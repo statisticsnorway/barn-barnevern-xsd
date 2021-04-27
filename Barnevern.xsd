@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Bufdir Kommunerapportering -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.9.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.9.1">
+	<xs:include schemaLocation="Innsending.xsd"/>
+	<xs:include schemaLocation="Fagsystem.xsd"/>
 	<xs:include schemaLocation="Avgiver.xsd"/>
 	<xs:include schemaLocation="Individ.xsd"/>
 	<!-- ELEMENTER -->
@@ -14,15 +16,10 @@
 	<!-- TYPEDEFINISJONER -->
 	<xs:complexType name="BarnevernType">
 		<xs:sequence>
+			<xs:element name="Innsending" type="InnsendingType"/>
+			<xs:element name="Fagsystem" type="FagsystemType"/>
 			<xs:element name="Avgiver" type="AvgiverType"/>
 			<xs:element name="Individ" type="IndividType" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
-			<xs:annotation>
-				<xs:documentation>
-          Dato og klokkeslett for uttrekket
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
 	</xs:complexType>
 </xs:schema>

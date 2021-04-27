@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.9.1">
+	<xs:include schemaLocation="Global.xsd"/>
+	<!-- ELEMENTER -->
+	<xs:element name="Innsending" type="InnsendingType"/>
+	<!-- TYPEDEFINISJONER -->
+	<xs:complexType name="InnsendingType">
+		<xs:attribute ref="StartDato"/>
+		<xs:attribute ref="SluttDato"/>
+		<xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
+			<xs:annotation>
+				<xs:appinfo>
+          Dato og klokkeslett for uttrekket
+        </xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>
