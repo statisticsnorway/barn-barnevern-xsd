@@ -34,7 +34,6 @@
 			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Ansvar" type="AnsvarType" minOccurs="0"/>
 			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
