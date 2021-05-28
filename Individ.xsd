@@ -31,6 +31,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0"/>
 			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
@@ -193,7 +194,6 @@
 		<xs:sequence>
 			<xs:element name="Melder" type="MelderType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
@@ -690,6 +690,7 @@
 				</xs:list>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute name="UtledetFraId"/>
 	</xs:complexType>
 	<!-- Kategori -->
 	<xs:complexType name="KategoriType">
@@ -1124,43 +1125,6 @@
           Vedtakets bortfallsdato
         </xs:documentation>
 			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="Status" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:length value="1"/>
-					<xs:enumeration value="1">
-						<xs:annotation>
-							<xs:appinfo>Under behandling</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="2">
-						<xs:annotation>
-							<xs:appinfo>Klar for godkjenning</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="3">
-						<xs:annotation>
-							<xs:appinfo>Godkjent</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="4">
-						<xs:annotation>
-							<xs:appinfo>Avslått/Avsluttet</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="5">
-						<xs:annotation>
-							<xs:appinfo>Bortfalt etter BVL</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="6">
-						<xs:annotation>
-							<xs:appinfo>Opphevet etter forvaltningsloven</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-				</xs:restriction>
-			</xs:simpleType>
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="EttervernType">
