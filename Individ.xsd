@@ -690,7 +690,11 @@
 				</xs:list>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="UtledetFraId"/>
+		<xs:attribute name="BasertPaaId">
+			<xs:annotation>
+				<xs:documentation>Id til det elementet som dette elementet er basert på, f.eks. ID'en til meldingen som denne undersøkelsen er basert på.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<!-- Kategori -->
 	<xs:complexType name="KategoriType">
