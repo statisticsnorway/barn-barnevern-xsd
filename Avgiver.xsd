@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Statistics Norway (Statistics Norway) -->
 <!-- Bufdir Kommunerapportering -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.9.0">
 	<!-- ELEMENTER -->
@@ -43,23 +44,6 @@
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
 					<xs:maxLength value="250"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="BVTUtforerTilsyn" use="required">
-			<xs:annotation>
-				<xs:documentation>
-          Kode som indikerer om ansvaret for tilsyn med barn i fosterhjem i kommunen er lagt til barnevernstjenesten eller ikke.
-          
-          Koder:
-          1 = BVT har ansvar for tilsyn
-          2 = BVT har ikke ansvar for tilsyn
-        </xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="1"/>
-					<xs:enumeration value="2"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
