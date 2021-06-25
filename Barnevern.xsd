@@ -15,17 +15,6 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
-	<xs:attribute name="BasertPaaId">
-		<xs:annotation>
-			<xs:documentation>Id til det elementet som dette elementet er basert på, f.eks. ID'en til meldingen som denne undersøkelsen er basert på.</xs:documentation>
-		</xs:annotation>
-		<xs:simpleType>
-			<xs:restriction base="xs:string">
-				<xs:minLength value="1"/>
-				<xs:maxLength value="30"/>
-			</xs:restriction>
-		</xs:simpleType>
-	</xs:attribute>
 	<xs:attribute name="StartDato" type="xs:date">
 		<xs:annotation>
 			<xs:appinfo>Startdato</xs:appinfo>
@@ -37,6 +26,19 @@
 			<xs:appinfo>Sluttdato</xs:appinfo>
 			<xs:documentation>Globalt attributt for sluttdato</xs:documentation>
 		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="Presisering">
+		<xs:annotation>
+			<xs:documentation>
+        Globalt element for presisering, brukes i forbindelse der en overliggende kode må presiseres
+      </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
 	</xs:attribute>
 	<!-- ELEMENTER -->
 	<xs:element name="Barnevern" type="BarnevernType">
@@ -52,7 +54,7 @@
 			<xs:element name="Fagsystem" type="FagsystemType"/>
 			<xs:element name="Avgiver" type="AvgiverType"/>
 			<xs:choice>
-				<xs:element name="Sak" type="sakType"/>
+				<xs:element name="Sak" type="SakType"/>
 				<xs:element name="AvvistMelding">
 					<xs:complexType>
 						<xs:attribute ref="Id" use="required"/>
@@ -178,27 +180,7 @@
 			</xs:simpleType>
 		</xs:attribute>
 	</xs:complexType>
-	<!-- ELEMENTER -->
-	<xs:element name="Individ" type="sakType">
-		<xs:annotation>
-			<xs:documentation>Individnivå</xs:documentation>
-		</xs:annotation>
-	</xs:element>
-	<xs:element name="Presisering">
-		<xs:annotation>
-			<xs:documentation>
-        Globalt element for presisering, brukes i forbindelse der en overliggende kode må presiseres
-      </xs:documentation>
-		</xs:annotation>
-		<xs:simpleType>
-			<xs:restriction base="xs:string">
-				<xs:minLength value="1"/>
-				<xs:maxLength value="100"/>
-			</xs:restriction>
-		</xs:simpleType>
-	</xs:element>
-	<!-- TYPEDEFINISJONER -->
-	<xs:complexType name="sakType">
+	<xs:complexType name="SakType">
 		<xs:annotation>
 			<xs:documentation>
         Typedefinisjon for individ
@@ -211,6 +193,16 @@
 			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute ref="Id" use="required"/>
+					<xs:attribute name="FraId" type="IdType" use="required"/>
+					<xs:attribute name="FraType" type="BegrepsType" use="required"/>
+					<xs:attribute name="TilId" type="IdType" use="required"/>
+					<xs:attribute name="TilType" type="BegrepsType" use="required"/>
+					<xs:attribute name="Navn" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required"/>
@@ -308,7 +300,6 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute ref="BasertPaaId"/>
 	</xs:complexType>
 	<!-- Melding -->
 	<xs:complexType name="MeldingType">
@@ -358,6 +349,11 @@
 									<xs:appinfo>Henlagt, Overført til annen kommune</xs:appinfo>
 								</xs:annotation>
 							</xs:enumeration>
+							<xs:enumeration value="1.4">
+								<xs:annotation>
+									<xs:appinfo>Henlagt, Ikke grunnlag for gjennomgang</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
 							<xs:enumeration value="2">
 								<xs:annotation>
 									<xs:appinfo>Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse</xs:appinfo>
@@ -382,8 +378,6 @@
 	<!-- Tiltak -->
 	<xs:complexType name="TiltakType">
 		<xs:sequence>
-			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
-			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
 			<xs:element name="Kategori" type="KategoriType"/>
 			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded"/>
@@ -430,11 +424,6 @@
 				<xs:documentation>
           Avslutningsdato for tiltaket
         </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="BasertPaaId">
-			<xs:annotation>
-				<xs:documentation>Id til det elementet som dette elementet er basert på, f.eks. ID'en til meldingen som denne undersøkelsen er basert på.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -486,9 +475,7 @@
 	</xs:complexType>
 	<!-- Melder -->
 	<xs:complexType name="MelderType">
-		<xs:sequence>
-			<xs:element ref="Presisering" minOccurs="0"/>
-		</xs:sequence>
+		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
 			<xs:simpleType>
 				<xs:list>
@@ -608,7 +595,7 @@
 							</xs:enumeration>
 							<xs:enumeration value="23">
 								<xs:annotation>
-									<xs:appinfo>Andre (krever presisering)</xs:appinfo>
+									<xs:appinfo>Anonym</xs:appinfo>
 								</xs:annotation>
 							</xs:enumeration>
 						</xs:restriction>
@@ -619,9 +606,7 @@
 	</xs:complexType>
 	<!-- Saksinnhold -->
 	<xs:complexType name="SaksinnholdType">
-		<xs:sequence>
-			<xs:element ref="Presisering" minOccurs="0"/>
-		</xs:sequence>
+		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -647,6 +632,31 @@
 							<xs:appinfo>Foreldres manglende foreldreferdigheter</xs:appinfo>
 						</xs:annotation>
 					</xs:enumeration>
+					<xs:enumeration value="20">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende beskyttelse av barnet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="21">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende stimulering og regulering av barnet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="22">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="23">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="24">
+						<xs:annotation>
+							<xs:appinfo>Konflikt mellom foreldre som ikke bor sammen</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
 					<xs:enumeration value="5">
 						<xs:annotation>
 							<xs:appinfo>Foreldres kriminalitet</xs:appinfo>
@@ -669,12 +679,12 @@
 					</xs:enumeration>
 					<xs:enumeration value="9">
 						<xs:annotation>
-							<xs:appinfo>Barnet utsatt for fysisk mishandling</xs:appinfo>
+							<xs:appinfo>Barnet utsatt for fysisk vold</xs:appinfo>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="10">
 						<xs:annotation>
-							<xs:appinfo>Barnet utsatt for psykisk mishandling</xs:appinfo>
+							<xs:appinfo>Barnet utsatt for psykisk vold</xs:appinfo>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="11">
@@ -709,17 +719,32 @@
 					</xs:enumeration>
 					<xs:enumeration value="17">
 						<xs:annotation>
-							<xs:appinfo>Barnets relasjonsvansker (mistanke om tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner)</xs:appinfo>
+							<xs:appinfo>Barnets relasjonsvansker (mistanke om eller diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner) </xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="25">
+						<xs:annotation>
+							<xs:appinfo>Barnets atferd</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="26">
+						<xs:annotation>
+							<xs:appinfo>Barnets kriminelle handlinger</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="27">
+						<xs:annotation>
+							<xs:appinfo>Barnet utsatt for menneskehandel</xs:appinfo>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="18">
 						<xs:annotation>
-							<xs:appinfo>Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-17 passer.)</xs:appinfo>
+							<xs:appinfo>Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)</xs:appinfo>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="19">
 						<xs:annotation>
-							<xs:appinfo>Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-17 passer.)</xs:appinfo>
+							<xs:appinfo>Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)</xs:appinfo>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -729,9 +754,9 @@
 	<!-- Undersøkelse -->
 	<xs:complexType name="UndersokelseType">
 		<xs:sequence>
-			<xs:element ref="Presisering" minOccurs="0"/>
 			<xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
+		<xs:attribute ref="Presisering"/>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
@@ -811,13 +836,10 @@
 				</xs:list>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute ref="BasertPaaId"/>
 	</xs:complexType>
 	<!-- Kategori -->
 	<xs:complexType name="KategoriType">
-		<xs:sequence>
-			<xs:element ref="Presisering" minOccurs="0"/>
-		</xs:sequence>
+		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -860,7 +882,12 @@
 					</xs:enumeration>
 					<xs:enumeration value="2.5">
 						<xs:annotation>
-							<xs:appinfo>Beredskapshjem</xs:appinfo>
+							<xs:appinfo>Beredskapshjem utenom familie og nære nettverk</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.6">
+						<xs:annotation>
+							<xs:appinfo>Midlertidig hjem i familie og nære nettverk</xs:appinfo>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2.99">
@@ -1074,9 +1101,7 @@
 	</xs:complexType>
 	<!-- Opphevelse -->
 	<xs:complexType name="OpphevelseType">
-		<xs:sequence>
-			<xs:element ref="Presisering" minOccurs="0"/>
-		</xs:sequence>
+		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -1165,11 +1190,8 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<!-- Krav -->
-	<xs:complexType name="KravType">
-		<xs:sequence>
-			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
-		</xs:sequence>
+	<!-- Oversendelse -->
+	<xs:complexType name="OversendelsePrivatKravType">
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
@@ -1186,12 +1208,26 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
+	<xs:complexType name="OversendelseBarneverntjeneste">
+		<xs:sequence>
+			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
+			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
+		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Datoen hvor kravet oversendes fylkesnemnda
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
 	<!-- Vedtak -->
 	<xs:complexType name="VedtakType">
 		<xs:sequence>
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
-			<xs:element name="Krav" type="KravType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Krav" type="OversendelsePrivatKravType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
@@ -1208,8 +1244,6 @@
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute ref="BasertPaaId"/>
-		<xs:attribute name="StatusEndretDato" type="xs:date"/>
 		<xs:attribute name="StatusKode">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -1247,6 +1281,7 @@
 			</xs:simpleType>
 		</xs:attribute>
 	</xs:complexType>
+	<!-- Ettervern -->
 	<xs:complexType name="EttervernType">
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
@@ -1277,6 +1312,21 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute ref="BasertPaaId"/>
 	</xs:complexType>
+	<xs:simpleType name="IdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BegrepsType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Melding"/>
+			<xs:enumeration value="Undersokelse"/>
+			<xs:enumeration value="Plan"/>
+			<xs:enumeration value="Tiltak"/>
+			<xs:enumeration value="Vedtak"/>
+			<xs:enumeration value="Ettervern"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>
