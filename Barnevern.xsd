@@ -249,6 +249,7 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute name="Avsluttet" type="xs:boolean"/>
 	</xs:complexType>
 	<!-- Plan -->
 	<xs:complexType name="PlanType">
