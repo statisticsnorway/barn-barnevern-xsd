@@ -193,6 +193,7 @@
 			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:attribute ref="Id" use="required"/>
@@ -1209,7 +1210,7 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="OversendelseBarneverntjeneste">
+	<xs:complexType name="OversendelseBarneverntjenesteType">
 		<xs:sequence>
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
