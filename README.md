@@ -6,7 +6,7 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 # v.0.10.1
 XSD er nå strukturert for
 - Innrapportering av én sak eller én avvist melding av gangen
-- Daglige rapporteringer
+- Rapporteringer med korte intervaller
 
 Presisering av bruk av Id'er for innrapportering:
 - Id'er forutsettes å være unike pr. elementtype pr. sak.	De trenger altså ikke være unike på tvers av elementtyper (eks.: et vedtak og en melding kan ha samme id).
