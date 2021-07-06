@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Statistics Norway (Statistics Norway) -->
 <!-- Bufdir Kommunerapportering -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.9.1">
-	<xs:include schemaLocation="Innsending.xsd"/>
-	<xs:include schemaLocation="Fagsystem.xsd"/>
-	<xs:include schemaLocation="Avgiver.xsd"/>
-	<xs:include schemaLocation="Individ.xsd"/>
+	<!-- ATTRIBUTTER -->
+	<xs:attribute name="Id">
+		<xs:annotation>
+			<xs:appinfo>Database-ID</xs:appinfo>
+			<xs:documentation>Globalt attributt for ID, f.eks databaseID/surrogatnøkkel i fagsystemet</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="StartDato" type="xs:date">
+		<xs:annotation>
+			<xs:appinfo>Startdato</xs:appinfo>
+			<xs:documentation>Globalt attributt for startdato</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="SluttDato" type="xs:date">
+		<xs:annotation>
+			<xs:appinfo>Sluttdato</xs:appinfo>
+			<xs:documentation>Globalt attributt for sluttdato</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="Presisering">
+		<xs:annotation>
+			<xs:documentation>
+        Globalt element for presisering, brukes i forbindelse der en overliggende kode må presiseres
+      </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
 	<!-- ELEMENTER -->
 	<xs:element name="Barnevern" type="BarnevernType">
 		<xs:annotation>
@@ -16,10 +51,1284 @@
 	<!-- TYPEDEFINISJONER -->
 	<xs:complexType name="BarnevernType">
 		<xs:sequence>
-			<xs:element name="Innsending" type="InnsendingType"/>
 			<xs:element name="Fagsystem" type="FagsystemType"/>
 			<xs:element name="Avgiver" type="AvgiverType"/>
-			<xs:element name="Individ" type="IndividType" maxOccurs="unbounded"/>
+			<xs:choice>
+				<xs:element name="Sak" type="SakType"/>
+				<xs:element name="AvvistMelding">
+					<xs:complexType>
+						<xs:attribute ref="Id" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
 		</xs:sequence>
+		<xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
+			<xs:annotation>
+				<xs:appinfo>
+          Dato og klokkeslett for uttrekket
+        </xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
+	<xs:complexType name="FagsystemType">
+		<xs:attribute name="Leverandor" use="required">
+			<xs:annotation>
+				<xs:appinfo>Leverandøren til fagsystemer, f.eks. Visma eller Acos</xs:appinfo>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="3"/>
+					<xs:maxLength value="300"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Navn" use="required">
+			<xs:annotation>
+				<xs:appinfo>Navnet til fagsystemet, f.eks. Familia</xs:appinfo>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="300"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Versjon" use="required">
+			<xs:annotation>
+				<xs:appinfo>Versjonen til fagsystemet, f.eks. v1.2.3</xs:appinfo>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="100"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AvgiverType">
+		<xs:attribute name="Organisasjonsnummer" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Organisasjonsnummeret til kommunen som er avgiver for dataene
+        </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="9"/>
+					<xs:maxLength value="9"/>
+					<xs:pattern value="\d{9}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Kommunenummer" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          4-sifret kommunenummer
+        </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="4"/>
+					<xs:maxLength value="4"/>
+					<xs:pattern value="\d{4}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Kommunenavn" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Kommunens navn
+        </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="250"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Bydelsnummer" use="optional">
+			<xs:annotation>
+				<xs:documentation>2-sifret bydelsnummer for bydelene i Oslo</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="2"/>
+					<xs:maxLength value="2"/>
+					<xs:pattern value="\d{2}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Bydelsnavn">
+			<xs:annotation>
+				<xs:documentation>Bydelsnavn ved rapportering av bydelene i Oslo</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="250"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Distriktsnummer">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="2"/>
+					<xs:maxLength value="3"/>
+					<xs:pattern value="\d{2,3}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="SakType">
+		<xs:annotation>
+			<xs:documentation>
+        Typedefinisjon for individ
+      </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute ref="Id" use="required"/>
+					<xs:attribute name="FraId" type="IdType" use="required"/>
+					<xs:attribute name="FraType" type="BegrepsType" use="required"/>
+					<xs:attribute name="TilId" type="IdType" use="required"/>
+					<xs:attribute name="TilType" type="BegrepsType" use="required"/>
+					<xs:attribute name="Navn" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required"/>
+		<xs:attribute ref="SluttDato"/>
+		<xs:attribute name="Journalnummer" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Journal-, registrerings-, saks- eller klientnummer
+        </xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="20"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Fodselsnummer" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="11"/>
+					<xs:maxLength value="11"/>
+					<xs:pattern value="\d{11}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="DUFnummer" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="12"/>
+					<xs:maxLength value="12"/>
+					<xs:pattern value="\d{12}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Saksbehandler" use="required">
+			<xs:annotation>
+				<xs:documentation>Navn eller epost</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="50"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Avsluttet" type="xs:boolean"/>
+	</xs:complexType>
+	<!-- Plan -->
+	<xs:complexType name="PlanType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Dato hvor planen regnes som aktiv
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="SluttDato" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Dato for avslutning av planen
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EvaluertDato" type="xs:date" use="optional">
+			<xs:annotation>
+				<xs:documentation>Planlagt dato for evaluering</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Plantype" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="2"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Tiltaksplan etter § 4-5</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Tiltaksplan etter § 4-28</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Foreløpig omsorgsplan etter § 4-15, 3. ledd</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Omsorgsplan etter § 4-15, 3. ledd</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Melding -->
+	<xs:complexType name="MeldingType">
+		<xs:sequence>
+			<xs:element name="Melder" type="MelderType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Mottaksdato for meldingen
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="SluttDato" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Konklusjonsdato
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Konklusjon" use="optional">
+			<xs:simpleType>
+				<xs:list>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+							<xs:maxLength value="3"/>
+							<xs:enumeration value="1">
+								<xs:annotation>
+									<xs:appinfo>Henlagt av andre grunner</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="1.1">
+								<xs:annotation>
+									<xs:appinfo>Henlagt, Utenfor BVL</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="1.2">
+								<xs:annotation>
+									<xs:appinfo>Henlagt, Vist til annen instans</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="1.3">
+								<xs:annotation>
+									<xs:appinfo>Henlagt, Overført til annen kommune</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="1.4">
+								<xs:annotation>
+									<xs:appinfo>Henlagt, Ikke grunnlag for gjennomgang</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="2">
+								<xs:annotation>
+									<xs:appinfo>Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="3">
+								<xs:annotation>
+									<xs:appinfo>Henlagt pga. aktive tiltak</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="4">
+								<xs:annotation>
+									<xs:appinfo>Melding i pågående undersøkelse</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:list>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Tiltak -->
+	<xs:complexType name="TiltakType">
+		<xs:sequence>
+			<xs:element name="Kategori" type="KategoriType"/>
+			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute name="Ettervern" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="1"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Mottatt og akseptert tilbud om tiltak</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Ikke lenger tiltak etter BVL, etter eget ønske</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Iverksatt dato for tiltaket
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="SluttDato" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Avslutningsdato for tiltaket
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Lovhjemmel -->
+	<xs:complexType name="LovhjemmelType">
+		<xs:attribute name="Lov" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="100"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Kapittel" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="5"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Paragraf" use="required">
+			<xs:annotation>
+				<xs:documentation>Hovedtypetiltak</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="5"/>
+					<xs:minLength value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Ledd" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="0"/>
+					<xs:maxLength value="5"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Punktum" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="0"/>
+					<xs:maxLength value="5"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Melder -->
+	<xs:complexType name="MelderType">
+		<xs:attribute ref="Presisering"/>
+		<xs:attribute name="Kode" use="required">
+			<xs:simpleType>
+				<xs:list>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+							<xs:maxLength value="2"/>
+							<xs:enumeration value="1">
+								<xs:annotation>
+									<xs:appinfo>Barnet selv</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="2">
+								<xs:annotation>
+									<xs:appinfo>Mor/ far/ foresatte</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="3">
+								<xs:annotation>
+									<xs:appinfo>Familie for øvrig</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="4">
+								<xs:annotation>
+									<xs:appinfo>Andre privatpersoner</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="5">
+								<xs:annotation>
+									<xs:appinfo>Barnvernstjenesten</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="6">
+								<xs:annotation>
+									<xs:appinfo>NAV (kommune og stat)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="7">
+								<xs:annotation>
+									<xs:appinfo>Barnevernsvakt</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="8">
+								<xs:annotation>
+									<xs:appinfo>Politi/lensmann</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="9">
+								<xs:annotation>
+									<xs:appinfo>Barnehage</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="10">
+								<xs:annotation>
+									<xs:appinfo>Helsestasjon/skolehelsetjenesten</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="11">
+								<xs:annotation>
+									<xs:appinfo>Skole</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="12">
+								<xs:annotation>
+									<xs:appinfo>Pedagogisk-psykologisk tjeneste (PPT)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="13">
+								<xs:annotation>
+									<xs:appinfo>Psykisk helsevern for barn og unge (kommune og stat)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="14">
+								<xs:annotation>
+									<xs:appinfo>Psykisk helsevern for voksne (kommune og stat)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="15">
+								<xs:annotation>
+									<xs:appinfo>Lege/ sykehus/ tannlege</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="16">
+								<xs:annotation>
+									<xs:appinfo>Familievernkontor</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="17">
+								<xs:annotation>
+									<xs:appinfo>Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="18">
+								<xs:annotation>
+									<xs:appinfo>Krisesenter</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="19">
+								<xs:annotation>
+									<xs:appinfo>Asylmottak/ UDI/ innvandringsmyndighet</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="20">
+								<xs:annotation>
+									<xs:appinfo>Utekontakt/ fritidsklubb</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="21">
+								<xs:annotation>
+									<xs:appinfo>Frivillige organisasjoner/ idrettslag</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="22">
+								<xs:annotation>
+									<xs:appinfo>Andre offentlige instanser (krever presisering)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="23">
+								<xs:annotation>
+									<xs:appinfo>Anonym</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:list>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Saksinnhold -->
+	<xs:complexType name="SaksinnholdType">
+		<xs:attribute ref="Presisering"/>
+		<xs:attribute name="Kode" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="2"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Foreldres somatiske sykdom</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Foreldres psykiske problem/ lidelse</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Foreldres rusmisbruk</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende foreldreferdigheter</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="20">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende beskyttelse av barnet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="21">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende stimulering og regulering av barnet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="22">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="23">
+						<xs:annotation>
+							<xs:appinfo>Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="24">
+						<xs:annotation>
+							<xs:appinfo>Konflikt mellom foreldre som ikke bor sammen</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5">
+						<xs:annotation>
+							<xs:appinfo>Foreldres kriminalitet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6">
+						<xs:annotation>
+							<xs:appinfo>Høy grad av konflikt hjemme</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7">
+						<xs:annotation>
+							<xs:appinfo>Vold i hjemmet/ barnet vitne til vold i nære relasjoner</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8">
+						<xs:annotation>
+							<xs:appinfo>Barnet utsatt for vanskjøtsel (Barnet overlatt til seg selv, dårlig kosthold, dårlig hygiene)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="9">
+						<xs:annotation>
+							<xs:appinfo>Barnet utsatt for fysisk vold</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="10">
+						<xs:annotation>
+							<xs:appinfo>Barnet utsatt for psykisk vold</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="11">
+						<xs:annotation>
+							<xs:appinfo>Barnet utsatt for seksuelle overgrep</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="12">
+						<xs:annotation>
+							<xs:appinfo>Barnet mangler omsorgsperson</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="13">
+						<xs:annotation>
+							<xs:appinfo>Barnet har nedsatt funksjonsevne</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="14">
+						<xs:annotation>
+							<xs:appinfo>Barnets psykiske problem/lidelse</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="15">
+						<xs:annotation>
+							<xs:appinfo>Barnets rusmisbruk</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="16">
+						<xs:annotation>
+							<xs:appinfo>Barnets atferd/ kriminalitet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="17">
+						<xs:annotation>
+							<xs:appinfo>Barnets relasjonsvansker (mistanke om eller diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner) </xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="25">
+						<xs:annotation>
+							<xs:appinfo>Barnets atferd</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="26">
+						<xs:annotation>
+							<xs:appinfo>Barnets kriminelle handlinger</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="27">
+						<xs:annotation>
+							<xs:appinfo>Barnet utsatt for menneskehandel</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="18">
+						<xs:annotation>
+							<xs:appinfo>Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="19">
+						<xs:annotation>
+							<xs:appinfo>Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Undersøkelse -->
+	<xs:complexType name="UndersokelseType">
+		<xs:sequence>
+			<xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute ref="Presisering"/>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Dato for undersøkelsens start.
+          
+          Denne er lik SluttDato for meldingen hvis meldingen har konklusjonskode = 2: «Ikke henlagt»
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UtvidetFrist">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Ja</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Nei</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="UtvidetFristDato" type="xs:date" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Datoen det ble innvilget utvidet frist.
+          Kun relevant dersom det er innvilget utvidet frist.
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="SluttDato" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Konklusjonsdato for undersøkelsen
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Konklusjon" use="optional">
+			<xs:simpleType>
+				<xs:list>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+							<xs:maxLength value="1"/>
+							<xs:enumeration value="1">
+								<xs:annotation>
+									<xs:appinfo>Barneverntjenesten fatter vedtak om tiltak</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="2">
+								<xs:annotation>
+									<xs:appinfo>Begjæring om tiltak for fylkesnemnda</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="3">
+								<xs:annotation>
+									<xs:appinfo>Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="4">
+								<xs:annotation>
+									<xs:appinfo>Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+							<xs:enumeration value="5">
+								<xs:annotation>
+									<xs:appinfo>Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)</xs:appinfo>
+								</xs:annotation>
+							</xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:list>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Kategori -->
+	<xs:complexType name="KategoriType">
+		<xs:attribute ref="Presisering"/>
+		<xs:attribute name="Kode" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="3"/>
+					<xs:maxLength value="5"/>
+					<xs:enumeration value="1.1">
+						<xs:annotation>
+							<xs:appinfo>Barnvernsinstitusjoner (gjelder alle typer barnevernsinstitusjoner)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1.2">
+						<xs:annotation>
+							<xs:appinfo>Plassering i institusjon etter annen lov</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.1">
+						<xs:annotation>
+							<xs:appinfo>Fosterhjem i familie og nære nettverk</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.2">
+						<xs:annotation>
+							<xs:appinfo>Fosterhjem utenfor familie og nære nettverk</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.3">
+						<xs:annotation>
+							<xs:appinfo>Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.4">
+						<xs:annotation>
+							<xs:appinfo>Fosterhjem etter § 4-27</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.5">
+						<xs:annotation>
+							<xs:appinfo>Beredskapshjem utenom familie og nære nettverk</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.6">
+						<xs:annotation>
+							<xs:appinfo>Midlertidig hjem i familie og nære nettverk</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.1">
+						<xs:annotation>
+							<xs:appinfo>MST</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.2">
+						<xs:annotation>
+							<xs:appinfo>PMTO</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.3">
+						<xs:annotation>
+							<xs:appinfo>FFT</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.4">
+						<xs:annotation>
+							<xs:appinfo>Weber Stratton</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.5">
+						<xs:annotation>
+							<xs:appinfo>ICDP</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.6">
+						<xs:annotation>
+							<xs:appinfo>Marte Meo</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.7">
+						<xs:annotation>
+							<xs:appinfo>Andre hjemmebaserte tiltak (gjelder andre tiltak i hjemmet som følger en spesiell metodikk og som gjenomføres på en systematisk måte) (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.8">
+						<xs:annotation>
+							<xs:appinfo>Sentre for foreldre og barn</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.9">
+						<xs:annotation>
+							<xs:appinfo>Vedtak om råd og veiledning</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.10">
+						<xs:annotation>
+							<xs:appinfo>Hjemmekonsulent/miljøarbeider</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.1">
+						<xs:annotation>
+							<xs:appinfo>Barnehage</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.2">
+						<xs:annotation>
+							<xs:appinfo>SFO/ Aktivitetsskole</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.3">
+						<xs:annotation>
+							<xs:appinfo>Fritidsaktiviteter</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.4">
+						<xs:annotation>
+							<xs:appinfo>Økonomisk hjelp for øvrig (gjelder økonomisk hjelp som ikke inngår i 4.1, 4.2 og 4.3)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.5">
+						<xs:annotation>
+							<xs:appinfo>Besøkshjem/ avlastningstiltak</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.6">
+						<xs:annotation>
+							<xs:appinfo>Støttekontakt</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.7">
+						<xs:annotation>
+							<xs:appinfo>Samtalegrupper/ barnegrupper (gjelder strukturerte samtale- og aktivitetstilbud for aldersbestemte grupper).</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.8">
+						<xs:annotation>
+							<xs:appinfo>Utdanning og arbeid (gjelder oppfølging og støtte for å styrke barn og ungdoms tilknytning til skole eller arbeid)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.9">
+						<xs:annotation>
+							<xs:appinfo>ART</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5.1">
+						<xs:annotation>
+							<xs:appinfo>Frivillig tilsyn i hjemmet (gjelder der foreldre har samtykket til tilsyn)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5.2">
+						<xs:annotation>
+							<xs:appinfo>Pålagt tilsyn i hjemmet (gjelder der tilsyn skjer etter vedtak i fylkesnemnd)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5.3">
+						<xs:annotation>
+							<xs:appinfo>Tilsyn under samvær</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5.4">
+						<xs:annotation>
+							<xs:appinfo>Ruskontroll</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6.1">
+						<xs:annotation>
+							<xs:appinfo>Familieråd</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6.2">
+						<xs:annotation>
+							<xs:appinfo>Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6.3">
+						<xs:annotation>
+							<xs:appinfo>Individuell plan</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6.4">
+						<xs:annotation>
+							<xs:appinfo>Deltakelse i ansvarsgruppe</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6.5">
+						<xs:annotation>
+							<xs:appinfo>Samarbeid om utdanning og arbeid</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7.1">
+						<xs:annotation>
+							<xs:appinfo>Bvl § 4-10 medisinsk undersøkelse og behandling</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7.2">
+						<xs:annotation>
+							<xs:appinfo>Bvl § 4-11 behandling av barn med særlige opplæringsbehov</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7.3">
+						<xs:annotation>
+							<xs:appinfo>Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8.1">
+						<xs:annotation>
+							<xs:appinfo>Økonomisk hjelp ved etablering i egen bolig/ hybel (Ikke husleie)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8.2">
+						<xs:annotation>
+							<xs:appinfo>Bolig med oppfølging (inkluderer også bofellesskap)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8.3">
+						<xs:annotation>
+							<xs:appinfo>Botreningskurs</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8.99">
+						<xs:annotation>
+							<xs:appinfo>Andre tiltak (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Opphevelse -->
+	<xs:complexType name="OpphevelseType">
+		<xs:attribute ref="Presisering"/>
+		<xs:attribute name="Kode" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="1"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Barnet tilbakeført til foreldre/ familien jamfør § 4-21</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Barnet har fylt 18 år</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Adopsjon § 4-20</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Annet (krever presisering)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Ansvar -->
+	<xs:complexType name="AnsvarType">
+		<xs:attribute name="Tilsynsansvar" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Ja</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Nei</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Oppfolgingsansvar" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Ja</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Nei</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Oppfølging -->
+	<xs:complexType name="OppfolgingType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute name="UtfortDato" type="xs:date" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Dato oppfølgingsbesøket faktisk ble foretatt
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Tilsyn -->
+	<xs:complexType name="TilsynType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute name="UtfortDato" type="xs:date" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Dato tilsynsbesøket faktisk ble utført
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Oversendelse -->
+	<xs:complexType name="OversendelsePrivatKravType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Mottaksdato for kravet
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="SluttDato" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Datoen hvor kravet oversendes fylkesnemnda
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="OversendelseBarneverntjenesteType">
+		<xs:sequence>
+			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
+			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
+		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Datoen hvor kravet oversendes fylkesnemnda
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Vedtak -->
+	<xs:complexType name="VedtakType">
+		<xs:sequence>
+			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
+			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
+			<xs:element name="Krav" type="OversendelsePrivatKravType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required">
+			<xs:annotation>
+				<xs:documentation>
+          Datoen vedtaket ble avgjort
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="SluttDato" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Vedtakets bortfallsdato
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="StatusKode">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Under behandling</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Klar for godkjenning</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Godkjent</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Avslått / Avsluttet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5">
+						<xs:annotation>
+							<xs:appinfo>Bortfall etter BVL</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6">
+						<xs:annotation>
+							<xs:appinfo>Opphevet etter forvaltningloven</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Ettervern -->
+	<xs:complexType name="EttervernType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
+		<xs:attribute name="Konklusjon">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Mottatt og akseptert tilbud om tiltak</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Ikke lenger tiltak etter BVL, etter eget ønske</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="IdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BegrepsType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Melding"/>
+			<xs:enumeration value="Undersokelse"/>
+			<xs:enumeration value="Plan"/>
+			<xs:enumeration value="Tiltak"/>
+			<xs:enumeration value="Vedtak"/>
+			<xs:enumeration value="Ettervern"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>
