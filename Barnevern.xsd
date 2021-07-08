@@ -30,7 +30,7 @@
 	<xs:attribute name="Presisering">
 		<xs:annotation>
 			<xs:documentation>
-        Globalt element for presisering, brukes i forbindelse der en overliggende kode må presiseres
+        Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
       </xs:documentation>
 		</xs:annotation>
 		<xs:simpleType>
@@ -44,18 +44,36 @@
 	<xs:element name="Barnevern" type="BarnevernType">
 		<xs:annotation>
 			<xs:documentation>
-        For innsending av barnevernsdata
+For innsending av barnevernsdata
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<!-- TYPEDEFINISJONER -->
 	<xs:complexType name="BarnevernType">
 		<xs:sequence>
-			<xs:element name="Fagsystem" type="FagsystemType"/>
-			<xs:element name="Avgiver" type="AvgiverType"/>
+			<xs:element name="Fagsystem" type="FagsystemType">
+				<xs:annotation>
+					<xs:documentation>Informasjon om fagsystem det rapporteres fra</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Avgiver" type="AvgiverType">
+				<xs:annotation>
+					<xs:documentation>Kommune som rapporterer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:choice>
-				<xs:element name="Sak" type="SakType"/>
+				<xs:annotation>
+					<xs:documentation>1 saksmappe eller 1 avvist melding rapporteres per innsending</xs:documentation>
+				</xs:annotation>
+				<xs:element name="Sak" type="SakType">
+					<xs:annotation>
+						<xs:documentation>Saksmappe for et barn. Komplett innhold av mappe endret siden siste innsending rapporteres</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element name="AvvistMelding">
+					<xs:annotation>
+						<xs:documentation>Melding som er avvist av barneverntjenesten. Ikke identifisert på barn</xs:documentation>
+					</xs:annotation>
 					<xs:complexType>
 						<xs:attribute ref="Id" use="required"/>
 					</xs:complexType>
@@ -136,8 +154,7 @@
 		</xs:attribute>
 		<xs:attribute name="Kommunenavn" use="required">
 			<xs:annotation>
-				<xs:documentation>
-          Kommunens navn
+				<xs:documentation>Kommunens navn
         </xs:documentation>
 			</xs:annotation>
 			<xs:simpleType>
@@ -187,14 +204,37 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Bekymringsmelding</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tiltaks- eller omsorgsplan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Alle typer vedtak som fattes i en barnevernsak, også av fylkesnemnda</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tilbud om ettervern. Eventuelt ettervernstiltak registreres som Tiltak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
+				</xs:annotation>
 				<xs:complexType>
 					<xs:attribute ref="Id" use="required"/>
 					<xs:attribute name="FraId" type="IdType" use="required"/>
@@ -381,8 +421,16 @@
 	<xs:complexType name="TiltakType">
 		<xs:sequence>
 			<xs:element name="Kategori" type="KategoriType"/>
-			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tilsyn i fosterhjem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Ansvarlig barneverntjenes oppfølgingsbesøk i fosterhjem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
@@ -423,8 +471,7 @@
 		</xs:attribute>
 		<xs:attribute ref="SluttDato" use="optional">
 			<xs:annotation>
-				<xs:documentation>
-          Avslutningsdato for tiltaket
+				<xs:documentation>Avslutningsdato for tiltaket
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -841,7 +888,13 @@
 	</xs:complexType>
 	<!-- Kategori -->
 	<xs:complexType name="KategoriType">
-		<xs:attribute ref="Presisering"/>
+		<xs:attribute ref="Presisering">
+			<xs:annotation>
+				<xs:documentation>
+Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
+      </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute name="Kode" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -1176,7 +1229,7 @@
 		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
 				<xs:documentation>
-          Dato oppfølgingsbesøket faktisk ble foretatt
+Dato oppfølgingsbesøket faktisk ble foretatt
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -1187,7 +1240,7 @@
 		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
 				<xs:documentation>
-          Dato tilsynsbesøket faktisk ble utført
+Dato tilsynsbesøket faktisk ble utført
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -1229,7 +1282,11 @@
 		<xs:sequence>
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
-			<xs:element name="Krav" type="OversendelsePrivatKravType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Krav" type="OversendelsePrivatKravType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Krav fra privat part om endring av tidligere vedtak fattet av fylkesnemnda</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
