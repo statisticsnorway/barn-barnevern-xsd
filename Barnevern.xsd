@@ -315,6 +315,14 @@ For innsending av barnevernsdata
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Plantype" use="required">
+			<xs:annotation>
+				<xs:documentation>
+1 = Tiltaksplan etter § 4-5
+2 = Tiltaksplan etter § 4-28
+3 = Foreløpig omsorgsplan etter § 4-15, 3. ledd
+4 = Omsorgsplan etter § 4-15, 3. ledd
+				</xs:documentation>
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
@@ -365,6 +373,18 @@ For innsending av barnevernsdata
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Konklusjon" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+ 1 = Henlagt av andre grunner
+ 1.1 = Henlagt, Utenfor BVL
+ 1.2 = Henlagt, Vist til annen instans
+ 1.3 = Henlagt, Overført til annen kommune
+ 1.4 = Henlagt, Ikke grunnlag for gjennomgang
+ 2 = Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse
+ 3 = Henlagt pga. aktive tiltak
+ 4 = Melding i pågående undersøkelse
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:list>
 					<xs:simpleType>
@@ -435,6 +455,14 @@ For innsending av barnevernsdata
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="Ettervern" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+1 = Mottatt og akseptert tilbud om tiltak
+2 = Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak
+3 = Ikke lenger tiltak etter BVL, etter eget ønske
+4 = Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
@@ -526,6 +554,33 @@ For innsending av barnevernsdata
 	<xs:complexType name="MelderType">
 		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
+			<xs:annotation>
+				<xs:documentation>
+1 = Barnet selv
+2 = Mor/ far/ foresatte
+3 = Familie for øvrig
+4 = Andre privatpersoner
+5 = Barnvernstjenesten
+6 = NAV (kommune og stat)
+7 = Barnevernsvakt
+8 = Politi/lensmann
+9 = Barnehage
+10 = Helsestasjon/skolehelsetjenesten
+11 = Skole
+12 = Pedagogisk-psykologisk tjeneste (PPT)
+13 = Psykisk helsevern for barn og unge (kommune og stat)
+14 = Psykisk helsevern for voksne (kommune og stat)
+15 = Lege/ sykehus/ tannlege
+16 = Familievernkontor
+17 = Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)
+18 = Krisesenter
+19 = Asylmottak/ UDI/ innvandringsmyndighet
+20 = Utekontakt/ fritidsklubb
+21 = Frivillige organisasjoner/ idrettslag
+22 = Andre offentlige instanser (krever presisering)
+23 = Anonym
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:list>
 					<xs:simpleType>
@@ -657,7 +712,37 @@ For innsending av barnevernsdata
 	<xs:complexType name="SaksinnholdType">
 		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
-			<xs:simpleType>
+				<xs:annotation>
+					<xs:documentation>
+1 = Foreldres somatiske sykdom
+2 = Foreldres psykiske problem/ lidelse
+3 = Foreldres rusmisbruk
+4 = Foreldres manglende foreldreferdigheter
+20 = Foreldres manglende beskyttelse av barnet
+21 = Foreldres manglende stimulering og regulering av barnet
+22 = Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet
+23 = Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester
+24 = Konflikt mellom foreldre som ikke bor sammen
+5 = Foreldres kriminalitet
+6 = Høy grad av konflikt hjemme
+7 = Vold i hjemmet/ barnet vitne til vold i nære relasjoner
+8 = Barnet utsatt for vanskjøtsel (Barnet overlatt til seg selv, dårlig kosthold, dårlig hygiene)
+9 = Barnet utsatt for fysisk vold
+10 = Barnet utsatt for psykisk vold
+11 = Barnet utsatt for seksuelle overgrep
+12 = Barnet mangler omsorgsperson
+13 = Barnet har nedsatt funksjonsevne
+14 = Barnets psykiske problem/lidelse
+15 = Barnets rusmisbruk
+16 = Barnets atferd/ kriminalitet
+17 = Barnets relasjonsvansker (mistanke om eller diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner) 
+25 = Barnets atferd
+26 = Barnets kriminelle handlinger
+27 = Barnet utsatt for menneskehandel
+18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
+19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
+					</xs:documentation>
+				</xs:annotation>			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
 					<xs:maxLength value="2"/>
@@ -817,6 +902,12 @@ For innsending av barnevernsdata
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="UtvidetFrist">
+			<xs:annotation>
+				<xs:documentation>
+1 = Ja
+2 = Nei
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="1"/>
@@ -849,6 +940,15 @@ For innsending av barnevernsdata
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Konklusjon" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+1 = Barneverntjenesten fatter vedtak om tiltak
+2 = Begjæring om tiltak for fylkesnemnda
+3 = Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)
+4 = Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)
+5 = Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:list>
 					<xs:simpleType>
@@ -896,6 +996,60 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Kode" use="required">
+			<xs:annotation>
+				<xs:documentation>
+1.1 = Barnvernsinstitusjoner (gjelder alle typer barnevernsinstitusjoner)
+1.2 = Plassering i institusjon etter annen lov
+1.99 = Andre tiltak (krever presisering)
+2.1 = Fosterhjem i familie og nære nettverk
+2.2 = Fosterhjem utenfor familie og nære nettverk
+2.3 = Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)
+2.4 = Fosterhjem etter § 4-27
+2.5 = Beredskapshjem utenom familie og nære nettverk
+2.6 = Midlertidig hjem i familie og nære nettverk
+2.99 = Andre tiltak (krever presisering)
+3.1 = MST
+3.2 = PMTO
+3.3 = FFT
+3.4 = Weber Stratton
+3.5 = ICDP
+3.6 = Marte Meo
+3.7 = Andre hjemmebaserte tiltak (gjelder andre tiltak i hjemmet som følger en spesiell metodikk og som gjenomføres på en systematisk måte) (krever presisering)
+3.8 = Sentre for foreldre og barn
+3.9 = Vedtak om råd og veiledning
+3.10 = Hjemmekonsulent/miljøarbeider
+3.99 = Andre tiltak (krever presisering)
+4.1 = Barnehage
+4.2 = SFO/ Aktivitetsskole
+4.3 = Fritidsaktiviteter
+4.4 = Økonomisk hjelp for øvrig (gjelder økonomisk hjelp som ikke inngår i 4.1, 4.2 og 4.3)
+4.5 = Besøkshjem/ avlastningstiltak
+4.6 = Støttekontakt
+4.7 = Samtalegrupper/ barnegrupper (gjelder strukturerte samtale- og aktivitetstilbud for aldersbestemte grupper).
+4.8 = Utdanning og arbeid (gjelder oppfølging og støtte for å styrke barn og ungdoms tilknytning til skole eller arbeid)
+4.9 = ART
+4.99 = Andre tiltak (krever presisering)
+5.1 = Frivillig tilsyn i hjemmet (gjelder der foreldre har samtykket til tilsyn)
+5.2 = Pålagt tilsyn i hjemmet (gjelder der tilsyn skjer etter vedtak i fylkesnemnd)
+5.3 = Tilsyn under samvær
+5.4 = Ruskontroll
+5.99 = Andre tiltak (krever presisering)
+6.1 = Familieråd
+6.2 = Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)
+6.3 = Individuell plan
+6.4 = Deltakelse i ansvarsgruppe
+6.5 = Samarbeid om utdanning og arbeid
+6.99 = Andre tiltak (krever presisering)
+7.1 = Bvl § 4-10 medisinsk undersøkelse og behandling
+7.2 = Bvl § 4-11 behandling av barn med særlige opplæringsbehov
+7.3 = Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)
+7.99 = Andre tiltak (krever presisering)
+8.1 = Økonomisk hjelp ved etablering i egen bolig/ hybel (Ikke husleie)
+8.2 = Bolig med oppfølging (inkluderer også bofellesskap)
+8.3 = Botreningskurs
+8.99 = Andre tiltak (krever presisering)
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="3"/>
@@ -1158,6 +1312,14 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 	<xs:complexType name="OpphevelseType">
 		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
+			<xs:annotation>
+				<xs:documentation>
+1 = Barnet tilbakeført til foreldre/ familien jamfør § 4-21
+2 = Barnet har fylt 18 år
+3 = Adopsjon § 4-20
+4 = Annet (krever presisering)
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
@@ -1189,6 +1351,12 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 	<!-- Ansvar -->
 	<xs:complexType name="AnsvarType">
 		<xs:attribute name="Tilsynsansvar" use="required">
+			<xs:annotation>
+				<xs:documentation>
+1 = Ja
+2 = Nei
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="1"/>
@@ -1206,6 +1374,12 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 			</xs:simpleType>
 		</xs:attribute>
 		<xs:attribute name="Oppfolgingsansvar" use="required">
+			<xs:annotation>
+				<xs:documentation>
+1 = Ja
+2 = Nei
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="1"/>
@@ -1304,6 +1478,16 @@ Dato tilsynsbesøket faktisk ble utført
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="StatusKode">
+			<xs:annotation>
+				<xs:documentation>
+1 = Under behandling
+2 = Klar for godkjenning
+3 = Godkjent
+4 = Avslått / Avsluttet
+5 = Bortfall etter BVL
+6 = Opphevet etter forvaltningloven
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="1">
@@ -1345,6 +1529,14 @@ Dato tilsynsbesøket faktisk ble utført
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
 		<xs:attribute name="Konklusjon">
+			<xs:annotation>
+				<xs:documentation>
+1 = Mottatt og akseptert tilbud om tiltak
+2 = Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak
+3 = Ikke lenger tiltak etter BVL, etter eget ønske
+4 = Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen
+ 				</xs:documentation>
+			</xs:annotation>			
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="1"/>
