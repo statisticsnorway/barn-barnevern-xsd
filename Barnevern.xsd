@@ -53,14 +53,38 @@
 		<xs:sequence>
 			<xs:element name="Fagsystem" type="FagsystemType"/>
 			<xs:element name="Avgiver" type="AvgiverType"/>
-			<xs:choice>
-				<xs:element name="Sak" type="SakType"/>
-				<xs:element name="AvvistMelding">
-					<xs:complexType>
-						<xs:attribute ref="Id" use="required"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:choice>
+			<xs:element name="Sak">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="SakType">
+							<xs:sequence>
+								<xs:element name="virksomhet">
+									<xs:complexType/>
+								</xs:element>
+								<xs:sequence>
+									<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:attribute ref="Id" use="required"/>
+											<xs:attribute name="FraId" type="IdType" use="required"/>
+											<xs:attribute name="FraType" type="BegrepsType" use="required"/>
+											<xs:attribute name="TilId" type="IdType" use="required"/>
+											<xs:attribute name="TilType" type="BegrepsType" use="required"/>
+											<xs:attribute name="Navn" type="xs:string"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
 			<xs:annotation>
@@ -186,25 +210,6 @@
         Typedefinisjon for individ
       </xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
-				<xs:complexType>
-					<xs:attribute ref="Id" use="required"/>
-					<xs:attribute name="FraId" type="IdType" use="required"/>
-					<xs:attribute name="FraType" type="BegrepsType" use="required"/>
-					<xs:attribute name="TilId" type="IdType" use="required"/>
-					<xs:attribute name="TilType" type="BegrepsType" use="required"/>
-					<xs:attribute name="Navn" type="xs:string"/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required"/>
 		<xs:attribute ref="SluttDato"/>
@@ -254,6 +259,13 @@
 	</xs:complexType>
 	<!-- Plan -->
 	<xs:complexType name="PlanType">
+		<xs:sequence>
+			<xs:element name="Evaluering" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="UtfortDato" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
@@ -267,11 +279,6 @@
 				<xs:documentation>
           Dato for avslutning av planen
         </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="EvaluertDato" type="xs:date" use="optional">
-			<xs:annotation>
-				<xs:documentation>Planlagt dato for evaluering</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Plantype" use="required">
@@ -381,6 +388,8 @@
 	<xs:complexType name="TiltakType">
 		<xs:sequence>
 			<xs:element name="Kategori" type="KategoriType"/>
+			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
+			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
 			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
@@ -431,6 +440,37 @@
 	</xs:complexType>
 	<!-- Lovhjemmel -->
 	<xs:complexType name="LovhjemmelType">
+		<xs:sequence>
+			<xs:element name="Lov" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Kapittel" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Paragraf" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Ledd" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded"/>
+														</xs:sequence>
+														<xs:attribute name="Ledd" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="Paragraf" use="required"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="Kapittel" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="lov" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute name="Lov" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
