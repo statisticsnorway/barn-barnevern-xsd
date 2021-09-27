@@ -1,14 +1,33 @@
 # Kodelister
 
-[TOC]
+## Innhold
+- [Melding](#/Barnevern/Sak/Virksomhet/Melding)
+  - [Melder](#/Barnevern/Sak/Virksomhet/Melding/Melder/@Kode)
+  - [Saksinnhold](#/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode)
+  - [Konklusjon](#/Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode)
+- [Undersøkelse](#/Barnevern/Sak/Virksomhet/Undersokelse)
+  - [Vedtaksgrunnlag](#/Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode)
+  - [UtvidetFrist](#/Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode)
+  - [Konklusjon](#/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode)
+- [Plan](#/Barnevern/Sak/Virksomhet/Plan)
+  - [Plantype](#/Barnevern/Sak/Virksomhet/Plan/@Plantype)
+- [Tiltak](#/Barnevern/Sak/Virksomhet/Tiltak)
+  - [Kategori](#/Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode)
+  - [Opphevelse](#/Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode)
+  - [Flytting](#/Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting)
+- [Vedtak](#/Barnevern/Sak/Virksomhet/Vedtak)
+  - [Status](#/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode)
+- [Ettervern](#/Barnevern/Sak/Virksomhet/Ettervern)
+  - [Konklusjon](#/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode)
 
 
 
-
+<a name="/Barnevern/Sak/Virksomhet/Melding"></a>
 ## Melding
 
 Definert på stien /Barnevern/Sak/Virksomhet/Melding
 
+<a name="/Barnevern/Sak/Virksomhet/Melding/Melder/@Kode"></a>
 #### Melder
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Melder/@Kode
@@ -74,6 +93,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode
 | 18   | Andre forhold ved foreldre/ familien (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.) | 2013-01-01 |            |
 | 19   | Andre forhold ved barnets situasjon (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)  | 2013-01-01 |            |
 
+<a name="/Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode"></a>
 #### Konklusjon
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode
@@ -91,10 +111,12 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode
 
 
 
+<a name="/Barnevern/Sak/Virksomhet/Undersokelse"></a>
 ## Undersøkelse
 
 Definert på stien /Barnevern/Sak/Virksomhet/Undersokelse
 
+<a name="/Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode"></a>
 #### Vedtaksgrunnlag
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode
@@ -102,6 +124,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode
 Bruker samme kodeliste som [Saksinnhold](#/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode)
 
 
+<a name="/Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode"></a>
 #### UtvidetFrist
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode
@@ -112,7 +135,8 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode
 | 2    | Nei       | 2022-01-01 |            | 
 
 
-#### Konklusjon  <a name="/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode"></a>
+<a name="/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode"></a>
+#### Konklusjon  
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode
 
@@ -129,10 +153,12 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode
 
 
 
+<a name="/Barnevern/Sak/Virksomhet/Plan"></a>
 ## Plan
 
 Definert på stien /Barnevern/Sak/Virksomhet/Plan
 
+<a name="/Barnevern/Sak/Virksomhet/Plan/@Plantype"></a>
 #### Plantype
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Plan/@Plantype
@@ -147,10 +173,12 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Plan/@Plantype
 
 
 
+<a name="/Barnevern/Sak/Virksomhet/Tiltak"></a>
 ## Tiltak
 
 Definert på stien /Barnevern/Sak/Virksomhet/Tiltak
 
+<a name="/Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode"></a>
 #### Kategori
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode
@@ -209,6 +237,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode
 | 8.99 | Andre tiltak (krever presisering)                          | 2013-01-01 ||
 
 
+<a name="/Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode"></a>
 #### Opphevelse
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode
@@ -221,6 +250,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode
 | 4    | Annet (krever presisering)                              | 2013-01-01 |            |
 
 
+<a name="/Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting"></a>
 #### Flytting
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting
@@ -241,10 +271,12 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting
 
 
 
+<a name="/Barnevern/Sak/Virksomhet/Vedtak"></a>
 ## Vedtak
 
 Definert på stien /Barnevern/Sak/Virksomhet/Vedtak
 
+<a name="/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode"></a>
 #### Kategori
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode
@@ -261,11 +293,13 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode
 
 
 
+<a name="/Barnevern/Sak/Virksomhet/Ettervern"></a>
 ## Ettervern
 
 Definert på stien /Barnevern/Sak/Virksomhet/Ettervern
 
-#### Kategori
+<a name="/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode"></a>
+#### Konklusjon
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode
 
