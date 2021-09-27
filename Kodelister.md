@@ -22,7 +22,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Melder/@Kode
 | 5    | Barnvernstjenesten                                   | 2013-01-01 |            |
 | 6    | NAV (kommune og stat)                                | 2013-01-01 |            |
 | 7    | Barnevernsvakt                                       | 2013-01-01 |            |
-| 8    | Politi/lensmann                                      | 2013-01-01 |            |
+| 8    | Politi                                               | 2013-01-01 |            |
 | 9    | Barnehage                                            | 2013-01-01 |            |
 | 10   | Helsestasjon/skolehelsetjenesten                     | 2013-01-01 |            |
 | 11   | Skole                                                | 2013-01-01 |            |

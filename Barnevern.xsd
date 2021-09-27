@@ -553,7 +553,7 @@ For innsending av barnevernsdata
 5 = Barnvernstjenesten
 6 = NAV (kommune og stat)
 7 = Barnevernsvakt
-8 = Politi/lensmann
+8 = Politi
 9 = Barnehage
 10 = Helsestasjon/skolehelsetjenesten
 11 = Skole
@@ -614,7 +614,7 @@ For innsending av barnevernsdata
 							</xs:enumeration>
 							<xs:enumeration value="8">
 								<xs:annotation>
-									<xs:appinfo>Politi/lensmann</xs:appinfo>
+									<xs:appinfo>Politi</xs:appinfo>
 								</xs:annotation>
 							</xs:enumeration>
 							<xs:enumeration value="9">
