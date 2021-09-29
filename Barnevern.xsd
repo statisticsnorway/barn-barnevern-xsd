@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Statistics Norway (Statistics Norway) -->
 <!-- Bufdir Kommunerapportering -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.10.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.11.1">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -36,7 +36,7 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:minLength value="1"/>
-				<xs:maxLength value="100"/>
+				<xs:maxLength value="300"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
@@ -61,24 +61,11 @@ For innsending av barnevernsdata
 					<xs:documentation>Kommune som rapporterer</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:choice>
+			<xs:element name="Sak" type="SakType">
 				<xs:annotation>
-					<xs:documentation>1 saksmappe eller 1 avvist melding rapporteres per innsending</xs:documentation>
+					<xs:documentation>Saksmappe for et barn. Komplett innhold av mappe endret siden siste innsending rapporteres</xs:documentation>
 				</xs:annotation>
-				<xs:element name="Sak" type="SakType">
-					<xs:annotation>
-						<xs:documentation>Saksmappe for et barn. Komplett innhold av mappe endret siden siste innsending rapporteres</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="AvvistMelding">
-					<xs:annotation>
-						<xs:documentation>Melding som er avvist av barneverntjenesten. Ikke identifisert på barn</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:attribute ref="Id" use="required"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:choice>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
 			<xs:annotation>
@@ -164,38 +151,6 @@ For innsending av barnevernsdata
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="Bydelsnummer" use="optional">
-			<xs:annotation>
-				<xs:documentation>2-sifret bydelsnummer for bydelene i Oslo</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="2"/>
-					<xs:maxLength value="2"/>
-					<xs:pattern value="\d{2}"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Bydelsnavn">
-			<xs:annotation>
-				<xs:documentation>Bydelsnavn ved rapportering av bydelene i Oslo</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="250"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Distriktsnummer">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="2"/>
-					<xs:maxLength value="3"/>
-					<xs:pattern value="\d{2,3}"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="SakType">
 		<xs:annotation>
@@ -204,46 +159,7 @@ For innsending av barnevernsdata
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Bekymringsmelding</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Tiltaks- eller omsorgsplan</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Alle typer vedtak som fattes i en barnevernsak, også av fylkesnemnda</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Tilbud om ettervern. Eventuelt ettervernstiltak registreres som Tiltak</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:attribute ref="Id" use="required"/>
-					<xs:attribute name="FraId" type="IdType" use="required"/>
-					<xs:attribute name="FraType" type="BegrepsType" use="required"/>
-					<xs:attribute name="TilId" type="IdType" use="required"/>
-					<xs:attribute name="TilType" type="BegrepsType" use="required"/>
-					<xs:attribute name="Navn" type="xs:string"/>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Virksomhet" type="VirksomhetType" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required"/>
@@ -294,24 +210,30 @@ For innsending av barnevernsdata
 	</xs:complexType>
 	<!-- Plan -->
 	<xs:complexType name="PlanType">
+		<xs:sequence>
+			<xs:element name="Evaluering" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="UtfortDato" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required">
+						<xs:annotation>
+							<xs:documentation>
+          Dato for avslutning av planen
+        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
 				<xs:documentation>
           Dato hvor planen regnes som aktiv
         </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute ref="SluttDato" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-          Dato for avslutning av planen
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="EvaluertDato" type="xs:date" use="optional">
-			<xs:annotation>
-				<xs:documentation>Planlagt dato for evaluering</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Plantype" use="required">
@@ -356,6 +278,75 @@ For innsending av barnevernsdata
 		<xs:sequence>
 			<xs:element name="Melder" type="MelderType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required">
+						<xs:annotation>
+							<xs:documentation>
+          Konklusjonsdato
+        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Kode" use="required">
+						<xs:annotation>
+							<xs:documentation>
+ 1 = Henlagt av andre grunner
+ 1.1 = Henlagt, Utenfor BVL
+ 1.2 = Henlagt, Vist til annen instans
+ 1.3 = Henlagt, Overført til annen kommune
+ 2 = Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse
+ 3 = Henlagt pga. aktive tiltak
+ 4 = Melding i pågående undersøkelse
+ 				</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:list>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:minLength value="1"/>
+										<xs:maxLength value="3"/>
+										<xs:enumeration value="1">
+											<xs:annotation>
+												<xs:appinfo>Henlagt av andre grunner</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="1.1">
+											<xs:annotation>
+												<xs:appinfo>Henlagt, Utenfor BVL</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="1.2">
+											<xs:annotation>
+												<xs:appinfo>Henlagt, Vist til annen instans</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="1.3">
+											<xs:annotation>
+												<xs:appinfo>Henlagt, Overført til annen kommune</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="2">
+											<xs:annotation>
+												<xs:appinfo>Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="3">
+											<xs:annotation>
+												<xs:appinfo>Henlagt pga. aktive tiltak</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="4">
+											<xs:annotation>
+												<xs:appinfo>Melding i pågående undersøkelse</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:list>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
@@ -365,81 +356,12 @@ For innsending av barnevernsdata
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute ref="SluttDato" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-          Konklusjonsdato
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="Konklusjon" use="optional">
-			<xs:annotation>
-				<xs:documentation>
- 1 = Henlagt av andre grunner
- 1.1 = Henlagt, Utenfor BVL
- 1.2 = Henlagt, Vist til annen instans
- 1.3 = Henlagt, Overført til annen kommune
- 1.4 = Henlagt, Ikke grunnlag for gjennomgang
- 2 = Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse
- 3 = Henlagt pga. aktive tiltak
- 4 = Melding i pågående undersøkelse
- 				</xs:documentation>
-			</xs:annotation>			
-			<xs:simpleType>
-				<xs:list>
-					<xs:simpleType>
-						<xs:restriction base="xs:string">
-							<xs:minLength value="1"/>
-							<xs:maxLength value="3"/>
-							<xs:enumeration value="1">
-								<xs:annotation>
-									<xs:appinfo>Henlagt av andre grunner</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="1.1">
-								<xs:annotation>
-									<xs:appinfo>Henlagt, Utenfor BVL</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="1.2">
-								<xs:annotation>
-									<xs:appinfo>Henlagt, Vist til annen instans</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="1.3">
-								<xs:annotation>
-									<xs:appinfo>Henlagt, Overført til annen kommune</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="1.4">
-								<xs:annotation>
-									<xs:appinfo>Henlagt, Ikke grunnlag for gjennomgang</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="2">
-								<xs:annotation>
-									<xs:appinfo>Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="3">
-								<xs:annotation>
-									<xs:appinfo>Henlagt pga. aktive tiltak</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="4">
-								<xs:annotation>
-									<xs:appinfo>Melding i pågående undersøkelse</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-						</xs:restriction>
-					</xs:simpleType>
-				</xs:list>
-			</xs:simpleType>
-		</xs:attribute>
 	</xs:complexType>
 	<!-- Tiltak -->
 	<xs:complexType name="TiltakType">
 		<xs:sequence>
+			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
+			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
 			<xs:element name="Kategori" type="KategoriType"/>
 			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
@@ -452,44 +374,88 @@ For innsending av barnevernsdata
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required">
+						<xs:annotation>
+							<xs:documentation>Avslutningsdato for tiltaket
+        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Flytting">
+						<xs:annotation>
+							<xs:documentation>
+1 = Barnevernstjenesten avslutter kontrakt med fosterhjem
+1.1 = Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører
+1.2 = Barnet blir myndig
+1.3 = Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)
+1.4 = Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)
+1.5 = Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).
+2 = Fosterforeldre avslutter kontrakten med barnevernet
+2.1 = Barnet har behov fosterforeldre ikke kan dekke
+2.2 = Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)
+2.3 = Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).
+ 				</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="1">
+									<xs:annotation>
+										<xs:appinfo>Barnevernstjenesten avslutter kontrakt med fosterhjem</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.1">
+									<xs:annotation>
+										<xs:appinfo>Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.2">
+									<xs:annotation>
+										<xs:appinfo>Barnet blir myndig</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.3">
+									<xs:annotation>
+										<xs:appinfo>Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.4">
+									<xs:annotation>
+										<xs:appinfo>Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.5">
+									<xs:annotation>
+										<xs:appinfo>Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2">
+									<xs:annotation>
+										<xs:appinfo>Fosterforeldre avslutter kontrakten med barnevernet</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2.1">
+									<xs:annotation>
+										<xs:appinfo>Barnet har behov fosterforeldre ikke kan dekke</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2.2">
+									<xs:annotation>
+										<xs:appinfo>Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2.3">
+									<xs:annotation>
+										<xs:appinfo>Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute name="Ettervern" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-1 = Mottatt og akseptert tilbud om tiltak
-2 = Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak
-3 = Ikke lenger tiltak etter BVL, etter eget ønske
-4 = Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen
- 				</xs:documentation>
-			</xs:annotation>			
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="1"/>
-					<xs:enumeration value="1">
-						<xs:annotation>
-							<xs:appinfo>Mottatt og akseptert tilbud om tiltak</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="2">
-						<xs:annotation>
-							<xs:appinfo>Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="3">
-						<xs:annotation>
-							<xs:appinfo>Ikke lenger tiltak etter BVL, etter eget ønske</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="4">
-						<xs:annotation>
-							<xs:appinfo>Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -497,15 +463,40 @@ For innsending av barnevernsdata
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute ref="SluttDato" use="optional">
-			<xs:annotation>
-				<xs:documentation>Avslutningsdato for tiltaket
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
 	</xs:complexType>
 	<!-- Lovhjemmel -->
 	<xs:complexType name="LovhjemmelType">
+		<xs:sequence>
+			<xs:element name="Lov" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Kapittel" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Paragraf" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Ledd" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded"/>
+														</xs:sequence>
+														<xs:attribute name="Ledd" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="Paragraf" use="required"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="Kapittel" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="lov" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute name="Lov" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -552,7 +543,6 @@ For innsending av barnevernsdata
 	</xs:complexType>
 	<!-- Melder -->
 	<xs:complexType name="MelderType">
-		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -563,7 +553,7 @@ For innsending av barnevernsdata
 5 = Barnvernstjenesten
 6 = NAV (kommune og stat)
 7 = Barnevernsvakt
-8 = Politi/lensmann
+8 = Politi
 9 = Barnehage
 10 = Helsestasjon/skolehelsetjenesten
 11 = Skole
@@ -580,7 +570,7 @@ For innsending av barnevernsdata
 22 = Andre offentlige instanser (krever presisering)
 23 = Anonym
  				</xs:documentation>
-			</xs:annotation>			
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:list>
 					<xs:simpleType>
@@ -624,7 +614,7 @@ For innsending av barnevernsdata
 							</xs:enumeration>
 							<xs:enumeration value="8">
 								<xs:annotation>
-									<xs:appinfo>Politi/lensmann</xs:appinfo>
+									<xs:appinfo>Politi</xs:appinfo>
 								</xs:annotation>
 							</xs:enumeration>
 							<xs:enumeration value="9">
@@ -707,13 +697,13 @@ For innsending av barnevernsdata
 				</xs:list>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute ref="Presisering"/>
 	</xs:complexType>
 	<!-- Saksinnhold -->
 	<xs:complexType name="SaksinnholdType">
-		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
-				<xs:annotation>
-					<xs:documentation>
+			<xs:annotation>
+				<xs:documentation>
 1 = Foreldres somatiske sykdom
 2 = Foreldres psykiske problem/ lidelse
 3 = Foreldres rusmisbruk
@@ -742,7 +732,8 @@ For innsending av barnevernsdata
 18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
 19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
 					</xs:documentation>
-				</xs:annotation>			<xs:simpleType>
+			</xs:annotation>
+			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
 					<xs:maxLength value="2"/>
@@ -884,13 +875,112 @@ For innsending av barnevernsdata
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute ref="Presisering"/>
 	</xs:complexType>
 	<!-- Undersøkelse -->
 	<xs:complexType name="UndersokelseType">
 		<xs:sequence>
 			<xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="UtvidetFrist" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="Kode" use="required">
+						<xs:annotation>
+							<xs:documentation>
+1 = Ja
+2 = Nei
+ 				</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length value="1"/>
+								<xs:enumeration value="1">
+									<xs:annotation>
+										<xs:appinfo>Ja</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2">
+									<xs:annotation>
+										<xs:appinfo>Nei</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="UtvidetFristDato" type="xs:date" use="optional">
+						<xs:annotation>
+							<xs:documentation>
+          Datoen det ble innvilget utvidet frist.
+          Kun relevant dersom det er innvilget utvidet frist.
+        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required">
+						<xs:annotation>
+							<xs:documentation>
+          Konklusjonsdato for undersøkelsen
+        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Kode" use="required">
+						<xs:annotation>
+							<xs:documentation>
+1 = Barneverntjenesten fatter vedtak om tiltak
+2 = Begjæring om tiltak for fylkesnemnda
+3 = Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)
+4 = Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)
+5 = Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)
+6 = Undersøkelsen henlagt etter henvisning til annen instans
+ 				</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:list>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:minLength value="1"/>
+										<xs:maxLength value="1"/>
+										<xs:enumeration value="1">
+											<xs:annotation>
+												<xs:appinfo>Barneverntjenesten fatter vedtak om tiltak</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="2">
+											<xs:annotation>
+												<xs:appinfo>Begjæring om tiltak for fylkesnemnda</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="3">
+											<xs:annotation>
+												<xs:appinfo>Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="4">
+											<xs:annotation>
+												<xs:appinfo>Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="5">
+											<xs:annotation>
+												<xs:appinfo>Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="6">
+											<xs:annotation>
+												<xs:appinfo>Undersøkelsen henlagt etter henvisning til annen instans</xs:appinfo>
+											</xs:annotation>
+										</xs:enumeration>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:list>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute ref="Presisering"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
-		<xs:attribute ref="Presisering"/>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
@@ -901,100 +991,9 @@ For innsending av barnevernsdata
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="UtvidetFrist">
-			<xs:annotation>
-				<xs:documentation>
-1 = Ja
-2 = Nei
- 				</xs:documentation>
-			</xs:annotation>			
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:length value="1"/>
-					<xs:enumeration value="1">
-						<xs:annotation>
-							<xs:appinfo>Ja</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="2">
-						<xs:annotation>
-							<xs:appinfo>Nei</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="UtvidetFristDato" type="xs:date" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-          Datoen det ble innvilget utvidet frist.
-          Kun relevant dersom det er innvilget utvidet frist.
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute ref="SluttDato" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-          Konklusjonsdato for undersøkelsen
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="Konklusjon" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-1 = Barneverntjenesten fatter vedtak om tiltak
-2 = Begjæring om tiltak for fylkesnemnda
-3 = Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)
-4 = Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)
-5 = Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)
- 				</xs:documentation>
-			</xs:annotation>			
-			<xs:simpleType>
-				<xs:list>
-					<xs:simpleType>
-						<xs:restriction base="xs:string">
-							<xs:minLength value="1"/>
-							<xs:maxLength value="1"/>
-							<xs:enumeration value="1">
-								<xs:annotation>
-									<xs:appinfo>Barneverntjenesten fatter vedtak om tiltak</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="2">
-								<xs:annotation>
-									<xs:appinfo>Begjæring om tiltak for fylkesnemnda</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="3">
-								<xs:annotation>
-									<xs:appinfo>Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="4">
-								<xs:annotation>
-									<xs:appinfo>Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value="5">
-								<xs:annotation>
-									<xs:appinfo>Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)</xs:appinfo>
-								</xs:annotation>
-							</xs:enumeration>
-						</xs:restriction>
-					</xs:simpleType>
-				</xs:list>
-			</xs:simpleType>
-		</xs:attribute>
 	</xs:complexType>
 	<!-- Kategori -->
 	<xs:complexType name="KategoriType">
-		<xs:attribute ref="Presisering">
-			<xs:annotation>
-				<xs:documentation>
-Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
-      </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -1049,7 +1048,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 8.3 = Botreningskurs
 8.99 = Andre tiltak (krever presisering)
  				</xs:documentation>
-			</xs:annotation>			
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="3"/>
@@ -1307,10 +1306,16 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute ref="Presisering">
+			<xs:annotation>
+				<xs:documentation>
+Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
+      </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<!-- Opphevelse -->
 	<xs:complexType name="OpphevelseType">
-		<xs:attribute ref="Presisering"/>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -1319,7 +1324,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 3 = Adopsjon § 4-20
 4 = Annet (krever presisering)
  				</xs:documentation>
-			</xs:annotation>			
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
@@ -1347,6 +1352,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute ref="Presisering"/>
 	</xs:complexType>
 	<!-- Ansvar -->
 	<xs:complexType name="AnsvarType">
@@ -1356,7 +1362,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 1 = Ja
 2 = Nei
  				</xs:documentation>
-			</xs:annotation>			
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="1"/>
@@ -1379,7 +1385,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 1 = Ja
 2 = Nei
  				</xs:documentation>
-			</xs:annotation>			
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="1"/>
@@ -1421,18 +1427,24 @@ Dato tilsynsbesøket faktisk ble utført
 	</xs:complexType>
 	<!-- Oversendelse -->
 	<xs:complexType name="OversendelsePrivatKravType">
+		<xs:sequence>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required">
+						<xs:annotation>
+							<xs:documentation>
+          Datoen hvor kravet oversendes fylkesnemnda
+        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
 				<xs:documentation>
           Mottaksdato for kravet
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute ref="SluttDato" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-          Datoen hvor kravet oversendes fylkesnemnda
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -1461,6 +1473,68 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:documentation>Krav fra privat part om endring av tidligere vedtak fattet av fylkesnemnda</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="Status" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="EndretDato" use="required"/>
+					<xs:attribute name="Kode" use="required">
+						<xs:annotation>
+							<xs:documentation>
+1 = Under behandling
+2 = Klar for godkjenning
+3 = Godkjent
+4 = Avslått / Avsluttet
+5 = Bortfall etter BVL
+6 = Opphevet etter forvaltningloven
+ 				</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="1">
+									<xs:annotation>
+										<xs:appinfo>Under behandling</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2">
+									<xs:annotation>
+										<xs:appinfo>Klar for godkjenning</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="3">
+									<xs:annotation>
+										<xs:appinfo>Godkjent</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="4">
+									<xs:annotation>
+										<xs:appinfo>Avslått / Avsluttet</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="5">
+									<xs:annotation>
+										<xs:appinfo>Bortfall etter BVL</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="6">
+									<xs:annotation>
+										<xs:appinfo>Opphevet etter forvaltningloven</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required">
+						<xs:annotation>
+							<xs:documentation>
+          Vedtakets bortfallsdato
+        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
@@ -1470,99 +1544,53 @@ Dato tilsynsbesøket faktisk ble utført
         </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute ref="SluttDato" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-          Vedtakets bortfallsdato
-        </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="StatusKode">
-			<xs:annotation>
-				<xs:documentation>
-1 = Under behandling
-2 = Klar for godkjenning
-3 = Godkjent
-4 = Avslått / Avsluttet
-5 = Bortfall etter BVL
-6 = Opphevet etter forvaltningloven
- 				</xs:documentation>
-			</xs:annotation>			
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="1">
-						<xs:annotation>
-							<xs:appinfo>Under behandling</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="2">
-						<xs:annotation>
-							<xs:appinfo>Klar for godkjenning</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="3">
-						<xs:annotation>
-							<xs:appinfo>Godkjent</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="4">
-						<xs:annotation>
-							<xs:appinfo>Avslått / Avsluttet</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="5">
-						<xs:annotation>
-							<xs:appinfo>Bortfall etter BVL</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="6">
-						<xs:annotation>
-							<xs:appinfo>Opphevet etter forvaltningloven</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
 	</xs:complexType>
 	<!-- Ettervern -->
 	<xs:complexType name="EttervernType">
-		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
-		<xs:attribute name="Konklusjon">
-			<xs:annotation>
-				<xs:documentation>
+		<xs:sequence>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required"/>
+					<xs:attribute name="Kode" use="required">
+						<xs:annotation>
+							<xs:documentation>
 1 = Mottatt og akseptert tilbud om tiltak
 2 = Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak
 3 = Ikke lenger tiltak etter BVL, etter eget ønske
 4 = Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen
  				</xs:documentation>
-			</xs:annotation>			
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:length value="1"/>
-					<xs:enumeration value="1">
-						<xs:annotation>
-							<xs:appinfo>Mottatt og akseptert tilbud om tiltak</xs:appinfo>
 						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="2">
-						<xs:annotation>
-							<xs:appinfo>Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="3">
-						<xs:annotation>
-							<xs:appinfo>Ikke lenger tiltak etter BVL, etter eget ønske</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="4">
-						<xs:annotation>
-							<xs:appinfo>Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length value="1"/>
+								<xs:enumeration value="1">
+									<xs:annotation>
+										<xs:appinfo>Mottatt og akseptert tilbud om tiltak</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2">
+									<xs:annotation>
+										<xs:appinfo>Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="3">
+									<xs:annotation>
+										<xs:appinfo>Ikke lenger tiltak etter BVL, etter eget ønske</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="4">
+									<xs:annotation>
+										<xs:appinfo>Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="IdType">
 		<xs:restriction base="xs:string">
@@ -1580,4 +1608,99 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="Ettervern"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="VirksomhetType">
+		<xs:sequence>
+			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Bekymringsmelding</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tiltaks- eller omsorgsplan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Alle typer vedtak som fattes i en barnevernsak, også av fylkesnemnda</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tilbud om ettervern. Eventuelt ettervernstiltak registreres som Tiltak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute ref="Id" use="required"/>
+					<xs:attribute name="FraId" type="IdType" use="required"/>
+					<xs:attribute name="FraType" type="BegrepsType" use="required"/>
+					<xs:attribute name="TilId" type="IdType" use="required"/>
+					<xs:attribute name="TilType" type="BegrepsType" use="required"/>
+					<xs:attribute name="Navn" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="StartDato" use="required"/>
+		<xs:attribute ref="SluttDato" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+          Konklusjonsdato for saken hos barnevernstjenesten i enten en bydel eller kommune (hvis man ikke har bydeler)
+        </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Organisasjonsnummer" use="required">
+			<xs:annotation>
+				<xs:documentation>Orgnr til den virksomheten som er utførende. For kommuner som  har bydeler er det bydelens orgnr, ellers benytte kommunens orgnr.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="9"/>
+					<xs:maxLength value="9"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Bydelsnummer" use="optional">
+			<xs:annotation>
+				<xs:documentation>2-sifret bydelsnummer for bydelen, brukes av f.eks. Oslo</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="2"/>
+					<xs:maxLength value="2"/>
+					<xs:pattern value="\d{2}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Bydelsnavn">
+			<xs:annotation>
+				<xs:documentation>Bydelsnavn for bydelen, f.eks. Gamle Oslo ved rapportering av bydel fra Oslo</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="250"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Distriktsnummer">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="2"/>
+					<xs:maxLength value="3"/>
+					<xs:pattern value="\d{2,3}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
 </xs:schema>
