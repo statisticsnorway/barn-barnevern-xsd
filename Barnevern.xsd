@@ -40,6 +40,12 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
+	<xs:attribute name="MigreringId">
+		<xs:annotation>
+			<xs:appinfo>MigreringId</xs:appinfo>
+			<xs:documentation>Globalt attributt for kobling til id til elementet i det systemet der dataene er migrert fra</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
 	<!-- ELEMENTER -->
 	<xs:element name="Barnevern" type="BarnevernType">
 		<xs:annotation>
@@ -207,6 +213,7 @@ For innsending av barnevernsdata
 			</xs:simpleType>
 		</xs:attribute>
 		<xs:attribute name="Avsluttet" type="xs:boolean"/>
+		<xs:attribute ref="MigreringId"/>
 	</xs:complexType>
 	<!-- Plan -->
 	<xs:complexType name="PlanType">
@@ -467,13 +474,13 @@ For innsending av barnevernsdata
 	<!-- Lovhjemmel -->
 	<xs:complexType name="LovhjemmelType">
 		<xs:sequence>
-			<xs:element name="Lov" maxOccurs="unbounded">
+			<xs:element name="Lov">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Kapittel" maxOccurs="unbounded">
+						<xs:element name="Kapittel">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="Paragraf" maxOccurs="unbounded">
+									<xs:element name="Paragraf">
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="Ledd" maxOccurs="unbounded">
@@ -481,65 +488,22 @@ For innsending av barnevernsdata
 														<xs:sequence>
 															<xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded"/>
 														</xs:sequence>
-														<xs:attribute name="Ledd" use="required"/>
+														<xs:attribute name="Kode" use="required"/>
 													</xs:complexType>
 												</xs:element>
 											</xs:sequence>
-											<xs:attribute name="Paragraf" use="required"/>
+											<xs:attribute name="Kode" use="required"/>
 										</xs:complexType>
 									</xs:element>
 								</xs:sequence>
-								<xs:attribute name="Kapittel" use="required"/>
+								<xs:attribute name="Kode" use="required"/>
 							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
-					<xs:attribute name="lov" use="required"/>
+					<xs:attribute name="Kode" use="required"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="Lov" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="100"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Kapittel" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="5"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Paragraf" use="required">
-			<xs:annotation>
-				<xs:documentation>Hovedtypetiltak</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:maxLength value="5"/>
-					<xs:minLength value="1"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Ledd" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="0"/>
-					<xs:maxLength value="5"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Punktum" use="optional">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="0"/>
-					<xs:maxLength value="5"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
 	</xs:complexType>
 	<!-- Melder -->
 	<xs:complexType name="MelderType">
@@ -883,7 +847,13 @@ For innsending av barnevernsdata
 			<xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="UtvidetFrist" minOccurs="0">
 				<xs:complexType>
-					<xs:attribute name="Kode" use="required">
+					<xs:attribute ref="StartDato" type="xs:date" use="required">
+						<xs:annotation>
+							<xs:documentation>
+          Datoen det ble søkt om utvidet frist.        </xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Innvilget">
 						<xs:annotation>
 							<xs:documentation>
 1 = Ja
@@ -905,14 +875,6 @@ For innsending av barnevernsdata
 								</xs:enumeration>
 							</xs:restriction>
 						</xs:simpleType>
-					</xs:attribute>
-					<xs:attribute name="UtvidetFristDato" type="xs:date" use="optional">
-						<xs:annotation>
-							<xs:documentation>
-          Datoen det ble innvilget utvidet frist.
-          Kun relevant dersom det er innvilget utvidet frist.
-        </xs:documentation>
-						</xs:annotation>
 					</xs:attribute>
 				</xs:complexType>
 			</xs:element>
@@ -1479,26 +1441,16 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
 							<xs:documentation>
-1 = Under behandling
-2 = Klar for godkjenning
 3 = Godkjent
 4 = Avslått / Avsluttet
+4.1 = Avslått
+4.2 = Avsluttet
 5 = Bortfall etter BVL
 6 = Opphevet etter forvaltningloven
  				</xs:documentation>
 						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
-								<xs:enumeration value="1">
-									<xs:annotation>
-										<xs:appinfo>Under behandling</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="2">
-									<xs:annotation>
-										<xs:appinfo>Klar for godkjenning</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
 								<xs:enumeration value="3">
 									<xs:annotation>
 										<xs:appinfo>Godkjent</xs:appinfo>
@@ -1507,6 +1459,16 @@ Dato tilsynsbesøket faktisk ble utført
 								<xs:enumeration value="4">
 									<xs:annotation>
 										<xs:appinfo>Avslått / Avsluttet</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="4.1">
+									<xs:annotation>
+										<xs:appinfo>Avslått</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="4.2">
+									<xs:annotation>
+										<xs:appinfo>Avsluttet</xs:appinfo>
 									</xs:annotation>
 								</xs:enumeration>
 								<xs:enumeration value="5">
@@ -1636,6 +1598,82 @@ Dato tilsynsbesøket faktisk ble utført
 				<xs:annotation>
 					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="Flytting" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute ref="Id" use="required"/>
+					<xs:attribute ref="SluttDato" use="required"/>
+					<xs:attribute name="Kode" use="required">
+						<xs:annotation>
+							<xs:documentation>
+1 = Barnevernstjenesten avslutter kontrakt med fosterhjem
+1.1 = Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører
+1.2 = Barnet blir myndig
+1.3 = Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)
+1.4 = Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)
+1.5 = Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).
+2 = Fosterforeldre avslutter kontrakten med barnevernet
+2.1 = Barnet har behov fosterforeldre ikke kan dekke
+2.2 = Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)
+2.3 = Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).
+ 				</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="1">
+									<xs:annotation>
+										<xs:appinfo>Barnevernstjenesten avslutter kontrakt med fosterhjem</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.1">
+									<xs:annotation>
+										<xs:appinfo>Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.2">
+									<xs:annotation>
+										<xs:appinfo>Barnet blir myndig</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.3">
+									<xs:annotation>
+										<xs:appinfo>Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.4">
+									<xs:annotation>
+										<xs:appinfo>Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="1.5">
+									<xs:annotation>
+										<xs:appinfo>Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2">
+									<xs:annotation>
+										<xs:appinfo>Fosterforeldre avslutter kontrakten med barnevernet</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2.1">
+									<xs:annotation>
+										<xs:appinfo>Barnet har behov fosterforeldre ikke kan dekke</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2.2">
+									<xs:annotation>
+										<xs:appinfo>Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2.3">
+									<xs:annotation>
+										<xs:appinfo>Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
