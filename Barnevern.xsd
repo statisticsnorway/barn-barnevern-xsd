@@ -15,6 +15,18 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
+	<xs:attribute name="MigrertId">
+		<xs:annotation>
+			<xs:appinfo>Database-ID</xs:appinfo>
+			<xs:documentation>Globalt attributt for ID for system det er migrert fra, og som er benyttet i tidligere KOSTRA-rapportering</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
 	<xs:attribute name="StartDato" type="xs:date">
 		<xs:annotation>
 			<xs:appinfo>Startdato</xs:appinfo>
@@ -69,7 +81,7 @@ For innsending av barnevernsdata
 			</xs:element>
 			<xs:element name="Sak" type="SakType">
 				<xs:annotation>
-					<xs:documentation>Saksmappe for et barn. Komplett innhold av mappe endret siden siste innsending rapporteres</xs:documentation>
+					<xs:documentation>Saksmappe for et barn. Komplett innhold av mappe rapporteres når innhold er endret siden siste innsending</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -84,7 +96,7 @@ For innsending av barnevernsdata
 	<xs:complexType name="FagsystemType">
 		<xs:attribute name="Leverandor" use="required">
 			<xs:annotation>
-				<xs:appinfo>Leverandøren til fagsystemer, f.eks. Visma eller Acos</xs:appinfo>
+				<xs:appinfo>Leverandøren til fagsystemer, f.eks. Visma, Acos eller NetCompany</xs:appinfo>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -161,13 +173,14 @@ For innsending av barnevernsdata
 	<xs:complexType name="SakType">
 		<xs:annotation>
 			<xs:documentation>
-        Typedefinisjon for individ
+        Typedefinisjon for Sak (tidl. Individ)
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Virksomhet" type="VirksomhetType" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required"/>
 		<xs:attribute ref="SluttDato"/>
 		<xs:attribute name="Journalnummer" use="required">
@@ -236,6 +249,7 @@ For innsending av barnevernsdata
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -356,6 +370,7 @@ For innsending av barnevernsdata
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -463,6 +478,7 @@ For innsending av barnevernsdata
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -944,6 +960,7 @@ For innsending av barnevernsdata
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -1316,55 +1333,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 		</xs:attribute>
 		<xs:attribute ref="Presisering"/>
 	</xs:complexType>
-	<!-- Ansvar -->
-	<xs:complexType name="AnsvarType">
-		<xs:attribute name="Tilsynsansvar" use="required">
-			<xs:annotation>
-				<xs:documentation>
-1 = Ja
-2 = Nei
- 				</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:length value="1"/>
-					<xs:enumeration value="1">
-						<xs:annotation>
-							<xs:appinfo>Ja</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="2">
-						<xs:annotation>
-							<xs:appinfo>Nei</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Oppfolgingsansvar" use="required">
-			<xs:annotation>
-				<xs:documentation>
-1 = Ja
-2 = Nei
- 				</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:length value="1"/>
-					<xs:enumeration value="1">
-						<xs:annotation>
-							<xs:appinfo>Ja</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="2">
-						<xs:annotation>
-							<xs:appinfo>Nei</xs:appinfo>
-						</xs:annotation>
-					</xs:enumeration>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-	</xs:complexType>
+
 	<!-- Oppfølging -->
 	<xs:complexType name="OppfolgingType">
 		<xs:attribute ref="Id" use="required"/>
@@ -1376,6 +1345,7 @@ Dato oppfølgingsbesøket faktisk ble foretatt
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
+
 	<!-- Tilsyn -->
 	<xs:complexType name="TilsynType">
 		<xs:attribute ref="Id" use="required"/>
