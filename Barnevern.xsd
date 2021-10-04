@@ -52,12 +52,6 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
-	<xs:attribute name="MigreringId">
-		<xs:annotation>
-			<xs:appinfo>MigreringId</xs:appinfo>
-			<xs:documentation>Globalt attributt for kobling til id til elementet i det systemet der dataene er migrert fra</xs:documentation>
-		</xs:annotation>
-	</xs:attribute>
 	<!-- ELEMENTER -->
 	<xs:element name="Barnevern" type="BarnevernType">
 		<xs:annotation>
@@ -226,7 +220,6 @@ For innsending av barnevernsdata
 			</xs:simpleType>
 		</xs:attribute>
 		<xs:attribute name="Avsluttet" type="xs:boolean"/>
-		<xs:attribute ref="MigreringId"/>
 	</xs:complexType>
 	<!-- Plan -->
 	<xs:complexType name="PlanType">
@@ -863,7 +856,7 @@ For innsending av barnevernsdata
 			<xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="UtvidetFrist" minOccurs="0">
 				<xs:complexType>
-					<xs:attribute ref="StartDato" type="xs:date" use="required">
+					<xs:attribute ref="StartDato" use="required">
 						<xs:annotation>
 							<xs:documentation>
           Datoen det ble søkt om utvidet frist.        </xs:documentation>
@@ -1333,7 +1326,6 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 		</xs:attribute>
 		<xs:attribute ref="Presisering"/>
 	</xs:complexType>
-
 	<!-- Oppfølging -->
 	<xs:complexType name="OppfolgingType">
 		<xs:attribute ref="Id" use="required"/>
@@ -1345,7 +1337,6 @@ Dato oppfølgingsbesøket faktisk ble foretatt
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-
 	<!-- Tilsyn -->
 	<xs:complexType name="TilsynType">
 		<xs:attribute ref="Id" use="required"/>
