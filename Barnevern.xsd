@@ -484,34 +484,18 @@ For innsending av barnevernsdata
 	<xs:complexType name="LovhjemmelType">
 		<xs:sequence>
 			<xs:element name="Lov">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Kapittel">
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="Paragraf">
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="Ledd" maxOccurs="unbounded">
-													<xs:complexType>
-														<xs:sequence>
-															<xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded"/>
-														</xs:sequence>
-														<xs:attribute name="Kode" use="required"/>
-													</xs:complexType>
-												</xs:element>
-											</xs:sequence>
-											<xs:attribute name="Kode" use="required"/>
-										</xs:complexType>
-									</xs:element>
-								</xs:sequence>
-								<xs:attribute name="Kode" use="required"/>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-					<xs:attribute name="Kode" use="required"/>
-				</xs:complexType>
+				<xs:complexType/>
 			</xs:element>
+			<xs:element name="Kapittel">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="Paragraf">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="Ledd" maxOccurs="unbounded">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Melder -->
