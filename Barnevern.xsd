@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Statistics Norway (Statistics Norway) -->
+<!-- Statistics Norway (Statistics Norway) -->
 <!-- Bufdir Kommunerapportering -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.11.2">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.12.1">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -483,35 +484,11 @@ For innsending av barnevernsdata
 	<!-- Lovhjemmel -->
 	<xs:complexType name="LovhjemmelType">
 		<xs:sequence>
-			<xs:element name="Lov">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Kapittel">
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="Paragraf">
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="Ledd" maxOccurs="unbounded">
-													<xs:complexType>
-														<xs:sequence>
-															<xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded"/>
-														</xs:sequence>
-														<xs:attribute name="Kode" use="required"/>
-													</xs:complexType>
-												</xs:element>
-											</xs:sequence>
-											<xs:attribute name="Kode" use="required"/>
-										</xs:complexType>
-									</xs:element>
-								</xs:sequence>
-								<xs:attribute name="Kode" use="required"/>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-					<xs:attribute name="Kode" use="required"/>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="Lov" type="xs:string"/>
+			<xs:element name="Kapittel" type="xs:string"/>
+			<xs:element name="Paragraf" type="xs:string"/>
+			<xs:element name="Ledd" type="xs:string" maxOccurs="unbounded"/>
+			<xs:element name="Punktum" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Melder -->
@@ -1529,6 +1506,8 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="Tiltak"/>
 			<xs:enumeration value="Vedtak"/>
 			<xs:enumeration value="Ettervern"/>
+			<xs:enumeration value="OversendelseBarneverntjeneste"/>
+			<xs:enumeration value="Flytting"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="VirksomhetType">
@@ -1560,94 +1539,11 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Flytting" minOccurs="0" maxOccurs="unbounded">
-				<xs:complexType>
-					<xs:attribute ref="Id" use="required"/>
-					<xs:attribute ref="SluttDato" use="required"/>
-					<xs:attribute name="Kode" use="required">
-						<xs:annotation>
-							<xs:documentation>
-1 = Barnevernstjenesten avslutter kontrakt med fosterhjem
-1.1 = Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører
-1.2 = Barnet blir myndig
-1.3 = Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)
-1.4 = Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)
-1.5 = Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).
-2 = Fosterforeldre avslutter kontrakten med barnevernet
-2.1 = Barnet har behov fosterforeldre ikke kan dekke
-2.2 = Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)
-2.3 = Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).
- 				</xs:documentation>
-						</xs:annotation>
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-								<xs:enumeration value="1">
-									<xs:annotation>
-										<xs:appinfo>Barnevernstjenesten avslutter kontrakt med fosterhjem</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="1.1">
-									<xs:annotation>
-										<xs:appinfo>Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="1.2">
-									<xs:annotation>
-										<xs:appinfo>Barnet blir myndig</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="1.3">
-									<xs:annotation>
-										<xs:appinfo>Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="1.4">
-									<xs:annotation>
-										<xs:appinfo>Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="1.5">
-									<xs:annotation>
-										<xs:appinfo>Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="2">
-									<xs:annotation>
-										<xs:appinfo>Fosterforeldre avslutter kontrakten med barnevernet</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="2.1">
-									<xs:annotation>
-										<xs:appinfo>Barnet har behov fosterforeldre ikke kan dekke</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="2.2">
-									<xs:annotation>
-										<xs:appinfo>Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="2.3">
-									<xs:annotation>
-										<xs:appinfo>Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Relasjon" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Flytting" type="FlyttingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Relasjon" type="RelasjonType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
 				</xs:annotation>
-				<xs:complexType>
-					<xs:attribute ref="Id" use="required"/>
-					<xs:attribute name="FraId" type="IdType" use="required"/>
-					<xs:attribute name="FraType" type="BegrepsType" use="required"/>
-					<xs:attribute name="TilId" type="IdType" use="required"/>
-					<xs:attribute name="TilType" type="BegrepsType" use="required"/>
-					<xs:attribute name="Navn" type="xs:string"/>
-				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="StartDato" use="required"/>
@@ -1698,6 +1594,88 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:minLength value="2"/>
 					<xs:maxLength value="3"/>
 					<xs:pattern value="\d{2,3}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="RelasjonType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute name="FraId" type="IdType" use="required"/>
+		<xs:attribute name="FraType" type="BegrepsType" use="required"/>
+		<xs:attribute name="TilId" type="IdType" use="required"/>
+		<xs:attribute name="TilType" type="BegrepsType" use="required"/>
+		<xs:attribute name="Navn" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="FlyttingType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="SluttDato" use="required"/>
+		<xs:attribute name="Kode" use="required">
+			<xs:annotation>
+				<xs:documentation>
+1 = Barnevernstjenesten avslutter kontrakt med fosterhjem
+1.1 = Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører
+1.2 = Barnet blir myndig
+1.3 = Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)
+1.4 = Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)
+1.5 = Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).
+2 = Fosterforeldre avslutter kontrakten med barnevernet
+2.1 = Barnet har behov fosterforeldre ikke kan dekke
+2.2 = Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)
+2.3 = Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).
+ 				</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Barnevernstjenesten avslutter kontrakt med fosterhjem</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1.1">
+						<xs:annotation>
+							<xs:appinfo>Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1.2">
+						<xs:annotation>
+							<xs:appinfo>Barnet blir myndig</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1.3">
+						<xs:annotation>
+							<xs:appinfo>Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1.4">
+						<xs:annotation>
+							<xs:appinfo>Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1.5">
+						<xs:annotation>
+							<xs:appinfo>Andre grunner; spesifiser. (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Fosterforeldre avslutter kontrakten med barnevernet</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.1">
+						<xs:annotation>
+							<xs:appinfo>Barnet har behov fosterforeldre ikke kan dekke</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.2">
+						<xs:annotation>
+							<xs:appinfo>Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2.3">
+						<xs:annotation>
+							<xs:appinfo>Andre grunner; spesifiser (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.).</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
