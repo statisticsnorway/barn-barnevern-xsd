@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Statistics Norway (Statistics Norway) -->
 <!-- Statistics Norway (Statistics Norway) -->
 <!-- Bufdir Kommunerapportering -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.12.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.12.2">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -192,6 +191,14 @@ For innsending av barnevernsdata
 			</xs:simpleType>
 		</xs:attribute>
 		<xs:attribute name="Fodselsnummer" use="optional">
+			<xs:annotation>
+				<xs:documentation>Fødselsnummer (https://www.udi.no/ord-og-begreper/fodselsnummer/), 
+				D-nummer (https://www.udi.no/ord-og-begreper/d-nummer/), 
+				fødselsdato (DDMMÅÅ) + 00100, 
+				fødselsdato (DDMMÅÅ) + 00200, 
+				fødselsdato (DDMMÅÅ) + 55555, 
+				fødselsdato (DDMMÅÅ) + 99999</xs:documentation>
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="11"/>
@@ -201,22 +208,14 @@ For innsending av barnevernsdata
 			</xs:simpleType>
 		</xs:attribute>
 		<xs:attribute name="DUFnummer" use="optional">
+			<xs:annotation>
+				<xs:documentation>DUF-nummer (https://www.udi.no/ord-og-begreper/duf-nummer/)</xs:documentation>
+			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="12"/>
 					<xs:maxLength value="12"/>
 					<xs:pattern value="\d{12}"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Saksbehandler" use="required">
-			<xs:annotation>
-				<xs:documentation>Navn eller epost</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="50"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
