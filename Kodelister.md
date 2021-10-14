@@ -19,6 +19,8 @@
   - [Status](#/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode)
 - [Ettervern](#/Barnevern/Sak/Virksomhet/Ettervern)
   - [Konklusjon](#/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode)
+- [Flytting](#/Barnevern/Sak/Virksomhet/Flytting)
+  - [Flyttekode](#/Barnevern/Sak/Virksomhet/Flytting/@Kode)
 
 
 
@@ -127,7 +129,7 @@ Bruker samme kodeliste som [Saksinnhold](#/Barnevern/Sak/Virksomhet/Melding/Saks
 <a name="/Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode"></a>
 #### UtvidetFrist
 
-Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode
+Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Innvilget
 
 | Kode | Betydning | Gyldig fra | Gyldig til |
 |:---- |---------- | ---------- | ---------- |
@@ -250,24 +252,6 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode
 | 4    | Annet (krever presisering)                              | 2013-01-01 |            |
 
 
-<a name="/Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting"></a>
-#### Flytting
-
-Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting
-
-| Kode | Betydning                                                       | Gyldig fra | Gyldig til |
-|:---- |---------------------------------------------------------------- | ---------- | ---------- |
-| 1    | Barnevernstjenesten avslutter kontrakt med fosterhjem           | 2013-01-01 ||
-| 1.1  | Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører  | 2013-01-01 ||
-| 1.2  | Barnet blir myndig                                              | 2013-01-01 ||
-| 1.3  | Fosterforeldre klarer ikke å dekke barnets behov <br>(forhold ved fosterhjemmet) | 2013-01-01 ||
-| 1.4  | Barnet har behov for annet plasseringssted <br>(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet) | 2013-01-01 ||
-| 1.5  | Andre grunner; spesifiser. <br>(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.). | 2013-01-01 ||
-| 2    | Fosterforeldre avslutter kontrakten med barnevernet             | 2013-01-01 ||
-| 2.1  | Barnet har behov fosterforeldre ikke kan dekke                  | 2013-01-01 ||
-| 2.2  | Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) | 2013-01-01 ||
-| 2.3  | Andre grunner; spesifiser <br>(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>manglende eller lite effektiv veiledning, mv.). | 2013-01-01 ||
-
 
 
 
@@ -283,13 +267,11 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode
 
 | Kode | Betydning                       | Gyldig fra | Gyldig til |
 |:---- |-------------------------------- | ---------- | ---------- |
-| 1    | Under behandling                | 2022-01-01 ||
-| 2    | Klar for godkjenning            | 2022-01-01 ||
 | 3    | Godkjent                        | 2022-01-01 ||
 | 4    | Avslått / Avsluttet             | 2022-01-01 ||
+| 4.1  | Avslått                         | 2022-01-01 ||
+| 4.2  | Avsluttet                       | 2022-01-01 ||
 | 5    | Bortfall etter BVL              | 2022-01-01 ||
-| 6    | Opphevet etter forvaltningloven | 2022-01-01 ||
-
 
 
 
@@ -312,3 +294,23 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode
 
  
 
+<a name="/Barnevern/Sak/Virksomhet/Flytting"></a>
+## Flytting
+
+Definert på stien /Barnevern/Sak/Virksomhet/Flytting
+
+<a name="/Barnevern/Sak/Virksomhet/Flytting/@Kode"></a>
+#### Flyttekode
+
+Brukes på stien /Barnevern/Sak/Virksomhet/Flytting/@Kode
+
+| Kode | Betydning                                                       | Gyldig fra | Gyldig til |
+|:---- |---------------------------------------------------------------- | ---------- | ---------- |
+| 1.1  | Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører  | 2013-01-01 ||
+| 1.2  | Barnet blir myndig                                              | 2013-01-01 ||
+| 1.3  | Fosterforeldre klarer ikke å dekke barnets behov <br>(forhold ved fosterhjemmet) | 2013-01-01 ||
+| 1.4  | Barnet har behov for annet plasseringssted <br>(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet) | 2013-01-01 ||
+| 1.5  | Andre grunner; spesifiser. <br>(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.). | 2013-01-01 ||
+| 2.1  | Barnet har behov fosterforeldre ikke kan dekke                  | 2013-01-01 ||
+| 2.2  | Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) | 2013-01-01 ||
+| 2.3  | Andre grunner; spesifiser <br>(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>manglende eller lite effektiv veiledning, mv.). | 2013-01-01 ||
