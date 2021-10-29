@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # kostra-barnevern-xsd
 Filbeskrivelse basert på xml schema definition brukt til å rapportere barnevernsdata fra kommuner til Nasjonalt barnevernregister. Erstatter tidligere KOSTRA barnevern-rapportering til Statistisk sentralbyrå og Kommunal halvårsrapportering til Bufdir.
 
@@ -59,3 +60,34 @@ Det er foretatt en omstrukturering av XSD’ene (definisjonene er splittet opp t
 
 ## Nye filer:
 
+### Fagsystem.xsd (ny)
+Innhold: Navn/versjon på systemet det rapporteres fra. Dette er nyttig informasjon ved forsøk på å finne ut av feil.
+
+### Global.xsd (ny)
+Inneholder definisjoner på attributtene Id, StartDato og SluttDato som tidligere lå i Individ.xsd
+
+### Innsending.xsd (ny)
+Inneholder definisjonen på nytt element InnsendingType og elementet Innsending. Behovet oppstår med flere innrapporteringer i løpet av et år. 
+
+## Endringer:
+
+### Barnevern.xsd
+Attributtet *DatoUttrekk* er flyttet til *InnsendingType* i Innsending.xsd
+
+### Individ.xsd
+Endringer (i tillegg til det som er nevnt over):
+-	*Undersokelse* er flyttet «ned» fra Melding til Individ.
+-	Elementet *Ansvar* utgår
+-	Nytt element *Ettervern* (*EttervernType*)
+-	Elementet *DatoSisteEndring* utgår
+-	Felles for alle enumeration-typer: Hver enumeration-verdi har fått tilhørende tekstlabel i annotation/appinfo, dette for å kunne gjøre enumeration-typene maskinlesbare
+-	I Vedtak er *VedtaksgrunnlagType* erstattet med *SaksinnholdType*, disse var innholdsmessig like. 
+-	*VedtaksgrunnlagType* utgår (se over)
+-	Attributt *Konklusjon* har fått flere verdier for å kombinere tidl. KOSTRA og kommunal halvårsrapportering
+-	Nytt attributt *Undersokelse@UtledetFraId* inneholder meldingens id, fordi *Undersøkelse* ikke lenger er del av *Melding*. 
+=======
+# barn-barnevern-xsd
+Filbeskrivelse basert på xml schema definition brukt til å rapportere barnevernsdata fra kommuner til Statistisk sentralbyrå i forbindelse med KOSTRA, Kommune-Stat-Rapportering. 
+Benyttes med bruk av fagsystemene Flyt Barnevern fra Visma og Modulus Barn fra Netcompany.
+
+>>>>>>> 101b8732ca2694821b7776f67f8b58ee4a4ecab1
