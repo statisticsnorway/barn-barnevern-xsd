@@ -1,7 +1,25 @@
 # kostra-barnevern-xsd
-Filbeskrivelse basert på xml schema definition brukt til å rapportere barnevernsdata fra kommuner til Statistisk sentralbyrå i forbindelse med KOSTRA, Kommune-Stat-Rapportering.
+Filbeskrivelse basert på xml schema definition brukt til å rapportere barnevernsdata fra kommuner til Nasjonalt barnevernregister. Erstatter tidligere KOSTRA barnevern-rapportering til Statistisk sentralbyrå og Kommunal halvårsrapportering til Bufdir.
 
 # Versjonshistorikk
+---
+# v.0.11.1
+## Struktur
+- *OversendelseBarneverntjeneste* lagt til under *Sak* (var definert som type, men ikke lagt til som element)
+- Fjernet *AvvistMelding*
+
+## Nye elementtyper
+- *MigreringId* brukes for elementer som er migrert fra gammel løsning. Disse kan potensielt være rapportert tidligere for saker som har historie tilbake til periode som er rapportert på gammel løsning. MigreringId brukes til å identifisere disse slik at man unngår duplikater.   
+
+## Navneendringer
+- Type *OversendelseBarneverntjeneste* endret til *OversendelseBarneverntjenesteType*
+
+## Andre endringer
+- Dokumentasjon lagt inn i flere element/typer
+- Enum-typer har fått tilbake opplisting som Annotation for enklere oversikt i verktøy / generert dokumentasjon (men er fortsatt i tillegg maskinlesbare via AppInfo)
+- Endret tekst *MelderType@kode* 8=Politi/lensmann
+- *Lov*, *Kapittel* og *Paragraf* kan nå bare ha én forekomst (ikke lenger *maxOccurs=unbounded*),  
+
 ---
 # v.0.10.1
 XSD er nå strukturert for
