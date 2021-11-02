@@ -9,8 +9,19 @@
 				<Saksinnhold Kode="1"/>
 				<Konklusjon SluttDato="2021-01-08" Kode="2"/>
 			</Melding>
-			<Undersokelse StartDato="2021-01-08" Id="1"/>
+			<Undersokelse StartDato="2021-01-08" Id="1">
+				<Konklusjon SluttDato="2021-04-08" Kode="1"/>
+			</Undersokelse>
+			<Vedtak Id="1" StartDato="2021-04-08">
+				<Lovhjemmel>
+					<Lov>BVL</Lov>
+					<Kapittel>4</Kapittel>
+					<Paragraf>12</Paragraf>
+					<Ledd>1</Ledd>
+				</Lovhjemmel>
+			</Vedtak>
 			<Relasjon FraType="Melding" FraId="1" Id="q1" TilId="1" TilType="Undersokelse"/>
+			<Relasjon FraType="Undersokelse" FraId="1" Id="q2" TilId="1" TilType="Vedtak"/>
 		</Virksomhet>
 	</Sak>
 </Barnevern>
