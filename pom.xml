@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>no.ssb.barn</groupId>
     <artifactId>barn-xsd</artifactId>
-    <version>0.12.2-SNAPSHOT</version>
+    <version>0.12.3-SNAPSHOT</version>
     <name>xsd</name>
     <description>XSD prosjekt for innrapportering til Barnevernsregister</description>
     <properties>

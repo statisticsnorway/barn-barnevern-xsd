@@ -35,7 +35,7 @@ Definert på stien /Barnevern/Sak/Virksomhet/Melding
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Melder/@Kode
 
 | Kode | Betydning                                            | Gyldig fra | Gyldig til |
-|:---- | ---------------------------------------------------- | ---------- | ---------- |
+| ----:| ---------------------------------------------------- | ---------- | ---------- |
 | 1    | Barnet selv                                          | 2013-01-01 |            |
 | 2    | Mor/ far/ foresatte                                  | 2013-01-01 |            |
 | 3    | Familie for øvrig                                    | 2013-01-01 |            |
@@ -66,7 +66,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Melder/@Kode
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode
 
 | Kode | Betydning                                                  | Gyldig fra | Gyldig til |
-|:---- |----------------------------------------------------------- | ---------- | ---------- |
+| ----:|----------------------------------------------------------- | ---------- | ---------- |
 | 1    | Foreldres somatiske sykdom                                 | 2013-01-01 |            |
 | 2    | Foreldres psykiske problem/ lidelse                        | 2013-01-01 |            |
 | 3    | Foreldres rusmisbruk                                       | 2013-01-01 |            |
@@ -132,7 +132,7 @@ Bruker samme kodeliste som [Saksinnhold](#/Barnevern/Sak/Virksomhet/Melding/Saks
 Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Innvilget
 
 | Kode | Betydning | Gyldig fra | Gyldig til |
-|:---- |---------- | ---------- | ---------- |
+| ----:|---------- | ---------- | ---------- |
 | 1    | Ja        | 2022-01-01 |            |
 | 2    | Nei       | 2022-01-01 |            | 
 
@@ -144,7 +144,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode
 
 
 | Kode | Betydning                                                  | Gyldig fra | Gyldig til |
-|:---- |----------------------------------------------------------- | ---------- | ---------- |
+| ----:|----------------------------------------------------------- | ---------- | ---------- |
 | 1    | Barneverntjenesten fatter vedtak om tiltak                 | 2013-01-01 |            |
 | 2    | Begjæring om tiltak for fylkesnemnda                       | 2013-01-01 |            |
 | 3    | Undersøkelsen henlagt etter barnverntjenestens vurdering <br>(kategorien gjelder når barneverntjenesten vurderer at vilkår <br>for å sette inn tiltak ikke er oppfylt) | 2013-01-01 |            |
@@ -166,7 +166,7 @@ Definert på stien /Barnevern/Sak/Virksomhet/Plan
 Brukes på stien /Barnevern/Sak/Virksomhet/Plan/@Plantype
 
 | Kode | Betydning                                   | Gyldig fra | Gyldig til |
-|:---- |-------------------------------------------- | ---------- | ---------- |
+| ----:|-------------------------------------------- | ---------- | ---------- |
 | 1    | Tiltaksplan etter § 4-5                     | 2013-01-01 |            |
 | 2    | Tiltaksplan etter § 4-28                    | 2013-01-01 |            |
 | 3    | Foreløpig omsorgsplan etter § 4-15, 3. ledd | 2013-01-01 |            |
@@ -245,7 +245,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode
 Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode
 
 | Kode | Betydning                                               | Gyldig fra | Gyldig til |
-|:---- |-------------------------------------------------------- | ---------- | ---------- |
+| ----:|-------------------------------------------------------- | ---------- | ---------- |
 | 1    | Barnet tilbakeført til foreldre/ familien jamfør § 4-21 | 2013-01-01 |            |
 | 2    | Barnet har fylt 18 år                                   | 2013-01-01 |            |
 | 3    | Adopsjon § 4-20                                         | 2013-01-01 |            |
@@ -286,7 +286,7 @@ Definert på stien /Barnevern/Sak/Virksomhet/Ettervern
 Brukes på stien /Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode
 
 | Kode | Betydning                                                       | Gyldig fra | Gyldig til |
-|:---- |---------------------------------------------------------------- | ---------- | ---------- |
+| ----:|---------------------------------------------------------------- | ---------- | ---------- |
 | 1    | Mottatt og akseptert tilbud om tiltak                           | 2022-01-01 ||
 | 2    | Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak | 2022-01-01 ||
 | 3    | Ikke lenger tiltak etter BVL, etter eget ønske                  | 2022-01-01 ||

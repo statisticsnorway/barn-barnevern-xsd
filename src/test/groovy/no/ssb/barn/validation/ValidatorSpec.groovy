@@ -6,12 +6,9 @@ import spock.lang.Specification
 import javax.xml.transform.stream.StreamSource
 
 class ValidatorSpec extends Specification {
-    def "Should find sources from classpath"() {
-        when:
-        def sourceFile = getSourceFromClasspath(filename)
-
-        then:
-        (sourceFile != null) == result
+    def "Should find sources from classpath, filename = #filename, result = #result"() {
+        expect:
+        (getSourceFromClasspath(filename) != null) == result
 
         where:
         filename            || result
@@ -22,7 +19,7 @@ class ValidatorSpec extends Specification {
         "/nonExistentFile"  || false
     }
 
-    def "Should validate valid xml files"() {
+    def "Should validate valid xml files, xsd = #xsd, xml = #xml, result = #result"() {
         when:
         def sourceXSD = getSourceFromClasspath(xsd)
         def sourceXML = getSourceFromClasspath(xml)
@@ -37,7 +34,7 @@ class ValidatorSpec extends Specification {
         "/Barnevern.xsd" | "/test01_fil02.xml" || true
     }
 
-    def "Should produce SAXException for invalid xml files"() {
+    def "Should produce SAXException for invalid xml files, xsd = #xsd, xml = #xml"() {
         when:
         def sourceXSD = getSourceFromClasspath(xsd)
         def sourceXML = getSourceFromClasspath(xml)
@@ -51,10 +48,22 @@ class ValidatorSpec extends Specification {
         "/Barnevern.xsd" | "/invalid.xml"
     }
 
+    def "Should validate norwegian sosial security numbers (fnr), fnr = #fnr, result = #result"() {
+        expect:
+        Validator.validateSSN(fnr) == result
+
+        where:
+        fnr           | type  || result
+        "05011399292" | "fnr" || true
+        "41011088188" | "dnr" || true
+        "01020304050" | "fnr" || false
+        "ABCDEFGHIJK" | "???" || false
+    }
+
     def getSourceFromClasspath(String path) {
         try {
             return new StreamSource(getClass().getResourceAsStream(path))
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             return null
         }
     }

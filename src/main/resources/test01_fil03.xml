@@ -9,7 +9,9 @@
 				<Saksinnhold Kode="1"/>
 				<Konklusjon SluttDato="2021-01-08" Kode="2"/>
 			</Melding>
-			<Undersokelse StartDato="2021-01-08" Id="1"/>
+			<Undersokelse StartDato="2021-01-08" Id="1">
+				<Konklusjon SluttDato="2021-04-08" Kode="1"/>
+			</Undersokelse>
 			<Relasjon FraType="Melding" FraId="1" Id="q1" TilId="1" TilType="Undersokelse"/>
 		</Virksomhet>
 	</Sak>
