@@ -102,10 +102,7 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode
 
 | Kode | Betydning                                | Gyldig fra | Gyldig til |
 |:---- |----------------------------------------- | ---------- | ---------- |
-| 1    | Henlagt av andre grunner                 | 2013-01-01 |            |
-| 1.1  | Henlagt, Utenfor BVL                     | 2022-01-01 |            | 
-| 1.2  | Henlagt, Vist til annen instans          | 2022-01-01 |            |
-| 1.3  | Henlagt, Overført til annen kommune      | 2022-01-01 |            |
+| 1    | Henlagt                                  | 2013-01-01 |            |
 | 2    | Ikke henlagt – konklusjonsdato melding <br>(eventuelt 7 dager etter mottatt melding) <br>er startdato undersøkelse | 2013-01-01 |            |
 | 3    | Henlagt pga. aktive tiltak               | 2013-01-01 |            |
 | 4    | Melding i pågående undersøkelse          | 2013-01-01 |            |

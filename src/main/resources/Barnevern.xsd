@@ -2,7 +2,7 @@
 <!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Statistics Norway (Statistics Norway) -->
 <!-- Statistics Norway (Statistics Norway) -->
 <!-- Bufdir Kommunerapportering -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.12.3">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.13.0">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -305,14 +305,11 @@ For innsending av barnevernsdata
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
 							<xs:documentation>
- 1 = Henlagt av andre grunner
- 1.1 = Henlagt, Utenfor BVL
- 1.2 = Henlagt, Vist til annen instans
- 1.3 = Henlagt, Overført til annen kommune
- 2 = Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse
- 3 = Henlagt pga. aktive tiltak
- 4 = Melding i pågående undersøkelse
- 				</xs:documentation>
+1 = Henlagt 
+2 = Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse
+3 = Henlagt pga. aktive tiltak
+4 = Melding i pågående undersøkelse
+							</xs:documentation>
 						</xs:annotation>
 						<xs:simpleType>
 							<xs:list>
@@ -322,22 +319,7 @@ For innsending av barnevernsdata
 										<xs:maxLength value="3"/>
 										<xs:enumeration value="1">
 											<xs:annotation>
-												<xs:appinfo>Henlagt av andre grunner</xs:appinfo>
-											</xs:annotation>
-										</xs:enumeration>
-										<xs:enumeration value="1.1">
-											<xs:annotation>
-												<xs:appinfo>Henlagt, Utenfor BVL</xs:appinfo>
-											</xs:annotation>
-										</xs:enumeration>
-										<xs:enumeration value="1.2">
-											<xs:annotation>
-												<xs:appinfo>Henlagt, Vist til annen instans</xs:appinfo>
-											</xs:annotation>
-										</xs:enumeration>
-										<xs:enumeration value="1.3">
-											<xs:annotation>
-												<xs:appinfo>Henlagt, Overført til annen kommune</xs:appinfo>
+												<xs:appinfo>Henlagt</xs:appinfo>
 											</xs:annotation>
 										</xs:enumeration>
 										<xs:enumeration value="2">
@@ -1430,7 +1412,7 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="Tiltak"/>
 			<xs:enumeration value="Vedtak"/>
 			<xs:enumeration value="Ettervern"/>
-			<xs:enumeration value="OversendelseBarneverntjeneste"/>
+			<xs:enumeration value="OversendelseFylkesnemnd"/>
 			<xs:enumeration value="Flytting"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -1458,7 +1440,7 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:documentation>Tilbud om ettervern. Eventuelt ettervernstiltak registreres som Tiltak</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="OversendelseBarneverntjeneste" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="OversendelseFylkesnemnd" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
 				</xs:annotation>
@@ -1531,6 +1513,7 @@ Dato tilsynsbesøket faktisk ble utført
 	</xs:complexType>
 	<xs:complexType name="FlyttingType">
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="SluttDato" use="required"/>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
