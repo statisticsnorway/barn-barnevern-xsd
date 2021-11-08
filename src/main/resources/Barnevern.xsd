@@ -1291,38 +1291,32 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
 							<xs:documentation>
-3 = Godkjent
-4 = Avslått / Avsluttet
-4.1 = Avslått
-4.2 = Avsluttet
-5 = Bortfall etter BVL
+1 = Godkjent
+2 = Begjæring oversendt nemnd  
+3 = Utgår / Bortfalt etter BVL 
+4 = Avslått / Avsluttet 
  				</xs:documentation>
 						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
-								<xs:enumeration value="3">
+								<xs:enumeration value="1">
 									<xs:annotation>
 										<xs:appinfo>Godkjent</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="2">
+									<xs:annotation>
+										<xs:appinfo>Begjæring oversendt nemnd</xs:appinfo>
+									</xs:annotation>
+								</xs:enumeration>
+								<xs:enumeration value="3">
+									<xs:annotation>
+										<xs:appinfo>Utgår / Bortfalt etter BVL</xs:appinfo>
 									</xs:annotation>
 								</xs:enumeration>
 								<xs:enumeration value="4">
 									<xs:annotation>
 										<xs:appinfo>Avslått / Avsluttet</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="4.1">
-									<xs:annotation>
-										<xs:appinfo>Avslått</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="4.2">
-									<xs:annotation>
-										<xs:appinfo>Avsluttet</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="5">
-									<xs:annotation>
-										<xs:appinfo>Bortfall etter BVL</xs:appinfo>
 									</xs:annotation>
 								</xs:enumeration>
 							</xs:restriction>
@@ -1360,10 +1354,9 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
 							<xs:documentation>
-1 = Mottatt og akseptert tilbud om tiltak
-2 = Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak
-3 = Ikke lenger tiltak etter BVL, etter eget ønske
-4 = Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen
+1 = Gitt tilbud om tiltak, akseptert 
+2 = Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak 
+3 = Ikke lenger tiltak etter BVL, etter brukers ønske
  				</xs:documentation>
 						</xs:annotation>
 						<xs:simpleType>
@@ -1371,22 +1364,17 @@ Dato tilsynsbesøket faktisk ble utført
 								<xs:length value="1"/>
 								<xs:enumeration value="1">
 									<xs:annotation>
-										<xs:appinfo>Mottatt og akseptert tilbud om tiltak</xs:appinfo>
+										<xs:appinfo>Gitt tilbud om tiltak, akseptert</xs:appinfo>
 									</xs:annotation>
 								</xs:enumeration>
 								<xs:enumeration value="2">
 									<xs:annotation>
-										<xs:appinfo>Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak</xs:appinfo>
+										<xs:appinfo>Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak</xs:appinfo>
 									</xs:annotation>
 								</xs:enumeration>
 								<xs:enumeration value="3">
 									<xs:annotation>
-										<xs:appinfo>Ikke lenger tiltak etter BVL, etter eget ønske</xs:appinfo>
-									</xs:annotation>
-								</xs:enumeration>
-								<xs:enumeration value="4">
-									<xs:annotation>
-										<xs:appinfo>Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen</xs:appinfo>
+										<xs:appinfo>Ikke lenger tiltak etter BVL, etter brukers ønske</xs:appinfo>
 									</xs:annotation>
 								</xs:enumeration>
 							</xs:restriction>

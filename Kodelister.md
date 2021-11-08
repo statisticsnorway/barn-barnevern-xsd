@@ -264,11 +264,12 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode
 
 | Kode | Betydning                       | Gyldig fra | Gyldig til |
 |:---- |-------------------------------- | ---------- | ---------- |
-| 3    | Godkjent                        | 2022-01-01 ||
+| 1    | Godkjent                        | 2022-01-01 ||
+| 2    | Begjæring oversendt nemnd       | 2022-01-01 ||
+| 3    | Utgår / Bortfalt etter BVL      | 2022-01-01 ||
 | 4    | Avslått / Avsluttet             | 2022-01-01 ||
-| 4.1  | Avslått                         | 2022-01-01 ||
-| 4.2  | Avsluttet                       | 2022-01-01 ||
-| 5    | Bortfall etter BVL              | 2022-01-01 ||
+
+
 
 
 
@@ -282,12 +283,11 @@ Definert på stien /Barnevern/Sak/Virksomhet/Ettervern
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode
 
-| Kode | Betydning                                                       | Gyldig fra | Gyldig til |
-| ----:|---------------------------------------------------------------- | ---------- | ---------- |
-| 1    | Mottatt og akseptert tilbud om tiltak                           | 2022-01-01 ||
-| 2    | Mottatt tilbud om tiltak, avslått grunnet ønske om annet tiltak | 2022-01-01 ||
-| 3    | Ikke lenger tiltak etter BVL, etter eget ønske                  | 2022-01-01 ||
-| 4    | Ikke lenger tiltak etter BVL, grunnet avslag fra kommunen       | 2022-01-01 ||
+| Kode | Betydning                                                              | Gyldig fra | Gyldig til |
+| ----:|----------------------------------------------------------------------- | ---------- | ---------- |
+| 1    | Gitt tilbud om tiltak, akseptert                                       | 2022-01-01 ||
+| 2    | Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak | 2022-01-01 ||
+| 3    | Ikke lenger tiltak etter BVL, etter brukers ønske                      | 2022-01-01 ||
 
  
 
