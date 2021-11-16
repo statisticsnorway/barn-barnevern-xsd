@@ -7,6 +7,13 @@
     <version>0.12.3-SNAPSHOT</version>
     <name>xsd</name>
     <description>XSD prosjekt for innrapportering til Barnevernsregister</description>
+
+    <scm>
+        <connection>scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd</connection>
+        <developerConnection>scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd/main</developerConnection>
+        <url>https://github.com/statisticsnorway/barn-barnevern-xsd</url>
+    </scm>
+
     <properties>
         <java.version>11</java.version>
         <kotlin.version>1.5.31</kotlin.version>
@@ -144,6 +151,17 @@
         </resources>
 
         <plugins>
+
+            <!-- https://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
