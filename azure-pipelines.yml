@@ -1,0 +1,107 @@
+name: $(Build.SourceBranch)-$(date:yyyyMMdd)$(rev:.r)
+
+# Pipeline triggers on any branch and tag
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+
+# Pipeline will be run on this base image
+pool:
+  vmImage: ubuntu-latest
+
+# Variables global to this pipeline
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables
+variables:
+  # Variables defined in Pipelines->Library->Variable Groups in your project in
+  # Azure Pipelines
+  - group: Hemmeligheter
+  # Variables defined here
+  - name: fullSha
+    value: '$(Build.SourceVersion)'
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+
+resources:
+  repositories:
+    # See https://github.com/statisticsnorway/ssb-developer-guide/blob/master/docs/azure_pipeline_doc.md#templating
+    # for info on how to use the templates repo
+    - repository: templates
+      type: github
+      name: statisticsnorway/azure-pipelines-templates
+      # The version of the repo on GitHub. Change to needed version
+      ref: refs/tags/1.1.22
+      # Service connection in the barn project on Pipelines
+      # with access to the template repository.
+      endpoint: 'github-Barnevernsregisteret'
+
+# Job which runs mvn test and verify, Sonar Analysis (if branch is master), mvn install,
+# builds Docker image, pushes this to GCR and checks for any image vulnerabilities
+jobs:
+  - job: buildTestDockerBuildDockerPush
+    displayName: 'Test/build app'
+
+    # Job condition: Run these jobs on any branch, but not on tags
+    condition: not(startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+
+    # Steps in this Job
+    steps:
+
+      # Maven caching to speed up pipeline build time
+      - task: Cache@2
+        displayName: Cache Maven local repo
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
+
+      - task: Maven@3
+        displayName: Maven verify
+        inputs:
+          goals: 'verify'
+          options: '-X -P ssb-bip,coverage --batch-mode $(MAVEN_OPTS)'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          mavenAuthenticateFeed: false
+          mavenVersionOption: 'Default'
+          mavenPomFile: 'pom.xml'
+          testRunTitle: 'Tests'
+          javaHomeOption: 'JDKVersion'
+          effectivePomSkip: false
+          isJacocoCoverageReportXML: true
+          checkStyleRunAnalysis: true
+          pmdRunAnalysis: true
+          sonarQubeRunAnalysis: false
+
+      # Download file with json-key to GCR as a later task needs to
+      # authenticate in a different way than using service connection
+      # File is stored in Pipelines->Library->Secure Files
+      - task: DownloadSecureFile@1
+        name: gcrJsonKey
+        displayName: 'Download gcr credentials'
+        inputs:
+          secureFile: 'gcr-key.json'
+
+      # Set env variable pointing to the file downloaded in previous task
+      # as a library in next task needs this env variable
+      - script: |
+          echo "Setting env variable GOOGLE_APPLICATION_CREDENTIALS"
+          echo "##vso[task.setvariable variable=GOOGLE_APPLICATION_CREDENTIALS]$(gcrJsonKey.secureFilePath)"
+        displayName: 'Setting GOOGLE_APPLICATION_CREDENTIALS env variable'
+
+      # Deploy artifact to Artifact Registry
+      - task: Maven@3
+        displayName: 'Maven install and deploy'
+        inputs:
+          goals: 'deploy'
+          options: '-DskipTests=true -Dmaven.javadoc.skip=true -P ssb-bip --batch-mode'
+          mavenPomFile: 'pom.xml'
+          mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
+          javaHomeOption: 'JDKVersion'
