@@ -10,7 +10,7 @@
 
     <scm>
         <connection>scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd</connection>
-        <developerConnection>scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd/master</developerConnection>
+        <!--<developerConnection>scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd/master</developerConnection>-->
         <url>https://github.com/statisticsnorway/barn-barnevern-xsd</url>
     </scm>
 
