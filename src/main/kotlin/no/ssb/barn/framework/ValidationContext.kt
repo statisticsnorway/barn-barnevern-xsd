@@ -1,4 +1,3 @@
 package no.ssb.barn.framework
 
-data class ValidationContext(
-    val xml: String)
+data class ValidationContext(val xml: String)

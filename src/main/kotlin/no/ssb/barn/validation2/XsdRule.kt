@@ -21,10 +21,8 @@ class XsdRule(
             getSchemaValidator(xsdResourceName)
                 .validate(StreamSource(StringReader(context.xml)))
         } catch (e: SAXParseException) {
-            return ReportEntry(
-                warningLevel = warningLevel,
-                ruleName = ruleName,
-                message = String.format(
+            return createReportEntry(
+                String.format(
                     "Line: %d Column: %d Message: %s",
                     e.lineNumber, e.columnNumber, e.message
                 )

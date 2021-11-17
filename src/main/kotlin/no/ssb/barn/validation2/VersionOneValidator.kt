@@ -7,7 +7,8 @@ import no.ssb.barn.report.ValidationReport
 class VersionOneValidator : ValidatorContract {
 
     private val rules = listOf(
-        XsdRule(xsdResourceName = "Barnevern.xsd"))
+        XsdRule(xsdResourceName = "Barnevern.xsd")
+    )
 
     override fun validate(context: ValidationContext): ValidationReport {
         return ValidationReport(
