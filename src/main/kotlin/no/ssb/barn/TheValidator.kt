@@ -17,7 +17,7 @@ class TheValidator private constructor() {
      * @return Validation report on JSON format
      */
     fun validate(xsdVersion: Int, xmlBody: String): String {
-        return "{hello: \"world\"}"
+        return "{ hello: \"world\" }"
     }
 
     companion object {
@@ -26,6 +26,7 @@ class TheValidator private constructor() {
          *
          * @return [TheValidator] instance
          */
+        @JvmStatic
         fun create(): TheValidator {
 
             // assemble the validator here
