@@ -1,4 +1,4 @@
-package no.ssb.barn
+package no.ssb.barn.validation2
 
 import spock.lang.Specification
 
@@ -17,6 +17,8 @@ class TheValidatorSpec extends Specification {
         def result = sut.validate(1, "~xmlBody~")
 
         then:
-        "{ hello: \"world\" }" == result
+        result.startsWith("{\"journalId\"")
+        and:
+        result.contains("warningLevel\":\"FATAL\"")
     }
 }

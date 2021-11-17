@@ -1,4 +1,8 @@
-package no.ssb.barn
+package no.ssb.barn.validation2
+
+import com.google.gson.Gson
+import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.framework.ValidatorContract
 
 /**
  * Barn XML validator. Clients of this library will typically keep an instance
@@ -9,6 +13,13 @@ package no.ssb.barn
  */
 class TheValidator private constructor() {
 
+    private val gson: Gson = Gson()
+    private val validatorMap: Map<Int, ValidatorContract> =
+        mapOf(
+            Pair(VERSION_ONE, VersionOneValidator()),
+            Pair(VERSION_TWO, VersionTwoValidator())
+        )
+
     /**
      * Validates XML and returns validation report on JSON format.
      *
@@ -17,10 +28,16 @@ class TheValidator private constructor() {
      * @return Validation report on JSON format
      */
     fun validate(xsdVersion: Int, xmlBody: String): String {
-        return "{ hello: \"world\" }"
+        val currentValidator = validatorMap[xsdVersion]
+        val context = ValidationContext(xmlBody)
+        return gson.toJson(currentValidator?.validate(context))
     }
 
     companion object {
+
+        const val VERSION_ONE = 1
+        const val VERSION_TWO = 2
+
         /**
          * Builds a validator instance.
          *
