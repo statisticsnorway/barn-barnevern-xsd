@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>no.ssb.barn</groupId>
     <artifactId>barn-xsd</artifactId>
-    <version>0.12.3-SNAPSHOT</version>
+    <version>0.12.4-SNAPSHOT</version>
     <name>xsd</name>
-    <description>XSD prosjekt for innrapportering til Barnevernsregister</description>
+    <description>XSD prosjekt for innrapportering til Barnevernsregister
+    </description>
 
     <scm>
-        <connection>scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd</connection>
-        <!--<developerConnection>scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd/master</developerConnection>-->
+        <connection>
+            scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd
+        </connection>
         <url>https://github.com/statisticsnorway/barn-barnevern-xsd</url>
     </scm>
 
     <properties>
         <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
         <kotlin.version>1.6.0</kotlin.version>
         <junit.version>5.7.2</junit.version>
         <jackson.version>2.13.0</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+        <groovy.version>3.0.9</groovy.version>
+        <spock.version>2.0-groovy-3.0</spock.version>
         <jacoco.version>0.8.7</jacoco.version>
         <checkstyle.version>8.45.1</checkstyle.version>
     </properties>
@@ -79,11 +86,15 @@
             <distributionManagement>
                 <snapshotRepository>
                     <id>artifact-registry</id>
-                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots</url>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots
+                    </url>
                 </snapshotRepository>
                 <repository>
                     <id>artifact-registry</id>
-                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases</url>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases
+                    </url>
                 </repository>
             </distributionManagement>
         </profile>
@@ -136,13 +147,19 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20190722</version>
+            <version>20210307</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.spockframework/spock-core -->
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
-            <version>2.0-groovy-3.0</version>
+            <version>${spock.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -207,18 +224,40 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>${java.version}</jvmTarget>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
                     <includes>
                         <include>**/*Spec.*</include>
                         <include>**/*Test.*</include>
                     </includes>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.9.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>addSources</goal>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>removeStubs</goal>
+                            <goal>addTestSources</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>compileTests</goal>
+                            <goal>removeTestStubs</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
