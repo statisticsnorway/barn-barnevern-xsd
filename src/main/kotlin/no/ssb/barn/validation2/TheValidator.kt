@@ -10,7 +10,7 @@ import no.ssb.barn.framework.ValidationContext
  * @author roar.skinderviken@ssb.no
  * @since 1.0
  */
-class TheValidator private constructor() {
+open class TheValidator private constructor() {
 
     private val gson = Gson()
 
