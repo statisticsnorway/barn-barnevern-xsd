@@ -43,10 +43,6 @@ class TheValidator private constructor() {
          * @return [TheValidator] instance
          */
         @JvmStatic
-        fun create(): TheValidator {
-
-            // assemble the validator here
-            return TheValidator()
-        }
+        fun create(): TheValidator = TheValidator()
     }
 }

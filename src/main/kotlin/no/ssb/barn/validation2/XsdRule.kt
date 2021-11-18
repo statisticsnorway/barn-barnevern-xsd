@@ -31,14 +31,12 @@ class XsdRule(
         return null
     }
 
-    private fun getSchemaValidator(xsdResourceName: String): Validator {
-        return SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+    private fun getSchemaValidator(xsdResourceName: String): Validator =
+        SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
             .newSchema(StreamSource(getSourceFromClasspath(xsdResourceName)))
             .newValidator()
-    }
 
-    private fun getSourceFromClasspath(resourceName: String): InputStream? {
-        return this::class.java.classLoader.getResource(resourceName)
+    private fun getSourceFromClasspath(resourceName: String): InputStream? =
+        this::class.java.classLoader.getResource(resourceName)
             ?.openStream()
-    }
 }

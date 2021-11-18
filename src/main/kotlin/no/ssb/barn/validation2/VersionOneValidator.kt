@@ -10,11 +10,10 @@ class VersionOneValidator : ValidatorContract {
         XsdRule(xsdResourceName = "Barnevern.xsd")
     )
 
-    override fun validate(context: ValidationContext): ValidationReport {
-        return ValidationReport(
+    override fun validate(context: ValidationContext): ValidationReport =
+        ValidationReport(
             "~journalId~",
             "~individualId~",
             rules.mapNotNull { it.validate(context) }
         )
-    }
 }

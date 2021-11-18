@@ -9,11 +9,10 @@ abstract class AbstractRule(
 ) {
     abstract fun validate(context: ValidationContext): ReportEntry?
 
-    protected fun createReportEntry(message: String): ReportEntry {
-        return ReportEntry(
+    protected fun createReportEntry(message: String): ReportEntry =
+        ReportEntry(
             warningLevel = warningLevel,
             ruleName = ruleName,
             message = message
         )
-    }
 }
