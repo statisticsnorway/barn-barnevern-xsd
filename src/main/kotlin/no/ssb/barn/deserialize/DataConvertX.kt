@@ -21,7 +21,7 @@ class DataConvertX {
         val marshaller = context.createMarshaller()
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true)
         marshaller.marshal(schema, System.out).toString()
-//        marshaller.marshal(subject,
+//        marshaller.marshal(schema,
 //                FileOutputStream("./Barnevern.xml"))
     }
 
