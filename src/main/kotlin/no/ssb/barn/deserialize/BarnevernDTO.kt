@@ -8,10 +8,10 @@ import java.util.*
 @JsonSerialize
 @JsonDeserialize
 data class BarnevernDTO (
-        val userName: String,
-        val userId: String?,
-        val datouttrekk: Date?,
-        val avgiver: AvgiverType?,
-        val sak: SakType?
+    val userName: String,
+    val userId: String?,
+    val datouttrekk: Date?,
+    val avgiver: AvgiverType?,
+    val sak: SakType?
 )
 
