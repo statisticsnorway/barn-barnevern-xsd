@@ -58,7 +58,7 @@ class TheValidatorSpec extends Specification {
         result.contains("warningLevel\":\"FATAL\"")
 
         where:
-        i << (1..100)
+        i << (1..10)
     }
 
     def getResourceAsText(String resourceName) {

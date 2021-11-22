@@ -9,11 +9,13 @@ class ValidationReportSpec extends Specification {
         def sut = new ValidationReport(
                 "~journalId~",
                 "~individualId~",
-                List.of(new ReportEntry(
-                        WarningLevel.WARNING,
-                        "~ruleName~",
-                        "~message~"))
-        )
+                List.of(
+                        new ReportEntry(
+                                WarningLevel.WARNING,
+                                "~ruleName~",
+                                "~errorMessage~",
+                                null)
+                ))
 
         then:
         "~journalId~" == sut.getJournalId()

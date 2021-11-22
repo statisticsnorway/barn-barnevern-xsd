@@ -2,6 +2,7 @@ package no.ssb.barn.validation2
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation2.rule.XsdRule
 import spock.lang.Specification
 
 class XsdRuleSpec extends Specification {
@@ -32,10 +33,12 @@ class XsdRuleSpec extends Specification {
         )
 
         when:
-        def reportEntry = sut.validate(context)
+        def reportEntries = sut.validate(context)
 
         then:
-        WarningLevel.FATAL == reportEntry.warningLevel
+        1 == reportEntries.size()
+        and:
+        WarningLevel.FATAL == reportEntries[0].warningLevel
     }
 
     def getResourceAsText(String resourceName) {
