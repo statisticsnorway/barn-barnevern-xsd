@@ -7,12 +7,13 @@ abstract class AbstractRule(
     private val warningLevel: WarningLevel,
     private val ruleName: String
 ) {
-    abstract fun validate(context: ValidationContext): ReportEntry?
+    abstract fun validate(context: ValidationContext): List<ReportEntry>?
 
-    protected fun createReportEntry(message: String): ReportEntry =
+    protected fun createReportEntry(errorText: String, errorDetails: String? = null): ReportEntry =
         ReportEntry(
             warningLevel = warningLevel,
             ruleName = ruleName,
-            message = message
+            errorText = errorText,
+            errorDetails = errorDetails
         )
 }

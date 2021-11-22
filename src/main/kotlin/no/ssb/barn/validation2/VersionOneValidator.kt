@@ -3,6 +3,7 @@ package no.ssb.barn.validation2
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.framework.ValidatorContract
 import no.ssb.barn.report.ValidationReport
+import no.ssb.barn.validation2.rule.XsdRule
 
 class VersionOneValidator : ValidatorContract {
 
@@ -15,5 +16,6 @@ class VersionOneValidator : ValidatorContract {
             "~journalId~",
             "~individualId~",
             rules.mapNotNull { it.validate(context) }
+                .flatten()
         )
 }
