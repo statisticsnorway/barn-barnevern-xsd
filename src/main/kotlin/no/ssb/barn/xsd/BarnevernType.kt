@@ -3,6 +3,7 @@ package no.ssb.barn.xsd
 import javax.xml.bind.annotation.*
 import javax.xml.datatype.XMLGregorianCalendar
 
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BarnevernType", propOrder = ["datoUttrekk", "fagsystem", "avgiver", "sak"])
 data class BarnevernType(
