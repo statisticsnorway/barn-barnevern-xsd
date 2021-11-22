@@ -1,7 +1,11 @@
 package no.ssb.barn.validation2
 
 import com.google.gson.Gson
+import mu.KotlinLogging
 import no.ssb.barn.framework.ValidationContext
+import java.lang.IndexOutOfBoundsException
+
+private val logger = KotlinLogging.logger {}
 
 /**
  * Barn XML validator. Clients of this library will typically keep an instance
@@ -10,9 +14,7 @@ import no.ssb.barn.framework.ValidationContext
  * @author roar.skinderviken@ssb.no
  * @since 1.0
  */
-class TheValidator private constructor() {
-
-    private val gson = Gson()
+open class TheValidator private constructor() {
 
     private val validatorMap = mapOf(
         Pair(VERSION_ONE, VersionOneValidator()),
@@ -28,8 +30,16 @@ class TheValidator private constructor() {
      */
     fun validate(xsdVersion: Int, xmlBody: String): String {
         val currentValidator = validatorMap[xsdVersion]
+            ?: throw IndexOutOfBoundsException("No validator found")
+
+        logger.info { "Received xmlBody: $xmlBody" }
+
         val context = ValidationContext(xmlBody)
-        return gson.toJson(currentValidator?.validate(context))
+        val validationReport = currentValidator.validate(context)
+
+        logger.info { "Got validation report: $validationReport" }
+
+        return Gson().toJson(validationReport)
     }
 
     companion object {
@@ -43,10 +53,6 @@ class TheValidator private constructor() {
          * @return [TheValidator] instance
          */
         @JvmStatic
-        fun create(): TheValidator {
-
-            // assemble the validator here
-            return TheValidator()
-        }
+        fun create(): TheValidator = TheValidator()
     }
 }

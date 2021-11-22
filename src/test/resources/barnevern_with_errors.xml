@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Barnevern DatoUttrekk="2012-12-13T12:12:12">
+    <Fagsystem Leverandor="str1234" Navn="str1234" Versjon="str1234"/>
+    <Avgiver Organisasjonsnummer="123456789" Kommunenummer="0301" Kommunenavn="str1234" Bydelsnummer="11" Bydelsnavn="str1234" Distriktsnummer="123"/>
+    <Sak Id="str1234" StartDato="2012-12-13" SluttDato="2012-12-13" Journalnummer="str1234" Fodselsnummer="12345678912" DUFnummer="123456789123" Saksbehandler="str1234" Avsluttet="true">
+        <Melding Id="str1234" StartDato="2012-12-13" SluttDato="2012-12-13" Konklusjon="1.1">
+            <Melder Presisering="str1234" Kode="12"/>
+            <Saksinnhold Presisering="str1234" Kode="1"/>
+        </Melding>
+        <Undersokelse Presisering="str1234" Id="str1234" StartDato="2012-12-13" UtvidetFrist="1" UtvidetFristDato="2012-12-13" SluttDato="2012-12-13" Konklusjon="1">
+            <Vedtaksgrunnlag Presisering="str1234" Kode="1"/>
+        </Undersokelse>
+        <Plan Id="str1234" StartDato="2012-12-13" SluttDato="2012-12-13" EvaluertDato="2012-12-13" Plantype="1"/>
+        <Tiltak Id="str1234" Ettervern="1" StartDato="2012-12-13" SluttDato="2012-12-13">
+            <Kategori Presisering="str1234" Kode="1.1"/>
+            <Tilsyn Id="str1234" UtfortDato="2012-12-13"/>
+            <Oppfolging Id="str1234" UtfortDato="2012-12-13"/>
+            <Opphevelse Presisering="str1234" Kode="1"/>
+        </Tiltak>
+        <Vedtak Id="str1234" StartDato="2012-12-13" SluttDato="2012-12-13" StatusKode="1">
+            <Lovhjemmel Lov="str1234" Kapittel="str12" Paragraf="str12" Ledd="str12" Punktum="str12"/>
+            <JmfrLovhjemmel Lov="str1234" Kapittel="str12" Paragraf="str12" Ledd="str12" Punktum="str12"/>
+            <Krav Id="str1234" StartDato="2012-12-13" SluttDato="2012-12-13"/>
+        </Vedtak>
+        <Ettervern Id="str1234" TilbudSendtDato="2012-12-13" Konklusjon="1"/>
+        <OversendelseBarneverntjeneste Id="str1234" StartDato="2012-12-13">
+            <Lovhjemmel Lov="str1234" Kapittel="str12" Paragraf="str12" Ledd="str12" Punktum="str12"/>
+            <JmfrLovhjemmel Lov="str1234" Kapittel="str12" Paragraf="str12" Ledd="str12" Punktum="str12"/>
+        </OversendelseBarneverntjeneste>
+        <Relasjon Id="str1234" FraId="str1234" FraType="Melding" TilId="str1234" TilType="Melding" Navn="str1234"/>
+    </Sak>
+</Barnevern>
