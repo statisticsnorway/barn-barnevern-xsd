@@ -70,9 +70,7 @@ class XMLConverterSpec extends Specification {
                 null,
                 List.of(virksomhet)
         )
-        def avgiver = new AvgiverType(
-                "944117784", "3401", "Kongsvinger kommune"
-        )
+        def avgiver = RandomGenerator.generateRandomAvgiverType()
         def fagsystem = new FagsystemType(
                 "SSB", "OJJ's automatiske touch", "0.0.1"
         )
@@ -85,7 +83,6 @@ class XMLConverterSpec extends Specification {
 
         when:
         def xmlString = XMLConverter.barneverTypeToXml(barnevern)
-        System.out.println(xmlString)
 
         then:
         verifyAll(xmlString) {
