@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RelasjonType", propOrder = ["id", "fraId", "fraType", "tilId", "tilType"])

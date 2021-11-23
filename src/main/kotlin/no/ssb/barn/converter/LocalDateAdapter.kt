@@ -2,7 +2,7 @@ package no.ssb.barn.converter
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import javax.xml.bind.annotation.adapters.XmlAdapter
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 
 class LocalDateAdapter : XmlAdapter<String, LocalDate>()  {
     private val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")

@@ -3,8 +3,8 @@ package no.ssb.barn.xsd
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.generator.RandomGenerator
 import java.time.LocalDate
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -61,7 +61,7 @@ data class SakType(
                 "02011088123",
                 "",
                 null,
-                MutableList(1) {index ->  VirksomhetType.createVirksomhetType() }
+                MutableList(1) { VirksomhetType.createVirksomhetType() }
             )
         }
     }
