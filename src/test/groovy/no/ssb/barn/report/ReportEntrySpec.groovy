@@ -9,13 +9,16 @@ class ReportEntrySpec extends Specification {
         def sut = new ReportEntry(
                 WarningLevel.WARNING,
                 "~ruleName~",
-                "~message~")
+                "~errorText~",
+                "~errorDetails~")
 
         then:
         WarningLevel.WARNING == sut.getWarningLevel()
         and:
         "~ruleName~" == sut.getRuleName()
         and:
-        "~message~" == sut.getMessage()
+        "~errorText~" == sut.getErrorText()
+        and:
+        "~errorDetails~" == sut.getErrorDetails()
     }
 }

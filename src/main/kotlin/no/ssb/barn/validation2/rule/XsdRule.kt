@@ -1,4 +1,4 @@
-package no.ssb.barn.validation2
+package no.ssb.barn.validation2.rule
 
 import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
@@ -13,18 +13,24 @@ import javax.xml.validation.SchemaFactory
 import javax.xml.validation.Validator
 
 class XsdRule(
-    val xsdResourceName: String
-) : AbstractRule(WarningLevel.FATAL, "XSD validation") {
+    val xsdResourceName: String,
+) : AbstractRule(
+    WarningLevel.FATAL,
+    "Individ Kontroll 01: Validering av individ"
+) {
 
-    override fun validate(context: ValidationContext): ReportEntry? {
+    override fun validate(context: ValidationContext): List<ReportEntry>? {
         try {
             getSchemaValidator(xsdResourceName)
                 .validate(StreamSource(StringReader(context.xml)))
         } catch (e: SAXParseException) {
-            return createReportEntry(
-                String.format(
-                    "Line: %d Column: %d Message: %s",
-                    e.lineNumber, e.columnNumber, e.message
+            return listOf(
+                createReportEntry(
+                    errorText = "Definisjon av Individ er feil i forhold til filspesifikasjonen",
+                    errorDetails = String.format(
+                        "Line: %d Column: %d Message: %s",
+                        e.lineNumber, e.columnNumber, e.message
+                    )
                 )
             )
         }
