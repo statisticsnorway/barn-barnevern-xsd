@@ -1,28 +1,35 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.converter.LocalDateAdapter
+import java.time.LocalDate
 import javax.xml.bind.annotation.*
-import javax.xml.datatype.XMLGregorianCalendar
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UndersokelseType", propOrder = ["id", "migrertId", "startDato",
-        "vedtaksgrunnlag", "utvidetFrist", "konklusjon"])
+@XmlType(
+    name = "UndersokelseType", propOrder = ["id", "migrertId", "startDato",
+        "vedtaksgrunnlag", "utvidetFrist", "konklusjon"]
+)
 data class UndersokelseType(
-        @XmlAttribute(name = "Id", required = true)
-        var id: String,
+    @field:XmlAttribute(name = "Id", required = true)
+    var id: String,
 
-        @XmlAttribute(name = "MigrertId")
-        var migrertId: String? = null,
+    @field:XmlAttribute(name = "MigrertId")
+    var migrertId: String? = null,
 
-        @XmlAttribute(name = "StartDato", required = true)
-        @XmlSchemaType(name = "date")
-        var startDato: XMLGregorianCalendar,
+    @field:XmlAttribute(name = "StartDato", required = true)
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(
+        LocalDateAdapter::class
+    )
+    var startDato: LocalDate,
 
-        @XmlElement(name = "Vedtaksgrunnlag")
-        var vedtaksgrunnlag: List<SaksinnholdType?>? = null,
+    @field:XmlElement(name = "Vedtaksgrunnlag")
+    var vedtaksgrunnlag: MutableList<SaksinnholdType?>? = null,
 
-        @XmlElement(name = "UtvidetFrist")
-        var utvidetFrist: UndersokelseUtvidetFristType? = null,
+    @field:XmlElement(name = "UtvidetFrist")
+    var utvidetFrist: UndersokelseUtvidetFristType? = null,
 
-        @XmlElement(name = "Konklusjon")
-        var konklusjon: UndersokelseKonklusjonType? = null
+    @field:XmlElement(name = "Konklusjon")
+    var konklusjon: UndersokelseKonklusjonType? = null
 )

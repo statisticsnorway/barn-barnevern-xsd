@@ -1,27 +1,49 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.generator.RandomGenerator
+import java.time.LocalDate
 import javax.xml.bind.annotation.*
-import javax.xml.datatype.XMLGregorianCalendar
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MeldingType", propOrder = ["id", "migrertId", "startDato", "melder", "saksinnhold", "konklusjon"])
+@XmlType(name = "MeldingType",
+    propOrder = ["id", "migrertId", "startDato", "melder", "saksinnhold", "konklusjon"],
+    factoryMethod = "createMeldingType")
 data class MeldingType(
-        @XmlAttribute(name = "Id", required = true)
-        var id: String,
+    @field:XmlAttribute(name = "Id", required = true)
+    var id: String,
 
-        @XmlAttribute(name = "MigrertId")
-        var migrertId: String? = null,
+    @field:XmlAttribute(name = "MigrertId")
+    var migrertId: String? = null,
 
-        @XmlAttribute(name = "StartDato", required = true)
-        @XmlSchemaType(name = "date")
-        var startDato: XMLGregorianCalendar,
+    @field:XmlAttribute(name = "StartDato", required = true)
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(
+        LocalDateAdapter::class
+    )
+    var startDato: LocalDate,
 
-        @XmlElement(name = "Melder")
-        var melder: List<MelderType?>? = null,
+    @field:XmlElement(name = "Melder")
+    var melder: MutableList<MelderType?>? = null,
 
-        @XmlElement(name = "Saksinnhold")
-        var saksinnhold: List<SaksinnholdType>? = null,
+    @field:XmlElement(name = "Saksinnhold")
+    var saksinnhold: MutableList<SaksinnholdType>? = null,
 
-        @XmlElement(name = "Konklusjon")
-        var konklusjon: MeldingKonklusjonType? = null
-)
+    @field:XmlElement(name = "Konklusjon")
+    var konklusjon: MeldingKonklusjonType? = null
+){
+    companion object {
+        @JvmStatic
+        fun createMeldingType(): MeldingType {
+            return MeldingType(
+                RandomGenerator.generateRandomString(10),
+                null,
+                LocalDate.now(),
+                MutableList(1) {index ->  MelderType.createMelderType() },
+                MutableList(1) {index ->  SaksinnholdType.createSaksinnholdType() },
+                null
+            )
+        }
+    }
+}
