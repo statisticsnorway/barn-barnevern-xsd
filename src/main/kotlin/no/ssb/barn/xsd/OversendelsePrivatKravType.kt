@@ -1,18 +1,23 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.converter.LocalDateAdapter
+import java.time.LocalDate
 import javax.xml.bind.annotation.*
-import javax.xml.datatype.XMLGregorianCalendar
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OversendelsePrivatKravType", propOrder = ["id", "startDato", "konklusjon"])
 data class OversendelsePrivatKravType(
-        @XmlAttribute(name = "Id", required = true)
-        var id: String,
+    @field:XmlAttribute(name = "Id", required = true)
+    var id: String,
 
-        @XmlAttribute(name = "StartDato", required = true)
-        @XmlSchemaType(name = "date")
-        var startDato: XMLGregorianCalendar,
+    @field:XmlAttribute(name = "StartDato", required = true)
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(
+        LocalDateAdapter::class
+    )
+    var startDato: LocalDate,
 
-        @XmlElement(name = "Konklusjon")
-        var konklusjon: OversendelsePrivatKravKonklusjonType? = null
+    @field:XmlElement(name = "Konklusjon")
+    var konklusjon: OversendelsePrivatKravKonklusjonType? = null
 )

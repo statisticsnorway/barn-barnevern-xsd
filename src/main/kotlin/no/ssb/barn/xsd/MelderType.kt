@@ -1,45 +1,163 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.generator.RandomGenerator
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAttribute
 import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MelderType", propOrder = ["kode", "presisering"])
+@XmlType(name = "MelderType",
+    propOrder = ["kode", "presisering"],
+    factoryMethod = "createMelderType")
 data class MelderType(
-    @XmlAttribute(name = "Kode", required = true)
-    var kode: List<String?>,
+    @field:XmlAttribute(name = "Kode", required = true)
+    var kode: String,
 
-    @XmlAttribute(name = "Presisering")
-    var presisering: String? = null
+    @field:XmlAttribute(name = "Presisering")
+    var presisering: String?
 ) {
+    companion object {
+        @JvmStatic
+        fun createMelderType(): MelderType {
+            return MelderType(
+                "1",
+                null
+            )
+        }
 
-    fun getKoder(): Array<Pair<String, String>> {
-        return arrayOf(
-            Pair("1", "Barnet selv"),
-            Pair("2", "Mor/ far/ foresatte"),
-            Pair("3", "Familie for øvrig"),
-            Pair("4", "Andre privatpersoner"),
-            Pair("5", "Barnvernstjenesten"),
-            Pair("6", "NAV (kommune og stat)"),
-            Pair("7", "Barnevernsvakt"),
-            Pair("8", "Politi"),
-            Pair("9", "Barnehage"),
-            Pair("10", "Helsestasjon/skolehelsetjenesten"),
-            Pair("11", "Skole"),
-            Pair("12", "Pedagogisk-psykologisk tjeneste (PPT)"),
-            Pair("13", "Psykisk helsevern for barn og unge (kommune og stat)"),
-            Pair("14", "Psykisk helsevern for voksne (kommune og stat)"),
-            Pair("15", "Lege/ sykehus/ tannlege"),
-            Pair("16", "Familievernkontor"),
-            Pair("17", "Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)"),
-            Pair("18", "Krisesenter"),
-            Pair("19", "Asylmottak/ UDI/ innvandringsmyndighet"),
-            Pair("20", "Utekontakt/ fritidsklubb"),
-            Pair("21", "Frivillige organisasjoner/ idrettslag"),
-            Pair("22", "Andre offentlige instanser (krever presisering)"),
-            Pair("23", "Anonym")
-        )
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodelistItem> {
+            return listOf(
+                CodelistItem(
+                    "1",
+                    "Barnet selv",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "2",
+                    "Mor/ far/ foresatte",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "3",
+                    "Familie for øvrig",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "4",
+                    "Andre privatpersoner",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "5",
+                    "Barnvernstjenesten",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "6",
+                    "NAV (kommune og stat)",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "7",
+                    "Barnevernsvakt",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "8",
+                    "Politi",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "9",
+                    "Barnehage",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "10",
+                    "Helsestasjon/skolehelsetjenesten",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "11",
+                    "Skole",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "12",
+                    "Pedagogisk-psykologisk tjeneste (PPT)",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "13",
+                    "Psykisk helsevern for barn og unge (kommune og stat)",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "14",
+                    "Psykisk helsevern for voksne (kommune og stat)",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "15",
+                    "Lege/ sykehus/ tannlege",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "16",
+                    "Familievernkontor",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "17",
+                    "Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "18",
+                    "Krisesenter",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "19",
+                    "Asylmottak/ UDI/ innvandringsmyndighet",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "20",
+                    "Utekontakt/ fritidsklubb",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "21",
+                    "Frivillige organisasjoner/ idrettslag",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "22",
+                    "Andre offentlige instanser (krever presisering)",
+                    LocalDate.of(2013, 1, 1)
+                ),
+                CodelistItem(
+                    "23",
+                    "Anonym",
+                    LocalDate.of(2013, 1, 1)
+                )
+            ).filter {
+                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
+                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
+            }
+        }
+
+        @JvmStatic
+        fun getRandomCode(date: LocalDate): String {
+            return getCodes(date).filter { item -> !item.description.contains("krever presisering") }.random().code
+        }
     }
 }

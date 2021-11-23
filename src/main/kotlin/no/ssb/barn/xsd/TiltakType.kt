@@ -1,40 +1,46 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.converter.LocalDateAdapter
+import java.time.LocalDate
 import javax.xml.bind.annotation.*
-import javax.xml.datatype.XMLGregorianCalendar
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TiltakType", propOrder = ["id", "migrertId", "startDato",
-    "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse", "konklusjon"])
+@XmlType(
+    name = "TiltakType", propOrder = ["id", "migrertId", "startDato",
+        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
+)
 data class TiltakType(
-        @XmlAttribute(name = "Id", required = true)
-        var id: String? = null,
+    @field:XmlAttribute(name = "Id", required = true)
+    var id: String? = null,
 
-        @XmlAttribute(name = "MigrertId")
-        var migrertId: String? = null,
+    @field:XmlAttribute(name = "MigrertId")
+    var migrertId: String? = null,
 
-        @XmlAttribute(name = "StartDato", required = true)
-        @XmlSchemaType(name = "date")
-        var startDato: XMLGregorianCalendar? = null,
+    @field:XmlAttribute(name = "StartDato", required = true)
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(
+        LocalDateAdapter::class
+    ) var startDato: LocalDate? = null,
 
-        @XmlElement(name = "Lovhjemmel", required = true)
-        var lovhjemmel: LovhjemmelType? = null,
+    @field:XmlElement(name = "Lovhjemmel", required = true)
+    var lovhjemmel: LovhjemmelType? = null,
 
-        @XmlElement(name = "JmfrLovhjemmel")
-        var jmfrLovhjemmel: List<LovhjemmelType>? = null,
+    @field:XmlElement(name = "JmfrLovhjemmel")
+    var jmfrLovhjemmel: List<LovhjemmelType>? = null,
 
-        @XmlElement(name = "Kategori", required = true)
-        var kategori: KategoriType? = null,
+    @field:XmlElement(name = "Kategori", required = true)
+    var kategori: KategoriType? = null,
 
-        @XmlElement(name = "Tilsyn")
-        var tilsyn: List<TilsynType>? = null,
+    @field:XmlElement(name = "Tilsyn")
+    var tilsyn: List<TilsynType>? = null,
 
-        @XmlElement(name = "Oppfolging")
-        var oppfolging: List<OppfolgingType>? = null,
+    @field:XmlElement(name = "Oppfolging")
+    var oppfolging: List<OppfolgingType>? = null,
 
-        @XmlElement(name = "Opphevelse")
-        var opphevelse: OpphevelseType? = null,
+    @field:XmlElement(name = "Opphevelse")
+    var opphevelse: OpphevelseType? = null,
 
-        @XmlElement(name = "Konklusjon")
-        var konklusjon: TiltakKonklusjonType? = null
+    @field:XmlElement(name = "Konklusjon")
+    var konklusjon: TiltakKonklusjonType? = null
 )

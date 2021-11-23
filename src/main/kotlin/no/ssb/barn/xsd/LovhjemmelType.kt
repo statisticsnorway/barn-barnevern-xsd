@@ -5,18 +5,18 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LovhjemmelType", propOrder = ["lov", "kapittel", "paragraf", "ledd", "punktum"])
 data class LovhjemmelType(
-        @XmlElement(name = "Lov", required = true)
+        @field:XmlElement(name = "Lov", required = true)
         var lov: String,
 
-        @XmlElement(name = "Kapittel", required = true)
+        @field:XmlElement(name = "Kapittel", required = true)
         var kapittel: String,
 
-        @XmlElement(name = "Paragraf", required = true)
+        @field:XmlElement(name = "Paragraf", required = true)
         var paragraf: String,
 
-        @XmlElement(name = "Ledd", required = true)
-        var ledd: List<String>,
+        @field:XmlElement(name = "Ledd", required = true)
+        var ledd: MutableList<String>,
 
-        @XmlElement(name = "Punktum")
-        var punktum: List<String>? = null
+        @field:XmlElement(name = "Punktum")
+        var punktum: MutableList<String>? = null
 )

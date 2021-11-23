@@ -1,58 +1,86 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.converter.LocalDateAdapter
+import java.time.LocalDate
 import javax.xml.bind.annotation.*
-import javax.xml.datatype.XMLGregorianCalendar
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "VirksomhetType", propOrder = [
+@XmlType(
+    name = "VirksomhetType", propOrder = [
         "startDato", "sluttDato", "organisasjonsnummer", "bydelsnummer", "bydelsnavn", "distriktsnummer",
-        "melding", "undersokelse", "plan", "tiltak", "vedtak", "ettervern", "oversendelseBarneverntjeneste", "flytting",
-        "relasjon"])
-data class VirksomhetType(
-        @XmlAttribute(name = "StartDato", required = true)
-        @XmlSchemaType(name = "date")
-        var startDato: XMLGregorianCalendar,
-
-        @XmlAttribute(name = "SluttDato")
-        @XmlSchemaType(name = "date")
-        var sluttDato: XMLGregorianCalendar? = null,
-
-        @XmlAttribute(name = "Organisasjonsnummer", required = true)
-        var organisasjonsnummer: String,
-
-        @XmlAttribute(name = "Bydelsnummer")
-        var bydelsnummer: String? = null,
-
-        @XmlAttribute(name = "Bydelsnavn")
-        var bydelsnavn: String? = null,
-
-        @XmlAttribute(name = "Distriktsnummer")
-        var distriktsnummer: String? = null,
-
-        @XmlElement(name = "Melding")
-        var melding: List<MeldingType?>? = null,
-
-        @XmlElement(name = "Undersokelse")
-        var undersokelse: List<UndersokelseType>? = null,
-
-        @XmlElement(name = "Plan")
-        var plan: List<PlanType>? = null,
-
-        @XmlElement(name = "Tiltak")
-        var tiltak: List<TiltakType>? = null,
-
-        @XmlElement(name = "Vedtak")
-        var vedtak: List<VedtakType>? = null,
-
-        @XmlElement(name = "Ettervern")
-        var ettervern: List<EttervernType>? = null,
-
-        @XmlElement(name = "OversendelseBarneverntjeneste")
-        var oversendelseBarneverntjeneste: List<OversendelseBarneverntjenesteType>? = null,
-
-        @XmlElement(name = "Flytting")
-        var flytting: List<FlyttingType>? = null,
-
-        @XmlElement(name = "Relasjon")
-        var relasjon: List<RelasjonType>? = null
+        "melding"/*, "undersokelse", "plan", "tiltak", "vedtak", "ettervern", "oversendelseBarneverntjeneste", "flytting",
+        "relasjon"*/],
+    factoryMethod = "createVirksomhetType"
 )
+data class VirksomhetType(
+    @field:XmlAttribute(name = "StartDato", required = true)
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(
+        LocalDateAdapter::class
+    )
+    var startDato: LocalDate,
+
+    @field:XmlAttribute(name = "SluttDato")
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(
+        LocalDateAdapter::class
+    )
+    var sluttDato: LocalDate? = null,
+
+    @field:XmlAttribute(name = "Organisasjonsnummer", required = true)
+    var organisasjonsnummer: String,
+
+    @field:XmlAttribute(name = "Bydelsnummer")
+    var bydelsnummer: String? = null,
+
+    @field:XmlAttribute(name = "Bydelsnavn")
+    var bydelsnavn: String? = null,
+
+    @field:XmlAttribute(name = "Distriktsnummer")
+    var distriktsnummer: String? = null,
+
+    @field:XmlElement(name = "Melding")
+    var melding: MutableList<MeldingType?>? = null,
+
+// TODO
+
+//        @field:XmlElement(name = "Undersokelse")
+//        var undersokelse: List<UndersokelseType>? = null,
+//
+//        @field:XmlElement(name = "Plan")
+//        var plan: List<PlanType>? = null,
+//
+//        @field:XmlElement(name = "Tiltak")
+//        var tiltak: List<TiltakType>? = null,
+//
+//        @field:XmlElement(name = "Vedtak")
+//        var vedtak: List<VedtakType>? = null,
+//
+//        @field:XmlElement(name = "Ettervern")
+//        var ettervern: List<EttervernType>? = null,
+//
+//        @field:XmlElement(name = "OversendelseBarneverntjeneste")
+//        var oversendelseBarneverntjeneste: List<OversendelseBarneverntjenesteType>? = null,
+//
+//        @field:XmlElement(name = "Flytting")
+//        var flytting: List<FlyttingType>? = null,
+//
+//        @field:XmlElement(name = "Relasjon")
+//        var relasjon: List<RelasjonType>? = null
+) {
+    companion object {
+        @JvmStatic
+        fun createVirksomhetType(): VirksomhetType {
+            return VirksomhetType(
+                LocalDate.now(),
+                null,
+                "987654321",
+                null,
+                null,
+                null,
+                    null,
+            )
+        }
+    }
+}

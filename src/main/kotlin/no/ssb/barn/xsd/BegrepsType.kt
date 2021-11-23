@@ -3,28 +3,28 @@ package no.ssb.barn.xsd
 import javax.xml.bind.annotation.XmlEnumValue
 
 enum class BegrepsType(val begrep: String) {
-    @XmlEnumValue("Melding")
+    @field:XmlEnumValue("Melding")
     MELDING("Melding"),
 
-    @XmlEnumValue("Undersokelse")
+    @field:XmlEnumValue("Undersokelse")
     UNDERSOKELSE("Undersokelse"),
 
-    @XmlEnumValue("Plan")
+    @field:XmlEnumValue("Plan")
     PLAN("Plan"),
 
-    @XmlEnumValue("Tiltak")
+    @field:XmlEnumValue("Tiltak")
     TILTAK("Tiltak"),
 
-    @XmlEnumValue("Vedtak")
+    @field:XmlEnumValue("Vedtak")
     VEDTAK("Vedtak"),
 
-    @XmlEnumValue("Ettervern")
+    @field:XmlEnumValue("Ettervern")
     ETTERVERN("Ettervern"),
 
-    @XmlEnumValue("OversendelseBarneverntjeneste")
+    @field:XmlEnumValue("OversendelseBarneverntjeneste")
     OVERSENDELSE_BARNEVERNTJENESTE("OversendelseBarneverntjeneste"),
 
-    @XmlEnumValue("Flytting")
+    @field:XmlEnumValue("Flytting")
     FLYTTING("Flytting");
 
     private var value: String? = null
