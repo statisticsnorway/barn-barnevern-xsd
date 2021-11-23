@@ -4,8 +4,8 @@ import no.ssb.barn.codelists.CodelistItem
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.generator.RandomGenerator
 import java.time.LocalDate
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Konklusjon", propOrder = ["sluttDato", "kode"], factoryMethod = "createMeldingKonklusjonType")

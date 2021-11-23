@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.XmlEnumValue
+import jakarta.xml.bind.annotation.XmlEnumValue
 
 enum class BegrepsType(val begrep: String) {
     @field:XmlEnumValue("Melding")

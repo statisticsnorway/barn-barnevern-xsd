@@ -2,15 +2,14 @@ package no.ssb.barn.xsd
 
 import no.ssb.barn.converter.LocalDateTimeAdapter
 import java.time.LocalDateTime
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlRootElement(name = "Barnevern")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "BarnevernType",
-    propOrder = ["datoUttrekk", "fagsystem", "avgiver", "sak"],
-    factoryMethod = "createBarnevernType"
+    propOrder = ["datoUttrekk", "fagsystem", "avgiver", "sak"]
 )
 data class BarnevernType(
     @field:XmlAttribute(name = "DatoUttrekk", required = true)
@@ -18,7 +17,7 @@ data class BarnevernType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var datoUttrekk: LocalDateTime?,
+    var datoUttrekk: LocalDateTime,
 
     @field:XmlElement(name = "Fagsystem", required = true)
     var fagsystem: FagsystemType,
@@ -26,15 +25,8 @@ data class BarnevernType(
     @field:XmlElement(name = "Avgiver", required = true)
     var avgiver: AvgiverType,
 
-    @field:XmlElement(name = "Sak", required = true)
+    @field:XmlElement(name = "Sak", type = SakType::class, required = true)
     var sak: SakType
 ) {
-    companion object {
-        @JvmStatic
-        fun createBarnevernType(): BarnevernType? {
-            return BarnevernType(
-                LocalDateTime.now(), FagsystemType(), AvgiverType(), SakType.createSakType()
-            )
-        }
-    }
+    constructor() : this(datoUttrekk = LocalDateTime.now(), fagsystem = FagsystemType(), avgiver = AvgiverType(), sak = SakType.createSakType())
 }

@@ -3,8 +3,8 @@ package no.ssb.barn.xsd
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.generator.RandomGenerator
 import java.time.LocalDate
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MeldingType",
@@ -40,8 +40,8 @@ data class MeldingType(
                 RandomGenerator.generateRandomString(10),
                 null,
                 LocalDate.now(),
-                MutableList(1) {index ->  MelderType.createMelderType() },
-                MutableList(1) {index ->  SaksinnholdType.createSaksinnholdType() },
+                MutableList(1) { MelderType.createMelderType() },
+                MutableList(1) { SaksinnholdType.createSaksinnholdType() },
                 null
             )
         }
