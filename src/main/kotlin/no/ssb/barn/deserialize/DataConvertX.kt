@@ -1,41 +1,42 @@
 package no.ssb.barn.deserialize
 
-import no.ssb.barn.xsd.BarnevernType
-import java.io.File
-import javax.xml.XMLConstants
 import jakarta.xml.bind.JAXBContext
 import jakarta.xml.bind.Unmarshaller
+import no.ssb.barn.xsd.BarnevernType
+import javax.xml.XMLConstants
 import javax.xml.transform.Source
-import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.Schema
 import javax.xml.validation.SchemaFactory
+
 
 class DataConvertX {
 
     companion object {
 
         @JvmStatic
-        fun unmarshallXML(schemaFile: Source): BarnevernType? {
+        fun unmarshallXML(xmlFile: Source): BarnevernType {
             val context: JAXBContext = JAXBContext.newInstance(BarnevernType::class.java)
             val unmarshalled = context.createUnmarshaller()
 
-            return unmarshalled.unmarshal(schemaFile) as BarnevernType
+            return unmarshalled.unmarshal(xmlFile) as BarnevernType
         }
 
         @JvmStatic
-        fun unmarshallXMLwithSchema(schemaFile: File): BarnevernType? {
-            val schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
-            val schema: Schema = schemaFactory.newSchema(schemaFile)
+        fun unmarshallXmlWithSchema(
+            schemaSource: Source,
+            xmlSource: Source
+        ): BarnevernType? {
+            val schemaFactory =
+                SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+            val schema: Schema = schemaFactory.newSchema(schemaSource)
 
-            val classLoader: ClassLoader = BarnevernType::class.java.getClassLoader()
-            val xsdStream = classLoader.getResourceAsStream(schemaFile.path)
-            val xsdSource = StreamSource(xsdStream)
+            val context: JAXBContext =
+                JAXBContext.newInstance(BarnevernType::class.java)
 
-            val context: JAXBContext = JAXBContext.newInstance(BarnevernType::class.java)
             val unmarshaller: Unmarshaller = context.createUnmarshaller()
             unmarshaller.schema = schema
 
-            return unmarshaller.unmarshal(xsdSource) as BarnevernType?
+            return unmarshaller.unmarshal(xmlSource) as BarnevernType?
         }
     }
 }

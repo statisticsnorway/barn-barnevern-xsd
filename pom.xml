@@ -30,7 +30,7 @@
         <jacoco.version>0.8.7</jacoco.version>
         <checkstyle.version>8.45.1</checkstyle.version>
         <javax.activation.version>1.2.0</javax.activation.version>
-        <jaxb.api.version>2.3.1</jaxb.api.version>
+        <jaxb.api.version>2.4.0-b180830.0359</jaxb.api.version>
     </properties>
 
     <profiles>
@@ -132,7 +132,7 @@
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
 
         <dependency>
