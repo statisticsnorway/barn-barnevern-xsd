@@ -3,13 +3,12 @@ package no.ssb.barn.deserialize
 import no.ssb.barn.xsd.BarnevernType
 import java.io.File
 import javax.xml.XMLConstants
-import javax.xml.bind.JAXBContext
-import javax.xml.bind.Unmarshaller
+import jakarta.xml.bind.JAXBContext
+import jakarta.xml.bind.Unmarshaller
 import javax.xml.transform.Source
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.Schema
 import javax.xml.validation.SchemaFactory
-
 
 class DataConvertX {
 

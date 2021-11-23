@@ -9,10 +9,9 @@ import javax.xml.transform.stream.StreamSource
 
 class DataConvertXSpec extends Specification {
 
-    @Ignore("Fix me")
     def "skriv ut data object fra xsd"() {
         given:
-            Source sourceXSD = getSourceFromClasspath("/Barnevern.xsd")
+            Source sourceXSD = getSourceFromClasspath("./Barnevern.xsd")
 
         when:
             BarnevernType convertObj = DataConvertX.unmarshallXML(sourceXSD)
