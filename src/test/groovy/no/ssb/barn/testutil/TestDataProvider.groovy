@@ -12,15 +12,19 @@ class TestDataProvider {
         "0101${twoDigitBirthYear}88123"
     }
 
-    static ValidationContext getTestContext() {
+    static ValidationContext getTestContext(String xmlResource) {
 
         // get XML
-        def xmlAsString = getResourceAsString("test01_fil09.xml")
+        def xmlAsString = getResourceAsString(xmlResource)
 
         // get deserialized XML
         def barnevernType = BarnevernDeserializer.unmarshallXml(xmlAsString)
 
         new ValidationContext(xmlAsString, barnevernType)
+    }
+
+    static ValidationContext getTestContext() {
+        getTestContext("test01_fil09.xml")
     }
 
     static String getResourceAsString(String resourceName) {
