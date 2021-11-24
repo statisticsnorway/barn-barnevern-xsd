@@ -17,7 +17,7 @@ class VersionOneValidatorSpec extends Specification {
 
     def "when validate with valid XML receive report without entries"() {
         given:
-        def context = TestDataProvider.getTestContext("test01_fil01.xml")
+        def context = TestDataProvider.getTestContextXmlOnly("test01_fil01.xml")
 
         when:
         def report = sut.validate(context)
@@ -28,7 +28,7 @@ class VersionOneValidatorSpec extends Specification {
 
     def "when message-level start date is before case-level start date, receive error"() {
         given:
-        def context = TestDataProvider.getTestContext("sluttdato_etter_startdato.xml")
+        def context = TestDataProvider.getTestContextXmlOnly("sluttdato_etter_startdato.xml")
 
         when:
         def report = sut.validate(context)
@@ -39,7 +39,7 @@ class VersionOneValidatorSpec extends Specification {
 
     def "when validate with invalid XML receive report with one entry"() {
         given:
-        def context = TestDataProvider.getTestContext("invalid.xml")
+        def context = TestDataProvider.getTestContextXmlOnly("invalid.xml")
 
         when:
         def report = sut.validate(context)
