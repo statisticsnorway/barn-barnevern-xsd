@@ -49,7 +49,5 @@ class ValidationUtils {
 
             return (k1 == s[9]) && (k2 == s[10])
         }
-
     }
-
 }

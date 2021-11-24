@@ -1,3 +1,10 @@
 package no.ssb.barn.framework
 
-data class ValidationContext(val xml: String)
+import no.ssb.barn.xsd.BarnevernType
+
+data class ValidationContext(
+    val xml: String,
+    val rootObject: BarnevernType?
+) {
+    constructor(xml: String) : this(xml, null)
+}

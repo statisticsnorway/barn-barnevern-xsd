@@ -1,5 +1,6 @@
 package no.ssb.barn.validation
 
+import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -33,7 +34,7 @@ class TheValidatorSpec extends Specification {
         when:
         def result = sut.validate(
                 1,
-                getResourceAsText("test01_fil01.xml"))
+                TestDataProvider.getResourceAsString("test01_fil01.xml"))
 
         then:
         result.startsWith("{\"journalId\"")
@@ -46,7 +47,7 @@ class TheValidatorSpec extends Specification {
         when:
         def result = sut.validate(
                 1,
-                getResourceAsText("barnevern_with_errors.xml"))
+                TestDataProvider.getResourceAsString("barnevern_with_errors.xml"))
 
         then:
         noExceptionThrown()
@@ -59,10 +60,5 @@ class TheValidatorSpec extends Specification {
 
         where:
         i << (1..10)
-    }
-
-    def getResourceAsText(String resourceName) {
-        return new String(getClass().getClassLoader()
-                .getResourceAsStream(resourceName).readAllBytes())
     }
 }

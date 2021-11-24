@@ -1,5 +1,6 @@
 package no.ssb.barn.deserialize
 
+import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -8,7 +9,7 @@ class BarnevernDeserializerSpec extends Specification {
     @Unroll("test01_fil0 #i .xml")
     def "when unmarshalling valid XML, receive populated instance"() {
         given:
-        def xmlStream = getResourceAsStream("test01_fil0" + i + ".xml")
+        def xmlStream = TestDataProvider.getResourceAsStream("test01_fil0" + i + ".xml")
 
         when:
         def barnevernType = BarnevernDeserializer.unmarshallXml(xmlStream)
@@ -32,7 +33,7 @@ class BarnevernDeserializerSpec extends Specification {
 
     def "when unmarshalling valid XML as String, receive populated instance"() {
         given:
-        def xml = getResourceAsString("test01_fil01.xml")
+        def xml = TestDataProvider.getResourceAsString("test01_fil01.xml")
 
         when:
         def barnevernType = BarnevernDeserializer.unmarshallXml(xml)
@@ -53,9 +54,9 @@ class BarnevernDeserializerSpec extends Specification {
 
     def "when unmarshalling valid XML with XSD, receive populated instance"() {
         given:
-        def xsdStream = getResourceAsStream("Barnevern.xsd")
+        def xsdStream = TestDataProvider.getResourceAsStream("Barnevern.xsd")
         and:
-        def xmlStream = getResourceAsStream("test01_fil01.xml")
+        def xmlStream = TestDataProvider.getResourceAsStream("test01_fil01.xml")
 
         when:
         def barnevernType = BarnevernDeserializer.unmarshallXmlWithSchema(xsdStream, xmlStream)
@@ -72,13 +73,5 @@ class BarnevernDeserializerSpec extends Specification {
         null != barnevernType.fagsystem
         and:
         null != barnevernType.sak
-    }
-
-    def getResourceAsString(String path) {
-        new String(getResourceAsStream(path).readAllBytes())
-    }
-
-    def getResourceAsStream(String path) {
-        this.getClass().getClassLoader().getResourceAsStream(path)
     }
 }
