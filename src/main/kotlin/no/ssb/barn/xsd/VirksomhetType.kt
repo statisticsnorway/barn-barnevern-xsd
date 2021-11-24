@@ -41,7 +41,7 @@ data class VirksomhetType(
     var distriktsnummer: String? = null,
 
     @field:XmlElement(name = "Melding")
-    var melding: MutableList<MeldingType?>? = MutableList(1) { MeldingType() },
+    var melding: MutableList<MeldingType>? = MutableList(1) { MeldingType() },
 
     @field:XmlElement(name = "Undersokelse")
     var undersokelse: MutableList<UndersokelseType>? = MutableList(1) { UndersokelseType() },

@@ -7,8 +7,6 @@ import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Subject
 
-import java.time.Year
-
 class AgeAboveEighteenSpec extends Specification {
 
     @Subject

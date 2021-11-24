@@ -26,7 +26,7 @@ data class MeldingType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Melder")
-    var melder: MutableList<MelderType?>? = MutableList(1) { MelderType() },
+    var melder: MutableList<MelderType>? = MutableList(1) { MelderType() },
 
     @field:XmlElement(name = "Saksinnhold")
     var saksinnhold: MutableList<SaksinnholdType>? = MutableList(1) { SaksinnholdType() },

@@ -10,15 +10,8 @@ class MessageCaseContentContainsClarification : AbstractRule(
     WarningLevel.ERROR,
     "Saksinnhold Kontroll 2: Kontroll av kode og presisering"
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-
-        // TODO: Legg til UndersokelseType når denne er på plass
-
-        // 18 = Andre forhold ved foreldre/familien
-        // 19 = Andre forhold ved barnets situasjon
-        val codesThatRequiresClarification = listOf("18", "19")
-
-        return context.rootObject.sak.virksomhet
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet
             .asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }
             .flatten()
@@ -33,5 +26,10 @@ class MessageCaseContentContainsClarification : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
+
+    companion object {
+        // 18 = Andre forhold ved foreldre/familien
+        // 19 = Andre forhold ved barnets situasjon
+        val codesThatRequiresClarification = listOf("18", "19")
     }
 }
