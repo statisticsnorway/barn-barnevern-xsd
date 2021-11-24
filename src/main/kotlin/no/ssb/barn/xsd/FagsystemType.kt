@@ -4,7 +4,7 @@ import jakarta.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FagsystemType", propOrder = ["leverandor", "navn", "versjon"])
-data class FagsystemType (
+data class FagsystemType(
     @field:XmlAttribute(name = "Leverandor", required = true)
     var leverandor: String = "",
 

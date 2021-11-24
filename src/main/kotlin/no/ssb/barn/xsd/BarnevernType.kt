@@ -1,9 +1,9 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
-import java.time.LocalDateTime
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import no.ssb.barn.converter.LocalDateTimeAdapter
+import java.time.LocalDateTime
 
 @XmlRootElement(name = "Barnevern")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,16 +17,14 @@ data class BarnevernType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var datoUttrekk: LocalDateTime,
+    var datoUttrekk: LocalDateTime = LocalDateTime.now(),
 
     @field:XmlElement(name = "Fagsystem", required = true)
-    var fagsystem: FagsystemType,
+    var fagsystem: FagsystemType = FagsystemType(),
 
     @field:XmlElement(name = "Avgiver", required = true)
-    var avgiver: AvgiverType,
+    var avgiver: AvgiverType = AvgiverType(),
 
     @field:XmlElement(name = "Sak", type = SakType::class, required = true)
-    var sak: SakType
-) {
-    constructor() : this(datoUttrekk = LocalDateTime.now(), fagsystem = FagsystemType(), avgiver = AvgiverType(), sak = SakType.createSakType())
-}
+    var sak: SakType = SakType()
+)

@@ -1,36 +1,22 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
 import no.ssb.barn.codelists.CodelistItem
-import no.ssb.barn.generator.RandomGenerator
 import java.time.LocalDate
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import jakarta.xml.bind.annotation.XmlAccessType
-import jakarta.xml.bind.annotation.XmlAccessorType
-import jakarta.xml.bind.annotation.XmlAttribute
-import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MelderType",
-    propOrder = ["kode", "presisering"],
-    factoryMethod = "createMelderType")
+@XmlType(
+    name = "MelderType",
+    propOrder = ["kode", "presisering"]
+)
 data class MelderType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String,
+    var kode: String = getCodes(LocalDate.now())[0].code,
 
     @field:XmlAttribute(name = "Presisering")
-    var presisering: String?
+    var presisering: String? = ""
 ) {
     companion object {
-        @JvmStatic
-        fun createMelderType(): MelderType {
-            return MelderType(
-                "1",
-                null
-            )
-        }
-
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodelistItem> {
             return listOf(

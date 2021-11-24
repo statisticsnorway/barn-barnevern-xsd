@@ -1,17 +1,17 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
+import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "VirksomhetType", propOrder = [
+    name = "VirksomhetType",
+    propOrder = [
         "startDato", "sluttDato", "organisasjonsnummer", "bydelsnummer", "bydelsnavn", "distriktsnummer",
         "melding"/*, "undersokelse", "plan", "tiltak", "vedtak", "ettervern", "oversendelseBarneverntjeneste", "flytting",
-        "relasjon"*/],
-    factoryMethod = "createVirksomhetType"
+        "relasjon"*/]
 )
 data class VirksomhetType(
     @field:XmlAttribute(name = "StartDato", required = true)
@@ -19,7 +19,7 @@ data class VirksomhetType(
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var startDato: LocalDate,
+    var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
@@ -29,7 +29,7 @@ data class VirksomhetType(
     var sluttDato: LocalDate? = null,
 
     @field:XmlAttribute(name = "Organisasjonsnummer", required = true)
-    var organisasjonsnummer: String,
+    var organisasjonsnummer: String = "999999999",
 
     @field:XmlAttribute(name = "Bydelsnummer")
     var bydelsnummer: String? = null,
@@ -68,19 +68,4 @@ data class VirksomhetType(
 //
 //        @field:XmlElement(name = "Relasjon")
 //        var relasjon: List<RelasjonType>? = null
-) {
-    companion object {
-        @JvmStatic
-        fun createVirksomhetType(): VirksomhetType {
-            return VirksomhetType(
-                LocalDate.now(),
-                null,
-                "987654321",
-                null,
-                null,
-                null,
-                    null,
-            )
-        }
-    }
-}
+)

@@ -1,35 +1,22 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
 import no.ssb.barn.codelists.CodelistItem
 import java.time.LocalDate
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import jakarta.xml.bind.annotation.XmlAccessType
-import jakarta.xml.bind.annotation.XmlAccessorType
-import jakarta.xml.bind.annotation.XmlAttribute
-import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SaksinnholdType",
-    propOrder = ["kode", "presisering"],
-    factoryMethod = "createSaksinnholdType")
+@XmlType(
+    name = "SaksinnholdType",
+    propOrder = ["kode", "presisering"]
+)
 data class SaksinnholdType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String,
+    var kode: String = getCodes(LocalDate.now())[0].code,
 
     @field:XmlAttribute(name = "Presisering")
     var presisering: String? = null
 ) {
     companion object {
-        @JvmStatic
-        fun createSaksinnholdType(): SaksinnholdType{
-            return SaksinnholdType(
-                "1",
-                null
-            )
-        }
-
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodelistItem> {
             return listOf(
@@ -186,7 +173,8 @@ data class SaksinnholdType(
 
         @JvmStatic
         fun getRandomCode(date: LocalDate): String {
-            return MelderType.getCodes(date).filter { item -> !item.description.contains("krever presisering") }.random().code
+            return MelderType.getCodes(date).filter { item -> !item.description.contains("krever presisering") }
+                .random().code
         }
     }
 }

@@ -1,21 +1,20 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.generator.RandomGenerator
 import java.time.LocalDate
-import jakarta.xml.bind.annotation.*
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "SakType",
     propOrder = ["id", "migrertId", "startDato", "sluttDato",
-        "journalnummer", "fodselsnummer", "duFnummer", "avsluttet", "virksomhet"],
-    factoryMethod = "createSakType"
+        "journalnummer", "fodselsnummer", "duFnummer", "avsluttet", "virksomhet"]
 )
 data class SakType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String,
+    var id: String = RandomGenerator.generateRandomString(10),
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,
@@ -25,7 +24,7 @@ data class SakType(
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var startDato: LocalDate,
+    var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
@@ -35,7 +34,7 @@ data class SakType(
     var sluttDato: LocalDate? = null,
 
     @field:XmlAttribute(name = "Journalnummer", required = true)
-    var journalnummer: String,
+    var journalnummer: String = RandomGenerator.generateRandomString(20),
 
     @field:XmlAttribute(name = "Fodselsnummer")
     var fodselsnummer: String? = null,
@@ -47,22 +46,5 @@ data class SakType(
     var avsluttet: Boolean? = null,
 
     @field:XmlElement(name = "Virksomhet", required = true)
-    var virksomhet: MutableList<VirksomhetType?>
-) {
-    companion object {
-        @JvmStatic
-        fun createSakType(): SakType {
-            return SakType(
-                RandomGenerator.generateRandomString(10),
-                null,
-                LocalDate.now(),
-                null,
-                RandomGenerator.generateRandomString(20),
-                "02011088123",
-                "",
-                null,
-                MutableList(1) { VirksomhetType.createVirksomhetType() }
-            )
-        }
-    }
-}
+    var virksomhet: MutableList<VirksomhetType?> = MutableList(1) { VirksomhetType() }
+)
