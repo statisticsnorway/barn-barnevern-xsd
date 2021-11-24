@@ -9,15 +9,20 @@ class MessageEndDateAfterStartDate : AbstractRule(
     WarningLevel.ERROR,
     "Melding Kontroll 2a: Startdato etter sluttdato"
 ) {
-
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        TODO("Not yet implemented")
-
-/*
-        "Individets startdato  (" + individStartDatoString
-        + ") er etter sluttdato (" + individSluttDatoString
-        + ")", Constants.CRITICAL_ERROR), individStartDato,
-*/
-
-    }
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
+            .mapNotNull { virksomhet -> virksomhet.melding }
+            .flatten()
+            .filter { melding ->
+                melding.konklusjon != null
+                        && melding.startDato > melding.konklusjon!!.sluttDato
+            }
+            .map {
+                createReportEntry(
+                    """Meldingens startdato (${it.startDato}) er etter meldingens 
+                        |sluttdato (${it.konklusjon?.sluttDato})""".trimMargin()
+                )
+            }
+            .toList()
+            .ifEmpty { null }
 }
