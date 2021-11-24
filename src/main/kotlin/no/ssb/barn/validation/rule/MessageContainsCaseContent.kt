@@ -9,8 +9,26 @@ class MessageContainsCaseContent : AbstractRule(
     WarningLevel.ERROR,
     "Melding Kontroll 5: Kontroll av konkludert melding, saksinnhold"
 ) {
+    // TODO: This part is missing
+    // if (forrigeTelleDato.getYear() < sluttDato.getYear()
 
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        TODO("Not yet implemented")
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
+            .mapNotNull { virksomhet -> virksomhet.melding }
+            .flatten()
+            .filter { melding ->
+                val conclusion = melding.konklusjon
+                melding.saksinnhold == null
+                        && conclusion != null
+                        && codesThatRequiresCaseContent.contains(conclusion.kode)
+            }
+            .map {
+                createReportEntry("Melding (${it.id}). Konkludert melding mangler saksinnhold.")
+            }
+            .toList()
+            .ifEmpty { null }
+
+    companion object {
+        val codesThatRequiresCaseContent = listOf("1", "2")
     }
 }
