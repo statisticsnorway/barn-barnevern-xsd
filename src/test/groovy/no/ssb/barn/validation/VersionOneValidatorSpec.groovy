@@ -1,6 +1,7 @@
 package no.ssb.barn.validation
 
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 
 class VersionOneValidatorSpec extends Specification {
@@ -8,14 +9,14 @@ class VersionOneValidatorSpec extends Specification {
     VersionOneValidator sut
 
     @SuppressWarnings('unused')
-    def setup(){
+    def setup() {
         sut = new VersionOneValidator()
     }
 
     def "when validate with valid XML receive report without entries"() {
         given:
         def context = new ValidationContext(
-                getResourceAsText("test01_fil01.xml"))
+                TestDataProvider.getResourceAsString("test01_fil01.xml"))
 
         when:
         def report = sut.validate(context)
@@ -27,7 +28,7 @@ class VersionOneValidatorSpec extends Specification {
     def "when validate with invalid XML receive report with one entry"() {
         given:
         def context = new ValidationContext(
-                getResourceAsText("invalid.xml")
+                TestDataProvider.getResourceAsString("invalid.xml")
         )
 
         when:
@@ -35,10 +36,5 @@ class VersionOneValidatorSpec extends Specification {
 
         then:
         1 == report.getReportEntries().size()
-    }
-
-    def getResourceAsText(String resourceName) {
-        return new String(getClass().getClassLoader()
-                .getResourceAsStream(resourceName).readAllBytes())
     }
 }
