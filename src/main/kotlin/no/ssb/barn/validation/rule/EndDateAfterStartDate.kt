@@ -18,10 +18,10 @@ class EndDateAfterStartDate : AbstractRule(
                 startDate,
                 endDate
             )
-        ) null else {
+        ) null
+        else
             createSingleReportEntryList(
                 "Individets startdato ($startDate) er etter sluttdato ($endDate)"
             )
-        }
     }
 }

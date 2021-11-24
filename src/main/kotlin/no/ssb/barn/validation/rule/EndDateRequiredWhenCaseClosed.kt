@@ -9,15 +9,43 @@ class EndDateRequiredWhenCaseClosed : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 02d: Avslutta 31 12 medfører at sluttdato skal være satt"
 ) {
-
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        TODO("Not yet implemented")
+
+        val endDate = context.rootObject.sak.sluttDato
+
+        return if (context.rootObject.sak.avsluttet == true && endDate == null) {
+            createSingleReportEntryList(
+                """Individet er avsluttet hos barnevernet og skal 
+                        |dermed være avsluttet. Sluttdato er $endDate. 
+                        |Kode for avsluttet er TODO"""
+            )
+        } else
+            null
+    }
 
 /*
-        "Individet er avsluttet hos barnevernet og skal dermed være avsluttet. Sluttdato er "
-        + individSluttDatoString + ". Kode for avsluttet er '" + avslutta3112 + "'.",
-        Constants.CRITICAL_ERROR), avslutta3112,
+    TODO Jon Ole : Her er originalkoden
+
+    fun controlAvslutta3112(
+        er: ErrorReport,
+        ere: ErrorReportEntry?,
+        kode: String,
+        sluttDato: LocalDate?,
+        frist: LocalDate?
+    ) {
+        try {
+            if (kode.equals("1", ignoreCase = true)) {
+                if (sluttDato == null || frist == null || sluttDato.isAfter(
+                        frist
+                    )
+                ) {
+                    er.addEntry(ere)
+                }
+            }
+        } catch (e: NullPointerException) {
+            er.addEntry(ere)
+        }
+    }
 */
 
-    }
 }
