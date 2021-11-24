@@ -9,8 +9,16 @@ class HasContent : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 06: Har meldinger, planer eller tiltak"
 ) {
-
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        TODO("Not yet implemented")
+        // TODO legg til sjekk på Tiltak og Plan
+        return if (context.rootObject.sak.virksomhet.any {
+                it?.melding?.any() == true
+            }) {
+            null
+        } else {
+            createSingleReportEntryList(
+                "Individet har ingen meldinger, planer eller tiltak i løpet av året"
+            )
+        }
     }
 }
