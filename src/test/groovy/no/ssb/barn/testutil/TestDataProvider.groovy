@@ -3,7 +3,14 @@ package no.ssb.barn.testutil
 import no.ssb.barn.deserialize.BarnevernDeserializer
 import no.ssb.barn.framework.ValidationContext
 
+import java.time.Year
+
 class TestDataProvider {
+
+    static String getMockSocialSecurityNumber(int age){
+        def twoDigitBirthYear = Year.now().minusYears(2000 + age)
+        "0101${twoDigitBirthYear}88123"
+    }
 
     static ValidationContext getTestContext() {
 

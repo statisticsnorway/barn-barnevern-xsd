@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.testutil.TestDataProvider
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -21,6 +22,25 @@ class AgeAboveEighteenSpec extends Specification {
     }
 
     def "individ over 18 aar og tiltak finnes, ingen feil forventes"() {
+        given:
+        context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(19)
+
+        when:
+        def reportEntries = sut.validate(context)
+
+        then:
+        noExceptionThrown()
+        and:
+        null == reportEntries
+    }
+
+    @Ignore("TODO fix me when Tiltak exists")
+    def "individ under 18 aar og tiltak mangler, ingen feil forventes"() {
+        given:
+        context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(17)
+        and:
+        context.rootObject.sak.virksomhet = List.of()
+
         when:
         def reportEntries = sut.validate(context)
 
@@ -32,9 +52,7 @@ class AgeAboveEighteenSpec extends Specification {
 
     def "individ over 18 aar og tiltak mangler, feil forventes"() {
         given:
-        def twoDigitBirthYear = Year.now().minusYears(2019)
-        and:
-        context.rootObject.sak.fodselsnummer = "0101" + twoDigitBirthYear + "88123"
+        context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(19)
         and:
         context.rootObject.sak.virksomhet = List.of()
 
