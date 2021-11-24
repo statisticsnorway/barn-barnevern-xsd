@@ -46,5 +46,5 @@ data class SakType(
     var avsluttet: Boolean? = null,
 
     @field:XmlElement(name = "Virksomhet", required = true)
-    var virksomhet: MutableList<VirksomhetType?> = MutableList(1) { VirksomhetType() }
+    var virksomhet: MutableList<VirksomhetType> = MutableList(1) { VirksomhetType() }
 )

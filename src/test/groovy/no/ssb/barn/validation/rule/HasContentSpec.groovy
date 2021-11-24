@@ -33,6 +33,7 @@ class HasContentSpec extends Specification {
     def "Mangler Melding og Tiltak og Plan, feil forventes"() {
         given:
         context.rootObject.sak.virksomhet = List.of(context.rootObject.sak.virksomhet[0])
+        and:
         context.rootObject.sak.virksomhet[0].melding = null
 
         when:

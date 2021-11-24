@@ -17,7 +17,7 @@ class EndDateRequiredWhenCaseClosed : AbstractRule(
             createSingleReportEntryList(
                 """Individet er avsluttet hos barnevernet og skal 
                         |dermed være avsluttet. Sluttdato er $endDate. 
-                        |Kode for avsluttet er TODO"""
+                        |Kode for avsluttet er TODO""".trimMargin()
             )
         } else
             null

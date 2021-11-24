@@ -15,6 +15,19 @@ class ValidationUtils {
     companion object {
 
         /**
+         * Sjekker om tekststreng eksisterer og har innhold/lengde. Returnérer true
+         * hvis den fins, ellers false samt at ErrorReportEntry legges til i
+         * ErrorReport
+         *
+         * @param er   ErrorReport
+         * @param ere  ErrorReportEntry
+         * @param val1 String
+         * @return boolean
+         */
+        fun existsAndHasLength(val1: String?): Boolean =
+            val1 != null && val1.isNotEmpty()
+
+        /**
          * Kontrollerer at en dato er etter en annen dato. Hvis dato1 er etter
          * dato2, returnéres false, ellers true
          *
