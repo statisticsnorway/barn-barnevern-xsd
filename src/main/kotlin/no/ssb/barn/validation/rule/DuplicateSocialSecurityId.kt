@@ -11,6 +11,6 @@ class DuplicateSocialSecurityId : AbstractRule(
 ) {
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        TODO("Not yet implemented")
+        TODO("Not yet implemented. This rule is to be deleted because it is impossible to have duplicates of social security numbers when only one exists")
     }
 }
