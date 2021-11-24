@@ -227,7 +227,7 @@ For innsending av barnevernsdata
 		<xs:sequence>
 			<xs:element name="Evaluering" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
-					<xs:attribute name="UtfortDato" use="required"/>
+					<xs:attribute name="UtfortDato" type="xs:date" use="required"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="Konklusjon" minOccurs="0">
@@ -1287,7 +1287,7 @@ Dato tilsynsbesøket faktisk ble utført
 			</xs:element>
 			<xs:element name="Status" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
-					<xs:attribute name="EndretDato" use="required"/>
+					<xs:attribute name="EndretDato" type="xs:date" use="required"/>
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
 							<xs:documentation>
