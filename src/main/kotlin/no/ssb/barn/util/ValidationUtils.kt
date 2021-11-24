@@ -124,6 +124,5 @@ class ValidationUtils {
             }
             return true
         }
-
     }
 }
