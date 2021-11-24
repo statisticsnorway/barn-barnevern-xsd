@@ -8,22 +8,24 @@ import spock.lang.Unroll
 
 import java.time.LocalDate
 
-class MessageEndDateAfterStartDateSpec extends Specification {
+class MessageEndDateBeforeIndividEndDateSpec extends Specification {
 
     @Subject
-    MessageEndDateAfterStartDate sut
+    MessageEndDateBeforeIndividEndDate sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new MessageEndDateAfterStartDate()
+        sut = new MessageEndDateBeforeIndividEndDate()
         context = TestDataProvider.getTestContext()
     }
 
     @Unroll
-    def "Startdato suksess-scenarier, ingen feil forventes"() {
+    def "Sluttdato suksess-scenarier, ingen feil forventes"() {
         given:
+        context.rootObject.sak.sluttDato = endDate
+        and:
         if (resetConclusion) {
             context.rootObject.sak.virksomhet[0].melding[0].konklusjon = null
         }
@@ -37,14 +39,16 @@ class MessageEndDateAfterStartDateSpec extends Specification {
         null == reportEntries
 
         where:
-        resetConclusion | _
-        false           | _
-        false           | _
-        true            | _
+        endDate         | resetConclusion
+        LocalDate.now() | false
+        null            | false
+        LocalDate.now() | true
     }
 
-    def "Startdato etter sluttdato, feil forventes"() {
+    def "Sluttdato for melding etter sluttdato for individ, feil forventes"() {
         given:
+        context.rootObject.sak.sluttDato = LocalDate.now().minusYears(1)
+        and:
         context.rootObject.sak.virksomhet[0].melding[0].startDato = LocalDate.now()
 
         when:
