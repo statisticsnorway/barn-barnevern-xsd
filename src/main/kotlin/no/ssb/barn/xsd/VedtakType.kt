@@ -4,35 +4,36 @@ import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import no.ssb.barn.generator.RandomGenerator
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "VedtakType", propOrder = ["id", "migrertId", "startDato",
-        "lovhjemmel", "jmfrLovhjemmel", "krav", "status", "konklusjon"]
+    name = "VedtakType",
+    propOrder = ["id", "startDato", "lovhjemmel", "jmfrLovhjemmel", "krav", "status", "konklusjon"]
 )
 data class VedtakType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String,
+    var id: String = RandomGenerator.generateRandomString(10),
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var startDato: LocalDate,
+    var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
-    var lovhjemmel: LovhjemmelType,
+    var lovhjemmel: LovhjemmelType = LovhjemmelType(),
 
     @field:XmlElement(name = "JmfrLovhjemmel")
-    var jmfrLovhjemmel: List<LovhjemmelType>? = null,
+    var jmfrLovhjemmel: MutableList<LovhjemmelType>? = MutableList(1) { LovhjemmelType() },
 
     @field:XmlElement(name = "Krav")
-    var krav: List<OversendelsePrivatKravType>? = null,
+    var krav: MutableList<OversendelsePrivatKravType>? = MutableList(1) { OversendelsePrivatKravType() },
 
     @field:XmlElement(name = "Status")
-    var status: List<VedtakStatusType>? = null,
+    var status: MutableList<VedtakStatusType>? = MutableList(1) { VedtakStatusType() },
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: VedtakKonklusjonType? = null
+    var konklusjon: VedtakKonklusjonType? = VedtakKonklusjonType()
 )

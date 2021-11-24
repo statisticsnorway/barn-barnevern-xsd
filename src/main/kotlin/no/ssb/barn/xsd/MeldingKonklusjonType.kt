@@ -8,7 +8,7 @@ import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "Konklusjon",
+    name = "MeldingKonklusjon",
     propOrder = ["sluttDato", "kode"]
 )
 data class MeldingKonklusjonType(

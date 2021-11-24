@@ -7,7 +7,8 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "TiltakType", propOrder = ["id", "migrertId", "startDato",
+    name = "TiltakType",
+    propOrder = ["id", "migrertId", "startDato",
         "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
 )
 data class TiltakType(

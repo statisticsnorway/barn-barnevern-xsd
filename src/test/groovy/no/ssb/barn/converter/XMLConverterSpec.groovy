@@ -57,7 +57,15 @@ class XMLConverterSpec extends Specification {
                 null,
                 null,
                 null,
-                List.of(melding)
+                List.of(melding),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
         )
         def sak = new SakType(
                 RandomGenerator.generateRandomInt().toString(),

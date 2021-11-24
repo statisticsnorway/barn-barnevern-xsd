@@ -15,7 +15,7 @@ class MessageCaseContentContainsClarification : AbstractRule(
             .asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }
             .flatten()
-            .mapNotNull { melding -> melding.saksinnhold }
+            .mapNotNull { melding -> melding?.saksinnhold }
             .flatten()
             .filter { saksinnhold ->
                 codesThatRequiresClarification.contains(saksinnhold.kode)

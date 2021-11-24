@@ -5,12 +5,13 @@ import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import no.ssb.barn.generator.RandomGenerator
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PlanType", propOrder = ["id", "migrertId", "startDato", "evaluering", "konklusjon"])
 data class PlanType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String,
+    var id: String = RandomGenerator.generateRandomString(10),
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,
@@ -20,16 +21,16 @@ data class PlanType(
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var startDato: LocalDate,
+    var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlAttribute(name = "Plantype", required = true)
-    var plantype: String,
+    var plantype: String = getPlantype(LocalDate.now())[0].code,
 
     @field:XmlElement(name = "Evaluering")
-    var evaluering: List<PlanEvalueringType?>? = null,
+    var evaluering: MutableList<PlanEvalueringType?>? = MutableList(1) { PlanEvalueringType() },
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: PlanKonklusjonType? = null
+    var konklusjon: PlanKonklusjonType? = PlanKonklusjonType()
 ){
     companion object {
         fun getPlantype(date: LocalDate): List<CodelistItem> {

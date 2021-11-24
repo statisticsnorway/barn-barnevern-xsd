@@ -14,10 +14,10 @@ data class UndersokelseUtvidetFristType(
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var startDato: LocalDate,
+    var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlAttribute(name = "Innvilget")
-    var innvilget: String? = null
+    var innvilget: String? = getInnvilget(LocalDate.now())[0].code
 ) {
     companion object {
         @JvmStatic

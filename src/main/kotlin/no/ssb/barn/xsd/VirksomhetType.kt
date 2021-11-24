@@ -10,8 +10,8 @@ import java.time.LocalDate
     name = "VirksomhetType",
     propOrder = [
         "startDato", "sluttDato", "organisasjonsnummer", "bydelsnummer", "bydelsnavn", "distriktsnummer",
-        "melding"/*, "undersokelse", "plan", "tiltak", "vedtak", "ettervern", "oversendelseBarneverntjeneste", "flytting",
-        "relasjon"*/]
+        "melding", "undersokelse", "plan", "tiltak", "vedtak", "ettervern", "oversendelseBarneverntjeneste", "flytting",
+        "relasjon"]
 )
 data class VirksomhetType(
     @field:XmlAttribute(name = "StartDato", required = true)
@@ -41,31 +41,29 @@ data class VirksomhetType(
     var distriktsnummer: String? = null,
 
     @field:XmlElement(name = "Melding")
-    var melding: MutableList<MeldingType>? = null,
+    var melding: MutableList<MeldingType?>? = MutableList(1) { MeldingType() },
 
-// TODO
+    @field:XmlElement(name = "Undersokelse")
+    var undersokelse: MutableList<UndersokelseType>? = MutableList(1) { UndersokelseType() },
 
-//        @field:XmlElement(name = "Undersokelse")
-//        var undersokelse: List<UndersokelseType>? = null,
-//
-//        @field:XmlElement(name = "Plan")
-//        var plan: List<PlanType>? = null,
-//
-//        @field:XmlElement(name = "Tiltak")
-//        var tiltak: List<TiltakType>? = null,
-//
-//        @field:XmlElement(name = "Vedtak")
-//        var vedtak: List<VedtakType>? = null,
-//
-//        @field:XmlElement(name = "Ettervern")
-//        var ettervern: List<EttervernType>? = null,
-//
-//        @field:XmlElement(name = "OversendelseBarneverntjeneste")
-//        var oversendelseBarneverntjeneste: List<OversendelseBarneverntjenesteType>? = null,
-//
-//        @field:XmlElement(name = "Flytting")
-//        var flytting: List<FlyttingType>? = null,
-//
-//        @field:XmlElement(name = "Relasjon")
-//        var relasjon: List<RelasjonType>? = null
+    @field:XmlElement(name = "Plan")
+    var plan: MutableList<PlanType>? = MutableList(1) { PlanType() },
+
+    @field:XmlElement(name = "Tiltak")
+    var tiltak: MutableList<TiltakType>? = MutableList(1) { TiltakType() },
+
+    @field:XmlElement(name = "Vedtak")
+    var vedtak: MutableList<VedtakType>? = MutableList(1) { VedtakType() },
+
+    @field:XmlElement(name = "Ettervern")
+    var ettervern: MutableList<EttervernType>? = MutableList(1) { EttervernType() },
+
+    @field:XmlElement(name = "OversendelseBarneverntjeneste")
+    var oversendelseBarneverntjeneste: List<OversendelseBarneverntjenesteType>? = MutableList(1) { OversendelseBarneverntjenesteType() },
+
+    @field:XmlElement(name = "Flytting")
+    var flytting: MutableList<FlyttingType>? = MutableList(1) { FlyttingType() },
+
+    @field:XmlElement(name = "Relasjon")
+    var relasjon: MutableList<RelasjonType>? = MutableList(1) { RelasjonType() }
 )
