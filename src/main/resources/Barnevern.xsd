@@ -2,7 +2,7 @@
 <!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Statistics Norway (Statistics Norway) -->
 <!-- Statistics Norway (Statistics Norway) -->
 <!-- Bufdir Kommunerapportering -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.13.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.13.1">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
