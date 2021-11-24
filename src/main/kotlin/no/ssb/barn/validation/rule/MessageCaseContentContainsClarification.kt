@@ -18,7 +18,7 @@ class MessageCaseContentContainsClarification : AbstractRule(
         // 19 = Andre forhold ved barnets situasjon
         val codesThatRequiresClarification = listOf("18", "19")
 
-        val reportEntries = context.rootObject.sak.virksomhet
+        return context.rootObject.sak.virksomhet
             .asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }
             .flatten()
@@ -32,9 +32,6 @@ class MessageCaseContentContainsClarification : AbstractRule(
                 createReportEntry("Saksinnhold med kode (${it.kode}) mangler presisering")
             }
             .toList()
-
-        return reportEntries.ifEmpty {
-            null
-        }
+            .ifEmpty { null }
     }
 }
