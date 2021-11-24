@@ -11,10 +11,6 @@ class AgeAboveEighteen : AbstractRule(
     "Individ Kontroll 08: Alder i forhold til tiltak"
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        if (context.rootObject == null) {
-            throw NullPointerException()
-        }
-
         val age = ValidationUtils.getAge(context.rootObject.sak.fodselsnummer)
 
         // TODO: We are going to check for existence of TiltakType, but

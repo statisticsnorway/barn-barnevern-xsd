@@ -5,8 +5,6 @@ import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Subject
 
-import java.time.Year
-
 class AgeAboveTwentyFiveSpec extends Specification {
 
     @Subject
@@ -35,11 +33,7 @@ class AgeAboveTwentyFiveSpec extends Specification {
 
     def "individ over 25 aar, feil forventes"() {
         given:
-        def twoDigitBirthYear = Year.now().minusYears(2019)
-        and:
-        context.rootObject.sak.fodselsnummer = "0101" + twoDigitBirthYear + "88123"
-        and:
-        context.rootObject.sak.virksomhet = List.of()
+        context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(27)
 
         when:
         def reportEntries = sut.validate(context)

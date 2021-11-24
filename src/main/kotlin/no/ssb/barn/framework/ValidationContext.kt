@@ -4,7 +4,7 @@ import no.ssb.barn.xsd.BarnevernType
 
 data class ValidationContext(
     val xml: String,
-    val rootObject: BarnevernType?
+    val rootObject: BarnevernType
 ) {
-    constructor(xml: String) : this(xml, null)
+    constructor(xml: String) : this(xml, BarnevernType())
 }

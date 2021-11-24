@@ -8,7 +8,7 @@ import java.time.Year
 class TestDataProvider {
 
     static String getMockSocialSecurityNumber(int age){
-        def twoDigitBirthYear = Year.now().minusYears(2000 + age)
+        def twoDigitBirthYear = Year.now().minusYears(age).value % 100
         "0101${twoDigitBirthYear}88123"
     }
 

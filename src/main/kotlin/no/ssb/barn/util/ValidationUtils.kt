@@ -4,6 +4,7 @@ import org.xml.sax.SAXException
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import javax.xml.XMLConstants
 import javax.xml.transform.Source
 import javax.xml.validation.Schema
@@ -12,6 +13,21 @@ import javax.xml.validation.Validator
 
 class ValidationUtils {
     companion object {
+
+        /**
+         * Kontrollerer at en dato er etter en annen dato. Hvis dato1 er etter
+         * dato2, returnéres false, ellers true
+         *
+         * @param first - LocalDate
+         * @param second - LocalDate
+         */
+        fun secondDateIsAfterFirstDate(
+            first: LocalDate?,
+            second: LocalDate?
+        ): Boolean =
+            if (first == null || second == null) true
+            else (second.isAfter(first))
+
         @JvmStatic
         @Throws(SAXException::class)
         fun validateFromSources(xsdFile: Source, xmlFile: Source): Boolean {

@@ -11,10 +11,6 @@ class AgeAboveTwentyFive : AbstractRule(
     "Individ Kontroll 07: Klient over 25 år avsluttes"
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        if (context.rootObject == null) {
-            throw NullPointerException()
-        }
-
         val age = ValidationUtils.getAge(context.rootObject.sak.fodselsnummer)
 
         return if (age < 25) {
