@@ -17,7 +17,7 @@ class TestDataProvider {
     }
 
     static String getResourceAsString(String resourceName) {
-        return new String(TestDataProvider.class.getClassLoader()
+        new String(TestDataProvider.class.getClassLoader()
                 .getResourceAsStream(resourceName).readAllBytes())
     }
 

@@ -9,7 +9,15 @@ abstract class AbstractRule(
 ) {
     abstract fun validate(context: ValidationContext): List<ReportEntry>?
 
-    protected fun createReportEntry(errorText: String, errorDetails: String? = null): ReportEntry =
+    protected fun createSingleReportEntryList(
+        errorText: String, errorDetails: String? = null
+    ): List<ReportEntry> =
+        listOf(createReportEntry(errorText, errorDetails))
+
+    protected fun createReportEntry(
+        errorText: String,
+        errorDetails: String? = null
+    ): ReportEntry =
         ReportEntry(
             warningLevel = warningLevel,
             ruleName = ruleName,
