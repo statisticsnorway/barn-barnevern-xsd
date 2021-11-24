@@ -1,41 +1,49 @@
 package no.ssb.barn.validation
 
+import no.ssb.barn.deserialize.BarnevernDeserializer
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.framework.ValidatorContract
-import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.ValidationReport
-import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.validation.rule.XsdRule
+import no.ssb.barn.validation.rule.*
 
 class VersionOneValidator : ValidatorContract {
 
-    private val rules = listOf(
+    private val preCheckRules = listOf(
         XsdRule(xsdResourceName = "Barnevern.xsd")
     )
 
-    override fun validate(context: ValidationContext): ValidationReport {
+    private val rules = listOf(
+        AgeAboveEighteen(),
+        AgeAboveTwentyFive(),
+        EndDateAfterStartDate(),
+        EndDateRequiredWhenCaseClosed(),
+        HasContent(),
+        MessageCaseContentContainsClarification(),
+        MessageContainsCaseContent(),
+        MessageContainsReporters(),
+        MessageEndDateAfterStartDate(),
+        MessageEndDateBeforeIndividEndDate()
+    )
 
-        val reportEntries = ArrayList<ReportEntry>()
-
-        rules.forEach { rule ->
-
-            // run current validation
-            val currReportEntries = rule.validate(context)
-
-            if (currReportEntries != null) {
-                reportEntries.addAll(currReportEntries as Collection<ReportEntry>)
-
-                // if any FATAL warnings, like XSD validation error, skip further validations
-                if (currReportEntries.any { entry -> entry.warningLevel == WarningLevel.FATAL }) {
-                    return@forEach
-                }
-            }
-        }
-
-        return ValidationReport(
+    override fun validate(context: ValidationContext): ValidationReport =
+        ValidationReport(
             "~journalId~",
             "~individualId~",
-            reportEntries
+            preCheckRules.asSequence()
+                .mapNotNull { it.validate(context) }
+                .flatten()
+                .toList()
+                .ifEmpty {
+                    // this is not a great solution, fix me
+                    val innerContext = ValidationContext(
+                        context.xml,
+                        BarnevernDeserializer.unmarshallXml(context.xml)
+                    )
+
+                    rules.asSequence()
+                        .mapNotNull { it.validate(innerContext) }
+                        .flatten()
+                        .toList()
+                }
         )
-    }
 }
