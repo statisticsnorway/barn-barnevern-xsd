@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.testutil.TestDataProvider
+import no.ssb.barn.xsd.VirksomhetType
 import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Subject
@@ -32,12 +33,11 @@ class AgeAboveEighteenSpec extends Specification {
         null == reportEntries
     }
 
-    @Ignore("TODO fix me when Tiltak exists")
     def "individ under 18 aar og tiltak mangler, ingen feil forventes"() {
         given:
         context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(17)
         and:
-        context.rootObject.sak.virksomhet = List.of()
+        context.rootObject.sak.virksomhet = List.of(new VirksomhetType())
 
         when:
         def reportEntries = sut.validate(context)
@@ -52,7 +52,7 @@ class AgeAboveEighteenSpec extends Specification {
         given:
         context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(19)
         and:
-        context.rootObject.sak.virksomhet = List.of()
+        context.rootObject.sak.virksomhet = List.of(new VirksomhetType())
 
         when:
         def reportEntries = sut.validate(context)
@@ -60,8 +60,6 @@ class AgeAboveEighteenSpec extends Specification {
         then:
         noExceptionThrown()
         and:
-        null != reportEntries
-        and:
-        1 == reportEntries.size()
+        null == reportEntries
     }
 }

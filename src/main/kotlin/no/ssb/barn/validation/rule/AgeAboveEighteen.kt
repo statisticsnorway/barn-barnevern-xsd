@@ -17,7 +17,7 @@ class AgeAboveEighteen : AbstractRule(
         // it is not implemented yet
         // return if (age < 18 || context.rootObject.sak.virksomhet.tiltak.any()) {
 
-        return if (age < 18 || context.rootObject.sak.virksomhet.any()) {
+        return if (age < 18 || context.rootObject.sak.virksomhet[0].tiltak?.any() == true) {
             null
         } else {
             createSingleReportEntryList(
