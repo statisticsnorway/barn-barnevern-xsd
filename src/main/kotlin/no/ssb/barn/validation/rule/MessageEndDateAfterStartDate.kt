@@ -14,8 +14,8 @@ class MessageEndDateAfterStartDate : AbstractRule(
             .mapNotNull { virksomhet -> virksomhet.melding }
             .flatten()
             .filter { melding ->
-                melding.konklusjon != null
-                        && melding.startDato > melding.konklusjon!!.sluttDato
+                val conclusion = melding.konklusjon
+                conclusion != null && melding.startDato > conclusion.sluttDato
             }
             .map {
                 createReportEntry(
