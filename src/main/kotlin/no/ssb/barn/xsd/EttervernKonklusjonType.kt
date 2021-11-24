@@ -7,17 +7,17 @@ import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Konklusjon", propOrder = ["sluttDato", "kode"])
+@XmlType(name = "EttervernKonklusjon", propOrder = ["sluttDato", "kode"])
 data class EttervernKonklusjonType(
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var sluttDato: LocalDate? = null,
+    var sluttDato: LocalDate? = LocalDate.now(),
 
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String
+    var kode: String = getCodes(LocalDate.of(2022, 1, 1 ))[0].code
 ){
     companion object {
         @JvmStatic

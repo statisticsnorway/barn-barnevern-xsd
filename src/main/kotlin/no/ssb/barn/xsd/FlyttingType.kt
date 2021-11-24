@@ -5,22 +5,23 @@ import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import no.ssb.barn.generator.RandomGenerator
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FlyttingType", propOrder = ["id", "sluttDato", "kode"])
 data class FlyttingType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String? = null,
+    var id: String = RandomGenerator.generateRandomString(10),
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var sluttDato: LocalDate? = null,
+    var sluttDato: LocalDate? = LocalDate.now(),
 
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String? = null
+    var kode: String? = getCodes(LocalDate.now())[0].code
 ) {
     companion object {
         @JvmStatic

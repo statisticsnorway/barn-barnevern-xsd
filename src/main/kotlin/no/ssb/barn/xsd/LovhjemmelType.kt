@@ -6,16 +6,16 @@ import jakarta.xml.bind.annotation.*
 @XmlType(name = "LovhjemmelType", propOrder = ["lov", "kapittel", "paragraf", "ledd", "punktum"])
 data class LovhjemmelType(
         @field:XmlElement(name = "Lov", required = true)
-        var lov: String,
+        var lov: String = "BVL",
 
         @field:XmlElement(name = "Kapittel", required = true)
-        var kapittel: String,
+        var kapittel: String = "0",
 
         @field:XmlElement(name = "Paragraf", required = true)
-        var paragraf: String,
+        var paragraf: String = "0",
 
         @field:XmlElement(name = "Ledd", required = true)
-        var ledd: MutableList<String>,
+        var ledd: MutableList<String> = MutableList(1) { "0" },
 
         @field:XmlElement(name = "Punktum")
         var punktum: MutableList<String>? = null

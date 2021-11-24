@@ -4,15 +4,16 @@ import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import no.ssb.barn.generator.RandomGenerator
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "UndersokelseType", propOrder = ["id", "migrertId", "startDato",
-        "vedtaksgrunnlag", "utvidetFrist", "konklusjon"]
+    name = "UndersokelseType",
+    propOrder = ["id", "migrertId", "startDato", "vedtaksgrunnlag", "utvidetFrist", "konklusjon"]
 )
 data class UndersokelseType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String,
+    var id: String = RandomGenerator.generateRandomString(10),
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,
@@ -22,7 +23,7 @@ data class UndersokelseType(
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var startDato: LocalDate,
+    var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Vedtaksgrunnlag")
     var vedtaksgrunnlag: MutableList<SaksinnholdType?>? = null,

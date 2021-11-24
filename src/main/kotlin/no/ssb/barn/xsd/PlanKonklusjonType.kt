@@ -6,12 +6,12 @@ import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Konklusjon", propOrder = ["sluttDato"])
+@XmlType(name = "PlanKonklusjon", propOrder = ["sluttDato"])
 data class PlanKonklusjonType(
     @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
     )
-    var sluttDato: LocalDate
+    var sluttDato: LocalDate = LocalDate.now()
 )
