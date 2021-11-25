@@ -1,6 +1,9 @@
 package no.ssb.barn.xsd
 
-import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlAttribute
+import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -15,5 +18,11 @@ data class AvgiverType(
     var kommunenummer: String = "",
 
     @field:XmlAttribute(name = "Kommunenavn", required = true)
-    var kommunenavn: String = ""
+    var kommunenavn: String = "",
+
+    @field:XmlAttribute(name = "Bydelsnummer", required = false)
+    var bydelsnummer: String? = null,
+
+    @field:XmlAttribute(name = "Bydelsnavn", required = false)
+    var bydelsnavn: String? = null
 )
