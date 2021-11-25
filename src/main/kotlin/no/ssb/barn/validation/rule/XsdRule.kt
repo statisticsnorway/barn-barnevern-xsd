@@ -18,7 +18,6 @@ class XsdRule(
     WarningLevel.FATAL,
     "Individ Kontroll 01: Validering av individ"
 ) {
-
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         try {
             getSchemaValidator(xsdResourceName)

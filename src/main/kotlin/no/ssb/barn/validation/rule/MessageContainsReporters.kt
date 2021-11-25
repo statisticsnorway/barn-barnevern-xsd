@@ -9,6 +9,8 @@ class MessageContainsReporters : AbstractRule(
     WarningLevel.ERROR,
     "Melding Kontroll 4: Kontroll av konkludert melding, melder"
 ) {
+    private val codesThatRequiresCaseContent = listOf("1", "2")
+
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }
@@ -24,8 +26,4 @@ class MessageContainsReporters : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
-
-    companion object {
-        val codesThatRequiresCaseContent = listOf("1", "2")
-    }
 }

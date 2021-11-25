@@ -9,6 +9,8 @@ class MessageContainsCaseContent : AbstractRule(
     WarningLevel.ERROR,
     "Melding Kontroll 5: Kontroll av konkludert melding, saksinnhold"
 ) {
+    private val codesThatRequiresCaseContent = listOf("1", "2")
+
     // TODO: This part is missing
     // if (forrigeTelleDato.getYear() < sluttDato.getYear()
 
@@ -27,8 +29,4 @@ class MessageContainsCaseContent : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
-
-    companion object {
-        val codesThatRequiresCaseContent = listOf("1", "2")
-    }
 }
