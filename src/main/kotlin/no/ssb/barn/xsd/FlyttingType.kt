@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
@@ -25,47 +25,47 @@ data class FlyttingType(
 ) {
     companion object {
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodelistItem> {
+        fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
-                CodelistItem(
+                CodeListItem(
                     "1.1",
                     "Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "1.2",
                     "Barnet blir myndig",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "1.3",
                     "Fosterforeldre klarer ikke å dekke barnets behov <br>" +
                             "(forhold ved fosterhjemmet)",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "1.4",
                     "Barnet har behov for annet plasseringssted <br>" +
                             "(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "1.5",
                     "Andre grunner; spesifiser. <br>" +
                             "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2.1",
                     "Barnet har behov fosterforeldre ikke kan dekke",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2.2",
                     "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2.3",
                     "Andre grunner; spesifiser <br>" +
                             "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>" +

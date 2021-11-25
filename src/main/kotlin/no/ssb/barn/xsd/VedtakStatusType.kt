@@ -2,7 +2,7 @@ package no.ssb.barn.xsd
 
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 
@@ -21,24 +21,24 @@ data class VedtakStatusType(
 ) {
     companion object {
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodelistItem> {
+        fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
-                CodelistItem(
+                CodeListItem(
                     "1",
                     "Godkjent",
                     LocalDate.parse("2022-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2",
                     "Begjæring oversendt nemnd",
                     LocalDate.parse("2022-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "3",
                     "Utgår / Bortfalt etter BVL",
                     LocalDate.parse("2022-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "4",
                     "Avslått / Avsluttet",
                     LocalDate.parse("2022-01-01")

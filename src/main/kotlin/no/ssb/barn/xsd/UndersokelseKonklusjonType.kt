@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
@@ -24,26 +24,26 @@ data class UndersokelseKonklusjonType(
 ) {
     companion object {
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodelistItem> {
+        fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
-                CodelistItem(
+                CodeListItem(
                     "1",
                     "Barneverntjenesten fatter vedtak om tiltak",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2",
                     "Begjæring om tiltak for fylkesnemnda",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "3",
                     "Undersøkelsen henlagt etter barnverntjenestens vurdering " +
                             "(kategorien gjelder når barneverntjenesten vurderer at vilkår " +
                             "for å sette inn tiltak ikke er oppfylt)",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "4",
                     "Undersøkelsen henlagt etter partens ønske " +
                             "(kategorien gjelder når barneverntjenesten vurderer at vilkår for " +
@@ -52,7 +52,7 @@ data class UndersokelseKonklusjonType(
                             "snakk om hjelpetiltak som foreldre/barn kan takke nei til.)",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "5",
                     "Undersøkelsen henlagt som følge av flytting " +
                             "kategorien gjelder når undersøkelsessak henlegges fordi barnet " +
@@ -61,7 +61,7 @@ data class UndersokelseKonklusjonType(
                             "oppholdskommune, obligatorisk ja/nei svar) (krever presisering)",
                     LocalDate.parse("2013-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "6",
                     "Undersøkelsen henlagt etter henvisning til annen instans",
                     LocalDate.parse("2013-01-01")

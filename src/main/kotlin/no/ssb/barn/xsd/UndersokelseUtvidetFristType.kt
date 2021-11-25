@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
@@ -21,14 +21,14 @@ data class UndersokelseUtvidetFristType(
 ) {
     companion object {
         @JvmStatic
-        fun getInnvilget(date: LocalDate): List<CodelistItem> {
+        fun getInnvilget(date: LocalDate): List<CodeListItem> {
             return listOf(
-                CodelistItem(
+                CodeListItem(
                     "1",
                     "Ja",
                     LocalDate.of(2022, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2",
                     "Nei",
                     LocalDate.of(2022, 1, 1)

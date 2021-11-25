@@ -4,7 +4,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import jakarta.xml.bind.annotation.adapters.XmlAdapter
 
-
 class LocalDateTimeAdapter : XmlAdapter<String, LocalDateTime>() {
     private val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     override fun marshal(dateTime: LocalDateTime): String {

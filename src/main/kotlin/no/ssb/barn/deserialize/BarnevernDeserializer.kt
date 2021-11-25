@@ -3,7 +3,6 @@ package no.ssb.barn.deserialize
 import jakarta.xml.bind.JAXBContext
 import no.ssb.barn.xsd.BarnevernType
 
-
 class BarnevernDeserializer {
     companion object {
         @JvmStatic

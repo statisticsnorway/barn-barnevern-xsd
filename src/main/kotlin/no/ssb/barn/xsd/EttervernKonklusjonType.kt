@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
@@ -21,19 +21,19 @@ data class EttervernKonklusjonType(
 ){
     companion object {
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodelistItem> {
+        fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
-                CodelistItem(
+                CodeListItem(
                     "1",
                     "Gitt tilbud om tiltak, akseptert",
                     LocalDate.parse("2022-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2",
                     "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak",
                     LocalDate.parse("2022-01-01")
                 ),
-                CodelistItem(
+                CodeListItem(
                     "3",
                     "Ikke lenger tiltak etter BVL, etter brukers ønske",
                     LocalDate.parse("2022-01-01")

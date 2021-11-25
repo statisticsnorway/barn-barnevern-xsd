@@ -2,7 +2,7 @@ package no.ssb.barn.xsd
 
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
 
@@ -24,24 +24,24 @@ data class MeldingKonklusjonType(
 ) {
     companion object {
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodelistItem> {
+        fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
-                CodelistItem(
+                CodeListItem(
                     "1",
                     "Henlagt",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2",
                     "Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "3",
                     "Henlagt pga. aktive tiltak",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "4",
                     "Melding i pågående undersøkelse",
                     LocalDate.of(2013, 1, 1)

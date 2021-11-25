@@ -1,8 +1,8 @@
 package no.ssb.barn.codelists
 
-import java.time.*
+import java.time.LocalDate
 
-data class CodelistItem(
+data class CodeListItem(
     var code: String,
     var description: String,
     var validFrom: LocalDate = LocalDate.of(2000, 1, 1),

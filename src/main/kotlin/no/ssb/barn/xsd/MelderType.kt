@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
 import jakarta.xml.bind.annotation.*
-import no.ssb.barn.codelists.CodelistItem
+import no.ssb.barn.codelists.CodeListItem
 import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,119 +18,119 @@ data class MelderType(
 ) {
     companion object {
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodelistItem> {
+        fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
-                CodelistItem(
+                CodeListItem(
                     "1",
                     "Barnet selv",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "2",
                     "Mor/ far/ foresatte",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "3",
                     "Familie for øvrig",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "4",
                     "Andre privatpersoner",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "5",
                     "Barnvernstjenesten",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "6",
                     "NAV (kommune og stat)",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "7",
                     "Barnevernsvakt",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "8",
                     "Politi",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "9",
                     "Barnehage",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "10",
                     "Helsestasjon/skolehelsetjenesten",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "11",
                     "Skole",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "12",
                     "Pedagogisk-psykologisk tjeneste (PPT)",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "13",
                     "Psykisk helsevern for barn og unge (kommune og stat)",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "14",
                     "Psykisk helsevern for voksne (kommune og stat)",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "15",
                     "Lege/ sykehus/ tannlege",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "16",
                     "Familievernkontor",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "17",
                     "Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "18",
                     "Krisesenter",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "19",
                     "Asylmottak/ UDI/ innvandringsmyndighet",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "20",
                     "Utekontakt/ fritidsklubb",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "21",
                     "Frivillige organisasjoner/ idrettslag",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "22",
                     "Andre offentlige instanser (krever presisering)",
                     LocalDate.of(2013, 1, 1)
                 ),
-                CodelistItem(
+                CodeListItem(
                     "23",
                     "Anonym",
                     LocalDate.of(2013, 1, 1)

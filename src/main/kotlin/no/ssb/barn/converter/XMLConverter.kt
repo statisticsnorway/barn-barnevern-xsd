@@ -1,9 +1,9 @@
 package no.ssb.barn.converter
 
+import jakarta.xml.bind.JAXB
 import no.ssb.barn.xsd.BarnevernType
 import java.io.StringReader
 import java.io.StringWriter
-import jakarta.xml.bind.JAXB
 
 class XMLConverter {
     companion object {
@@ -11,13 +11,12 @@ class XMLConverter {
         fun xmlToBarnevernType(xmlString: String): BarnevernType =
              JAXB.unmarshal(StringReader(xmlString), BarnevernType::class.java)
 
-
         @JvmStatic
-        fun barneverTypeToXml(barnevernType: BarnevernType): String {
-            val sw = StringWriter()
-            JAXB.marshal(barnevernType, sw)
+        fun barnevernTypeToXml(barnevernType: BarnevernType): String {
+            val stringWriter = StringWriter()
+            JAXB.marshal(barnevernType, stringWriter)
 
-            return sw.toString()
+            return stringWriter.toString()
         }
     }
 }

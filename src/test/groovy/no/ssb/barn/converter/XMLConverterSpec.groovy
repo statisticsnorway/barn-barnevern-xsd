@@ -90,7 +90,7 @@ class XMLConverterSpec extends Specification {
         )
 
         when:
-        def xmlString = XMLConverter.barneverTypeToXml(barnevern)
+        def xmlString = XMLConverter.barnevernTypeToXml(barnevern)
 
         then:
         verifyAll(xmlString) {
