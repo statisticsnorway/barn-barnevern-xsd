@@ -17,7 +17,9 @@ class ValidationReportSpec extends Specification {
                                 "~xmlContext~",
                                 "~contextId~",
                                 "~errorDetails~")
-                ))
+                ),
+                WarningLevel.ERROR,
+        )
 
         then:
         "~journalId~" == sut.getJournalId()
@@ -25,5 +27,7 @@ class ValidationReportSpec extends Specification {
         "~individualId~" == sut.getIndividualId()
         and:
         1 == sut.getReportEntries().size()
+        and:
+        WarningLevel.ERROR == sut.warningLevelHighTide
     }
 }

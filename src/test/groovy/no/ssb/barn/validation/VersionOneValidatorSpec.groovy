@@ -35,6 +35,8 @@ class VersionOneValidatorSpec extends Specification {
 
         then:
         1 == report.reportEntries.size()
+        and:
+        WarningLevel.ERROR == report.warningLevelHighTide
     }
 
     def "when validate with invalid XML receive report with one entry"() {
@@ -48,5 +50,7 @@ class VersionOneValidatorSpec extends Specification {
         1 == report.reportEntries.size()
         and:
         report.reportEntries[0].warningLevel == WarningLevel.FATAL
+        and:
+        WarningLevel.FATAL == report.warningLevelHighTide
     }
 }

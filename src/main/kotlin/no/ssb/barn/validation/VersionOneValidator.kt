@@ -30,25 +30,31 @@ class VersionOneValidator : ValidatorContract {
         SocialSecurityIdAndDuf()
     )
 
-    override fun validate(context: ValidationContext): ValidationReport =
-        ValidationReport(
-            "~journalId~",
-            "~individualId~",
-            preCheckRules.asSequence()
-                .mapNotNull { it.validate(context) }
-                .flatten()
-                .toList()
-                .ifEmpty {
-                    // this is not a great solution, fix me
-                    val innerContext = ValidationContext(
-                        context.xml,
-                        BarnevernDeserializer.unmarshallXml(context.xml)
-                    )
+    override fun validate(context: ValidationContext): ValidationReport {
 
-                    rules.asSequence()
-                        .mapNotNull { it.validate(innerContext) }
-                        .flatten()
-                        .toList()
-                }
+        val reportEntries = preCheckRules.asSequence()
+            .mapNotNull { it.validate(context) }
+            .flatten()
+            .toList()
+            .ifEmpty {
+                // this is not a great solution, fix me
+                val innerContext = ValidationContext(
+                    context.xml,
+                    BarnevernDeserializer.unmarshallXml(context.xml)
+                )
+                rules.asSequence()
+                    .mapNotNull { it.validate(innerContext) }
+                    .flatten()
+                    .toList()
+            }
+
+        return ValidationReport(
+            journalId = "~journalId~",
+            individualId = "~individualId~",
+            reportEntries = reportEntries,
+            warningLevelHighTide = reportEntries.asSequence()
+                .map { it.warningLevel }
+                .maxByOrNull { it.ordinal }
         )
+    }
 }
