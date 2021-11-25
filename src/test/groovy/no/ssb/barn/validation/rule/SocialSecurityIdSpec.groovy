@@ -39,6 +39,7 @@ class SocialSecurityIdSpec extends Specification {
         socialSecurityId || expectedError
         "02011088123"    || null
         "12345655555"    || "Individet har ufullstendig fødselsnummer."
+        "12345612345"    || "Individet har ufullstendig fødselsnummer."
         null             || "Individet har ufullstendig fødselsnummer."
         ""               || "Individet har ufullstendig fødselsnummer."
         " "              || "Individet har ufullstendig fødselsnummer."

@@ -4,7 +4,7 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.util.ValidationUtils
+import no.ssb.barn.util.ValidationUtils.Companion.validateSSN
 import java.util.regex.Pattern
 
 class SocialSecurityIdAndDuf : AbstractRule(
@@ -18,17 +18,17 @@ class SocialSecurityIdAndDuf : AbstractRule(
         val duFnummer = context.rootObject.sak.duFnummer
 
         if (fodselsnummer != null) {
-            return if (!(ValidationUtils.validateSSN(fodselsnummer)
-                        || fodselsnummer.endsWith("00100")
-                        || fodselsnummer.endsWith("00200")
-                        || fodselsnummer.endsWith("55555")
-                        || fodselsnummer.endsWith("99999"))
+            return if (validateSSN(fodselsnummer)
+                || fodselsnummer.endsWith("00100")
+                || fodselsnummer.endsWith("00200")
+                || fodselsnummer.endsWith("55555")
+                || fodselsnummer.endsWith("99999")
             ) {
+                null
+            } else {
                 createSingleReportEntryList(
                     "Feil i fødselsnummer. Kan ikke identifisere individet."
                 )
-            } else {
-                null
             }
         }
 
