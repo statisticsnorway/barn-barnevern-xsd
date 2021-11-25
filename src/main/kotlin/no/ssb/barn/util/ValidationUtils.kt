@@ -5,6 +5,7 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.Year
 import javax.xml.XMLConstants
 import javax.xml.transform.Source
 import javax.xml.validation.Schema
@@ -16,7 +17,7 @@ class ValidationUtils {
 
         /**
          * Kontrollerer at en dato er etter en annen dato. Hvis dato1 er etter
-         * dato2, returnéres false, ellers true
+         * dato2, returneres false, ellers true
          *
          * @param first - LocalDate
          * @param second - LocalDate
@@ -48,7 +49,7 @@ class ValidationUtils {
 
         @JvmStatic
         fun validateSSN(ssn: String): Boolean {
-            // Validate norwegian sosial security number (ssn), known as fnr or dnr
+            // Validate norwegian social security number (ssn), known as fnr or dnr
             val regex = "^\\d{11}$".toRegex()
             if (!regex.matches(ssn)) return false
 
@@ -75,22 +76,15 @@ class ValidationUtils {
         fun getAge(socialSecurityNumber: String?): Int {
             return if (socialSecurityNumber != null)
                 getAlderFromFnr(
-                    socialSecurityNumber, "2021" /* TODO args.getAargang()*/
+                    socialSecurityNumber, Year.now().value % 100
                 )
             else -2
         }
 
         @JvmStatic
-        fun getAlderFromFnr(fodselsnummer: String, rappAarYYYY: String): Int {
-            if (isValidDate(
-                    fodselsnummer.substring(
-                        0,
-                        6
-                    ), "ddMMyy"
-                )
-            ) {
+        fun getAlderFromFnr(fodselsnummer: String, aargang: Int): Int {
+            if (isValidDate(fodselsnummer.substring(0, 6))) {
                 val fodselsAar = fodselsnummer.substring(4, 6).toInt()
-                val aargang = rappAarYYYY.substring(2, 4).toInt()
 
                 val alder =
                     if (aargang < fodselsAar) aargang + 100 - fodselsAar
@@ -101,8 +95,8 @@ class ValidationUtils {
             return -1
         }
 
-        private fun isValidDate(dateStr: String, dateFormat: String): Boolean {
-            val sdf: DateFormat = SimpleDateFormat(dateFormat)
+        private fun isValidDate(dateStr: String): Boolean {
+            val sdf: DateFormat = SimpleDateFormat("ddMMyy")
             sdf.isLenient = false
             try {
                 sdf.parse(dateStr)
