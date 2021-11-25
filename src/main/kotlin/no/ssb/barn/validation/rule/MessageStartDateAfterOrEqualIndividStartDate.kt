@@ -9,8 +9,23 @@ class MessageStartDateAfterOrEqualIndividStartDate : AbstractRule(
     WarningLevel.ERROR,
     "Melding Kontroll 2e: Startdato mot individets startdato"
 ) {
-
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        TODO("Not yet implemented")
+        val sak = context.rootObject.sak
+        val individStartDate = sak.startDato
+
+        return sak.virksomhet.asSequence()
+            .mapNotNull { virksomhet -> virksomhet.melding }
+            .flatten()
+            .filter { melding ->
+                melding.startDato < individStartDate
+            }
+            .map {
+                createReportEntry(
+                    """Startdato (${it.startDato}) skal være lik eller etter 
+                        |individets startdato ($individStartDate)""".trimMargin()
+                )
+            }
+            .toList()
+            .ifEmpty { null }
     }
 }

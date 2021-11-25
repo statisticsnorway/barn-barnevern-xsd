@@ -23,6 +23,7 @@ class VersionOneValidator : ValidatorContract {
         MessageContainsReporters(),
         MessageEndDateAfterStartDate(),
         MessageEndDateBeforeIndividEndDate(),
+        MessageStartDateAfterOrEqualIndividStartDate(),
         RegionCityPart(),
         SocialSecurityId(),
         SocialSecurityIdAndDuf()

@@ -4,14 +4,14 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.util.ValidationUtils
+import no.ssb.barn.util.ValidationUtils.Companion.getAge
 
 class AgeAboveEighteen : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 08: Alder i forhold til tiltak"
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val age = ValidationUtils.getAge(context.rootObject.sak.fodselsnummer)
+        val age = getAge(context.rootObject.sak.fodselsnummer)
 
         // TODO: We are going to check for existence of TiltakType, but
         // it is not implemented yet

@@ -4,7 +4,7 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.util.ValidationUtils
+import no.ssb.barn.util.ValidationUtils.Companion.secondDateIsAfterFirstDate
 
 class EndDateAfterStartDate : AbstractRule(
     WarningLevel.ERROR,
@@ -14,11 +14,8 @@ class EndDateAfterStartDate : AbstractRule(
         val startDate = context.rootObject.sak.startDato
         val endDate = context.rootObject.sak.sluttDato
 
-        return if (ValidationUtils.secondDateIsAfterFirstDate(
-                startDate,
-                endDate
-            )
-        ) null
+        return if (secondDateIsAfterFirstDate(startDate, endDate))
+            null
         else
             createSingleReportEntryList(
                 "Individets startdato ($startDate) er etter sluttdato ($endDate)"

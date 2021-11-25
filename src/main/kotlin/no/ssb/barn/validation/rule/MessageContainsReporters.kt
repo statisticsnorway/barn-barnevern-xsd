@@ -11,7 +11,6 @@ class MessageContainsReporters : AbstractRule(
 ) {
     private val codesThatRequiresCaseContent = listOf("1", "2")
 
-
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }

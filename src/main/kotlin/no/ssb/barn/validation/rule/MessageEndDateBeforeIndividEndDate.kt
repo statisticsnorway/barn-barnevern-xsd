@@ -10,7 +10,6 @@ class MessageEndDateBeforeIndividEndDate : AbstractRule(
     "Melding Kontroll 2c: Sluttdato mot individets sluttdato"
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-
         val sak = context.rootObject.sak
         val individEndDate = sak.sluttDato ?: return null
 
