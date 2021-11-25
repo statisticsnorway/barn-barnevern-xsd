@@ -22,7 +22,9 @@ class VersionOneValidator : ValidatorContract {
         MessageContainsCaseContent(),
         MessageContainsReporters(),
         MessageEndDateAfterStartDate(),
-        MessageEndDateBeforeIndividEndDate()
+        MessageEndDateBeforeIndividEndDate(),
+        SocialSecurityId(),
+        SocialSecurityIdAndDuf()
     )
 
     override fun validate(context: ValidationContext): ValidationReport =

@@ -9,7 +9,7 @@ class TestDataProvider {
 
     static String getMockSocialSecurityNumber(int age){
         def twoDigitBirthYear = Year.now().minusYears(age).value % 100
-        "0101${twoDigitBirthYear}55555"
+        "0101${twoDigitBirthYear}99999"
     }
 
     static ValidationContext getTestContextXmlOnly(String xmlResource) {
