@@ -1,5 +1,6 @@
 package no.ssb.barn.validation.rule
 
+import com.google.gson.Gson
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
@@ -37,6 +38,10 @@ class MessageReporterContainsClarificationSpec extends Specification {
 
         then:
         (reportEntries != null) == errorExpected
+        and:
+        if (errorExpected){
+            System.out.println(new Gson().toJson(reportEntries[0]))
+        }
 
         where:
         messageEndDate  | code | clarification     || errorExpected

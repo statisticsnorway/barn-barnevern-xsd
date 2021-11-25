@@ -13,8 +13,10 @@ class ValidationReportSpec extends Specification {
                         new ReportEntry(
                                 WarningLevel.WARNING,
                                 "~ruleName~",
-                                "~errorMessage~",
-                                null)
+                                "~errorText~",
+                                "~xmlContext~",
+                                "~contextId~",
+                                "~errorDetails~")
                 ))
 
         then:
