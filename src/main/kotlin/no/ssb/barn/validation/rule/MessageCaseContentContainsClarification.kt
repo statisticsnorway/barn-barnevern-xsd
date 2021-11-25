@@ -4,7 +4,6 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.util.ValidationUtils
 
 class MessageCaseContentContainsClarification : AbstractRule(
     WarningLevel.ERROR,
@@ -23,7 +22,7 @@ class MessageCaseContentContainsClarification : AbstractRule(
             .flatten()
             .filter { saksinnhold ->
                 codesThatRequiresClarification.contains(saksinnhold.kode)
-                        && !ValidationUtils.existsAndHasLength(saksinnhold.presisering)
+                        && saksinnhold.presisering.isNullOrEmpty()
             }
             .map {
                 createReportEntry("Saksinnhold med kode (${it.kode}) mangler presisering")
