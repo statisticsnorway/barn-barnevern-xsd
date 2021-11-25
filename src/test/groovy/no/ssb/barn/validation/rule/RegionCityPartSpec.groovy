@@ -24,9 +24,11 @@ class RegionCityPartSpec extends Specification {
         given:
         context.rootObject.avgiver.kommunenummer = kommuneNr
         and:
-        context.rootObject.avgiver.bydelsnummer = bydelsnr
+        context.rootObject.sak.virksomhet = List.of(context.rootObject.sak.virksomhet[0])
         and:
-        context.rootObject.avgiver.bydelsnavn = bydelsnavn
+        context.rootObject.sak.virksomhet[0].bydelsnummer = bydelsnr
+        and:
+        context.rootObject.sak.virksomhet[0].bydelsnavn = bydelsnavn
 
         when:
         def reportEntries = sut.validate(context)

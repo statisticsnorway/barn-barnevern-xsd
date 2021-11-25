@@ -19,10 +19,4 @@ data class AvgiverType(
 
     @field:XmlAttribute(name = "Kommunenavn", required = true)
     var kommunenavn: String = "",
-
-    @field:XmlAttribute(name = "Bydelsnummer", required = false)
-    var bydelsnummer: String? = null,
-
-    @field:XmlAttribute(name = "Bydelsnavn", required = false)
-    var bydelsnavn: String? = null
 )

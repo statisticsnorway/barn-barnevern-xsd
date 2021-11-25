@@ -14,19 +14,22 @@ class RegionCityPart : AbstractRule(
             return null
         }
 
-        return mapOf(
-            Pair(
-                "Filen mangler bydelsnummer.",
-                context.rootObject.avgiver.bydelsnummer
-            ),
-            Pair(
-                "Filen mangler bydelsnavn.",
-                context.rootObject.avgiver.bydelsnavn
-            )
-        ).asSequence()
-            .filter { it.value.isNullOrEmpty() }
-            .map { createReportEntry(it.key) }
-            .toList()
+        return context.rootObject.sak.virksomhet.asSequence()
+            .filter { it.bydelsnummer.isNullOrEmpty() || it.bydelsnavn.isNullOrEmpty() }
+            .flatMap { virksomhet ->
+                mapOf(
+                    Pair(
+                        "Filen mangler bydelsnummer.",
+                        virksomhet.bydelsnummer
+                    ),
+                    Pair(
+                        "Filen mangler bydelsnavn.",
+                        virksomhet.bydelsnavn
+                    )
+                )
+                    .filter { it.value.isNullOrEmpty() }
+                    .map { createReportEntry(it.key) }
+            }.toList()
             .ifEmpty { null }
     }
 }
