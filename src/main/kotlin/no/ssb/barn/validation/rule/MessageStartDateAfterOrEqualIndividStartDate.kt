@@ -22,7 +22,9 @@ class MessageStartDateAfterOrEqualIndividStartDate : AbstractRule(
             .map {
                 createReportEntry(
                     """Startdato (${it.startDato}) skal være lik eller etter 
-                        |individets startdato ($individStartDate)""".trimMargin()
+                        |individets startdato ($individStartDate)"""
+                        .trimMargin()
+                        .replace("\n", "")
                 )
             }
             .toList()

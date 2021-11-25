@@ -20,7 +20,9 @@ class MessageEndDateAfterStartDate : AbstractRule(
             .map {
                 createReportEntry(
                     """Meldingens startdato (${it.startDato}) er etter meldingens 
-                        |sluttdato (${it.konklusjon?.sluttDato})""".trimMargin()
+                        |sluttdato (${it.konklusjon?.sluttDato})"""
+                        .trimMargin()
+                        .replace("\n", "")
                 )
             }
             .toList()
