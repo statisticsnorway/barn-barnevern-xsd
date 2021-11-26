@@ -26,7 +26,7 @@ class VersionOneValidatorSpec extends Specification {
         then:
         0 == report.getReportEntries().size()
         and:
-        WarningLevel.INFO == report.severity
+        WarningLevel.OK == report.severity
     }
 
     def "when message-level start date is before case-level start date, receive error"() {

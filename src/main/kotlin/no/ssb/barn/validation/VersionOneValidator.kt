@@ -55,7 +55,7 @@ class VersionOneValidator : ValidatorContract {
             reportEntries = reportEntries,
             severity = reportEntries.asSequence()
                 .map { it.warningLevel }
-                .maxByOrNull { it.ordinal } ?: WarningLevel.INFO
+                .maxByOrNull { it.ordinal } ?: WarningLevel.OK
         )
     }
 }
