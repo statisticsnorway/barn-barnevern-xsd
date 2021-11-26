@@ -9,7 +9,7 @@ import no.ssb.barn.xsd.MeldingType
 class MessageReporterContainsClarification : AbstractRule(
     WarningLevel.ERROR,
     "Melder Kontroll 2: Kontroll av kode og presisering",
-    MeldingType::class.java.simpleName.removeSuffix("Type")
+    MeldingType::class.java.simpleName
 ) {
     // TODO: Sjekk på meldingSluttDato.isAfter(forrigeTelleDato) mangler
 

@@ -24,7 +24,7 @@ abstract class AbstractRule(
             warningLevel = warningLevel,
             ruleName = ruleName,
             errorText = errorText,
-            type = xmlContext,
+            type = xmlContext?.removeSuffix("Type"),
             id = contextId,
             errorDetails = errorDetails
         )
