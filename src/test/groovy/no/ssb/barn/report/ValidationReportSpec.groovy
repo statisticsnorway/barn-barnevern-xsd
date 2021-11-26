@@ -7,27 +7,24 @@ class ValidationReportSpec extends Specification {
     def "given valid ValidationReport, all props are set"() {
         when:
         def sut = new ValidationReport(
-                "~journalId~",
-                "~individualId~",
+                "~messageId~",
                 List.of(
                         new ReportEntry(
                                 WarningLevel.WARNING,
                                 "~ruleName~",
                                 "~errorText~",
                                 "~xmlContext~",
-                                "~contextId~",
+                                "~id~",
                                 "~errorDetails~")
                 ),
                 WarningLevel.ERROR,
         )
 
         then:
-        "~journalId~" == sut.getJournalId()
-        and:
-        "~individualId~" == sut.getIndividualId()
+        "~messageId~" == sut.getMessageId()
         and:
         1 == sut.getReportEntries().size()
         and:
-        WarningLevel.ERROR == sut.warningLevelHighTide
+        WarningLevel.ERROR == sut.severity
     }
 }

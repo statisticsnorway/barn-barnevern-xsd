@@ -13,13 +13,16 @@ class TestDataProvider {
     }
 
     static ValidationContext getTestContextXmlOnly(String xmlResource) {
-        new ValidationContext(getResourceAsString(xmlResource))
+        new ValidationContext(
+                UUID.randomUUID().toString(),
+                getResourceAsString(xmlResource))
     }
 
     static ValidationContext getTestContext() {
         def xmlAsString = getResourceAsString("test01_fil09.xml")
 
         new ValidationContext(
+                UUID.randomUUID().toString(),
                 xmlAsString,
                 BarnevernDeserializer.unmarshallXml(xmlAsString))
     }

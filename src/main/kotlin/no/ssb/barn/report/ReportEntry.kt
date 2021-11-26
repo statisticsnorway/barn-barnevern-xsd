@@ -4,7 +4,7 @@ data class ReportEntry(
     val warningLevel: WarningLevel,
     val ruleName: String,
     val errorText: String,
-    val xmlContext: String? = null, // TODO: Make non-nullable
-    val contextId: String? = null, // TODO: Make non-nullable
+    val type: String? = null, // TODO: Make non-nullable
+    val id: String? = null, // TODO: Make non-nullable
     val errorDetails: String? = null
 )

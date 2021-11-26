@@ -1,8 +1,7 @@
 package no.ssb.barn.report
 
 data class ValidationReport(
-    val journalId: String,
-    val individualId: String,
+    val messageId: String,
     val reportEntries: List<ReportEntry>,
-    val warningLevelHighTide: WarningLevel?
+    val severity: WarningLevel
 )

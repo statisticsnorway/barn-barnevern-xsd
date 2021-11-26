@@ -1,9 +1,10 @@
 package no.ssb.barn.validation
 
-import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
+
+import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
 class TheValidatorSpec extends Specification {
 
@@ -22,10 +23,11 @@ class TheValidatorSpec extends Specification {
 
     def "when validate with invalid params, receive JSON result"() {
         when:
-        def result = sut.validate(1, "~xmlBody~")
+        def result = sut.validate(
+                UUID.randomUUID().toString(), 1, "~xmlBody~")
 
         then:
-        result.startsWith("{\"journalId\"")
+        result.startsWith("{\"messageId\"")
         and:
         result.contains("warningLevel\":\"FATAL\"")
     }
@@ -33,11 +35,12 @@ class TheValidatorSpec extends Specification {
     def "when validate with valid params, receive JSON result"() {
         when:
         def result = sut.validate(
+                UUID.randomUUID().toString(),
                 1,
-                TestDataProvider.getResourceAsString("test01_fil01.xml"))
+                getResourceAsString("test01_fil01.xml"))
 
         then:
-        result.startsWith("{\"journalId\"")
+        result.startsWith("{\"messageId\"")
         and:
         !result.contains("warningLevel")
     }
@@ -46,15 +49,16 @@ class TheValidatorSpec extends Specification {
     def "when validate multiple times with invalid params, receive JSON result"() {
         when:
         def result = sut.validate(
+                UUID.randomUUID().toString(),
                 1,
-                TestDataProvider.getResourceAsString("barnevern_with_errors.xml"))
+                getResourceAsString("barnevern_with_errors.xml"))
 
         then:
         noExceptionThrown()
         and:
         null != result
         and:
-        result.startsWith("{\"journalId\"")
+        result.startsWith("{\"messageId\"")
         and:
         result.contains("warningLevel\":\"FATAL\"")
 

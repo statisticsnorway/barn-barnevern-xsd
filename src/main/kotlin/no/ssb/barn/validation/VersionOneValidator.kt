@@ -4,6 +4,7 @@ import no.ssb.barn.deserialize.BarnevernDeserializer
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.framework.ValidatorContract
 import no.ssb.barn.report.ValidationReport
+import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.rule.*
 
 class VersionOneValidator : ValidatorContract {
@@ -39,6 +40,7 @@ class VersionOneValidator : ValidatorContract {
             .ifEmpty {
                 // this is not a great solution, fix me
                 val innerContext = ValidationContext(
+                    context.messageId,
                     context.xml,
                     BarnevernDeserializer.unmarshallXml(context.xml)
                 )
@@ -49,12 +51,11 @@ class VersionOneValidator : ValidatorContract {
             }
 
         return ValidationReport(
-            journalId = "~journalId~",
-            individualId = "~individualId~",
+            messageId = context.messageId,
             reportEntries = reportEntries,
-            warningLevelHighTide = reportEntries.asSequence()
+            severity = reportEntries.asSequence()
                 .map { it.warningLevel }
-                .maxByOrNull { it.ordinal }
+                .maxByOrNull { it.ordinal } ?: WarningLevel.INFO
         )
     }
 }

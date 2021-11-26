@@ -24,8 +24,8 @@ abstract class AbstractRule(
             warningLevel = warningLevel,
             ruleName = ruleName,
             errorText = errorText,
-            xmlContext = xmlContext,
-            contextId = contextId,
+            type = xmlContext,
+            id = contextId,
             errorDetails = errorDetails
         )
 

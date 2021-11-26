@@ -29,7 +29,8 @@ class RegionCityPart : AbstractRule(
                 )
                     .filter { it.value.isNullOrEmpty() }
                     .map { createReportEntry(it.key) }
-            }.toList()
+            }
+            .toList()
             .ifEmpty { null }
     }
 }

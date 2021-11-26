@@ -2,8 +2,9 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
+
+import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
 class XsdRuleSpec extends Specification {
 
@@ -17,7 +18,8 @@ class XsdRuleSpec extends Specification {
     def "when validate with valid XML receive no reportEntry"() {
         given:
         def context = new ValidationContext(
-                TestDataProvider.getResourceAsString("test01_fil01.xml"))
+                UUID.randomUUID().toString(),
+                getResourceAsString("test01_fil01.xml"))
 
         when:
         def reportEntry = sut.validate(context)
@@ -29,7 +31,8 @@ class XsdRuleSpec extends Specification {
     def "when validate with invalid XML receive reportEntry"() {
         given:
         def context = new ValidationContext(
-                TestDataProvider.getResourceAsString("invalid.xml")
+                UUID.randomUUID().toString(),
+                getResourceAsString("invalid.xml")
         )
 
         when:

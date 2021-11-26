@@ -10,8 +10,8 @@ class ReportEntrySpec extends Specification {
                 WarningLevel.WARNING,
                 "~ruleName~",
                 "~errorText~",
-                "~xmlContext~",
-                "~contextId~",
+                "~type~",
+                "~id~",
                 "~errorDetails~")
 
         then:
@@ -21,9 +21,9 @@ class ReportEntrySpec extends Specification {
         and:
         "~errorText~" == sut.getErrorText()
         and:
-        "~xmlContext~" == sut.getXmlContext()
+        "~type~" == sut.getType()
         and:
-        "~contextId~" == sut.getContextId()
+        "~id~" == sut.getId()
         and:
         "~errorDetails~" == sut.getErrorDetails()
     }

@@ -22,15 +22,16 @@ class TheValidator private constructor() {
     /**
      * Validates XML and returns validation report on JSON format.
      *
+     * @param messageId Vendor-specified message-id
      * @param xsdVersion XSD version for xmlBody
      * @param xmlBody    XML body
      * @return Validation report on JSON format
      */
-    fun validate(xsdVersion: Int, xmlBody: String): String {
+    fun validate(messageId: String, xsdVersion: Int, xmlBody: String): String {
         val currentValidator = validatorMap[xsdVersion]
             ?: throw IndexOutOfBoundsException("No validator found")
 
-        val context = ValidationContext(xmlBody)
+        val context = ValidationContext(messageId, xmlBody)
         val validationReport = currentValidator.validate(context)
 
         return gson.toJson(validationReport)
