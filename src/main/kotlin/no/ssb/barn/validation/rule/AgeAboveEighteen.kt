@@ -11,17 +11,19 @@ class AgeAboveEighteen : AbstractRule(
     "Individ Kontroll 08: Alder i forhold til tiltak"
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val age = getAge(context.rootObject.sak.fodselsnummer)
-
-        // TODO: We are going to check for existence of TiltakType, but
-        // it is not implemented yet
-        // return if (age < 18 || context.rootObject.sak.virksomhet.tiltak.any()) {
-
-        return if (age < 18 || context.rootObject.sak.virksomhet[0].tiltak?.any() == true) {
-            null
-        } else {
-            createSingleReportEntryList(
-                "Individet er over 18 år og skal dermed ha tiltak")
+        if (getAge(context.rootObject.sak.fodselsnummer) < 18) {
+            return null
         }
+
+        return context.rootObject.sak.virksomhet.asSequence()
+            .filter { virksomhet -> virksomhet.tiltak?.none() == true }
+            .map {
+                createReportEntry(
+                    "Individet er over 18 år og skal dermed ha tiltak"
+                )
+            }
+            .distinct()
+            .toList()
+            .ifEmpty { null }
     }
 }
