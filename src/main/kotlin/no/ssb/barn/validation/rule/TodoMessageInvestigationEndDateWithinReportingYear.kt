@@ -5,7 +5,7 @@ import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 
-class MessageInvestigationEndDateWithinReportingYear : AbstractRule(
+class TodoMessageInvestigationEndDateWithinReportingYear : AbstractRule(
     WarningLevel.ERROR,
     "Undersøkelse Kontroll 2b: Sluttdato mot rapporteringsår"
 ) {
