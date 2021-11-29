@@ -20,6 +20,7 @@ class VersionOneValidator : ValidatorContract {
         EndDateRequiredWhenCaseClosed(),
         HasContent(),
         InvestigationDecisionClarificationRequired(),
+        InvestigationDecisionRequired(),
         InvestigationEndDateBeforeIndividEndDate(),
         InvestigationStartDateAfterIndividStartDate(),
         MeasureEndDateAfterStartDate(),
