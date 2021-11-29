@@ -1,10 +1,10 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.generator.RandomGenerator
+import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -26,7 +26,7 @@ data class UndersokelseType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Vedtaksgrunnlag")
-    var vedtaksgrunnlag: MutableList<SaksinnholdType?>? = null,
+    var vedtaksgrunnlag: MutableList<SaksinnholdType>? = null,
 
     @field:XmlElement(name = "UtvidetFrist")
     var utvidetFrist: UndersokelseUtvidetFristType? = null,

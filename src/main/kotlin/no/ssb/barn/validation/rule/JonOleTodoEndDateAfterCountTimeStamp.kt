@@ -4,14 +4,20 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.xsd.UndersokelseType
 
-class TodoInvestigationDecisionClarificationRequired : AbstractRule(
+class JonOleTodoEndDateAfterCountTimeStamp : AbstractRule(
     WarningLevel.ERROR,
-    "Vedtaksgrunnlag Kontroll 2: Kontroll av kode \" + vedtaksgrunnlagKode + \" og presisering",
-    UndersokelseType::class.java.simpleName
+    "Individ Kontroll 02b: Sluttdato mot versjon"
 ) {
+
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         TODO("Not yet implemented")
+
+/*
+        "Individets sluttdato (" + individSluttDatoString
+        + ") er før forrige telletidspunkt ("
+        + forrigeTelleDatoString + ")",
+        Constants.CRITICAL_ERROR), forrigeTelle
+*/
     }
 }
