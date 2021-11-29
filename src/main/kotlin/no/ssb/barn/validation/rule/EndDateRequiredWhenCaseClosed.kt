@@ -4,10 +4,12 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.xsd.SakType
 
 class EndDateRequiredWhenCaseClosed : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 02d: Avslutta 31 12 medfører at sluttdato skal være satt"
+    "Individ Kontroll 02d: Avslutta 31 12 medfører at sluttdato skal være satt",
+    SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
 
@@ -15,11 +17,10 @@ class EndDateRequiredWhenCaseClosed : AbstractRule(
 
         return if (context.rootObject.sak.avsluttet == true && endDate == null) {
             createSingleReportEntryList(
-                """Individet er avsluttet hos barnevernet og skal 
-                        |dermed være avsluttet. Sluttdato er $endDate. 
-                        |Kode for avsluttet er TODO"""
-                    .trimMargin()
-                    .replace("\n", "")
+                "Individet er avsluttet hos barnevernet og skal"
+                        + " dermed være avsluttet. Sluttdato er $endDate."
+                        + " Kode for avsluttet er TODO",
+                context.rootObject.sak.id
             )
         } else
             null

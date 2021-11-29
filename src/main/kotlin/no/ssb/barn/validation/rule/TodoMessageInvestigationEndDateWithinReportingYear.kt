@@ -7,7 +7,8 @@ import no.ssb.barn.report.WarningLevel
 
 class TodoMessageInvestigationEndDateWithinReportingYear : AbstractRule(
     WarningLevel.ERROR,
-    "Undersøkelse Kontroll 2b: Sluttdato mot rapporteringsår"
+    "Undersøkelse Kontroll 2b: Sluttdato mot rapporteringsår",
+    "TODO"
 ) {
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {

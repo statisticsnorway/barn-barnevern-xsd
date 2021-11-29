@@ -4,10 +4,12 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.xsd.AvgiverType
 
 class RegionCityPart : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 09: Bydelsnummer"
+    "Individ Kontroll 09: Bydelsnummer",
+    AvgiverType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         if (context.rootObject.avgiver.kommunenummer != "0301") {

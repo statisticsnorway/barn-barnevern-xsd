@@ -22,11 +22,9 @@ class PlanStartDateAfterIndividStartDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Plan (${it.id}}). Startdato (${it.startDato}) skal 
-                            |være lik eller etter individets startdato 
-                            |($individStartDate)"""
-                        .trimMargin()
-                        .replace("\n", ""),
+                    "Plan (${it.id}}). Startdato (${it.startDato}) skal"
+                            + " være lik eller etter individets startdato"
+                            + " ($individStartDate)",
                     it.id
                 )
             }

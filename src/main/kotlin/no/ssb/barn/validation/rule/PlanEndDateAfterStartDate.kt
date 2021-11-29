@@ -20,11 +20,9 @@ class PlanEndDateAfterStartDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Plan (${it.id}}). Planens startdato (${it.startDato}) 
-                            | er etter planens sluttdato  
-                            | (${it.konklusjon?.sluttDato})"""
-                        .trimMargin()
-                        .replace("\n", ""),
+                    "Plan (${it.id}}). Planens startdato (${it.startDato})"
+                            + " er etter planens sluttdato"
+                            + " (${it.konklusjon?.sluttDato})",
                     it.id
                 )
             }

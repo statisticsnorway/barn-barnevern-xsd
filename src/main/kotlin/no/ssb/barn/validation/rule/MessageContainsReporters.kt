@@ -4,10 +4,12 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.xsd.MeldingType
 
 class MessageContainsReporters : AbstractRule(
     WarningLevel.ERROR,
-    "Melding Kontroll 4: Kontroll av konkludert melding, melder"
+    "Melding Kontroll 4: Kontroll av konkludert melding, melder",
+    MeldingType::class.java.simpleName
 ) {
     private val codesThatRequiresCaseContent = listOf("1", "2")
 
@@ -22,7 +24,10 @@ class MessageContainsReporters : AbstractRule(
                         && codesThatRequiresCaseContent.contains(conclusion.kode)
             }
             .map {
-                createReportEntry("Melding (${it.id}). Konkludert melding mangler melder(e).")
+                createReportEntry(
+                    "Melding (${it.id}). Konkludert melding mangler melder(e).",
+                    it.id
+                )
             }
             .toList()
             .ifEmpty { null }

@@ -4,10 +4,12 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.xsd.MeldingType
 
 class MessageEndDateAfterStartDate : AbstractRule(
     WarningLevel.ERROR,
-    "Melding Kontroll 2a: Startdato etter sluttdato"
+    "Melding Kontroll 2a: Startdato etter sluttdato",
+    MeldingType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
@@ -19,10 +21,9 @@ class MessageEndDateAfterStartDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Meldingens startdato (${it.startDato}) er etter meldingens 
-                        |sluttdato (${it.konklusjon?.sluttDato})"""
-                        .trimMargin()
-                        .replace("\n", "")
+                    "Meldingens startdato (${it.startDato}) er etter "
+                            + "meldingens sluttdato (${it.konklusjon?.sluttDato})",
+                    it.id
                 )
             }
             .toList()

@@ -7,7 +7,8 @@ import no.ssb.barn.report.WarningLevel
 
 class TodoMessageProcessingTimeOverdue : AbstractRule(
     WarningLevel.WARNING,
-    "Melding Kontroll 3: Behandlingstid av melding"
+    "Melding Kontroll 3: Behandlingstid av melding",
+    "TODO"
 ) {
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {

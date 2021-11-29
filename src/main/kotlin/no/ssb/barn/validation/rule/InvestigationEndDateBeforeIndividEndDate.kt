@@ -23,11 +23,9 @@ class InvestigationEndDateBeforeIndividEndDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Undersøkelse (${it.id}). Undersøkelsens sluttdato
-                        | (${it.konklusjon?.sluttDato}) er etter individets
-                        | sluttdato ($individEndDate)"""
-                        .trimMargin()
-                        .replace("\n", ""),
+                    "Undersøkelse (${it.id}). Undersøkelsens sluttdato"
+                            + " (${it.konklusjon?.sluttDato}) er etter individets"
+                            + " sluttdato ($individEndDate)",
                     it.id
                 )
             }

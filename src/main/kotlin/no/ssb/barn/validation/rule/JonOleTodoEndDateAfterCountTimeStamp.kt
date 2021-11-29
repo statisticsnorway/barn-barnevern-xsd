@@ -7,7 +7,8 @@ import no.ssb.barn.report.WarningLevel
 
 class JonOleTodoEndDateAfterCountTimeStamp : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 02b: Sluttdato mot versjon"
+    "Individ Kontroll 02b: Sluttdato mot versjon",
+    "TODO"
 ) {
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {

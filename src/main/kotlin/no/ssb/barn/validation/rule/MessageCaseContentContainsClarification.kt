@@ -4,10 +4,12 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.xsd.SaksinnholdType
 
 class MessageCaseContentContainsClarification : AbstractRule(
     WarningLevel.ERROR,
-    "Saksinnhold Kontroll 2: Kontroll av kode og presisering"
+    "Saksinnhold Kontroll 2: Kontroll av kode og presisering",
+    SaksinnholdType::class.java.simpleName
 ) {
     // 18 = Andre forhold ved foreldre/familien
     // 19 = Andre forhold ved barnets situasjon
@@ -25,7 +27,8 @@ class MessageCaseContentContainsClarification : AbstractRule(
                         && saksinnhold.presisering.isNullOrEmpty()
             }
             .map {
-                createReportEntry("Saksinnhold med kode (${it.kode}) mangler presisering")
+                createReportEntry(
+                    "Saksinnhold med kode (${it.kode}) mangler presisering")
             }
             .toList()
             .ifEmpty { null }

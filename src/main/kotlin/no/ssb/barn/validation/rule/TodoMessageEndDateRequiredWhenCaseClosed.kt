@@ -7,7 +7,8 @@ import no.ssb.barn.report.WarningLevel
 
 class TodoMessageEndDateRequiredWhenCaseClosed : AbstractRule(
     WarningLevel.ERROR,
-    "Melding Kontroll 2d: Avslutta 31 12 medfører at sluttdato skal være satt på"
+    "Melding Kontroll 2d: Avslutta 31 12 medfører at sluttdato skal være satt på",
+    "TODO"
 ) {
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {

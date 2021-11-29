@@ -6,14 +6,15 @@ import no.ssb.barn.report.WarningLevel
 abstract class AbstractRule(
     private val warningLevel: WarningLevel,
     private val ruleName: String,
-    private val xmlContext: String? = null
+    private val xmlContext: String
 ) {
     abstract fun validate(context: ValidationContext): List<ReportEntry>?
 
     protected fun createSingleReportEntryList(
-        errorText: String
+        errorText: String,
+        contextId: String
     ): List<ReportEntry> =
-        listOf(createReportEntry(errorText))
+        listOf(createReportEntry(errorText, contextId))
 
     protected fun createReportEntry(
         errorText: String,
@@ -23,7 +24,7 @@ abstract class AbstractRule(
             warningLevel = warningLevel,
             ruleName = ruleName,
             errorText = errorText,
-            type = xmlContext?.removeSuffix("Type"),
+            type = xmlContext.removeSuffix("Type"),
             id = contextId
         )
 

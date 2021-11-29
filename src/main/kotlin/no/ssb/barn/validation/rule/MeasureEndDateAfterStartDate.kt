@@ -20,12 +20,9 @@ class MeasureEndDateAfterStartDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Tiltak (${it.id}}). Startdato (${it.startDato}) 
-                            | for tiltaket er etter sluttdato  
-                            | (${it.konklusjon?.sluttDato}) for tiltaket"""
-                        .trimMargin()
-                        .replace("\n", ""),
-                    it.id ?: "N/A"
+                    "Tiltak (${it.id}}). Startdato (${it.startDato})"
+                            + " for tiltaket er etter sluttdato"
+                            + " (${it.konklusjon?.sluttDato}) for tiltaket"
                 )
             }
             .toList()

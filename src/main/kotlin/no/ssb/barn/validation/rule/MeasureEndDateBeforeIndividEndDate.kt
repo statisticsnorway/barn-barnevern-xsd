@@ -23,12 +23,9 @@ class MeasureEndDateBeforeIndividEndDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Tiltak (${it.id}). Sluttdato
-                        | (${it.konklusjon?.sluttDato}) er etter individets
-                        | sluttdato ($individEndDate)"""
-                        .trimMargin()
-                        .replace("\n", ""),
-                    it.id?: "N/A"
+                    "Tiltak (${it.id}). Sluttdato"
+                            + " (${it.konklusjon?.sluttDato}) er etter individets"
+                            + " sluttdato ($individEndDate)"
                 )
             }
             .toList()

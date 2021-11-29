@@ -5,10 +5,12 @@ import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.Companion.validateSSN
+import no.ssb.barn.xsd.SakType
 
 class SocialSecurityId : AbstractRule(
     WarningLevel.WARNING,
-    "Individ Kontroll 11: Fødselsnummer"
+    "Individ Kontroll 11: Fødselsnummer",
+    SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val fodselsnummer = context.rootObject.sak.fodselsnummer
@@ -19,7 +21,8 @@ class SocialSecurityId : AbstractRule(
             || !validateSSN(fodselsnummer)
         ) {
             createSingleReportEntryList(
-                "Individet har ufullstendig fødselsnummer. Korriger fødselsnummer."
+                "Individet har ufullstendig fødselsnummer. Korriger fødselsnummer.",
+                context.rootObject.sak.id
             )
         } else {
             null

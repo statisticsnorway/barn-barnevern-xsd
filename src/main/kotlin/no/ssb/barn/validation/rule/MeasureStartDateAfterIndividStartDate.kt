@@ -22,12 +22,9 @@ class MeasureStartDateAfterIndividStartDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Tiltak (${it.id}}). Startdato (${it.startDato}) skal 
-                            | være lik eller etter individets startdato 
-                            | ($individStartDate)"""
-                        .trimMargin()
-                        .replace("\n", ""),
-                    it.id ?: "N/A"
+                    "Tiltak (${it.id}}). Startdato (${it.startDato}) skal"
+                            + " være lik eller etter individets startdato"
+                            + " ($individStartDate)"
                 )
             }
             .toList()

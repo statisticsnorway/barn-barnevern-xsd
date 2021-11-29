@@ -5,11 +5,13 @@ import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.Companion.validateSSN
+import no.ssb.barn.xsd.SakType
 import java.util.regex.Pattern
 
 class SocialSecurityIdAndDuf : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 03: Fødselsnummer og DUFnummer"
+    "Individ Kontroll 03: Fødselsnummer og DUFnummer",
+    SakType::class.java.simpleName
 ) {
     private val dufPattern = Pattern.compile("^\\d{12}$")
 
@@ -27,7 +29,8 @@ class SocialSecurityIdAndDuf : AbstractRule(
                 null
             } else {
                 createSingleReportEntryList(
-                    "Feil i fødselsnummer. Kan ikke identifisere individet."
+                    "Feil i fødselsnummer. Kan ikke identifisere individet.",
+                    context.rootObject.sak.id
                 )
             }
         }
@@ -35,7 +38,8 @@ class SocialSecurityIdAndDuf : AbstractRule(
         if (duFnummer != null) {
             return if (!dufPattern.matcher(duFnummer).matches()) {
                 createSingleReportEntryList(
-                    "DUFnummer mangler. Kan ikke identifisere individet."
+                    "DUFnummer mangler. Kan ikke identifisere individet.",
+                    context.rootObject.sak.id
                 )
             } else {
                 null
@@ -43,7 +47,8 @@ class SocialSecurityIdAndDuf : AbstractRule(
         }
 
         return createSingleReportEntryList(
-            "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere individet."
+            "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere individet.",
+            context.rootObject.sak.id
         )
     }
 }

@@ -22,11 +22,9 @@ class InvestigationStartDateAfterIndividStartDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    """Undersøkelse (${it.id}}). Startdato (${it.startDato}) skal
-                            | være lik eller etter individets startdato
-                            | ($individStartDate)"""
-                        .trimMargin()
-                        .replace("\n", ""),
+                    "Undersøkelse (${it.id}}). Startdato (${it.startDato})"
+                            + " skal være lik eller etter individets startdato"
+                            + " ($individStartDate)",
                     it.id
                 )
             }

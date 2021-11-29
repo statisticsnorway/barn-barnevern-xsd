@@ -16,7 +16,8 @@ class XsdRule(
     val xsdResourceName: String,
 ) : AbstractRule(
     WarningLevel.FATAL,
-    "Individ Kontroll 01: Validering av individ"
+    "Individ Kontroll 01: Validering av individ",
+    "N/A"
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         try {
@@ -25,13 +26,11 @@ class XsdRule(
         } catch (e: SAXParseException) {
             return listOf(
                 createReportEntry(
-                    errorText = """Definisjon av Individ er feil i forhold til 
-                        | filspesifikasjonen:"""
-                        .trimMargin()
-                        .replace("\n", "")
+                    errorText = "Definisjon av Individ er feil i forhold til"
+                            + " filspesifikasjonen: "
                             + String.format(
-                                    "Line: %d Column: %d Message: %s",
-                                    e.lineNumber, e.columnNumber, e.message
+                        "Line: %d Column: %d Message: %s",
+                        e.lineNumber, e.columnNumber, e.message
                     )
                 )
             )

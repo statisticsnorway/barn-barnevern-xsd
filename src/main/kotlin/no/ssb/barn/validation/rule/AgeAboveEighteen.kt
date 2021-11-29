@@ -5,10 +5,12 @@ import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.Companion.getAge
+import no.ssb.barn.xsd.SakType
 
 class AgeAboveEighteen : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 08: Alder i forhold til tiltak"
+    "Individ Kontroll 08: Alder i forhold til tiltak",
+    SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         if (getAge(context.rootObject.sak.fodselsnummer) < 18) {
@@ -19,7 +21,8 @@ class AgeAboveEighteen : AbstractRule(
             .filter { virksomhet -> virksomhet.tiltak?.none() == true }
             .map {
                 createReportEntry(
-                    "Individet er over 18 år og skal dermed ha tiltak"
+                    "Individet er over 18 år og skal dermed ha tiltak",
+                    context.rootObject.sak.id
                 )
             }
             .distinct()
