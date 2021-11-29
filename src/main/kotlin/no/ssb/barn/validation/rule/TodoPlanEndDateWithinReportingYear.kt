@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.PlanType
 
-class TodoPlanEndDateBeforeIndividEndDate : AbstractRule(
+class TodoPlanEndDateWithinReportingYear : AbstractRule(
     WarningLevel.ERROR,
     "Plan Kontroll 2b: Sluttdato mot rapporteringsår",
     PlanType::class.java.simpleName
