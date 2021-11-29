@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.SakType
 
-class EndDateRequiredWhenCaseClosed : AbstractRule(
+class JonOleTodoEndDateRequiredWhenCaseClosed : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 02d: Avslutta 31 12 medfører at sluttdato skal være satt",
     SakType::class.java.simpleName

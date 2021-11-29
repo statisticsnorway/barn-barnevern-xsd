@@ -17,7 +17,7 @@ class VersionOneValidator : ValidatorContract {
         AgeAboveEighteen(),
         AgeAboveTwentyFive(),
         EndDateAfterStartDate(),
-        EndDateRequiredWhenCaseClosed(),
+        JonOleTodoEndDateRequiredWhenCaseClosed(),
         HasContent(),
         InvestigationDecisionClarificationRequired(),
         InvestigationDecisionRequired(),

@@ -5,9 +5,9 @@ import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 
-class TodoMessageEndDateRequiredWhenCaseClosed : AbstractRule(
+class JonOleTodoMessageInvestigationEndDateWithinReportingYear : AbstractRule(
     WarningLevel.ERROR,
-    "Melding Kontroll 2d: Avslutta 31 12 medfører at sluttdato skal være satt på",
+    "Undersøkelse Kontroll 2b: Sluttdato mot rapporteringsår",
     "TODO"
 ) {
 

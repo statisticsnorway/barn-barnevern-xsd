@@ -11,13 +11,13 @@ import java.time.LocalDate
 class EndDateRequiredWhenCaseClosedSpec extends Specification {
 
     @Subject
-    EndDateRequiredWhenCaseClosed sut
+    JonOleTodoEndDateRequiredWhenCaseClosed sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new EndDateRequiredWhenCaseClosed()
+        sut = new JonOleTodoEndDateRequiredWhenCaseClosed()
         context = TestDataProvider.getTestContext()
     }
 
