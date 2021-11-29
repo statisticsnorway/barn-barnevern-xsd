@@ -11,8 +11,7 @@ class ReportEntrySpec extends Specification {
                 "~ruleName~",
                 "~errorText~",
                 "~type~",
-                "~id~",
-                "~errorDetails~")
+                "~id~")
 
         then:
         WarningLevel.WARNING == sut.getWarningLevel()
@@ -24,7 +23,5 @@ class ReportEntrySpec extends Specification {
         "~type~" == sut.getType()
         and:
         "~id~" == sut.getId()
-        and:
-        "~errorDetails~" == sut.getErrorDetails()
     }
 }

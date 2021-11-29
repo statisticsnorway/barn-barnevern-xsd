@@ -14,8 +14,7 @@ class ValidationReportSpec extends Specification {
                                 "~ruleName~",
                                 "~errorText~",
                                 "~xmlContext~",
-                                "~id~",
-                                "~errorDetails~")
+                                "~id~")
                 ),
                 WarningLevel.ERROR,
         )

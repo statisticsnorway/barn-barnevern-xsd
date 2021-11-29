@@ -11,32 +11,28 @@ abstract class AbstractRule(
     abstract fun validate(context: ValidationContext): List<ReportEntry>?
 
     protected fun createSingleReportEntryList(
-        errorText: String, errorDetails: String? = null
+        errorText: String
     ): List<ReportEntry> =
-        listOf(createReportEntry(errorText, errorDetails))
+        listOf(createReportEntry(errorText))
 
     protected fun createReportEntry(
         errorText: String,
-        contextId: String,
-        errorDetails: String? = null
+        contextId: String
     ): ReportEntry =
         ReportEntry(
             warningLevel = warningLevel,
             ruleName = ruleName,
             errorText = errorText,
             type = xmlContext?.removeSuffix("Type"),
-            id = contextId,
-            errorDetails = errorDetails
+            id = contextId
         )
 
     protected fun createReportEntry(
-        errorText: String,
-        errorDetails: String? = null
+        errorText: String
     ): ReportEntry =
         ReportEntry(
             warningLevel = warningLevel,
             ruleName = ruleName,
-            errorText = errorText,
-            errorDetails = errorDetails
+            errorText = errorText
         )
 }

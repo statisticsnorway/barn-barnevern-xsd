@@ -6,25 +6,23 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.PlanType
 
-class PlanStartDateAfterIndividStartDate : AbstractRule(
+class PlanEndDateAfterStartDate : AbstractRule(
     WarningLevel.ERROR,
-    "Plan Kontroll 2e: Startdato mot individets startdato",
+    "Plan Kontroll 2a: Startdato etter sluttdato",
     PlanType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val individStartDate = context.rootObject.sak.startDato
-
         return context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.plan }
             .flatten()
             .filter { plan ->
-                plan.startDato < individStartDate
+                plan.startDato > plan.konklusjon?.sluttDato
             }
             .map {
                 createReportEntry(
-                    """Plan (${it.id}}). Startdato (${it.startDato}) skal 
-                            |være lik eller etter individets startdato 
-                            |($individStartDate)"""
+                    """Plan (${it.id}}). Planens startdato (${it.startDato}) 
+                            | er etter planens sluttdato  
+                            | (${it.konklusjon?.sluttDato})"""
                         .trimMargin()
                         .replace("\n", ""),
                     it.id

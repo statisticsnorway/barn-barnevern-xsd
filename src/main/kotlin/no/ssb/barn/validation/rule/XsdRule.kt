@@ -25,10 +25,13 @@ class XsdRule(
         } catch (e: SAXParseException) {
             return listOf(
                 createReportEntry(
-                    errorText = "Definisjon av Individ er feil i forhold til filspesifikasjonen",
-                    errorDetails = String.format(
-                        "Line: %d Column: %d Message: %s",
-                        e.lineNumber, e.columnNumber, e.message
+                    errorText = """Definisjon av Individ er feil i forhold til 
+                        | filspesifikasjonen:"""
+                        .trimMargin()
+                        .replace("\n", "")
+                            + String.format(
+                                    "Line: %d Column: %d Message: %s",
+                                    e.lineNumber, e.columnNumber, e.message
                     )
                 )
             )
