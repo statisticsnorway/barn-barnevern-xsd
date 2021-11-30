@@ -4,7 +4,6 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.util.ValidationUtils.Companion.secondDateIsAfterFirstDate
 import no.ssb.barn.xsd.SakType
 
 class EndDateAfterStartDate : AbstractRule(
@@ -16,7 +15,7 @@ class EndDateAfterStartDate : AbstractRule(
         val startDate = context.rootObject.sak.startDato
         val endDate = context.rootObject.sak.sluttDato
 
-        return if (secondDateIsAfterFirstDate(startDate, endDate))
+        return if (endDate == null || endDate.isAfter(startDate))
             null
         else
             createSingleReportEntryList(
