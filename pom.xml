@@ -6,7 +6,7 @@
     <groupId>no.ssb.barn</groupId>
     <artifactId>barn-xsd</artifactId>
     <version>0.13.1-SNAPSHOT</version>
-    <name>xsd</name>
+    <name>barn-barnevern-xsd</name>
     <description>XSD prosjekt for innrapportering til Barnevernsregister
     </description>
 
