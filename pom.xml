@@ -45,6 +45,7 @@
                     target/site/jacoco/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
             </properties>
+
             <build>
                 <pluginManagement>
                     <plugins>
