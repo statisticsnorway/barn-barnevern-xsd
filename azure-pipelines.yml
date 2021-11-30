@@ -52,6 +52,12 @@ jobs:
     # Steps in this Job
     steps:
 
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'bipSonarCloud-Barnevernsregisteret'
+          organization: 'statisticsnorway'
+          scannerMode: 'Other'
+
       # Maven caching to speed up pipeline build time
       - task: Cache@2
         displayName: Cache Maven local repo
@@ -78,7 +84,13 @@ jobs:
           isJacocoCoverageReportXML: true
           checkStyleRunAnalysis: true
           pmdRunAnalysis: true
-          sonarQubeRunAnalysis: false
+          sonarQubeRunAnalysis: true
+
+      - task: SonarCloudPublish@1
+        inputs:
+          pollingTimeoutSec: '300'
+
+      // statisticsnorway_barn-barnevern-xsd
 
       # Download file with json-key to GCR as a later task needs to
       # authenticate in a different way than using service connection
