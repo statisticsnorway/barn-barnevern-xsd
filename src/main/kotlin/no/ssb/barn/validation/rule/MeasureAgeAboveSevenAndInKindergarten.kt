@@ -24,8 +24,8 @@ class MeasureAgeAboveSevenAndInKindergarten : AbstractRule(
                 }
                 .map {
                     createReportEntry(
-                        "Tiltak ($it.id). Barnet er over 7 år og i "
-                                + "barnehage. Barnets alder er $age år.",
+                        "Tiltak ($it.id). Barnet er over 7 år og i"
+                                + " barnehage. Barnets alder er $age år.",
                         it.id ?: "N/A"
                     )
                 }
