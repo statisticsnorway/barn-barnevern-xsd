@@ -67,7 +67,7 @@ class ValidationUtils {
         }
 
         @JvmStatic
-        fun getAlderFromFnr(fodselsnummer: String, aargang: Int): Int {
+        private fun getAlderFromFnr(fodselsnummer: String, aargang: Int): Int {
             if (isValidDate(fodselsnummer.substring(0, 6))) {
                 val fodselsAar = fodselsnummer.substring(4, 6).toInt()
 

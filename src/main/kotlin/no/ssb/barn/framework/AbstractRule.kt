@@ -34,6 +34,7 @@ abstract class AbstractRule(
         ReportEntry(
             warningLevel = warningLevel,
             ruleName = ruleName,
-            errorText = errorText
+            errorText = errorText,
+            type = xmlContext.removeSuffix("Type"),
         )
 }

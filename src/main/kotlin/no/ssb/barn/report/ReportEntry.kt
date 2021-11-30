@@ -4,6 +4,6 @@ data class ReportEntry(
     val warningLevel: WarningLevel,
     val ruleName: String,
     val errorText: String,
-    val type: String? = null, // TODO: Make non-nullable
-    val id: String? = null // TODO: Make non-nullable
+    val type: String,
+    val id: String? = null
 )
