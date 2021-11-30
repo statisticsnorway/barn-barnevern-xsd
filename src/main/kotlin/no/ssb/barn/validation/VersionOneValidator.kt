@@ -24,6 +24,7 @@ class VersionOneValidator : ValidatorContract {
         InvestigationStartDateAfterIndividStartDate(),
         LegalBasisAgeAboveEighteenNoMeasure(),
         LegalBasisValidCode(),
+        LegalBasisWithEndDateClarificationRequired(),
         MeasureAgeAboveSevenAndInKindergarten(),
         MeasureEndDateAfterStartDate(),
         MeasureEndDateBeforeIndividEndDate(),

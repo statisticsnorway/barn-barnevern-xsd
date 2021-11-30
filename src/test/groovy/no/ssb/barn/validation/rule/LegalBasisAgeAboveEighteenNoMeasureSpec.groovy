@@ -6,6 +6,7 @@ import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.LovhjemmelType
 import spock.lang.Specification
 import spock.lang.Subject
+import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 
@@ -22,6 +23,7 @@ class LegalBasisAgeAboveEighteenNoMeasureSpec extends Specification {
         context = TestDataProvider.getTestContext()
     }
 
+    @Unroll
     def "test alle scenarier"() {
         given:
         def sak = context.rootObject.sak

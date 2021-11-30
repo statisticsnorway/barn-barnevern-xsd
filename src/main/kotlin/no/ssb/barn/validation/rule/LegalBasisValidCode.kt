@@ -4,15 +4,15 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.xsd.LovhjemmelType
+import no.ssb.barn.xsd.TiltakType
 
 class LegalBasisValidCode : AbstractRule(
     WarningLevel.ERROR,
     "Lovhjemmel Kontroll 4: Lovhjemmel",
-    LovhjemmelType::class.java.simpleName
+    TiltakType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        return context.rootObject.sak.virksomhet.asSequence()
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.tiltak }
             .flatten()
             .filter { tiltak ->
@@ -30,5 +30,4 @@ class LegalBasisValidCode : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
-    }
 }

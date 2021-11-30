@@ -6,6 +6,7 @@ import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.LovhjemmelType
 import spock.lang.Specification
 import spock.lang.Subject
+import spock.lang.Unroll
 
 class LegalBasisValidCodeSpec extends Specification {
 
@@ -20,6 +21,7 @@ class LegalBasisValidCodeSpec extends Specification {
         context = TestDataProvider.getTestContext()
     }
 
+    @Unroll
     def "test alle scenarier"() {
         given:
         def sak = context.rootObject.sak
