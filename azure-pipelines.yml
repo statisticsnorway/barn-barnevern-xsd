@@ -90,8 +90,6 @@ jobs:
         inputs:
           pollingTimeoutSec: '300'
 
-      // statisticsnorway_barn-barnevern-xsd
-
       # Download file with json-key to GCR as a later task needs to
       # authenticate in a different way than using service connection
       # File is stored in Pipelines->Library->Secure Files
