@@ -10,13 +10,6 @@
     <description>XSD prosjekt for innrapportering til Barnevernsregister
     </description>
 
-    <scm>
-        <connection>
-            scm:git:https://github.com/statisticsnorway/barn-barnevern-xsd
-        </connection>
-        <url>https://github.com/statisticsnorway/barn-barnevern-xsd</url>
-    </scm>
-
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
