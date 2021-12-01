@@ -17,6 +17,7 @@ data class KategoriType(
     var presisering: String? = null
 ) {
     companion object {
+        private const val otherMeasures = "Andre tiltak (krever presisering)"
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
         private val codeMap =
             mapOf(
@@ -31,7 +32,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "1.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 ),
                 Pair(
                     "2.1",
@@ -59,7 +60,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "2.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 ),
                 Pair(
                     "3.1",
@@ -106,7 +107,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "3.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 ),
                 Pair(
                     "4.1",
@@ -150,7 +151,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "4.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 ),
                 Pair(
                     "5.1",
@@ -172,7 +173,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "5.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 ),
                 Pair(
                     "6.1",
@@ -200,7 +201,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "6.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 ),
                 Pair(
                     "7.1",
@@ -218,7 +219,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "7.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 ),
                 Pair(
                     "8.1",
@@ -234,7 +235,7 @@ data class KategoriType(
                 ),
                 Pair(
                     "8.99",
-                    "Andre tiltak (krever presisering)"
+                    otherMeasures
                 )
             )
                 .map {
