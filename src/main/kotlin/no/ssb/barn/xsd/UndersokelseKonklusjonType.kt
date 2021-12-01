@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -27,7 +28,7 @@ data class UndersokelseKonklusjonType(
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-        private val codeMap =
+        private val codeList =
             mapOf(
                 Pair(
                     "1",
@@ -68,9 +69,6 @@ data class UndersokelseKonklusjonType(
 
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodeListItem> =
-            codeMap.filter {
-                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
-                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
-            }
+            TypeUtils.getCodes(date, codeList)
     }
 }

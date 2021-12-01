@@ -5,6 +5,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.generator.RandomGenerator
+import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,7 +38,7 @@ data class PlanType(
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-        private val planTypeMap = mapOf(
+        private val planTypeList = mapOf(
             Pair(
                 "1",
                 "Tiltaksplan etter § 4-5"
@@ -60,10 +61,6 @@ data class PlanType(
             }
 
         fun getPlantype(date: LocalDate): List<CodeListItem> =
-            planTypeMap
-                .filter {
-                    (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
-                            && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
-                }
+            TypeUtils.getCodes(date, planTypeList)
     }
 }

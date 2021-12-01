@@ -5,6 +5,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlAttribute
 import jakarta.xml.bind.annotation.XmlType
 import no.ssb.barn.codelists.CodeListItem
+import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,7 +20,7 @@ data class KategoriType(
     companion object {
         private const val otherMeasures = "Andre tiltak (krever presisering)"
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-        private val codeMap =
+        private val codeList =
             mapOf(
                 Pair(
                     "1.1",
@@ -246,7 +247,7 @@ data class KategoriType(
                     )
                 }
 
-        private val tiltakOpphevelseMap =
+        private val tiltakOpphevelseList =
             mapOf(
                 Pair(
                     "1",
@@ -272,15 +273,9 @@ data class KategoriType(
 
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodeListItem> =
-            codeMap.filter {
-                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
-                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
-            }
+            TypeUtils.getCodes(date, codeList)
 
         fun getTiltakOpphevelse(date: LocalDate): List<CodeListItem> =
-            tiltakOpphevelseMap.filter {
-                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
-                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
-            }
+            TypeUtils.getCodes(date, tiltakOpphevelseList)
     }
 }
