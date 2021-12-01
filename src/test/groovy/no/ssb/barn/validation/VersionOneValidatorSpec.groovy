@@ -37,7 +37,7 @@ class VersionOneValidatorSpec extends Specification {
         def report = sut.validate(context)
 
         then:
-        2 == report.reportEntries.size()
+        3 == report.reportEntries.size()
         and:
         WarningLevel.ERROR == report.severity
     }
