@@ -22,91 +22,92 @@ data class MelderType(
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-        private val codeList = mapOf(
-            Pair(
+
+        private val codeList = arrayOf(
+            arrayOf(
                 "1",
                 "Barnet selv"
             ),
-            Pair(
+            arrayOf(
                 "2",
                 "Mor/ far/ foresatte"
             ),
-            Pair(
+            arrayOf(
                 "3",
                 "Familie for øvrig"
             ),
-            Pair(
+            arrayOf(
                 "4",
                 "Andre privatpersoner"
             ),
-            Pair(
+            arrayOf(
                 "5",
                 "Barnvernstjenesten"
             ),
-            Pair(
+            arrayOf(
                 "6",
                 "NAV (kommune og stat)"
             ),
-            Pair(
+            arrayOf(
                 "7",
                 "Barnevernsvakt"
             ),
-            Pair(
+            arrayOf(
                 "8",
                 "Politi"
             ),
-            Pair(
+            arrayOf(
                 "9",
                 "Barnehage"
             ),
-            Pair(
+            arrayOf(
                 "10",
                 "Helsestasjon/skolehelsetjenesten"
             ),
-            Pair(
+            arrayOf(
                 "11",
                 "Skole"
             ),
-            Pair(
+            arrayOf(
                 "12",
                 "Pedagogisk-psykologisk tjeneste (PPT)"
             ),
-            Pair(
+            arrayOf(
                 "13",
                 "Psykisk helsevern for barn og unge (kommune og stat)"
             ),
-            Pair(
+            arrayOf(
                 "14",
                 "Psykisk helsevern for voksne (kommune og stat)"
             ),
-            Pair(
+            arrayOf(
                 "15",
                 "Lege/ sykehus/ tannlege"
             ),
-            Pair(
+            arrayOf(
                 "16",
                 "Familievernkontor"
             ),
-            Pair(
+            arrayOf(
                 "17",
                 "Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)"
             ),
-            Pair("18", "Krisesenter"),
-            Pair("19", "Asylmottak/ UDI/ innvandringsmyndighet"),
-            Pair(
+            arrayOf("18", "Krisesenter"),
+            arrayOf("19", "Asylmottak/ UDI/ innvandringsmyndighet"),
+            arrayOf(
                 "20", "Utekontakt/ fritidsklubb"
             ),
-            Pair(
+            arrayOf(
                 "21",
                 "Frivillige organisasjoner/ idrettslag"
             ),
-            Pair(
+            arrayOf(
                 "22",
                 "Andre offentlige instanser (krever presisering)"
             ),
-            Pair("23", "Anonym")
+            arrayOf("23", "Anonym")
         )
-            .map { CodeListItem(it.key, it.value, validFrom) }
+            .map { CodeListItem(it[0], it[1], validFrom) }
 
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodeListItem> =
