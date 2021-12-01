@@ -35,9 +35,6 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>statisticsnorway</sonar.organization>
         <sonar.projectKey>statisticsnorway_barn-barnevern-xsd</sonar.projectKey>
-        <sonar.junit.reportPaths>
-            target/surefire-reports/**
-        </sonar.junit.reportPaths>
     </properties>
 
     <profiles>
@@ -48,7 +45,6 @@
                     target/site/jacoco/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
             </properties>
-
             <build>
                 <pluginManagement>
                     <plugins>
@@ -72,7 +68,6 @@
                         <artifactId>sonar-maven-plugin</artifactId>
                         <version>${sonar.version}</version>
                     </plugin>
-
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
@@ -100,15 +95,11 @@
             <distributionManagement>
                 <snapshotRepository>
                     <id>artifact-registry</id>
-                    <url>
-                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots
-                    </url>
+                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots</url>
                 </snapshotRepository>
                 <repository>
                     <id>artifact-registry</id>
-                    <url>
-                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases
-                    </url>
+                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases</url>
                 </repository>
             </distributionManagement>
         </profile>
@@ -165,17 +156,6 @@
         </resources>
 
         <plugins>
-
-            <!-- https://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <tagNameFormat>v@{project.version}</tagNameFormat>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
