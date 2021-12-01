@@ -21,29 +21,30 @@ data class EttervernKonklusjonType(
 ) {
     companion object {
         private val validFrom = LocalDate.parse("2022-01-01")
+        private val codeMap =
+            mapOf(
+                Pair(
+                    "1",
+                    "Gitt tilbud om tiltak, akseptert"
+                ),
+                Pair(
+                    "2",
+                    "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak"
+                ),
+                Pair(
+                    "3",
+                    "Ikke lenger tiltak etter BVL, etter brukers ønske"
+                )
+            )
+                .map {
+                    CodeListItem(it.key, it.value, validFrom)
+                }
 
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> {
-            return listOf(
-                CodeListItem(
-                    "1",
-                    "Gitt tilbud om tiltak, akseptert",
-                    validFrom = validFrom
-                ),
-                CodeListItem(
-                    "2",
-                    "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak",
-                    validFrom = validFrom
-                ),
-                CodeListItem(
-                    "3",
-                    "Ikke lenger tiltak etter BVL, etter brukers ønske",
-                    validFrom = validFrom
-                )
-            ).filter {
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            codeMap.filter {
                 (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
                         && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
             }
-        }
     }
 }

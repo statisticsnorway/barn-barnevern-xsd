@@ -37,33 +37,33 @@ data class PlanType(
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-
-        fun getPlantype(date: LocalDate): List<CodeListItem> {
-            return listOf(
-                CodeListItem(
-                    "1",
-                    "Tiltaksplan etter § 4-5",
-                    validFrom
-                ),
-                CodeListItem(
-                    "2",
-                    "Tiltaksplan etter § 4-28",
-                    validFrom
-                ),
-                CodeListItem(
-                    "3",
-                    "Foreløpig omsorgsplan etter § 4-15, 3. ledd",
-                    validFrom
-                ),
-                CodeListItem(
-                    "4",
-                    "Omsorgsplan etter § 4-15, 3. ledd",
-                    validFrom
-                )
-            ).filter {
-                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
-                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
+        private val planTypeMap = mapOf(
+            Pair(
+                "1",
+                "Tiltaksplan etter § 4-5"
+            ),
+            Pair(
+                "2",
+                "Tiltaksplan etter § 4-28"
+            ),
+            Pair(
+                "3",
+                "Foreløpig omsorgsplan etter § 4-15, 3. ledd"
+            ),
+            Pair(
+                "4",
+                "Omsorgsplan etter § 4-15, 3. ledd"
+            )
+        )
+            .map {
+                CodeListItem(it.key, it.value, validFrom)
             }
-        }
+
+        fun getPlantype(date: LocalDate): List<CodeListItem> =
+            planTypeMap
+                .filter {
+                    (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
+                            && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
+                }
     }
 }

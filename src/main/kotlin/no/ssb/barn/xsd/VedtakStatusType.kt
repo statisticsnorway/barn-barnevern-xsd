@@ -21,34 +21,32 @@ data class VedtakStatusType(
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2022-01-01")
+        private val codeMap =
+            mapOf(
+                Pair(
+                    "1",
+                    "Godkjent"
+                ),
+                Pair(
+                    "2",
+                    "Begjæring oversendt nemnd"
+                ),
+                Pair(
+                    "3",
+                    "Utgår / Bortfalt etter BVL"
+                ),
+                Pair(
+                    "4",
+                    "Avslått / Avsluttet"
+                )
+            )
+                .map { CodeListItem(it.key, it.value, validFrom) }
 
         @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> {
-            return listOf(
-                CodeListItem(
-                    "1",
-                    "Godkjent",
-                    validFrom
-                ),
-                CodeListItem(
-                    "2",
-                    "Begjæring oversendt nemnd",
-                    validFrom
-                ),
-                CodeListItem(
-                    "3",
-                    "Utgår / Bortfalt etter BVL",
-                    validFrom
-                ),
-                CodeListItem(
-                    "4",
-                    "Avslått / Avsluttet",
-                    validFrom
-                )
-            ).filter {
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            codeMap.filter {
                 (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
                         && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
             }
-        }
     }
 }

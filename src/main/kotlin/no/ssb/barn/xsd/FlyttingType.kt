@@ -25,60 +25,55 @@ data class FlyttingType(
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> {
-
-            return listOf(
-                CodeListItem(
+        private val codeMap =
+            mapOf(
+                Pair(
                     "1.1",
-                    "Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører",
-                    validFrom
+                    "Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører"
                 ),
-                CodeListItem(
+                Pair(
                     "1.2",
-                    "Barnet blir myndig",
-                    validFrom
+                    "Barnet blir myndig"
                 ),
-                CodeListItem(
+                Pair(
                     "1.3",
                     "Fosterforeldre klarer ikke å dekke barnets behov <br>" +
-                            "(forhold ved fosterhjemmet)",
-                    validFrom
+                            "(forhold ved fosterhjemmet)"
                 ),
-                CodeListItem(
+                Pair(
                     "1.4",
                     "Barnet har behov for annet plasseringssted <br>" +
-                            "(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)",
-                    validFrom
+                            "(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)"
                 ),
-                CodeListItem(
+                Pair(
                     "1.5",
                     "Andre grunner; spesifiser. <br>" +
-                            "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).",
-                    validFrom
+                            "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.)."
                 ),
-                CodeListItem(
+                Pair(
                     "2.1",
-                    "Barnet har behov fosterforeldre ikke kan dekke",
-                    validFrom
+                    "Barnet har behov fosterforeldre ikke kan dekke"
                 ),
-                CodeListItem(
+                Pair(
                     "2.2",
-                    "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)",
-                    validFrom
+                    "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)"
                 ),
-                CodeListItem(
+                Pair(
                     "2.3",
                     "Andre grunner; spesifiser <br>" +
                             "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>" +
-                            "manglende eller lite effektiv veiledning, mv.).",
-                    validFrom
+                            "manglende eller lite effektiv veiledning, mv.)."
                 )
-            ).filter {
+            )
+                .map {
+                    CodeListItem(it.key, it.value, validFrom)
+                }
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            codeMap.filter {
                 (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
                         && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
             }
-        }
     }
 }

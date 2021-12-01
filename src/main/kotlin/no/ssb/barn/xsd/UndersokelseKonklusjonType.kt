@@ -27,54 +27,50 @@ data class UndersokelseKonklusjonType(
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> {
-            return listOf(
-                CodeListItem(
+        private val codeMap =
+            mapOf(
+                Pair(
                     "1",
-                    "Barneverntjenesten fatter vedtak om tiltak",
-                    validFrom
+                    "Barneverntjenesten fatter vedtak om tiltak"
                 ),
-                CodeListItem(
+                Pair(
                     "2",
-                    "Begjæring om tiltak for fylkesnemnda",
-                    validFrom
+                    "Begjæring om tiltak for fylkesnemnda"
                 ),
-                CodeListItem(
+                Pair(
                     "3",
                     "Undersøkelsen henlagt etter barnverntjenestens vurdering " +
                             "(kategorien gjelder når barneverntjenesten vurderer at vilkår " +
-                            "for å sette inn tiltak ikke er oppfylt)",
-                    validFrom
+                            "for å sette inn tiltak ikke er oppfylt)"
                 ),
-                CodeListItem(
+                Pair(
                     "4",
                     "Undersøkelsen henlagt etter partens ønske " +
                             "(kategorien gjelder når barneverntjenesten vurderer at vilkår for " +
                             "å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi " +
                             "foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er " +
-                            "snakk om hjelpetiltak som foreldre/barn kan takke nei til.)",
-                    validFrom
+                            "snakk om hjelpetiltak som foreldre/barn kan takke nei til.)"
                 ),
-                CodeListItem(
+                Pair(
                     "5",
                     "Undersøkelsen henlagt som følge av flytting " +
                             "kategorien gjelder når undersøkelsessak henlegges fordi barnet " +
                             "flytter til en ny kommune. Bør også innebære et underpunkt der " +
                             "barneverntjenesten må oppgi om saken er meldt videre til barnets nye " +
-                            "oppholdskommune, obligatorisk ja/nei svar) (krever presisering)",
-                    validFrom
+                            "oppholdskommune, obligatorisk ja/nei svar) (krever presisering)"
                 ),
-                CodeListItem(
+                Pair(
                     "6",
-                    "Undersøkelsen henlagt etter henvisning til annen instans",
-                    validFrom
+                    "Undersøkelsen henlagt etter henvisning til annen instans"
                 )
-            ).filter {
+            )
+                .map { CodeListItem(it.key, it.value, validFrom) }
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            codeMap.filter {
                 (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
                         && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
             }
-        }
     }
 }
