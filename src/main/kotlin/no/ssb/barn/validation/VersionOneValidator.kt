@@ -30,6 +30,7 @@ class VersionOneValidator : ValidatorContract {
         MeasureClarificationRequired(),
         MeasureEndDateAfterStartDate(),
         MeasureEndDateBeforeIndividEndDate(),
+        MeasureMultipleAllocationsWithinPeriod(),
         MeasureStartDateAfterIndividStartDate(),
         MessageCaseContentContainsClarification(),
         MessageContainsCaseContent(),
