@@ -11,8 +11,8 @@ class PlanEndDateAfterStartDate : AbstractRule(
     "Plan Kontroll 2a: Startdato etter sluttdato",
     PlanType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        return context.rootObject.sak.virksomhet.asSequence()
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.plan }
             .flatten()
             .filter { plan ->
@@ -28,5 +28,4 @@ class PlanEndDateAfterStartDate : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
-    }
 }

@@ -11,9 +11,9 @@ class HasContent : AbstractRule(
     "Individ Kontroll 06: Har meldinger, planer eller tiltak",
     SakType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
         // TODO legg til sjekk på Tiltak og Plan
-        return if (context.rootObject.sak.virksomhet.any {
+        if (context.rootObject.sak.virksomhet.any {
                 it.melding?.any() == true
             }) {
             null
@@ -23,5 +23,4 @@ class HasContent : AbstractRule(
                 context.rootObject.sak.id
             )
         }
-    }
 }

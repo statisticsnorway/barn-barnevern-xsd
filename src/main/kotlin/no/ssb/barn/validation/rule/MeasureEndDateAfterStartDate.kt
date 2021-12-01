@@ -11,8 +11,8 @@ class MeasureEndDateAfterStartDate : AbstractRule(
     "Tiltak Kontroll 2a: Startdato etter sluttdato",
     TiltakType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        return context.rootObject.sak.virksomhet.asSequence()
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.tiltak }
             .flatten()
             .filter { tiltak ->
@@ -27,5 +27,4 @@ class MeasureEndDateAfterStartDate : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
-    }
 }

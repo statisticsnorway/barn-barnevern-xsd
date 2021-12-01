@@ -11,8 +11,8 @@ class MeasureClarificationRequired : AbstractRule(
     "Tiltak Kontroll 7: Kontroll av manglende presisering for tiltakskategori",
     TiltakType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        return context.rootObject.sak.virksomhet.asSequence()
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.tiltak }
             .flatten()
             .filter { tiltak ->
@@ -28,5 +28,4 @@ class MeasureClarificationRequired : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
-    }
 }
