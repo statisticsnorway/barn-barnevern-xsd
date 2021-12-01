@@ -1,9 +1,11 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
-import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Subject
+
+import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class AgeAboveTwentyFiveSpec extends Specification {
 
@@ -15,12 +17,12 @@ class AgeAboveTwentyFiveSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new AgeAboveTwentyFive()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     def "individ under 25, ingen feil forventes"() {
         given:
-        context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(24)
+        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(24)
 
         when:
         def reportEntries = sut.validate(context)
@@ -33,7 +35,7 @@ class AgeAboveTwentyFiveSpec extends Specification {
 
     def "individ over 25 aar, feil forventes"() {
         given:
-        context.rootObject.sak.fodselsnummer = TestDataProvider.getMockSocialSecurityNumber(27)
+        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(27)
 
         when:
         def reportEntries = sut.validate(context)

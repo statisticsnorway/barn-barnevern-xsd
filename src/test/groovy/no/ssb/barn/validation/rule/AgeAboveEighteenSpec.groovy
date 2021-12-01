@@ -1,11 +1,11 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
-import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Subject
 
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class AgeAboveEighteenSpec extends Specification {
 
@@ -17,7 +17,7 @@ class AgeAboveEighteenSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new AgeAboveEighteen()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     def "individ over 18 aar og tiltak finnes, ingen feil forventes"() {

@@ -2,12 +2,13 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.time.LocalDate
+
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
 
@@ -20,7 +21,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new MeasureMultipleAllocationsWithinPeriod()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     @Unroll
@@ -35,7 +36,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         virksomhet.tiltak[0].kategori.kode = categoryCode
         and:
         if (useSecond) {
-            secondContext = TestDataProvider.getTestContext()
+            secondContext = getTestContext()
             virksomhet.tiltak[1] = secondContext.rootObject.sak.virksomhet[0].tiltak[0]
             virksomhet.tiltak[1].id = "2"
             virksomhet.tiltak[1].startDato = secondStartDate

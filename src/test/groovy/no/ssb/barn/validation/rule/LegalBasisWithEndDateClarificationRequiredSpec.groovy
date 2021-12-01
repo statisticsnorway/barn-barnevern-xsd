@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.OpphevelseType
 import no.ssb.barn.xsd.TiltakKonklusjonType
@@ -11,6 +10,8 @@ import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.time.LocalDate
+
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
 
@@ -22,7 +23,7 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new LegalBasisWithEndDateClarificationRequired()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     @Unroll

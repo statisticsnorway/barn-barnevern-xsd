@@ -1,12 +1,13 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
-import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.time.LocalDate
+
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class EndDateAfterStartDateSpec extends Specification {
 
@@ -18,7 +19,7 @@ class EndDateAfterStartDateSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new EndDateAfterStartDate()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     @Unroll("startDate: #startDate, endDate #endDate")

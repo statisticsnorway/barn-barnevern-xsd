@@ -1,10 +1,11 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
-import no.ssb.barn.testutil.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
+
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class SocialSecurityIdAndDufSpec extends Specification {
 
@@ -16,7 +17,7 @@ class SocialSecurityIdAndDufSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new SocialSecurityIdAndDuf()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     @Unroll

@@ -2,11 +2,12 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.SaksinnholdType
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
+
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class InvestigationDecisionClarificationRequiredSpec extends Specification {
 
@@ -18,7 +19,7 @@ class InvestigationDecisionClarificationRequiredSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new InvestigationDecisionClarificationRequired()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     @Unroll

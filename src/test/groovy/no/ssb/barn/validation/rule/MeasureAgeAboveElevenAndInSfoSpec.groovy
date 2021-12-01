@@ -2,13 +2,13 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.KategoriType
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
+import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
 
@@ -20,7 +20,7 @@ class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
     @SuppressWarnings('unused')
     def setup() {
         sut = new MeasureAgeAboveElevenAndInSfo()
-        context = TestDataProvider.getTestContext()
+        context = getTestContext()
     }
 
     @Unroll
