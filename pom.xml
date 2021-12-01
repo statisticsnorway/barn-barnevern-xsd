@@ -9,7 +9,6 @@
     <name>barn-barnevern-xsd</name>
     <description>XSD prosjekt for innrapportering til Barnevernsregister
     </description>
-
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
