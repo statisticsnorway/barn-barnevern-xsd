@@ -1,10 +1,10 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
-import jakarta.xml.bind.annotation.*
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EttervernKonklusjon", propOrder = ["sluttDato", "kode"])
@@ -17,29 +17,33 @@ data class EttervernKonklusjonType(
     var sluttDato: LocalDate? = LocalDate.now(),
 
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = getCodes(LocalDate.of(2022, 1, 1 ))[0].code
-){
+    var kode: String = getCodes(LocalDate.of(2022, 1, 1))[0].code
+) {
     companion object {
+        private val validFrom = LocalDate.parse("2022-01-01")
+
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
                 CodeListItem(
                     "1",
                     "Gitt tilbud om tiltak, akseptert",
-                    LocalDate.parse("2022-01-01")
+                    validFrom = validFrom
                 ),
                 CodeListItem(
                     "2",
                     "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak",
-                    LocalDate.parse("2022-01-01")
+                    validFrom = validFrom
                 ),
                 CodeListItem(
                     "3",
                     "Ikke lenger tiltak etter BVL, etter brukers ønske",
-                    LocalDate.parse("2022-01-01")
+                    validFrom = validFrom
                 )
-            ).filter { (date.isEqual(it.validFrom) ||  date.isAfter(it.validFrom))
-                    && (date.isBefore(it.validTo) || date.isEqual(it.validTo)) }
+            ).filter {
+                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
+                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
+            }
         }
     }
 }

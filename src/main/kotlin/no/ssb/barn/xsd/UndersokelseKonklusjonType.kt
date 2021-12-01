@@ -1,13 +1,16 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
-import jakarta.xml.bind.annotation.*
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UndersokelseKonklusjon", propOrder = ["sluttDato", "kode", "presisering"])
+@XmlType(
+    name = "UndersokelseKonklusjon",
+    propOrder = ["sluttDato", "kode", "presisering"]
+)
 data class UndersokelseKonklusjonType(
     @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -23,25 +26,27 @@ data class UndersokelseKonklusjonType(
     var presisering: String? = null
 ) {
     companion object {
+        private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
+
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
                 CodeListItem(
                     "1",
                     "Barneverntjenesten fatter vedtak om tiltak",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "2",
                     "Begjæring om tiltak for fylkesnemnda",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "3",
                     "Undersøkelsen henlagt etter barnverntjenestens vurdering " +
                             "(kategorien gjelder når barneverntjenesten vurderer at vilkår " +
                             "for å sette inn tiltak ikke er oppfylt)",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "4",
@@ -50,7 +55,7 @@ data class UndersokelseKonklusjonType(
                             "å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi " +
                             "foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er " +
                             "snakk om hjelpetiltak som foreldre/barn kan takke nei til.)",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "5",
@@ -59,15 +64,17 @@ data class UndersokelseKonklusjonType(
                             "flytter til en ny kommune. Bør også innebære et underpunkt der " +
                             "barneverntjenesten må oppgi om saken er meldt videre til barnets nye " +
                             "oppholdskommune, obligatorisk ja/nei svar) (krever presisering)",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "6",
                     "Undersøkelsen henlagt etter henvisning til annen instans",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 )
-            ).filter { (date.isEqual(it.validFrom) ||  date.isAfter(it.validFrom))
-                    && (date.isBefore(it.validTo) || date.isEqual(it.validTo)) }
+            ).filter {
+                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
+                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
+            }
         }
     }
 }

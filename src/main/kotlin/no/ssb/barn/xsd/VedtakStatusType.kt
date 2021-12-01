@@ -20,28 +20,30 @@ data class VedtakStatusType(
     var kode: String = getCodes(LocalDate.of(2022, 1, 1))[0].code
 ) {
     companion object {
+        private val validFrom: LocalDate = LocalDate.parse("2022-01-01")
+
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodeListItem> {
             return listOf(
                 CodeListItem(
                     "1",
                     "Godkjent",
-                    LocalDate.parse("2022-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "2",
                     "Begjæring oversendt nemnd",
-                    LocalDate.parse("2022-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "3",
                     "Utgår / Bortfalt etter BVL",
-                    LocalDate.parse("2022-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "4",
                     "Avslått / Avsluttet",
-                    LocalDate.parse("2022-01-01")
+                    validFrom
                 )
             ).filter {
                 (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))

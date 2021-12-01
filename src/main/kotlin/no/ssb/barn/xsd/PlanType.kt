@@ -8,7 +8,10 @@ import no.ssb.barn.generator.RandomGenerator
 import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PlanType", propOrder = ["id", "migrertId", "startDato", "evaluering", "konklusjon"])
+@XmlType(
+    name = "PlanType",
+    propOrder = ["id", "migrertId", "startDato", "evaluering", "konklusjon"]
+)
 data class PlanType(
     @field:XmlAttribute(name = "Id", required = true)
     var id: String = RandomGenerator.generateRandomString(10),
@@ -31,32 +34,36 @@ data class PlanType(
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: PlanKonklusjonType? = PlanKonklusjonType()
-){
+) {
     companion object {
+        private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
+
         fun getPlantype(date: LocalDate): List<CodeListItem> {
             return listOf(
                 CodeListItem(
                     "1",
                     "Tiltaksplan etter § 4-5",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "2",
                     "Tiltaksplan etter § 4-28",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "3",
                     "Foreløpig omsorgsplan etter § 4-15, 3. ledd",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 ),
                 CodeListItem(
                     "4",
                     "Omsorgsplan etter § 4-15, 3. ledd",
-                    LocalDate.parse("2013-01-01")
+                    validFrom
                 )
-            ).filter { (date.isEqual(it.validFrom) ||  date.isAfter(it.validFrom))
-                    && (date.isBefore(it.validTo) || date.isEqual(it.validTo)) }
+            ).filter {
+                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
+                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
+            }
         }
     }
 }
