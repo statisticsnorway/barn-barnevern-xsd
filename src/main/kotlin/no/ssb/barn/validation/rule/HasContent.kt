@@ -21,7 +21,8 @@ class HasContent : AbstractRule(
             .map {
                 createReportEntry(
                     "Individet har ingen meldinger, planer eller"
-                            + " tiltak i løpet av året-"
+                            + " tiltak i løpet av året.",
+                    context.rootObject.sak.id
                 )
             }
             .toList()
