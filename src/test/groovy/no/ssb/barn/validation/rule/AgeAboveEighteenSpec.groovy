@@ -1,8 +1,10 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
 import spock.lang.Subject
+import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
@@ -20,9 +22,14 @@ class AgeAboveEighteenSpec extends Specification {
         context = getTestContext()
     }
 
-    def "individ over 18 aar og tiltak finnes, ingen feil forventes"() {
+    @Unroll
+    def "Test av alle scenarier"() {
         given:
-        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(19)
+        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(age)
+        and:
+        if (resetMeasures) {
+            context.rootObject.sak.virksomhet[0].tiltak = null
+        }
 
         when:
         def reportEntries = sut.validate(context)
@@ -30,38 +37,21 @@ class AgeAboveEighteenSpec extends Specification {
         then:
         noExceptionThrown()
         and:
-        null == reportEntries
-    }
-
-    def "individ under 18 aar og tiltak mangler, ingen feil forventes"() {
-        given:
-        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(16)
+        (reportEntries != null) == errorExpected
         and:
-        context.rootObject.sak.virksomhet = List.of(context.rootObject.sak.virksomhet[0])
-        and:
-        context.rootObject.sak.virksomhet[0].tiltak = List.of()
+        if (errorExpected) {
+            assert 1 == reportEntries.size()
+            assert WarningLevel.ERROR == reportEntries[0].warningLevel
+            assert reportEntries[0].errorText.contains("Individet er over 18 år og skal dermed ha tiltak")
+        }
 
-        when:
-        def reportEntries = sut.validate(context)
-
-        then:
-        noExceptionThrown()
-        and:
-        null == reportEntries
-    }
-
-    def "individ over 18 aar og tiltak mangler, feil forventes"() {
-        given:
-        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(19)
-        and:
-        context.rootObject.sak.virksomhet[0].tiltak = List.of()
-
-        when:
-        def reportEntries = sut.validate(context)
-
-        then:
-        noExceptionThrown()
-        and:
-        1 == reportEntries.size()
+        where:
+        resetMeasures | age || errorExpected
+        true          | 17  || false
+        true          | 18  || true
+        true          | 19  || true
+        false         | 17  || false
+        false         | 18  || false
+        false         | 19  || false
     }
 }

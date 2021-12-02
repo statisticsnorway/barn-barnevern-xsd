@@ -25,7 +25,7 @@ class HasContentSpec extends Specification {
     }
 
     @Unroll
-    def "Mangler Melding og Tiltak og Plan, feil forventes"() {
+    def "Test av alle scenarier"() {
         given:
         def virksomhet = context.rootObject.sak.virksomhet[0]
         and:

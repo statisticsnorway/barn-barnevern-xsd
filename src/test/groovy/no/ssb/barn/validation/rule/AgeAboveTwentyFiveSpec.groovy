@@ -1,8 +1,10 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
 import spock.lang.Subject
+import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
@@ -20,9 +22,10 @@ class AgeAboveTwentyFiveSpec extends Specification {
         context = getTestContext()
     }
 
-    def "individ under 25, ingen feil forventes"() {
+    @Unroll
+    def "Test av alle scenarier"() {
         given:
-        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(24)
+        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(age)
 
         when:
         def reportEntries = sut.validate(context)
@@ -30,21 +33,19 @@ class AgeAboveTwentyFiveSpec extends Specification {
         then:
         noExceptionThrown()
         and:
-        null == reportEntries
-    }
-
-    def "individ over 25 aar, feil forventes"() {
-        given:
-        context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(27)
-
-        when:
-        def reportEntries = sut.validate(context)
-
-        then:
-        noExceptionThrown()
+        (reportEntries != null) == errorExpected
         and:
-        null != reportEntries
-        and:
-        1 == reportEntries.size()
+        if (errorExpected) {
+            assert 1 == reportEntries.size()
+            assert WarningLevel.ERROR == reportEntries[0].warningLevel
+            assert reportEntries[0].errorText.contains("Individet er $age år og skal avsluttes som klient")
+        }
+
+        where:
+        age || errorExpected
+        25  || true
+        26  || true
+        24  || false
+        1   || false
     }
 }
