@@ -13,9 +13,6 @@ class MessageContainsCaseContent : AbstractRule(
 ) {
     private val codesThatRequiresCaseContent = listOf("1", "2")
 
-    // TODO: This part is missing
-    // if (forrigeTelleDato.getYear() < sluttDato.getYear()
-
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }
