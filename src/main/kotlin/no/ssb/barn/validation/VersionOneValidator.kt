@@ -38,6 +38,7 @@ class VersionOneValidator : ValidatorContract {
         MessageContainsReporters(),
         MessageEndDateAfterStartDate(),
         MessageEndDateBeforeIndividEndDate(),
+        MessageProcessingTimeOverdue(),
         MessageReporterContainsClarification(),
         MessageStartDateAfterOrEqualIndividStartDate(),
         PlanEndDateAfterStartDate(),

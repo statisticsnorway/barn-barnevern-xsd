@@ -1,10 +1,12 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
-import spock.lang.Ignore
+import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
+
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -21,12 +23,17 @@ class MessageProcessingTimeOverdueSpec extends Specification {
         context = getTestContext()
     }
 
-    @Ignore
     @Unroll
-    def "Startdato suksess-scenarier, ingen feil forventes"() {
+    def "test av alle scenarier"() {
         given:
+        def message = context.rootObject.sak.virksomhet[0].melding[0]
+        and:
+        message.startDato = startDate
+        and:
         if (resetConclusion) {
-            context.rootObject.sak.virksomhet[0].melding[0].konklusjon = null
+            message.konklusjon = null
+        } else {
+            message.konklusjon?.sluttDato = endDate
         }
 
         when:
@@ -35,12 +42,23 @@ class MessageProcessingTimeOverdueSpec extends Specification {
         then:
         noExceptionThrown()
         and:
-        null == reportEntries
+        (reportEntries != null) == errorExpected
+        and:
+        if (errorExpected) {
+            assert 1 == reportEntries.size()
+            assert WarningLevel.WARNING == reportEntries[0].warningLevel
+            assert reportEntries[0].errorText.contains("Fristoverskridelse på behandlingstid for melding")
+        }
 
         where:
-        resetConclusion | _
-        false           | _
-        false           | _
-        true            | _
+        resetConclusion | startDate   | endDate     || errorExpected
+        true            | getDate(-7) | getDate(0)  || false
+        false           | getDate(-3) | getDate(0)  || false
+        false           | getDate(-9) | getDate(-1) || true
+        false           | getDate(-7) | getDate(0)  || false
+    }
+
+    static def getDate(days) {
+        LocalDate.now().plusDays(days)
     }
 }

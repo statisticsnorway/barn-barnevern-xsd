@@ -16,7 +16,6 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     MeasureMultipleAllocationsWithinPeriod sut
 
     ValidationContext context
-    ValidationContext secondContext
 
     @SuppressWarnings('unused')
     def setup() {
@@ -36,7 +35,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         virksomhet.tiltak[0].kategori.kode = categoryCode
         and:
         if (useSecond) {
-            secondContext = getTestContext()
+            def secondContext = getTestContext()
             virksomhet.tiltak[1] = secondContext.rootObject.sak.virksomhet[0].tiltak[0]
             virksomhet.tiltak[1].id = "2"
             virksomhet.tiltak[1].startDato = secondStartDate
