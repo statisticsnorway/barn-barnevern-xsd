@@ -25,9 +25,11 @@ class InvestigationDecisionRequiredSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.sak.virksomhet[0].undersokelse[0].konklusjon.kode = code
+        def investigation = context.rootObject.sak.virksomhet[0].undersokelse[0]
         and:
-        context.rootObject.sak.virksomhet[0].undersokelse[0].vedtaksgrunnlag = decision
+        investigation.konklusjon.kode = code
+        and:
+        investigation.vedtaksgrunnlag = decision
 
         when:
         def reportEntries = sut.validate(context)
