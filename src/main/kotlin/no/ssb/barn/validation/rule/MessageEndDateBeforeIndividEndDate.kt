@@ -19,9 +19,7 @@ class MessageEndDateBeforeIndividEndDate : AbstractRule(
             .mapNotNull { virksomhet -> virksomhet.melding }
             .flatten()
             .filter { melding ->
-                val conclusion = melding.konklusjon
-                conclusion != null
-                        && conclusion.sluttDato > individEndDate
+                melding.konklusjon?.sluttDato?.isAfter(individEndDate) == true
             }
             .map {
                 createReportEntry(
