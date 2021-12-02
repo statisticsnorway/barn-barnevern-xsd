@@ -1,7 +1,7 @@
 package no.ssb.barn.validation.rule
 
-import com.google.gson.Gson
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -38,10 +38,14 @@ class MessageReporterContainsClarificationSpec extends Specification {
         def reportEntries = sut.validate(context)
 
         then:
+        noExceptionThrown()
+        and:
         (reportEntries != null) == errorExpected
         and:
-        if (errorExpected){
-            System.out.println(new Gson().toJson(reportEntries[0]))
+        if (errorExpected) {
+            assert 1 == reportEntries.size()
+            assert WarningLevel.ERROR == reportEntries[0].warningLevel
+            assert reportEntries[0].errorText.contains("Melder med kode")
         }
 
         where:
