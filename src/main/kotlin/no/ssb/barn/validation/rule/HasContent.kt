@@ -12,15 +12,18 @@ class HasContent : AbstractRule(
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        // TODO legg til sjekk på Tiltak og Plan
-        if (context.rootObject.sak.virksomhet.any {
-                it.melding?.any() == true
-            }) {
-            null
-        } else {
-            createSingleReportEntryList(
-                "Individet har ingen meldinger, planer eller tiltak i løpet av året",
-                context.rootObject.sak.id
-            )
-        }
+        context.rootObject.sak.virksomhet.asSequence()
+            .filter { virksomhet ->
+                !(virksomhet.melding?.any() == true
+                        || virksomhet.tiltak?.any() == true
+                        || virksomhet.plan?.any() == true)
+            }
+            .map {
+                createReportEntry(
+                    "Individet har ingen meldinger, planer eller"
+                            + " tiltak i løpet av året-"
+                )
+            }
+            .toList()
+            .ifEmpty { null }
 }
