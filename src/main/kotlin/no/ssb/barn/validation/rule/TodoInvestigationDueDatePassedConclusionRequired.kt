@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.UndersokelseType
 
-class JonOleTodoInvestigationDueDatePassedConclusionRequired : AbstractRule(
+class TodoInvestigationDueDatePassedConclusionRequired : AbstractRule(
     WarningLevel.WARNING,
     "Undersøkelse Kontroll 8: Ukonkludert undersøkelse påbegynt før 1. juli er ikke konkludert",
     UndersokelseType::class.java.simpleName
