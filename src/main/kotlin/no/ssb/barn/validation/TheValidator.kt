@@ -1,7 +1,7 @@
 package no.ssb.barn.validation
 
-import com.google.gson.Gson
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.report.ValidationReport
 
 /**
  * Barn XML validator. Clients of this library will typically keep an instance
@@ -11,9 +11,6 @@ import no.ssb.barn.framework.ValidationContext
  * @since 1.0
  */
 class TheValidator private constructor() {
-
-    private val gson = Gson()
-
     private val validatorMap = mapOf(
         Pair(VERSION_ONE, VersionOneValidator()),
         Pair(VERSION_TWO, VersionTwoValidator())
@@ -25,16 +22,14 @@ class TheValidator private constructor() {
      * @param messageId Vendor-specified message-id
      * @param xsdVersion XSD version for xmlBody
      * @param xmlBody    XML body
-     * @return Validation report on JSON format
+     * @return Validation report instance
      */
-    fun validate(messageId: String, xsdVersion: Int, xmlBody: String): String {
+    fun validate(messageId: String, xsdVersion: Int, xmlBody: String): ValidationReport {
         val currentValidator = validatorMap[xsdVersion]
             ?: throw IndexOutOfBoundsException("No validator found")
 
         val context = ValidationContext(messageId, xmlBody)
-        val validationReport = currentValidator.validate(context)
-
-        return gson.toJson(validationReport)
+        return currentValidator.validate(context)
     }
 
     companion object {

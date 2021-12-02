@@ -1,5 +1,6 @@
 package no.ssb.barn.validation
 
+import no.ssb.barn.report.WarningLevel
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -21,34 +22,30 @@ class TheValidatorSpec extends Specification {
         TheValidator.create() instanceof TheValidator
     }
 
-    def "when validate with invalid params, receive JSON result"() {
+    def "when validate with invalid xml, receive validation report with FATAL"() {
         when:
-        def result = sut.validate(
+        def validationReport = sut.validate(
                 UUID.randomUUID().toString(), 1, "~xmlBody~")
 
         then:
-        result.startsWith("{\"messageId\"")
-        and:
-        result.contains("warningLevel\":\"FATAL\"")
+        WarningLevel.FATAL == validationReport.severity
     }
 
-    def "when validate with valid params, receive JSON result"() {
+    def "when validate with valid xml, receive validation report with OK"() {
         when:
-        def result = sut.validate(
+        def validationReport = sut.validate(
                 UUID.randomUUID().toString(),
                 1,
                 getResourceAsString("test01_fil01.xml"))
 
         then:
-        result.startsWith("{\"messageId\"")
-        and:
-        !result.contains("warningLevel")
+        WarningLevel.OK == validationReport.severity
     }
 
     @Unroll("test repeated #i time")
     def "when validate multiple times with invalid params, receive JSON result"() {
         when:
-        def result = sut.validate(
+        def validationReport = sut.validate(
                 UUID.randomUUID().toString(),
                 1,
                 getResourceAsString("barnevern_with_errors.xml"))
@@ -56,13 +53,11 @@ class TheValidatorSpec extends Specification {
         then:
         noExceptionThrown()
         and:
-        null != result
+        null != validationReport
         and:
-        result.startsWith("{\"messageId\"")
-        and:
-        result.contains("warningLevel\":\"FATAL\"")
+        WarningLevel.FATAL == validationReport.severity
 
         where:
-        i << (1..10)
+        i << (1..5)
     }
 }
