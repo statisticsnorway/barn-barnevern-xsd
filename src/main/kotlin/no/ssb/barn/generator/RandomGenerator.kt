@@ -32,27 +32,27 @@ class RandomGenerator {
                 .current()
                 .nextLong(startEpochDay, endEpochDay)
             val birthDate123456 = LocalDate.ofEpochDay(randomDay)
-                    .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
+                .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
 
             while (true) {
                 val ssn789 = Random.nextInt(100, 499).toString()
-                val birthDateAndSSN = birthDate123456.plus(ssn789)
-                val birthDateAndFnrList10 = birthDateAndSSN.toCharArray().map { s -> s.toString().toInt() }.toList()
-                val weights10 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)
-                val controlDigit10 = birthDateAndFnrList10
-                    .zip(weights10) { d, w -> d * w }
+                val mod10 = birthDate123456.plus(ssn789)
+                    .toCharArray()
+                    .map { s -> s.toString().toInt() }
+                    .toList()
+                    .zip(listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)) { digit, weight -> digit * weight }
                     .fold(0, { sum, i -> sum + i })
-                val mod10 = controlDigit10.mod(11)
+                    .mod(11)
 
                 if (mod10 != 1) {
                     val digit10 = if (mod10 == 0) 0 else 11 - mod10
-                    val birthDateAndFnrList11 = birthDate123456.plus(ssn789).plus(digit10.toString())
-                            .toCharArray().map { s -> s.toString().toInt() }.toList()
-                    val weights11 = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)
-                    val controlDigit11 = birthDateAndFnrList11
-                        .zip(weights11) { d, w -> d * w }
-                        .fold(0, { acc, i -> acc + i })
-                    val mod11 = controlDigit11.mod(11)
+                    val mod11 = birthDate123456.plus(ssn789).plus(digit10.toString())
+                        .toCharArray()
+                        .map { s -> s.toString().toInt() }
+                        .toList()
+                        .zip(listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)) { digit, weight -> digit * weight }
+                        .fold(0, { sum, i -> sum + i })
+                        .mod(11)
 
                     if (mod11 != 1) {
                         val digit11 = if (mod11 == 0) 0 else 11 - mod11
