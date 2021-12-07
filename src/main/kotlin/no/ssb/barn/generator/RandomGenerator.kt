@@ -7,25 +7,27 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
 
 
+@Suppress("SpellCheckingInspection")
 class RandomGenerator {
     companion object {
-        @JvmStatic
-        fun generateRandomString(stringLength: Int): String {
-            val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
-            return (1..stringLength)
+        private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+
+        @JvmStatic
+        fun generateRandomString(stringLength: Int): String =
+            (1..stringLength)
                 .map { Random.nextInt(0, charPool.size) }
                 .map(charPool::get)
                 .joinToString("")
-        }
 
         @JvmStatic
-        fun generateRandomInt(): Int {
-            return (1..100000).random()
-        }
+        fun generateRandomInt(): Int = (1..100000).random()
 
         @JvmStatic
-        fun generateRandomSSN(startInclusive: LocalDate, endExclusive: LocalDate): String {
+        fun generateRandomSSN(
+            startInclusive: LocalDate,
+            endExclusive: LocalDate
+        ): String {
             val startEpochDay: Long = startInclusive.toEpochDay()
             val endEpochDay: Long = endExclusive.toEpochDay()
             val randomDay = ThreadLocalRandom
@@ -40,24 +42,51 @@ class RandomGenerator {
                     .toCharArray()
                     .map { s -> s.toString().toInt() }
                     .toList()
-                    .zip(listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)) { digit, weight -> digit * weight }
-                    .fold(0, { sum, i -> sum + i })
+                    .zip(
+                        listOf(
+                            3,
+                            7,
+                            6,
+                            1,
+                            8,
+                            9,
+                            4,
+                            5,
+                            2
+                        )
+                    ) { digit, weight -> digit * weight }
+                    .fold(0) { sum, i -> sum + i }
                     .mod(11)
 
                 if (mod10 != 1) {
                     val digit10 = if (mod10 == 0) 0 else 11 - mod10
-                    val mod11 = birthDate123456.plus(ssn789).plus(digit10.toString())
-                        .toCharArray()
-                        .map { s -> s.toString().toInt() }
-                        .toList()
-                        .zip(listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)) { digit, weight -> digit * weight }
-                        .fold(0, { sum, i -> sum + i })
-                        .mod(11)
+                    val mod11 =
+                        birthDate123456.plus(ssn789).plus(digit10.toString())
+                            .toCharArray()
+                            .map { s -> s.toString().toInt() }
+                            .toList()
+                            .zip(
+                                listOf(
+                                    5,
+                                    4,
+                                    3,
+                                    2,
+                                    7,
+                                    6,
+                                    5,
+                                    4,
+                                    3,
+                                    2
+                                )
+                            ) { digit, weight -> digit * weight }
+                            .fold(0) { sum, i -> sum + i }
+                            .mod(11)
 
                     if (mod11 != 1) {
                         val digit11 = if (mod11 == 0) 0 else 11 - mod11
 
-                        return birthDate123456.plus(ssn789).plus(digit10.toString()).plus(digit11.toString())
+                        return birthDate123456.plus(ssn789)
+                            .plus(digit10.toString()).plus(digit11.toString())
                     }
                 }
             }
@@ -402,8 +431,16 @@ class RandomGenerator {
                 AvgiverType("940208580", "5422", "Balsfjord"),
                 AvgiverType("940330408", "5423", "Karlsøy"),
                 AvgiverType("840014932", "5424", "Lyngen"),
-                AvgiverType("964994129", "5425", "Storfjord - Omasvuotna - Omasvuono"),
-                AvgiverType("940363586", "5426", "Gáivuotna - Kåfjord - Kaivuono"),
+                AvgiverType(
+                    "964994129",
+                    "5425",
+                    "Storfjord - Omasvuotna - Omasvuono"
+                ),
+                AvgiverType(
+                    "940363586",
+                    "5426",
+                    "Gáivuotna - Kåfjord - Kaivuono"
+                ),
                 AvgiverType("941812716", "5427", "Skjervøy"),
                 AvgiverType("943350833", "5428", "Nordreisa - Ráisa - Raisi"),
                 AvgiverType("940331102", "5429", "Kvænangen"),
@@ -412,7 +449,11 @@ class RandomGenerator {
                 AvgiverType("964830711", "5433", "Hasvik"),
                 AvgiverType("941087957", "5434", "Måsøy"),
                 AvgiverType("938469415", "5435", "Nordkapp"),
-                AvgiverType("959411735", "5436", "Porsanger - Porsángu - Porsanki"),
+                AvgiverType(
+                    "959411735",
+                    "5436",
+                    "Porsanger - Porsángu - Porsanki"
+                ),
                 AvgiverType("963376030", "5437", "Kárásjohka - Karasjok"),
                 AvgiverType("940400392", "5438", "Lebesby"),
                 AvgiverType("934266811", "5439", "Gamvik"),
