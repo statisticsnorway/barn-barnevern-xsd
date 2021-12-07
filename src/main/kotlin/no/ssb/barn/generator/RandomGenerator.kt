@@ -93,8 +93,8 @@ class RandomGenerator {
         }
 
         @JvmStatic
-        fun generateRandomAvgiverType(): AvgiverType {
-            return listOf(
+        fun generateRandomAvgiverType(): AvgiverType =
+            listOf(
                 AvgiverType("944496394", "1101", "Eigersund"),
                 AvgiverType("964965226", "1103", "Stavanger"),
                 AvgiverType("944073787", "1106", "Haugesund"),
@@ -464,6 +464,5 @@ class RandomGenerator {
                 AvgiverType("942110286", "5444", "Sør-Varanger")
 
             ).random()
-        }
     }
 }
