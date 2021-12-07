@@ -21,7 +21,7 @@ class RandomGenerator {
                 .joinToString("")
 
         @JvmStatic
-        fun generateRandomInt(): Int = (1..100000).random()
+        fun generateRandomInt(): Int = (1..100_000).random()
 
         @JvmStatic
         fun generateRandomSSN(
