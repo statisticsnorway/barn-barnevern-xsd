@@ -19,7 +19,7 @@ class TestDataGenerator {
 
     private fun createMutations(incoming: BarnevernType): List<BarnevernType> {
         val mutations = mutableListOf<BarnevernType>()
-        var currentMutation: BarnevernType? = createInitialMutation()
+        var currentMutation: BarnevernType? = incoming
 
         while (currentMutation != null) {
             mutations.add(currentMutation)
