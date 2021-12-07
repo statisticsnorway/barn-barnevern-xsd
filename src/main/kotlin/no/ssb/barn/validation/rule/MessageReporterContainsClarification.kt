@@ -11,8 +11,6 @@ class MessageReporterContainsClarification : AbstractRule(
     "Melder Kontroll 2: Kontroll av kode og presisering",
     MeldingType::class.java.simpleName
 ) {
-    // TODO: Sjekk på meldingSluttDato.isAfter(forrigeTelleDato) mangler
-
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }

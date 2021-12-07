@@ -1,6 +1,7 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -20,7 +21,7 @@ class MessageCaseContentContainsClarificationSpec extends Specification {
     }
 
     @Unroll
-    def "Saksinnhold suksess-scenarier, ingen feil forventes"() {
+    def "Test av alle scenarier"() {
         given:
         def saksinnhold = context.rootObject.sak.virksomhet[0].melding[0].saksinnhold[0]
         and:
@@ -34,36 +35,21 @@ class MessageCaseContentContainsClarificationSpec extends Specification {
         then:
         noExceptionThrown()
         and:
-        null == reportEntries
+        (reportEntries != null) == errorExpected
+        and:
+        if (errorExpected) {
+            assert 1 == reportEntries.size()
+            assert WarningLevel.ERROR == reportEntries[0].warningLevel
+            assert reportEntries[0].errorText.contains("mangler presisering")
+        }
 
         where:
-        code | clarification
-        "18" | "~presisering~"
-        "19" | "~presisering~"
-        "42" | "~presisering~"
-        "42" | null
-    }
-
-    @Unroll
-    def "Saksinnhold mangler presisering, feil forventes"() {
-        given:
-        def saksinnhold = context.rootObject.sak.virksomhet[0].melding[0].saksinnhold[0]
-        and:
-        saksinnhold.kode = "18"
-        and:
-        saksinnhold.presisering = null
-
-        when:
-        def reportEntries = sut.validate(context)
-
-        then:
-        noExceptionThrown()
-        and:
-        1 == reportEntries.size()
-
-        where:
-        code | _
-        "18" | _
-        "19" | _
+        code | clarification   || errorExpected
+        "18" | "~presisering~" || false
+        "19" | "~presisering~" || false
+        "42" | "~presisering~" || false
+        "42" | null            || false
+        "18" | null            || true
+        "19" | null            || true
     }
 }

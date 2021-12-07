@@ -1,6 +1,7 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -21,7 +22,7 @@ class MessageContainsCaseContentSpec extends Specification {
     }
 
     @Unroll
-    def "Konklusjon suksess-scenarier, ingen feil forventes"() {
+    def "Test av alle scenarier"() {
         given:
         def melding = context.rootObject.sak.virksomhet[0].melding[0]
         and:
@@ -37,35 +38,20 @@ class MessageContainsCaseContentSpec extends Specification {
         then:
         noExceptionThrown()
         and:
-        null == reportEntries
+        (reportEntries != null) == errorExpected
+        and:
+        if (errorExpected) {
+            assert 1 == reportEntries.size()
+            assert WarningLevel.ERROR == reportEntries[0].warningLevel
+            assert reportEntries[0].errorText.contains("Konkludert melding mangler saksinnhold.")
+        }
 
         where:
-        code | resetCaseContent
-        "1"  | false
-        "2"  | false
-        "42" | true
-    }
-
-    @Unroll
-    def "Saksinnhold mangler, feil forventes"() {
-        given:
-        def melding = context.rootObject.sak.virksomhet[0].melding[0]
-        and:
-        melding.saksinnhold = null
-        and:
-        melding.konklusjon.kode = code
-
-        when:
-        def reportEntries = sut.validate(context)
-
-        then:
-        noExceptionThrown()
-        and:
-        1 == reportEntries.size()
-
-        where:
-        code | _
-        "1"  | _
-        "2"  | _
+        code | resetCaseContent || errorExpected
+        "1"  | false            || false
+        "2"  | false            || false
+        "1"  | true             || true
+        "2"  | true             || true
+        "42" | true             || false
     }
 }

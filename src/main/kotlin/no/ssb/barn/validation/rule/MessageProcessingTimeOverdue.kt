@@ -11,15 +11,16 @@ class MessageProcessingTimeOverdue : AbstractRule(
     "Melding Kontroll 3: Behandlingstid av melding",
     MeldingType::class.java.simpleName
 ) {
-
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.melding }
             .flatten()
             .filter { melding ->
-                melding.startDato.plusDays(7).isBefore(
-                    melding.konklusjon?.sluttDato
-                )
+                melding.konklusjon != null
+                        && melding.startDato.plusDays(7)
+                    .isBefore(
+                        melding.konklusjon?.sluttDato
+                    )
             }
             .map {
                 createReportEntry(

@@ -10,30 +10,28 @@ import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class MessageProcessingTimeOverdueSpec extends Specification {
+class InvestigationDueDatePassedConclusionRequiredSpec extends Specification {
 
     @Subject
-    MessageProcessingTimeOverdue sut
+    InvestigationDueDatePassedConclusionRequired sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new MessageProcessingTimeOverdue()
+        sut = new InvestigationDueDatePassedConclusionRequired()
         context = getTestContext()
     }
 
     @Unroll
     def "test av alle scenarier"() {
         given:
-        def message = context.rootObject.sak.virksomhet[0].melding[0]
+        def investigation = context.rootObject.sak.virksomhet[0].undersokelse[0]
         and:
-        message.startDato = startDate
+        investigation.startDato = startDate
         and:
         if (resetConclusion) {
-            message.konklusjon = null
-        } else {
-            message.konklusjon?.sluttDato = endDate
+            investigation.konklusjon = null
         }
 
         when:
@@ -47,18 +45,20 @@ class MessageProcessingTimeOverdueSpec extends Specification {
         if (errorExpected) {
             assert 1 == reportEntries.size()
             assert WarningLevel.WARNING == reportEntries[0].warningLevel
-            assert reportEntries[0].errorText.contains("Fristoverskridelse på behandlingstid for melding")
+            assert reportEntries[0].errorText.contains("og skal konkluderes da den har pågått i mer enn 6 måneder")
         }
 
         where:
-        resetConclusion | startDate   | endDate     || errorExpected
-        true            | getDate(-7) | getDate(0)  || false
-        false           | getDate(-3) | getDate(0)  || false
-        false           | getDate(-9) | getDate(-1) || true
-        false           | getDate(-7) | getDate(0)  || false
+        resetConclusion | startDate   || errorExpected
+        true            | getDate(-7) || true
+        true            | getDate(-6) || false
+        true            | getDate(-5) || false
+        false           | getDate(-5) || false
+        false           | getDate(-6) || false
+        false           | getDate(-7) || false
     }
 
-    static def getDate(days) {
-        LocalDate.now().plusDays(days)
+    static def getDate(months) {
+        LocalDate.now().plusMonths(months)
     }
 }

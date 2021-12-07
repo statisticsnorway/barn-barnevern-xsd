@@ -5,28 +5,28 @@ import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.UndersokelseType
+import java.time.LocalDate
 
-class InvestigationDecisionRequired : AbstractRule(
-    WarningLevel.ERROR,
-    "Undersøkelse Kontroll 7: Konkludert undersøkelse skal ha vedtaksgrunnlag",
+class InvestigationDueDatePassedConclusionRequired : AbstractRule(
+    WarningLevel.WARNING,
+    "Undersøkelse Kontroll 8: Ukonkludert undersøkelse påbegynt før 1. juli er ikke konkludert",
     UndersokelseType::class.java.simpleName
 ) {
-    private val codesThatRequiresDecision = listOf("1", "2")
-
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .mapNotNull { virksomhet -> virksomhet.undersokelse }
             .flatten()
             .filter { undersokelse ->
-                codesThatRequiresDecision.contains(undersokelse.konklusjon?.kode)
-                        && undersokelse.vedtaksgrunnlag?.any() != true
+                undersokelse.konklusjon == null
+                        && undersokelse.startDato.plusMonths(6)
+                    .isBefore(LocalDate.now())
             }
             .map {
                 createReportEntry(
                     "Undersøkelse (${it.id})."
-                            + " Undersøkelse konkludert med kode"
-                            + " ${it.konklusjon?.kode}"
-                            + " skal ha vedtaksgrunnlag",
+                            + " Undersøkelsen startet ${it.startDato}"
+                            + " og skal konkluderes da den har pågått i mer enn"
+                            + " 6 måneder",
                     it.id
                 )
             }

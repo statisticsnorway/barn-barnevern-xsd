@@ -17,12 +17,12 @@ class MessageEndDateAfterStartDate : AbstractRule(
             .flatten()
             .filter { melding ->
                 val conclusion = melding.konklusjon
-                conclusion != null && melding.startDato > conclusion.sluttDato
+                conclusion != null && melding.startDato.isAfter(conclusion.sluttDato)
             }
             .map {
                 createReportEntry(
-                    "Meldingens startdato (${it.startDato}) er etter "
-                            + "meldingens sluttdato (${it.konklusjon?.sluttDato})",
+                    "Meldingens startdato (${it.startDato}) er etter"
+                            + " meldingens sluttdato (${it.konklusjon?.sluttDato})",
                     it.id
                 )
             }
