@@ -1,17 +1,22 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.AvgiverType
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.concurrent.ThreadLocalRandom
+import kotlin.random.Random
+
 
 class RandomGenerator {
     companion object {
         @JvmStatic
-        fun generateRandomString(stringLength: Int) : String{
-            val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        fun generateRandomString(stringLength: Int): String {
+            val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
             return (1..stringLength)
-                .map { kotlin.random.Random.nextInt(0, charPool.size) }
+                .map { Random.nextInt(0, charPool.size) }
                 .map(charPool::get)
-                .joinToString("");
+                .joinToString("")
         }
 
         @JvmStatic
@@ -20,7 +25,46 @@ class RandomGenerator {
         }
 
         @JvmStatic
-        fun generateRandomAvgiverType() : AvgiverType {
+        fun generateRandomSSN(startInclusive: LocalDate, endExclusive: LocalDate): String {
+            val startEpochDay: Long = startInclusive.toEpochDay()
+            val endEpochDay: Long = endExclusive.toEpochDay()
+            val randomDay = ThreadLocalRandom
+                .current()
+                .nextLong(startEpochDay, endEpochDay)
+            val birthDate123456 = LocalDate.ofEpochDay(randomDay)
+                    .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
+
+            while (true) {
+                val ssn789 = Random.nextInt(100, 499).toString()
+                val birthDateAndSSN = birthDate123456.plus(ssn789)
+                val birthDateAndFnrList10 = birthDateAndSSN.toCharArray().map { s -> s.toString().toInt() }.toList()
+                val weights10 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)
+                val controlDigit10 = birthDateAndFnrList10
+                    .zip(weights10) { d, w -> d * w }
+                    .fold(0, { sum, i -> sum + i })
+                val mod10 = controlDigit10.mod(11)
+
+                if (mod10 != 1) {
+                    val digit10 = if (mod10 == 0) 0 else 11 - mod10
+                    val birthDateAndFnrList11 = birthDate123456.plus(ssn789).plus(digit10.toString())
+                            .toCharArray().map { s -> s.toString().toInt() }.toList()
+                    val weights11 = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)
+                    val controlDigit11 = birthDateAndFnrList11
+                        .zip(weights11) { d, w -> d * w }
+                        .fold(0, { acc, i -> acc + i })
+                    val mod11 = controlDigit11.mod(11)
+
+                    if (mod11 != 1) {
+                        val digit11 = if (mod11 == 0) 0 else 11 - mod11
+
+                        return birthDate123456.plus(ssn789).plus(digit10.toString()).plus(digit11.toString())
+                    }
+                }
+            }
+        }
+
+        @JvmStatic
+        fun generateRandomAvgiverType(): AvgiverType {
             return listOf(
                 AvgiverType("944496394", "1101", "Eigersund"),
                 AvgiverType("964965226", "1103", "Stavanger"),
