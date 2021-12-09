@@ -22,7 +22,7 @@ class TypeUtilsSpec extends Specification {
         LocalDate.of(2101, 1, 1) || 0
     }
 
-    def CodeListItem getCodeListItem() {
+    static def getCodeListItem() {
         new CodeListItem("~code~", "~description~",
                 LocalDate.of(2020, 1, 1),
                 LocalDate.of(2022, 1, 1),
