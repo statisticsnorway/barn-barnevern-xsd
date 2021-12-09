@@ -3,7 +3,6 @@ package no.ssb.barn.generator
 import no.ssb.barn.xsd.AvgiverType
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
 
 
@@ -30,9 +29,7 @@ class RandomGenerator {
         ): String {
             val startEpochDay: Long = startInclusive.toEpochDay()
             val endEpochDay: Long = endExclusive.toEpochDay()
-            val randomDay = ThreadLocalRandom
-                .current()
-                .nextLong(startEpochDay, endEpochDay)
+            val randomDay = (startEpochDay..endEpochDay).random()
             val birthDate123456 = LocalDate.ofEpochDay(randomDay)
                 .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
 
