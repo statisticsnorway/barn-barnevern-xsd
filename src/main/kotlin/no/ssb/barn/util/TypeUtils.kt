@@ -7,6 +7,7 @@ class TypeUtils {
 
     companion object {
 
+        @JvmStatic
         fun getCodes(
             date: LocalDate,
             codeList: List<CodeListItem>
