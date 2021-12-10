@@ -4,15 +4,22 @@ import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
-import no.ssb.barn.generator.RandomGenerator
+import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
+import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FlyttingType", propOrder = ["id", "sluttDato", "kode"])
+@XmlType(name = "FlyttingType", propOrder = ["id", "migrertId", "sluttDato", "arsakFra", "flytteTil"])
 data class FlyttingType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String = RandomGenerator.generateRandomString(10),
+    @field:XmlJavaTypeAdapter(
+        UuidAdapter::class
+    )
+    var id: UUID = UUID.randomUUID(),
+
+    @field:XmlAttribute(name = "MigrertId")
+    var migrertId: String? = null,
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
@@ -21,8 +28,11 @@ data class FlyttingType(
     )
     var sluttDato: LocalDate? = LocalDate.now(),
 
-    @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String? = getCodes(LocalDate.now())[0].code
+    @field:XmlElement(name = "ArsakFra")
+var arsakFra: ArsakFraType = ArsakFraType(),
+
+    @field:XmlElement(name = "FlytteTil")
+var flytteTil: FlytteTilType = FlytteTilType()
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
