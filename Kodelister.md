@@ -20,7 +20,8 @@
 - [Ettervern](#/Barnevern/Sak/Virksomhet/Ettervern)
   - [Konklusjon](#/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode)
 - [Flytting](#/Barnevern/Sak/Virksomhet/Flytting)
-  - [Flyttekode](#/Barnevern/Sak/Virksomhet/Flytting/@Kode)
+  - [ÅrsakFra](#/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode)
+  - [FlyttingTil](#/Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode)
 
 
 
@@ -100,16 +101,12 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode
 
-| Kode | Betydning                                                                                                  | Gyldig fra | Gyldig til |
-| ---- | ---------------------------------------------------------------------------------------------------------- | ---------- | ---------- |
-| 1    | Henlagt                                                                                                    | 2013-01-01 | 2021-12-31 |
-| 1.1  | Henlagt, Utenfor BVL                                                                                       | 2022-01-01 |            |
-| 1.2  | Henlagt, Vist til annen instans                                                                            | 2022-01-01 |            |
-| 1.3  | Henlagt, Overført til annen kommune                                                                        | 2022-01-01 |            |
-| 1.4  | Henlagt av andre grunner enn 1.1, 1.2, 1.3 og 3                                                            | 2022-01-01 |            |
-| 2    | Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse | 2013-01-01 |            |
-| 3    | Henlagt pga. aktive tiltak                                                                                 | 2013-01-01 |            |
-| 4    | Melding i pågående undersøkelse                                                                            | 2013-01-01 |            |
+| Kode | Betydning                                                                                                  | Gyldig fra |
+| ---- | ---------------------------------------------------------------------------------------------------------- | ---------- |
+| 1    | Henlagt                                                                                                    | 2013-01-01 |
+| 2    | Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse | 2013-01-01 |
+| 3    | Henlagt pga. aktive tiltak                                                                                 | 2013-01-01 |
+| 4    | Melding i pågående undersøkelse                                                                            | 2013-01-01 |
 
 
 <a name="/Barnevern/Sak/Virksomhet/Undersokelse"></a>
