@@ -5,7 +5,6 @@ import java.time.LocalDate
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.UuidAdapter
-import no.ssb.barn.generator.RandomGenerator
 import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -5,7 +5,6 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
-import no.ssb.barn.generator.RandomGenerator
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import java.util.*
