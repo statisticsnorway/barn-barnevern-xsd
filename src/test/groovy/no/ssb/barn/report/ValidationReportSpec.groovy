@@ -5,6 +5,9 @@ import spock.lang.Specification
 class ValidationReportSpec extends Specification {
 
     def "given valid ValidationReport, all props are set"() {
+        given:
+        def uuid = UUID.randomUUID()
+
         when:
         def sut = new ValidationReport(
                 "~messageId~",
@@ -14,16 +17,18 @@ class ValidationReportSpec extends Specification {
                                 "~ruleName~",
                                 "~errorText~",
                                 "~xmlContext~",
-                                "~id~")
+                                uuid)
                 ),
                 WarningLevel.ERROR,
         )
 
         then:
-        "~messageId~" == sut.getMessageId()
-        and:
-        1 == sut.getReportEntries().size()
-        and:
-        WarningLevel.ERROR == sut.severity
+        with(sut) {
+            "~messageId~" == getMessageId()
+            and:
+            1 == getReportEntries().size()
+            and:
+            WarningLevel.ERROR == severity
+        }
     }
 }

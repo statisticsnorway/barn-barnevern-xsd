@@ -3,8 +3,10 @@ package no.ssb.barn.xsd
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.generator.RandomGenerator
 import java.time.LocalDate
+import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -13,7 +15,10 @@ import java.time.LocalDate
 )
 data class MeldingType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String = RandomGenerator.generateRandomString(10),
+    @field:XmlJavaTypeAdapter(
+        UuidAdapter::class
+    )
+    var id: UUID = UUID.randomUUID(),
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,

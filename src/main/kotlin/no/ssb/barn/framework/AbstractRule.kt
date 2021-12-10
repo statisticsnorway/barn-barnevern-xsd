@@ -2,6 +2,7 @@ package no.ssb.barn.framework
 
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import java.util.*
 
 abstract class AbstractRule(
     private val warningLevel: WarningLevel,
@@ -12,13 +13,13 @@ abstract class AbstractRule(
 
     protected fun createSingleReportEntryList(
         errorText: String,
-        contextId: String
+        contextId: UUID
     ): List<ReportEntry> =
         listOf(createReportEntry(errorText, contextId))
 
     protected fun createReportEntry(
         errorText: String,
-        contextId: String
+        contextId: UUID
     ): ReportEntry =
         ReportEntry(
             warningLevel = warningLevel,

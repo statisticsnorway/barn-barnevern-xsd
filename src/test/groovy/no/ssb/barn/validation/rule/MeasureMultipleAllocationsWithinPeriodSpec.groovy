@@ -37,7 +37,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         if (useSecond) {
             def secondContext = getTestContext()
             virksomhet.tiltak[1] = secondContext.rootObject.sak.virksomhet[0].tiltak[0]
-            virksomhet.tiltak[1].id = "2"
+            virksomhet.tiltak[1].id = UUID.randomUUID()
             virksomhet.tiltak[1].startDato = secondStartDate
             virksomhet.tiltak[1].konklusjon.sluttDato = secondEndDate
             virksomhet.tiltak[1].kategori.kode = categoryCode

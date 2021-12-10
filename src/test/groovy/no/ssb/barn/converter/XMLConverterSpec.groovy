@@ -43,7 +43,7 @@ class XMLConverterSpec extends Specification {
         def melder = new MelderType(MelderType.getRandomCode(date), null)
         def saksinnhold = new SaksinnholdType(SaksinnholdType.getRandomCode(date), null)
         def melding = new MeldingType(
-                RandomGenerator.generateRandomInt().toString(),
+                UUID.randomUUID(),
                 null,
                 date,
                 List.of(melder),
@@ -68,7 +68,7 @@ class XMLConverterSpec extends Specification {
                 null
         )
         def sak = new SakType(
-                RandomGenerator.generateRandomInt().toString(),
+                UUID.randomUUID(),
                 null,
                 date,
                 null,

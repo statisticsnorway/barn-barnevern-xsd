@@ -3,7 +3,9 @@ package no.ssb.barn.xsd
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.UuidAdapter
 import java.time.LocalDate
+import java.util.*
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -14,7 +16,10 @@ import java.time.LocalDate
 )
 data class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String? = null,
+    @field:XmlJavaTypeAdapter(
+        UuidAdapter::class
+    )
+    var id: UUID = UUID.randomUUID(),
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,
