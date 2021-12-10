@@ -3,6 +3,7 @@ package no.ssb.barn.validation.rule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
@@ -15,17 +16,21 @@ class XsdRuleSpec extends Specification {
         sut = new XsdRule("Barnevern.xsd")
     }
 
+    @Unroll
     def "when validate with valid XML receive no reportEntry"() {
         given:
         def context = new ValidationContext(
                 UUID.randomUUID().toString(),
-                getResourceAsString("test01_fil01.xml"))
+                getResourceAsString("test01_fil0" + i + ".xml"))
 
         when:
         def reportEntry = sut.validate(context)
 
         then:
         null == reportEntry
+
+        where:
+        i << (1..5)
     }
 
     def "when validate with invalid XML receive reportEntry"() {
