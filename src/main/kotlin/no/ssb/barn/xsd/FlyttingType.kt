@@ -29,10 +29,10 @@ data class FlyttingType(
     var sluttDato: LocalDate? = LocalDate.now(),
 
     @field:XmlElement(name = "ArsakFra")
-var arsakFra: ArsakFraType = ArsakFraType(),
+    var arsakFra: ArsakFraType = ArsakFraType(),
 
-    @field:XmlElement(name = "FlytteTil")
-var flytteTil: FlytteTilType = FlytteTilType()
+    @field:XmlElement(name = "FlyttingTil")
+    var flytteTil: FlyttingTilType = FlyttingTilType()
 ) {
     companion object {
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
