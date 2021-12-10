@@ -35,7 +35,7 @@ class LegalBasisWithEndDateClarificationRequired : AbstractRule(
                 createReportEntry(
                     "Tiltak ($it.id). Opphevelse av omsorgstiltak"
                             + " mangler presisering",
-                    it.id ?: "N/A"
+                    it.id
                 )
             }
             .toList()

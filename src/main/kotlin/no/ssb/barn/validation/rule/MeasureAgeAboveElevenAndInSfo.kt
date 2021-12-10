@@ -26,7 +26,7 @@ class MeasureAgeAboveElevenAndInSfo : AbstractRule(
                     createReportEntry(
                         "Tiltak ($it.id). Barnet er over 11 år og i"
                                 + " SFO. Barnets alder er $age år.",
-                        it.id ?: "N/A"
+                        it.id
                     )
                 }
                 .toList()

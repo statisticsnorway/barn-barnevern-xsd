@@ -71,7 +71,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                 reportEntries.add(
                     createReportEntry(
                         errorMsg,
-                        outerMeasure.id ?: "N/A"
+                        outerMeasure.id
                     )
                 )
             }

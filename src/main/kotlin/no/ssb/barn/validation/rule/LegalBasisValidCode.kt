@@ -25,7 +25,7 @@ class LegalBasisValidCode : AbstractRule(
                             + " (${it.lovhjemmel?.kapittel}) eller paragraf"
                             + " (${it.lovhjemmel?.paragraf}) er rapportert med"
                             + " den ugyldige koden 0",
-                    it.id ?: "N/A"
+                    it.id
                 )
             }
             .toList()

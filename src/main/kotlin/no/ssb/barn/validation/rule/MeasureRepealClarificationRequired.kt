@@ -23,7 +23,7 @@ class MeasureRepealClarificationRequired : AbstractRule(
                 createReportEntry(
                     "Tiltak (${it.id}}). Tiltaksopphevelse" +
                             " (${it.opphevelse?.kode}) mangler presisering",
-                    it.id ?: "N/A"
+                    it.id
                 )
             }
             .toList()

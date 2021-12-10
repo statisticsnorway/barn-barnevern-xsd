@@ -23,7 +23,7 @@ class MeasureClarificationRequired : AbstractRule(
                 createReportEntry(
                     "Tiltak ($it.id). Tiltakskategori"
                             + "(${it.kategori?.kode}) mangler presisering",
-                    it.id ?: "N/A"
+                    it.id
                 )
             }
             .toList()
