@@ -2,21 +2,21 @@
 <Barnevern xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" DatoUttrekk="2021-01-01T13:22:00" xsi:noNamespaceSchemaLocation="Barnevern.xsd">
 	<Fagsystem Versjon="1.0" Navn="OJJ's Manuell Touch" Leverandor="SSB"/>
 	<Avgiver Kommunenummer="3401" Kommunenavn="Kongsvinger kommune" Organisasjonsnummer="944117784"/>
-	<Sak StartDato="2021-01-01" Id="1" Journalnummer="test1" Fodselsnummer="02011088123">
+	<Sak StartDato="2021-01-01" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1" Fodselsnummer="02011088123">
 		<Virksomhet StartDato="2021-01-01" Organisasjonsnummer="944117784">
-			<Melding StartDato="2021-01-01" Id="1">
+			<Melding StartDato="2021-01-01" Id="bb6b82ea-c3da-4882-b591-cccd833c262d">
 				<Melder Kode="1"/>
 				<Saksinnhold Kode="1"/>
 				<Konklusjon SluttDato="2021-01-08" Kode="2"/>
 			</Melding>
-			<Undersokelse StartDato="2021-01-08" Id="1">
+			<Undersokelse StartDato="2021-01-08" Id="d28aa453-724a-4538-8c4e-2f27b36b7530">
 				<Konklusjon SluttDato="2021-04-08" Kode="1"/>
 			</Undersokelse>
-			<Plan Id="1" StartDato="2021-07-09" Plantype="1">
+			<Plan Id="0b6ceeba-677d-45da-bf4d-cb14e3631c28" StartDato="2021-07-09" Plantype="1">
 				<Evaluering UtfortDato="2021-10-12"/>
 				<Evaluering UtfortDato="2022-01-12"/>
 			</Plan>
-			<Tiltak Id="1" StartDato="2021-04-08">
+			<Tiltak Id="be6dff10-c654-4a88-8310-a42d3e268e7d" StartDato="2021-04-08">
 				<Lovhjemmel>
 					<Lov>BVL</Lov>
 					<Kapittel>4</Kapittel>
@@ -26,7 +26,7 @@
 				<Kategori Kode="3.10"/>
 				<Konklusjon SluttDato="2021-07-09"/>
 			</Tiltak>
-			<Vedtak Id="1" StartDato="2021-04-08">
+			<Vedtak Id="5365c6e6-be78-4a3e-8b28-b7af12085ede" StartDato="2021-04-08">
 				<Lovhjemmel>
 					<Lov>BVL</Lov>
 					<Kapittel>4</Kapittel>
@@ -36,7 +36,7 @@
 				<Status EndretDato="2021-04-09" Kode="3"/>
 				<Konklusjon SluttDato="2021-04-09"/>
 			</Vedtak>
-			<Vedtak Id="2" StartDato="2021-07-08">
+			<Vedtak Id="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" StartDato="2021-07-08">
 				<Lovhjemmel>
 					<Lov>BVL</Lov>
 					<Kapittel>4</Kapittel>
@@ -46,10 +46,10 @@
 				<Status EndretDato="2021-07-09" Kode="3"/>
 				<Konklusjon SluttDato="2021-07-09"/>
 			</Vedtak>
-			<Relasjon FraType="Melding" FraId="1" Id="q1" TilId="1" TilType="Undersokelse"/>
-			<Relasjon FraType="Undersokelse" FraId="1" Id="q2" TilId="1" TilType="Vedtak"/>
-			<Relasjon FraType="Vedtak" FraId="1" Id="q3" TilId="1" TilType="Tiltak"/>
-			<Relasjon FraType="Vedtak" FraId="2" Id="q4" TilId="1" TilType="Tiltak"/>
+			<Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d" Id="q1" TilId="d28aa453-724a-4538-8c4e-2f27b36b7530" TilType="Undersokelse"/>
+			<Relasjon FraType="Undersokelse" FraId="d28aa453-724a-4538-8c4e-2f27b36b7530" Id="q2" TilId="5365c6e6-be78-4a3e-8b28-b7af12085ede" TilType="Vedtak"/>
+			<Relasjon FraType="Vedtak" FraId="5365c6e6-be78-4a3e-8b28-b7af12085ede" Id="q3" TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
+			<Relasjon FraType="Vedtak" FraId="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" Id="q4" TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
 		</Virksomhet>
 	</Sak>
 </Barnevern>
