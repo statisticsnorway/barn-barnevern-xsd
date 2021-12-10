@@ -100,14 +100,16 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode
 
-| Kode | Betydning                                                    | Gyldig fra |
-| :--- | ------------------------------------------------------------ | ---------- |
-| 1    | Henlagt                                                      | 2013-01-01 |
-| 2    | Ikke henlagt – konklusjonsdato melding <br>(eventuelt 7 dager etter mottatt melding) <br>er startdato undersøkelse | 2013-01-01 |
-| 3    | Henlagt pga. aktive tiltak                                   | 2013-01-01 |
-| 4    | Melding i pågående undersøkelse                              | 2013-01-01 |
-
-
+| Kode | Betydning                                                                                                  | Gyldig fra | Gyldig til |
+| ---- | ---------------------------------------------------------------------------------------------------------- | ---------- | ---------- |
+| 1    | Henlagt                                                                                                    | 2013-01-01 | 2021-12-31 |
+| 1.1  | Henlagt, Utenfor BVL                                                                                       | 2022-01-01 |            |
+| 1.2  | Henlagt, Vist til annen instans                                                                            | 2022-01-01 |            |
+| 1.3  | Henlagt, Overført til annen kommune                                                                        | 2022-01-01 |            |
+| 1.4  | Henlagt av andre grunner enn 1.1, 1.2, 1.3 og 3                                                            | 2022-01-01 |            |
+| 2    | Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse | 2013-01-01 |            |
+| 3    | Henlagt pga. aktive tiltak                                                                                 | 2013-01-01 |            |
+| 4    | Melding i pågående undersøkelse                                                                            | 2013-01-01 |            |
 
 
 <a name="/Barnevern/Sak/Virksomhet/Undersokelse"></a>
@@ -296,18 +298,46 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode
 
 Definert på stien /Barnevern/Sak/Virksomhet/Flytting
 
-<a name="/Barnevern/Sak/Virksomhet/Flytting/@Kode"></a>
-#### Flyttekode
+<a name="/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode"></a>
+#### ÅrsakFra
 
-Brukes på stien /Barnevern/Sak/Virksomhet/Flytting/@Kode
+Brukes på stien /Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode
 
-| Kode | Betydning                                                       | Gyldig fra |
-|:---- |---------------------------------------------------------------- | ---------- |
-| 1.1  | Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører  | 2013-01-01 |
-| 1.2  | Barnet blir myndig                                              | 2013-01-01 |
-| 1.3  | Fosterforeldre klarer ikke å dekke barnets behov <br>(forhold ved fosterhjemmet) | 2013-01-01 |
-| 1.4  | Barnet har behov for annet plasseringssted <br>(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet) | 2013-01-01 |
-| 1.5  | Andre grunner; spesifiser. <br>(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.). | 2013-01-01 |
-| 2.1  | Barnet har behov fosterforeldre ikke kan dekke                  | 2013-01-01 |
-| 2.2  | Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) | 2013-01-01 |
-| 2.3  | Andre grunner; spesifiser <br>(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>manglende eller lite effektiv veiledning, mv.). | 2013-01-01 |
+| Kode  | Betydning                                                                                                                                                   | Gyldig fra |
+|:----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| 1.1.1 | Omsorgsplasseringen opphører                                                                                                                                | 2022-01-01 |
+| 1.1.2 | Barnet blir myndig                                                                                                                                          | 2022-01-01 |
+| 1.1.3 | Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)                                                                                | 2022-01-01 |
+| 1.1.4 | Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv.                                                       | 2022-01-01 |
+| 1.1.5 | Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.) (krever presisering)                                                | 2022-01-01 |
+| 1.2.1 | Barnet har behov fosterforeldre ikke kan dekke                                                                                                              | 2022-01-01 |
+| 1.2.2 | Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)                                                                                             | 2022-01-01 |
+| 1.2.3 | Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.) (krever presisering)     | 2022-01-01 |
+| 1.3   | Barnet flytter sammen med fosterforeldre til nytt bosted                                                                                                    | 2022-01-01 |
+| 2.1   | Avsluttet i henhold til plan ved oppstart av institusjonsoppholdet                                                                                          | 2022-01-01 |
+| 2.2   | Institusjonen barnet bor i klarer ikke å dekke barnets behov (manglende kompetanse hos ansatte, beboersammensetning, fysiske forhold ved institusjonen osv) | 2022-01-01 |
+| 2.3   | Barnet har behov for annen type plasseringstiltak (annen type institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv.                                     | 2022-01-01 |
+| 2.4   | Barnet blir myndig og velger selv å flytte ut                                                                                                               | 2022-01-01 |
+| 2.5   | Barnet trekker samtykke                                                                                                                                     | 2022-01-01 |
+| 2.6   | Foreldre trekker samtykke                                                                                                                                   | 2022-01-01 |
+| 2.7   | Ikke medhold i fylkesnemnda                                                                                                                                 | 2022-01-01 |
+| 2.8   | Uenighet mellom barnevernstjenesten og Bufetat om oppdragets omfang og/eller økonomi,                                                                       | 2022-01-01 |
+| 2.9   | Andre grunner (krever presisering)                                                                                                                          | 2022-01-01 |
+
+
+<a name="/Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode"></a>
+#### FlyttingTil
+
+Brukes på stien /Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode
+
+|:Kode | Betydning                                   | Gyldig fra |
+| ---- | ------------------------------------------- | ---------- |
+| 1    | Fosterhjem i familie og nære nettverk       | 2022-01-01 |
+| 2    | Fosterhjem utenfor familie og nære nettverk | 2022-01-01 |
+| 3    | Beredskapshjem                              | 2022-01-01 |
+| 4    | Barnevernsinstitusjon                       | 2022-01-01 |
+| 5    | Bolig med oppfølging                        | 2022-01-01 |
+| 6    | Foreldre                                    | 2022-01-01 |
+| 7    | Egen bolig uten oppfølging                  | 2022-01-01 |
+| 8    | Annet bosted (spesifiser)                   | 2022-01-01 |
+| 9    | Adresseendring                              | 2022-01-01 |
