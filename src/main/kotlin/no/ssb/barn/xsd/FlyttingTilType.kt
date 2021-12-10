@@ -10,10 +10,10 @@ import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "FlytteTilType",
+    name = "FlyttingTilType",
     propOrder = ["kode", "presisering"]
 )
-data class FlytteTilType(
+data class FlyttingTilType(
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String = MelderType.getCodes(LocalDate.now())[0].code,
 
