@@ -1,10 +1,10 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.AvgiverType
+import no.ssb.barn.xsd.FagsystemType
+import java.security.SecureRandom
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.ThreadLocalRandom
-import kotlin.random.Random
 
 
 @Suppress("SpellCheckingInspection")
@@ -14,9 +14,19 @@ class RandomGenerator {
         private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
         @JvmStatic
+        fun generateRandomIntFromRange(startInclusive: Int, endExclusive: Int): Int {
+            return startInclusive + SecureRandom().nextInt(endExclusive)
+        }
+
+        @JvmStatic
+        fun generateRandomLongFromRange(startInclusive: Long, endExclusive: Long): Long {
+            return startInclusive + (SecureRandom().nextDouble().toLong() * (endExclusive - startInclusive))
+        }
+
+        @JvmStatic
         fun generateRandomString(stringLength: Int): String =
             (1..stringLength)
-                .map { Random.nextInt(0, charPool.size) }
+                .map { generateRandomIntFromRange(0, charPool.size) }
                 .map(charPool::get)
                 .joinToString("")
 
@@ -30,14 +40,12 @@ class RandomGenerator {
         ): String {
             val startEpochDay: Long = startInclusive.toEpochDay()
             val endEpochDay: Long = endExclusive.toEpochDay()
-            val randomDay = ThreadLocalRandom
-                .current()
-                .nextLong(startEpochDay, endEpochDay)
+            val randomDay = generateRandomLongFromRange(startEpochDay, endEpochDay)
             val birthDate123456 = LocalDate.ofEpochDay(randomDay)
                 .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
 
             while (true) {
-                val ssn789 = Random.nextInt(100, 499).toString()
+                val ssn789 = generateRandomIntFromRange(100, 499).toString()
                 val mod10 = birthDate123456.plus(ssn789)
                     .toCharArray()
                     .map { s -> s.toString().toInt() }
@@ -91,6 +99,14 @@ class RandomGenerator {
                 }
             }
         }
+
+        @JvmStatic
+        fun generateRandomFagsystemType(): FagsystemType =
+            listOf(
+//                FagsystemType("Visma", "Flyt Barnevern", "1.0.0"),
+//                FagsystemType("Netcompany", "Modulus Barn", "0.1.0"),
+                FagsystemType("SSB", "Random Magic", "0.0.1")
+            ).random()
 
         @JvmStatic
         fun generateRandomAvgiverType(): AvgiverType =
