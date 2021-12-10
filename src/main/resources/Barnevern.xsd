@@ -1324,6 +1324,8 @@ Dato tilsynsbesøket faktisk ble utført
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
+					<xs:minLength value="3"/>
+					<xs:maxLength value="5"/>
 					<xs:enumeration value="1.1.1"/>
 					<xs:enumeration value="1.1.2"/>
 					<xs:enumeration value="1.1.3"/>
@@ -1384,6 +1386,7 @@ Barnet/ungdommen flytter til:
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
 					<xs:enumeration value="1"/>
 					<xs:enumeration value="2"/>
 					<xs:enumeration value="3"/>
