@@ -1,5 +1,6 @@
 package no.ssb.barn.deserialize
 
+import no.ssb.barn.generator.TestDataGenerator
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -30,5 +31,18 @@ class BarnevernDeserializerSpec extends Specification {
 
         where:
         i << (1..9)
+    }
+
+    def "when marshalling instance to XML, xml is valid"() {
+        given:
+        def instance = new TestDataGenerator().createInitialMutation()
+
+        when:
+        def xml = BarnevernDeserializer.marshallXml(instance)
+
+        then:
+        noExceptionThrown()
+        and:
+        null != xml
     }
 }
