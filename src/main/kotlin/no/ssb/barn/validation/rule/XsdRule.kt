@@ -23,6 +23,8 @@ class XsdRule(
         try {
             getSchemaValidator(xsdResourceName)
                 .validate(StreamSource(StringReader(context.xml)))
+
+            return null
         } catch (e: SAXParseException) {
             return listOf(
                 createReportEntry(
@@ -35,7 +37,6 @@ class XsdRule(
                 )
             )
         }
-        return null
     }
 
     private fun getSchemaValidator(xsdResourceName: String): Validator =

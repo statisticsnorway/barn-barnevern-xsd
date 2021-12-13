@@ -1,6 +1,6 @@
 package no.ssb.barn.converter
 
-import no.ssb.barn.generator.RandomGenerator
+import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.xsd.*
 import spock.lang.Specification
 
@@ -72,13 +72,13 @@ class XMLConverterSpec extends Specification {
                 null,
                 date,
                 null,
-                RandomGenerator.generateRandomString(9),
+                RandomUtils.generateRandomString(9),
                 "02011088123",
                 null,
                 null,
                 List.of(virksomhet)
         )
-        def avgiver = RandomGenerator.generateRandomAvgiverType()
+        def avgiver = RandomUtils.generateRandomAvgiverType()
         def fagsystem = new FagsystemType(
                 "SSB", "OJJ's automatiske touch", "0.0.1"
         )

@@ -4,7 +4,7 @@ import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
-import no.ssb.barn.generator.RandomGenerator
+import no.ssb.barn.generator.RandomUtils
 import java.time.LocalDate
 import java.util.*
 
@@ -39,7 +39,7 @@ data class SakType(
     var sluttDato: LocalDate? = null,
 
     @field:XmlAttribute(name = "Journalnummer", required = true)
-    var journalnummer: String = RandomGenerator.generateRandomString(20),
+    var journalnummer: String = RandomUtils.generateRandomString(20),
 
     @field:XmlAttribute(name = "Fodselsnummer")
     var fodselsnummer: String? = null,

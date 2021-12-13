@@ -1,16 +1,19 @@
 package no.ssb.barn.xsd
 
-import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlAttribute
+import jakarta.xml.bind.annotation.XmlType
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.UuidAdapter
-import no.ssb.barn.generator.RandomGenerator
+import no.ssb.barn.generator.RandomUtils
 import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RelasjonType", propOrder = ["id", "fraId", "fraType", "tilId", "tilType"])
 data class RelasjonType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String = RandomGenerator.generateRandomString(10),
+    var id: String = RandomUtils.generateRandomString(10),
 
     @field:XmlAttribute(name = "FraId", required = true)
     @field:XmlJavaTypeAdapter(

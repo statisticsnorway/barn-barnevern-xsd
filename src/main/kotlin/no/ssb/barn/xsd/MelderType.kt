@@ -35,11 +35,17 @@ data class MelderType(
             arrayOf("10", "Helsestasjon/skolehelsetjenesten"),
             arrayOf("11", "Skole"),
             arrayOf("12", "Pedagogisk-psykologisk tjeneste (PPT)"),
-            arrayOf("13", "Psykisk helsevern for barn og unge (kommune og stat)"),
+            arrayOf(
+                "13",
+                "Psykisk helsevern for barn og unge (kommune og stat)"
+            ),
             arrayOf("14", "Psykisk helsevern for voksne (kommune og stat)"),
             arrayOf("15", "Lege/ sykehus/ tannlege"),
             arrayOf("16", "Familievernkontor"),
-            arrayOf("17", "Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)"),
+            arrayOf(
+                "17",
+                "Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)"
+            ),
             arrayOf("18", "Krisesenter"),
             arrayOf("19", "Asylmottak/ UDI/ innvandringsmyndighet"),
             arrayOf("20", "Utekontakt/ fritidsklubb"),
