@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FagsystemType", propOrder = ["leverandor", "navn", "versjon"])

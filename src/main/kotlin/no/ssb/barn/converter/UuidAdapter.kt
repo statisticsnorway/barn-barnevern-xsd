@@ -1,6 +1,6 @@
 package no.ssb.barn.converter
 
-import jakarta.xml.bind.annotation.adapters.XmlAdapter
+import javax.xml.bind.annotation.adapters.XmlAdapter
 import java.util.*
 
 class UuidAdapter: XmlAdapter<String, UUID>() {

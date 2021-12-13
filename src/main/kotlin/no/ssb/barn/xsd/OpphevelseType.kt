@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 import no.ssb.barn.generator.RandomUtils
 
 @XmlAccessorType(XmlAccessType.FIELD)

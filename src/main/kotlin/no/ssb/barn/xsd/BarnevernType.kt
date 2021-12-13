@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
-import jakarta.xml.bind.annotation.*
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateTimeAdapter
 import java.time.LocalDateTime
 

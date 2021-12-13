@@ -1,6 +1,6 @@
 package no.ssb.barn.converter
 
-import jakarta.xml.bind.JAXB
+import javax.xml.bind.JAXB
 import no.ssb.barn.xsd.BarnevernType
 import java.io.StringReader
 import java.io.StringWriter
