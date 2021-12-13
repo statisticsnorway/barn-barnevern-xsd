@@ -2,7 +2,6 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.AvgiverType
 import no.ssb.barn.xsd.FagsystemType
-import java.security.SecureRandom
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -14,14 +13,12 @@ class RandomGenerator {
         private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
         @JvmStatic
-        fun generateRandomIntFromRange(startInclusive: Int, endExclusive: Int): Int {
-            return startInclusive + SecureRandom().nextInt(endExclusive)
-        }
+        fun generateRandomIntFromRange(startInclusive: Int, endExclusive: Int): Int =
+            (startInclusive until endExclusive).random()
 
         @JvmStatic
-        fun generateRandomLongFromRange(startInclusive: Long, endExclusive: Long): Long {
-            return startInclusive + (SecureRandom().nextDouble().toLong() * (endExclusive - startInclusive))
-        }
+        fun generateRandomLongFromRange(startInclusive: Long, endExclusive: Long): Long =
+            (startInclusive until endExclusive).random()
 
         @JvmStatic
         fun generateRandomString(stringLength: Int): String =

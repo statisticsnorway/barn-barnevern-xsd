@@ -1,6 +1,6 @@
 package no.ssb.barn.util
 
-import no.ssb.barn.codelists.CodeListItem
+import no.ssb.barn.xsd.CodeListItem
 import spock.lang.Specification
 import spock.lang.Unroll
 

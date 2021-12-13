@@ -1,4 +1,4 @@
-package no.ssb.barn.codelists
+package no.ssb.barn.xsd
 
 import java.time.LocalDate
 

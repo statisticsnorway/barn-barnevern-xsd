@@ -6,7 +6,6 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlAttribute
 import jakarta.xml.bind.annotation.XmlType
-import no.ssb.barn.codelists.CodeListItem
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 

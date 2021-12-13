@@ -58,16 +58,17 @@ class ValidationUtils {
         }
 
         @JvmStatic
-        fun getAge(socialSecurityNumber: String?): Int {
-            return if (socialSecurityNumber != null)
+        fun getAge(socialSecurityNumber: String?): Int =
+            if (socialSecurityNumber != null)
                 getAlderFromFnr(
                     socialSecurityNumber, Year.now().value % 100
                 )
-            else -2
-        }
+            else {
+                -2
+            }
 
         @JvmStatic
-        private fun getAlderFromFnr(fodselsnummer: String, aargang: Int): Int {
+        private fun getAlderFromFnr(fodselsnummer: String, aargang: Int): Int =
             if (isValidDate(fodselsnummer.substring(0, 6))) {
                 val fodselsAar = fodselsnummer.substring(4, 6).toInt()
 
@@ -75,10 +76,10 @@ class ValidationUtils {
                     if (aargang < fodselsAar) aargang + 100 - fodselsAar
                     else aargang - fodselsAar
 
-                return if (alder == 99) -1 else alder
+                if (alder == 99) -1 else alder
+            } else {
+                -1
             }
-            return -1
-        }
 
         private fun isValidDate(dateStr: String): Boolean {
             val sdf: DateFormat = SimpleDateFormat("ddMMyy")

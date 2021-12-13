@@ -1,6 +1,6 @@
 package no.ssb.barn.util
 
-import no.ssb.barn.codelists.CodeListItem
+import no.ssb.barn.xsd.CodeListItem
 import java.time.LocalDate
 
 class TypeUtils {

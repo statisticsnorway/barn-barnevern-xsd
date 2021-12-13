@@ -7,6 +7,7 @@ import java.io.StringWriter
 
 class XMLConverter {
     companion object {
+
         @JvmStatic
         fun xmlToBarnevernType(xmlString: String): BarnevernType =
              JAXB.unmarshal(StringReader(xmlString), BarnevernType::class.java)
