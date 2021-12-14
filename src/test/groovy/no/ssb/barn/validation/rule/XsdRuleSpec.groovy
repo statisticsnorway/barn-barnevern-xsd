@@ -3,12 +3,14 @@ package no.ssb.barn.validation.rule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import spock.lang.Specification
+import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
 class XsdRuleSpec extends Specification {
 
+    @Subject
     XsdRule sut
 
     @SuppressWarnings('unused')

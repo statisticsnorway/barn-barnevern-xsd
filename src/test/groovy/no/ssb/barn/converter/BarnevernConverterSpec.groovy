@@ -1,7 +1,9 @@
 package no.ssb.barn.converter
 
+import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.generator.TestDataGenerator
+import no.ssb.barn.validation.rule.XsdRule
 import no.ssb.barn.xsd.BarnevernType
 import no.ssb.barn.xsd.FagsystemType
 import no.ssb.barn.xsd.MelderType
@@ -18,6 +20,8 @@ import java.time.LocalDateTime
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
 class BarnevernConverterSpec extends Specification {
+
+    def xsdRule = new XsdRule("Barnevern.xsd")
 
     @Unroll("test01_fil0 #i .xml")
     def "when unmarshalling valid XML, receive populated instance"() {
@@ -61,6 +65,8 @@ class BarnevernConverterSpec extends Specification {
         noExceptionThrown()
         and:
         null != xml
+        and:
+        null == xsdRule.validate(new ValidationContext("N/A", xml))
     }
 
     def "should convert XML to objects, JAXB.unmarshal()"() {
