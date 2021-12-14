@@ -18,7 +18,7 @@ class AgeAboveEighteen : AbstractRule(
         }
 
         return context.rootObject.sak.virksomhet.asSequence()
-            .filter { virksomhet -> virksomhet.tiltak?.any() != true }
+            .filter { virksomhet -> !virksomhet.tiltak.any() }
             .map {
                 createReportEntry(
                     "Individet er over 18 år og skal dermed ha tiltak",

@@ -15,7 +15,7 @@ class EndDateAfterStartDate : AbstractRule(
         val startDate = context.rootObject.sak.startDato
         val endDate = context.rootObject.sak.sluttDato
 
-        return if (endDate == null || endDate.isAfter(startDate))
+        return if (endDate?.isBefore(startDate) != true)
             null
         else
             createSingleReportEntryList(

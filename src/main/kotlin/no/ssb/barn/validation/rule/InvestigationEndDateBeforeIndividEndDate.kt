@@ -16,8 +16,7 @@ class InvestigationEndDateBeforeIndividEndDate : AbstractRule(
         val individEndDate = sak.sluttDato ?: return null
 
         return sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.undersokelse }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.undersokelse }
             .filter { undersokelse ->
                 undersokelse.konklusjon?.sluttDato?.isAfter(individEndDate) == true
             }

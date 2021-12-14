@@ -29,7 +29,7 @@ class MessageContainsReportersSpec extends Specification {
         melding.konklusjon.kode = code
         and:
         if (resetReporters) {
-            melding.melder = null
+            melding.melder = List.of()
         }
 
         when:

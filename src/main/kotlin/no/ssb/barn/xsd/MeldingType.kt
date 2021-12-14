@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
 import java.time.LocalDate
 import java.util.*
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -30,10 +30,10 @@ data class MeldingType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Melder")
-    var melder: MutableList<MelderType>? = MutableList(1) { MelderType() },
+    var melder: List<MelderType> = mutableListOf(),
 
     @field:XmlElement(name = "Saksinnhold")
-    var saksinnhold: MutableList<SaksinnholdType>? = MutableList(1) { SaksinnholdType() },
+    var saksinnhold: List<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: MeldingKonklusjonType? = null

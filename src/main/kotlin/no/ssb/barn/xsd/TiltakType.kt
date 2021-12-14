@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
 import java.time.LocalDate
 import java.util.*
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -34,16 +34,16 @@ data class TiltakType(
     var lovhjemmel: LovhjemmelType? = null,
 
     @field:XmlElement(name = "JmfrLovhjemmel")
-    var jmfrLovhjemmel: List<LovhjemmelType>? = null,
+    var jmfrLovhjemmel: List<LovhjemmelType> = mutableListOf(),
 
     @field:XmlElement(name = "Kategori", required = true)
     var kategori: KategoriType? = null,
 
     @field:XmlElement(name = "Tilsyn")
-    var tilsyn: List<TilsynType>? = null,
+    var tilsyn: List<TilsynType> = mutableListOf(),
 
     @field:XmlElement(name = "Oppfolging")
-    var oppfolging: List<OppfolgingType>? = null,
+    var oppfolging: List<OppfolgingType> = mutableListOf(),
 
     @field:XmlElement(name = "Opphevelse")
     var opphevelse: OpphevelseType? = null,

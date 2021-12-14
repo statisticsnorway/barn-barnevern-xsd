@@ -15,10 +15,8 @@ class InvestigationDecisionClarificationRequired : AbstractRule(
 
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.undersokelse }
-            .flatten()
-            .mapNotNull { undersokelse -> undersokelse.vedtaksgrunnlag }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.undersokelse }
+            .flatMap { undersokelse -> undersokelse.vedtaksgrunnlag }
             .filter { vedtaksgrunnlag ->
                 codesThatRequiresClarification.contains(vedtaksgrunnlag.kode)
                         && vedtaksgrunnlag.presisering.isNullOrEmpty()

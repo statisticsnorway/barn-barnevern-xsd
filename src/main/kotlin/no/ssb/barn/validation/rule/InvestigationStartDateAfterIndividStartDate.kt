@@ -15,8 +15,7 @@ class InvestigationStartDateAfterIndividStartDate : AbstractRule(
         val individStartDate = context.rootObject.sak.startDato
 
         return context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.undersokelse }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.undersokelse }
             .filter { undersokelse ->
                 undersokelse.startDato.isBefore(individStartDate)
             }

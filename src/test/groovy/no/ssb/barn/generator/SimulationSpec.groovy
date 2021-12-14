@@ -1,9 +1,11 @@
 package no.ssb.barn.generator
 
+import no.ssb.barn.xsd.BarnevernType
 import spock.lang.Specification
 import spock.lang.Subject
 
 import java.time.LocalDate
+import java.util.stream.Collectors
 import java.util.stream.StreamSupport
 
 class SimulationSpec extends Specification {
@@ -27,10 +29,11 @@ class SimulationSpec extends Specification {
         def result = sut.run()
 
         then:
-        def splitIterator = Spliterators.spliteratorUnknownSize(result.iterator(), Spliterator.ORDERED)
+        def splitIterator =
+                Spliterators.spliteratorUnknownSize(
+                        result.iterator(), Spliterator.ORDERED)
         and:
-        def stream = StreamSupport.stream(splitIterator, false)
-        and:
-        stream.count() > expectedNumberOfMutations
+        StreamSupport.stream(splitIterator, false)
+                .count() > expectedNumberOfMutations
     }
 }

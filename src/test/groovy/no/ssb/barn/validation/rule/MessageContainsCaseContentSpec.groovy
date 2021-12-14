@@ -29,7 +29,7 @@ class MessageContainsCaseContentSpec extends Specification {
         melding.konklusjon.kode = code
         and:
         if (resetCaseContent) {
-            melding.saksinnhold = null
+            melding.saksinnhold = List.of()
         }
 
         when:

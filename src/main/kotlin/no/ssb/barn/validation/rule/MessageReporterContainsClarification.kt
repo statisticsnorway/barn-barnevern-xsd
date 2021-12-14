@@ -13,12 +13,17 @@ class MessageReporterContainsClarification : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.melding }
-            .flatten()
-            .filter { melding -> melding.konklusjon?.sluttDato != null && melding.melder?.any() == true }
+            .flatMap { virksomhet -> virksomhet.melding }
+            .filter { melding ->
+                melding.konklusjon?.sluttDato != null
+                        && melding.melder.any()
+            }
             .flatMap { melding ->
-                melding.melder!!
-                    .filter { melder -> melder.kode == "22" && melder.presisering.isNullOrEmpty() }
+                melding.melder
+                    .filter { melder ->
+                        melder.kode == "22"
+                                && melder.presisering.isNullOrEmpty()
+                    }
                     .map {
                         createReportEntry(
                             "Melder med kode (${it.kode}) mangler presisering",

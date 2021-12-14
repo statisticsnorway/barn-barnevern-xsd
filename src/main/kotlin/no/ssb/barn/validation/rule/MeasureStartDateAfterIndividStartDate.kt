@@ -15,8 +15,7 @@ class MeasureStartDateAfterIndividStartDate : AbstractRule(
         val individStartDate = context.rootObject.sak.startDato
 
         return context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.tiltak }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 tiltak.startDato?.isBefore(individStartDate) == true
             }

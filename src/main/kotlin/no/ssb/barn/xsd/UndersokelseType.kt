@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
 import java.time.LocalDate
 import java.util.*
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -30,7 +30,7 @@ data class UndersokelseType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Vedtaksgrunnlag")
-    var vedtaksgrunnlag: MutableList<SaksinnholdType>? = null,
+    var vedtaksgrunnlag: List<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "UtvidetFrist")
     var utvidetFrist: UndersokelseUtvidetFristType? = null,

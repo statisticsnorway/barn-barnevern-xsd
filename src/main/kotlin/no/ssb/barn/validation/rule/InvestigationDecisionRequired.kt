@@ -15,11 +15,10 @@ class InvestigationDecisionRequired : AbstractRule(
 
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.undersokelse }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.undersokelse }
             .filter { undersokelse ->
                 codesThatRequiresDecision.contains(undersokelse.konklusjon?.kode)
-                        && undersokelse.vedtaksgrunnlag?.any() != true
+                        && !undersokelse.vedtaksgrunnlag.any()
             }
             .map {
                 createReportEntry(

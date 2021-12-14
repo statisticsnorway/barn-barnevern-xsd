@@ -13,8 +13,7 @@ class MeasureRepealClarificationRequired : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         return context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.tiltak }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 tiltak.opphevelse != null
                         && tiltak.opphevelse?.presisering.isNullOrEmpty()

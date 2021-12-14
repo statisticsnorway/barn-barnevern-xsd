@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
 import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.UuidAdapter
 import java.time.LocalDate
+import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.converter.UuidAdapter
-import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OversendelseBarneverntjenesteType", propOrder = ["id", "startDato", "lovhjemmel", "jmfrLovhjemmel"])
@@ -26,5 +26,5 @@ data class OversendelseBarneverntjenesteType(
     var lovhjemmel: LovhjemmelType = LovhjemmelType(),
 
     @field:XmlElement(name = "JmfrLovhjemmel")
-    var jmfrLovhjemmel: MutableList<LovhjemmelType>? = MutableList(1) { LovhjemmelType() }
+    var jmfrLovhjemmel: List<LovhjemmelType> = mutableListOf()
 )

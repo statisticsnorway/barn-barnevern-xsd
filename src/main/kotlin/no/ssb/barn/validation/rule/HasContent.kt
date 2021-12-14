@@ -14,9 +14,7 @@ class HasContent : AbstractRule(
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .filter { virksomhet ->
-                !(virksomhet.melding?.any() == true
-                        || virksomhet.tiltak?.any() == true
-                        || virksomhet.plan?.any() == true)
+                !(virksomhet.melding.any() || virksomhet.tiltak.any() || virksomhet.plan.any())
             }
             .map {
                 createReportEntry(

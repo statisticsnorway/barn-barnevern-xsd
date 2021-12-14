@@ -17,8 +17,7 @@ class MeasureAgeAboveSevenAndInKindergarten : AbstractRule(
 
         if (age > 7) {
             return context.rootObject.sak.virksomhet.asSequence()
-                .mapNotNull { virksomhet -> virksomhet.tiltak }
-                .flatten()
+                .flatMap { virksomhet -> virksomhet.tiltak }
                 .filter { tiltak ->
                     tiltak.kategori?.kode == "4.1"
                 }

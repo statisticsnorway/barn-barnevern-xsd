@@ -13,8 +13,7 @@ class MeasureEndDateAfterStartDate : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.tiltak }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 tiltak.konklusjon?.sluttDato?.isBefore(tiltak.startDato) == true
             }

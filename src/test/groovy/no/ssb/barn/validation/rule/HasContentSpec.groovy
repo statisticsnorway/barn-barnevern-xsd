@@ -29,11 +29,11 @@ class HasContentSpec extends Specification {
         given:
         def virksomhet = context.rootObject.sak.virksomhet[0]
         and:
-        virksomhet.melding = messages
+        virksomhet.melding = messages as List<MeldingType>
         and:
-        virksomhet.tiltak = measures
+        virksomhet.tiltak = measures as List<TiltakType>
         and:
-        virksomhet.plan = plans
+        virksomhet.plan = plans as List<PlanType>
 
         when:
         def reportEntries = sut.validate(context)
@@ -51,9 +51,9 @@ class HasContentSpec extends Specification {
 
         where:
         messages                   | measures                  | plans                   || errorExpected
-        null                       | null                      | null                    || true
-        List.of(new MeldingType()) | null                      | null                    || false
-        null                       | List.of(new TiltakType()) | null                    || false
-        null                       | null                      | List.of(new PlanType()) || false
+        List.of()                  | List.of()                 | List.of()               || true
+        List.of(new MeldingType()) | List.of()                 | List.of()               || false
+        List.of()                  | List.of(new TiltakType()) | List.of()               || false
+        List.of()                  | List.of()                 | List.of(new PlanType()) || false
     }
 }

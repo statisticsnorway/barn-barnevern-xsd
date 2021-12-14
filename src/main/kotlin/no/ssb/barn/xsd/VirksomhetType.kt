@@ -1,9 +1,9 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import java.time.LocalDate
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -41,29 +41,29 @@ data class VirksomhetType(
     var distriktsnummer: String? = null,
 
     @field:XmlElement(name = "Melding")
-    var melding: MutableList<MeldingType>? = MutableList(1) { MeldingType() },
+    var melding: List<MeldingType> = mutableListOf(),
 
     @field:XmlElement(name = "Undersokelse")
-    var undersokelse: MutableList<UndersokelseType>? = MutableList(1) { UndersokelseType() },
+    var undersokelse: List<UndersokelseType> = mutableListOf(),
 
     @field:XmlElement(name = "Plan")
-    var plan: MutableList<PlanType>? = MutableList(1) { PlanType() },
+    var plan: List<PlanType> = mutableListOf(),
 
     @field:XmlElement(name = "Tiltak")
-    var tiltak: MutableList<TiltakType>? = MutableList(1) { TiltakType() },
+    var tiltak: List<TiltakType> = mutableListOf(),
 
     @field:XmlElement(name = "Vedtak")
-    var vedtak: MutableList<VedtakType>? = MutableList(1) { VedtakType() },
+    var vedtak: List<VedtakType> = mutableListOf(),
 
     @field:XmlElement(name = "Ettervern")
-    var ettervern: MutableList<EttervernType>? = MutableList(1) { EttervernType() },
+    var ettervern: List<EttervernType> = mutableListOf(),
 
     @field:XmlElement(name = "OversendelseBarneverntjeneste")
-    var oversendelseBarneverntjeneste: List<OversendelseBarneverntjenesteType>? = MutableList(1) { OversendelseBarneverntjenesteType() },
+    var oversendelseBarneverntjeneste: List<OversendelseBarneverntjenesteType> = mutableListOf(),
 
     @field:XmlElement(name = "Flytting")
-    var flytting: MutableList<FlyttingType>? = MutableList(1) { FlyttingType() },
+    var flytting: List<FlyttingType> = mutableListOf(),
 
     @field:XmlElement(name = "Relasjon")
-    var relasjon: MutableList<RelasjonType>? = MutableList(1) { RelasjonType() }
+    var relasjon: List<RelasjonType> = mutableListOf()
 )

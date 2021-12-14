@@ -29,8 +29,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val measures = context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.tiltak }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 kodelistePlasseringstiltak.contains(tiltak.kategori?.kode)
                         && tiltak.startDato != null

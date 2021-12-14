@@ -28,6 +28,12 @@ class BarnevernDeserializerSpec extends Specification {
         null != barnevernType.fagsystem
         and:
         null != barnevernType.sak
+        and:
+        barnevernType.sak.virksomhet.any()
+        and:
+        barnevernType.sak.virksomhet[0].melding.any()
+        and:
+        !barnevernType.sak.virksomhet[0].ettervern.any()
 
         where:
         i << (1..9)

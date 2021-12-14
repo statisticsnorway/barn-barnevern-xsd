@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
 import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.UuidAdapter
 import java.time.LocalDate
+import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.converter.UuidAdapter
-import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -30,14 +30,14 @@ data class VedtakType(
     var lovhjemmel: LovhjemmelType = LovhjemmelType(),
 
     @field:XmlElement(name = "JmfrLovhjemmel")
-    var jmfrLovhjemmel: MutableList<LovhjemmelType>? = MutableList(1) { LovhjemmelType() },
+    var jmfrLovhjemmel: List<LovhjemmelType> = mutableListOf(),
 
     @field:XmlElement(name = "Krav")
-    var krav: MutableList<OversendelsePrivatKravType>? = MutableList(1) { OversendelsePrivatKravType() },
+    var krav: List<OversendelsePrivatKravType> = mutableListOf(),
 
     @field:XmlElement(name = "Status")
-    var status: MutableList<VedtakStatusType>? = MutableList(1) { VedtakStatusType() },
+    var status: List<VedtakStatusType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: VedtakKonklusjonType? = VedtakKonklusjonType()
+    var konklusjon: VedtakKonklusjonType? = null
 )

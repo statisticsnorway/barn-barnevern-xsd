@@ -44,13 +44,13 @@ class Simulation(
                 } else {
                     // find a case to mutate
                     val currentCase = getRandomCaseToMutate()
-                    val currentMutation = currentCase.mutations.last()
+                    val mostRecentMutation = currentCase.mutations.last()
 
                     val currentNewMutation = CaseMutation(
-                        generation = currentMutation.generation + 1,
-                        isMutable = currentMutation.generation < 4, // TODO: scaffolding for use during development
+                        generation = mostRecentMutation.generation + 1,
+                        isMutable = mostRecentMutation.generation < 4, // TODO: scaffolding for use during development
                         created = currentDate,
-                        barnevern = testDataGenerator.mutate(currentMutation.barnevern)
+                        barnevern = testDataGenerator.mutate(mostRecentMutation.barnevern)
                     )
 
                     currentCase.mutations.add(currentNewMutation)

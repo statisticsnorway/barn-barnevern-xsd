@@ -14,8 +14,7 @@ class InvestigationDueDatePassedConclusionRequired : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.undersokelse }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.undersokelse }
             .filter { undersokelse ->
                 undersokelse.konklusjon == null
                         && undersokelse.startDato.plusMonths(6)

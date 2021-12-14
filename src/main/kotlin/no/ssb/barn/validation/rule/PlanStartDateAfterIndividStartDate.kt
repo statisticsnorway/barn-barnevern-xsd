@@ -15,10 +15,9 @@ class PlanStartDateAfterIndividStartDate : AbstractRule(
         val individStartDate = context.rootObject.sak.startDato
 
         return context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.plan }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.plan }
             .filter { plan ->
-                plan.startDato < individStartDate
+                plan.startDato.isBefore(individStartDate)
             }
             .map {
                 createReportEntry(

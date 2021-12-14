@@ -13,10 +13,9 @@ class PlanEndDateAfterStartDate : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.plan }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.plan }
             .filter { plan ->
-                plan.startDato > plan.konklusjon?.sluttDato
+                plan.konklusjon?.sluttDato?.isBefore(plan.startDato) == true
             }
             .map {
                 createReportEntry(

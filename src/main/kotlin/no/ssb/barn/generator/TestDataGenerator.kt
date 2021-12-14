@@ -33,44 +33,39 @@ class TestDataGenerator {
             )
         }
 
-        with(instance.sak.virksomhet[0]) {
-
-            startDato = LocalDate.now()
-            organisasjonsnummer = globalCompanyId // TODO: Oslo
-            plan = null
-            undersokelse = null
-            tiltak = null
-            vedtak = null
-            ettervern = null
-            oversendelseBarneverntjeneste = null
-            flytting = null
-            relasjon = null
-
-            val messages = melding
-            if (messages != null && messages.size > 0) {
-                with(messages[0]) {
-                    id = java.util.UUID.randomUUID()
-                    startDato = LocalDate.now()
-
-                    melder = mutableListOf(
-                        MelderType(
-                            MelderType.getRandomCode(
-                                LocalDate.now()
-                            )
-                        )
-                    )
-
-                    saksinnhold = mutableListOf(
-                        SaksinnholdType(
-                            SaksinnholdType.getRandomCode(
-                                LocalDate.now()
-                            )
-                        )
-                    )
-                }
-            }
+        if (!instance.sak.virksomhet.any()) {
+            return instance
         }
 
+        with(instance.sak.virksomhet.first()) {
+            startDato = LocalDate.now()
+            organisasjonsnummer = globalCompanyId // TODO: Oslo
+
+            if (!melding.any()) {
+                return instance
+            }
+
+            with(melding.first()) {
+                id = java.util.UUID.randomUUID()
+                startDato = LocalDate.now()
+
+                melder = mutableListOf(
+                    MelderType(
+                        MelderType.getRandomCode(
+                            LocalDate.now()
+                        )
+                    )
+                )
+
+                saksinnhold = mutableListOf(
+                    SaksinnholdType(
+                        SaksinnholdType.getRandomCode(
+                            LocalDate.now()
+                        )
+                    )
+                )
+            }
+        }
         return instance
     }
 

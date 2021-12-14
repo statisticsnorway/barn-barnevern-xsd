@@ -1,12 +1,12 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.generator.RandomUtils
 import java.time.LocalDate
 import java.util.*
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -51,5 +51,5 @@ data class SakType(
     var avsluttet: Boolean? = null,
 
     @field:XmlElement(name = "Virksomhet", required = true)
-    var virksomhet: MutableList<VirksomhetType> = MutableList(1) { VirksomhetType() }
+    var virksomhet: List<VirksomhetType> = mutableListOf()
 )

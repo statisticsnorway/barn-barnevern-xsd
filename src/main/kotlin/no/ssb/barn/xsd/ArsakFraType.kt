@@ -70,7 +70,6 @@ data class ArsakFraType(
             CodeListItem("2.9", "Andre grunner (krever presisering)", validFrom)
         )
 
-
         @JvmStatic
         fun getCodes(date: LocalDate): List<CodeListItem> =
             TypeUtils.getCodes(date, codeList)

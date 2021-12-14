@@ -16,12 +16,9 @@ class MessageCaseContentContainsClarification : AbstractRule(
     private val codesThatRequiresClarification = listOf("18", "19")
 
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet
-            .asSequence()
-            .mapNotNull { virksomhet -> virksomhet.melding }
-            .flatten()
-            .mapNotNull { melding -> melding.saksinnhold }
-            .flatten()
+        context.rootObject.sak.virksomhet.asSequence()
+            .flatMap { virksomhet -> virksomhet.melding }
+            .flatMap { melding -> melding.saksinnhold }
             .filter { saksinnhold ->
                 codesThatRequiresClarification.contains(saksinnhold.kode)
                         && saksinnhold.presisering.isNullOrEmpty()

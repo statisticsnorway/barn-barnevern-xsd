@@ -13,8 +13,7 @@ class MessageProcessingTimeOverdue : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.melding }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
                 melding.konklusjon != null
                         && melding.startDato.plusDays(7)

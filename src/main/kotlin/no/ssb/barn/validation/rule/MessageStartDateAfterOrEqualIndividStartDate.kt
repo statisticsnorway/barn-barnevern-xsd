@@ -16,8 +16,7 @@ class MessageStartDateAfterOrEqualIndividStartDate : AbstractRule(
         val individStartDate = sak.startDato
 
         return sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.melding }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
                 melding.startDato.isBefore(individStartDate)
             }

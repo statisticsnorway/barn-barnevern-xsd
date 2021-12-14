@@ -58,14 +58,14 @@ class XMLConverterSpec extends Specification {
                 null,
                 null,
                 List.of(melding),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of()
         )
         def sak = new SakType(
                 UUID.randomUUID(),

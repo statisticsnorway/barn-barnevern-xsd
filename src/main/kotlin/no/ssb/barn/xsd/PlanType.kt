@@ -1,12 +1,12 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import java.util.*
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -34,7 +34,7 @@ data class PlanType(
     var plantype: String = getPlantype(LocalDate.now())[0].code,
 
     @field:XmlElement(name = "Evaluering")
-    var evaluering: MutableList<PlanEvalueringType>? = MutableList(1) { PlanEvalueringType() },
+    var evaluering: List<PlanEvalueringType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: PlanKonklusjonType? = PlanKonklusjonType()

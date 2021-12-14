@@ -15,11 +15,10 @@ class MessageContainsReporters : AbstractRule(
 
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.melding }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
                 val conclusion = melding.konklusjon
-                melding.melder?.any() != true
+                !melding.melder.any()
                         && conclusion != null
                         && codesThatRequiresCaseContent.contains(conclusion.kode)
             }

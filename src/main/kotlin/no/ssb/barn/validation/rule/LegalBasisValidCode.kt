@@ -13,8 +13,7 @@ class LegalBasisValidCode : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
-            .mapNotNull { virksomhet -> virksomhet.tiltak }
-            .flatten()
+            .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 tiltak.lovhjemmel?.paragraf?.startsWith("0") == true
                         || tiltak.lovhjemmel?.kapittel?.startsWith("0") == true
