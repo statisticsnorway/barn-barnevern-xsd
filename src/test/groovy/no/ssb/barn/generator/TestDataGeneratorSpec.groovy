@@ -9,17 +9,22 @@ class TestDataGeneratorSpec extends Specification {
     @Subject
     TestDataGenerator sut
 
-    def "when calling createInitialMutation receive instance"() {
-        given:
+    def setup() {
         sut = new TestDataGenerator()
+    }
 
+    def "when calling createInitialMutation receive valid instance"() {
         when:
         def instance = sut.createInitialMutation()
 
         then:
-        def xml = BarnevernConverter.marshallXml(instance)
+        def xml = BarnevernConverter.marshallInstance(instance)
         and:
         null != BarnevernConverter.unmarshallXml(xml)
-        System.out.println(BarnevernConverter.unmarshallXml(xml))
+    }
+
+    def "when calling mutate with valid instance receive mutated instance"() {
+        expect:
+        null != sut.mutate(sut.createInitialMutation())
     }
 }

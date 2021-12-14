@@ -2,6 +2,7 @@ package no.ssb.barn.util
 
 import org.xml.sax.SAXException
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import javax.xml.transform.stream.StreamSource
 
@@ -58,6 +59,20 @@ class ValidationUtilsSpec extends Specification {
         "41011088188" | "dnr" || true
         "01020304050" | "fnr" || false
         "ABCDEFGHIJK" | "???" || false
+    }
+
+    @Unroll
+    def "getAge all scenarios"() {
+        expect:
+        expectedAge == ValidationUtils.getAge(fnr)
+
+        where:
+        fnr            | type  || expectedAge
+        "05011399292"  | "fnr" || 8
+        "41011088188"  | "dnr" || -1
+        "01020304050"  | "fnr" || 18
+        "a".repeat(11) | "???" || -1
+        null           | "???" || -2
     }
 
     def getSourceFromClasspath(String path) {

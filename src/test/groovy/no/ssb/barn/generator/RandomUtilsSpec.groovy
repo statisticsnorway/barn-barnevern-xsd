@@ -6,7 +6,7 @@ import spock.lang.Specification
 import java.time.LocalDate
 
 class RandomUtilsSpec extends Specification {
-    def "Should validate randomly generated norwegian social security numbers known as FNR"(){
+    def "Should validate randomly generated norwegian social security numbers known as FNR"() {
         given:
         def startInclusive = LocalDate.of(2000, 1, 1)
         and:
@@ -19,7 +19,7 @@ class RandomUtilsSpec extends Specification {
         ValidationUtils.validateSSN(ssn)
     }
 
-    def "Should validate randomly generated String"(){
+    def "Should validate randomly generated String"() {
         given:
         def stringLength = 20
 
@@ -33,7 +33,7 @@ class RandomUtilsSpec extends Specification {
         }
     }
 
-    def "Should create an Int within a certain range"(){
+    def "Should create an Int within a certain range"() {
         given:
         def startInclusive = 0
         and:
@@ -46,8 +46,15 @@ class RandomUtilsSpec extends Specification {
         startInclusive <= randomInt && randomInt < endExclusive
     }
 
-    def "Should validate UUID against regex"(){
+    def "Should validate UUID against regex"() {
         expect:
         UUID.randomUUID() ==~ /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/
+    }
+
+    def "generateRandomInt receive int between boundaries"() {
+        expect:
+        RandomUtils.generateRandomInt() >= 1
+        and:
+        RandomUtils.generateRandomInt() <= 100_000
     }
 }

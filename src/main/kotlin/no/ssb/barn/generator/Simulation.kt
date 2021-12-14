@@ -5,7 +5,9 @@ import java.util.*
 
 class Simulation(
     startDate: LocalDate,
-    private val endDate: LocalDate
+    private val endDate: LocalDate,
+    private val minUpdatesPerDay: Int = 10,
+    private val maxUpdatesPerDay: Int = 20,
 ) {
     private val caseList = mutableSetOf<CaseEntry>()
     private val testDataGenerator = TestDataGenerator()
@@ -14,17 +16,12 @@ class Simulation(
     private var numberOfNewCasesForCurrentDay = 0
     private var currentDate = startDate
 
-    companion object {
-        const val MIN_UPDATES_PER_DAY = 10
-        const val MAX_UPDATES_PER_DAY = 30
-    }
-
     fun run() = sequence {
 
         while (currentDate.isBefore(endDate.plusDays(1))) {
 
             val requiredNumberOfUpdatesForCurrentDay =
-                (MIN_UPDATES_PER_DAY..MAX_UPDATES_PER_DAY).random()
+                (minUpdatesPerDay..maxUpdatesPerDay).random()
 
             while (numberOfUpdatesForCurrentDay < requiredNumberOfUpdatesForCurrentDay + 1) {
 

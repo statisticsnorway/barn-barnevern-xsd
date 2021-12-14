@@ -11,7 +11,7 @@ import javax.xml.validation.Schema
 import javax.xml.validation.SchemaFactory
 import javax.xml.validation.Validator
 
-class ValidationUtils {
+class ValidationUtils private constructor() {
     companion object {
 
         @JvmStatic

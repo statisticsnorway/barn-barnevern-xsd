@@ -4,7 +4,8 @@ import no.ssb.barn.xsd.BarnevernType
 import java.io.StringWriter
 import javax.xml.bind.JAXBContext
 
-class BarnevernConverter {
+class BarnevernConverter private constructor() {
+
     companion object {
 
         private val jaxbContext: JAXBContext =
@@ -17,7 +18,7 @@ class BarnevernConverter {
                 .unmarshal(xml.byteInputStream()) as BarnevernType
 
         @JvmStatic
-        fun marshallXml(barnevernType: BarnevernType): String =
+        fun marshallInstance(barnevernType: BarnevernType): String =
             StringWriter().use {
                 jaxbContext
                     .createMarshaller()

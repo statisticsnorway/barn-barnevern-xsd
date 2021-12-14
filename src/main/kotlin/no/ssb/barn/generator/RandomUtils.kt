@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 
 
 @Suppress("SpellCheckingInspection")
-class RandomUtils {
+class RandomUtils private constructor() {
     companion object {
 
         @JvmStatic
