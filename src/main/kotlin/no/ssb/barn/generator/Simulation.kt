@@ -18,51 +18,50 @@ class Simulation(
 
     fun run() = sequence {
 
+        var requiredNumberOfUpdatesForCurrentDay =
+            (minUpdatesPerDay..maxUpdatesPerDay).random()
+
         while (currentDate.isBefore(endDate.plusDays(1))) {
 
-            val requiredNumberOfUpdatesForCurrentDay =
-                (minUpdatesPerDay..maxUpdatesPerDay).random()
+            if (!mutableCasesExists() || shouldCreateNewCase()) {
+                val currentBarnevernType =
+                    testDataGenerator.createInitialMutation()
 
-            while (numberOfUpdatesForCurrentDay < requiredNumberOfUpdatesForCurrentDay + 1) {
-
-                if (!mutableCasesExists() || shouldCreateNewCase()) {
-                    val currentBarnevernType =
-                        testDataGenerator.createInitialMutation()
-
-                    caseList.add(
-                        CaseEntry(
-                            UUID.randomUUID(),
-                            currentBarnevernType
-                        )
+                caseList.add(
+                    CaseEntry(
+                        UUID.randomUUID(),
+                        currentBarnevernType
                     )
-                    numberOfNewCasesForCurrentDay++
+                )
+                numberOfNewCasesForCurrentDay++
+                yield(currentBarnevernType)
+            } else {
 
-                    yield(currentBarnevernType)
+                // find a case to mutate
+                val currentCase = getRandomCaseToMutate()
+                val mutation =
+                    testDataGenerator.mutate(currentCase.barnevern)
+
+                if (currentCase.generation + 1 > 4) {
+                    caseList.remove(currentCase)
                 } else {
-                    // find a case to mutate
-                    val currentCase = getRandomCaseToMutate()
-                    val mutation =
-                        testDataGenerator.mutate(currentCase.barnevern)
-
-                    if (currentCase.generation + 1 > 4) {
-                        caseList.remove(currentCase)
-                    } else {
-                        with(currentCase) {
-                            barnevern = mutation
-                            generation++
-                            updated = currentDate
-                        }
+                    with(currentCase) {
+                        barnevern = mutation
+                        generation++
+                        updated = currentDate
                     }
-
-                    yield(mutation)
                 }
-
-                numberOfUpdatesForCurrentDay++
+                yield(mutation)
             }
 
-            currentDate = currentDate.plusDays(1)
-            numberOfUpdatesForCurrentDay = 0
-            numberOfNewCasesForCurrentDay = 0
+            if (++numberOfUpdatesForCurrentDay > requiredNumberOfUpdatesForCurrentDay) {
+                requiredNumberOfUpdatesForCurrentDay =
+                    (minUpdatesPerDay..maxUpdatesPerDay).random()
+
+                currentDate = currentDate.plusDays(1)
+                numberOfUpdatesForCurrentDay = 0
+                numberOfNewCasesForCurrentDay = 0
+            }
         }
     }
 
