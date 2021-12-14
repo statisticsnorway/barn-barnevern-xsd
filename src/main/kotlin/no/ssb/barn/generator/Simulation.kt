@@ -15,8 +15,8 @@ class Simulation(
     private var currentDate = startDate
 
     companion object {
-        const val CHANGE_LIMIT_DAY_LOWER = 10
-        const val CHANGE_LIMIT_DAY_UPPER = 30
+        const val MIN_UPDATES_PER_DAY = 10
+        const val MAX_UPDATES_PER_DAY = 30
     }
 
     fun run() = sequence {
@@ -24,7 +24,7 @@ class Simulation(
         while (currentDate.isBefore(endDate.plusDays(1))) {
 
             val requiredNumberOfUpdatesForCurrentDay =
-                (CHANGE_LIMIT_DAY_LOWER..CHANGE_LIMIT_DAY_UPPER).random()
+                (MIN_UPDATES_PER_DAY..MAX_UPDATES_PER_DAY).random()
 
             while (numberOfUpdatesForCurrentDay < requiredNumberOfUpdatesForCurrentDay + 1) {
 
@@ -32,29 +32,32 @@ class Simulation(
                     val currentBarnevernType =
                         testDataGenerator.createInitialMutation()
 
-                    val currentMutatedCase = CaseMutation(
-                        barnevern = currentBarnevernType,
-                        created = currentDate
+                    caseList.add(
+                        CaseEntry(
+                            UUID.randomUUID(),
+                            currentBarnevernType
+                        )
                     )
-
-                    caseList.add(CaseEntry(UUID.randomUUID(), currentMutatedCase))
                     numberOfNewCasesForCurrentDay++
 
                     yield(currentBarnevernType)
                 } else {
                     // find a case to mutate
                     val currentCase = getRandomCaseToMutate()
-                    val mostRecentMutation = currentCase.mutations.last()
+                    val mutation =
+                        testDataGenerator.mutate(currentCase.barnevern)
 
-                    val currentNewMutation = CaseMutation(
-                        generation = mostRecentMutation.generation + 1,
-                        isMutable = mostRecentMutation.generation < 4, // TODO: scaffolding for use during development
-                        created = currentDate,
-                        barnevern = testDataGenerator.mutate(mostRecentMutation.barnevern)
-                    )
+                    if (currentCase.generation + 1 > 4) {
+                        caseList.remove(currentCase)
+                    } else {
+                        with(currentCase) {
+                            barnevern = mutation
+                            generation++
+                            updated = currentDate
+                        }
+                    }
 
-                    currentCase.mutations.add(currentNewMutation)
-                    yield(currentNewMutation.barnevern)
+                    yield(mutation)
                 }
 
                 numberOfUpdatesForCurrentDay++
@@ -79,8 +82,8 @@ class Simulation(
     private fun getRandomCaseToMutate(): CaseEntry =
         caseList.asSequence()
             .filter {
-                it.mutations.last().isMutable
-                        && it.mutations.last().created.isBefore(currentDate)
+                it.isMutable
+                        && it.updated.isBefore(currentDate)
             }
             .toList()
             .random()
@@ -88,7 +91,7 @@ class Simulation(
 
     private fun mutableCasesExists(): Boolean =
         caseList.any {
-            it.mutations.last().isMutable
-                    && it.mutations.last().created.isBefore(currentDate)
+            it.isMutable
+                    && it.updated.isBefore(currentDate)
         }
 }

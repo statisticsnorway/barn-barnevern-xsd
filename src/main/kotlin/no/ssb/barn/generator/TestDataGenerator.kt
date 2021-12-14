@@ -1,6 +1,6 @@
 package no.ssb.barn.generator
 
-import no.ssb.barn.deserialize.BarnevernDeserializer
+import no.ssb.barn.converter.BarnevernConverter
 import no.ssb.barn.xsd.BarnevernType
 import no.ssb.barn.xsd.MelderType
 import no.ssb.barn.xsd.SaksinnholdType
@@ -12,7 +12,7 @@ class TestDataGenerator {
     private val initialMutationXml = getResourceAsText("/initial_mutation.xml")
 
     fun createInitialMutation(): BarnevernType {
-        val instance = BarnevernDeserializer.unmarshallXml(initialMutationXml)
+        val instance = BarnevernConverter.unmarshallXml(initialMutationXml)
         var globalCompanyId: String
 
         with(instance) {

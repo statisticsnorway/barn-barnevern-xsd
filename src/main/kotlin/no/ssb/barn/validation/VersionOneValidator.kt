@@ -1,6 +1,6 @@
 package no.ssb.barn.validation
 
-import no.ssb.barn.deserialize.BarnevernDeserializer
+import no.ssb.barn.converter.BarnevernConverter
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.framework.ValidatorContract
 import no.ssb.barn.report.ValidationReport
@@ -61,7 +61,7 @@ class VersionOneValidator : ValidatorContract {
                 val innerContext = ValidationContext(
                     context.messageId,
                     context.xml,
-                    BarnevernDeserializer.unmarshallXml(context.xml)
+                    BarnevernConverter.unmarshallXml(context.xml)
                 )
                 rules.asSequence()
                     .mapNotNull { it.validate(innerContext) }

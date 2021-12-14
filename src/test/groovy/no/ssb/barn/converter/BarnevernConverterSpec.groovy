@@ -1,4 +1,4 @@
-package no.ssb.barn.deserialize
+package no.ssb.barn.converter
 
 import no.ssb.barn.generator.TestDataGenerator
 import spock.lang.Specification
@@ -6,7 +6,7 @@ import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
-class BarnevernDeserializerSpec extends Specification {
+class BarnevernConverterSpec extends Specification {
 
     @Unroll("test01_fil0 #i .xml")
     def "when unmarshalling valid XML, receive populated instance"() {
@@ -14,7 +14,7 @@ class BarnevernDeserializerSpec extends Specification {
         def xml = getResourceAsString("test01_fil0" + i + ".xml")
 
         when:
-        def barnevernType = BarnevernDeserializer.unmarshallXml(xml)
+        def barnevernType = BarnevernConverter.unmarshallXml(xml)
 
         then:
         noExceptionThrown()
@@ -44,7 +44,7 @@ class BarnevernDeserializerSpec extends Specification {
         def instance = new TestDataGenerator().createInitialMutation()
 
         when:
-        def xml = BarnevernDeserializer.marshallXml(instance)
+        def xml = BarnevernConverter.marshallXml(instance)
 
         then:
         noExceptionThrown()

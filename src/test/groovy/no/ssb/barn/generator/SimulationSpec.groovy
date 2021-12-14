@@ -1,11 +1,10 @@
 package no.ssb.barn.generator
 
-import no.ssb.barn.xsd.BarnevernType
+
 import spock.lang.Specification
 import spock.lang.Subject
 
 import java.time.LocalDate
-import java.util.stream.Collectors
 import java.util.stream.StreamSupport
 
 class SimulationSpec extends Specification {
@@ -23,7 +22,7 @@ class SimulationSpec extends Specification {
 
     def "when simulation har ran for 10 days, expect least number of cases"() {
         given:
-        def expectedNumberOfMutations = Simulation.CHANGE_LIMIT_DAY_LOWER * NUMBER_OF_DAYS
+        def expectedNumberOfMutations = Simulation.MIN_UPDATES_PER_DAY * NUMBER_OF_DAYS
 
         when:
         def result = sut.run()

@@ -1,6 +1,6 @@
 package no.ssb.barn.testutil
 
-import no.ssb.barn.deserialize.BarnevernDeserializer
+import no.ssb.barn.converter.BarnevernConverter
 import no.ssb.barn.framework.ValidationContext
 
 import java.time.Year
@@ -27,7 +27,7 @@ class TestDataProvider {
         new ValidationContext(
                 UUID.randomUUID().toString(),
                 xmlAsString,
-                BarnevernDeserializer.unmarshallXml(xmlAsString))
+                BarnevernConverter.unmarshallXml(xmlAsString))
     }
 
     static String getResourceAsString(String resourceName) {

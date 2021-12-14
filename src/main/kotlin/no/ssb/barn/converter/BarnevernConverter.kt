@@ -1,10 +1,10 @@
-package no.ssb.barn.deserialize
+package no.ssb.barn.converter
 
 import no.ssb.barn.xsd.BarnevernType
 import java.io.StringWriter
 import javax.xml.bind.JAXBContext
 
-class BarnevernDeserializer {
+class BarnevernConverter {
     companion object {
 
         private val jaxbContext: JAXBContext =

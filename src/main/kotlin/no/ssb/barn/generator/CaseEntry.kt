@@ -1,8 +1,13 @@
 package no.ssb.barn.generator
 
+import no.ssb.barn.xsd.BarnevernType
+import java.time.LocalDate
 import java.util.*
 
-class CaseEntry(val id: UUID, initialMutation: CaseMutation) {
-
-    val mutations = mutableListOf(initialMutation)
-}
+data class CaseEntry(
+    val id: UUID,
+    var barnevern: BarnevernType,
+    var generation: Int = 1,
+    var isMutable: Boolean = true,
+    var updated: LocalDate = LocalDate.now()
+)
