@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.util.TypeUtils
+import java.time.LocalDate
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAttribute
 import javax.xml.bind.annotation.XmlType
-import no.ssb.barn.util.TypeUtils
-import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -17,7 +17,7 @@ data class FlyttingTilType(
     var kode: String = MelderType.getCodes(LocalDate.now())[0].code,
 
     @field:XmlAttribute(name = "Presisering")
-    var presisering: String? = ""
+    var presisering: String? = null
 
 ) {
     companion object {
