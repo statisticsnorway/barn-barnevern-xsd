@@ -30,7 +30,8 @@ class Simulation(
                 caseList.add(
                     CaseEntry(
                         UUID.randomUUID(),
-                        currentBarnevernType
+                        currentBarnevernType,
+                        currentDate
                     )
                 )
                 numberOfNewCasesForCurrentDay++

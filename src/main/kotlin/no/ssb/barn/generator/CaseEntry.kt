@@ -7,6 +7,6 @@ import java.util.*
 data class CaseEntry(
     val id: UUID,
     var barnevern: BarnevernType,
-    var generation: Int = 1,
-    var updated: LocalDate = LocalDate.now()
+    var updated: LocalDate,
+    var generation: Int = 1
 )
