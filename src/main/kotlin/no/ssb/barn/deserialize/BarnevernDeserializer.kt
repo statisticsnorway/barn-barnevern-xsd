@@ -1,21 +1,25 @@
 package no.ssb.barn.deserialize
 
-import javax.xml.bind.JAXBContext
 import no.ssb.barn.xsd.BarnevernType
 import java.io.StringWriter
+import javax.xml.bind.JAXBContext
 
 class BarnevernDeserializer {
     companion object {
+
+        private val jaxbContext: JAXBContext =
+            JAXBContext.newInstance(BarnevernType::class.java)
+
         @JvmStatic
         fun unmarshallXml(xml: String): BarnevernType =
-            JAXBContext.newInstance(BarnevernType::class.java)
+            jaxbContext
                 .createUnmarshaller()
                 .unmarshal(xml.byteInputStream()) as BarnevernType
 
         @JvmStatic
         fun marshallXml(barnevernType: BarnevernType): String =
             StringWriter().use {
-                JAXBContext.newInstance(BarnevernType::class.java)
+                jaxbContext
                     .createMarshaller()
                     .marshal(barnevernType, it)
                 return it.toString()
