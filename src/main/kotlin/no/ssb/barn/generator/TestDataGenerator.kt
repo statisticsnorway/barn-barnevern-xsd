@@ -4,6 +4,7 @@ import no.ssb.barn.deserialize.BarnevernDeserializer
 import no.ssb.barn.xsd.BarnevernType
 import no.ssb.barn.xsd.MelderType
 import no.ssb.barn.xsd.SaksinnholdType
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class TestDataGenerator {
@@ -22,19 +23,19 @@ class TestDataGenerator {
         }
 
         with(instance.sak) {
-            startDato = java.time.LocalDate.now().minusDays(1)
+            startDato = LocalDate.now().minusDays(1)
             id = java.util.UUID.randomUUID()
             journalnummer =
-                no.ssb.barn.generator.RandomUtils.generateRandomString(15)
-            fodselsnummer = no.ssb.barn.generator.RandomUtils.generateRandomSSN(
-                java.time.LocalDate.now().minusYears(20),
-                java.time.LocalDate.now().minusYears(1)
+                RandomUtils.generateRandomString(15)
+            fodselsnummer = RandomUtils.generateRandomSSN(
+                LocalDate.now().minusYears(20),
+                LocalDate.now().minusYears(1)
             )
         }
 
         with(instance.sak.virksomhet[0]) {
 
-            startDato = java.time.LocalDate.now()
+            startDato = LocalDate.now()
             organisasjonsnummer = globalCompanyId // TODO: Oslo
             plan = null
             undersokelse = null
@@ -49,20 +50,20 @@ class TestDataGenerator {
             if (messages != null && messages.size > 0) {
                 with(messages[0]) {
                     id = java.util.UUID.randomUUID()
-                    startDato = java.time.LocalDate.now()
+                    startDato = LocalDate.now()
 
                     melder = mutableListOf(
                         MelderType(
-                            no.ssb.barn.xsd.MelderType.getRandomCode(
-                                java.time.LocalDate.now()
+                            MelderType.getRandomCode(
+                                LocalDate.now()
                             )
                         )
                     )
 
                     saksinnhold = mutableListOf(
                         SaksinnholdType(
-                            no.ssb.barn.xsd.SaksinnholdType.getRandomCode(
-                                java.time.LocalDate.now()
+                            SaksinnholdType.getRandomCode(
+                                LocalDate.now()
                             )
                         )
                     )
