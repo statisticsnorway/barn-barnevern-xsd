@@ -42,7 +42,7 @@ class Simulation(
                 val mutation =
                     testDataGenerator.mutate(currentCase.barnevern)
 
-                if (currentCase.generation + 1 > 4) {
+                if (currentCase.generation + 1 > 4) { // replace this with logic later
                     caseList.remove(currentCase)
                 } else {
                     with(currentCase) {
@@ -65,9 +65,6 @@ class Simulation(
         }
     }
 
-    /**
-     * Note: This function assumes 50/50 mix of new cases and existing cases
-     */
     private fun shouldCreateNewCase(): Boolean {
         val weight =
             (1 - (numberOfNewCasesForCurrentDay.toDouble() / numberOfUpdatesForCurrentDay.toDouble())) * 100
@@ -78,8 +75,7 @@ class Simulation(
     private fun getRandomCaseToMutate(): CaseEntry =
         caseList.asSequence()
             .filter {
-                it.isMutable
-                        && it.updated.isBefore(currentDate)
+                it.updated.isBefore(currentDate)
             }
             .toList()
             .random()
@@ -87,7 +83,6 @@ class Simulation(
 
     private fun mutableCasesExists(): Boolean =
         caseList.any {
-            it.isMutable
-                    && it.updated.isBefore(currentDate)
+            it.updated.isBefore(currentDate)
         }
 }

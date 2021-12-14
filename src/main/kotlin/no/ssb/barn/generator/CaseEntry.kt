@@ -8,6 +8,5 @@ data class CaseEntry(
     val id: UUID,
     var barnevern: BarnevernType,
     var generation: Int = 1,
-    var isMutable: Boolean = true,
     var updated: LocalDate = LocalDate.now()
 )

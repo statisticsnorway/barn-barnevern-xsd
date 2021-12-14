@@ -7,9 +7,11 @@ import no.ssb.barn.xsd.SaksinnholdType
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class TestDataGenerator {
+class TestDataGenerator(xmlResourceName: String) {
 
-    private val initialMutationXml = getResourceAsText("/initial_mutation.xml")
+    constructor() : this("/initial_mutation.xml")
+
+    private val initialMutationXml: String = getResourceAsText(xmlResourceName)
 
     fun createInitialMutation(): BarnevernType {
         val instance = BarnevernConverter.unmarshallXml(initialMutationXml)
@@ -80,6 +82,8 @@ class TestDataGenerator {
         // 3. Select a random one, mutate incoming and return mutated version.
     }
 
-    private fun getResourceAsText(path: String): String =
-        javaClass.getResource(path).readText()
+    companion object {
+        private fun getResourceAsText(path: String): String =
+            javaClass.getResource(path).readText()
+    }
 }
