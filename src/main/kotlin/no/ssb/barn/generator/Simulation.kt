@@ -18,7 +18,7 @@ class Simulation(
     }
 
     private val caseList = mutableSetOf<CaseEntry>()
-    private val testDataGenerator = TestDataGenerator()
+    private val initialMutationProvider = InitialMutationProvider()
 
     private var numberOfUpdatesForCurrentDay = 0
     private var numberOfNewCasesForCurrentDay = 0
@@ -33,7 +33,7 @@ class Simulation(
 
             if (!mutableCasesExists() || shouldCreateNewCase()) {
                 val currentBarnevernType =
-                    testDataGenerator.createInitialMutation(currentDate)
+                    initialMutationProvider.createInitialMutation(currentDate)
 
                 caseList.add(
                     CaseEntry(
@@ -48,7 +48,7 @@ class Simulation(
 
                 // find a case to mutate
                 val currentCase = getRandomCaseToMutate()
-                testDataGenerator.mutate(currentCase)
+                CaseMutator.mutate(currentCase)
 
                 if (currentCase.generation + 1 > 4) { // replace this with logic later
                     caseList.remove(currentCase)

@@ -2,7 +2,7 @@ package no.ssb.barn.converter
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.generator.RandomUtils
-import no.ssb.barn.generator.TestDataGenerator
+import no.ssb.barn.generator.InitialMutationProvider
 import no.ssb.barn.validation.rule.XsdRule
 import no.ssb.barn.xsd.BarnevernType
 import no.ssb.barn.xsd.FagsystemType
@@ -56,7 +56,7 @@ class BarnevernConverterSpec extends Specification {
 
     def "when marshalling instance to XML, xml is valid"() {
         given:
-        def instance = new TestDataGenerator().createInitialMutation(LocalDate.now())
+        def instance = new InitialMutationProvider().createInitialMutation(LocalDate.now())
 
         when:
         def xml = BarnevernConverter.marshallInstance(instance)
