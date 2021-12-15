@@ -4,7 +4,7 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.util.ValidationUtils.Companion.validateSSN
+import no.ssb.barn.util.ValidationUtils.validateSSN
 import no.ssb.barn.xsd.SakType
 
 class SocialSecurityId : AbstractRule(
