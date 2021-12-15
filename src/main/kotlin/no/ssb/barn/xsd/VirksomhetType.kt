@@ -41,29 +41,29 @@ data class VirksomhetType(
     var distriktsnummer: String? = null,
 
     @field:XmlElement(name = "Melding")
-    var melding: List<MeldingType> = mutableListOf(),
+    var melding: MutableList<MeldingType> = mutableListOf(),
 
     @field:XmlElement(name = "Undersokelse")
-    var undersokelse: List<UndersokelseType> = mutableListOf(),
+    var undersokelse: MutableList<UndersokelseType> = mutableListOf(),
 
     @field:XmlElement(name = "Plan")
-    var plan: List<PlanType> = mutableListOf(),
+    var plan: MutableList<PlanType> = mutableListOf(),
 
     @field:XmlElement(name = "Tiltak")
-    var tiltak: List<TiltakType> = mutableListOf(),
+    var tiltak: MutableList<TiltakType> = mutableListOf(),
 
     @field:XmlElement(name = "Vedtak")
-    var vedtak: List<VedtakType> = mutableListOf(),
+    var vedtak: MutableList<VedtakType> = mutableListOf(),
 
     @field:XmlElement(name = "Ettervern")
-    var ettervern: List<EttervernType> = mutableListOf(),
+    var ettervern: MutableList<EttervernType> = mutableListOf(),
 
     @field:XmlElement(name = "OversendelseBarneverntjeneste")
-    var oversendelseBarneverntjeneste: List<OversendelseBarneverntjenesteType> = mutableListOf(),
+    var oversendelseBarneverntjeneste: MutableList<OversendelseBarneverntjenesteType> = mutableListOf(),
 
     @field:XmlElement(name = "Flytting")
-    var flytting: List<FlyttingType> = mutableListOf(),
+    var flytting: MutableList<FlyttingType> = mutableListOf(),
 
     @field:XmlElement(name = "Relasjon")
-    var relasjon: List<RelasjonType> = mutableListOf()
+    var relasjon: MutableList<RelasjonType> = mutableListOf()
 )

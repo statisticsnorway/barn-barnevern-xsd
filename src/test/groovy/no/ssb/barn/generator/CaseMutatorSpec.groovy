@@ -45,7 +45,6 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
     def "fromMessageToDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MESSAGE)
@@ -61,7 +60,6 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
     def "fromInvestigationToMeasure expect one instance of TiltakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION)
@@ -79,7 +77,6 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
     def "fromInvestigationToDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION)
@@ -97,7 +94,6 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
     def "fromMeasureToPlan expect one instance of PlanType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
@@ -115,7 +111,6 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
     def "fromMeasureToDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
@@ -133,7 +128,6 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
     def "fromMeasureToAfterCare expect one instance of EttervernType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
@@ -151,7 +145,6 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
     def "fromDecisionToMeasure expect one instance of TiltakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
@@ -169,8 +162,7 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
-    def "fromDecisionToAnotherDecision"() {
+    def "fromDecisionToAnotherDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
         and: "make sure we have a single VedtakType instance"
@@ -185,8 +177,7 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
-    def "fromDecisionToAfterCare"() {
+    def "fromDecisionToAfterCare expect one instance of EttervernType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
         and: "make sure we have VedtakType instance"
@@ -203,13 +194,43 @@ class CaseMutatorSpec extends Specification {
                 .sum()
     }
 
-    @Ignore("Implement me")
-    def "FromAfterCareToMeasure"() {
+    def "fromAfterCareToMeasure expect one instance of TiltakType"() {
+        given:
+        def caseEntry = createCaseEntry(BarnevernState.AFTERCARE)
+        and: "make sure we have EttervernType instance"
+        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.ettervern.any())
+        and: "make sure we don't have TiltakType instance"
+        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
+
+        when:
+        CaseMutator.fromAfterCareToMeasure(caseEntry)
+
+        then:
+        1 == caseEntry.barnevern.sak.virksomhet.stream()
+                .mapToInt(it -> it.tiltak.size())
+                .sum()
     }
 
-    @Ignore("Implement me")
-    def "FromAfterCareToDecision"() {
+    def "fromAfterCareToDecision expect one more instance of VedtakType"() {
+        given:
+        def caseEntry = createCaseEntry(BarnevernState.AFTERCARE)
+        and: "make sure we have EttervernType instance"
+        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.ettervern.any())
+        and: "count existing number of VedtakType instances"
+        def initialNumberOfDecisions = caseEntry.barnevern.sak.virksomhet.stream()
+                .mapToInt(it -> it.vedtak.size())
+                .sum()
+
+        when:
+        CaseMutator.fromAfterCareToDecision(caseEntry)
+
+        then:
+        initialNumberOfDecisions + 1 == caseEntry.barnevern.sak.virksomhet.stream()
+                .mapToInt(it -> it.vedtak.size())
+                .sum()
     }
+
+    // util stuff from here
 
     def createCaseEntry(BarnevernState state) {
         def instance = new CaseEntry(
@@ -236,6 +257,11 @@ class CaseMutatorSpec extends Specification {
                 CaseMutator.fromMessageToInvestigation(instance)
                 CaseMutator.fromInvestigationToDecision(instance)
                 break
+
+            case BarnevernState.AFTERCARE:
+                CaseMutator.fromMessageToInvestigation(instance)
+                CaseMutator.fromInvestigationToDecision(instance)
+                CaseMutator.fromDecisionToAfterCare(instance)
         }
 
         instance

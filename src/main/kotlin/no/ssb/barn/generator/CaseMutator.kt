@@ -1,6 +1,6 @@
 package no.ssb.barn.generator
 
-import no.ssb.barn.xsd.UndersokelseType
+import no.ssb.barn.xsd.*
 
 object CaseMutator {
 
@@ -19,23 +19,25 @@ object CaseMutator {
     // START Melding
 
     @JvmStatic
-    fun fromMessageToInvestigation(case: CaseEntry) {
-        case.barnevern.sak.virksomhet[0].undersokelse =
-            listOf(UndersokelseType())
+    fun fromMessageToInvestigation(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].undersokelse.add(UndersokelseType())
     }
 
     @JvmStatic
-    fun fromMessageToDecision(case: CaseEntry) {
+    fun fromMessageToDecision(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
     }
 
     // START Undersokelse
 
     @JvmStatic
-    fun fromInvestigationToMeasure(case: CaseEntry) {
+    fun fromInvestigationToMeasure(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(TiltakType())
     }
 
     @JvmStatic
-    fun fromInvestigationToDecision(case: CaseEntry) {
+    fun fromInvestigationToDecision(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
     }
 
     // START Plan
@@ -44,39 +46,47 @@ object CaseMutator {
     // START Tiltak
 
     @JvmStatic
-    fun fromMeasureToPlan(case: CaseEntry) {
+    fun fromMeasureToPlan(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].plan.add(PlanType())
     }
 
     @JvmStatic
-    fun fromMeasureToDecision(case: CaseEntry) {
+    fun fromMeasureToDecision(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
     }
 
     @JvmStatic
-    fun fromMeasureToAfterCare(case: CaseEntry) {
+    fun fromMeasureToAfterCare(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].ettervern.add(EttervernType())
     }
 
     // START Vedtak
 
     @JvmStatic
-    fun fromDecisionToMeasure(case: CaseEntry) {
+    fun fromDecisionToMeasure(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(TiltakType())
     }
 
     @JvmStatic
-    fun fromDecisionToAnotherDecision(case: CaseEntry) {
+    fun fromDecisionToAnotherDecision(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
     }
 
     @JvmStatic
-    fun fromDecisionToAfterCare(case: CaseEntry) {
+    fun fromDecisionToAfterCare(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].ettervern.add(EttervernType())
     }
 
     // START Ettervern
 
     @JvmStatic
-    fun fromAfterCareToMeasure(case: CaseEntry) {
+    fun fromAfterCareToMeasure(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(TiltakType())
     }
 
     @JvmStatic
-    fun fromAfterCareToDecision(case: CaseEntry) {
+    fun fromAfterCareToDecision(caseEntry: CaseEntry) {
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
     }
 
     private val newStateFuncMap = mapOf(
