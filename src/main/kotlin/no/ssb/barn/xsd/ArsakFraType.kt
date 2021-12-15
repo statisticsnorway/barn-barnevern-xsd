@@ -14,12 +14,17 @@ import javax.xml.bind.annotation.XmlType
 )
 data class ArsakFraType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = MelderType.getCodes(LocalDate.now())[0].code,
+    var kode: String = getCodes(LocalDate.now())[0].code,
 
     @field:XmlAttribute(name = "Presisering")
     var presisering: String? = null
 ) {
     companion object {
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
         private val validFrom = LocalDate.of(2022, 1, 1)
         private val codeList = listOf(
             CodeListItem("1.1.1", "Omsorgsplasseringen opphører ", validFrom),
@@ -69,9 +74,5 @@ data class ArsakFraType(
             ),
             CodeListItem("2.9", "Andre grunner (krever presisering)", validFrom)
         )
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
     }
 }
