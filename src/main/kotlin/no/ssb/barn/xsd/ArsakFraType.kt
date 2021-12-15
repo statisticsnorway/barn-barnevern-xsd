@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType
 )
 data class ArsakFraType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = getCodes(LocalDate.now())[0].code,
+    var kode: String = getCodes(validFrom)[0].code,
 
     @field:XmlAttribute(name = "Presisering")
     var presisering: String? = null

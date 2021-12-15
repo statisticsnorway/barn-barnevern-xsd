@@ -7,7 +7,20 @@ import java.time.LocalDate
 
 class ArsakFraTypeSpec extends Specification {
 
-    def "when constructor is called expect props to be populated"() {
+    def "when constructor is called without values, expect no errors"() {
+        given:
+        def code = ArsakFraType.getCodes(
+                LocalDate.of(2022, 1, 1))[0].code
+        and:
+        def sut = new ArsakFraType()
+
+        expect:
+        code == sut.kode
+        and:
+        null == sut.presisering
+    }
+
+    def "when constructor is called with values, expect props to be populated"() {
         given:
         def code = ArsakFraType.getCodes(
                 LocalDate.of(2022, 1, 1))[0].code
