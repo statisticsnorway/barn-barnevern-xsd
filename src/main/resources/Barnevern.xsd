@@ -350,8 +350,8 @@ For innsending av barnevernsdata
    "items":[
 	  {"code":"1", "validFrom":"2013-01-01", "title":"Henlagt " },
 	  {"code":"2", "validFrom":"2013-01-01", "title":"Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse" },
-	  {"code":"3", "validFrom":"2013-01-01", "title":"Henlagt pga. aktive tiltak" },
-	  {"code":"4", "validFrom":"2013-01-01", "title":"Melding i pågående undersøkelse" }
+	  {"code":"3", "validFrom":"2020-01-01", "title":"Henlagt pga. aktive tiltak" },
+	  {"code":"4", "validFrom":"2020-01-01", "title":"Melding i pågående undersøkelse" }
    ]
 }
 							</xs:appinfo>
@@ -595,7 +595,7 @@ For innsending av barnevernsdata
 	  { "code":"17", "validFrom":"2013-01-01", "title":"Barnets relasjonsvansker (mistanke om eller diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner) " },
 	  { "code":"25", "validFrom":"2021-01-01", "title":"Barnets atferd" },
 	  { "code":"26", "validFrom":"2021-01-01", "title":"Barnets kriminelle handlinger" },
-	  { "code":"27", "validFrom":"2013-01-01", "title":"Barnet utsatt for menneskehandel" },
+	  { "code":"27", "validFrom":"2021-01-01", "title":"Barnet utsatt for menneskehandel" },
 	  { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
 	  { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" } 
    ]
@@ -709,7 +709,7 @@ For innsending av barnevernsdata
 	  { "code":"3", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)" },
 	  { "code":"4", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)" },
 	  { "code":"5", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)" },
-	  { "code":"6", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter henvisning til annen instans" } 
+	  { "code":"6", "validFrom":"2022-01-01", "title":"Undersøkelsen henlagt etter henvisning til annen instans" } 
    ]
 }
 							</xs:appinfo>
@@ -818,7 +818,7 @@ For innsending av barnevernsdata
 	  {"code" : "2.3", "validFrom" : "2013-01-01", "title" : "Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)"},
 	  {"code" : "2.4", "validFrom" : "2013-01-01", "title" : "Fosterhjem etter § 4-27"},
 	  {"code" : "2.5", "validFrom" : "2013-01-01", "title" : "Beredskapshjem utenom familie og nære nettverk"},
-	  {"code" : "2.6", "validFrom" : "2020-01-01", "title" : "Midlertidig hjem i familie og nære nettverk"},
+	  {"code" : "2.6", "validFrom" : "2021-01-01", "title" : "Midlertidig hjem i familie og nære nettverk"},
 	  {"code" : "2.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
 	  {"code" : "3.1", "validFrom" : "2013-01-01", "title" : "MST"},
 	  {"code" : "3.2", "validFrom" : "2013-01-01", "title" : "PMTO"},
