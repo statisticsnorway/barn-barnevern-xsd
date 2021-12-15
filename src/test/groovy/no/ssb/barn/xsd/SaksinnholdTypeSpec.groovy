@@ -15,7 +15,7 @@ class SaksinnholdTypeSpec extends Specification {
         where:
         date || expectedNumberOfItems
         LocalDate.of(2012, 1, 1) || 0
-        LocalDate.of(2021, 1, 1) || 25
+        LocalDate.of(2021, 1, 1) || 24 // BAR-199
         LocalDate.of(2101, 1, 1) || 0
     }
 
