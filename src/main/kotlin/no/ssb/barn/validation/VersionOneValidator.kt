@@ -57,7 +57,6 @@ class VersionOneValidator : ValidatorContract {
             .flatten()
             .toList()
             .ifEmpty {
-                // this is not a great solution, fix me
                 val innerContext = ValidationContext(
                     context.messageId,
                     context.xml,

@@ -25,19 +25,43 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMessageToDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
+            VedtakType(
+                lovhjemmel = LovhjemmelType(
+                    ledd = mutableListOf("~ledd~")
+                )
+            )
+        )
     }
 
     // START Undersokelse
 
     @JvmStatic
     fun fromInvestigationToMeasure(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(TiltakType())
+        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(
+            TiltakType(
+                startDato = caseEntry.updated,
+                lovhjemmel = LovhjemmelType(
+                    kapittel = "1",
+                    paragraf = "2",
+                    ledd = mutableListOf("~ledd~")
+                ),
+                kategori = KategoriType(presisering = "~Presisering~")
+            )
+        )
     }
 
     @JvmStatic
     fun fromInvestigationToDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
+            VedtakType(
+                lovhjemmel = LovhjemmelType(
+                    kapittel = "1",
+                    paragraf = "2",
+                    ledd = mutableListOf("~ledd~")
+                )
+            )
+        )
     }
 
     // START Plan
@@ -52,7 +76,15 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMeasureToDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
+            VedtakType(
+                lovhjemmel = LovhjemmelType(
+                    kapittel = "1",
+                    paragraf = "2",
+                    ledd = mutableListOf("~ledd~")
+                )
+            )
+        )
     }
 
     @JvmStatic
@@ -64,12 +96,30 @@ object CaseMutator {
 
     @JvmStatic
     fun fromDecisionToMeasure(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(TiltakType())
+        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(
+            TiltakType(
+                startDato = caseEntry.updated,
+                lovhjemmel = LovhjemmelType(
+                    kapittel = "1",
+                    paragraf = "2",
+                    ledd = mutableListOf("~ledd~")
+                ),
+                kategori = KategoriType(presisering = "~Presisering~")
+            )
+        )
     }
 
     @JvmStatic
     fun fromDecisionToAnotherDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
+            VedtakType(
+                lovhjemmel = LovhjemmelType(
+                    kapittel = "1",
+                    paragraf = "2",
+                    ledd = mutableListOf("~ledd~")
+                )
+            )
+        )
     }
 
     @JvmStatic
@@ -81,12 +131,30 @@ object CaseMutator {
 
     @JvmStatic
     fun fromAfterCareToMeasure(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(TiltakType())
+        caseEntry.barnevern.sak.virksomhet[0].tiltak.add(
+            TiltakType(
+                startDato = caseEntry.updated,
+                lovhjemmel = LovhjemmelType(
+                    kapittel = "1",
+                    paragraf = "2",
+                    ledd = mutableListOf("~ledd~")
+                ),
+                kategori = KategoriType(presisering = "~Presisering~")
+            )
+        )
     }
 
     @JvmStatic
     fun fromAfterCareToDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(VedtakType())
+        caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
+            VedtakType(
+                lovhjemmel = LovhjemmelType(
+                    kapittel = "1",
+                    paragraf = "2",
+                    ledd = mutableListOf("~ledd~")
+                )
+            )
+        )
     }
 
     private val newStateFuncMap = mapOf(

@@ -18,8 +18,8 @@ data class LovhjemmelType(
         var paragraf: String = "0",
 
         @field:XmlElement(name = "Ledd", required = true)
-        var ledd: List<String> = mutableListOf(),
+        var ledd: MutableList<String> = mutableListOf(),
 
         @field:XmlElement(name = "Punktum")
-        var punktum: List<String> = mutableListOf()
+        var punktum: MutableList<String> = mutableListOf()
 )

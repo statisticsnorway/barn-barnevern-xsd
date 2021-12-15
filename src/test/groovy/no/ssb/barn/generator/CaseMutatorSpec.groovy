@@ -1,6 +1,10 @@
 package no.ssb.barn.generator
 
-import spock.lang.Ignore
+import no.ssb.barn.converter.BarnevernConverter
+import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.VersionOneValidator
+import no.ssb.barn.xsd.BarnevernType
 import spock.lang.Specification
 
 import java.time.LocalDate
@@ -8,6 +12,7 @@ import java.time.LocalDate
 class CaseMutatorSpec extends Specification {
 
     def initialMutationProvider = new InitialMutationProvider()
+    def versionOneValidator = new VersionOneValidator()
 
     def "when calling mutate with valid instance expect changed state"() {
         given:
@@ -43,6 +48,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.undersokelse.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromMessageToDecision expect one instance of VedtakType"() {
@@ -58,6 +65,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.vedtak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromInvestigationToMeasure expect one instance of TiltakType"() {
@@ -75,6 +84,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.tiltak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromInvestigationToDecision expect one instance of VedtakType"() {
@@ -92,6 +103,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.vedtak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromMeasureToPlan expect one instance of PlanType"() {
@@ -109,6 +122,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.plan.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromMeasureToDecision expect one instance of VedtakType"() {
@@ -126,6 +141,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.vedtak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromMeasureToAfterCare expect one instance of EttervernType"() {
@@ -143,6 +160,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.ettervern.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromDecisionToMeasure expect one instance of TiltakType"() {
@@ -160,6 +179,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.tiltak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromDecisionToAnotherDecision expect one instance of VedtakType"() {
@@ -175,6 +196,8 @@ class CaseMutatorSpec extends Specification {
         2 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.vedtak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromDecisionToAfterCare expect one instance of EttervernType"() {
@@ -192,6 +215,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.ettervern.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromAfterCareToMeasure expect one instance of TiltakType"() {
@@ -209,6 +234,8 @@ class CaseMutatorSpec extends Specification {
         1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.tiltak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     def "fromAfterCareToDecision expect one more instance of VedtakType"() {
@@ -228,6 +255,8 @@ class CaseMutatorSpec extends Specification {
         initialNumberOfDecisions + 1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.vedtak.size())
                 .sum()
+        and:
+        isValid(caseEntry.barnevern)
     }
 
     // util stuff from here
@@ -265,5 +294,13 @@ class CaseMutatorSpec extends Specification {
         }
 
         instance
+    }
+
+    def isValid(BarnevernType barnevernType) {
+        versionOneValidator.validate(
+                new ValidationContext(
+                        "~messageId~",
+                        BarnevernConverter.marshallInstance(barnevernType)))
+                .severity != WarningLevel.FATAL
     }
 }
