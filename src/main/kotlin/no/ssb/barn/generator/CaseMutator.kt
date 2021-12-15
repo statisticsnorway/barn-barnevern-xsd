@@ -1,6 +1,7 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.*
+import java.time.LocalDate
 
 object CaseMutator {
 
@@ -26,11 +27,7 @@ object CaseMutator {
     @JvmStatic
     fun fromMessageToDecision(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
-            VedtakType(
-                lovhjemmel = LovhjemmelType(
-                    ledd = mutableListOf("~ledd~")
-                )
-            )
+            createVedtakType()
         )
     }
 
@@ -39,28 +36,14 @@ object CaseMutator {
     @JvmStatic
     fun fromInvestigationToMeasure(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].tiltak.add(
-            TiltakType(
-                startDato = caseEntry.updated,
-                lovhjemmel = LovhjemmelType(
-                    kapittel = "1",
-                    paragraf = "2",
-                    ledd = mutableListOf("~ledd~")
-                ),
-                kategori = KategoriType(presisering = "~Presisering~")
-            )
+            createTiltakType(caseEntry.updated)
         )
     }
 
     @JvmStatic
     fun fromInvestigationToDecision(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
-            VedtakType(
-                lovhjemmel = LovhjemmelType(
-                    kapittel = "1",
-                    paragraf = "2",
-                    ledd = mutableListOf("~ledd~")
-                )
-            )
+            createVedtakType()
         )
     }
 
@@ -77,13 +60,7 @@ object CaseMutator {
     @JvmStatic
     fun fromMeasureToDecision(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
-            VedtakType(
-                lovhjemmel = LovhjemmelType(
-                    kapittel = "1",
-                    paragraf = "2",
-                    ledd = mutableListOf("~ledd~")
-                )
-            )
+            createVedtakType()
         )
     }
 
@@ -97,28 +74,14 @@ object CaseMutator {
     @JvmStatic
     fun fromDecisionToMeasure(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].tiltak.add(
-            TiltakType(
-                startDato = caseEntry.updated,
-                lovhjemmel = LovhjemmelType(
-                    kapittel = "1",
-                    paragraf = "2",
-                    ledd = mutableListOf("~ledd~")
-                ),
-                kategori = KategoriType(presisering = "~Presisering~")
-            )
+            createTiltakType(caseEntry.updated)
         )
     }
 
     @JvmStatic
     fun fromDecisionToAnotherDecision(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
-            VedtakType(
-                lovhjemmel = LovhjemmelType(
-                    kapittel = "1",
-                    paragraf = "2",
-                    ledd = mutableListOf("~ledd~")
-                )
-            )
+            createVedtakType()
         )
     }
 
@@ -132,28 +95,14 @@ object CaseMutator {
     @JvmStatic
     fun fromAfterCareToMeasure(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].tiltak.add(
-            TiltakType(
-                startDato = caseEntry.updated,
-                lovhjemmel = LovhjemmelType(
-                    kapittel = "1",
-                    paragraf = "2",
-                    ledd = mutableListOf("~ledd~")
-                ),
-                kategori = KategoriType(presisering = "~Presisering~")
-            )
+            createTiltakType(caseEntry.updated)
         )
     }
 
     @JvmStatic
     fun fromAfterCareToDecision(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.virksomhet[0].vedtak.add(
-            VedtakType(
-                lovhjemmel = LovhjemmelType(
-                    kapittel = "1",
-                    paragraf = "2",
-                    ledd = mutableListOf("~ledd~")
-                )
-            )
+            createVedtakType()
         )
     }
 
@@ -211,4 +160,24 @@ object CaseMutator {
             ::fromAfterCareToDecision
         )
     )
+
+    private fun createVedtakType(): VedtakType =
+        VedtakType(
+            lovhjemmel = LovhjemmelType(
+                kapittel = "1",
+                paragraf = "2",
+                ledd = mutableListOf("~ledd~")
+            )
+        )
+
+    private fun createTiltakType(startDate: LocalDate): TiltakType =
+        TiltakType(
+            startDato = startDate,
+            lovhjemmel = LovhjemmelType(
+                kapittel = "1",
+                paragraf = "2",
+                ledd = mutableListOf("~ledd~")
+            ),
+            kategori = KategoriType(presisering = "~Presisering~")
+        )
 }
