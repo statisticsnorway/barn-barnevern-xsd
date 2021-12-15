@@ -82,7 +82,7 @@ class TestDataGenerator(xmlResourceName: String) {
             .random()
 
         // run mutation on incoming instance
-        transitionEntry.value.invoke(caseToMutate)
+        transitionEntry.value(caseToMutate)
 
         // assign new state to case
         caseToMutate.state = transitionEntry.key.second
@@ -140,46 +140,58 @@ class TestDataGenerator(xmlResourceName: String) {
     }
 
     private val newStateFuncMap = mapOf(
-        Pair(Pair(BarnevernState.MESSAGE, BarnevernState.INVESTIGATION)) { caseEntry: CaseEntry ->
-            fromMessageToInvestigation(caseEntry)
-        },
-        Pair(Pair(BarnevernState.MESSAGE, BarnevernState.DECISION)) { caseEntry: CaseEntry ->
-            fromMessageToDecision(caseEntry)
-        },
+        Pair(
+            Pair(BarnevernState.MESSAGE, BarnevernState.INVESTIGATION),
+            ::fromMessageToInvestigation
+        ),
+        Pair(
+            Pair(BarnevernState.MESSAGE, BarnevernState.DECISION),
+            ::fromMessageToDecision
+        ),
 
-        Pair(Pair(BarnevernState.INVESTIGATION, BarnevernState.MEASURE)) { caseEntry: CaseEntry ->
-            fromInvestigationToMeasure(caseEntry)
-        },
-        Pair(Pair(BarnevernState.INVESTIGATION, BarnevernState.DECISION)) { caseEntry: CaseEntry ->
-            fromInvestigationToDecision(caseEntry)
-        },
+        Pair(
+            Pair(BarnevernState.INVESTIGATION, BarnevernState.MEASURE),
+            ::fromInvestigationToMeasure
+        ),
+        Pair(
+            Pair(BarnevernState.INVESTIGATION, BarnevernState.DECISION),
+            ::fromInvestigationToDecision
+        ),
 
-        Pair(Pair(BarnevernState.MEASURE, BarnevernState.PLAN)) { caseEntry: CaseEntry ->
-            fromMeasureToPlan(caseEntry)
-        },
-        Pair(Pair(BarnevernState.MEASURE, BarnevernState.DECISION)) { caseEntry: CaseEntry ->
-            fromMeasureToDecision(caseEntry)
-        },
-        Pair(Pair(BarnevernState.MEASURE, BarnevernState.AFTERCARE)) { caseEntry: CaseEntry ->
-            fromMeasureToAfterCare(caseEntry)
-        },
+        Pair(
+            Pair(BarnevernState.MEASURE, BarnevernState.PLAN),
+            ::fromMeasureToPlan
+        ),
+        Pair(
+            Pair(BarnevernState.MEASURE, BarnevernState.DECISION),
+            ::fromMeasureToDecision
+        ),
+        Pair(
+            Pair(BarnevernState.MEASURE, BarnevernState.AFTERCARE),
+            ::fromMeasureToAfterCare
+        ),
 
-        Pair(Pair(BarnevernState.DECISION, BarnevernState.MEASURE)) { caseEntry: CaseEntry ->
-            fromDecisionToMeasure(caseEntry)
-        },
-        Pair(Pair(BarnevernState.DECISION, BarnevernState.DECISION)) { caseEntry: CaseEntry ->
-            fromDecisionToAnotherDecision(caseEntry)
-        },
-        Pair(Pair(BarnevernState.DECISION, BarnevernState.AFTERCARE)) { caseEntry: CaseEntry ->
-            fromDecisionToAfterCare(caseEntry)
-        },
+        Pair(
+            Pair(BarnevernState.DECISION, BarnevernState.MEASURE),
+            ::fromDecisionToMeasure
+        ),
+        Pair(
+            Pair(BarnevernState.DECISION, BarnevernState.DECISION),
+            ::fromDecisionToAnotherDecision
+        ),
+        Pair(
+            Pair(BarnevernState.DECISION, BarnevernState.AFTERCARE),
+            ::fromDecisionToAfterCare
+        ),
 
-        Pair(Pair(BarnevernState.AFTERCARE, BarnevernState.MEASURE)) { caseEntry: CaseEntry ->
-            fromAfterCareToMeasure(caseEntry)
-        },
-        Pair(Pair(BarnevernState.AFTERCARE, BarnevernState.DECISION)) { caseEntry: CaseEntry ->
-            fromAfterCareToDecision(caseEntry)
-        }
+        Pair(
+            Pair(BarnevernState.AFTERCARE, BarnevernState.MEASURE),
+            ::fromAfterCareToMeasure
+        ),
+        Pair(
+            Pair(BarnevernState.AFTERCARE, BarnevernState.DECISION),
+            ::fromAfterCareToDecision
+        ),
     )
 
     companion object {
