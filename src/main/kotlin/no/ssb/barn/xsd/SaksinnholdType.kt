@@ -2,12 +2,12 @@
 
 package no.ssb.barn.xsd
 
+import no.ssb.barn.util.TypeUtils
+import java.time.LocalDate
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAttribute
 import javax.xml.bind.annotation.XmlType
-import no.ssb.barn.util.TypeUtils
-import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -50,11 +50,13 @@ data class SaksinnholdType(
                     "Foreldres manglende stimulering og regulering av barnet",
                     validFrom2020
                 ),
+/* TODO Jon Ole: This code does not validate against XSD
                 CodeListItem(
                     "22",
                     "Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet",
                     validFrom2020
                 ),
+*/
                 CodeListItem(
                     "23",
                     "Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester",
