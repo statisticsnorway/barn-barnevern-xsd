@@ -8,5 +8,6 @@ data class CaseEntry(
     val id: UUID,
     var barnevern: BarnevernType,
     var updated: LocalDate,
-    var generation: Int = 1
+    var generation: Int = 1,
+    var state: BarnevernState = BarnevernState.MESSAGE
 )

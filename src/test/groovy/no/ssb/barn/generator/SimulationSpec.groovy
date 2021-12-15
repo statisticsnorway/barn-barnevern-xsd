@@ -39,4 +39,14 @@ class SimulationSpec extends Specification {
         StreamSupport.stream(splitIterator, false)
                 .count() > expectedLeastNumberOfMutations
     }
+
+    def "when calling secondary constructor, no exception is thrown"() {
+        when:
+        sut = new Simulation(
+                LocalDate.now().minusDays(NUMBER_OF_DAYS),
+                LocalDate.now())
+
+        then:
+        noExceptionThrown()
+    }
 }

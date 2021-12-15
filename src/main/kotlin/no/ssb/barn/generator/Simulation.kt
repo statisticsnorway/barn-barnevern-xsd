@@ -6,9 +6,17 @@ import java.util.*
 class Simulation(
     startDate: LocalDate,
     private val endDate: LocalDate,
-    private val minUpdatesPerDay: Int = 10,
-    private val maxUpdatesPerDay: Int = 20,
+    private val minUpdatesPerDay: Int,
+    private val maxUpdatesPerDay: Int
 ) {
+    constructor(startDate: LocalDate, endDate: LocalDate)
+            : this(startDate, endDate, MIN_UPDATES_PER_DAY, MAX_UPDATES_PER_DAY)
+
+    companion object {
+        const val MIN_UPDATES_PER_DAY = 10
+        const val MAX_UPDATES_PER_DAY = 20
+    }
+
     private val caseList = mutableSetOf<CaseEntry>()
     private val testDataGenerator = TestDataGenerator()
 
@@ -25,7 +33,7 @@ class Simulation(
 
             if (!mutableCasesExists() || shouldCreateNewCase()) {
                 val currentBarnevernType =
-                    testDataGenerator.createInitialMutation()
+                    testDataGenerator.createInitialMutation(currentDate)
 
                 caseList.add(
                     CaseEntry(
@@ -40,19 +48,17 @@ class Simulation(
 
                 // find a case to mutate
                 val currentCase = getRandomCaseToMutate()
-                val mutation =
-                    testDataGenerator.mutate(currentCase.barnevern)
+                testDataGenerator.mutate(currentCase)
 
                 if (currentCase.generation + 1 > 4) { // replace this with logic later
                     caseList.remove(currentCase)
                 } else {
                     with(currentCase) {
-                        barnevern = mutation
                         generation++
                         updated = currentDate
                     }
                 }
-                yield(mutation)
+                yield(currentCase.barnevern)
             }
 
             if (++numberOfUpdatesForCurrentDay > requiredNumberOfUpdatesForCurrentDay) {
@@ -80,7 +86,6 @@ class Simulation(
             }
             .toList()
             .random()
-
 
     private fun mutableCasesExists(): Boolean =
         caseList.any {
