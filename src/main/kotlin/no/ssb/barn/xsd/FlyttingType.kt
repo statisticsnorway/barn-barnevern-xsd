@@ -1,15 +1,18 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import java.util.*
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FlyttingType", propOrder = ["id", "migrertId", "sluttDato", "arsakFra", "flytteTil"])
+@XmlType(
+    name = "FlyttingType",
+    propOrder = ["id", "migrertId", "sluttDato", "arsakFra", "flytteTil"]
+)
 data class FlyttingType(
     @field:XmlAttribute(name = "Id", required = true)
     @field:XmlJavaTypeAdapter(
@@ -34,7 +37,13 @@ data class FlyttingType(
     var flytteTil: FlyttingTilType = FlyttingTilType()
 ) {
     companion object {
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
+
         private val codeList =
             mapOf(
                 Pair(
@@ -78,9 +87,5 @@ data class FlyttingType(
                 .map {
                     CodeListItem(it.key, it.value, validFrom)
                 }
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
     }
 }
