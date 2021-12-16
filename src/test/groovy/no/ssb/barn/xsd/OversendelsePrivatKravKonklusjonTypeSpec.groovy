@@ -7,10 +7,15 @@ import java.time.LocalDate
 class OversendelsePrivatKravKonklusjonTypeSpec extends Specification {
 
     def "when constructor no exceptions expected"() {
+        given:
+        def date = LocalDate.now()
+
         when:
-        new OversendelsePrivatKravKonklusjonType(LocalDate.now())
+        def sut = new OversendelsePrivatKravKonklusjonType(date)
 
         then:
         noExceptionThrown()
+        and:
+        date == sut.sluttDato
     }
 }
