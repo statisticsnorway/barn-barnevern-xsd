@@ -33,6 +33,14 @@ class MessageReporterContainsClarificationSpec extends Specification {
         message.melder[0].kode = code
         and:
         message.melder[0].presisering = clarification
+        and:
+        if (resetConclusion) {
+            message.konklusjon = null
+        }
+        and:
+        if (resetReporter) {
+            message.melder = List.of()
+        }
 
         when:
         def reportEntries = sut.validate(context)
@@ -49,9 +57,12 @@ class MessageReporterContainsClarificationSpec extends Specification {
         }
 
         where:
-        messageEndDate  | code | clarification     || errorExpected
-        LocalDate.now() | "22" | "~clarification~" || false
-        LocalDate.now() | "22" | ""                || true
-        LocalDate.now() | "21" | ""                || false
+        resetConclusion | resetReporter | messageEndDate  | code  | clarification   || errorExpected
+        true            | false         | LocalDate.now() | "N/A" | "N/A"           || false
+        false           | true          | LocalDate.now() | "N/A" | "N/A"           || false
+        false           | false         | LocalDate.now() | "1"   | "N/A"           || false
+        false           | false         | LocalDate.now() | "22"  | "~presisering~" || false
+        false           | false         | LocalDate.now() | "22"  | ""              || true
+        false           | false         | LocalDate.now() | "22"  | null            || true
     }
 }
