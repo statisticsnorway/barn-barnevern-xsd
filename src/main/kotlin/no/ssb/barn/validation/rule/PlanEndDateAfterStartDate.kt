@@ -15,7 +15,9 @@ class PlanEndDateAfterStartDate : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.plan }
             .filter { plan ->
-                plan.konklusjon?.sluttDato?.isBefore(plan.startDato) == true
+                val conclusion = plan.konklusjon
+                conclusion != null
+                        && conclusion.sluttDato.isBefore(plan.startDato)
             }
             .map {
                 createReportEntry(

@@ -15,7 +15,8 @@ class MeasureEndDateAfterStartDate : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
-                tiltak.konklusjon?.sluttDato?.isBefore(tiltak.startDato) == true
+                val conclusion = tiltak.konklusjon
+                conclusion != null && conclusion.sluttDato.isBefore(tiltak.startDato)
             }
             .map {
                 createReportEntry(
