@@ -75,13 +75,11 @@ data class SaksinnholdType(
                     "Foreldres manglende stimulering og regulering av barnet",
                     validFrom2020
                 ),
-/* TODO Jon Ole: This code does not validate against XSD
                 CodeListItem(
                     "22",
                     "Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet",
                     validFrom2020
                 ),
-*/
                 CodeListItem(
                     "23",
                     "Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester",
