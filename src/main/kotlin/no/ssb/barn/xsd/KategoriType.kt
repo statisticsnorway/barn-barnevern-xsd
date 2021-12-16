@@ -25,6 +25,7 @@ data class KategoriType(
         fun getCodes(date: LocalDate): List<CodeListItem> =
             TypeUtils.getCodes(date, codeList)
 
+        @JvmStatic
         fun getTiltakOpphevelse(date: LocalDate): List<CodeListItem> =
             TypeUtils.getCodes(date, tiltakOpphevelseList)
 

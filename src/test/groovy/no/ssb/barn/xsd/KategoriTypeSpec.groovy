@@ -31,4 +31,17 @@ class KategoriTypeSpec extends Specification {
         LocalDate.of(2013, 6, 1)   || 49
         LocalDate.of(2101, 1, 1)   || 0
     }
+
+    @Unroll
+    def "getTiltakOpphevelse receive number of expected items"() {
+        expect:
+        expectedNumberOfItems == KategoriType.getTiltakOpphevelse(date).size()
+
+        where:
+        date                       || expectedNumberOfItems
+        LocalDate.of(2012, 12, 31) || 0
+        LocalDate.of(2013, 1, 1)   || 4
+        LocalDate.of(2013, 6, 1)   || 4
+        LocalDate.of(2101, 1, 1)   || 0
+    }
 }
