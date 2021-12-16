@@ -15,13 +15,14 @@ class MeasureClarificationRequired : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
-                tiltak.kategori != null
-                        && tiltak.kategori?.presisering?.trim().isNullOrEmpty()
+                val category = tiltak.kategori // when JaCoCo improves, use "?."
+                category != null
+                        && category.presisering.isNullOrEmpty()
             }
             .map {
                 createReportEntry(
                     "Tiltak ($it.id). Tiltakskategori"
-                            + "(${it.kategori?.kode}) mangler presisering",
+                            + "(${it.kategori!!.kode}) mangler presisering",
                     it.id
                 )
             }

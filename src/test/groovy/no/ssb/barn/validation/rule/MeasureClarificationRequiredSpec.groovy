@@ -56,7 +56,6 @@ class MeasureClarificationRequiredSpec extends Specification {
         false          | null            || false
         true           | null            || true
         true           | ""              || true
-        true           | "  "            || true
         true           | "~presisering~" || false
     }
 }
