@@ -30,6 +30,7 @@ class CaseMutatorSpec extends Specification {
         currentState                 || expectedNewStates
         BarnevernState.MESSAGE       || Set.of(BarnevernState.INVESTIGATION, BarnevernState.DECISION)
         BarnevernState.INVESTIGATION || Set.of(BarnevernState.MEASURE, BarnevernState.DECISION)
+        BarnevernState.PLAN          || Set.of(BarnevernState.PLAN)
         BarnevernState.MEASURE       || Set.of(BarnevernState.PLAN, BarnevernState.DECISION, BarnevernState.AFTERCARE)
         BarnevernState.DECISION      || Set.of(BarnevernState.MEASURE, BarnevernState.DECISION, BarnevernState.AFTERCARE)
         BarnevernState.AFTERCARE     || Set.of(BarnevernState.MEASURE, BarnevernState.DECISION)
@@ -275,6 +276,12 @@ class CaseMutatorSpec extends Specification {
 
             case BarnevernState.INVESTIGATION:
                 CaseMutator.fromMessageToInvestigation(instance)
+                break
+
+            case BarnevernState.PLAN:
+                CaseMutator.fromMessageToInvestigation(instance)
+                CaseMutator.fromInvestigationToMeasure(instance)
+                CaseMutator.fromMeasureToPlan(instance)
                 break
 
             case BarnevernState.MEASURE:
