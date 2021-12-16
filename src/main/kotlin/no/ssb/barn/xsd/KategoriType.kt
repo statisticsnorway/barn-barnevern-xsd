@@ -20,8 +20,17 @@ data class KategoriType(
     var presisering: String? = null
 ) {
     companion object {
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
+        fun getTiltakOpphevelse(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, tiltakOpphevelseList)
+
         private const val otherMeasures = "Andre tiltak (krever presisering)"
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
+
         private val codeList =
             mapOf(
                 Pair(
@@ -110,12 +119,5 @@ data class KategoriType(
                 .map {
                     CodeListItem(it.key, it.value, validFrom)
                 }
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
-
-        fun getTiltakOpphevelse(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, tiltakOpphevelseList)
     }
 }

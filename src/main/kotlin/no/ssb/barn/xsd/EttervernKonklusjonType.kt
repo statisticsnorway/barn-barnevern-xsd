@@ -1,9 +1,10 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.util.TypeUtils
+import java.time.LocalDate
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.converter.LocalDateAdapter
-import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EttervernKonklusjon", propOrder = ["sluttDato", "kode"])
@@ -19,8 +20,14 @@ data class EttervernKonklusjonType(
     var kode: String = getCodes(LocalDate.of(2022, 1, 1))[0].code
 ) {
     companion object {
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
         private val validFrom = LocalDate.parse("2022-01-01")
-        private val codeMap =
+
+        private val codeList =
             mapOf(
                 Pair(
                     "1",
@@ -38,12 +45,5 @@ data class EttervernKonklusjonType(
                 .map {
                     CodeListItem(it.key, it.value, validFrom)
                 }
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            codeMap.filter {
-                (date.isEqual(it.validFrom) || date.isAfter(it.validFrom))
-                        && (date.isBefore(it.validTo) || date.isEqual(it.validTo))
-            }
     }
 }
