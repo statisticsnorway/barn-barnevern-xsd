@@ -14,26 +14,43 @@ class CaseMutatorSpec extends Specification {
     def initialMutationProvider = new InitialMutationProvider()
     def versionOneValidator = new VersionOneValidator()
 
-    def "when calling mutate with valid instance expect changed state"() {
+    def "when calling mutate with valid instance expect changed state 2"() {
         given:
-        def caseEntry = createCaseEntry(currentState)
+        def caseEntry
+        and:
+        def iterations = 0
 
         when:
-        CaseMutator.mutate(caseEntry)
+        do {
+            caseEntry = createCaseEntry(currentState)
+            CaseMutator.mutate(caseEntry)
+        } while (caseEntry.state != expectedNewState && ++iterations < 20)
 
         then:
         noExceptionThrown()
         and:
-        expectedNewStates.contains(caseEntry.state)
+        expectedNewState == caseEntry.state
 
         where:
-        currentState                 || expectedNewStates
-        BarnevernState.MESSAGE       || Set.of(BarnevernState.INVESTIGATION, BarnevernState.DECISION)
-        BarnevernState.INVESTIGATION || Set.of(BarnevernState.MEASURE, BarnevernState.DECISION)
-        BarnevernState.PLAN          || Set.of(BarnevernState.PLAN)
-        BarnevernState.MEASURE       || Set.of(BarnevernState.PLAN, BarnevernState.DECISION, BarnevernState.AFTERCARE)
-        BarnevernState.DECISION      || Set.of(BarnevernState.MEASURE, BarnevernState.DECISION, BarnevernState.AFTERCARE)
-        BarnevernState.AFTERCARE     || Set.of(BarnevernState.MEASURE, BarnevernState.DECISION)
+        currentState                 || expectedNewState
+        BarnevernState.MESSAGE       || BarnevernState.INVESTIGATION
+        BarnevernState.MESSAGE       || BarnevernState.DECISION
+
+        BarnevernState.INVESTIGATION || BarnevernState.MEASURE
+        BarnevernState.INVESTIGATION || BarnevernState.DECISION
+
+        BarnevernState.PLAN          || BarnevernState.PLAN
+
+        BarnevernState.MEASURE       || BarnevernState.PLAN
+        BarnevernState.MEASURE       || BarnevernState.DECISION
+        BarnevernState.MEASURE       || BarnevernState.AFTERCARE
+
+        BarnevernState.DECISION      || BarnevernState.MEASURE
+        BarnevernState.DECISION      || BarnevernState.DECISION
+        BarnevernState.DECISION      || BarnevernState.AFTERCARE
+
+        BarnevernState.AFTERCARE     || BarnevernState.MEASURE
+        BarnevernState.AFTERCARE     || BarnevernState.DECISION
     }
 
     def "fromMessageToInvestigation expect one instance of UndersokelseType"() {
