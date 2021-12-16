@@ -25,7 +25,7 @@ class PlanEndDateBeforeIndividEndDate : AbstractRule(
             .map {
                 createReportEntry(
                     "Plan (${it.id}). Planens sluttdato"
-                            + " (${it.konklusjon?.sluttDato}) er etter individets"
+                            + " (${it.konklusjon!!.sluttDato}) er etter individets"
                             + " sluttdato ($individEndDate)",
                     it.id
                 )

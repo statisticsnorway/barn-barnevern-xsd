@@ -23,7 +23,7 @@ class PlanEndDateAfterStartDate : AbstractRule(
                 createReportEntry(
                     "Plan (${it.id}}). Planens startdato (${it.startDato})"
                             + " er etter planens sluttdato"
-                            + " (${it.konklusjon?.sluttDato})",
+                            + " (${it.konklusjon!!.sluttDato})",
                     it.id
                 )
             }

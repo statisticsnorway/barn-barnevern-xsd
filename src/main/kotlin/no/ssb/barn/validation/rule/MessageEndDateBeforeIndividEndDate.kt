@@ -24,7 +24,7 @@ class MessageEndDateBeforeIndividEndDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    "Meldingens sluttdato (${it.konklusjon?.sluttDato})"
+                    "Meldingens sluttdato (${it.konklusjon!!.sluttDato})"
                             + " er etter individets"
                             + " sluttdato ($individEndDate)",
                     it.id

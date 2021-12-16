@@ -25,7 +25,7 @@ class MessageProcessingTimeOverdue : AbstractRule(
                 createReportEntry(
                     "Melding (${it.id})."
                             + " Fristoverskridelse på behandlingstid for melding,"
-                            + " (${it.startDato} -> ${it.konklusjon?.sluttDato})",
+                            + " (${it.startDato} -> ${it.konklusjon!!.sluttDato})",
                     it.id
                 )
             }

@@ -22,7 +22,7 @@ class MeasureEndDateAfterStartDate : AbstractRule(
                 createReportEntry(
                     "Tiltak (${it.id}}). Startdato (${it.startDato})"
                             + " for tiltaket er etter sluttdato"
-                            + " (${it.konklusjon?.sluttDato}) for tiltaket"
+                            + " (${it.konklusjon!!.sluttDato}) for tiltaket"
                 )
             }
             .toList()

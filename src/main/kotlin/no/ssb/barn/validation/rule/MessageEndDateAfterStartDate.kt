@@ -22,7 +22,7 @@ class MessageEndDateAfterStartDate : AbstractRule(
             .map {
                 createReportEntry(
                     "Meldingens startdato (${it.startDato}) er etter"
-                            + " meldingens sluttdato (${it.konklusjon?.sluttDato})",
+                            + " meldingens sluttdato (${it.konklusjon!!.sluttDato})",
                     it.id
                 )
             }

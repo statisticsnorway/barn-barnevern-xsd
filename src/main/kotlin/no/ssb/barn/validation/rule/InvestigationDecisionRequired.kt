@@ -24,7 +24,7 @@ class InvestigationDecisionRequired : AbstractRule(
                 createReportEntry(
                     "Undersøkelse (${it.id})."
                             + " Undersøkelse konkludert med kode"
-                            + " ${it.konklusjon?.kode}"
+                            + " ${it.konklusjon!!.kode}"
                             + " skal ha vedtaksgrunnlag",
                     it.id
                 )
