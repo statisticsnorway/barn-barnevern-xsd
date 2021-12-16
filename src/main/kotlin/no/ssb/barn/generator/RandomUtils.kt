@@ -110,21 +110,21 @@ object RandomUtils {
     private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
     private val cityPartsOslo = mapOf(
-        Pair("Alna", "12"),
-        Pair("Bjerke", "9"),
-        Pair("Frogner", "5"),
-        Pair("Gamle Oslo", "1"),
-        Pair("Grorud", "10"),
-        Pair("Grünerløkka", "2"),
-        Pair("Nordre Aker", "8"),
-        Pair("Nordstrand", "14"),
-        Pair("Sagene", "3"),
-        Pair("St. Hanshaugen", "4"),
-        Pair("Stovner", "11"),
-        Pair("Søndre Nordstrand", "15"),
-        Pair("Ullern", "6"),
-        Pair("Vestre Aker", "7"),
-        Pair("Østensjø", "13")
+        Pair("12", "Alna"),
+        Pair("9", "Bjerke"),
+        Pair("5", "Frogner"),
+        Pair("1", "Gamle Oslo"),
+        Pair("10", "Grorud"),
+        Pair("2", "Grünerløkka"),
+        Pair("8", "Nordre Aker"),
+        Pair("14", "Nordstrand"),
+        Pair("3", "Sagene"),
+        Pair("4", "St. Hanshaugen"),
+        Pair("11", "Stovner"),
+        Pair("15", "Søndre Nordstrand"),
+        Pair("6", "Ullern"),
+        Pair("7", "Vestre Aker"),
+        Pair("13", "Østensjø")
     )
 
     private val avgiverType = listOf(
