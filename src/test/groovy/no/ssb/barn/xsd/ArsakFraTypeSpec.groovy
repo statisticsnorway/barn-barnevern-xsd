@@ -8,16 +8,11 @@ import java.time.LocalDate
 class ArsakFraTypeSpec extends Specification {
 
     def "when constructor is called without values, expect no errors"() {
-        given:
-        def code = ArsakFraType.getCodes(
-                LocalDate.of(2022, 1, 1))[0].code
-        and:
-        def sut = new ArsakFraType()
+        when:
+        new ArsakFraType()
 
-        expect:
-        code == sut.kode
-        and:
-        null == sut.presisering
+        then:
+        noExceptionThrown()
     }
 
     def "when constructor is called with values, expect props to be populated"() {
@@ -39,10 +34,11 @@ class ArsakFraTypeSpec extends Specification {
         expectedNumberOfItems == ArsakFraType.getCodes(date).size()
 
         where:
-        date                     || expectedNumberOfItems
-        LocalDate.of(2021, 1, 1) || 0
-        LocalDate.of(2022, 1, 1) || 18
-        LocalDate.of(2022, 6, 1) || 18
-        LocalDate.of(2101, 1, 1) || 0
+        date                       || expectedNumberOfItems
+        LocalDate.of(2021, 1, 1)   || 0
+        LocalDate.of(2021, 12, 31) || 0
+        LocalDate.of(2022, 1, 1)   || 18
+        LocalDate.of(2022, 6, 1)   || 18
+        LocalDate.of(2101, 1, 1)   || 0
     }
 }

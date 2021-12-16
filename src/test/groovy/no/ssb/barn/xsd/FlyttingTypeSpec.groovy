@@ -8,10 +8,12 @@ import java.time.LocalDate
 class FlyttingTypeSpec extends Specification {
 
     def "when constructor is called without values, expect no errors"() {
-        given:
+        when:
         def sut = new FlyttingType()
 
-        expect:
+        then:
+        noExceptionThrown()
+        and:
         null != sut.id
         and:
         null == sut.migrertId

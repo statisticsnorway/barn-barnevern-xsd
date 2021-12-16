@@ -1,10 +1,10 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UtvidetFrist", propOrder = ["startDato", "innvilget"])
@@ -17,10 +17,19 @@ data class UndersokelseUtvidetFristType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlAttribute(name = "Innvilget")
-    var innvilget: String? = getInnvilget(LocalDate.now())[0].code
+    var innvilget: String? = getInnvilget(LocalDate.now())
+        .take(1)
+        .map { it.code }
+        .firstOrNull()
 ) {
     companion object {
+
+        @JvmStatic
+        fun getInnvilget(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
         private val validFrom = LocalDate.of(2022, 1, 1)
+
         private val codeList = listOf(
             CodeListItem(
                 "1",
@@ -33,10 +42,6 @@ data class UndersokelseUtvidetFristType(
                 validFrom
             )
         )
-
-        @JvmStatic
-        fun getInnvilget(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
     }
 }
 

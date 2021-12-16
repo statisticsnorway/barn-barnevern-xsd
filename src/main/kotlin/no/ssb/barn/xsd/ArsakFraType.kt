@@ -14,7 +14,10 @@ import javax.xml.bind.annotation.XmlType
 )
 data class ArsakFraType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = getCodes(validFrom)[0].code,
+    var kode: String? = getCodes(LocalDate.now())
+        .take(1)
+        .map { it.code }
+        .firstOrNull(),
 
     @field:XmlAttribute(name = "Presisering")
     var presisering: String? = null
@@ -44,15 +47,31 @@ data class ArsakFraType(
                 "Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.) (krever presisering)",
                 validFrom
             ),
-            CodeListItem("1.2.1", "Barnet har behov fosterforeldre ikke kan dekke ", validFrom),
-            CodeListItem("1.2.2", "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) ", validFrom),
+            CodeListItem(
+                "1.2.1",
+                "Barnet har behov fosterforeldre ikke kan dekke ",
+                validFrom
+            ),
+            CodeListItem(
+                "1.2.2",
+                "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) ",
+                validFrom
+            ),
             CodeListItem(
                 "1.2.3",
                 "Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.) (krever presisering) ",
                 validFrom
             ),
-            CodeListItem("1.3", "Barnet flytter sammen med fosterforeldre til nytt bosted", validFrom),
-            CodeListItem("2.1", "Avsluttet i henhold til plan ved oppstart av institusjonsoppholdet", validFrom),
+            CodeListItem(
+                "1.3",
+                "Barnet flytter sammen med fosterforeldre til nytt bosted",
+                validFrom
+            ),
+            CodeListItem(
+                "2.1",
+                "Avsluttet i henhold til plan ved oppstart av institusjonsoppholdet",
+                validFrom
+            ),
             CodeListItem(
                 "2.2",
                 "Institusjonen barnet bor i klarer ikke å dekke barnets behov (manglende kompetanse hos ansatte, beboersammensetning, fysiske forhold ved institusjonen osv)",
@@ -63,7 +82,11 @@ data class ArsakFraType(
                 "Barnet har behov for annen type plasseringstiltak (annen type institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. ",
                 validFrom
             ),
-            CodeListItem("2.4", "Barnet blir myndig og velger selv å flytte ut", validFrom),
+            CodeListItem(
+                "2.4",
+                "Barnet blir myndig og velger selv å flytte ut",
+                validFrom
+            ),
             CodeListItem("2.5", "Barnet trekker samtykke", validFrom),
             CodeListItem("2.6", "Foreldre trekker samtykke", validFrom),
             CodeListItem("2.7", "Ikke medhold i fylkesnemnda", validFrom),
