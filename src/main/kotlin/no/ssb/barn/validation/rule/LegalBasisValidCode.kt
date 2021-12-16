@@ -15,17 +15,17 @@ class LegalBasisValidCode : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
-                val law = tiltak.lovhjemmel
-                law != null
+                val legalBasis = tiltak.lovhjemmel
+                legalBasis != null
                         &&
-                        (law.paragraf.startsWith("0")
-                                || law.kapittel.startsWith("0"))
+                        (legalBasis.paragraf.startsWith("0")
+                                || legalBasis.kapittel.startsWith("0"))
             }
             .map {
                 createReportEntry(
                     "Tiltak ($it.id). Kapittel"
-                            + " (${it.lovhjemmel?.kapittel}) eller paragraf"
-                            + " (${it.lovhjemmel?.paragraf}) er rapportert med"
+                            + " (${it.lovhjemmel!!.kapittel}) eller paragraf"
+                            + " (${it.lovhjemmel!!.paragraf}) er rapportert med"
                             + " den ugyldige koden 0",
                     it.id
                 )

@@ -15,13 +15,14 @@ class MeasureRepealClarificationRequired : AbstractRule(
         return context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
-                tiltak.opphevelse != null
-                        && tiltak.opphevelse?.presisering.isNullOrEmpty()
+                val opphevelse = tiltak.opphevelse // when JaCoCo improves, use "?."
+                opphevelse != null
+                        && opphevelse.presisering.isNullOrEmpty()
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}}). Tiltaksopphevelse" +
-                            " (${it.opphevelse?.kode}) mangler presisering",
+                            " (${it.opphevelse!!.kode}) mangler presisering",
                     it.id
                 )
             }
