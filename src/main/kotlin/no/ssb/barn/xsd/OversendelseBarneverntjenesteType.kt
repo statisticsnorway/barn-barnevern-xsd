@@ -26,5 +26,5 @@ data class OversendelseBarneverntjenesteType(
     var lovhjemmel: LovhjemmelType = LovhjemmelType(),
 
     @field:XmlElement(name = "JmfrLovhjemmel")
-    var jmfrLovhjemmel: List<LovhjemmelType> = mutableListOf()
+    var jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf()
 )
