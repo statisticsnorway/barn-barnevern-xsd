@@ -16,61 +16,56 @@ class InitialMutationProvider(xmlResourceName: String) {
         val currentDateTime =
             currentDate.atStartOfDay().plusHours((6..20).random().toLong())
 
-        return BarnevernConverter.unmarshallXml(initialMutationXml)
-            .apply {
-                avgiver = RandomUtils.generateRandomAvgiverType()
-                fagsystem = RandomUtils.generateRandomFagsystemType()
+        return BarnevernConverter.unmarshallXml(initialMutationXml).apply {
+            avgiver = RandomUtils.generateRandomAvgiverType()
+            fagsystem = RandomUtils.generateRandomFagsystemType()
 
-                with(sak) {
-                    startDato = currentDateTime.toLocalDate()
-                    id = java.util.UUID.randomUUID()
-                    journalnummer =
-                        RandomUtils.generateRandomString(15)
-                    fodselsnummer = RandomUtils.generateRandomSSN(
-                        LocalDate.now().minusYears(20),
-                        LocalDate.now().minusYears(1)
-                    )
-                }
+            sak.apply {
+                startDato = currentDateTime.toLocalDate()
+                id = java.util.UUID.randomUUID()
+                journalnummer =
+                    RandomUtils.generateRandomString(15)
+                fodselsnummer = RandomUtils.generateRandomSSN(
+                    LocalDate.now().minusYears(20),
+                    LocalDate.now().minusYears(1)
+                )
             }
-            .also {
-                if (!it.sak.virksomhet.any()) {
-                    return it
-                }
-            }
-            .apply {
-                with(sak.virksomhet.first()) {
-                    startDato = currentDateTime.toLocalDate()
-                    organisasjonsnummer =
-                        avgiver.organisasjonsnummer // TODO: Oslo
-                }
-            }
-            .also {
-                if (!it.sak.virksomhet.first().melding.any()) {
-                    return it
-                }
-            }
-            .apply {
-                with(sak.virksomhet.first().melding.first()) {
-                    id = java.util.UUID.randomUUID()
-                    startDato = currentDateTime.toLocalDate()
 
-                    melder = mutableListOf(
-                        MelderType(
-                            MelderType.getRandomCode(
-                                currentDateTime.toLocalDate()
-                            )
+            if (!sak.virksomhet.any()) {
+                return this
+            }
+
+            sak.virksomhet.first().apply {
+                startDato = currentDateTime.toLocalDate()
+                organisasjonsnummer =
+                    avgiver.organisasjonsnummer // TODO: Oslo
+            }
+
+            if (!sak.virksomhet.first().melding.any()) {
+                return this
+            }
+
+            sak.virksomhet.first().melding.first().apply {
+                id = java.util.UUID.randomUUID()
+                startDato = currentDateTime.toLocalDate()
+
+                melder = mutableListOf(
+                    MelderType(
+                        MelderType.getRandomCode(
+                            currentDateTime.toLocalDate()
                         )
                     )
+                )
 
-                    saksinnhold = mutableListOf(
-                        SaksinnholdType(
-                            SaksinnholdType.getRandomCode(
-                                currentDateTime.toLocalDate()
-                            )
+                saksinnhold = mutableListOf(
+                    SaksinnholdType(
+                        SaksinnholdType.getRandomCode(
+                            currentDateTime.toLocalDate()
                         )
                     )
-                }
+                )
             }
+        }
     }
 
     companion object {
