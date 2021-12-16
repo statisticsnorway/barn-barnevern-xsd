@@ -35,15 +35,13 @@ class LegalBasisAgeAboveEighteenNoMeasureSpec extends Specification {
         sak.virksomhet[0].tiltak[0].lovhjemmel = null
         and:
         if (createLovhjemmel) {
-            def leddList = ledd != null
-                    ? List.of(ledd)
-                    : List.of()
-
             sak.virksomhet[0].tiltak[0].lovhjemmel = new LovhjemmelType(
                     "BVL",
                     kapittel,
                     paragraf,
-                    leddList as List<String>,
+                    ledd != null
+                            ? List.of(ledd)
+                            : List.of() as List<String>,
                     List.of())
         }
 
@@ -71,5 +69,9 @@ class LegalBasisAgeAboveEighteenNoMeasureSpec extends Specification {
         18  | true             | "4"      | "8"      | "2"  || true
         18  | true             | "4"      | "8"      | "3"  || true
         18  | true             | "4"      | "8"      | "4"  || false
+        18  | true             | "4"      | "7"      | null || false
+        18  | true             | "4"      | "7"      | "2"  || false
+        18  | true             | "4"      | "7"      | "3"  || false
+        18  | true             | "4"      | "7"      | "4"  || false
     }
 }
