@@ -18,6 +18,9 @@ class InitialMutationProvider(xmlResourceName: String) {
 
         return BarnevernConverter.unmarshallXml(initialMutationXml)
             .apply {
+                avgiver = RandomUtils.generateRandomAvgiverType()
+                fagsystem = RandomUtils.generateRandomFagsystemType()
+
                 with(sak) {
                     startDato = currentDateTime.toLocalDate()
                     id = java.util.UUID.randomUUID()
