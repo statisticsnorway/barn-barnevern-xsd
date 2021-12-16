@@ -54,6 +54,6 @@ class MessageEndDateBeforeIndividEndDateSpec extends Specification {
         caseEndDate     | messageEndDate              | resetConclusion || errorExpected
         LocalDate.now() | LocalDate.now()             | false           || false
         LocalDate.now() | LocalDate.now().plusDays(1) | false           || true
-        LocalDate.now() | LocalDate.now()             | true            || false
+        LocalDate.now() | LocalDate.now().plusDays(1) | true            || false
     }
 }
