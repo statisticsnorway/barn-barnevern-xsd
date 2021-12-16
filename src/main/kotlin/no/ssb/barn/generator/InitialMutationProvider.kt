@@ -12,17 +12,18 @@ class InitialMutationProvider(xmlResourceName: String) {
 
     private val initialMutationXml: String = getResourceAsText(xmlResourceName)
 
-    fun createInitialMutation(currentDate: LocalDate): BarnevernType {
-        val currentDateTime =
-            currentDate.atStartOfDay().plusHours((6..20).random().toLong())
-
-        return BarnevernConverter.unmarshallXml(initialMutationXml)
+    fun createInitialMutation(currentDate: LocalDate): BarnevernType =
+        BarnevernConverter.unmarshallXml(initialMutationXml)
             .apply outerApply@{
+
+                datoUttrekk = currentDate.atStartOfDay().plusHours(
+                    (8..20).random().toLong()
+                )
                 fagsystem = RandomUtils.generateRandomFagsystemType()
                 avgiver = RandomUtils.generateRandomAvgiverType()
 
                 sak.apply {
-                    startDato = currentDateTime.toLocalDate()
+                    startDato = currentDate
                     id = java.util.UUID.randomUUID()
                     journalnummer =
                         RandomUtils.generateRandomString(15)
@@ -36,9 +37,11 @@ class InitialMutationProvider(xmlResourceName: String) {
                     }
                 }
 
+                // all props in BarnevernType handled above
+
                 sak.virksomhet.first().also {
                     RandomUtils.copyAvgiverToVirksomhet(avgiver, it)
-                    it.startDato = currentDateTime.toLocalDate()
+                    it.startDato = currentDate
 
                     if (!it.melding.any()) {
                         return@outerApply
@@ -47,26 +50,19 @@ class InitialMutationProvider(xmlResourceName: String) {
 
                 sak.virksomhet.first().melding.first().apply {
                     id = java.util.UUID.randomUUID()
-                    startDato = currentDateTime.toLocalDate()
+                    startDato = currentDate
 
                     melder = mutableListOf(
-                        MelderType(
-                            MelderType.getRandomCode(
-                                currentDateTime.toLocalDate()
-                            )
-                        )
+                        MelderType(MelderType.getRandomCode(currentDate))
                     )
 
                     saksinnhold = mutableListOf(
                         SaksinnholdType(
-                            SaksinnholdType.getRandomCode(
-                                currentDateTime.toLocalDate()
-                            )
+                            SaksinnholdType.getRandomCode(currentDate)
                         )
                     )
                 }
             }
-    }
 
     companion object {
         private fun getResourceAsText(path: String): String =
