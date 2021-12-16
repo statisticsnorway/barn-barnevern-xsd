@@ -15,11 +15,10 @@ class MessageProcessingTimeOverdue : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
-                melding.konklusjon != null
+                val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
+                conclusion != null
                         && melding.startDato.plusDays(7)
-                    .isBefore(
-                        melding.konklusjon?.sluttDato
-                    )
+                    .isBefore(conclusion.sluttDato)
             }
             .map {
                 createReportEntry(

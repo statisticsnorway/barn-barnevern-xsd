@@ -30,10 +30,10 @@ class MessageProcessingTimeOverdueSpec extends Specification {
         and:
         message.startDato = startDate
         and:
+        message.konklusjon.sluttDato = endDate
+        and:
         if (resetConclusion) {
             message.konklusjon = null
-        } else {
-            message.konklusjon?.sluttDato = endDate
         }
 
         when:
