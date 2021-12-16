@@ -15,7 +15,7 @@ class PlanEndDateAfterStartDate : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.plan }
             .filter { plan ->
-                val conclusion = plan.konklusjon
+                val conclusion = plan.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
                         && conclusion.sluttDato.isBefore(plan.startDato)
             }

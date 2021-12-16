@@ -18,7 +18,7 @@ class MessageEndDateBeforeIndividEndDate : AbstractRule(
         return sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
-                val conclusion = melding.konklusjon
+                val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
                         && conclusion.sluttDato.isAfter(individEndDate)
             }

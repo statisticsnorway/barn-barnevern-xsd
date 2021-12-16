@@ -17,7 +17,7 @@ class MessageContainsCaseContent : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
-                val conclusion = melding.konklusjon
+                val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
                 !melding.saksinnhold.any()
                         && conclusion != null
                         && codesThatRequiresCaseContent.contains(conclusion.kode)

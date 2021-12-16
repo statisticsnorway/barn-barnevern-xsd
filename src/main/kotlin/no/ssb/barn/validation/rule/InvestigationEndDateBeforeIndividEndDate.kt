@@ -18,7 +18,7 @@ class InvestigationEndDateBeforeIndividEndDate : AbstractRule(
         return sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.undersokelse }
             .filter { undersokelse ->
-                val conclusion = undersokelse.konklusjon
+                val conclusion = undersokelse.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
                         && conclusion.sluttDato.isAfter(individEndDate)
             }
