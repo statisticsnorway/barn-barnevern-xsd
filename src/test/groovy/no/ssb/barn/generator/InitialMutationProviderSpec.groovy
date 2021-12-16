@@ -26,6 +26,7 @@ class InitialMutationProviderSpec extends Specification {
         where:
         xmlResource                                | _
         "/initial_mutation.xml"                    | _
+        "/initial_mutation_oslo.xml"               | _
         "/initial_mutation_without_virksomhet.xml" | _
         "/initial_mutation_without_melding.xml"    | _
     }
