@@ -31,6 +31,10 @@ class PlanEndDateAfterStartDateSpec extends Specification {
         plan.startDato = planStartDate
         and:
         plan.konklusjon.sluttDato = planEndDate
+        and:
+        if (resetConclusion) {
+            plan.konklusjon = null
+        }
 
         when:
         def reportEntries = sut.validate(context)
@@ -45,9 +49,10 @@ class PlanEndDateAfterStartDateSpec extends Specification {
         }
 
         where:
-        planStartDate                 | planEndDate                   || errorExpected
-        LocalDate.now().minusYears(1) | LocalDate.now()               || false
-        LocalDate.now()               | LocalDate.now()               || false
-        LocalDate.now()               | LocalDate.now().minusYears(1) || true
+        resetConclusion | planStartDate                 | planEndDate                   || errorExpected
+        false           | LocalDate.now().minusYears(1) | LocalDate.now()               || false
+        false           | LocalDate.now()               | LocalDate.now()               || false
+        false           | LocalDate.now()               | LocalDate.now().minusYears(1) || true
+        true            | LocalDate.now()               | LocalDate.now().minusYears(1) || false
     }
 }
