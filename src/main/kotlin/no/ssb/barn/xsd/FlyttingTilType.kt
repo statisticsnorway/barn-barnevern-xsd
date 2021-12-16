@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType
 )
 data class FlyttingTilType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String? = MelderType.getCodes(LocalDate.now())
+    var kode: String? = getCodes(LocalDate.now())
         .take(1)
         .map { it.code }
         .firstOrNull(),
