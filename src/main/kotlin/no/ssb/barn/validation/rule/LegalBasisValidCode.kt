@@ -15,8 +15,11 @@ class LegalBasisValidCode : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
-                tiltak.lovhjemmel?.paragraf?.startsWith("0") == true
-                        || tiltak.lovhjemmel?.kapittel?.startsWith("0") == true
+                val law = tiltak.lovhjemmel
+                law != null
+                        &&
+                        (law.paragraf.startsWith("0")
+                                || law.kapittel.startsWith("0"))
             }
             .map {
                 createReportEntry(

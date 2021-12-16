@@ -29,6 +29,10 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         context.rootObject.sak.sluttDato = individEndDate
         and:
         context.rootObject.sak.virksomhet[0].tiltak[0].konklusjon.sluttDato = measureEndDate
+        and:
+        if (resetConclusion) {
+            context.rootObject.sak.virksomhet[0].tiltak[0].konklusjon = null
+        }
 
         when:
         def reportEntries = sut.validate(context)
@@ -43,9 +47,10 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         }
 
         where:
-        individEndDate                | measureEndDate                || errorExpected
-        LocalDate.now().minusYears(1) | LocalDate.now()               || true
-        LocalDate.now()               | LocalDate.now()               || false
-        LocalDate.now()               | LocalDate.now().minusYears(1) || false
+        resetConclusion | individEndDate                | measureEndDate                || errorExpected
+        false           | LocalDate.now().minusYears(1) | LocalDate.now()               || true
+        true            | LocalDate.now().minusYears(1) | LocalDate.now()               || false
+        false           | LocalDate.now()               | LocalDate.now()               || false
+        false           | LocalDate.now()               | LocalDate.now().minusYears(1) || false
     }
 }

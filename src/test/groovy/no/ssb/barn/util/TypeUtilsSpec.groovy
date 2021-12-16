@@ -8,7 +8,10 @@ import java.time.LocalDate
 
 class TypeUtilsSpec extends Specification {
 
-    def codeListItems = List.of(getCodeListItem())
+    def codeListItems = List.of(
+            getCodeListItem(2020, 2022),
+            getCodeListItem(2017, 2019),
+            getCodeListItem(2022, 2024))
 
     @Unroll
     def "getCodes receive number of expected items"() {
@@ -17,15 +20,15 @@ class TypeUtilsSpec extends Specification {
 
         where:
         date || expectedNumberOfItems
-        LocalDate.of(2019, 1, 1) || 0
+        LocalDate.of(2019, 1, 1) || 1
         LocalDate.of(2021, 1, 1) || 1
         LocalDate.of(2101, 1, 1) || 0
     }
 
-    static def getCodeListItem() {
+    static def getCodeListItem(int yearFrom, int yearTo) {
         new CodeListItem("~code~", "~description~",
-                LocalDate.of(2020, 1, 1),
-                LocalDate.of(2022, 1, 1),
+                LocalDate.of(yearFrom, 1, 1),
+                LocalDate.of(yearTo, 1, 1),
                 "~changeDescription~")
     }
 }
