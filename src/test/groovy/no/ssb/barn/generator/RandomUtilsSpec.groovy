@@ -1,11 +1,31 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.util.ValidationUtils
+import no.ssb.barn.xsd.AvgiverType
+import no.ssb.barn.xsd.VirksomhetType
 import spock.lang.Specification
 
 import java.time.LocalDate
 
 class RandomUtilsSpec extends Specification {
+
+    def "copyAvgiverToVirksomhet expect city part info to be populated"() {
+        given:
+        def avgiver = new AvgiverType()
+        and:
+        avgiver.kommunenummer = GeneratorConstants.OSLO
+        and:
+        def virksomhet = new VirksomhetType()
+
+        when:
+        RandomUtils.copyAvgiverToVirksomhet(avgiver, virksomhet)
+
+        then:
+        null != virksomhet.bydelsnummer
+        and:
+        null != virksomhet.bydelsnavn
+    }
+
     def "Should validate randomly generated norwegian social security numbers known as FNR"() {
         given:
         def startInclusive = LocalDate.of(2000, 1, 1)

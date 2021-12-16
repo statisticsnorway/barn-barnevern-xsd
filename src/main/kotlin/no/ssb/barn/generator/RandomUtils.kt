@@ -89,14 +89,14 @@ object RandomUtils {
 
     @JvmStatic
     fun copyAvgiverToVirksomhet(
-        avgiverType: AvgiverType,
-        virksomhetType: VirksomhetType
-    ): VirksomhetType = virksomhetType.apply {
+        avgiver: AvgiverType,
+        virksomhet: VirksomhetType
+    ): VirksomhetType = virksomhet.apply {
 
         // we should change orgnr when Oslo
-        organisasjonsnummer = avgiverType.organisasjonsnummer
+        organisasjonsnummer = avgiver.organisasjonsnummer
 
-        if (avgiverType.kommunenummer == GeneratorConstants.OSLO) {
+        if (avgiver.kommunenummer == GeneratorConstants.OSLO) {
             cityPartsOslo.entries.random().also {
                 bydelsnummer = it.key
                 bydelsnavn = it.value
