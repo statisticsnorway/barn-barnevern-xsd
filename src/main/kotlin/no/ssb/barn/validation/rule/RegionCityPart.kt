@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.generator.GeneratorConstants
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.AvgiverType
@@ -12,7 +13,7 @@ class RegionCityPart : AbstractRule(
     AvgiverType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        if (context.rootObject.avgiver.kommunenummer != "0301") {
+        if (context.rootObject.avgiver.kommunenummer != GeneratorConstants.OSLO) {
             return null
         }
 

@@ -44,11 +44,11 @@ class RegionCityPartSpec extends Specification {
 
         where:
         kommuneNr | bydelsnr | bydelsnavn   || numberOfErrorsExpected | firstError
-        "0301"    | "11"     | "Nordstrand" || 0                      | null
+        "0301"    | "14"     | "Nordstrand" || 0                      | null
         "0301"    | ""       | "Nordstrand" || 1                      | "Filen mangler bydelsnummer."
         "0301"    | null     | "Nordstrand" || 1                      | "Filen mangler bydelsnummer."
-        "0301"    | "11"     | ""           || 1                      | "Filen mangler bydelsnavn."
-        "0301"    | "11"     | null         || 1                      | "Filen mangler bydelsnavn."
+        "0301"    | "14"     | ""           || 1                      | "Filen mangler bydelsnavn."
+        "0301"    | "14"     | null         || 1                      | "Filen mangler bydelsnavn."
         "0301"    | ""       | ""           || 2                      | "Filen mangler bydelsnummer."
         "0301"    | null     | ""           || 2                      | "Filen mangler bydelsnummer."
         "0301"    | ""       | null         || 2                      | "Filen mangler bydelsnummer."

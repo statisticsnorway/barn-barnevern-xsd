@@ -2,6 +2,7 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.AvgiverType
 import no.ssb.barn.xsd.FagsystemType
+import no.ssb.barn.xsd.VirksomhetType
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -87,11 +88,48 @@ object RandomUtils {
         ).random()
 
     @JvmStatic
+    fun copyAvgiverToVirksomhet(
+        avgiverType: AvgiverType,
+        virksomhetType: VirksomhetType
+    ): VirksomhetType = virksomhetType.apply {
+
+        // we should change orgnr when Oslo
+        organisasjonsnummer = avgiverType.organisasjonsnummer
+
+        if (avgiverType.kommunenummer == GeneratorConstants.OSLO) {
+            cityPartsOslo.entries.random().also {
+                bydelsnummer = it.key
+                bydelsnavn = it.value
+            }
+        }
+    }
+
+    @JvmStatic
     fun generateRandomAvgiverType() = avgiverType.random()
 
     private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
+    private val cityPartsOslo = mapOf(
+        Pair("Alna", "12"),
+        Pair("Bjerke", "9"),
+        Pair("Frogner", "5"),
+        Pair("Gamle Oslo", "1"),
+        Pair("Grorud", "10"),
+        Pair("Grünerløkka", "2"),
+        Pair("Nordre Aker", "8"),
+        Pair("Nordstrand", "14"),
+        Pair("Sagene", "3"),
+        Pair("St. Hanshaugen", "4"),
+        Pair("Stovner", "11"),
+        Pair("Søndre Nordstrand", "15"),
+        Pair("Ullern", "6"),
+        Pair("Vestre Aker", "7"),
+        Pair("Østensjø", "13")
+    )
+
     private val avgiverType = listOf(
+        AvgiverType("958935420", GeneratorConstants.OSLO, "Oslo"),
+
         AvgiverType("944496394", "1101", "Eigersund"),
         AvgiverType("964965226", "1103", "Stavanger"),
         AvgiverType("944073787", "1106", "Haugesund"),

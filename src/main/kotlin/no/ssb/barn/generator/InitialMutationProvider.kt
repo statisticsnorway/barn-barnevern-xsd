@@ -16,56 +16,56 @@ class InitialMutationProvider(xmlResourceName: String) {
         val currentDateTime =
             currentDate.atStartOfDay().plusHours((6..20).random().toLong())
 
-        return BarnevernConverter.unmarshallXml(initialMutationXml).apply {
-            avgiver = RandomUtils.generateRandomAvgiverType()
-            fagsystem = RandomUtils.generateRandomFagsystemType()
+        return BarnevernConverter.unmarshallXml(initialMutationXml)
+            .apply outerApply@{
+                fagsystem = RandomUtils.generateRandomFagsystemType()
+                avgiver = RandomUtils.generateRandomAvgiverType()
 
-            sak.apply {
-                startDato = currentDateTime.toLocalDate()
-                id = java.util.UUID.randomUUID()
-                journalnummer =
-                    RandomUtils.generateRandomString(15)
-                fodselsnummer = RandomUtils.generateRandomSSN(
-                    LocalDate.now().minusYears(20),
-                    LocalDate.now().minusYears(1)
-                )
-            }
+                sak.apply {
+                    startDato = currentDateTime.toLocalDate()
+                    id = java.util.UUID.randomUUID()
+                    journalnummer =
+                        RandomUtils.generateRandomString(15)
+                    fodselsnummer = RandomUtils.generateRandomSSN(
+                        LocalDate.now().minusYears(20),
+                        LocalDate.now().minusYears(1)
+                    )
 
-            if (!sak.virksomhet.any()) {
-                return this
-            }
+                    if (!virksomhet.any()) {
+                        return@outerApply
+                    }
+                }
 
-            sak.virksomhet.first().apply {
-                startDato = currentDateTime.toLocalDate()
-                organisasjonsnummer =
-                    avgiver.organisasjonsnummer // TODO: Oslo
-            }
+                sak.virksomhet.first().also {
+                    RandomUtils.copyAvgiverToVirksomhet(avgiver, it)
+                    it.startDato = currentDateTime.toLocalDate()
 
-            if (!sak.virksomhet.first().melding.any()) {
-                return this
-            }
+                    if (!it.melding.any()) {
+                        return@outerApply
+                    }
+                }
 
-            sak.virksomhet.first().melding.first().apply {
-                id = java.util.UUID.randomUUID()
-                startDato = currentDateTime.toLocalDate()
+                sak.virksomhet.first().melding.first().apply {
+                    id = java.util.UUID.randomUUID()
+                    startDato = currentDateTime.toLocalDate()
 
-                melder = mutableListOf(
-                    MelderType(
-                        MelderType.getRandomCode(
-                            currentDateTime.toLocalDate()
+                    melder = mutableListOf(
+                        MelderType(
+                            MelderType.getRandomCode(
+                                currentDateTime.toLocalDate()
+                            )
                         )
                     )
-                )
 
-                saksinnhold = mutableListOf(
-                    SaksinnholdType(
-                        SaksinnholdType.getRandomCode(
-                            currentDateTime.toLocalDate()
+                    saksinnhold = mutableListOf(
+                        SaksinnholdType(
+                            SaksinnholdType.getRandomCode(
+                                currentDateTime.toLocalDate()
+                            )
                         )
                     )
-                )
+                }
             }
-        }
     }
 
     companion object {
