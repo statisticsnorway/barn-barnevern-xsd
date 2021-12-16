@@ -18,7 +18,9 @@ class MessageEndDateBeforeIndividEndDate : AbstractRule(
         return sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
-                melding.konklusjon?.sluttDato?.isAfter(individEndDate) == true
+                val conclusion = melding.konklusjon
+                conclusion != null
+                        && conclusion.sluttDato.isAfter(individEndDate)
             }
             .map {
                 createReportEntry(
