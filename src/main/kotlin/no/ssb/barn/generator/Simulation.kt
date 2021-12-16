@@ -46,16 +46,15 @@ class Simulation(
         } else {
             getRandomCaseToMutate(currentDate)
                 .also {
-                    if (it.generation > 4) { // replace this with logic later
-                        caseList.remove(it)
-                        return@also
-                    }
-
                     CaseMutator.mutate(it)
 
                     with(it) {
                         generation++
                         updated = currentDate
+                    }
+
+                    if (it.generation > 4) { // replace this with logic later
+                        caseList.remove(it)
                     }
                 }
         }
