@@ -51,6 +51,8 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         false           | LocalDate.now().minusYears(1) | LocalDate.now()               || true
         true            | LocalDate.now().minusYears(1) | LocalDate.now()               || false
         false           | LocalDate.now()               | LocalDate.now()               || false
+        true            | LocalDate.now()               | LocalDate.now()               || false
         false           | LocalDate.now()               | LocalDate.now().minusYears(1) || false
+        true            | LocalDate.now()               | LocalDate.now().minusYears(1) || false
     }
 }
