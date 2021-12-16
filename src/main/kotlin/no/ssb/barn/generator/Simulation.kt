@@ -28,34 +28,30 @@ class Simulation(
 
     private fun produceCasesForCurrentDate(currentDate: LocalDate): Sequence<BarnevernType> =
         (1..(minUpdatesPerDay..maxUpdatesPerDay).random()).asSequence()
-            .map { getOrCreateCurrentCase(currentDate).barnevern }
+            .map { mutateOrCreateCaseEntry(currentDate) }
 
-    private fun getOrCreateCurrentCase(currentDate: LocalDate): CaseEntry =
+    private fun mutateOrCreateCaseEntry(currentDate: LocalDate): BarnevernType =
         if (!mutableCasesExists(currentDate) || shouldCreateNewCase()) {
             initialMutationProvider.createInitialMutation(currentDate)
-                .let {
-                    val currentCaseEntry = CaseEntry(
-                        UUID.randomUUID(),
-                        it,
-                        currentDate
+                .also {
+                    caseList.add(
+                        CaseEntry(
+                            UUID.randomUUID(),
+                            it,
+                            currentDate
+                        )
                     )
-
-                    caseList.add(currentCaseEntry)
-                    return@let currentCaseEntry
                 }
         } else {
-            getRandomCaseToMutate(currentDate)
-                .also {
-                    CaseMutator.mutate(it)
+            CaseMutator.mutate(getRandomCaseToMutate(currentDate))
+                .run {
+                    generation++
+                    updated = currentDate
 
-                    with(it) {
-                        generation++
-                        updated = currentDate
+                    if (generation > 4) { // replace this with logic later
+                        caseList.remove(this)
                     }
-
-                    if (it.generation > 4) { // replace this with logic later
-                        caseList.remove(it)
-                    }
+                    barnevern
                 }
         }
 
