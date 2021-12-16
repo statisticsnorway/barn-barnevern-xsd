@@ -14,14 +14,22 @@ import javax.xml.bind.annotation.XmlType
 )
 data class FlyttingTilType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = MelderType.getCodes(LocalDate.now())[0].code,
+    var kode: String? = MelderType.getCodes(LocalDate.now())
+        .take(1)
+        .map { it.code }
+        .firstOrNull(),
 
     @field:XmlAttribute(name = "Presisering")
     var presisering: String? = null
 
 ) {
     companion object {
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
         private val validFrom = LocalDate.of(2022, 1, 1)
+
         private val codeList = listOf(
             CodeListItem("1", "Fosterhjem i familie og nære nettverk", validFrom),
             CodeListItem("2", "Fosterhjem utenfor familie og nære nettverk", validFrom),
@@ -33,11 +41,6 @@ data class FlyttingTilType(
             CodeListItem("8", "Annet bosted (spesifiser)", validFrom),
             CodeListItem("9", "Adresseendring", validFrom)
         )
-
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
     }
 }
 

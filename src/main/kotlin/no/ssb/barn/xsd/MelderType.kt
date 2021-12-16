@@ -14,12 +14,29 @@ import javax.xml.bind.annotation.XmlType
 )
 data class MelderType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = getCodes(LocalDate.now())[0].code,
+    var kode: String? = getCodes(LocalDate.now())
+        .take(1)
+        .map { it.code }
+        .firstOrNull(),
 
     @field:XmlAttribute(name = "Presisering")
     var presisering: String? = null
 ) {
     companion object {
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
+        @JvmStatic
+        fun getRandomCode(date: LocalDate): String =
+            getCodes(date)
+                .filter { item ->
+                    !item.description
+                        .contains("krever presisering")
+                }
+                .random().code
+
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
 
         private val codeList = arrayOf(
@@ -54,18 +71,5 @@ data class MelderType(
             arrayOf("23", "Anonym")
         )
             .map { CodeListItem(it[0], it[1], validFrom) }
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
-
-        @JvmStatic
-        fun getRandomCode(date: LocalDate): String =
-            getCodes(date)
-                .filter { item ->
-                    !item.description
-                        .contains("krever presisering")
-                }
-                .random().code
     }
 }

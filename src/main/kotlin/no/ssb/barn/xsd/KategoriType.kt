@@ -1,17 +1,20 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.util.TypeUtils
+import java.time.LocalDate
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAttribute
 import javax.xml.bind.annotation.XmlType
-import no.ssb.barn.util.TypeUtils
-import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "KategoriType", propOrder = ["kode", "presisering"])
 data class KategoriType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = getCodes(LocalDate.now())[0].code,
+    var kode: String? = getCodes(LocalDate.now())
+        .take(1)
+        .map { it.code }
+        .firstOrNull(),
 
     @field:XmlAttribute(name = "Presisering")
     var presisering: String? = null

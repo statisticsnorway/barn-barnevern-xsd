@@ -25,8 +25,30 @@ data class SaksinnholdType(
     var presisering: String? = null
 ) {
     companion object {
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
+        @JvmStatic
+        fun harPresisering(date: LocalDate): Boolean =
+            getCodes(date).any { codeListItem: CodeListItem ->
+                codeListItem.description.contains(
+                    "krever presisering"
+                )
+            }
+
+        @JvmStatic
+        fun getRandomCode(date: LocalDate): String =
+            getCodes(date)
+                .filter { item -> !item.description.contains("krever presisering") }
+                .ifEmpty { return "" }
+                .random()
+                .code
+
         private val validFrom2013 = LocalDate.parse("2013-01-01")
         private val validFrom2020 = LocalDate.of(2020, 1, 1)
+
         private val codeList =
             listOf(
                 CodeListItem("1", "Foreldres somatiske sykdom", validFrom2013),
@@ -147,25 +169,5 @@ data class SaksinnholdType(
                     validFrom2013
                 )
             )
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
-
-        @JvmStatic
-        fun harPresisering(date: LocalDate): Boolean =
-            getCodes(date).any { codeListItem: CodeListItem ->
-                codeListItem.description.contains(
-                    "krever presisering"
-                )
-            }
-
-        @JvmStatic
-        fun getRandomCode(date: LocalDate): String =
-            getCodes(date)
-                .filter { item -> !item.description.contains("krever presisering") }
-                .ifEmpty { return "" }
-                .random()
-                .code
     }
 }

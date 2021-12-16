@@ -29,6 +29,7 @@ data class ArsakFraType(
             TypeUtils.getCodes(date, codeList)
 
         private val validFrom = LocalDate.of(2022, 1, 1)
+
         private val codeList = listOf(
             CodeListItem("1.1.1", "Omsorgsplasseringen opphører ", validFrom),
             CodeListItem("1.1.2", "Barnet blir myndig ", validFrom),

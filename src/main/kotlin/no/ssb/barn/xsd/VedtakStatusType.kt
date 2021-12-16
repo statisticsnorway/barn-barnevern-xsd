@@ -1,10 +1,10 @@
 package no.ssb.barn.xsd
 
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Status", propOrder = ["endretDato", "kode"])
@@ -17,10 +17,19 @@ data class VedtakStatusType(
     var endretDato: LocalDate = LocalDate.now(),
 
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = getCodes(LocalDate.of(2022, 1, 1))[0].code
+    var kode: String? = getCodes(LocalDate.of(2022, 1, 1))
+        .take(1)
+        .map { it.code }
+        .firstOrNull()
 ) {
     companion object {
+
+        @JvmStatic
+        fun getCodes(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, codeList)
+
         private val validFrom: LocalDate = LocalDate.parse("2022-01-01")
+
         private val codeList =
             mapOf(
                 Pair(
@@ -41,9 +50,5 @@ data class VedtakStatusType(
                 )
             )
                 .map { CodeListItem(it.key, it.value, validFrom) }
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
     }
 }

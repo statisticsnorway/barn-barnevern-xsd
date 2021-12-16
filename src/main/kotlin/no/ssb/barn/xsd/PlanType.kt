@@ -31,7 +31,10 @@ data class PlanType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlAttribute(name = "Plantype", required = true)
-    var plantype: String = getPlantype(LocalDate.now())[0].code,
+    var plantype: String? = getPlantype(LocalDate.now())
+        .take(1)
+        .map { it.code }
+        .firstOrNull(),
 
     @field:XmlElement(name = "Evaluering")
     var evaluering: List<PlanEvalueringType> = mutableListOf(),
@@ -40,7 +43,12 @@ data class PlanType(
     var konklusjon: PlanKonklusjonType? = PlanKonklusjonType()
 ) {
     companion object {
+
+        fun getPlantype(date: LocalDate): List<CodeListItem> =
+            TypeUtils.getCodes(date, planTypeList)
+
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
+
         private val planTypeList = mapOf(
             Pair(
                 "1",
@@ -62,8 +70,5 @@ data class PlanType(
             .map {
                 CodeListItem(it.key, it.value, validFrom)
             }
-
-        fun getPlantype(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, planTypeList)
     }
 }
