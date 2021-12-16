@@ -1,10 +1,8 @@
 package no.ssb.barn.generator
 
-
 import spock.lang.Specification
 import spock.lang.Subject
 
-import java.time.LocalDate
 import java.util.stream.StreamSupport
 
 class SimulationSpec extends Specification {
@@ -18,8 +16,6 @@ class SimulationSpec extends Specification {
 
     def setup() {
         sut = new Simulation(
-                LocalDate.now().minusDays(NUMBER_OF_DAYS),
-                LocalDate.now(),
                 MIN_UPDATES_PER_DAY,
                 MAX_UPDATES_PER_DAY)
     }
@@ -29,7 +25,7 @@ class SimulationSpec extends Specification {
         def expectedLeastNumberOfMutations = MIN_UPDATES_PER_DAY * NUMBER_OF_DAYS
 
         when:
-        def result = sut.run()
+        def result = sut.run(NUMBER_OF_DAYS)
 
         then:
         def splitIterator =
@@ -42,9 +38,7 @@ class SimulationSpec extends Specification {
 
     def "when calling secondary constructor, no exception is thrown"() {
         when:
-        sut = new Simulation(
-                LocalDate.now().minusDays(NUMBER_OF_DAYS),
-                LocalDate.now())
+        sut = new Simulation()
 
         then:
         noExceptionThrown()
