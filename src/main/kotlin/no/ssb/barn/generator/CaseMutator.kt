@@ -6,15 +6,16 @@ import java.time.LocalDate
 object CaseMutator {
 
     @JvmStatic
-    fun mutate(caseToMutate: CaseEntry) =
+    fun mutate(caseToMutate: CaseEntry): CaseEntry =
         newStateFuncMap.entries.asSequence()
             .filter { it.key.first == caseToMutate.state }
             .toList()
-            .ifEmpty { return } // if state == Plan, there is no transition
+            .ifEmpty { return caseToMutate } // if state == Plan, there is no transition
             .random()
             .run {
                 value(caseToMutate) // call transformation
                 caseToMutate.state = key.second
+                caseToMutate
             }
 
     // START Melding
