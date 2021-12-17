@@ -16,11 +16,14 @@ class LegalBasisWithEndDateClarificationRequired : AbstractRule(
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 val legalBasis = tiltak.lovhjemmel
+                val conclusion = tiltak.konklusjon
+                val repeal = tiltak.opphevelse
 
-                tiltak.konklusjon?.sluttDato != null
-                        && tiltak.opphevelse?.kode == "4"
-                        && tiltak.opphevelse?.presisering.isNullOrEmpty()
-                        && legalBasis != null
+                legalBasis != null
+                        && conclusion != null
+                        && repeal != null
+                        && repeal.kode == "4"
+                        && repeal.presisering.isNullOrEmpty()
                         && legalBasis.kapittel == "4"
                         && (
                         legalBasis.paragraf == "12"
