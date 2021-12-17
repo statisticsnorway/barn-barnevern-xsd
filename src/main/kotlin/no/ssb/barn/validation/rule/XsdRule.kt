@@ -45,6 +45,5 @@ class XsdRule(
             .newValidator()
 
     private fun getSourceFromClasspath(resourceName: String): InputStream? =
-        this::class.java.classLoader.getResource(resourceName)
-            ?.openStream()
+        this::class.java.classLoader.getResource(resourceName)!!.openStream()
 }

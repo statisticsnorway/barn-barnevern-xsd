@@ -1,10 +1,12 @@
 package no.ssb.barn.util
 
+import no.ssb.barn.generator.RandomUtils
 import org.xml.sax.SAXException
 import spock.lang.Specification
 import spock.lang.Unroll
 
 import javax.xml.transform.stream.StreamSource
+import java.time.LocalDate
 
 class ValidationUtilsSpec extends Specification {
     def "Should find sources from classpath, filename = #filename, result = #result"() {
@@ -49,7 +51,7 @@ class ValidationUtilsSpec extends Specification {
         "/Barnevern.xsd" | "/invalid.xml"
     }
 
-    def "Should validate norwegian sosial security numbers (fnr), fnr = #fnr, result = #result"() {
+    def "Should validate norwegian social security numbers (fnr), fnr = #fnr, result = #result"() {
         expect:
         ValidationUtils.validateSSN(fnr) == result
 
@@ -67,12 +69,20 @@ class ValidationUtilsSpec extends Specification {
         expectedAge == ValidationUtils.getAge(fnr)
 
         where:
-        fnr            | type  || expectedAge
-        "05011399292"  | "fnr" || 8
-        "41011088188"  | "dnr" || -1
-        "01020304050"  | "fnr" || 18
-        "a".repeat(11) | "???" || -1
-        null           | "???" || -2
+        fnr             | type  || expectedAge
+        "05011399292"   | "fnr" || 8
+        "41011088188"   | "dnr" || -1
+        "01020304050"   | "fnr" || 18
+        "a".repeat(11)  | "???" || -1
+        null            | "???" || -2
+        getSsnByAge(99) | "fnr" || -1
+    }
+
+    static def getSsnByAge(int age) {
+        RandomUtils.generateRandomSSN(
+                LocalDate.now().minusYears(age + 1),
+                LocalDate.now().minusYears(age)
+        )
     }
 
     def getSourceFromClasspath(String path) {

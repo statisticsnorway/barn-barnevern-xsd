@@ -50,7 +50,6 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
                 virksomhet.tiltak[1].kategori.kode = categoryCode
             }
         }
-        and:
 
         when:
         def reportEntries = sut.validate(context)
