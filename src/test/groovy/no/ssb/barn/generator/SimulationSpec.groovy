@@ -22,6 +22,19 @@ class SimulationSpec extends Specification {
                 MAX_MUTATIONS)
     }
 
+    def "when running for a single day, expect generated cases"() {
+        when:
+        def result = sut.run(1)
+
+        then:
+        def splitIterator =
+                Spliterators.spliteratorUnknownSize(
+                        result.iterator(), Spliterator.ORDERED)
+        and:
+        StreamSupport.stream(splitIterator, false)
+                .count() > 0
+    }
+
     def "when simulation har ran for 10 days, expect least number of cases"() {
         given:
         def expectedLeastNumberOfMutations = MIN_UPDATES_PER_DAY * NUMBER_OF_DAYS
