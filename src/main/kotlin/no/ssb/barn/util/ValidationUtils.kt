@@ -41,8 +41,8 @@ object ValidationUtils {
     private fun areOverlapping(
         first: ClosedRange<LocalDate>, second: ClosedRange<LocalDate>
     ): Boolean =
-        first.start <= second.endInclusive
-                && second.start <= first.endInclusive
+        first.start.isBefore(second.endInclusive)
+                && second.start.isBefore(first.endInclusive)
 
     @JvmStatic
     fun getMaxDate(first: LocalDate, second: LocalDate): LocalDate =

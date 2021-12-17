@@ -42,22 +42,22 @@ class ValidationUtilsSpec extends Specification {
         expectedResult == ValidationUtils.areOverlappingWithAtLeastThreeMonths(first, second)
 
         where:
-        first                                        | second                                      || expectedResult
-        createMeasure(createDate(0), createDate(1))  | createMeasure(createDate(2), createDate(3)) || false
-        createMeasure(createDate(2), createDate(3))  | createMeasure(createDate(0), createDate(1)) || false
+        first                                        | second                                       || expectedResult
+        createMeasure(createDate(0), createDate(1))  | createMeasure(createDate(2), createDate(3))  || false
+        createMeasure(createDate(2), createDate(3))  | createMeasure(createDate(0), createDate(1))  || false
 
         // first.start <= second.endInclusive
-        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(0), createDate(3)) || true
+        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(0), createDate(3))  || true
         createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(-3), createDate(0)) || false
 
         // second.start <= first.endInclusive
-        createMeasure(createDate(-2), createDate(1))  | createMeasure(createDate(0), createDate(3)) || false
-        createMeasure(createDate(-3), createDate(0))  | createMeasure(createDate(0), createDate(3)) || false
+        createMeasure(createDate(-2), createDate(1)) | createMeasure(createDate(0), createDate(3))  || false
+        createMeasure(createDate(-3), createDate(0)) | createMeasure(createDate(0), createDate(3))  || false
 
-        createMeasure(createDate(0), createDate(3))  | createMeasure(createDate(0), createDate(3)) || true
-        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(1), createDate(4)) || true
-        createMeasure(createDate(-1), createDate(3)) | createMeasure(createDate(0), createDate(4)) || true
-        createMeasure(createDate(-2), createDate(2)) | createMeasure(createDate(1), createDate(4)) || false
+        createMeasure(createDate(0), createDate(3))  | createMeasure(createDate(0), createDate(3))  || true
+        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(1), createDate(4))  || true
+        createMeasure(createDate(-1), createDate(3)) | createMeasure(createDate(0), createDate(4))  || true
+        createMeasure(createDate(-2), createDate(2)) | createMeasure(createDate(1), createDate(4))  || false
     }
 
     def "Should find sources from classpath, filename = #filename, result = #result"() {
