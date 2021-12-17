@@ -4,8 +4,8 @@ import no.ssb.barn.framework.AbstractRule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.util.ValidationUtils.areOverlappingWithAtLeastThreeMonths
 import no.ssb.barn.xsd.TiltakType
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
@@ -47,7 +47,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
 
         measures.forEachIndexed { outerIndex, outerMeasure ->
             measures.forEachIndexed inner@{ innerIndex, innerMeasure ->
-                if (outerIndex == innerIndex || !areOverlappingWithThreeMonths(
+                if (outerIndex == innerIndex || !areOverlappingWithAtLeastThreeMonths(
                         outerMeasure,
                         innerMeasure
                     )
@@ -79,38 +79,4 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
         }
         return reportEntries.ifEmpty { null }
     }
-
-    private fun areOverlappingWithThreeMonths(
-        outerMeasure: TiltakType, innerMeasure: TiltakType
-    ): Boolean {
-
-        val outerRange =
-            outerMeasure.startDato!!.rangeTo(outerMeasure.konklusjon!!.sluttDato)
-
-        val innerRange =
-            innerMeasure.startDato!!.rangeTo(innerMeasure.konklusjon!!.sluttDato)
-
-        return areOverlapping(outerRange, innerRange)
-                && getMaxDate(outerRange.start, innerRange.start)
-            .plusMonths(3)
-            .minusDays(1) // in case both intervals are equal
-            .isBefore(
-                getMinDate(
-                    outerRange.endInclusive,
-                    innerRange.endInclusive
-                )
-            )
-    }
-
-    private fun areOverlapping(
-        first: ClosedRange<LocalDate>, second: ClosedRange<LocalDate>
-    ): Boolean =
-        first.start <= second.endInclusive
-                && second.start <= first.endInclusive
-
-    private fun getMaxDate(first: LocalDate, second: LocalDate): LocalDate =
-        if (first > second) first else second
-
-    private fun getMinDate(first: LocalDate, second: LocalDate): LocalDate =
-        if (first < second) first else second
 }

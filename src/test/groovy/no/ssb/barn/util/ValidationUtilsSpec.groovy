@@ -1,6 +1,8 @@
 package no.ssb.barn.util
 
 import no.ssb.barn.generator.RandomUtils
+import no.ssb.barn.xsd.TiltakKonklusjonType
+import no.ssb.barn.xsd.TiltakType
 import org.xml.sax.SAXException
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -9,6 +11,45 @@ import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
 
 class ValidationUtilsSpec extends Specification {
+
+    @Unroll
+    def "minDate receive min date"() {
+        expect:
+        ValidationUtils.getMinDate(first, second) == (expectFirstToBeReturned ? first : second)
+
+        where:
+        first                     | second                    || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || true
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || false
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
+    }
+
+    @Unroll
+    def "maxDate receive max date"() {
+        expect:
+        ValidationUtils.getMaxDate(first, second) == (expectFirstToBeReturned ? first : second)
+
+        where:
+        first                     | second                    || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || false
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || true
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
+    }
+
+    @Unroll
+    def "areOverlappingWithAtLeastThreeMonths all scenarios"() {
+        expect:
+        expectedResult == ValidationUtils.areOverlappingWithAtLeastThreeMonths(first, second)
+
+        where:
+        first                                        | second                                      || expectedResult
+        createMeasure(createDate(0), createDate(1))  | createMeasure(createDate(2), createDate(3)) || false
+        createMeasure(createDate(0), createDate(3))  | createMeasure(createDate(0), createDate(3)) || true
+        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(1), createDate(4)) || true
+        createMeasure(createDate(-1), createDate(3)) | createMeasure(createDate(0), createDate(4)) || true
+        createMeasure(createDate(-2), createDate(2)) | createMeasure(createDate(1), createDate(4)) || false
+    }
+
     def "Should find sources from classpath, filename = #filename, result = #result"() {
         expect:
         (getSourceFromClasspath(filename) != null) == result
@@ -76,6 +117,27 @@ class ValidationUtilsSpec extends Specification {
         "a".repeat(11)  | "???" || -1
         null            | "???" || -2
         getSsnByAge(99) | "fnr" || -1
+    }
+
+    // util stuff from here
+
+    static def createMeasure(LocalDate start, LocalDate end) {
+        new TiltakType(
+                UUID.randomUUID(),
+                null,
+                start,
+                null,
+                List.of(),
+                null,
+                List.of(),
+                List.of(),
+                null,
+                new TiltakKonklusjonType(end)
+        )
+    }
+
+    static def createDate(monthsAhead) {
+        LocalDate.now().plusMonths(monthsAhead)
     }
 
     static def getSsnByAge(int age) {

@@ -1,9 +1,11 @@
 package no.ssb.barn.util
 
+import no.ssb.barn.xsd.TiltakType
 import org.xml.sax.SAXException
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.Year
 import javax.xml.XMLConstants
 import javax.xml.transform.Source
@@ -12,6 +14,43 @@ import javax.xml.validation.SchemaFactory
 import javax.xml.validation.Validator
 
 object ValidationUtils {
+
+    @JvmStatic
+    fun areOverlappingWithAtLeastThreeMonths(
+        outerMeasure: TiltakType, innerMeasure: TiltakType
+    ): Boolean {
+
+        val outerRange =
+            outerMeasure.startDato!!.rangeTo(outerMeasure.konklusjon!!.sluttDato)
+
+        val innerRange =
+            innerMeasure.startDato!!.rangeTo(innerMeasure.konklusjon!!.sluttDato)
+
+        return areOverlapping(outerRange, innerRange)
+                && getMaxDate(outerRange.start, innerRange.start)
+            .plusMonths(3)
+            .minusDays(1) // in case both intervals are equal
+            .isBefore(
+                getMinDate(
+                    outerRange.endInclusive,
+                    innerRange.endInclusive
+                )
+            )
+    }
+
+    private fun areOverlapping(
+        first: ClosedRange<LocalDate>, second: ClosedRange<LocalDate>
+    ): Boolean =
+        first.start <= second.endInclusive
+                && second.start <= first.endInclusive
+
+    @JvmStatic
+    fun getMaxDate(first: LocalDate, second: LocalDate): LocalDate =
+        if (first.isAfter(second)) first else second
+
+    @JvmStatic
+    fun getMinDate(first: LocalDate, second: LocalDate): LocalDate =
+        if (first.isBefore(second)) first else second
 
     @JvmStatic
     @Throws(SAXException::class)
