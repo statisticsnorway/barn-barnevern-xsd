@@ -22,6 +22,16 @@ class TheValidatorSpec extends Specification {
         TheValidator.create() instanceof TheValidator
     }
 
+    def "when validate with invalid xsd, receive exception"() {
+        when:
+        sut.validate(
+                UUID.randomUUID().toString(), 2, "~xmlBody~")
+
+        then:
+        //noinspection GroovyUnusedAssignment
+        IndexOutOfBoundsException e = thrown()
+    }
+
     def "when validate with invalid xml, receive validation report with FATAL"() {
         when:
         def validationReport = sut.validate(

@@ -12,8 +12,7 @@ import no.ssb.barn.report.ValidationReport
  */
 class TheValidator private constructor() {
     private val validatorMap = mapOf(
-        Pair(VERSION_ONE, VersionOneValidator()),
-        Pair(VERSION_TWO, VersionTwoValidator())
+        Pair(VERSION_ONE, VersionOneValidator())
     )
 
     /**
@@ -35,7 +34,6 @@ class TheValidator private constructor() {
     companion object {
 
         const val VERSION_ONE = 1
-        const val VERSION_TWO = 2
 
         /**
          * Builds a validator instance.
