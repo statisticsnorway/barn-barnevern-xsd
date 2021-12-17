@@ -111,19 +111,19 @@ object RandomUtils {
 
     private val cityPartsOslo = mapOf(
         Pair("12", "Alna"),
-        Pair("9", "Bjerke"),
-        Pair("5", "Frogner"),
-        Pair("1", "Gamle Oslo"),
+        Pair("09", "Bjerke"),
+        Pair("05", "Frogner"),
+        Pair("01", "Gamle Oslo"),
         Pair("10", "Grorud"),
-        Pair("2", "Grünerløkka"),
-        Pair("8", "Nordre Aker"),
+        Pair("02", "Grünerløkka"),
+        Pair("08", "Nordre Aker"),
         Pair("14", "Nordstrand"),
-        Pair("3", "Sagene"),
-        Pair("4", "St. Hanshaugen"),
+        Pair("03", "Sagene"),
+        Pair("04", "St. Hanshaugen"),
         Pair("11", "Stovner"),
         Pair("15", "Søndre Nordstrand"),
-        Pair("6", "Ullern"),
-        Pair("7", "Vestre Aker"),
+        Pair("06", "Ullern"),
+        Pair("07", "Vestre Aker"),
         Pair("13", "Østensjø")
     )
 
