@@ -6,13 +6,19 @@ import java.util.*
 
 class Simulation(
     private val minUpdatesPerDay: Int,
-    private val maxUpdatesPerDay: Int
+    private val maxUpdatesPerDay: Int,
+    private val maxMutations: Int
 ) {
-    constructor() : this(MIN_UPDATES_PER_DAY, MAX_UPDATES_PER_DAY)
+    constructor() : this(
+        DEFAULT_MIN_UPDATES_PER_DAY,
+        DEFAULT_MAX_UPDATES_PER_DAY,
+        DEFAULT_MAX_MUTATIONS
+    )
 
     companion object {
-        const val MIN_UPDATES_PER_DAY = 10
-        const val MAX_UPDATES_PER_DAY = 20
+        const val DEFAULT_MIN_UPDATES_PER_DAY = 10
+        const val DEFAULT_MAX_UPDATES_PER_DAY = 20
+        const val DEFAULT_MAX_MUTATIONS = 3
 
         // flip a coin
         private fun shouldCreateNewCase(): Boolean = (0..1).random() == 1
@@ -47,7 +53,7 @@ class Simulation(
                     generation++
                     updated = currentDate
 
-                    if (generation > 4) { // replace this with logic later
+                    if (generation > maxMutations) {
                         caseList.remove(this)
                     }
                     barnevern

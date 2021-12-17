@@ -10,6 +10,7 @@ class SimulationSpec extends Specification {
     def NUMBER_OF_DAYS = 20
     def MIN_UPDATES_PER_DAY = 1
     def MAX_UPDATES_PER_DAY = 2
+    def MAX_MUTATIONS = 2
 
     @Subject
     Simulation sut
@@ -17,7 +18,8 @@ class SimulationSpec extends Specification {
     def setup() {
         sut = new Simulation(
                 MIN_UPDATES_PER_DAY,
-                MAX_UPDATES_PER_DAY)
+                MAX_UPDATES_PER_DAY,
+                MAX_MUTATIONS)
     }
 
     def "when simulation har ran for 10 days, expect least number of cases"() {
