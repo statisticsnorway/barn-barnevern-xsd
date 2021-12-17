@@ -45,6 +45,7 @@ class ValidationUtilsSpec extends Specification {
         first                                        | second                                      || expectedResult
         createMeasure(createDate(0), createDate(1))  | createMeasure(createDate(2), createDate(3)) || false
         createMeasure(createDate(3), createDate(6))  | createMeasure(createDate(2), createDate(3)) || false
+        createMeasure(createDate(3), createDate(6))  | createMeasure(createDate(6), createDate(9)) || false
         createMeasure(createDate(0), createDate(3))  | createMeasure(createDate(0), createDate(3)) || true
         createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(1), createDate(4)) || true
         createMeasure(createDate(-1), createDate(3)) | createMeasure(createDate(0), createDate(4)) || true
