@@ -36,7 +36,7 @@ class Simulation(
             .map { mutateOrCreateCaseEntry(currentDate) }
 
     private fun mutateOrCreateCaseEntry(currentDate: LocalDate): BarnevernType =
-        if (!mutableCasesExists(currentDate) || shouldCreateNewCase()) {
+        if (mutableCaseCount(currentDate) < 1 || shouldCreateNewCase()) {
             InitialMutationProvider.createInitialMutation(currentDate)
                 .also {
                     caseList.add(
@@ -65,11 +65,11 @@ class Simulation(
             .filter {
                 it.updated.isBefore(currentDate)
             }
-            .toList()
-            .random()
+            .drop((0 until mutableCaseCount(currentDate)).random())
+            .first()
 
-    private fun mutableCasesExists(currentDate: LocalDate): Boolean =
-        caseList.any {
+    private fun mutableCaseCount(currentDate: LocalDate): Int =
+        caseList.count {
             it.updated.isBefore(currentDate)
         }
 }
