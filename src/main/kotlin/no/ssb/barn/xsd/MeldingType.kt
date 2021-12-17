@@ -30,10 +30,10 @@ data class MeldingType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Melder")
-    var melder: List<MelderType> = mutableListOf(),
+    var melder: MutableList<MelderType> = mutableListOf(),
 
     @field:XmlElement(name = "Saksinnhold")
-    var saksinnhold: List<SaksinnholdType> = mutableListOf(),
+    var saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: MeldingKonklusjonType? = null

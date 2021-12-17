@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.xsd.SaksinnholdType
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -26,10 +27,16 @@ class MessageContainsCaseContentSpec extends Specification {
         given:
         def melding = context.rootObject.sak.virksomhet[0].melding[0]
         and:
-        melding.konklusjon.kode = code
+        if (resetConclusion) {
+            melding.konklusjon = null
+        } else {
+            melding.konklusjon.kode = code
+        }
         and:
         if (resetCaseContent) {
-            melding.saksinnhold = List.of()
+            melding.saksinnhold.clear()
+        } else {
+            melding.saksinnhold.add(new SaksinnholdType())
         }
 
         when:
@@ -47,11 +54,11 @@ class MessageContainsCaseContentSpec extends Specification {
         }
 
         where:
-        code | resetCaseContent || errorExpected
-        "1"  | false            || false
-        "2"  | false            || false
-        "1"  | true             || true
-        "2"  | true             || true
-        "42" | true             || false
+        resetCaseContent | resetConclusion | code  || errorExpected
+        false            | false           | "N/A" || false
+        true             | true            | "N/A" || false
+        true             | false           | "42"  || false
+        true             | false           | "1"   || true
+        true             | false           | "2"   || true
     }
 }
