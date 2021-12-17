@@ -45,11 +45,16 @@ class MessageCaseContentContainsClarificationSpec extends Specification {
 
         where:
         code | clarification   || errorExpected
+        null | "N/A"           || false
+        ""   | "N/A"           || false
+        "42" | "N/A"           || false
+
+        "18" | null            || true
+        "18" | ""              || true
+        "19" | null            || true
+        "19" | ""              || true
+
         "18" | "~presisering~" || false
         "19" | "~presisering~" || false
-        "42" | "~presisering~" || false
-        "42" | null            || false
-        "18" | null            || true
-        "19" | null            || true
     }
 }
