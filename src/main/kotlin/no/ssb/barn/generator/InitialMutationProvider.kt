@@ -18,9 +18,6 @@ object InitialMutationProvider {
 
                 sak.apply {
                     startDato = currentDate
-                    id = java.util.UUID.randomUUID()
-                    journalnummer =
-                        RandomUtils.generateRandomString(15)
                     fodselsnummer = RandomUtils.generateRandomSSN(
                         LocalDate.now().minusYears(20),
                         LocalDate.now().minusYears(1)
