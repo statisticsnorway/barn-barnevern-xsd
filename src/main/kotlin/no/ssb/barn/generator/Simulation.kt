@@ -19,7 +19,6 @@ class Simulation(
     }
 
     private val caseList = mutableSetOf<CaseEntry>()
-    private val initialMutationProvider = InitialMutationProvider()
 
     fun run(daysBack: Int): Sequence<BarnevernType> =
         (-daysBack until 0).asSequence()
@@ -32,7 +31,7 @@ class Simulation(
 
     private fun mutateOrCreateCaseEntry(currentDate: LocalDate): BarnevernType =
         if (!mutableCasesExists(currentDate) || shouldCreateNewCase()) {
-            initialMutationProvider.createInitialMutation(currentDate)
+            InitialMutationProvider.createInitialMutation(currentDate)
                 .also {
                     caseList.add(
                         CaseEntry(

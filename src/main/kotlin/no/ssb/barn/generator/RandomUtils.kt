@@ -1,8 +1,6 @@
 package no.ssb.barn.generator
 
-import no.ssb.barn.xsd.AvgiverType
-import no.ssb.barn.xsd.FagsystemType
-import no.ssb.barn.xsd.VirksomhetType
+import no.ssb.barn.xsd.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -88,21 +86,32 @@ object RandomUtils {
         ).random()
 
     @JvmStatic
-    fun copyAvgiverToVirksomhet(
-        avgiver: AvgiverType,
-        virksomhet: VirksomhetType
-    ): VirksomhetType = virksomhet.apply {
+    fun generateRandomVirksomhetType(avgiver: AvgiverType): VirksomhetType =
+        VirksomhetType().apply {
 
-        // we should change orgnr when Oslo
-        organisasjonsnummer = avgiver.organisasjonsnummer
+            // we should probably use orgnr for bydel when Oslo
+            organisasjonsnummer = avgiver.organisasjonsnummer
 
-        if (avgiver.kommunenummer == GeneratorConstants.OSLO) {
-            cityPartsOslo.entries.random().also {
-                bydelsnummer = it.key
-                bydelsnavn = it.value
+            if (avgiver.kommunenummer == GeneratorConstants.OSLO) {
+                cityPartsOslo.entries.random().also {
+                    bydelsnummer = it.key
+                    bydelsnavn = it.value
+                }
             }
         }
-    }
+
+    @JvmStatic
+    fun generateRandomMeldingType(currentDate: LocalDate): MeldingType =
+        MeldingType().apply {
+            id = java.util.UUID.randomUUID()
+            startDato = currentDate
+            melder.add(MelderType(MelderType.getRandomCode(currentDate)))
+            saksinnhold.add(
+                SaksinnholdType(
+                    SaksinnholdType.getRandomCode(currentDate)
+                )
+            )
+        }
 
     @JvmStatic
     fun generateRandomAvgiverType() = avgiverType.random()

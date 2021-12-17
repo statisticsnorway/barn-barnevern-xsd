@@ -56,7 +56,7 @@ class BarnevernConverterSpec extends Specification {
 
     def "when marshalling instance to XML, xml is valid"() {
         given:
-        def instance = new InitialMutationProvider().createInitialMutation(LocalDate.now())
+        def instance = InitialMutationProvider.createInitialMutation(LocalDate.now())
 
         when:
         def xml = BarnevernConverter.marshallInstance(instance)

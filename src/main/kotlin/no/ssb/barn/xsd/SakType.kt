@@ -51,5 +51,5 @@ data class SakType(
     var avsluttet: Boolean? = null,
 
     @field:XmlElement(name = "Virksomhet", required = true)
-    var virksomhet: List<VirksomhetType> = mutableListOf()
+    var virksomhet: MutableList<VirksomhetType> = mutableListOf()
 )

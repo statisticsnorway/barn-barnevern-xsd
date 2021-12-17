@@ -11,7 +11,6 @@ import java.time.LocalDate
 
 class CaseMutatorSpec extends Specification {
 
-    def initialMutationProvider = new InitialMutationProvider()
     def versionOneValidator = new VersionOneValidator()
 
     def "when calling mutate with valid instance expect changed state 2"() {
@@ -279,10 +278,10 @@ class CaseMutatorSpec extends Specification {
 
     // util stuff from here
 
-    def createCaseEntry(BarnevernState state) {
+    static def createCaseEntry(BarnevernState state) {
         def instance = new CaseEntry(
                 UUID.randomUUID(),
-                initialMutationProvider.createInitialMutation(LocalDate.now()),
+                InitialMutationProvider.createInitialMutation(LocalDate.now()),
                 LocalDate.now(),
                 1,
                 state)

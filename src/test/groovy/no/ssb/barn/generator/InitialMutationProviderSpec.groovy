@@ -10,11 +10,8 @@ class InitialMutationProviderSpec extends Specification {
 
     @Unroll
     def "when calling createInitialMutation receive valid instance"() {
-        given:
-        def sut = new InitialMutationProvider(xmlResource)
-
         when:
-        def instance = sut.createInitialMutation(LocalDate.now())
+        def instance = InitialMutationProvider.createInitialMutation(LocalDate.now())
 
         then:
         noExceptionThrown()
@@ -24,9 +21,6 @@ class InitialMutationProviderSpec extends Specification {
         null != BarnevernConverter.unmarshallXml(xml)
 
         where:
-        xmlResource                                | _
-        "/initial_mutation.xml"                    | _
-        "/initial_mutation_without_virksomhet.xml" | _
-        "/initial_mutation_without_melding.xml"    | _
+        i << (1..10)
     }
 }
