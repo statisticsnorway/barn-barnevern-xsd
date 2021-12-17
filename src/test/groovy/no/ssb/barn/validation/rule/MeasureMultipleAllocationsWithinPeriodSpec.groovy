@@ -32,7 +32,11 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         and:
         virksomhet.tiltak[0].konklusjon.sluttDato = firstEndDate
         and:
-        virksomhet.tiltak[0].kategori.kode = categoryCode
+        if (resetCategory) {
+            virksomhet.tiltak[0].kategori = null
+        } else {
+            virksomhet.tiltak[0].kategori.kode = categoryCode
+        }
         and:
         if (useSecond) {
             def secondContext = getTestContext()
@@ -40,7 +44,11 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
             virksomhet.tiltak[1].id = UUID.randomUUID()
             virksomhet.tiltak[1].startDato = secondStartDate
             virksomhet.tiltak[1].konklusjon.sluttDato = secondEndDate
-            virksomhet.tiltak[1].kategori.kode = categoryCode
+            if (resetCategory) {
+                virksomhet.tiltak[1].kategori = null
+            } else {
+                virksomhet.tiltak[1].kategori.kode = categoryCode
+            }
         }
         and:
 
@@ -57,23 +65,24 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         }
 
         where:
-        firstStartDate | firstEndDate | useSecond | secondStartDate | secondEndDate | categoryCode || errorExpected
-        getDate(-3)    | getDate(0)   | false     | null            | null          | "1.1"        || false
-        getDate(-3)    | getDate(0)   | true      | null            | getDate(0)    | "1.1"        || false
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.1"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-2)     | getDate(0)    | "1.1"        || false
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "~code~"     || false
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.1"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.2"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.99"       || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.1"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.2"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.3"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.4"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.5"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.6"        || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.99"       || true
-        getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "8.2"        || true
+        resetCategory | firstStartDate | firstEndDate | useSecond | secondStartDate | secondEndDate | categoryCode || errorExpected
+        true          | getDate(-3)    | getDate(0)   | false     | null            | null          | "N/A"        || false
+        false         | getDate(-3)    | getDate(0)   | false     | null            | null          | "1.1"        || false
+        false         | getDate(-3)    | getDate(0)   | true      | null            | getDate(0)    | "1.1"        || false
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-2)     | getDate(0)    | "1.1"        || false
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "~code~"     || false
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.2"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "1.99"       || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.1"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.2"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.3"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.4"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.5"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.6"        || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "2.99"       || true
+        false         | getDate(-3)    | getDate(0)   | true      | getDate(-3)     | getDate(0)    | "8.2"        || true
     }
 
     static def getDate(months) {
