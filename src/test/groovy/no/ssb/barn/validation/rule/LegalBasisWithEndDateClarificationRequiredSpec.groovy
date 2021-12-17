@@ -70,17 +70,19 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
 
         where:
         createLovhjemmel | createOpphevelse | createKonklusjon | kapittel | paragraf | ledd | kode  | presisering     || errorExpected
-        false            | false            | false            | "N/A"    | "N/A"    | null | "N/A" | ""              || false
-        true             | false            | false            | "N/A"    | "N/A"    | null | "N/A" | ""              || false
-        true             | true             | false            | "N/A"    | "N/A"    | null | "N/A" | ""              || false
-        true             | true             | true             | "N/A"    | "N/A"    | null | "42"  | ""              || false
+        false            | false            | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
+        true             | false            | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
+        true             | true             | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
+        true             | true             | true             | "N/A"    | "N/A"    | null | "42"  | "N/A"           || false
         true             | true             | true             | "N/A"    | "N/A"    | null | "4"   | "~presisering~" || false
 
         true             | true             | true             | "42"     | "N/A"    | null | "4"   | null            || false
         true             | true             | true             | "42"     | "N/A"    | null | "4"   | ""              || false
 
+        true             | true             | true             | "4"      | "N/A"    | null | "4"   | null            || false
         true             | true             | true             | "4"      | "N/A"    | null | "4"   | ""              || false
 
+        true             | true             | true             | "4"      | "42"     | null | "4"   | null            || false
         true             | true             | true             | "4"      | "42"     | null | "4"   | ""              || false
 
         true             | true             | true             | "4"      | "12"     | null | "4"   | null            || true
@@ -94,5 +96,8 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
 
         true             | true             | true             | "4"      | "8"      | "3"  | "4"   | null            || true
         true             | true             | true             | "4"      | "8"      | "3"  | "4"   | ""              || true
+
+        true             | true             | true             | "4"      | "8"      | "42" | "4"   | null            || false
+        true             | true             | true             | "4"      | "8"      | "42" | "4"   | ""              || false
     }
 }
