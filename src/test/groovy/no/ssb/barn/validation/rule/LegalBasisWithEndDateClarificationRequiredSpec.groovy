@@ -29,27 +29,29 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
     @Unroll
     def "test alle scenarier"() {
         given:
-        def virksomhet = context.rootObject.sak.virksomhet[0]
+        def measure = context.rootObject.sak.virksomhet[0].tiltak[0]
         and:
-        virksomhet.tiltak = List.of(virksomhet.tiltak[0])
+        measure.lovhjemmel = null
         and:
-        virksomhet.tiltak[0].lovhjemmel = null
+        measure.konklusjon = null
         and:
-        virksomhet.tiltak[0].konklusjon = null
-        and:
-        virksomhet.tiltak[0].opphevelse = null
+        measure.opphevelse = null
         and:
         if (createLovhjemmel) {
-            virksomhet.tiltak[0].lovhjemmel = new LovhjemmelType(
-                    "~lov~", kapittel, paragraf, List.of(ledd), List.of())
+            measure.lovhjemmel = new LovhjemmelType(
+                    "~lov~",
+                    kapittel,
+                    paragraf,
+                    ledd != null ? List.of(ledd) : List.of() as List<String>,
+                    List.of())
         }
         and:
         if (createOpphevelse) {
-            virksomhet.tiltak[0].opphevelse = new OpphevelseType(kode, presisering)
+            measure.opphevelse = new OpphevelseType(kode, presisering)
         }
         and:
         if (createKonklusjon) {
-            virksomhet.tiltak[0].konklusjon = new TiltakKonklusjonType(LocalDate.now())
+            measure.konklusjon = new TiltakKonklusjonType(LocalDate.now())
         }
 
         when:
@@ -67,18 +69,30 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
         }
 
         where:
-        createLovhjemmel | createOpphevelse | createKonklusjon | kapittel | paragraf | ledd | kode | presisering     || errorExpected
-        false            | false            | false            | ""       | ""       | ""   | ""   | ""              || false
-        false            | false            | true             | ""       | ""       | ""   | ""   | ""              || false
-        false            | true             | true             | ""       | ""       | ""   | ""   | ""              || false
-        false            | true             | true             | ""       | ""       | ""   | "4"  | "~presisering~" || false
-        false            | true             | true             | ""       | ""       | ""   | "4"  | ""              || false
-        true             | true             | true             | ""       | ""       | ""   | "4"  | "~presisering~" || false
-        true             | true             | true             | ""       | ""       | ""   | "4"  | ""              || false
-        true             | true             | true             | "4"      | "12"     | ""   | "4"  | ""              || true
-        true             | true             | true             | "4"      | "8"      | ""   | "4"  | "~presisering~" || false
-        true             | true             | true             | "4"      | "8"      | "2"  | "4"  | ""              || true
-        true             | true             | true             | "4"      | "8"      | "3"  | "4"  | ""              || true
-        true             | true             | true             | "4"      | "8"      | "4"  | "4"  | ""              || false
+        createLovhjemmel | createOpphevelse | createKonklusjon | kapittel | paragraf | ledd | kode  | presisering     || errorExpected
+        false            | false            | false            | "N/A"    | "N/A"    | null | "N/A" | ""              || false
+        true             | false            | false            | "N/A"    | "N/A"    | null | "N/A" | ""              || false
+        true             | true             | false            | "N/A"    | "N/A"    | null | "N/A" | ""              || false
+        true             | true             | true             | "N/A"    | "N/A"    | null | "42"  | ""              || false
+        true             | true             | true             | "N/A"    | "N/A"    | null | "4"   | "~presisering~" || false
+
+        true             | true             | true             | "42"     | "N/A"    | null | "4"   | null            || false
+        true             | true             | true             | "42"     | "N/A"    | null | "4"   | ""              || false
+
+        true             | true             | true             | "4"      | "N/A"    | null | "4"   | ""              || false
+
+        true             | true             | true             | "4"      | "42"     | null | "4"   | ""              || false
+
+        true             | true             | true             | "4"      | "12"     | null | "4"   | null            || true
+        true             | true             | true             | "4"      | "12"     | null | "4"   | ""              || true
+
+        true             | true             | true             | "4"      | "8"      | null | "4"   | null            || false
+        true             | true             | true             | "4"      | "8"      | null | "4"   | ""              || false
+
+        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | null            || true
+        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | ""              || true
+
+        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | null            || true
+        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | ""              || true
     }
 }
