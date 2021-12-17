@@ -47,11 +47,17 @@ class InvestigationDecisionClarificationRequiredSpec extends Specification {
         }
 
         where:
-        code | clarification     || errorExpected
-        "18" | null              || true
-        "18" | "~clarification~" || false
-        "19" | null              || true
-        "19" | "~clarification~" || false
-        "20" | null              || false
+        code | clarification   || errorExpected
+        null | "N/A"           || false
+        ""   | "N/A"           || false
+        "42" | "N/A"           || false
+
+        "18" | null            || true
+        "18" | ""              || true
+        "19" | null            || true
+        "19" | ""              || true
+
+        "18" | "~presisering~" || false
+        "19" | "~presisering~" || false
     }
 }
