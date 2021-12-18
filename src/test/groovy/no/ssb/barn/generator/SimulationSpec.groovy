@@ -63,7 +63,7 @@ class SimulationSpec extends Specification {
 
     def "getRandomCaseToMutate test of all scenarios"() {
         when:
-        def result = Simulation.getRandomCaseToMutate(LocalDate.now(), caseSet as Set<CaseEntry>)
+        def result = Simulation.getRandomCaseToMutate(currentDate, caseSet as Set<CaseEntry>)
 
         then:
         noExceptionThrown()
@@ -71,15 +71,17 @@ class SimulationSpec extends Specification {
         (result != null) == expectItem
 
         where:
-        caseSet                                            || expectItem
-        Set.of()                                           || false
-        Set.of(getCaseEntry(LocalDate.now()))              || false
-        Set.of(getCaseEntry(LocalDate.now().minusDays(1))) || true
+        currentDate | caseSet                                                  || expectItem
+        today       | Set.of()                                                 || false
+        today       | Set.of(getCaseEntry(today))                              || false
+        yesterday   | Set.of(getCaseEntry(today))                              || false
+        tomorrow    | Set.of(getCaseEntry(today))                              || true
+        today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || true
     }
 
     def "mutableCaseCount test of all scenarios"() {
         when:
-        def result = Simulation.mutableCaseCount(LocalDate.now(), caseSet as Set<CaseEntry>)
+        def result = Simulation.mutableCaseCount(currentDate, caseSet as Set<CaseEntry>)
 
         then:
         noExceptionThrown()
@@ -87,11 +89,17 @@ class SimulationSpec extends Specification {
         expectedCount == result
 
         where:
-        caseSet                                            || expectedCount
-        Set.of()                                           || 0
-        Set.of(getCaseEntry(LocalDate.now()))              || 0
-        Set.of(getCaseEntry(LocalDate.now().minusDays(1))) || 1
+        currentDate | caseSet                                                  || expectedCount
+        today       | Set.of()                                                 || 0
+        today       | Set.of(getCaseEntry(today))                              || 0
+        yesterday   | Set.of(getCaseEntry(today))                              || 0
+        tomorrow    | Set.of(getCaseEntry(today))                              || 1
+        today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || 2
     }
+
+    static def today = LocalDate.now()
+    static def yesterday = today.minusDays(1)
+    static def tomorrow = today.plusDays(1)
 
     static def getCaseEntry(LocalDate date) {
         new CaseEntry(
