@@ -46,8 +46,14 @@ class SocialSecurityIdAndDufSpec extends Specification {
         "12345655555"    | null           || null
         "12345699999"    | null           || null
         "12345612345"    | null           || "Feil i fødselsnummer."
+        "123456"         | null           || "Feil i fødselsnummer."
+        ""               | "123456789012" || null
         null             | "123456789012" || null
         null             | "123456789"    || "DUFnummer mangler."
+        ""               | "123456789"    || "DUFnummer mangler."
         null             | null           || "Fødselsnummer og DUFnummer mangler."
+        ""               | null           || "Fødselsnummer og DUFnummer mangler."
+        null             | ""             || "Fødselsnummer og DUFnummer mangler."
+        ""               | ""             || "Fødselsnummer og DUFnummer mangler."
     }
 }

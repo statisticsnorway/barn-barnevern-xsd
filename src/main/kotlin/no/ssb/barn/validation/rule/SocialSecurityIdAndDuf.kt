@@ -21,10 +21,12 @@ class SocialSecurityIdAndDuf : AbstractRule(
         val fodselsnummer = context.rootObject.sak.fodselsnummer
         val duFnummer = context.rootObject.sak.duFnummer
 
-        if (fodselsnummer != null && fodselsnummer.length == 11) {
-            return if (suffixExceptions.contains(fodselsnummer.takeLast(5))
-                || validateSSN(fodselsnummer)
-            ) {
+        if (!fodselsnummer.isNullOrEmpty()) {
+            return if (
+                fodselsnummer.length == 11
+                    && (
+                        suffixExceptions.contains(fodselsnummer.takeLast(5))
+                        || validateSSN(fodselsnummer))) {
                 null
             } else {
                 createSingleReportEntryList(
@@ -34,7 +36,7 @@ class SocialSecurityIdAndDuf : AbstractRule(
             }
         }
 
-        if (duFnummer != null) {
+        if (!duFnummer.isNullOrEmpty()) {
             return if (!dufPattern.matcher(duFnummer).matches()) {
                 createSingleReportEntryList(
                     "DUFnummer mangler. Kan ikke identifisere individet.",
