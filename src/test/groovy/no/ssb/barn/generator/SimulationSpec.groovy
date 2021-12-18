@@ -9,9 +9,9 @@ import java.util.stream.StreamSupport
 
 class SimulationSpec extends Specification {
 
-    def NUMBER_OF_DAYS = 10
-    def MIN_UPDATES_PER_DAY = 4
-    def MAX_UPDATES_PER_DAY = 8
+    def NUMBER_OF_DAYS = 100
+    def MIN_UPDATES_PER_DAY = 20
+    def MAX_UPDATES_PER_DAY = 40
     def MAX_MUTATIONS = 2
 
     @Subject
