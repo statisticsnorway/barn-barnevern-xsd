@@ -89,12 +89,14 @@ class SimulationSpec extends Specification {
         expectedCount == result
 
         where:
-        currentDate | caseSet                                                  || expectedCount
-        today       | Set.of()                                                 || 0
-        today       | Set.of(getCaseEntry(today))                              || 0
-        yesterday   | Set.of(getCaseEntry(today))                              || 0
-        tomorrow    | Set.of(getCaseEntry(today))                              || 1
-        today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || 2
+        currentDate | caseSet                                              || expectedCount
+        today       | Set.of()                                             || 0
+        today       | Set.of(getCaseEntry(today))                          || 0
+        yesterday   | Set.of(getCaseEntry(today))                          || 0
+        tomorrow    | Set.of(getCaseEntry(today))                          || 1
+        today       | Set.of(getCaseEntry(yesterday))                      || 1
+        today       | Set.of(getCaseEntry(tomorrow))                       || 0
+        today       | Set.of(getCaseEntry(today), getCaseEntry(yesterday)) || 1
     }
 
     static def today = LocalDate.now()
