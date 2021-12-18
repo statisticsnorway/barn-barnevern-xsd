@@ -69,6 +69,6 @@ class Simulation(
 
         @JvmStatic
         fun mutableCaseCount(currentDate: LocalDate, caseSet: Set<CaseEntry>): Int =
-            caseSet.count { it.updated < currentDate }
+            caseSet.count { it.updated.isBefore(currentDate) }
     }
 }
