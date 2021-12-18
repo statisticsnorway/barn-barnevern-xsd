@@ -15,16 +15,15 @@ class SocialSecurityIdAndDuf : AbstractRule(
 ) {
     private val dufPattern = Pattern.compile("^\\d{12}$")
 
+    private val suffixExceptions = setOf("00100", "00200", "55555", "99999")
+
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val fodselsnummer = context.rootObject.sak.fodselsnummer
         val duFnummer = context.rootObject.sak.duFnummer
 
-        if (fodselsnummer != null) {
-            return if (validateSSN(fodselsnummer)
-                || fodselsnummer.endsWith("00100")
-                || fodselsnummer.endsWith("00200")
-                || fodselsnummer.endsWith("55555")
-                || fodselsnummer.endsWith("99999")
+        if (fodselsnummer != null && fodselsnummer.length == 11) {
+            return if (suffixExceptions.contains(fodselsnummer.takeLast(5))
+                || validateSSN(fodselsnummer)
             ) {
                 null
             } else {
