@@ -76,6 +76,7 @@ class SimulationSpec extends Specification {
         today       | Set.of(getCaseEntry(today))                              || false
         yesterday   | Set.of(getCaseEntry(today))                              || false
         tomorrow    | Set.of(getCaseEntry(today))                              || true
+        today       | Set.of(getCaseEntry(today), getCaseEntry(yesterday))     || true
         today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || true
     }
 
@@ -89,14 +90,15 @@ class SimulationSpec extends Specification {
         expectedCount == result
 
         where:
-        currentDate | caseSet                                              || expectedCount
-        today       | Set.of()                                             || 0
-        today       | Set.of(getCaseEntry(today))                          || 0
-        yesterday   | Set.of(getCaseEntry(today))                          || 0
-        tomorrow    | Set.of(getCaseEntry(today))                          || 1
-        today       | Set.of(getCaseEntry(yesterday))                      || 1
-        today       | Set.of(getCaseEntry(tomorrow))                       || 0
-        today       | Set.of(getCaseEntry(today), getCaseEntry(yesterday)) || 1
+        currentDate | caseSet                                                  || expectedCount
+        today       | Set.of()                                                 || 0
+        today       | Set.of(getCaseEntry(today))                              || 0
+        yesterday   | Set.of(getCaseEntry(today))                              || 0
+        tomorrow    | Set.of(getCaseEntry(today))                              || 1
+        today       | Set.of(getCaseEntry(yesterday))                          || 1
+        today       | Set.of(getCaseEntry(tomorrow))                           || 0
+        today       | Set.of(getCaseEntry(today), getCaseEntry(yesterday))     || 1
+        today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || 2
     }
 
     static def today = LocalDate.now()
