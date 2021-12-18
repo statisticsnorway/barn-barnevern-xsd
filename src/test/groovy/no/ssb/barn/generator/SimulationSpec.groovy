@@ -61,6 +61,22 @@ class SimulationSpec extends Specification {
         noExceptionThrown()
     }
 
+    def "getRandomCaseToMutate test of all scenarios"() {
+        when:
+        def result = Simulation.getRandomCaseToMutate(LocalDate.now(), caseSet as Set<CaseEntry>)
+
+        then:
+        noExceptionThrown()
+        and:
+        (result != null) == expectItem
+
+        where:
+        caseSet                                            || expectItem
+        Set.of()                                           || false
+        Set.of(getCaseEntry(LocalDate.now()))              || false
+        Set.of(getCaseEntry(LocalDate.now().minusDays(1))) || true
+    }
+
     def "mutableCaseCount test of all scenarios"() {
         when:
         def result = Simulation.mutableCaseCount(LocalDate.now(), caseSet as Set<CaseEntry>)
