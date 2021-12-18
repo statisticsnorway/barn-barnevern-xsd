@@ -70,31 +70,35 @@ object ValidationUtils {
         return true
     }
 
+    private val controlSumNumbers = listOf(
+        2, 3, 4, 5, 6, 7,
+        2, 3, 4, 5
+    )
+
     @JvmStatic
-    fun validateSSN(cid: String): Boolean {
-        val controlDigit = cid[cid.length - 1].toString()
-        val controlSumNumbers = listOf(
-            2, 3, 4, 5, 6, 7,
-            2, 3, 4, 5, 6, 7,
-            2, 3, 4, 5, 6, 7,
-            2, 3, 4, 5, 6, 7
-        )
-        val number = cid.subSequence(0, cid.length - 1).reversed().toString()
-        var sum = 0
-        for(i in number.indices) {
-            if (!number[i].isDigit()) {
-                return false
+    fun validateSSN(ssn: String): Boolean {
+        if (ssn.length != 11) {
+            return false
+        }
+
+        val controlDigit = ssn[ssn.length - 1].toString()
+        val tenFirstDigitsReversed = ssn.subSequence(0, ssn.length - 1).reversed().toString()
+
+        return tenFirstDigitsReversed
+            .mapIndexed { index, currentChar ->
+                if (!currentChar.isDigit()) {
+                    return false
+                }
+                currentChar.toString().toInt() * controlSumNumbers[index]
             }
-            sum += number[i].toString().toInt() * controlSumNumbers[i]
-        }
-
-        val output = when (val sumResult = 11 - sum % 11) {
-            11 -> "0"
-            10 -> "-"
-            else -> sumResult.toString()
-        }
-
-        return output == controlDigit
+            .sum()
+            .let {
+                when (val sumResult = 11 - it % 11) {
+                    11 -> "0"
+                    10 -> "-"
+                    else -> sumResult.toString()
+                } == controlDigit
+            }
     }
 
     @JvmStatic

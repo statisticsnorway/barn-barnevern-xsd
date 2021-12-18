@@ -112,6 +112,7 @@ class ValidationUtilsSpec extends Specification {
         "41011088188" | "dnr" || true
         "01020304050" | "fnr" || false
         "ABCDEFGHIJK" | "???" || false
+        "123456"      | "???" || false
     }
 
     @Unroll
