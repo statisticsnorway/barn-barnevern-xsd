@@ -15,19 +15,10 @@ class Simulation(
         DEFAULT_MAX_MUTATIONS
     )
 
-    companion object {
-        const val DEFAULT_MIN_UPDATES_PER_DAY = 10
-        const val DEFAULT_MAX_UPDATES_PER_DAY = 20
-        const val DEFAULT_MAX_MUTATIONS = 3
-
-        // flip a coin
-        private fun shouldCreateNewCase(): Boolean = (0..1).random() == 1
-    }
-
-    private val caseList = mutableSetOf<CaseEntry>()
+    private val caseSet = mutableSetOf<CaseEntry>()
 
     fun run(daysBack: Int): Sequence<BarnevernType> =
-        (-daysBack until 0).asSequence()
+        (-daysBack until 1).asSequence()
             .map { LocalDate.now().plusDays(it.toLong()) }
             .flatMap { produceCasesForCurrentDate(it) }
 
@@ -36,40 +27,48 @@ class Simulation(
             .map { mutateOrCreateCaseEntry(currentDate) }
 
     private fun mutateOrCreateCaseEntry(currentDate: LocalDate): BarnevernType =
-        if (mutableCaseCount(currentDate) < 1 || shouldCreateNewCase()) {
-            InitialMutationProvider.createInitialMutation(currentDate)
-                .also {
-                    caseList.add(
-                        CaseEntry(
-                            UUID.randomUUID(),
-                            it,
-                            currentDate
-                        )
+        if (mutableCaseCount(currentDate, caseSet) < 1 || shouldCreateNewCase()) {
+            InitialMutationProvider.createInitialMutation(currentDate).also {
+                caseSet.add(
+                    CaseEntry(
+                        UUID.randomUUID(),
+                        it,
+                        currentDate
                     )
-                }
+                )
+            }
         } else {
-            CaseMutator.mutate(getRandomCaseToMutate(currentDate))
+            CaseMutator.mutate(getRandomCaseToMutate(currentDate, caseSet) as CaseEntry)
                 .run {
                     generation++
                     updated = currentDate
 
                     if (generation > maxMutations) {
-                        caseList.remove(this)
+                        caseSet.remove(this)
                     }
                     barnevern
                 }
         }
 
-    private fun getRandomCaseToMutate(currentDate: LocalDate): CaseEntry =
-        caseList.asSequence()
-            .filter {
-                it.updated.isBefore(currentDate)
-            }
-            .drop((0 until mutableCaseCount(currentDate)).random())
-            .first()
+    companion object {
+        const val DEFAULT_MIN_UPDATES_PER_DAY = 10
+        const val DEFAULT_MAX_UPDATES_PER_DAY = 20
+        const val DEFAULT_MAX_MUTATIONS = 3
 
-    private fun mutableCaseCount(currentDate: LocalDate): Int =
-        caseList.count {
-            it.updated.isBefore(currentDate)
-        }
+        // flip a coin
+        private fun shouldCreateNewCase(): Boolean = (0..1).random() == 1
+
+        @JvmStatic
+        fun getRandomCaseToMutate(
+            currentDate: LocalDate, caseSet: Set<CaseEntry>): CaseEntry? =
+            caseSet
+                .filter { it.updated.isBefore(currentDate) }
+                .ifEmpty { return null }
+                .drop((0 until mutableCaseCount(currentDate, caseSet)).random())
+                .first()
+
+        @JvmStatic
+        fun mutableCaseCount(currentDate: LocalDate, caseSet: Set<CaseEntry>): Int =
+            caseSet.count { it.updated.isBefore(currentDate) }
+    }
 }
