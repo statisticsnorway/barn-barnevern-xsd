@@ -38,7 +38,7 @@ class Simulation(
                 )
             }
         } else {
-            CaseMutator.mutate(getRandomCaseToMutate(currentDate, caseSet) as CaseEntry)
+            CaseMutator.mutate(getRandomCaseToMutate(currentDate, caseSet))
                 .run {
                     generation++
                     updated = currentDate
@@ -60,10 +60,9 @@ class Simulation(
 
         @JvmStatic
         fun getRandomCaseToMutate(
-            currentDate: LocalDate, caseSet: Set<CaseEntry>): CaseEntry? =
+            currentDate: LocalDate, caseSet: Set<CaseEntry>): CaseEntry =
             caseSet
                 .filter { it.updated.isBefore(currentDate) }
-                .ifEmpty { return null }
                 .drop((0 until mutableCaseCount(currentDate, caseSet)).random())
                 .first()
 

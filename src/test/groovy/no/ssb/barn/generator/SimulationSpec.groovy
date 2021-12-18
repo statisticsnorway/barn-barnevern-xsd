@@ -61,23 +61,33 @@ class SimulationSpec extends Specification {
         noExceptionThrown()
     }
 
-    def "getRandomCaseToMutate test of all scenarios"() {
+    def "getRandomCaseToMutate test of success scenarios"() {
         when:
-        def result = Simulation.getRandomCaseToMutate(currentDate, caseSet as Set<CaseEntry>)
+        Simulation.getRandomCaseToMutate(currentDate, caseSet as Set<CaseEntry>)
 
         then:
         noExceptionThrown()
-        and:
-        (result != null) == expectItem
 
         where:
-        currentDate | caseSet                                                  || expectItem
-        today       | Set.of()                                                 || false
-        today       | Set.of(getCaseEntry(today))                              || false
-        yesterday   | Set.of(getCaseEntry(today))                              || false
-        tomorrow    | Set.of(getCaseEntry(today))                              || true
-        today       | Set.of(getCaseEntry(today), getCaseEntry(yesterday))     || true
-        today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || true
+        currentDate | caseSet
+        tomorrow    | Set.of(getCaseEntry(today))
+        today       | Set.of(getCaseEntry(today), getCaseEntry(yesterday))
+        today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday))
+    }
+
+    def "getRandomCaseToMutate test of failure scenarios"() {
+        when:
+        Simulation.getRandomCaseToMutate(currentDate, caseSet as Set<CaseEntry>)
+
+        then:
+        //noinspection GroovyUnusedAssignment
+        NoSuchElementException e = thrown()
+
+        where:
+        currentDate | caseSet
+        today       | Set.of()
+        today       | Set.of(getCaseEntry(today))
+        yesterday   | Set.of(getCaseEntry(today))
     }
 
     def "mutableCaseCount test of all scenarios"() {
