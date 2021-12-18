@@ -14,6 +14,7 @@ import no.ssb.barn.xsd.VirksomhetType
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import javax.xml.bind.UnmarshalException
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -22,6 +23,15 @@ import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 class BarnevernConverterSpec extends Specification {
 
     def xsdRule = new XsdRule("Barnevern.xsd")
+
+    def "when unmarshalling invalid XML, receive exception"(){
+        when:
+        BarnevernConverter.unmarshallXml("~someXml~")
+
+        then:
+        //noinspection GroovyUnusedAssignment
+        UnmarshalException e = thrown()
+    }
 
     @Unroll("test01_fil0 #i .xml")
     def "when unmarshalling valid XML, receive populated instance"() {

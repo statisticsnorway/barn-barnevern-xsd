@@ -63,7 +63,7 @@ class SimulationSpec extends Specification {
 
     def "getRandomCaseToMutate test of success scenarios"() {
         when:
-        Simulation.getRandomCaseToMutate(currentDate, caseSet as Set<CaseEntry>)
+        Simulation.getRandomCaseToMutate(currentDate, caseSet)
 
         then:
         noExceptionThrown()

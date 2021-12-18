@@ -95,6 +95,7 @@ class ValidationUtilsSpec extends Specification {
         ValidationUtils.validateFromSources(sourceXSD, sourceXML)
 
         then:
+        //noinspection GroovyUnusedAssignment
         SAXException e = thrown()
 
         where:
@@ -113,7 +114,6 @@ class ValidationUtilsSpec extends Specification {
         "01020304050" | "fnr" || false
         "ABCDEFGHIJK" | "???" || false
         "123456"      | "???" || false
-        "01000000046" | "fnr" || false
     }
 
     @Unroll
