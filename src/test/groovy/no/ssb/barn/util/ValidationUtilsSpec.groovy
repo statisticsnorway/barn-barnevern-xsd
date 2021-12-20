@@ -114,8 +114,8 @@ class ValidationUtilsSpec extends Specification {
         "01020304050" | "fnr" || false
         "ABCDEFGHIJK" | "???" || false
         "123456"      | "???" || false
-        "24101219220" | "fnr" || true
-        "01000000040" | "fnr" || false
+        "24101219220" | "fnr" || true  // for testing 11 - it % 11 == 11
+        "01000000040" | "fnr" || false // for testing 11 - it % 11 == 10
     }
 
     @Unroll
