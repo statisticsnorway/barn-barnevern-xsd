@@ -70,27 +70,27 @@ object ValidationUtils {
         return true
     }
 
-    private val controlSumDigits1 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2, 1)
-    private val controlSumDigits2 = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
+    val controlSumDigits1 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2, 1)
+    val controlSumDigits2 = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 
     @JvmStatic
     fun validateSSN(ssn: String): Boolean =
-        modulo11(ssn.substring(0, ssn.length - 1), controlSumDigits1)
-                && modulo11(ssn, controlSumDigits2)
+        modulo11(ssn.substring(0, ssn.length - 1), controlSumDigits1) == 0
+                && modulo11(ssn, controlSumDigits2) == 0
 
-    private fun modulo11(toCheck: String, controlDigits: List<Int>): Boolean =
+    fun modulo11(toCheck: String, controlDigits: List<Int>): Int =
         if (toCheck.length != controlDigits.size) {
-            false
+            -1
         } else {
             toCheck
                 .mapIndexed { index, currentChar ->
                     if (!currentChar.isDigit()) {
-                        return false
+                        return -1
                     }
                     currentChar.toString().toInt() * controlDigits[index]
                 }
                 .sum()
-                .mod(11) == 0
+                .mod(11)
         }
 
     @JvmStatic

@@ -1,5 +1,8 @@
 package no.ssb.barn.generator
 
+import no.ssb.barn.util.ValidationUtils.controlSumDigits1
+import no.ssb.barn.util.ValidationUtils.controlSumDigits2
+import no.ssb.barn.util.ValidationUtils.modulo11
 import no.ssb.barn.xsd.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -44,39 +47,32 @@ object RandomUtils {
             .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
 
         while (true) {
-            val ssn789 = generateRandomIntFromRange(100, 499).toString()
-            val mod10 = birthDate123456.plus(ssn789)
-                .toCharArray()
-                .map { s -> s.toString().toInt() }
-                .toList()
-                .zip(
-                    listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)
-                ) { digit, weight -> digit * weight }
-                .fold(0) { sum, i -> sum + i }
-                .mod(11)
+            val nineDigits = birthDate123456
+                .plus(generateRandomIntFromRange(100, 499).toString())
 
-            if (mod10 != 1) {
-                val digit10 = if (mod10 == 0) 0 else 11 - mod10
-                val mod11 =
-                    birthDate123456.plus(ssn789).plus(digit10.toString())
-                        .toCharArray()
-                        .map { s -> s.toString().toInt() }
-                        .toList()
-                        .zip(
-                            listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)
-                        ) { digit, weight -> digit * weight }
-                        .fold(0) { sum, i -> sum + i }
-                        .mod(11)
+            val mod10 = modulo11(
+                nineDigits,
+                controlSumDigits1.slice((0..controlSumDigits1.size - 2))
+            )
 
-                if (mod11 != 1) {
-                    val digit11 = if (mod11 == 0) 0 else 11 - mod11
+            if (mod10 == 1) continue
 
-                    return birthDate123456.plus(ssn789)
-                        .plus(digit10.toString()).plus(digit11.toString())
-                }
-            }
+            val tenDigits = nineDigits.plus(getModAsString(mod10))
+
+            val mod11 = modulo11(
+                tenDigits,
+                controlSumDigits2.slice((0..controlSumDigits2.size - 2))
+            )
+
+            if (mod11 == 1) continue
+
+            return tenDigits
+                .plus(getModAsString(mod11))
         }
     }
+
+    private fun getModAsString(value: Int): String =
+        (if (value == 0) 0 else 11 - value).toString()
 
     @JvmStatic
     fun generateRandomFagsystemType(): FagsystemType =
