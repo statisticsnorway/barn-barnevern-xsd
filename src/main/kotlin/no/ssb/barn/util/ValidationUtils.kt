@@ -81,15 +81,17 @@ object ValidationUtils {
     private fun modulo11(toCheck: String, controlDigits: List<Int>): Boolean =
         if (toCheck.length != controlDigits.size) {
             false
-        } else toCheck
-            .mapIndexed { index, currentChar ->
-                if (!currentChar.isDigit()) {
-                    return false
+        } else {
+            toCheck
+                .mapIndexed { index, currentChar ->
+                    if (!currentChar.isDigit()) {
+                        return false
+                    }
+                    currentChar.toString().toInt() * controlDigits[index]
                 }
-                currentChar.toString().toInt() * controlDigits[index]
-            }
-            .sum()
-            .mod(11) == 0
+                .sum()
+                .mod(11) == 0
+        }
 
     @JvmStatic
     fun getAge(socialSecurityNumber: String?): Int =
