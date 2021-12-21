@@ -40,7 +40,7 @@ Valideringstjenesten lager en liste med advarsler som ikke hindrer innsending, s
 
 #### Datovalideringer: StartDato, SluttDato og Avslutta3112
 
-Begrepet SluttDato går igjen på flere nivåer i xml’en. I stedet for å definere de samme valideringene i hvert av elementene Individ, Melding, Undersokelse, Vedtaksgrunnlag, Plan og Tiltak defineres de nå generelt der det kan finnes en SluttDato. Hvis SluttDato trenger en spesiell validering på et eller flere av de overnevnte elementene beskrives dette eksplisitt. Nummereringen til dato-valideringene gjenspeiles på de begrepene.
+Begrepet SluttDato går igjen på flere nivåer i xml’en. I stedet for å definere de samme valideringene i hvert av elementene Individ, Melding, Undersokelse, Vedtaksgrunnlag, Plan og Tiltak defineres de nå generelt der det kan finnes en SluttDato. Hvis SluttDato trenger en spesiell validering på ett eller flere av de overnevnte elementene, beskrives dette eksplisitt. Nummereringen til datovalideringene gjenspeiles på de begrepene.
 
 
 
@@ -63,11 +63,11 @@ Gitt at:
 
 Når:
 
-Hvis SisteDato finnes så validér at ForsteDato er før SisteDato
+Hvis SisteDato finnes, validér at ForsteDato er før SisteDato
 
 Så:
 
-Ved feil legg til begrep, alvorlighetsgrad. referanseid, tittel og melding i valideringsrapport
+Ved feil, legg til begrep, alvorlighetsgrad. referanseid, tittel og melding i valideringsrapport
 
 
 
