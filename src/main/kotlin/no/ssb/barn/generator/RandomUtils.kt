@@ -47,27 +47,37 @@ object RandomUtils {
             .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
 
         while (true) {
-            val nineDigits = birthDate123456
-                .plus(generateRandomIntFromRange(100, 499).toString())
+            birthDate123456
+                .plus(generateRandomIntFromRange(100, 499).toString()).also {
+                    buildSsnRecursive(
+                        it,
+                        listOf(
+                            controlSumDigits1.slice((0..controlSumDigits1.size - 2)),
+                            controlSumDigits2.slice((0..controlSumDigits2.size - 2))
+                        )
+                    )
+                        .also { ssn ->
+                            if (ssn.length == 11) {
+                                return ssn
+                            }
+                        }
+                }
+        }
+    }
 
-            val mod10 = modulo11(
-                nineDigits,
-                controlSumDigits1.slice((0..controlSumDigits1.size - 2))
-            )
+    private fun buildSsnRecursive(
+        seed: String, controlDigits: List<List<Int>>): String {
+        if (seed.length > 10) {
+            return seed
+        }
 
-            if (mod10 == 1) continue
+        val mod = modulo11(seed, controlDigits[seed.length - 9])
 
-            val tenDigits = nineDigits.plus(getModAsString(mod10))
-
-            val mod11 = modulo11(
-                tenDigits,
-                controlSumDigits2.slice((0..controlSumDigits2.size - 2))
-            )
-
-            if (mod11 == 1) continue
-
-            return tenDigits
-                .plus(getModAsString(mod11))
+        return if (mod == 1) {
+            seed
+        } else {
+            // NOTE: Recursive call
+            buildSsnRecursive(seed.plus(getModAsString(mod)), controlDigits)
         }
     }
 
