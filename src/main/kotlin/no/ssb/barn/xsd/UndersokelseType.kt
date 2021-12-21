@@ -30,7 +30,7 @@ data class UndersokelseType(
     var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Vedtaksgrunnlag")
-    var vedtaksgrunnlag: List<SaksinnholdType> = mutableListOf(),
+    var vedtaksgrunnlag: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "UtvidetFrist")
     var utvidetFrist: UndersokelseUtvidetFristType? = null,

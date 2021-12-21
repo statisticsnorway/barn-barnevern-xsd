@@ -34,16 +34,16 @@ data class TiltakType(
     var lovhjemmel: LovhjemmelType? = null,
 
     @field:XmlElement(name = "JmfrLovhjemmel")
-    var jmfrLovhjemmel: List<LovhjemmelType> = mutableListOf(),
+    var jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf(),
 
     @field:XmlElement(name = "Kategori", required = true)
     var kategori: KategoriType? = null,
 
     @field:XmlElement(name = "Tilsyn")
-    var tilsyn: List<TilsynType> = mutableListOf(),
+    var tilsyn: MutableList<TilsynType> = mutableListOf(),
 
     @field:XmlElement(name = "Oppfolging")
-    var oppfolging: List<OppfolgingType> = mutableListOf(),
+    var oppfolging: MutableList<OppfolgingType> = mutableListOf(),
 
     @field:XmlElement(name = "Opphevelse")
     var opphevelse: OpphevelseType? = null,

@@ -37,7 +37,7 @@ data class PlanType(
         .firstOrNull(),
 
     @field:XmlElement(name = "Evaluering")
-    var evaluering: List<PlanEvalueringType> = mutableListOf(),
+    var evaluering: MutableList<PlanEvalueringType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: PlanKonklusjonType? = PlanKonklusjonType()
