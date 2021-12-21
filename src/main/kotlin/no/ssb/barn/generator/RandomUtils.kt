@@ -34,6 +34,9 @@ object RandomUtils {
     @JvmStatic
     fun generateRandomInt(): Int = (1..100_000).random()
 
+    const val SSN_LENGTH = 11
+    const val SSN_INITIAL_SEED_LENGTH = 9
+
     @JvmStatic
     fun generateRandomSSN(
         startInclusive: LocalDate,
@@ -52,12 +55,12 @@ object RandomUtils {
                     buildSsnRecursive(
                         it,
                         listOf(
-                            controlSumDigits1.slice((0..controlSumDigits1.size - 2)),
-                            controlSumDigits2.slice((0..controlSumDigits2.size - 2))
+                            controlSumDigits1.slice(0..controlSumDigits1.size - 2),
+                            controlSumDigits2.slice(0..controlSumDigits2.size - 2)
                         )
                     )
                         .also { ssn ->
-                            if (ssn.length == 11) {
+                            if (ssn.length == SSN_LENGTH) {
                                 return ssn
                             }
                         }
@@ -67,11 +70,13 @@ object RandomUtils {
 
     private fun buildSsnRecursive(
         seed: String, controlDigits: List<List<Int>>): String {
-        if (seed.length > 10) {
+        if (seed.length > SSN_LENGTH - 1) {
             return seed
         }
 
-        val mod = modulo11(seed, controlDigits[seed.length - 9])
+        val mod = modulo11(
+            seed,
+            controlDigits[seed.length - SSN_INITIAL_SEED_LENGTH])
 
         return if (mod == 1) {
             seed
