@@ -70,35 +70,27 @@ object ValidationUtils {
         return true
     }
 
-    private val controlSumNumbers = listOf(
-        2, 3, 4, 5, 6, 7,
-        2, 3, 4, 5
-    )
+    private val controlSumDigits1 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2, 1)
+    private val controlSumDigits2 = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 
     @JvmStatic
-    fun validateSSN(ssn: String): Boolean {
-        if (ssn.length != 11) {
+    fun validateSSN(ssn: String): Boolean =
+        modulo11(ssn.substring(0, ssn.length - 1), controlSumDigits1)
+                && modulo11(ssn, controlSumDigits2)
+
+    private fun modulo11(toCheck: String, controlDigits: List<Int>): Boolean {
+        if (toCheck.length != controlDigits.size) {
             return false
         }
-
-        val controlDigit = ssn[ssn.length - 1].toString()
-        val tenFirstDigitsReversed = ssn.subSequence(0, ssn.length - 1).reversed().toString()
-
-        return tenFirstDigitsReversed
+        return toCheck
             .mapIndexed { index, currentChar ->
                 if (!currentChar.isDigit()) {
                     return false
                 }
-                currentChar.toString().toInt() * controlSumNumbers[index]
+                currentChar.toString().toInt() * controlDigits[index]
             }
             .sum()
-            .let {
-                when (val sumResult = 11 - it % 11) {
-                    11 -> "0"
-                    10 -> "-"
-                    else -> sumResult.toString()
-                } == controlDigit
-            }
+            .mod(11) == 0
     }
 
     @JvmStatic
