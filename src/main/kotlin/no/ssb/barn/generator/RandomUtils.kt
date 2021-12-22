@@ -41,52 +41,56 @@ object RandomUtils {
     fun generateRandomSSN(
         startInclusive: LocalDate,
         endExclusive: LocalDate
-    ): String {
-        val startEpochDay: Long = startInclusive.toEpochDay()
-        val endEpochDay: Long = endExclusive.toEpochDay()
-        val randomDay =
-            generateRandomLongFromRange(startEpochDay, endEpochDay)
-        val birthDate123456 = LocalDate.ofEpochDay(randomDay)
-            .format(DateTimeFormatter.ofPattern("ddMMyy")).toString()
-
-        while (true) {
-            birthDate123456
-                .plus(generateRandomIntFromRange(100, 499).toString())
-                .also {
-                    buildSsnRecursive(
-                        it,
-                        listOf(
-                            controlSumDigits1.subList(0, controlSumDigits1.size - 1),
-                            controlSumDigits2.subList(0, controlSumDigits2.size - 1)
-                        ))
-                        .also { ssn ->
-                            if (ssn.length == SSN_LENGTH) {
-                                return ssn
-                            }
-                        }
-                }
+    ): String =
+        generateRandomLongFromRange(
+            startInclusive.toEpochDay(),
+            endExclusive.toEpochDay()
+        ).let { randomDay ->
+            LocalDate.ofEpochDay(randomDay)
+                .format(DateTimeFormatter.ofPattern("ddMMyy"))
+        }.let { birthDate123456 ->
+            generateSequence {
+                birthDate123456
+                    .plus(generateRandomIntFromRange(100, 499).toString())
+            }.map { nineDigitSeed ->
+                buildSsnRecursive(
+                    nineDigitSeed,
+                    listOf(
+                        controlSumDigits1.subList(
+                            0, controlSumDigits1.size - 1
+                        ),
+                        controlSumDigits2.subList(
+                            0, controlSumDigits2.size - 1
+                        )
+                    )
+                )
+            }
+                .filter { ssnCandidate -> ssnCandidate.length == SSN_LENGTH }
+                .first()
         }
-    }
+
 
     private fun buildSsnRecursive(
         seed: String, controlDigits: List<List<Int>>
-    ): String {
-        if (seed.length > SSN_LENGTH - 1) {
-            return seed
-        }
-
-        val mod = modulo11(
-            seed,
-            controlDigits[seed.length - SSN_INITIAL_SEED_LENGTH]
-        )
-
-        return if (mod == 1 || mod > 9) {
+    ): String =
+        if (seed.length == SSN_LENGTH) {
             seed
         } else {
-            // NOTE: Recursive call
-            buildSsnRecursive(seed.plus(getModAsString(mod)), controlDigits)
+            modulo11(
+                seed,
+                controlDigits[seed.length - SSN_INITIAL_SEED_LENGTH]
+            ).let { modulo11 ->
+                if (modulo11 == 1 || modulo11 == 10) {
+                    seed
+                } else {
+                    // NOTE: Recursive call
+                    buildSsnRecursive(
+                        seed.plus(getModAsString(modulo11)),
+                        controlDigits
+                    )
+                }
+            }
         }
-    }
 
     private fun getModAsString(value: Int): String =
         (if (value == 0) 0 else SSN_LENGTH - value).toString()
