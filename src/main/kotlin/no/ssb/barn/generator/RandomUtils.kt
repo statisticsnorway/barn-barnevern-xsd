@@ -69,7 +69,6 @@ object RandomUtils {
                 .first()
         }
 
-
     private fun buildSsnRecursive(
         seed: String, controlDigits: List<List<Int>>
     ): String =
