@@ -1,7 +1,6 @@
 package no.ssb.barn.xsd
 
 import no.ssb.barn.converter.LocalDateTimeAdapter
-import java.io.Serializable
 import java.time.LocalDateTime
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -28,4 +27,4 @@ data class BarnevernType(
 
     @field:XmlElement(name = "Sak", type = SakType::class, required = true)
     var sak: SakType = SakType()
-) : Serializable
+)
