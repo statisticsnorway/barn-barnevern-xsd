@@ -19,8 +19,7 @@ class ValidationReportSpec extends Specification {
                                 "~xmlContext~",
                                 uuid)
                 ),
-                WarningLevel.ERROR,
-                Map.of()
+                WarningLevel.ERROR
         )
 
         then:
@@ -30,8 +29,6 @@ class ValidationReportSpec extends Specification {
             1 == getReportEntries().size()
             and:
             WarningLevel.ERROR == severity
-            and:
-            null != getInstanceAsMap()
         }
     }
 }

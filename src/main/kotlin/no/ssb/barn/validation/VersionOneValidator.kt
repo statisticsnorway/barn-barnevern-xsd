@@ -71,8 +71,6 @@ class VersionOneValidator : ValidatorContract {
         return ValidationReport(
             messageId = context.messageId,
             reportEntries = reportEntries,
-            instanceAsMap = BarnevernConverter.marshallInstanceToMap(
-                context.rootObject),
             severity = reportEntries.asSequence()
                 .map { it.warningLevel }
                 .maxByOrNull { it.ordinal } ?: WarningLevel.OK

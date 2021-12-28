@@ -22,6 +22,12 @@ object BarnevernConverter {
             .unmarshal(xml.byteInputStream()) as BarnevernType
 
     @JvmStatic
+    fun unmarshallXmlToMap(xml: String): Map<String, Any> {
+        val json = gson.toJson(unmarshallXml(xml))
+        return gson.fromJson<Map<String, Any>>(json)
+    }
+
+    @JvmStatic
     fun marshallInstance(barnevernType: BarnevernType): String =
         StringWriter().use {
             jaxbContext
@@ -29,12 +35,6 @@ object BarnevernConverter {
                 .marshal(barnevernType, it)
             return it.toString()
         }
-
-    @JvmStatic
-    fun marshallInstanceToMap(barnevernType: BarnevernType): Map<String, Any> {
-        val json = gson.toJson(barnevernType)
-        return gson.fromJson<Map<String, Any>>(json)
-    }
 
     private val gson: Gson = GsonBuilder()
         .registerTypeAdapter(LocalDate::class.java, GsonLocalDateAdapter())

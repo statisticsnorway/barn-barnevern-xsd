@@ -64,6 +64,19 @@ class BarnevernConverterSpec extends Specification {
         i << (1..9)
     }
 
+    def "when unmarshalling instance to map, map is not null"() {
+        given:
+        def xml = getResourceAsString("test01_fil09.xml")
+
+        when:
+        def map = BarnevernConverter.unmarshallXmlToMap(xml)
+
+        then:
+        noExceptionThrown()
+        and:
+        null != map
+    }
+
     def "when marshalling instance to XML, xml is valid"() {
         given:
         def instance = InitialMutationProvider.createInitialMutation(LocalDate.now())
@@ -77,19 +90,6 @@ class BarnevernConverterSpec extends Specification {
         null != xml
         and:
         null == xsdRule.validate(new ValidationContext("N/A", xml))
-    }
-
-    def "when marshalling instance to map, map is not null"() {
-        given:
-        def instance = InitialMutationProvider.createInitialMutation(LocalDate.now())
-
-        when:
-        def map = BarnevernConverter.marshallInstanceToMap(instance)
-
-        then:
-        noExceptionThrown()
-        and:
-        null != map
     }
 
     def "should convert XML to objects, JAXB.unmarshal()"() {
