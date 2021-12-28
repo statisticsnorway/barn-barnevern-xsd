@@ -20,6 +20,7 @@ class ValidationReportSpec extends Specification {
                                 uuid)
                 ),
                 WarningLevel.ERROR,
+                Map.of()
         )
 
         then:
@@ -29,6 +30,8 @@ class ValidationReportSpec extends Specification {
             1 == getReportEntries().size()
             and:
             WarningLevel.ERROR == severity
+            and:
+            null != getInstanceAsMap()
         }
     }
 }
