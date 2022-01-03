@@ -31,25 +31,28 @@ class CaseMutatorSpec extends Specification {
         expectedNewState == caseEntry.state || iterations >= 20
 
         where:
-        currentState                 || expectedNewState
-        BarnevernState.MESSAGE       || BarnevernState.INVESTIGATION
-        BarnevernState.MESSAGE       || BarnevernState.DECISION
+        currentState                         || expectedNewState
+        BarnevernState.MESSAGE               || BarnevernState.INVESTIGATION_STARTED
+        BarnevernState.MESSAGE               || BarnevernState.DECISION
 
-        BarnevernState.INVESTIGATION || BarnevernState.MEASURE
-        BarnevernState.INVESTIGATION || BarnevernState.DECISION
+        BarnevernState.INVESTIGATION_STARTED || BarnevernState.INVESTIGATION_ENDED
+        BarnevernState.INVESTIGATION_STARTED || BarnevernState.DECISION
 
-        BarnevernState.PLAN          || BarnevernState.PLAN
+        BarnevernState.INVESTIGATION_ENDED   || BarnevernState.MEASURE
+        BarnevernState.INVESTIGATION_ENDED   || BarnevernState.DECISION
 
-        BarnevernState.MEASURE       || BarnevernState.PLAN
-        BarnevernState.MEASURE       || BarnevernState.DECISION
-        BarnevernState.MEASURE       || BarnevernState.AFTERCARE
+        BarnevernState.PLAN                  || BarnevernState.PLAN
 
-        BarnevernState.DECISION      || BarnevernState.MEASURE
-        BarnevernState.DECISION      || BarnevernState.DECISION
-        BarnevernState.DECISION      || BarnevernState.AFTERCARE
+        BarnevernState.MEASURE               || BarnevernState.PLAN
+        BarnevernState.MEASURE               || BarnevernState.DECISION
+        BarnevernState.MEASURE               || BarnevernState.AFTERCARE
 
-        BarnevernState.AFTERCARE     || BarnevernState.MEASURE
-        BarnevernState.AFTERCARE     || BarnevernState.DECISION
+        BarnevernState.DECISION              || BarnevernState.MEASURE
+        BarnevernState.DECISION              || BarnevernState.DECISION
+        BarnevernState.DECISION              || BarnevernState.AFTERCARE
+
+        BarnevernState.AFTERCARE             || BarnevernState.MEASURE
+        BarnevernState.AFTERCARE             || BarnevernState.DECISION
     }
 
     def "fromMessageToInvestigation expect one instance of UndersokelseType"() {
@@ -88,7 +91,7 @@ class CaseMutatorSpec extends Specification {
 
     def "fromInvestigationToMeasure expect one instance of TiltakType"() {
         given:
-        def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION)
+        def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION_STARTED)
         and: "make sure we have UndersokelseType instance"
         assert caseEntry.barnevern.sak.virksomhet.any(it -> it.undersokelse.any())
         and: "make sure we don't have TiltakType instance"
@@ -107,7 +110,7 @@ class CaseMutatorSpec extends Specification {
 
     def "fromInvestigationToDecision expect one instance of VedtakType"() {
         given:
-        def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION)
+        def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION_STARTED)
         and: "make sure we have UndersokelseType instance"
         assert caseEntry.barnevern.sak.virksomhet.any(it -> it.undersokelse.any())
         and: "make sure we don't have VedtakType instance"
@@ -290,7 +293,7 @@ class CaseMutatorSpec extends Specification {
             case BarnevernState.MESSAGE:
                 break
 
-            case BarnevernState.INVESTIGATION:
+            case BarnevernState.INVESTIGATION_STARTED:
                 CaseMutator.fromMessageToInvestigation(instance)
                 break
 
