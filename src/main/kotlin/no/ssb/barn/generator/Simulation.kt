@@ -46,6 +46,11 @@ class Simulation(
                     if (generation > maxMutations) {
                         caseSet.remove(this)
                     }
+
+                    // update case timestamp
+                    barnevern.datoUttrekk = currentDate.atStartOfDay().plusHours(
+                        (8..20).random().toLong())
+
                     barnevern
                 }
         }
