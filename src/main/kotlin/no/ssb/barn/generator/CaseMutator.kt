@@ -21,16 +21,24 @@ object CaseMutator {
     // START Melding
 
     @JvmStatic
+    fun fromMessageToCaseClosed(caseEntry: CaseEntry) {
+        val message = caseEntry.barnevern.sak.virksomhet.last().melding.last()
+        message.konklusjon = MeldingKonklusjonType(
+            kode = MeldingKonklusjonType.getCodes(LocalDate.now())
+                .first { it.code == "1" }.code
+        )
+    }
+
+    @JvmStatic
     fun fromMessageToInvestigationStarted(caseEntry: CaseEntry) {
         val company = caseEntry.barnevern.sak.virksomhet.last()
-        val message = company.melding.last()
         val investigation = UndersokelseType()
 
         company.undersokelse.add(investigation)
 
         company.relasjon.add(
             RelasjonType(
-                fraId = message.id,
+                fraId = company.melding.last().id,
                 fraType = BegrepsType.MELDING,
                 tilId = investigation.id,
                 tilType = BegrepsType.UNDERSOKELSE
@@ -41,14 +49,13 @@ object CaseMutator {
     @JvmStatic
     fun fromMessageToDecision(caseEntry: CaseEntry) {
         val company = caseEntry.barnevern.sak.virksomhet.last()
-        val message = company.melding.last()
         val decision = createVedtakType()
 
         company.vedtak.add(decision)
 
         company.relasjon.add(
             RelasjonType(
-                fraId = message.id,
+                fraId = company.melding.last().id,
                 fraType = BegrepsType.MELDING,
                 tilId = decision.id,
                 tilType = BegrepsType.VEDTAK
@@ -109,14 +116,13 @@ object CaseMutator {
     @JvmStatic
     fun fromInvestigationEndedToMeasure(caseEntry: CaseEntry) {
         val company = caseEntry.barnevern.sak.virksomhet.last()
-        val investigation = company.undersokelse.last()
         val measure = createTiltakType(LocalDate.now())
 
         company.tiltak.add(measure)
 
         company.relasjon.add(
             RelasjonType(
-                fraId = investigation.id,
+                fraId = company.undersokelse.last().id,
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = measure.id,
                 tilType = BegrepsType.TILTAK
@@ -127,14 +133,13 @@ object CaseMutator {
     @JvmStatic
     fun fromInvestigationEndedToDecision(caseEntry: CaseEntry) {
         val company = caseEntry.barnevern.sak.virksomhet.last()
-        val investigation = company.undersokelse.last()
         val decision = createVedtakType()
 
         company.vedtak.add(decision)
 
         company.relasjon.add(
             RelasjonType(
-                fraId = investigation.id,
+                fraId = company.undersokelse.last().id,
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = decision.id,
                 tilType = BegrepsType.VEDTAK
@@ -167,14 +172,13 @@ object CaseMutator {
     @JvmStatic
     fun fromDecisionToMeasure(caseEntry: CaseEntry) {
         val company = caseEntry.barnevern.sak.virksomhet.last()
-        val decision = company.vedtak.last()
         val measure = createTiltakType(caseEntry.updated)
 
         company.tiltak.add(measure)
 
         company.relasjon.add(
             RelasjonType(
-                fraId = decision.id,
+                fraId = company.vedtak.last().id,
                 fraType = BegrepsType.VEDTAK,
                 tilId = measure.id,
                 tilType = BegrepsType.TILTAK
@@ -192,14 +196,13 @@ object CaseMutator {
     @JvmStatic
     fun fromDecisionToAfterCare(caseEntry: CaseEntry) {
         val company = caseEntry.barnevern.sak.virksomhet.last()
-        val decision = company.vedtak.last()
         val afterCare = EttervernType()
 
         company.ettervern.add(afterCare)
 
         company.relasjon.add(
             RelasjonType(
-                fraId = decision.id,
+                fraId = company.vedtak.last().id,
                 fraType = BegrepsType.VEDTAK,
                 tilId = afterCare.id,
                 tilType = BegrepsType.ETTERVERN
@@ -224,6 +227,10 @@ object CaseMutator {
     }
 
     private val newStateFuncMap = mapOf(
+        Pair(
+            Pair(BarnevernState.MESSAGE, BarnevernState.CASE_CLOSED),
+            ::fromMessageToCaseClosed
+        ),
         Pair(
             Pair(BarnevernState.MESSAGE, BarnevernState.INVESTIGATION_STARTED),
             ::fromMessageToInvestigationStarted

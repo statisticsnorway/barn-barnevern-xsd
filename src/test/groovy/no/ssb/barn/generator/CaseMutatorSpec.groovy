@@ -32,6 +32,7 @@ class CaseMutatorSpec extends Specification {
 
         where:
         currentState                         || expectedNewState
+        BarnevernState.MESSAGE               || BarnevernState.CASE_CLOSED
         BarnevernState.MESSAGE               || BarnevernState.INVESTIGATION_STARTED
         BarnevernState.MESSAGE               || BarnevernState.DECISION
 
