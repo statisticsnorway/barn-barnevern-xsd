@@ -36,7 +36,7 @@ class CaseMutatorSpec extends Specification {
         BarnevernState.MESSAGE               || BarnevernState.DECISION
 
         BarnevernState.INVESTIGATION_STARTED || BarnevernState.INVESTIGATION_ENDED
-        BarnevernState.INVESTIGATION_STARTED || BarnevernState.DECISION
+        BarnevernState.INVESTIGATION_STARTED || BarnevernState.MEASURE
 
         BarnevernState.INVESTIGATION_ENDED   || BarnevernState.MEASURE
         BarnevernState.INVESTIGATION_ENDED   || BarnevernState.DECISION

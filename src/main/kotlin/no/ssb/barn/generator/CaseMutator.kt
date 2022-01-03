@@ -49,8 +49,7 @@ object CaseMutator {
     }
 
     @JvmStatic
-    fun fromInvestigationStartedToDecision(caseEntry: CaseEntry) {
-
+    fun fromInvestigationStartedToMeasureViaDecision(caseEntry: CaseEntry) {
         val company = caseEntry.barnevern.sak.virksomhet.last()
         val investigation = company.undersokelse.last()
 
@@ -61,6 +60,7 @@ object CaseMutator {
         )
 
         val decision = createVedtakType()
+        decision.konklusjon = VedtakKonklusjonType()
 
         company.vedtak.add(decision)
         company.relasjon.add(
@@ -69,6 +69,17 @@ object CaseMutator {
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = decision.id,
                 tilType = BegrepsType.VEDTAK
+            )
+        )
+
+        val measure = createTiltakType(LocalDate.now())
+        company.tiltak.add(measure)
+        company.relasjon.add(
+            RelasjonType(
+                fraId = decision.id,
+                fraType = BegrepsType.VEDTAK,
+                tilId = measure.id,
+                tilType = BegrepsType.TILTAK
             )
         )
     }
@@ -165,8 +176,8 @@ object CaseMutator {
         ),
 
         Pair(
-            Pair(BarnevernState.INVESTIGATION_STARTED, BarnevernState.DECISION),
-            ::fromInvestigationStartedToDecision
+            Pair(BarnevernState.INVESTIGATION_STARTED, BarnevernState.MEASURE),
+            ::fromInvestigationStartedToMeasureViaDecision
         ),
 
         Pair(
