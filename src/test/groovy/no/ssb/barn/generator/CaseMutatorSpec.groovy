@@ -13,7 +13,7 @@ class CaseMutatorSpec extends Specification {
 
     def versionOneValidator = new VersionOneValidator()
 
-    def "when calling mutate with valid instance expect changed state 2"() {
+    def "when calling mutate with valid instance expect changed state"() {
         given:
         def caseEntry
         and:
@@ -62,7 +62,7 @@ class CaseMutatorSpec extends Specification {
         assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.undersokelse.any())
 
         when:
-        CaseMutator.fromMessageToInvestigation(caseEntry)
+        CaseMutator.fromMessageToInvestigationStarted(caseEntry)
 
         then:
         1 == caseEntry.barnevern.sak.virksomhet.stream()
@@ -98,7 +98,7 @@ class CaseMutatorSpec extends Specification {
         assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
 
         when:
-        CaseMutator.fromInvestigationToMeasure(caseEntry)
+        CaseMutator.fromInvestigationEndedToMeasure(caseEntry)
 
         then:
         1 == caseEntry.barnevern.sak.virksomhet.stream()
@@ -117,7 +117,7 @@ class CaseMutatorSpec extends Specification {
         assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.vedtak.any())
 
         when:
-        CaseMutator.fromInvestigationToDecision(caseEntry)
+        CaseMutator.fromInvestigationEndedToDecision(caseEntry)
 
         then:
         1 == caseEntry.barnevern.sak.virksomhet.stream()
@@ -294,28 +294,37 @@ class CaseMutatorSpec extends Specification {
                 break
 
             case BarnevernState.INVESTIGATION_STARTED:
-                CaseMutator.fromMessageToInvestigation(instance)
+                CaseMutator.fromMessageToInvestigationStarted(instance)
+                break
+
+            case BarnevernState.INVESTIGATION_ENDED:
+                CaseMutator.fromMessageToInvestigationStarted(instance)
+                CaseMutator.fromInvestigationStartedToEnded(instance)
                 break
 
             case BarnevernState.PLAN:
-                CaseMutator.fromMessageToInvestigation(instance)
-                CaseMutator.fromInvestigationToMeasure(instance)
+                CaseMutator.fromMessageToInvestigationStarted(instance)
+                CaseMutator.fromInvestigationStartedToEnded(instance)
+                CaseMutator.fromInvestigationEndedToMeasure(instance)
                 CaseMutator.fromMeasureToPlan(instance)
                 break
 
             case BarnevernState.MEASURE:
-                CaseMutator.fromMessageToInvestigation(instance)
-                CaseMutator.fromInvestigationToMeasure(instance)
+                CaseMutator.fromMessageToInvestigationStarted(instance)
+                CaseMutator.fromInvestigationStartedToEnded(instance)
+                CaseMutator.fromInvestigationEndedToMeasure(instance)
                 break
 
             case BarnevernState.DECISION:
-                CaseMutator.fromMessageToInvestigation(instance)
-                CaseMutator.fromInvestigationToDecision(instance)
+                CaseMutator.fromMessageToInvestigationStarted(instance)
+                CaseMutator.fromInvestigationStartedToEnded(instance)
+                CaseMutator.fromInvestigationEndedToDecision(instance)
                 break
 
             case BarnevernState.AFTERCARE:
-                CaseMutator.fromMessageToInvestigation(instance)
-                CaseMutator.fromInvestigationToDecision(instance)
+                CaseMutator.fromMessageToInvestigationStarted(instance)
+                CaseMutator.fromInvestigationStartedToEnded(instance)
+                CaseMutator.fromInvestigationEndedToDecision(instance)
                 CaseMutator.fromDecisionToAfterCare(instance)
         }
 
@@ -323,10 +332,11 @@ class CaseMutatorSpec extends Specification {
     }
 
     def isValid(BarnevernType barnevernType) {
-        versionOneValidator.validate(
+        def res = versionOneValidator.validate(
                 new ValidationContext(
                         "~messageId~",
                         BarnevernConverter.marshallInstance(barnevernType)))
-                .severity != WarningLevel.FATAL
+
+        return res.severity != WarningLevel.FATAL
     }
 }

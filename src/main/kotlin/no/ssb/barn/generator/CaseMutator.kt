@@ -21,16 +21,38 @@ object CaseMutator {
     // START Melding
 
     @JvmStatic
-    fun fromMessageToInvestigation(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet.last().undersokelse.add(
-            UndersokelseType()
+    fun fromMessageToInvestigationStarted(caseEntry: CaseEntry) {
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        val message = company.melding.last()
+        val investigation = UndersokelseType()
+
+        company.undersokelse.add(investigation)
+
+        company.relasjon.add(
+            RelasjonType(
+                fraId = message.id,
+                fraType = BegrepsType.MELDING,
+                tilId = investigation.id,
+                tilType = BegrepsType.UNDERSOKELSE
+            )
         )
     }
 
     @JvmStatic
     fun fromMessageToDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet.last().vedtak.add(
-            createVedtakType()
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        val message = company.melding.last()
+        val decision = createVedtakType()
+
+        company.vedtak.add(decision)
+
+        company.relasjon.add(
+            RelasjonType(
+                fraId = message.id,
+                fraType = BegrepsType.MELDING,
+                tilId = decision.id,
+                tilType = BegrepsType.VEDTAK
+            )
         )
     }
 
@@ -85,16 +107,38 @@ object CaseMutator {
     }
 
     @JvmStatic
-    fun fromInvestigationToMeasure(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet.last().tiltak.add(
-            createTiltakType(caseEntry.updated)
+    fun fromInvestigationEndedToMeasure(caseEntry: CaseEntry) {
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        val investigation = company.undersokelse.last()
+        val measure = createTiltakType(LocalDate.now())
+
+        company.tiltak.add(measure)
+
+        company.relasjon.add(
+            RelasjonType(
+                fraId = investigation.id,
+                fraType = BegrepsType.UNDERSOKELSE,
+                tilId = measure.id,
+                tilType = BegrepsType.TILTAK
+            )
         )
     }
 
     @JvmStatic
-    fun fromInvestigationToDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet.last().vedtak.add(
-            createVedtakType()
+    fun fromInvestigationEndedToDecision(caseEntry: CaseEntry) {
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        val investigation = company.undersokelse.last()
+        val decision = createVedtakType()
+
+        company.vedtak.add(decision)
+
+        company.relasjon.add(
+            RelasjonType(
+                fraId = investigation.id,
+                fraType = BegrepsType.UNDERSOKELSE,
+                tilId = decision.id,
+                tilType = BegrepsType.VEDTAK
+            )
         )
     }
 
@@ -110,9 +154,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMeasureToDecision(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet.last().vedtak.add(
-            createVedtakType()
-        )
+        caseEntry.barnevern.sak.virksomhet.last().vedtak.add(createVedtakType())
     }
 
     @JvmStatic
@@ -124,8 +166,19 @@ object CaseMutator {
 
     @JvmStatic
     fun fromDecisionToMeasure(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet.last().tiltak.add(
-            createTiltakType(caseEntry.updated)
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        val decision = company.vedtak.last()
+        val measure = createTiltakType(caseEntry.updated)
+
+        company.tiltak.add(measure)
+
+        company.relasjon.add(
+            RelasjonType(
+                fraId = decision.id,
+                fraType = BegrepsType.VEDTAK,
+                tilId = measure.id,
+                tilType = BegrepsType.TILTAK
+            )
         )
     }
 
@@ -138,7 +191,20 @@ object CaseMutator {
 
     @JvmStatic
     fun fromDecisionToAfterCare(caseEntry: CaseEntry) {
-        caseEntry.barnevern.sak.virksomhet.last().ettervern.add(EttervernType())
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        val decision = company.vedtak.last()
+        val afterCare = EttervernType()
+
+        company.ettervern.add(afterCare)
+
+        company.relasjon.add(
+            RelasjonType(
+                fraId = decision.id,
+                fraType = BegrepsType.VEDTAK,
+                tilId = afterCare.id,
+                tilType = BegrepsType.ETTERVERN
+            )
+        )
     }
 
     // START Ettervern
@@ -160,7 +226,7 @@ object CaseMutator {
     private val newStateFuncMap = mapOf(
         Pair(
             Pair(BarnevernState.MESSAGE, BarnevernState.INVESTIGATION_STARTED),
-            ::fromMessageToInvestigation
+            ::fromMessageToInvestigationStarted
         ),
         Pair(
             Pair(BarnevernState.MESSAGE, BarnevernState.DECISION),
@@ -182,11 +248,11 @@ object CaseMutator {
 
         Pair(
             Pair(BarnevernState.INVESTIGATION_ENDED, BarnevernState.MEASURE),
-            ::fromInvestigationToMeasure
+            ::fromInvestigationEndedToMeasure
         ),
         Pair(
             Pair(BarnevernState.INVESTIGATION_ENDED, BarnevernState.DECISION),
-            ::fromInvestigationToDecision
+            ::fromInvestigationEndedToDecision
         ),
 
         Pair(
