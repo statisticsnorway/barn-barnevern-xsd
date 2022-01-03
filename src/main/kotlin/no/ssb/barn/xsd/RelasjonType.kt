@@ -1,19 +1,18 @@
 package no.ssb.barn.xsd
 
+import no.ssb.barn.converter.UuidAdapter
+import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAttribute
 import javax.xml.bind.annotation.XmlType
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.converter.UuidAdapter
-import no.ssb.barn.generator.RandomUtils
-import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RelasjonType", propOrder = ["id", "fraId", "fraType", "tilId", "tilType"])
 data class RelasjonType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: String = RandomUtils.generateRandomString(10),
+    var id: UUID = UUID.randomUUID(),
 
     @field:XmlAttribute(name = "FraId", required = true)
     @field:XmlJavaTypeAdapter(
