@@ -9,6 +9,7 @@ import spock.lang.Unroll
 
 import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
+import java.time.Year
 
 class ValidationUtilsSpec extends Specification {
 
@@ -125,9 +126,9 @@ class ValidationUtilsSpec extends Specification {
 
         where:
         fnr             | type  || expectedAge
-        "05011399292"   | "fnr" || 8
+        "05011399292"   | "fnr" || Year.now().value - 2013
         "41011088188"   | "dnr" || -1
-        "01020304050"   | "fnr" || 18
+        "01020304050"   | "fnr" || Year.now().value - 2003
         "a".repeat(11)  | "???" || -1
         null            | "???" || -2
         getSsnByAge(99) | "fnr" || -1
@@ -156,8 +157,8 @@ class ValidationUtilsSpec extends Specification {
 
     static def getSsnByAge(int age) {
         RandomUtils.generateRandomSSN(
-                LocalDate.now().minusYears(age + 1),
-                LocalDate.now().minusYears(age)
+                LocalDate.of(Year.now().minusYears(age).value, 1, 1),
+                LocalDate.of(Year.now().minusYears(age - 1).value, 1, 1),
         )
     }
 
