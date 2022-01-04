@@ -36,7 +36,6 @@ object BarnevernConverter {
             return it.toString()
         }
 
-
     private val gson: Gson = GsonBuilder()
         .registerTypeAdapter(LocalDate::class.java, GsonLocalDateAdapter())
         .registerTypeAdapter(LocalDateTime::class.java, GsonLocalDateTimeAdapter())
