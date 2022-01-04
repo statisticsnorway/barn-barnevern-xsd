@@ -27,7 +27,11 @@ class Simulation(
             .map { mutateOrCreateCaseEntry(currentDate) }
 
     private fun mutateOrCreateCaseEntry(currentDate: LocalDate): BarnevernType =
-        if (mutableCaseCount(currentDate, caseSet) < 1 || shouldCreateNewCase()) {
+        if (mutableCaseCount(
+                currentDate,
+                caseSet
+            ) < 1 || shouldCreateNewCase()
+        ) {
             InitialMutationProvider.createInitialMutation(currentDate).also {
                 caseSet.add(
                     CaseEntry(
@@ -43,13 +47,16 @@ class Simulation(
                     generation++
                     updated = currentDate
 
-                    if (generation > maxMutations) {
+                    if (generation > maxMutations
+                        || state == BarnevernState.CASE_CLOSED) {
                         caseSet.remove(this)
                     }
 
                     // update case timestamp
-                    barnevern.datoUttrekk = currentDate.atStartOfDay().plusHours(
-                        (8..20).random().toLong())
+                    barnevern.datoUttrekk =
+                        currentDate.atStartOfDay().plusHours(
+                            (8..20).random().toLong()
+                        )
 
                     barnevern
                 }
@@ -65,14 +72,18 @@ class Simulation(
 
         @JvmStatic
         fun getRandomCaseToMutate(
-            currentDate: LocalDate, caseSet: Set<CaseEntry>): CaseEntry =
+            currentDate: LocalDate, caseSet: Set<CaseEntry>
+        ): CaseEntry =
             caseSet
                 .filter { it.updated.isBefore(currentDate) }
                 .drop((0 until mutableCaseCount(currentDate, caseSet)).random())
                 .first()
 
         @JvmStatic
-        fun mutableCaseCount(currentDate: LocalDate, caseSet: Set<CaseEntry>): Int =
+        fun mutableCaseCount(
+            currentDate: LocalDate,
+            caseSet: Set<CaseEntry>
+        ): Int =
             caseSet.count { it.updated.isBefore(currentDate) }
     }
 }
