@@ -159,7 +159,18 @@ object CaseMutator {
     }
 
     // START Plan
-    // N/A
+
+    @JvmStatic
+    fun fromPlanToEvaluatedPlan(caseEntry: CaseEntry) {
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        company.plan.last().evaluering.add(PlanEvalueringType())
+    }
+
+    @JvmStatic
+    fun fromPlanToCaseClosed(caseEntry: CaseEntry) {
+        val company = caseEntry.barnevern.sak.virksomhet.last()
+        company.plan.last().konklusjon = PlanKonklusjonType()
+    }
 
     // START Tiltak
 
@@ -320,6 +331,15 @@ object CaseMutator {
         Pair(
             Pair(BarnevernState.INVESTIGATION_ENDED, BarnevernState.DECISION),
             ::fromInvestigationEndedToDecision
+        ),
+
+        Pair(
+            Pair(BarnevernState.PLAN, BarnevernState.PLAN),
+            ::fromPlanToEvaluatedPlan
+        ),
+        Pair(
+            Pair(BarnevernState.PLAN, BarnevernState.CASE_CLOSED),
+            ::fromPlanToCaseClosed
         ),
 
         Pair(

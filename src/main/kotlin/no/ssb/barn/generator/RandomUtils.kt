@@ -130,7 +130,15 @@ object RandomUtils {
         }
 
     @JvmStatic
-    fun generateRandomAvgiverType() = avgiverType.random()
+    fun generateRandomAvgiverType(): AvgiverType =
+        // make approx. 16% chance of selecting Oslo
+        if ((1..6).random() == 3) {
+            avgiverType.first { it.kommunenummer == GeneratorConstants.OSLO }
+        } else {
+            avgiverType
+                .filter { it.kommunenummer != GeneratorConstants.OSLO }
+                .random()
+        }
 
     private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
