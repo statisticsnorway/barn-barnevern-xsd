@@ -227,7 +227,7 @@ object CaseMutator {
         val decision = createVedtakType()
         company.vedtak.add(decision)
 
-        if (company.tiltak.any()){
+        if (company.tiltak.any()) {
             company.relasjon.add(
                 RelasjonType(
                     fraId = decision.id,
@@ -383,22 +383,22 @@ object CaseMutator {
     )
 
     private fun createVedtakType(): VedtakType =
-        VedtakType(
-            lovhjemmel = LovhjemmelType(
-                kapittel = "1",
-                paragraf = "2",
-                ledd = mutableListOf("~ledd~")
-            )
-        )
+        VedtakType(lovhjemmel = createLegalBasis())
 
     private fun createTiltakType(startDate: LocalDate): TiltakType =
         TiltakType(
             startDato = startDate,
-            lovhjemmel = LovhjemmelType(
-                kapittel = "1",
-                paragraf = "2",
-                ledd = mutableListOf("~ledd~")
+            kategori = KategoriType(
+                kode = KategoriType.getCodes(startDate).random().code,
+                presisering = "~Presisering~"
             ),
-            kategori = KategoriType(presisering = "~Presisering~")
+            lovhjemmel = createLegalBasis()
+        )
+
+    private fun createLegalBasis(): LovhjemmelType =
+        LovhjemmelType(
+            kapittel = "4",
+            paragraf = listOf("8", "12").random(),
+            ledd = mutableListOf(listOf("2", "3").random())
         )
 }
