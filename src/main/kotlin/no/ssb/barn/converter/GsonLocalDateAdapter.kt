@@ -15,6 +15,6 @@ class GsonLocalDateAdapter :
         typeOfSrc: Type?,
         context: JsonSerializationContext?
     ): JsonElement {
-        return JsonPrimitive(date?.format(DateTimeFormatter.ISO_LOCAL_DATE)) // "yyyy-mm-dd"
+        return JsonPrimitive(date?.format(DateTimeFormatter.ISO_LOCAL_DATE))
     }
 }

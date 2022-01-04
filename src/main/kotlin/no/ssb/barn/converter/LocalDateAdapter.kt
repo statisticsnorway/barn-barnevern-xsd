@@ -1,14 +1,14 @@
 package no.ssb.barn.converter
 
-import javax.xml.bind.annotation.adapters.XmlAdapter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import javax.xml.bind.annotation.adapters.XmlAdapter
 
 class LocalDateAdapter : XmlAdapter<String, LocalDate>()  {
-    private val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
-    override fun marshal(date: LocalDate?): String? = date?.format(format)
+    override fun marshal(date: LocalDate?): String? =
+        date?.format(DateTimeFormatter.ISO_LOCAL_DATE)
 
     override fun unmarshal(date: String): LocalDate =
-        LocalDate.parse(date, format)
+        LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE)
 }
