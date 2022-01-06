@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.SakType
 
-class HasContent : AbstractRule(
+class CaseHasContent : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 06: Har meldinger, planer eller tiltak",
     SakType::class.java.simpleName

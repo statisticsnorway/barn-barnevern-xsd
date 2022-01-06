@@ -10,16 +10,16 @@ import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class EndDateAfterStartDateSpec extends Specification {
+class CaseEndDateAfterStartDateSpec extends Specification {
 
     @Subject
-    EndDateAfterStartDate sut
+    CaseEndDateAfterStartDate sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new EndDateAfterStartDate()
+        sut = new CaseEndDateAfterStartDate()
         context = getTestContext()
     }
 

@@ -2,12 +2,22 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
+@Narrative("""
+Validéring av innhold mot filbeskrivelse
+
+Gitt at man har en fil med innhold
+når man validér filen mot filbeskrivelsen
+så skal man ved feil gi feilmeldingen 'Innholdet er feil i forhold til filbeskrivelsen / XSD'
+
+Alvorlighetsgrad: FATAL
+""")
 class XsdRuleSpec extends Specification {
 
     @Subject

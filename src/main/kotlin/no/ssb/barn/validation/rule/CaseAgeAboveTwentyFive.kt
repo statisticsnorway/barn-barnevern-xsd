@@ -7,7 +7,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.getAge
 import no.ssb.barn.xsd.SakType
 
-class AgeAboveTwentyFive : AbstractRule(
+class CaseAgeAboveTwentyFive : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 07: Klient over 25 år avsluttes",
     SakType::class.java.simpleName

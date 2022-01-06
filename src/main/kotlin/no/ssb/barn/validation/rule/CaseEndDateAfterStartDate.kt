@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.SakType
 
-class EndDateAfterStartDate : AbstractRule(
+class CaseEndDateAfterStartDate : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 02a: Startdato etter sluttdato",
     SakType::class.java.simpleName

@@ -3,6 +3,7 @@ package no.ssb.barn.validation.rule
 import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.KategoriType
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -10,6 +11,11 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
+@Narrative("""
+Gitt at det er en sak med tiltak og fødselnummer (slik at man kan utlede alder)
+når barnets alder er større enn 11 år
+så skal det sjekkes om tiltaket sin kategori er '4.2' SFO/AKS slik at en gir en gitt feilmelding
+""")
 class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
 
     @Subject
@@ -25,32 +31,27 @@ class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
 
     @Unroll
     def "test alle scenarier"() {
-        given:
+        given: "det er en sak "
         def sak = context.rootObject.sak
-        and:
+        and: "som har tiltak med kategorikode"
+        sak.virksomhet[0].tiltak[0].kategori = (createKategori) ? new KategoriType(code, "~presisering~") : null
+        and: "som har et fødselnummer (her generert basert på en gitt alder)"
         sak.fodselsnummer = getMockSocialSecurityNumber(age)
-        and:
-        sak.virksomhet[0].tiltak = List.of(sak.virksomhet[0].tiltak[0])
-        and:
-        sak.virksomhet[0].tiltak[0].kategori = null
-        and:
-        if (createKategori) {
-            sak.virksomhet[0].tiltak[0].kategori = new KategoriType(
-                    code, "~presisering~"
-            )
-        }
 
-        when:
+        when: "barnets alder er større enn 11 skal det sjekkes at kategori er '4.2' SFO/Aktivitetsskole"
         def reportEntries = sut.validate(context)
 
-        then:
+        then: "at ingen unntak er kastet"
         noExceptionThrown()
-        and:
+        and: "at antall feil er som forventet"
         (reportEntries != null) == errorExpected
-        and:
+        and: "hvis det forventes feil"
         if (errorExpected) {
+            and: "at antall feil er 1"
             assert 1 == reportEntries.size()
+            and: "at riktig alvorlighetsgrad er satt"
             assert WarningLevel.WARNING == reportEntries[0].warningLevel
+            and: "at feilmeldingsteksten inneholder en gitt tekst"
             assert reportEntries[0].errorText.contains("Barnet er over 11 år og i SFO")
         }
 

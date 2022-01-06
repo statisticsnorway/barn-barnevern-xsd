@@ -7,7 +7,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.getAge
 import no.ssb.barn.xsd.SakType
 
-class AgeAboveEighteen : AbstractRule(
+class CaseAgeAboveEighteen : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 08: Alder i forhold til tiltak",
     SakType::class.java.simpleName

@@ -9,16 +9,16 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class AgeAboveEighteenSpec extends Specification {
+class CaseAgeAboveEighteenSpec extends Specification {
 
     @Subject
-    AgeAboveEighteen sut
+    CaseAgeAboveEighteen sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new AgeAboveEighteen()
+        sut = new CaseAgeAboveEighteen()
         context = getTestContext()
     }
 

@@ -11,16 +11,16 @@ import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class HasContentSpec extends Specification {
+class CaseHasContentSpec extends Specification {
 
     @Subject
-    HasContent sut
+    CaseHasContent sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new HasContent()
+        sut = new CaseHasContent()
         context = getTestContext()
     }
 

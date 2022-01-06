@@ -14,10 +14,10 @@ class VersionOneValidator : ValidatorContract {
     )
 
     private val rules = listOf(
-        AgeAboveEighteen(),
-        AgeAboveTwentyFive(),
-        EndDateAfterStartDate(),
-        HasContent(),
+        CaseAgeAboveEighteen(),
+        CaseAgeAboveTwentyFive(),
+        CaseEndDateAfterStartDate(),
+        CaseHasContent(),
         InvestigationDecisionClarificationRequired(),
         InvestigationDecisionRequired(),
         InvestigationDueDatePassedConclusionRequired(),
