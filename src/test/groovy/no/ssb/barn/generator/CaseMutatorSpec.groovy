@@ -1,7 +1,7 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.converter.BarnevernConverter
-import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.VersionOneValidator
 import no.ssb.barn.xsd.BarnevernType

@@ -1,7 +1,7 @@
 package no.ssb.barn.testutil
 
 import no.ssb.barn.converter.BarnevernConverter
-import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.validation.ValidationContext
 
 import java.time.Year
 

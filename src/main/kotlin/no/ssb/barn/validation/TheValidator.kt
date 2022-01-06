@@ -1,6 +1,5 @@
 package no.ssb.barn.validation
 
-import no.ssb.barn.framework.ValidationContext
 import no.ssb.barn.report.ValidationReport
 
 /**

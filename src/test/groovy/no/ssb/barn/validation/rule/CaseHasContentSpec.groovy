@@ -1,6 +1,6 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.MeldingType
 import no.ssb.barn.xsd.PlanType

@@ -21,11 +21,18 @@ object BarnevernConverter {
             .createUnmarshaller()
             .unmarshal(xml.byteInputStream()) as BarnevernType
 
+    private const val VALIDATION_REPORT_KEY = "validationReport"
+
     @JvmStatic
-    fun unmarshallXmlToMap(xml: String): Map<String, Any> {
-        val json = gson.toJson(unmarshallXml(xml))
-        return gson.fromJson<Map<String, Any>>(json)
-    }
+    fun unmarshallXmlAndValidationReportToMap(
+        xml: String,
+        validationReportJson: String
+    ): MutableMap<String, Any> =
+        gson.fromJson<MutableMap<String, Any>>(gson.toJson(unmarshallXml(xml)))
+            .also {
+                it[VALIDATION_REPORT_KEY] =
+                    gson.fromJson<Map<String, Any>>(validationReportJson)
+            }
 
     @JvmStatic
     fun marshallInstance(barnevernType: BarnevernType): String =
@@ -38,9 +45,12 @@ object BarnevernConverter {
 
     private val gson: Gson = GsonBuilder()
         .registerTypeAdapter(LocalDate::class.java, GsonLocalDateAdapter())
-        .registerTypeAdapter(LocalDateTime::class.java, GsonLocalDateTimeAdapter())
+        .registerTypeAdapter(
+            LocalDateTime::class.java,
+            GsonLocalDateTimeAdapter()
+        )
         .create()
 
     private inline fun <reified T> Gson.fromJson(json: String) =
-        fromJson<T>(json, object: TypeToken<T>() {}.type)
+        fromJson<T>(json, object : TypeToken<T>() {}.type)
 }

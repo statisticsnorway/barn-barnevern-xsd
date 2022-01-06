@@ -1,4 +1,4 @@
-package no.ssb.barn.framework
+package no.ssb.barn.validation
 
 import no.ssb.barn.xsd.BarnevernType
 

@@ -1,6 +1,6 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll

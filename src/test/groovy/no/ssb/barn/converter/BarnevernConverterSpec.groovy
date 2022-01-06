@@ -1,6 +1,6 @@
 package no.ssb.barn.converter
 
-import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.generator.InitialMutationProvider
 import no.ssb.barn.validation.rule.XsdRule
@@ -64,12 +64,14 @@ class BarnevernConverterSpec extends Specification {
         i << (1..9)
     }
 
+    def VALIDATION_REPORT_JSON = '{ "someValue": 1, "myList": [4, 8, 15, 16, 23, 42] }'
+
     def "when unmarshalling instance to map, map is not null"() {
         given:
         def xml = getResourceAsString("test01_fil09.xml")
 
         when:
-        def map = BarnevernConverter.unmarshallXmlToMap(xml)
+        def map = BarnevernConverter.unmarshallXmlAndValidationReportToMap(xml, VALIDATION_REPORT_JSON)
 
         then:
         noExceptionThrown()
