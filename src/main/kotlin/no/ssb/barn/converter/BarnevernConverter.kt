@@ -35,6 +35,10 @@ object BarnevernConverter {
             }
 
     @JvmStatic
+    fun unmarshallXmlToJson(xml: String): String =
+        gson.toJson(unmarshallXml(xml))
+
+    @JvmStatic
     fun marshallInstance(barnevernType: BarnevernType): String =
         StringWriter().use {
             jaxbContext
