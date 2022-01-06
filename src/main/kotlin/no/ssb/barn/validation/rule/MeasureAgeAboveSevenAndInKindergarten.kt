@@ -1,10 +1,10 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 
 class MeasureAgeAboveSevenAndInKindergarten : AbstractRule(
@@ -23,7 +23,7 @@ class MeasureAgeAboveSevenAndInKindergarten : AbstractRule(
                 }
                 .map {
                     createReportEntry(
-                        "Tiltak ($it.id). Barnet er over 7 år og i"
+                        "Tiltak (${it.id}). Barnet er over 7 år og i"
                                 + " barnehage. Barnets alder er $age år.",
                         it.id
                     )

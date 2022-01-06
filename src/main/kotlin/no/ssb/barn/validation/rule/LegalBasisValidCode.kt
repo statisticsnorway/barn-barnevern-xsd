@@ -1,9 +1,9 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 
 class LegalBasisValidCode : AbstractRule(
@@ -23,7 +23,7 @@ class LegalBasisValidCode : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    "Tiltak ($it.id). Kapittel"
+                    "Tiltak (${it.id}). Kapittel"
                             + " (${it.lovhjemmel!!.kapittel}) eller paragraf"
                             + " (${it.lovhjemmel!!.paragraf}) er rapportert med"
                             + " den ugyldige koden 0",
