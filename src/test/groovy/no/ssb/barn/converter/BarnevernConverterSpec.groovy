@@ -1,6 +1,6 @@
 package no.ssb.barn.converter
 
-import no.ssb.barn.framework.ValidationContext
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.generator.InitialMutationProvider
 import no.ssb.barn.validation.rule.XsdRule

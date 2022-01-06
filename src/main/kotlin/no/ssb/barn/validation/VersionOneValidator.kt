@@ -1,8 +1,6 @@
 package no.ssb.barn.validation
 
 import no.ssb.barn.converter.BarnevernConverter
-import no.ssb.barn.framework.ValidationContext
-import no.ssb.barn.framework.ValidatorContract
 import no.ssb.barn.report.ValidationReport
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.rule.*
