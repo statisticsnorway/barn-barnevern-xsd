@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -10,6 +11,13 @@ import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
+@Narrative("""
+Gitt at man har en sak der StartDato og SluttDato finnes<br/>
+når StartDato er etter SluttDato<br/>
+så gi feilmeldingen "Sakens startdato er etter sluttdato"
+
+Alvorlighetsgrad: Warning
+""")
 class CaseEndDateAfterStartDateSpec extends Specification {
 
     @Subject

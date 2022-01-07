@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -9,16 +10,23 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class CaseAgeAboveEighteenSpec extends Specification {
+@Narrative("""
+Gitt at man har har et barn og utleder alder<br/>
+når alder er 18 eller større og tiltak mangler <br/>
+så skal man ved feil gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak"
+
+Alvorlighetsgrad: ERROR
+""")
+class CaseAgeAboveEighteenAndMeasuresSpec extends Specification {
 
     @Subject
-    CaseAgeAboveEighteen sut
+    CaseAgeAboveEighteenAndMeasures sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new CaseAgeAboveEighteen()
+        sut = new CaseAgeAboveEighteenAndMeasures()
         context = getTestContext()
     }
 
@@ -42,7 +50,7 @@ class CaseAgeAboveEighteenSpec extends Specification {
         if (errorExpected) {
             assert 1 == reportEntries.size()
             assert WarningLevel.ERROR == reportEntries[0].warningLevel
-            assert reportEntries[0].errorText.contains("Individet er over 18 år og skal dermed ha tiltak")
+            assert reportEntries[0].errorText.contains("Klienten er over 18 år og skal dermed ha tiltak")
         }
 
         where:

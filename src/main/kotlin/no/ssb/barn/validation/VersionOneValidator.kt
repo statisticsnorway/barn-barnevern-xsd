@@ -12,7 +12,7 @@ class VersionOneValidator : ValidatorContract {
     )
 
     private val rules = listOf(
-        CaseAgeAboveEighteen(),
+        CaseAgeAboveEighteenAndMeasures(),
         CaseAgeAboveTwentyFive(),
         CaseEndDateAfterStartDate(),
         CaseHasContent(),
@@ -44,8 +44,8 @@ class VersionOneValidator : ValidatorContract {
         PlanEndDateBeforeIndividEndDate(),
         PlanStartDateAfterIndividStartDate(),
         RegionCityPart(),
-        SocialSecurityId(),
-        SocialSecurityIdAndDuf()
+        CaseSocialSecurityId(),
+        CaseSocialSecurityIdAndDuf()
     )
 
     override fun validate(context: ValidationContext): ValidationReport {

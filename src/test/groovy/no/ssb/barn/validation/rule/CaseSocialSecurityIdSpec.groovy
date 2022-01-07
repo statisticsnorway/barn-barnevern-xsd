@@ -1,22 +1,26 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class SocialSecurityIdSpec extends Specification {
+@Narrative("""
+
+""")
+class CaseSocialSecurityIdSpec extends Specification {
 
     @Subject
-    SocialSecurityId sut
+    CaseSocialSecurityId sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new SocialSecurityId()
+        sut = new CaseSocialSecurityId()
         context = getTestContext()
     }
 

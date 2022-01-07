@@ -7,11 +7,13 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.Year
+import java.util.regex.Pattern
 import javax.xml.XMLConstants
 import javax.xml.transform.Source
 import javax.xml.validation.Schema
 import javax.xml.validation.SchemaFactory
 import javax.xml.validation.Validator
+
 
 object ValidationUtils {
 
@@ -79,19 +81,55 @@ object ValidationUtils {
                 && modulo11(ssn, controlSumDigits2) == 0
 
     fun modulo11(toCheck: String, controlDigits: List<Int>): Int =
-        if (toCheck.length != controlDigits.size) {
-            -1
-        } else {
-            toCheck
-                .mapIndexed { index, currentChar ->
-                    if (!currentChar.isDigit()) {
-                        return -1
-                    }
-                    currentChar.toString().toInt() * controlDigits[index]
-                }
+        if (toCheck.length == controlDigits.size && Pattern.compile("^\\d+$").matcher(toCheck).matches()) {
+            toCheck.asSequence()
+                .map { it.toString().toInt() }
+                .zip(controlDigits.asSequence()) { digit, controlDigit -> digit * controlDigit }
                 .sum()
                 .mod(11)
+        } else {
+            -1
         }
+
+    @JvmStatic
+    fun validateDUF(duf: String): Boolean =
+        Pattern.compile("^\\d{12}$").matcher(duf).matches()
+                &&
+                duf.asSequence()
+                    .take(10)
+                    .map { it.toString().toInt() }
+                    .zip(sequenceOf(4, 6, 3, 2, 4, 6, 3, 2, 7, 5)) { digit, weight -> digit * weight }
+                    .sum()
+                    .mod(11)
+                    .let { it.toString().padStart(2, '0') } == duf.substring(10)
+
+    @JvmStatic
+    fun validateFNR(fnr: String): Boolean =
+        Pattern.compile("^\\d{11}$").matcher(fnr).matches()
+                && (
+                validateSSN(fnr)
+                        || (
+                        isValidDate(dnr2fnr(fnr))
+                                && (
+                                fnr.endsWith("00100")
+                                        || fnr.endsWith("00200")
+                                        || fnr.endsWith("55555")
+                                        || fnr.endsWith("99999")
+                                )
+                        )
+                )
+
+    @JvmStatic
+    fun dnr2fnr(dnr: String): String {
+        var first = dnr.first().toString().toInt()
+
+        /* When using d-number then 4 is added to the first digit. */
+        /* When the first digit is greater than 3 then subtract 4 to get a valid date  */
+        if (first > 3) {
+            first -= 4
+        }
+        return first.toString() + dnr.substring(1, 6)
+    }
 
     @JvmStatic
     fun getAge(socialSecurityNumber: String?): Int =

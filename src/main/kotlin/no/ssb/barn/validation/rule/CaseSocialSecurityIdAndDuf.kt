@@ -4,11 +4,12 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.util.ValidationUtils.validateFNR
 import no.ssb.barn.util.ValidationUtils.validateSSN
 import no.ssb.barn.xsd.SakType
 import java.util.regex.Pattern
 
-class SocialSecurityIdAndDuf : AbstractRule(
+class CaseSocialSecurityIdAndDuf : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 03: Fødselsnummer og DUFnummer",
     SakType::class.java.simpleName
@@ -22,15 +23,11 @@ class SocialSecurityIdAndDuf : AbstractRule(
         val duFnummer = context.rootObject.sak.duFnummer
 
         if (!fodselsnummer.isNullOrEmpty()) {
-            return if (
-                fodselsnummer.length == 11
-                    && (
-                        suffixExceptions.contains(fodselsnummer.takeLast(5))
-                        || validateSSN(fodselsnummer))) {
+            return if (validateFNR(fodselsnummer)) {
                 null
             } else {
                 createSingleReportEntryList(
-                    "Feil i fødselsnummer. Kan ikke identifisere individet.",
+                    "Feil i fødselsnummer. Kan ikke identifisere klienten.",
                     context.rootObject.sak.id
                 )
             }
@@ -39,7 +36,7 @@ class SocialSecurityIdAndDuf : AbstractRule(
         if (!duFnummer.isNullOrEmpty()) {
             return if (!dufPattern.matcher(duFnummer).matches()) {
                 createSingleReportEntryList(
-                    "DUFnummer mangler. Kan ikke identifisere individet.",
+                    "DUFnummer mangler. Kan ikke identifisere klienten.",
                     context.rootObject.sak.id
                 )
             } else {
@@ -48,7 +45,7 @@ class SocialSecurityIdAndDuf : AbstractRule(
         }
 
         return createSingleReportEntryList(
-            "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere individet.",
+            "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere klienten.",
             context.rootObject.sak.id
         )
     }

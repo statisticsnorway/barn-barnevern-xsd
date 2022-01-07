@@ -13,8 +13,8 @@ import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 Validéring av innhold mot filbeskrivelse
 
 Gitt at man har en fil med innhold
-når man validér filen mot filbeskrivelsen
-så skal man ved feil gi feilmeldingen 'Innholdet er feil i forhold til filbeskrivelsen / XSD'
+når man validérer filen mot filbeskrivelsen og det feiler
+så gi feilmeldingen 'Innholdet er feil i forhold til filbeskrivelsen / XSD'
 
 Alvorlighetsgrad: FATAL
 """)

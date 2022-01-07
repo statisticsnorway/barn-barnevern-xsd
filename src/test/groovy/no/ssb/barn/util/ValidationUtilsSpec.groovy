@@ -104,12 +104,12 @@ class ValidationUtilsSpec extends Specification {
         "/Barnevern.xsd" | "/invalid.xml"
     }
 
-    def "Should validate norwegian social security numbers (fnr), fnr = #fnr, result = #result"() {
+    def "Should validate norwegian social security numbers (fnr), ssn = #ssn, result = #result"() {
         expect:
-        ValidationUtils.validateSSN(fnr) == result
+        ValidationUtils.validateSSN(ssn) == result
 
         where:
-        fnr           | type  || result
+        ssn           | type  || result
         "05011399292" | "fnr" || true
         "41011088188" | "dnr" || true
         "01020304050" | "fnr" || false
@@ -117,6 +117,51 @@ class ValidationUtilsSpec extends Specification {
         "123456"      | "???" || false
         "24101219220" | "fnr" || true
         "01000000040" | "fnr" || false
+    }
+
+    def "Should validate foreign security numbers (duf-nummer), duf = #duf, result = #result"() {
+        expect:
+        ValidationUtils.validateDUF(duf) == result
+
+        where:
+        duf            || result
+        "201017238203" || true
+        "200816832910" || true
+        "201012345678" || false
+        "ABCDEFGHIJKL" || false
+        "123456"       || false
+        "241012192200" || false
+        "010000000400" || false
+    }
+
+    def "Should validate norwegian social security numbers (fnr), fnr = #fnr, result = #result"() {
+        expect:
+        ValidationUtils.validateFNR(fnr) == result
+
+        where:
+        fnr           | type  || result
+        "05011399292" | "fnr" || true
+        "41011088188" | "dnr" || true
+        "05011300100" | "fnr" || true
+        "05011300200" | "fnr" || true
+        "05011355555" | "fnr" || true
+        "05011399999" | "fnr" || true
+        "24101219220" | "fnr" || true
+
+        "01020304050" | "fnr" || false
+        "ABCDEFGHIJK" | "???" || false
+        "123456"      | "???" || false
+        "01000000040" | "fnr" || false
+    }
+
+    def "Should validate convert the first digit of the dnr to valid date (dnr), dnr = #dnr, result = #result"() {
+        expect:
+        ValidationUtils.dnr2fnr(dnr) == result
+
+        where:
+        dnr           | type  || result
+        "05011399292" | "fnr" || "050113"
+        "41011088188" | "dnr" || "010110"
     }
 
     @Unroll

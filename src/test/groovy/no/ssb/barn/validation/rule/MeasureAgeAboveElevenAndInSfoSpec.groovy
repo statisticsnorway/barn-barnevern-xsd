@@ -13,8 +13,10 @@ import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
 Gitt at det er en sak med tiltak og fødselnummer (slik at man kan utlede alder)
-når barnets alder er større enn 11 år
-så skal det sjekkes om tiltaket sin kategori er '4.2' SFO/AKS slik at en gir en gitt feilmelding
+dersom barnets alder er større enn 11 år og tiltakets kategori er '4.2' SFO/AKS
+så gi feilmelding "Klienten er over 11 år og i SFO"
+
+Alvorlighetsgrad: Warning
 """)
 class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
 
@@ -52,7 +54,7 @@ class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
             and: "at riktig alvorlighetsgrad er satt"
             assert WarningLevel.WARNING == reportEntries[0].warningLevel
             and: "at feilmeldingsteksten inneholder en gitt tekst"
-            assert reportEntries[0].errorText.contains("Barnet er over 11 år og i SFO")
+            assert reportEntries[0].errorText.contains("Klienten er over 11 år og i SFO")
         }
 
         where:

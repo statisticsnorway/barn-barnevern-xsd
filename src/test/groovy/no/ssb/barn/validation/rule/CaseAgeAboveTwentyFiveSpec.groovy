@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -9,6 +10,13 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
+@Narrative("""
+Gitt at man har en sak og utleder alder ved hjelp av fødselsnummer<br/>
+når alder er 25 eller større<br/>
+så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient"
+
+Alvorlighetsgrad: ERROR
+""")
 class CaseAgeAboveTwentyFiveSpec extends Specification {
 
     @Subject
@@ -38,7 +46,7 @@ class CaseAgeAboveTwentyFiveSpec extends Specification {
         if (errorExpected) {
             assert 1 == reportEntries.size()
             assert WarningLevel.ERROR == reportEntries[0].warningLevel
-            assert reportEntries[0].errorText.contains("Individet er $age år og skal avsluttes som klient")
+            assert reportEntries[0].errorText.contains("Klienten er over 25 år og skal avsluttes som klient")
         }
 
         where:

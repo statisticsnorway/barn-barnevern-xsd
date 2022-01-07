@@ -7,7 +7,7 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SakType
 
-class CaseAgeAboveEighteen : AbstractRule(
+class CaseAgeAboveEighteenAndMeasures : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 08: Alder i forhold til tiltak",
     SakType::class.java.simpleName
@@ -21,7 +21,7 @@ class CaseAgeAboveEighteen : AbstractRule(
             .filter { virksomhet -> !virksomhet.tiltak.any() }
             .map {
                 createReportEntry(
-                    "Individet er over 18 år og skal dermed ha tiltak",
+                    "Klienten er over 18 år og skal dermed ha tiltak",
                     context.rootObject.sak.id
                 )
             }

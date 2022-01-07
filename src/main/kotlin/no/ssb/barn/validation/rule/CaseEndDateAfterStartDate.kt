@@ -8,7 +8,7 @@ import no.ssb.barn.xsd.SakType
 
 class CaseEndDateAfterStartDate : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 02a: Startdato etter sluttdato",
+    "Startdato etter sluttdato",
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
@@ -19,7 +19,7 @@ class CaseEndDateAfterStartDate : AbstractRule(
             null
         else
             createSingleReportEntryList(
-                "Individets startdato ($startDate) er etter sluttdato ($endDate)",
+                "Sakens startdato ($startDate) er etter sluttdato ($endDate)",
                 context.rootObject.sak.id
             )
     }

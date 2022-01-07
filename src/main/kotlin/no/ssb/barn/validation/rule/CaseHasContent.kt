@@ -8,7 +8,7 @@ import no.ssb.barn.xsd.SakType
 
 class CaseHasContent : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 06: Har meldinger, planer eller tiltak",
+    "Har meldinger, planer eller tiltak",
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
@@ -18,8 +18,7 @@ class CaseHasContent : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    "Individet har ingen meldinger, planer eller"
-                            + " tiltak i løpet av året.",
+                    "Klienten har ingen meldinger, planer eller tiltak.",
                     context.rootObject.sak.id
                 )
             }

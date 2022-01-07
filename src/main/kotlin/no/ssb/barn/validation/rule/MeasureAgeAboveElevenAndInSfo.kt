@@ -9,7 +9,7 @@ import no.ssb.barn.xsd.TiltakType
 
 class MeasureAgeAboveElevenAndInSfo : AbstractRule(
     WarningLevel.WARNING,
-    "Tiltak Kontroll 6: Barn over 11 år og i SFO",
+    "Barn over 11 år og i SFO",
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
@@ -23,8 +23,7 @@ class MeasureAgeAboveElevenAndInSfo : AbstractRule(
                 }
                 .map {
                     createReportEntry(
-                        "Tiltak (${it.id}). Barnet er over 11 år og i"
-                                + " SFO. Barnets alder er $age år.",
+                        "Klienten er over 11 år og i SFO. Barnets alder er $age år.",
                         it.id
                     )
                 }

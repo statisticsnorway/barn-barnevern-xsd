@@ -1,22 +1,38 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class SocialSecurityIdAndDufSpec extends Specification {
+@Narrative("""
+Gitt at man har en sak<br/>
+når fødselsnummer mangler <br/>
+så gi feilmeldingen "Feil i fødselsnummer. Kan ikke identifisere klienten."
+
+Gitt at man har en sak<br/>
+når DUF-nummer mangler <br/>
+så gi feilmeldingen "DUFnummer mangler. Kan ikke identifisere klienten."
+
+Gitt at man har en sak<br/>
+når fødselsnummer og DUF-nummer mangler <br/>
+så gi feilmeldingen "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere klienten."
+
+Alvorlighetsgrad: ERROR
+""")
+class CaseSocialSecurityIdAndDufSpec extends Specification {
 
     @Subject
-    SocialSecurityIdAndDuf sut
+    CaseSocialSecurityIdAndDuf sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new SocialSecurityIdAndDuf()
+        sut = new CaseSocialSecurityIdAndDuf()
         context = getTestContext()
     }
 
