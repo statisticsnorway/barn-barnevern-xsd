@@ -4,7 +4,6 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.util.ValidationUtils.validateFNR
 import no.ssb.barn.util.ValidationUtils.validateSSN
 import no.ssb.barn.xsd.SakType
 import java.util.regex.Pattern
@@ -23,7 +22,11 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
         val duFnummer = context.rootObject.sak.duFnummer
 
         if (!fodselsnummer.isNullOrEmpty()) {
-            return if (validateFNR(fodselsnummer)) {
+            return if (
+                fodselsnummer.length == 11
+                    && (
+                        suffixExceptions.contains(fodselsnummer.takeLast(5))
+                        || validateSSN(fodselsnummer))) {
                 null
             } else {
                 createSingleReportEntryList(

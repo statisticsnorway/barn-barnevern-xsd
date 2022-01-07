@@ -9,15 +9,16 @@ import no.ssb.barn.xsd.SakType
 
 class CaseSocialSecurityId : AbstractRule(
     WarningLevel.WARNING,
-    "Fødselsnummer",
+    "Sak Kontroll 11: Fødselsnummer",
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val fodselsnummer = context.rootObject.sak.fodselsnummer ?: ""
 
-        return if (!validateFNR(fodselsnummer)) {
+        return if (!validateFNR(fodselsnummer)
+        ) {
             createSingleReportEntryList(
-                "Klienten har ufullstendig fødselsnummer. Korriger fødselsnummer.",
+                "Individet har ufullstendig fødselsnummer. Korriger fødselsnummer.",
                 context.rootObject.sak.id
             )
         } else {
