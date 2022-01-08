@@ -2,6 +2,7 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.*
 import java.time.LocalDate
+import java.util.*
 
 object CaseMutator {
 
@@ -44,6 +45,7 @@ object CaseMutator {
 
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = company.melding.last().id,
                 fraType = BegrepsType.MELDING,
                 tilId = investigation.id,
@@ -67,6 +69,7 @@ object CaseMutator {
 
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = company.melding.last().id,
                 fraType = BegrepsType.MELDING,
                 tilId = decision.id,
@@ -105,6 +108,7 @@ object CaseMutator {
         company.vedtak.add(decision)
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = investigation.id,
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = decision.id,
@@ -116,6 +120,7 @@ object CaseMutator {
         company.tiltak.add(measure)
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = decision.id,
                 fraType = BegrepsType.VEDTAK,
                 tilId = measure.id,
@@ -133,6 +138,7 @@ object CaseMutator {
 
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = company.undersokelse.last().id,
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = measure.id,
@@ -150,6 +156,7 @@ object CaseMutator {
 
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = company.undersokelse.last().id,
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = decision.id,
@@ -209,6 +216,7 @@ object CaseMutator {
 
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = company.vedtak.last().id,
                 fraType = BegrepsType.VEDTAK,
                 tilId = measure.id,
@@ -230,6 +238,7 @@ object CaseMutator {
         if (company.tiltak.any()) {
             company.relasjon.add(
                 RelasjonType(
+                    id = UUID.randomUUID(),
                     fraId = decision.id,
                     fraType = BegrepsType.VEDTAK,
                     tilId = company.tiltak.last().id,
@@ -251,6 +260,7 @@ object CaseMutator {
 
         company.relasjon.add(
             RelasjonType(
+                id = UUID.randomUUID(),
                 fraId = company.vedtak.last().id,
                 fraType = BegrepsType.VEDTAK,
                 tilId = afterCare.id,
