@@ -12,6 +12,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "RelasjonType", propOrder = ["id", "fraId", "fraType", "tilId", "tilType"])
 data class RelasjonType(
     @field:XmlAttribute(name = "Id", required = true)
+    @field:XmlJavaTypeAdapter(
+        UuidAdapter::class
+    )
     var id: UUID = UUID.randomUUID(),
 
     @field:XmlAttribute(name = "FraId", required = true)
