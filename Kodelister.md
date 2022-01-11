@@ -80,12 +80,12 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode
 |    5 | Foreldres kriminalitet                                       | 2013-01-01 |            |                                |
 |    6 | Høy grad av konflikt hjemme                                  | 2013-01-01 |            |                                |
 |    7 | Vold i hjemmet/ barnet vitne til vold i nære <br>relasjoner  | 2013-01-01 |            |                                |
-|    8 | Barnet utsatt for vanskjøtsel <br>(Barnet overlatt til seg selv, dårlig kosthold, dårlig hygiene) | 2013-01-01 |            |                                |
+|    8 | Foreldres manglende ivaretakelse av grunnleggende<br/> og hverdagslig omsorg for barnet | 2013-01-01 |            |                                |
 |    9 | Barnet utsatt for fysisk vold                                | 2013-01-01 |            |                                |
 |   10 | Barnet utsatt for psykisk vold                               | 2013-01-01 |            |                                |
 |   11 | Barnet utsatt for seksuelle overgrep                         | 2013-01-01 |            |                                |
 |   12 | Barnet mangler omsorgsperson                                 | 2013-01-01 |            |                                |
-|   13 | Barnet har nedsatt funksjonsevne                             | 2013-01-01 |            |                                |
+|   13 | Barnet har nedsatt funksjonsevne                             | 2013-01-01 | 2020-12-31 |                                |
 |   14 | Barnets psykiske problem/lidelse                             | 2013-01-01 |            |                                |
 |   15 | Barnets rusmisbruk                                           | 2013-01-01 |            |                                |
 |   16 | Barnets atferd/ kriminalitet                                 | 2013-01-01 | 2020-12-31 | 16 deles i 25 og 26            |

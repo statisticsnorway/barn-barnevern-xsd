@@ -66,6 +66,7 @@ For innsending av barnevernsdata
 	</xs:element>
 	<!-- TYPEDEFINISJONER -->
 	<xs:complexType name="BarnevernType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:sequence>
 			<xs:element name="Fagsystem" type="FagsystemType">
 				<xs:annotation>
@@ -533,6 +534,7 @@ For innsending av barnevernsdata
 	</xs:complexType>
 	<!-- Saksinnhold -->
 	<xs:complexType name="SaksinnholdType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -548,7 +550,7 @@ For innsending av barnevernsdata
 5 = Foreldres kriminalitet
 6 = Høy grad av konflikt hjemme
 7 = Vold i hjemmet/ barnet vitne til vold i nære relasjoner
-8 = Barnet utsatt for vanskjøtsel (Barnet overlatt til seg selv, dårlig kosthold, dårlig hygiene)
+8 = Foreldres manglende ivaretakelse av grunnleggende og hverdagslig omsorg for barnet
 9 = Barnet utsatt for fysisk vold
 10 = Barnet utsatt for psykisk vold
 11 = Barnet utsatt for seksuelle overgrep
@@ -583,12 +585,12 @@ For innsending av barnevernsdata
 	  { "code":"5", "validFrom":"2013-01-01", "title":"Foreldres kriminalitet" },
 	  { "code":"6", "validFrom":"2013-01-01", "title":"Høy grad av konflikt hjemme" },
 	  { "code":"7", "validFrom":"2013-01-01", "title":"Vold i hjemmet/ barnet vitne til vold i nære relasjoner" },
-	  { "code":"8", "validFrom":"2013-01-01", "title":"Barnet utsatt for vanskjøtsel (Barnet overlatt til seg selv, dårlig kosthold, dårlig hygiene)" },
+	  { "code":"8", "validFrom":"2013-01-01", "title":"Foreldres manglende ivaretakelse av grunnleggende og hverdagslig omsorg for barnet" },
 	  { "code":"9", "validFrom":"2013-01-01", "title":"Barnet utsatt for fysisk vold" },
 	  { "code":"10", "validFrom":"2013-01-01", "title":"Barnet utsatt for psykisk vold" },
 	  { "code":"11", "validFrom":"2013-01-01", "title":"Barnet utsatt for seksuelle overgrep" },
 	  { "code":"12", "validFrom":"2013-01-01", "title":"Barnet mangler omsorgsperson" },
-	  { "code":"13", "validFrom":"2013-01-01", "title":"Barnet har nedsatt funksjonsevne" },
+	  { "code":"13", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Barnet har nedsatt funksjonsevne" },
 	  { "code":"14", "validFrom":"2013-01-01", "title":"Barnets psykiske problem/lidelse" },
 	  { "code":"15", "validFrom":"2013-01-01", "title":"Barnets rusmisbruk" },
 	  { "code":"16", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Barnets atferd/ kriminalitet", "changeDescription":"16 deles i 25 og 26" },
@@ -640,6 +642,7 @@ For innsending av barnevernsdata
 	</xs:complexType>
 	<!-- Undersøkelse -->
 	<xs:complexType name="UndersokelseType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:sequence>
 			<xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="UtvidetFrist" minOccurs="0">
@@ -1015,6 +1018,7 @@ Dato tilsynsbesøket faktisk ble utført
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="OversendelseBarneverntjenesteType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:sequence>
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
@@ -1030,6 +1034,7 @@ Dato tilsynsbesøket faktisk ble utført
 	</xs:complexType>
 	<!-- Vedtak -->
 	<xs:complexType name="VedtakType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:sequence>
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
@@ -1098,6 +1103,7 @@ Dato tilsynsbesøket faktisk ble utført
 	</xs:complexType>
 	<!-- Ettervern -->
 	<xs:complexType name="EttervernType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:sequence>
 			<xs:element name="Konklusjon" minOccurs="0">
 				<xs:complexType>
@@ -1157,6 +1163,7 @@ Dato tilsynsbesøket faktisk ble utført
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="VirksomhetType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:sequence>
 			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
@@ -1245,6 +1252,7 @@ Dato tilsynsbesøket faktisk ble utført
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="RelasjonType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="FraId" type="IdType" use="required"/>
 		<xs:attribute name="FraType" type="BegrepsType" use="required"/>
@@ -1252,6 +1260,7 @@ Dato tilsynsbesøket faktisk ble utført
 		<xs:attribute name="TilType" type="BegrepsType" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="FlyttingType">
+		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
 		<xs:sequence>
 			<xs:element name="ArsakFra" type="ArsakFraType"/>
 			<xs:element name="FlyttingTil" type="FlyttingTilType"/>
