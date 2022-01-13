@@ -547,6 +547,7 @@ For innsending av barnevernsdata
 22 = Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet
 23 = Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester
 24 = Konflikt mellom foreldre som ikke bor sammen
+28 = Foreldres manglende oppfølging av barnets behov for helsetjenester
 5 = Foreldres kriminalitet
 6 = Høy grad av konflikt hjemme
 7 = Vold i hjemmet/ barnet vitne til vold i nære relasjoner
@@ -582,6 +583,7 @@ For innsending av barnevernsdata
 	  { "code":"22", "validFrom":"2021-01-01", "title":"Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet" },
 	  { "code":"23", "validFrom":"2021-01-01", "title":"Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester" },
 	  { "code":"24", "validFrom":"2021-01-01", "title":"Konflikt mellom foreldre som ikke bor sammen" },
+	  { "code":"28", "validFrom":"2021-01-01", "title":"Foreldres manglende oppfølging av barnets behov for helsetjenester" },
 	  { "code":"5", "validFrom":"2013-01-01", "title":"Foreldres kriminalitet" },
 	  { "code":"6", "validFrom":"2013-01-01", "title":"Høy grad av konflikt hjemme" },
 	  { "code":"7", "validFrom":"2013-01-01", "title":"Vold i hjemmet/ barnet vitne til vold i nære relasjoner" },
@@ -617,6 +619,7 @@ For innsending av barnevernsdata
 					<xs:enumeration value="22"/>
 					<xs:enumeration value="23"/>
 					<xs:enumeration value="24"/>
+					<xs:enumeration value="28"/>
 					<xs:enumeration value="5"/>
 					<xs:enumeration value="6"/>
 					<xs:enumeration value="7"/>

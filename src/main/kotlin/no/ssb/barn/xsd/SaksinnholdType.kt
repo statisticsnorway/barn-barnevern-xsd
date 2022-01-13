@@ -91,6 +91,11 @@ data class SaksinnholdType(
                     "Konflikt mellom foreldre som ikke bor sammen",
                     validFrom2021
                 ),
+                CodeListItem(
+                    "28",
+                    "Foreldres manglende oppfølging av barnets behov for helsetjenester",
+                    validFrom2021
+                ),
                 CodeListItem("5", "Foreldres kriminalitet", validFrom2013),
                 CodeListItem("6", "Høy grad av konflikt hjemme", validFrom2013),
                 CodeListItem(
