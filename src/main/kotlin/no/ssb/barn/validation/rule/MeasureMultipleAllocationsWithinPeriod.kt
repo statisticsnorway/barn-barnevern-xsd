@@ -1,32 +1,20 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.areOverlappingWithAtLeastThreeMonths
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.SharedValidationConstants
+import no.ssb.barn.validation.SharedValidationConstants.kodelistePlasseringstiltak
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 import java.time.format.DateTimeFormatter
 
 class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
     WarningLevel.WARNING,
-    "Tiltak Kontroll 9: Flere plasseringstiltak i samme periode",
+    SharedValidationConstants.MULTIPLE_ALLOCATIONS_WITH_PERIOD_RULE_NAME,
     TiltakType::class.java.simpleName
 ) {
-    private val kodelistePlasseringstiltak = listOf(
-        "1.1",
-        "1.2",
-        "1.99",
-        "2.1",
-        "2.2",
-        "2.3",
-        "2.4",
-        "2.5",
-        "2.6",
-        "2.99",
-        "8.2"
-    )
-
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val measures = context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
