@@ -4,7 +4,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.areOverlappingWithAtLeastThreeMonths
 import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.SharedValidationConstants
+import no.ssb.barn.validation.SharedValidationConstants.MULTIPLE_MEASURES_RULE_NAME
 import no.ssb.barn.validation.SharedValidationConstants.kodelistePlasseringstiltak
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter
 
 class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
     WarningLevel.WARNING,
-    SharedValidationConstants.MULTIPLE_ALLOCATIONS_WITH_PERIOD_RULE_NAME,
+    MULTIPLE_MEASURES_RULE_NAME,
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
