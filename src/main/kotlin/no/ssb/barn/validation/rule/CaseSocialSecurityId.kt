@@ -18,7 +18,7 @@ class CaseSocialSecurityId : AbstractRule(
         return if (!validateFNR(fodselsnummer)
         ) {
             createSingleReportEntryList(
-                "Individet har ufullstendig fødselsnummer. Korriger fødselsnummer.",
+                "Saken har ufullstendig fødselsnummer. Korriger fødselsnummer.",
                 context.rootObject.sak.id
             )
         } else {

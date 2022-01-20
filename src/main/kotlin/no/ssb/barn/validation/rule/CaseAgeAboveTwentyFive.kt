@@ -9,7 +9,7 @@ import no.ssb.barn.xsd.SakType
 
 class CaseAgeAboveTwentyFive : AbstractRule(
     WarningLevel.ERROR,
-    "Klient over 25 år avsluttes",
+    "Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet",
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {

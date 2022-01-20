@@ -9,7 +9,7 @@ import no.ssb.barn.xsd.SakType
 
 class CaseAgeAboveEighteenAndMeasures : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 08: Alder i forhold til tiltak",
+    "Sak Kontroll 08: Alder i forhold til tiltak",
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {

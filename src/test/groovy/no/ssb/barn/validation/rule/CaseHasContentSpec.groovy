@@ -13,6 +13,8 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
+Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
+
 Gitt at man har en sak <br/>
 når saken mangler melding, plan og tiltak<br/>
 så gi feilmeldingen "Klienten har ingen meldinger, planer eller tiltak"

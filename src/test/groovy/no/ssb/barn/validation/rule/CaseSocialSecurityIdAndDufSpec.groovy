@@ -9,12 +9,14 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
+Sak Kontroll 3: Fødselsnummer og DUFnummer
+
 Gitt at man har en sak<br/>
 når fødselsnummer mangler <br/>
 så gi feilmeldingen "Feil i fødselsnummer. Kan ikke identifisere klienten."
 
 Gitt at man har en sak<br/>
-når DUF-nummer mangler <br/>
+når fødselsnummer mangler og DUF-nummer mangler <br/>
 så gi feilmeldingen "DUFnummer mangler. Kan ikke identifisere klienten."
 
 Gitt at man har en sak<br/>

@@ -11,6 +11,8 @@ import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
+Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet
+
 Gitt at man har en sak og utleder alder ved hjelp av fødselsnummer<br/>
 når alder er 25 eller større<br/>
 så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient"

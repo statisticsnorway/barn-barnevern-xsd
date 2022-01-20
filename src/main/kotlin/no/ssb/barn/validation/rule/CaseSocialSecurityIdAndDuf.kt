@@ -10,7 +10,7 @@ import java.util.regex.Pattern
 
 class CaseSocialSecurityIdAndDuf : AbstractRule(
     WarningLevel.ERROR,
-    "Individ Kontroll 03: Fødselsnummer og DUFnummer",
+    "Sak Kontroll 03: Fødselsnummer og DUFnummer",
     SakType::class.java.simpleName
 ) {
     private val dufPattern = Pattern.compile("^\\d{12}$")

@@ -12,9 +12,9 @@ import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 @Narrative("""
 Validéring av innhold mot filbeskrivelse
 
-Gitt at man har en fil med innhold
-når man validérer filen mot filbeskrivelsen og det feiler
-så gi feilmeldingen 'Innholdet er feil i forhold til filbeskrivelsen / XSD'
+Gitt at man har en fil med innhold som man skal validere mot filbeskrivelsen<br/>
+når validering av filen mot filbeskrivelsen feiler<br/>
+så gi feilmeldingen "Innholdet er feil i forhold til filbeskrivelsen / XSD"
 
 Alvorlighetsgrad: FATAL
 """)

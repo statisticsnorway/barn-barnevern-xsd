@@ -1,68 +1,70 @@
 # Kodelister
 
 ## Innhold
+
 - [Melding](#/Barnevern/Sak/Virksomhet/Melding)
-  - [Melder](#/Barnevern/Sak/Virksomhet/Melding/Melder/@Kode)
-  - [Saksinnhold](#/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode)
-  - [Konklusjon](#/Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode)
+    - [Melder](#/Barnevern/Sak/Virksomhet/Melding/Melder/@Kode)
+    - [Saksinnhold](#/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode)
+    - [Konklusjon](#/Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode)
 - [Undersøkelse](#/Barnevern/Sak/Virksomhet/Undersokelse)
-  - [Vedtaksgrunnlag](#/Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode)
-  - [UtvidetFrist](#/Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode)
-  - [Konklusjon](#/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode)
+    - [Vedtaksgrunnlag](#/Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode)
+    - [UtvidetFrist](#/Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode)
+    - [Konklusjon](#/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode)
 - [Plan](#/Barnevern/Sak/Virksomhet/Plan)
-  - [Plantype](#/Barnevern/Sak/Virksomhet/Plan/@Plantype)
+    - [Plantype](#/Barnevern/Sak/Virksomhet/Plan/@Plantype)
 - [Tiltak](#/Barnevern/Sak/Virksomhet/Tiltak)
-  - [Kategori](#/Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode)
-  - [Opphevelse](#/Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode)
-  - [Flytting](#/Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting)
+    - [Kategori](#/Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode)
+    - [Opphevelse](#/Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode)
+    - [Flytting](#/Barnevern/Sak/Virksomhet/Tiltak/Konklusjon/@Flytting)
 - [Vedtak](#/Barnevern/Sak/Virksomhet/Vedtak)
-  - [Status](#/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode)
+    - [Status](#/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode)
 - [Ettervern](#/Barnevern/Sak/Virksomhet/Ettervern)
-  - [Konklusjon](#/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode)
+    - [Konklusjon](#/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode)
 - [Flytting](#/Barnevern/Sak/Virksomhet/Flytting)
-  - [ÅrsakFra](#/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode)
-  - [FlyttingTil](#/Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode)
+    - [ÅrsakFra](#/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode)
+    - [FlyttingTil](#/Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode)
 
+<a name="#/Barnevern/Sak/Virksomhet/Melding"></a>
 
-
-<a name="/Barnevern/Sak/Virksomhet/Melding"></a>
 ## Melding
 
 Definert på stien /Barnevern/Sak/Virksomhet/Melding
 
-<a name="/Barnevern/Sak/Virksomhet/Melding/Melder/@Kode"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Melding/Melder/@Kode"></a>
+
 #### Melder
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Melder/@Kode
 
-| Kode | Betydning                                                    | Gyldig fra |
-|:---- | ------------------------------------------------------------ | ---------- |
-|    1 | Barnet selv                                                  | 2013-01-01 |
-|    2 | Mor/ far/ foresatte                                          | 2013-01-01 |
-|    3 | Familie for øvrig                                            | 2013-01-01 |
-|    4 | Andre privatpersoner                                         | 2013-01-01 |
-|    5 | Barnvernstjenesten                                           | 2013-01-01 |
-|    6 | NAV (kommune og stat)                                        | 2013-01-01 |
-|    7 | Barnevernsvakt                                               | 2013-01-01 |
-|    8 | Politi                                                       | 2013-01-01 |
-|    9 | Barnehage                                                    | 2013-01-01 |
-|   10 | Helsestasjon/skolehelsetjenesten                             | 2013-01-01 |
-|   11 | Skole                                                        | 2013-01-01 |
-|   12 | Pedagogisk-psykologisk tjeneste (PPT)                        | 2013-01-01 |
-|   13 | Psykisk helsevern for barn og unge (kommune og stat)         | 2013-01-01 |
-|   14 | Psykisk helsevern for voksne (kommune og stat)               | 2013-01-01 |
-|   15 | Lege/ sykehus/ tannlege                                      | 2013-01-01 |
-|   16 | Familievernkontor                                            | 2013-01-01 |
-|   17 | Tjenester og instanser med ansvar for oppfølging av <br>personers rusproblemer (kommune og stat) | 2013-01-01 |
-|   18 | Krisesenter                                                  | 2013-01-01 |
-|   19 | Asylmottak/ UDI/ innvandringsmyndighet                       | 2013-01-01 |
-|   20 | Utekontakt/ fritidsklubb                                     | 2013-01-01 |
-|   21 | Frivillige organisasjoner/ idrettslag                        | 2013-01-01 |
-|   22 | Andre offentlige instanser (krever presisering)              | 2013-01-01 |
-|   23 | Anonym                                                       | 2013-01-01 |
+|  Kode | Betydning                                                    | Gyldig fra |
+|------:| ------------------------------------------------------------ | ---------- |
+|     1 | Barnet selv                                                  | 2013-01-01 |
+|     2 | Mor/ far/ foresatte                                          | 2013-01-01 |
+|     3 | Familie for øvrig                                            | 2013-01-01 |
+|     4 | Andre privatpersoner                                         | 2013-01-01 |
+|     5 | Barnvernstjenesten                                           | 2013-01-01 |
+|     6 | NAV (kommune og stat)                                        | 2013-01-01 |
+|     7 | Barnevernsvakt                                               | 2013-01-01 |
+|     8 | Politi                                                       | 2013-01-01 |
+|     9 | Barnehage                                                    | 2013-01-01 |
+|    10 | Helsestasjon/skolehelsetjenesten                             | 2013-01-01 |
+|    11 | Skole                                                        | 2013-01-01 |
+|    12 | Pedagogisk-psykologisk tjeneste (PPT)                        | 2013-01-01 |
+|    13 | Psykisk helsevern for barn og unge (kommune og stat)         | 2013-01-01 |
+|    14 | Psykisk helsevern for voksne (kommune og stat)               | 2013-01-01 |
+|    15 | Lege/ sykehus/ tannlege                                      | 2013-01-01 |
+|    16 | Familievernkontor                                            | 2013-01-01 |
+|    17 | Tjenester og instanser med ansvar for oppfølging av <br>personers rusproblemer (kommune og stat) | 2013-01-01 |
+|    18 | Krisesenter                                                  | 2013-01-01 |
+|    19 | Asylmottak/ UDI/ innvandringsmyndighet                       | 2013-01-01 |
+|    20 | Utekontakt/ fritidsklubb                                     | 2013-01-01 |
+|    21 | Frivillige organisasjoner/ idrettslag                        | 2013-01-01 |
+|    22 | Andre offentlige instanser (krever presisering)              | 2013-01-01 |
+|    23 | Anonym                                                       | 2013-01-01 |
 
-<a name="/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode"></a>
-#### Saksinnhold  
+<a name="#/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode"></a>
+
+#### Saksinnhold
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode
 
@@ -97,7 +99,8 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode
 | 18   | Andre forhold ved foreldre/ familien (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.) | 2013-01-01 |            |                                |
 | 19   | Andre forhold ved barnets situasjon (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.) | 2013-01-01 |            |                                |
 
-<a name="/Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode"></a>
+
 #### Konklusjon
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode
@@ -109,21 +112,22 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode
 | 3    | Henlagt pga. aktive tiltak                                   | 2020-01-01 |
 | 4    | Melding i pågående undersøkelse                              | 2020-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Undersokelse"></a>
 
-<a name="/Barnevern/Sak/Virksomhet/Undersokelse"></a>
 ## Undersøkelse
 
 Definert på stien /Barnevern/Sak/Virksomhet/Undersokelse
 
-<a name="/Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode"></a>
+
 #### Vedtaksgrunnlag
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Vedtaksgrunnlag/@Kode
 
 Bruker samme kodeliste som [Saksinnhold](#/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode)
 
+<a name="#/Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode"></a>
 
-<a name="/Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Kode"></a>
 #### UtvidetFrist
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Innvilget
@@ -133,12 +137,11 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Innvilget
 |    1 | Ja        | 2022-01-01 |
 |    2 | Nei       | 2022-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode"></a>
 
-<a name="/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode"></a>
-#### Konklusjon  
+#### Konklusjon
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode
-
 
 | Kode | Betydning                                                    | Gyldig fra |
 |:---- | ------------------------------------------------------------ | ---------- |
@@ -149,15 +152,14 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode
 |    5 | Undersøkelsen henlagt som følge av flytting <br>kategorien gjelder når undersøkelsessak henlegges fordi barnet <br>flytter til en ny kommune. Bør også innebære et underpunkt der <br>barneverntjenesten må oppgi om saken er meldt videre til barnets nye <br>oppholdskommune, obligatorisk ja/nei svar) (krever presisering) | 2013-01-01 |
 |    6 | Undersøkelsen henlagt etter henvisning til annen instans     | 2022-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Plan"></a>
 
-
-
-<a name="/Barnevern/Sak/Virksomhet/Plan"></a>
 ## Plan
 
 Definert på stien /Barnevern/Sak/Virksomhet/Plan
 
-<a name="/Barnevern/Sak/Virksomhet/Plan/@Plantype"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Plan/@Plantype"></a>
+
 #### Plantype
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Plan/@Plantype
@@ -169,15 +171,14 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Plan/@Plantype
 |    3 | Foreløpig omsorgsplan etter § 4-15, 3. ledd | 2013-01-01 |
 |    4 | Omsorgsplan etter § 4-15, 3. ledd           | 2013-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Tiltak"></a>
 
-
-
-<a name="/Barnevern/Sak/Virksomhet/Tiltak"></a>
 ## Tiltak
 
 Definert på stien /Barnevern/Sak/Virksomhet/Tiltak
 
-<a name="/Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode"></a>
+
 #### Kategori
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode
@@ -235,8 +236,8 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode
 | 8.3  | Botreningskurs                                               | 2013-01-01 |
 | 8.99 | Andre tiltak (krever presisering)                            | 2013-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode"></a>
 
-<a name="/Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode"></a>
 #### Opphevelse
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode
@@ -248,16 +249,14 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode
 |    3 | Adopsjon § 4-20                                         | 2013-01-01 |
 |    4 | Annet (krever presisering)                              | 2013-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Vedtak"></a>
 
-
-
-
-<a name="/Barnevern/Sak/Virksomhet/Vedtak"></a>
 ## Vedtak
 
 Definert på stien /Barnevern/Sak/Virksomhet/Vedtak
 
-<a name="/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode"></a>
+
 #### Kategori
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode
@@ -269,16 +268,14 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode
 | 3    | Utgår / Bortfalt etter BVL      | 2022-01-01 |
 | 4    | Avslått / Avsluttet             | 2022-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Ettervern"></a>
 
-
-
-
-<a name="/Barnevern/Sak/Virksomhet/Ettervern"></a>
 ## Ettervern
 
 Definert på stien /Barnevern/Sak/Virksomhet/Ettervern
 
-<a name="/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode"></a>
+
 #### Konklusjon
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode
@@ -289,14 +286,14 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode
 | 2    | Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak | 2022-01-01 |
 | 3    | Ikke lenger tiltak etter BVL, etter brukers ønske                      | 2022-01-01 |
 
- 
+<a name="#/Barnevern/Sak/Virksomhet/Flytting"></a>
 
-<a name="/Barnevern/Sak/Virksomhet/Flytting"></a>
 ## Flytting
 
 Definert på stien /Barnevern/Sak/Virksomhet/Flytting
 
-<a name="/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode"></a>
+<a name="#/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode"></a>
+
 #### ÅrsakFra
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode
@@ -322,8 +319,8 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode
 | 2.8   | Uenighet mellom barnevernstjenesten og Bufetat om oppdragets omfang og/eller økonomi,                                                                       | 2022-01-01 |
 | 2.9   | Andre grunner (krever presisering)                                                                                                                          | 2022-01-01 |
 
+<a name="#/Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode"></a>
 
-<a name="/Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode"></a>
 #### FlyttingTil
 
 Brukes på stien /Barnevern/Sak/Virksomhet/Flytting/FlyttingTil/@Kode

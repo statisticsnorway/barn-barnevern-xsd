@@ -11,9 +11,11 @@ import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
-Gitt at man har har et barn og utleder alder<br/>
+### Sak Kontroll 8: Klient over 18 år skal ha tiltak
+
+Gitt at man har en sak og utleder alder ved hjelp av fødselsnummer<br/>
 når alder er 18 eller større og tiltak mangler <br/>
-så skal man ved feil gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak"
+så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak"
 
 Alvorlighetsgrad: ERROR
 """)

@@ -8,7 +8,7 @@ import no.ssb.barn.xsd.SakType
 
 class CaseHasContent : AbstractRule(
     WarningLevel.ERROR,
-    "Har meldinger, planer eller tiltak",
+    "Sak Kontroll 06: Har meldinger, planer eller tiltak",
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =

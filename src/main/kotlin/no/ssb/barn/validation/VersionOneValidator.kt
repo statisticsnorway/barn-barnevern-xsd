@@ -12,10 +12,16 @@ class VersionOneValidator : ValidatorContract {
     )
 
     private val rules = listOf(
+        BusinessEndDateAfterCaseEndDate(),
+        BusinessEndDateAfterStartDate(),
+        BusinessStartDateBeforeCaseStartDate(),
+        BusinessUrbanDistrictNumberAndName(),
         CaseAgeAboveEighteenAndMeasures(),
         CaseAgeAboveTwentyFive(),
         CaseEndDateAfterStartDate(),
         CaseHasContent(),
+        CaseSocialSecurityId(),
+        CaseSocialSecurityIdAndDuf(),
         InvestigationDecisionClarificationRequired(),
         InvestigationDecisionRequired(),
         InvestigationDueDatePassedConclusionRequired(),
@@ -35,7 +41,7 @@ class VersionOneValidator : ValidatorContract {
         MessageCaseContentContainsClarification(),
         MessageContainsCaseContent(),
         MessageContainsReporters(),
-        MessageEndDateAfterStartDate(),
+        MessageStartDateAfterEndDate(),
         MessageEndDateBeforeIndividEndDate(),
         MessageProcessingTimeOverdue(),
         MessageReporterContainsClarification(),
@@ -43,9 +49,7 @@ class VersionOneValidator : ValidatorContract {
         PlanEndDateAfterStartDate(),
         PlanEndDateBeforeIndividEndDate(),
         PlanStartDateAfterIndividStartDate(),
-        RegionCityPart(),
-        CaseSocialSecurityId(),
-        CaseSocialSecurityIdAndDuf()
+        RegionCityPart()
     )
 
     override fun validate(context: ValidationContext): ValidationReport {

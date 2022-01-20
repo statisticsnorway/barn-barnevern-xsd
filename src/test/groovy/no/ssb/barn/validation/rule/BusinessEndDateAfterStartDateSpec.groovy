@@ -1,7 +1,7 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -12,33 +12,33 @@ import java.time.LocalDate
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
-### Sak Kontroll 2a: StartDato er etter SluttDato
+Virksomhet Kontroll 2b: StartDato er etter SluttDato
 
-Gitt at man har en sak der StartDato og SluttDato finnes<br/>
+Gitt at man har en virksomhet der StartDato og SluttDato finnes<br/>
 når StartDato er etter SluttDato<br/>
-så gi feilmeldingen "Sakens startdato {StartDato} er etter sluttdato {SluttDato}"
+så gi feilmeldingen "Virksomhetens startdato {StartDato} er etter sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
 """)
-class CaseEndDateAfterStartDateSpec extends Specification {
+class BusinessEndDateAfterStartDateSpec extends Specification {
 
     @Subject
-    CaseEndDateAfterStartDate sut
+    BusinessEndDateAfterStartDate sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new CaseEndDateAfterStartDate()
+        sut = new BusinessEndDateAfterStartDate()
         context = getTestContext()
     }
 
     @Unroll("startDate: #startDate, endDate #endDate")
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.sak.startDato = startDate
+        context.rootObject.sak.virksomhet[0].startDato = startDate
         and:
-        context.rootObject.sak.sluttDato = endDate
+        context.rootObject.sak.virksomhet[0].sluttDato = endDate
 
         when:
         def reportEntries = sut.validate(context)

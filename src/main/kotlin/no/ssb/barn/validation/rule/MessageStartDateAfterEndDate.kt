@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.MeldingType
 
-class MessageEndDateAfterStartDate : AbstractRule(
+class MessageStartDateAfterEndDate : AbstractRule(
     WarningLevel.ERROR,
     "Melding Kontroll 2a: Startdato etter sluttdato",
     MeldingType::class.java.simpleName
