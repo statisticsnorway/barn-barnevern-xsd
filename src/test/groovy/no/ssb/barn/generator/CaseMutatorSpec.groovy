@@ -1,9 +1,11 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.converter.BarnevernConverter
+import no.ssb.barn.validation.SharedValidationConstants
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.VersionOneValidator
+import no.ssb.barn.validation.rule.MeasureMultipleAllocationsWithinPeriod
 import no.ssb.barn.xsd.BarnevernType
 import spock.lang.Specification
 
