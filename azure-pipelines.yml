@@ -51,12 +51,18 @@ jobs:
 
     # Steps in this Job
     steps:
+      - script: 'wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz'
+        displayName: 'Downloading JDK 17'
 
-      - task: SonarCloudPrepare@1
+      - task: JavaToolInstaller@0
+        displayName: 'Installing JDK 17'
         inputs:
-          SonarCloud: 'bipSonarCloud-Barnevernsregisteret'
-          organization: 'statisticsnorway'
-          scannerMode: 'Other'
+          versionSpec: "17"
+          jdkArchitectureOption: x64
+          jdkSourceOption: LocalDirectory
+          jdkFile: "$(System.DefaultWorkingDirectory)/jdk-17_linux-x64_bin.tar.gz"
+          jdkDestinationDirectory: "$(System.DefaultWorkingDirectory)/binaries/externals"
+          cleanDestinationDirectory: true
 
       # Maven caching to speed up pipeline build time
       - task: Cache@2
@@ -67,6 +73,12 @@ jobs:
             maven | "$(Agent.OS)"
             maven
           path: $(MAVEN_CACHE_FOLDER)
+
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'bipSonarCloud-Barnevernsregisteret'
+          organization: 'statisticsnorway'
+          scannerMode: 'Other'
 
       - task: Maven@3
         displayName: Maven verify
