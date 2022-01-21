@@ -1,16 +1,17 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.util.ValidationUtils.validateSSN
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.SharedValidationConstants.SOCIAL_SECURITY_AND_DUF_RULE_NAME
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SakType
 import java.util.regex.Pattern
 
 class CaseSocialSecurityIdAndDuf : AbstractRule(
     WarningLevel.ERROR,
-    "Sak Kontroll 03: Fødselsnummer og DUFnummer",
+    SOCIAL_SECURITY_AND_DUF_RULE_NAME,
     SakType::class.java.simpleName
 ) {
     private val dufPattern = Pattern.compile("^\\d{12}$")

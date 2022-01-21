@@ -6,7 +6,7 @@ object SharedValidationConstants {
         "Sak Kontroll 11: Fødselsnummer"
 
     const val SOCIAL_SECURITY_AND_DUF_RULE_NAME =
-        "Individ Kontroll 03: Fødselsnummer og DUFnummer"
+        "Sak Kontroll 03: Fødselsnummer og DUFnummer"
 
     const val MULTIPLE_MEASURES_RULE_NAME =
         "Tiltak Kontroll 9: Flere plasseringstiltak i samme periode"
