@@ -14,4 +14,20 @@ data class CaseEntry(
 ) {
     val lastCompany: VirksomhetType
         get() = this.barnevern.sak.virksomhet.last()
+
+    fun resetCompany() : VirksomhetType {
+        this.barnevern.sak.virksomhet = mutableListOf(lastCompany.shallowClone())
+        return lastCompany
+    }
+}
+
+fun VirksomhetType.shallowClone() : VirksomhetType {
+    return VirksomhetType(
+        startDato = startDato,
+        sluttDato = sluttDato,
+        organisasjonsnummer = organisasjonsnummer,
+        bydelsnummer = bydelsnummer,
+        bydelsnavn = bydelsnavn,
+        distriktsnummer = distriktsnummer
+    )
 }

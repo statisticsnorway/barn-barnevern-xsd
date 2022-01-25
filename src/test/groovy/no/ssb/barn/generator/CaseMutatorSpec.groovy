@@ -1,11 +1,9 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.converter.BarnevernConverter
-import no.ssb.barn.validation.SharedValidationConstants
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.validation.VersionOneValidator
-import no.ssb.barn.validation.rule.MeasureMultipleAllocationsWithinPeriod
 import no.ssb.barn.xsd.BarnevernType
 import spock.lang.Specification
 
@@ -267,16 +265,12 @@ class CaseMutatorSpec extends Specification {
         def caseEntry = createCaseEntry(BarnevernState.AFTERCARE)
         and: "make sure we have EttervernType instance"
         assert caseEntry.barnevern.sak.virksomhet.any(it -> it.ettervern.any())
-        and: "count existing number of VedtakType instances"
-        def initialNumberOfDecisions = caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.vedtak.size())
-                .sum()
 
         when:
         CaseMutator.fromAfterCareToDecision(caseEntry)
 
         then:
-        initialNumberOfDecisions + 1 == caseEntry.barnevern.sak.virksomhet.stream()
+        1 == caseEntry.barnevern.sak.virksomhet.stream()
                 .mapToInt(it -> it.vedtak.size())
                 .sum()
         and:
