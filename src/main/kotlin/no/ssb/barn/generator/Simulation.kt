@@ -32,15 +32,16 @@ class Simulation(
                 caseSet
             ) < 1 || shouldCreateNewCase()
         ) {
-            InitialMutationProvider.createInitialMutation(currentDate).also {
-                caseSet.add(
-                    CaseEntry(
-                        UUID.randomUUID(),
-                        it,
-                        currentDate
+            InitialMutationProvider.createInitialMutation(currentDate)
+                .also {
+                    caseSet.add(
+                        CaseEntry(
+                            UUID.randomUUID(),
+                            it,
+                            currentDate
+                        )
                     )
-                )
-            }
+                }
         } else {
             CaseMutator.mutate(getRandomCaseToMutate(currentDate, caseSet))
                 .run {
@@ -48,7 +49,8 @@ class Simulation(
                     updated = currentDate
 
                     if (generation > maxMutations
-                        || state == BarnevernState.CASE_CLOSED) {
+                        || state == BarnevernState.CASE_CLOSED
+                    ) {
                         caseSet.remove(this)
                     }
 
