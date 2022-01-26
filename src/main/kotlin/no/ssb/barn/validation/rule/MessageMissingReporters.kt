@@ -6,28 +6,25 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.MeldingType
 
-class MessageStartDateAfterOrEqualIndividStartDate : AbstractRule(
+class MessageMissingReporters : AbstractRule(
     WarningLevel.ERROR,
-    "Melding Kontroll 2e: Startdato mot individets startdato",
+    "Melding Kontroll 4: Konkludert melding mangler melder",
     MeldingType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val sak = context.rootObject.sak
-        val individStartDate = sak.startDato
-
-        return sak.virksomhet.asSequence()
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
-                melding.startDato.isBefore(individStartDate)
+                val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
+                conclusion != null
+                        && !melding.melder.any()
             }
             .map {
                 createReportEntry(
-                    "Startdato (${it.startDato}) skal være lik eller etter"
-                            + " individets startdato ($individStartDate)",
+                    "Konkludert melding mangler melder(e)",
                     it.id
                 )
             }
             .toList()
             .ifEmpty { null }
-    }
 }

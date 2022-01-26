@@ -30,7 +30,7 @@ så gi feilmeldingen "Innholdet er feil i forhold til filbeskrivelsen / XSD"
 
 Alvorlighetsgrad: FATAL
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/XsdRuleSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/XsdRuleSpec.groovy) 
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/XsdRule.kt)
 
@@ -39,7 +39,7 @@ Alvorlighetsgrad: FATAL
 
 ### Sak Kontroll 2a: StartDato er etter SluttDato
 
-Gitt at man har en sak der StartDato og SluttDato finnes<br/>
+Gitt at man har en Sak der StartDato og SluttDato finnes<br/>
 når StartDato er etter SluttDato<br/>
 så gi feilmeldingen "Sakens startdato {StartDato} er etter sluttdato {SluttDato}"
 
@@ -51,17 +51,17 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [Sak Kontroll 3: Fødselsnummer og DUFnummer](src/test/groovy/no/ssb/barn/validation/rule/CaseSocialSecurityIdAndDuf.groovy)
+### Sak Kontroll 3: Fødselsnummer og DUFnummer
 
-Gitt at man har en sak<br/>
+Gitt at man har en Sak<br/>
 når fødselsnummer mangler <br/>
 så gi feilmeldingen "Feil i fødselsnummer. Kan ikke identifisere klienten."
 
-Gitt at man har en sak<br/>
+Gitt at man har en Sak<br/>
 når fødselsnummer mangler og DUF-nummer mangler <br/>
 så gi feilmeldingen "DUFnummer mangler. Kan ikke identifisere klienten."
 
-Gitt at man har en sak<br/>
+Gitt at man har en Sak<br/>
 når fødselsnummer og DUF-nummer mangler <br/>
 så gi feilmeldingen "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere klienten."
 
@@ -73,55 +73,72 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak](src/test/groovy/no/ssb/barn/validation/rule/CaseHasContentSpec.groovy)
+### Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
 
-Gitt at man har en sak <br/>
+Gitt at man har en Sak <br/>
 når saken mangler melding, plan og tiltak<br/>
 så gi feilmeldingen "Klienten har ingen meldinger, planer eller tiltak"
 
 Alvorlighetsgrad: ERROR
 
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/CaseHasContentSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/CaseHasContent.kt)
 
 
-### [Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet](src/test/groovy/no/ssb/barn/validation/rule/CaseAgeAboveTwentyFive.groovy)
 
-Gitt at man har en sak og utleder alder ved hjelp av fødselsnummer<br/>
+### Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet
+
+Gitt at man har en Sak og utleder alder ved hjelp av fødselsnummer<br/>
 når alder er 25 eller større<br/>
 så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient"
 
 Alvorlighetsgrad: ERROR
 
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/CaseAgeAboveTwentyFiveSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/CaseAgeAboveTwentyFive.kt)
 
 
 
-### [Sak Kontroll 8: Klient over 18 år skal ha tiltak](src/test/groovy/no/ssb/barn/validation/rule/CaseAgeAboveEighteen.groovy)
 
-Gitt at man har en sak og utleder alder ved hjelp av fødselsnummer<br/>
+### Sak Kontroll 8: Klient over 18 år skal ha tiltak
+
+Gitt at man har en Sak og utleder alder ved hjelp av fødselsnummer<br/>
 når alder er 18 eller større og tiltak mangler <br/>
 så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak"
 
 Alvorlighetsgrad: ERROR
 
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/CaseAgeAboveEighteenSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/CaseAgeAboveEighteen.kt)
 
 
-### [Sak Kontroll 11: Fødselsnummer](src/test/groovy/no/ssb/barn/validation/rule/CaseSocialSecurityId.groovy)
 
-Gitt at man har en sak<br/>
+### Sak Kontroll 11: Fødselsnummer
+
+Gitt at man har en Sak<br/>
 når fødselsnummer mangler <br/>
 så gi feilmeldingen "Klienten har ufullstendig fødselsnummer. Korriger fødselsnummer."
 
 Alvorlighetsgrad: Warning
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/CaseSocialSecurityIdSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/CaseSocialSecurityId.kt)
 
 
 
 
 
 <a name="Virksomhet"></a>
+
 ## Virksomhet
 
 ### Virksomhet Kontroll 2a: StartDato er etter SluttDato
 
-Gitt at man har en virksomhet der StartDato og SluttDato finnes<br/>
+Gitt at man har en Virksomhet der StartDato og SluttDato finnes<br/>
 når StartDato er etter SluttDato<br/>
 så gi feilmeldingen "Virksomhetens startdato {StartDato} er etter sluttdato {SluttDato}"
 
@@ -133,9 +150,9 @@ Alvorlighetsgrad: ERROR
 
 
 
-### O Virksomhet Kontroll 2c: SluttDato mot sakens SluttDato
+### Virksomhet Kontroll 2c: SluttDato er etter sakens SluttDato
 
-Gitt at man har en sak der SluttDato finnes og virksomhet der SluttDato finnes<br/>
+Gitt at man har en Sak der SluttDato finnes og virksomhet der SluttDato finnes<br/>
 når virksomhetens SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Virksomhetens startdato {SluttDato} er etter sakens sluttdato {SluttDato}"
 
@@ -147,9 +164,9 @@ Alvorlighetsgrad: ERROR
 
 
 
-### X Virksomhet Kontroll 2e: StartDato mot sakens StartDato
+### Virksomhet Kontroll 2e: StartDato er før sakens StartDato
 
-Gitt at man har en sak der StartDato finnes og virksomhet der StartDato finnes<br/>
+Gitt at man har en Sak der StartDato finnes og virksomhet der StartDato finnes<br/>
 når virksomhetens StartDato er før sakens StartDato <br/>
 så gi feilmeldingen "Virksomhetens startdato {StartDato } er før sakens startdato {StartDato }"
 
@@ -163,7 +180,7 @@ Alvorlighetsgrad: ERROR
 
 ### Virksomhet Kontroll 3: Bydelsnummer og bydelsnavn
 
-Gitt at man har en virksomhet der Organisasjonsnummer er en av 958935420 (Oslo), 964338531 (Bergen), 942110464 (Trondheim) eller 964965226 (Stavanger)<br/>
+Gitt at man har en Virksomhet der Organisasjonsnummer er en av 958935420 (Oslo), 964338531 (Bergen), 942110464 (Trondheim) eller 964965226 (Stavanger)<br/>
 når Bydelsnummer eller Bydelsnavn mangler utfylling<br/>
 så gi feilmeldingen "Virksomhetens Bydelsnummer og Bydelsnavn skal være utfylt"
 
@@ -179,51 +196,121 @@ Alvorlighetsgrad: ERROR
 
 ## Melding
 
-### [Melding Kontroll 2a: StartDato er etter SluttDato](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterStartDate.groovy)
+### Melding Kontroll 2a: StartDato er etter SluttDato
 
-Gitt at man har en melding der StartDato og Konklusjon/SluttDato finnes<br/>
+Gitt at man har en Melding der StartDato og Konklusjon/SluttDato finnes<br/>
 når StartDato er etter SluttDato<br/>
 så gi feilmeldingen "Meldingens startdato {StartDato} er etter sluttdato {Konklusjon/SluttDato}"
 
 Alvorlighetsgrad: ERROR
 
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageStartDateAfterEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageStartDateAfterEndDate.kt)
 
 
-### X Melding Kontroll 2c: SluttDato mot virksomhetens SluttDato
 
-### X Melding Kontroll 2e: StartDato mot virksomhetens StartDato
+### Melding Kontroll 2c: SluttDato er etter virksomhetens SluttDato
 
-### X Melding Kontroll 3: Behandlingstid av melding
+Gitt at man har en Melding der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
+når meldingens SluttDato er etter virksomhetens SluttDato<br/>
+så gi feilmeldingen "Meldingens sluttdato {Konklusjon/SluttDato} er etter Virksomhetens sluttdato {SluttDato}"
 
-### X Melding Kontroll 4: Konkludert melding inneholder melder
+Alvorlighetsgrad: ERROR
 
-### X Melding Kontroll 5: Konkludert melding inneholder saksinnhold
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDate.kt)
+
+
+
+### Melding Kontroll 2e: StartDato er før virksomhetens StartDato
+
+Gitt at man har en Melding med StartDato og i virksomhet med StartDato<br/>
+når meldingens StartDato er før virksomhetens StartDato<br/>
+så gi feilmeldingen "Meldingens startdato {StartDato} er før virksomhetens startdato {StartDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageStartDateBeforeBusinessStartDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageStartDateBeforeBusinessStartDate.kt)
+
+
+
+### Melding Kontroll 3: Fristoverskridelse på behandlingstid
+
+Gitt at man har en Melding der StartDato og Konklusjon/SluttDato finnes<br/>
+når Konklusjon/SluttDato er mer enn 7 dager etter StartDato<br/>
+så gi feilmeldingen "Fristoverskridelse på behandlingstid for melding, ({StartDato} -> {Konklusjon/SluttDato})"
+
+Alvorlighetsgrad: Warning
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageProcessingTimeOverdueSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageProcessingTimeOverdue.kt)
+
+
+
+### Melding Kontroll 4: Konkludert melding mangler melder
+
+Gitt at man har en Melding<br/>
+når Konklusjon finnes og 1 eller flere Melder(e) mangler<br/>
+så gi feilmeldingen "Konkludert melding mangler melder(e)"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageContainsReportersSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageMissingReporters.kt)
+
+
+
+### Melding Kontroll 5: Konkludert melding mangler saksinnhold
+
+Gitt at man har en Melding<br/>
+når Konklusjon finnes og 1 eller flere Saksinnhold mangler<br/>
+så gi feilmeldingen "Konkludert melding mangler saksinnhold"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageMissingCaseContentSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageMissingCaseContent.kt)
+
 
 <a name="Melder"></a>
 
 ### Melder
 
-#### X Melder Kontroll 2: Kode med Presisering
+#### Melder Kontroll 2: Mangler Presisering
+
+Gitt at man har en Melder der Kode er 22 (= Andre offentlige instanser)<br/>
+når Melder mangler Presisering<br/>
+så gi feilmeldingen "Melder med kode ({Kode}) mangler presisering"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageReporterMissingClarificationSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageReporterMissingClarification.kt)
+
 
 <a name="Saksinnhold"></a>
 
 ### Saksinnhold
 
-#### X Saksinnhold Kontroll 2: Kode med Presisering
+#### Saksinnhold Kontroll 2: Mangler Presisering
 
+Gitt at man har et Saksinnhold der Kode er 18 (= Andre forhold ved foreldre/familien) eller 19 (= Andre forhold ved barnets situasjon)<br/>
+når Saksinnhold mangler Presisering<br/>
+så gi feilmeldingen "Saksinnhold med kode ({Kode}) mangler presisering"
 
+Alvorlighetsgrad: ERROR
 
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageReporterMissingClarificationSpec.groovy)
 
-
-[Individ Kontroll 11: Fødselsnummer](src/test/groovy/no/ssb/barn/validation/rule/CaseSocialSecurityId.groovy)
-
-Gitt at man har en sak<br/>
-når fødselsnummer mangler <br/>
-så gi feilmeldingen "Klienten har ufullstendig fødselsnummer. Korriger fødselsnummer."
-
-Alvorlighetsgrad: Warning
-
-
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageReporterMissingClarification.kt)
 
 
 

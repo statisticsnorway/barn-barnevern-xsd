@@ -1,24 +1,34 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SaksinnholdType
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class MessageContainsCaseContentSpec extends Specification {
+@Narrative("""
+Melding Kontroll 5: Konkludert melding mangler saksinnhold
+
+Gitt at man har en melding
+når Konklusjon finnes og 1 eller flere Saksinnhold mangler
+så gi feilmeldingen "Konkludert melding mangler saksinnhold"
+
+Alvorlighetsgrad: ERROR
+""")
+class MessageMissingCaseContentSpec extends Specification {
 
     @Subject
-    MessageContainsCaseContent sut
+    MessageMissingCaseContent sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new MessageContainsCaseContent()
+        sut = new MessageMissingCaseContent()
         context = getTestContext()
     }
 
@@ -27,16 +37,16 @@ class MessageContainsCaseContentSpec extends Specification {
         given:
         def melding = context.rootObject.sak.virksomhet[0].melding[0]
         and:
-        if (resetConclusion) {
-            melding.konklusjon = null
+        if (setConclusion) {
+            melding.konklusjon.kode = "1"
         } else {
-            melding.konklusjon.kode = code
+            melding.konklusjon = null
         }
         and:
-        if (resetCaseContent) {
-            melding.saksinnhold.clear()
-        } else {
+        if (setCaseContent) {
             melding.saksinnhold.add(new SaksinnholdType())
+        } else {
+            melding.saksinnhold.clear()
         }
 
         when:
@@ -54,11 +64,11 @@ class MessageContainsCaseContentSpec extends Specification {
         }
 
         where:
-        resetCaseContent | resetConclusion | code  || errorExpected
-        false            | false           | "N/A" || false
-        true             | true            | "N/A" || false
-        true             | false           | "42"  || false
-        true             | false           | "1"   || true
-        true             | false           | "2"   || true
+        setConclusion | setCaseContent || errorExpected
+        false         | false          || false
+        false         | true           || false
+        true          | false          || true
+        true          | true           || false
+
     }
 }

@@ -2,21 +2,31 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class MessageCaseContentContainsClarificationSpec extends Specification {
+@Narrative("""
+Saksinnhold Kontroll 2: Mangler Presisering
+
+Gitt at man har et Saksinnhold der Kode er 18 (= Andre forhold ved foreldre/familien) eller 19 (= Andre forhold ved barnets situasjon)<br/>
+når Saksinnhold mangler Presisering<br/>
+så gi feilmeldingen "Saksinnhold med kode ({Kode}) mangler presisering"
+
+Alvorlighetsgrad: ERROR
+""")
+class MessageCaseContentMissingClarificationSpec extends Specification {
     @Subject
-    MessageCaseContentContainsClarification sut
+    MessageCaseContentMissingClarification sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new MessageCaseContentContainsClarification()
+        sut = new MessageCaseContentMissingClarification()
         context = getTestContext()
     }
 

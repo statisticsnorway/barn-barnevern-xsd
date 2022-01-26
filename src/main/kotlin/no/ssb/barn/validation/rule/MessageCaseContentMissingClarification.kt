@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.SaksinnholdType
 
-class MessageCaseContentContainsClarification : AbstractRule(
+class MessageCaseContentMissingClarification : AbstractRule(
     WarningLevel.ERROR,
     "Saksinnhold Kontroll 2: Kontroll av kode og presisering",
     SaksinnholdType::class.java.simpleName
@@ -20,7 +20,7 @@ class MessageCaseContentContainsClarification : AbstractRule(
             .flatMap { virksomhet -> virksomhet.melding }
             .flatMap { melding -> melding.saksinnhold }
             .filter { saksinnhold ->
-                codesThatRequiresClarification.contains(saksinnhold.kode)
+                saksinnhold.kode in codesThatRequiresClarification
                         && saksinnhold.presisering.isNullOrEmpty()
             }
             .map {

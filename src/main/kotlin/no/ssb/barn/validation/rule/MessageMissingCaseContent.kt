@@ -6,25 +6,22 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.MeldingType
 
-class MessageContainsReporters : AbstractRule(
+class MessageMissingCaseContent : AbstractRule(
     WarningLevel.ERROR,
-    "Melding Kontroll 4: Kontroll av konkludert melding, melder",
+    "Melding Kontroll 5: Kontroll av konkludert melding, saksinnhold",
     MeldingType::class.java.simpleName
 ) {
-    private val codesThatRequiresCaseContent = listOf("1", "2")
-
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
                 val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
-                !melding.melder.any()
-                        && conclusion != null
-                        && codesThatRequiresCaseContent.contains(conclusion.kode)
+                conclusion != null
+                        && !melding.saksinnhold.any()
             }
             .map {
                 createReportEntry(
-                    "Melding (${it.id}). Konkludert melding mangler melder(e).",
+                    "Melding (${it.id}). Konkludert melding mangler saksinnhold.",
                     it.id
                 )
             }
