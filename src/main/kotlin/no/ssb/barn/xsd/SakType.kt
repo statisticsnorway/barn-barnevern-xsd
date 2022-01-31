@@ -12,7 +12,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(
     name = "SakType",
     propOrder = ["id", "migrertId", "startDato", "sluttDato",
-        "journalnummer", "fodselsnummer", "duFnummer", "avsluttet", "virksomhet"]
+        "journalnummer", "fodselsnummer", "duFnummer", "fodseldato", "kjonn",
+        "avsluttet", "virksomhet"]
 )
 data class SakType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -46,6 +47,16 @@ data class SakType(
 
     @field:XmlAttribute(name = "DUFnummer")
     var duFnummer: String? = null,
+
+    @field:XmlAttribute(name = "Fodseldato")
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(
+        LocalDateAdapter::class
+    )
+    var fodseldato: LocalDate? = null,
+
+    @field:XmlAttribute(name = "Kjonn")
+    var kjonn: String? = null,
 
     @field:XmlAttribute(name = "Avsluttet")
     var avsluttet: Boolean? = null,

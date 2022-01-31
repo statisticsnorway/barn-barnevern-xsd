@@ -8,7 +8,7 @@ import no.ssb.barn.xsd.MeldingType
 
 class MessageProcessingTimeOverdue : AbstractRule(
     WarningLevel.WARNING,
-    "Melding Kontroll 3: Behandlingstid av melding",
+    "Melding Kontroll 3: Fristoverskridelse på behandlingstid",
     MeldingType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
@@ -17,13 +17,11 @@ class MessageProcessingTimeOverdue : AbstractRule(
             .filter { melding ->
                 val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
-                        && melding.startDato.plusDays(7)
-                    .isBefore(conclusion.sluttDato)
+                        && conclusion.sluttDato.isAfter(melding.startDato.plusDays(7))
             }
             .map {
                 createReportEntry(
-                    "Melding (${it.id})."
-                            + " Fristoverskridelse på behandlingstid for melding,"
+                    "Fristoverskridelse på behandlingstid for melding,"
                             + " (${it.startDato} -> ${it.konklusjon!!.sluttDato})",
                     it.id
                 )

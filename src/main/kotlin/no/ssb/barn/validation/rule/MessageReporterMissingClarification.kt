@@ -6,7 +6,7 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.MeldingType
 
-class MessageReporterContainsClarification : AbstractRule(
+class MessageReporterMissingClarification : AbstractRule(
     WarningLevel.ERROR,
     "Melder Kontroll 2: Kontroll av kode og presisering",
     MeldingType::class.java.simpleName
@@ -14,13 +14,10 @@ class MessageReporterContainsClarification : AbstractRule(
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
-            .filter { melding ->
-                melding.konklusjon?.sluttDato != null
-                        && melding.melder.any()
-            }
             .flatMap { melding ->
                 melding.melder
                     .filter { melder ->
+                        // 22 = Andre offentlige instanser
                         melder.kode == "22"
                                 && melder.presisering.isNullOrEmpty()
                     }

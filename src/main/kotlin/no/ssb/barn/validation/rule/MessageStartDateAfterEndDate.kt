@@ -15,9 +15,9 @@ class MessageStartDateAfterEndDate : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.melding }
             .filter { melding ->
-                val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
-                conclusion != null
-                        && melding.startDato.isAfter(conclusion.sluttDato)
+                with(melding) {
+                    konklusjon != null && startDato.isAfter(konklusjon!!.sluttDato)
+                }
             }
             .map {
                 createReportEntry(

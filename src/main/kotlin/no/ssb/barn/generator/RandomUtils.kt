@@ -10,6 +10,17 @@ import java.time.format.DateTimeFormatter
 @Suppress("SpellCheckingInspection")
 object RandomUtils {
 
+    const val FEMALE = "2"
+    const val MALE = "1"
+
+    @JvmStatic
+    fun getGenderFromSsn(socialSecurityId: String): String =
+        if (socialSecurityId.substring(8,9).toInt() % 2 == 0) FEMALE else MALE
+
+    @JvmStatic
+    fun getDateOfBirthFromSsn(socialSecurityId: String): LocalDate =
+        LocalDate.parse(socialSecurityId.substring(0,6), DateTimeFormatter.ofPattern("ddMMyy"))
+
     @JvmStatic
     fun generateRandomIntFromRange(
         startInclusive: Int,

@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -10,6 +11,15 @@ import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
+@Narrative("""
+Melding Kontroll 3: Fristoverskridelse på behandlingstid
+
+Gitt at man har en melding der StartDato og Konklusjon/SluttDato finnes
+når Konklusjon/SluttDato er mer enn 6 dager etter StartDato
+så gi feilmeldingen "Fristoverskridelse på behandlingstid for melding, ({StartDato} -> {Konklusjon/SluttDato})
+
+Alvorlighetsgrad: Warning
+""")
 class MessageProcessingTimeOverdueSpec extends Specification {
 
     @Subject
