@@ -161,6 +161,8 @@ class BarnevernConverterSpec extends Specification {
                 RandomUtils.generateRandomString(9),
                 "02011088123",
                 null,
+                LocalDate.now().minusYears(2),
+                "1",
                 null,
                 List.of(virksomhet)
         )

@@ -11,6 +11,14 @@ import java.time.format.DateTimeFormatter
 object RandomUtils {
 
     @JvmStatic
+    fun getGenderFromSsn(socialSecurityId: String) =
+        if (socialSecurityId.substring(8,9).toInt() % 2 == 0) "2" else "1"
+
+    @JvmStatic
+    fun getDateOfBirthFromSsn(socialSecurityId: String) =
+        LocalDate.parse(socialSecurityId.substring(0,6), DateTimeFormatter.ofPattern("ddMMyy"))
+
+    @JvmStatic
     fun generateRandomIntFromRange(
         startInclusive: Int,
         endExclusive: Int

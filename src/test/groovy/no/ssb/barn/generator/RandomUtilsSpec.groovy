@@ -10,6 +10,28 @@ import java.time.LocalDate
 class RandomUtilsSpec extends Specification {
 
     @Unroll
+    def "getGenderFromSsn all scenarios"() {
+        expect:
+        expectedValue == RandomUtils.getGenderFromSsn(ssn)
+
+        where: "digit #9 is even, girl (2) else boy (1)"
+        ssn           || expectedValue
+        "01010112345" || "1"
+        "01010112245" || "2"
+    }
+
+    @Unroll
+    def "getDateOfBirthFromSsn all scenarios"() {
+        expect:
+        expectedValue == RandomUtils.getDateOfBirthFromSsn(ssn)
+
+        where: "digit #9 is even, girl (2) else boy (1)"
+        ssn           || expectedValue
+        "01010112345" || LocalDate.of(2001, 1, 1)
+        "31121012345" || LocalDate.of(2010, 12, 31)
+    }
+
+    @Unroll
     def "generateRandomVirksomhetType expect city part info to be populated"() {
         given:
         def avgiver = new AvgiverType("123456789", kommunenr, kommunenavn)

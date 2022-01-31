@@ -16,12 +16,16 @@ object InitialMutationProvider {
                 fagsystem = RandomUtils.generateRandomFagsystemType()
                 avgiver = RandomUtils.generateRandomAvgiverType()
 
+                val socialSecurityId = RandomUtils.generateRandomSSN(
+                    LocalDate.now().minusYears(20),
+                    LocalDate.now().minusYears(1)
+                )
+
                 sak.apply {
                     startDato = currentDate
-                    fodselsnummer = RandomUtils.generateRandomSSN(
-                        LocalDate.now().minusYears(20),
-                        LocalDate.now().minusYears(1)
-                    )
+                    fodselsnummer = socialSecurityId
+                    fodseldato = RandomUtils.getDateOfBirthFromSsn(socialSecurityId)
+                    kjonn = RandomUtils.getGenderFromSsn(socialSecurityId)
                 }
 
                 RandomUtils.generateRandomVirksomhetType(avgiver)
