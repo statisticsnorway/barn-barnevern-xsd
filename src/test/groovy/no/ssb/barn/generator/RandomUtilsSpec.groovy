@@ -25,7 +25,7 @@ class RandomUtilsSpec extends Specification {
         expect:
         expectedValue == RandomUtils.getDateOfBirthFromSsn(ssn)
 
-        where: "digit #9 is even, girl (2) else boy (1)"
+        where:
         ssn           || expectedValue
         "01010112345" || LocalDate.of(2001, 1, 1)
         "31121012345" || LocalDate.of(2010, 12, 31)
