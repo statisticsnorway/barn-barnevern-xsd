@@ -16,8 +16,8 @@ class RandomUtilsSpec extends Specification {
 
         where: "digit #9 is even, girl (2) else boy (1)"
         ssn           || expectedValue
-        "01010112345" || "1"
-        "01010112245" || "2"
+        "01010112345" || RandomUtils.MALE
+        "01010112245" || RandomUtils.FEMALE
     }
 
     @Unroll

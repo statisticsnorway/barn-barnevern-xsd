@@ -10,12 +10,15 @@ import java.time.format.DateTimeFormatter
 @Suppress("SpellCheckingInspection")
 object RandomUtils {
 
-    @JvmStatic
-    fun getGenderFromSsn(socialSecurityId: String) =
-        if (socialSecurityId.substring(8,9).toInt() % 2 == 0) "2" else "1"
+    const val FEMALE = "2"
+    const val MALE = "1"
 
     @JvmStatic
-    fun getDateOfBirthFromSsn(socialSecurityId: String) =
+    fun getGenderFromSsn(socialSecurityId: String): String =
+        if (socialSecurityId.substring(8,9).toInt() % 2 == 0) FEMALE else MALE
+
+    @JvmStatic
+    fun getDateOfBirthFromSsn(socialSecurityId: String): LocalDate =
         LocalDate.parse(socialSecurityId.substring(0,6), DateTimeFormatter.ofPattern("ddMMyy"))
 
     @JvmStatic
