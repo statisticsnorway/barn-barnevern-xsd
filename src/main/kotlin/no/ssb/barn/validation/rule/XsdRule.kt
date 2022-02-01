@@ -38,10 +38,13 @@ class XsdRule(
         }
     }
 
-    private fun getSchemaValidator(xsdResourceName: String): Validator =
-        SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+    private fun getSchemaValidator(xsdResourceName: String): Validator {
+        val newInstance = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+        newInstance.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true)
+        return newInstance
             .newSchema(StreamSource(getSourceFromClasspath(xsdResourceName)))
             .newValidator()
+    }
 
     private fun getSourceFromClasspath(resourceName: String): InputStream? =
         this::class.java.classLoader.getResource(resourceName)!!.openStream()
