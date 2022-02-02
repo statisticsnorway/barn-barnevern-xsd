@@ -24,24 +24,11 @@ object BarnevernConverter {
 
     private const val VALIDATION_REPORT_KEY = "validationReport"
 
-/*
     @JvmStatic
     fun unmarshallXmlAndValidationReportToMap(
         xml: String,
         validationReportJson: String
-    ): MutableMap<String, Any> =
-        gson.fromJson<MutableMap<String, Any>>(gson.toJson(unmarshallXml(xml)))
-            .also {
-                it[VALIDATION_REPORT_KEY] =
-                    gson.fromJson<Map<String, Any>>(validationReportJson)
-            }
-*/
-
-    @JvmStatic
-    fun unmarshallXmlAndValidationReportToMap(
-        xml: String,
-        validationReportJson: String
-    ): MutableMap<String, Any> =
+    ): Map<String, Any> =
         unmarshallXml(xml).apply {
             sak.virksomhet = sak.virksomhet
                 .map { virksomhet ->
