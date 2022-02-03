@@ -6,6 +6,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
+import static no.ssb.barn.testutil.TestDataProvider.getTestContextXmlOnly
 
 class TheValidatorSpec extends Specification {
 
@@ -69,5 +70,47 @@ class TheValidatorSpec extends Specification {
 
         where:
         i << (1..5)
+    }
+
+
+
+    def "when validating xml structure and invalid XSD version, receive fatal validation result"() {
+        def invalidXsdVersion = -1
+        when:
+        def validationReport = sut.validateXmlStructure(
+                UUID.randomUUID().toString(),
+                invalidXsdVersion,
+                getResourceAsString("barnevern_with_errors.xml"))
+
+        then:
+        noExceptionThrown()
+        and:
+        WarningLevel.FATAL == validationReport.severity
+    }
+    def "when validating xml structure and invalid xml, receive fatal validation result"() {
+        when:
+        def validationReport = sut.validateXmlStructure(
+                UUID.randomUUID().toString(),
+                1,
+                getResourceAsString("invalid.xml"))
+
+        then:
+        noExceptionThrown()
+        and:
+        WarningLevel.FATAL == validationReport.severity
+    }
+
+    def "when validating xml structure and invalid rules, receive ok validation result"() {
+        when:
+        def validationReport = sut.validateXmlStructure(
+                UUID.randomUUID().toString(),
+                1,
+                getResourceAsString("sluttdato_etter_startdato.xml"))
+
+        then:
+        noExceptionThrown()
+        and:
+        WarningLevel.OK == validationReport.severity
+
     }
 }
