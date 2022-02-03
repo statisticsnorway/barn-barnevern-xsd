@@ -431,7 +431,7 @@ object CaseMutator {
 
     private fun createLegalBasis(): LovhjemmelType =
         LovhjemmelType(
-            kapittel = "4",
+            kapittel = listOf("4", "5").random(), // make 50% of TiltakType = "omsorgstiltak"
             paragraf = listOf("8", "12").random(),
             ledd = mutableListOf(listOf("2", "3").random())
         )
