@@ -29,6 +29,14 @@ object BarnevernConverter {
         xml: String,
         validationReportJson: String
     ): Map<String, Any> =
+        gson.fromJson<MutableMap<String, Any>>(unmarshallXmlToJson(xml))
+            .also {
+                it[VALIDATION_REPORT_KEY] =
+                    gson.fromJson<Map<String, Any>>(validationReportJson)
+            }
+
+    @JvmStatic
+    fun unmarshallXmlToJson(xml: String): String =
         unmarshallXml(xml).apply {
             sak.virksomhet = sak.virksomhet
                 .map { virksomhet ->
@@ -39,11 +47,7 @@ object BarnevernConverter {
                     }
                 }.toMutableList()
         }.let { barnevernType ->
-            gson.fromJson<MutableMap<String, Any>>(gson.toJson(barnevernType))
-                .also {
-                    it[VALIDATION_REPORT_KEY] =
-                        gson.fromJson<Map<String, Any>>(validationReportJson)
-                }
+            gson.toJson(barnevernType)
         }
 
     @JvmStatic

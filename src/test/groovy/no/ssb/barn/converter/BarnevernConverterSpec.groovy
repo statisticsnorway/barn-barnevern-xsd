@@ -79,6 +79,19 @@ class BarnevernConverterSpec extends Specification {
         null != map
     }
 
+    def "when unmarshalling instance to json, json is not null"() {
+        given:
+        def xml = getResourceAsString("test01_fil09.xml")
+
+        when:
+        def json = BarnevernConverter.unmarshallXmlToJson(xml)
+
+        then:
+        noExceptionThrown()
+        and:
+        null != json
+    }
+
     def "when marshalling instance to XML, xml is valid"() {
         given:
         def instance = InitialMutationProvider.createInitialMutation(LocalDate.now())
