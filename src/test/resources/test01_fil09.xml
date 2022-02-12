@@ -10,6 +10,8 @@
 				<Konklusjon SluttDato="2021-01-08" Kode="2"/>
 			</Melding>
 			<Undersokelse StartDato="2021-01-08" Id="d28aa453-724a-4538-8c4e-2f27b36b7530">
+				<Vedtaksgrunnlag Kode="1" Presisering=""/>
+				<UtvidetFrist StartDato="2021-02-08" Innvilget="2"/>
 				<Konklusjon SluttDato="2021-04-08" Kode="1"/>
 			</Undersokelse>
 			<Plan Id="0b6ceeba-677d-45da-bf4d-cb14e3631c28" StartDato="2021-07-09" Plantype="1">

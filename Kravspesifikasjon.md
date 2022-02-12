@@ -14,7 +14,7 @@
 - [Plan](#Plan)
 - [Ettervern](#Ettervern)
 - [Flytting](#Flytting)
-- [Oversendelse til fylkesnemnd](#Oversendelse_til_fylkesnemnd)
+- [Oversendelse til fylkesnemnd](#OversendelseTilFylkesnemnd)
 
 
 
@@ -110,9 +110,9 @@ så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/CaseAgeAboveEighteenSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/CaseAgeAboveEighteenAndMeasuresSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/CaseAgeAboveEighteen.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/CaseAgeAboveEighteenAndMeasures.kt)
 
 
 
@@ -260,7 +260,7 @@ så gi feilmeldingen "Konkludert melding mangler melder(e)"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageContainsReportersSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageMissingReportersSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageMissingReporters.kt)
 
@@ -317,19 +317,136 @@ Alvorlighetsgrad: ERROR
 <a name="Undersokelse"></a>
 ## Undersøkelse
 
-### X Undersøkelse Kontroll 2a: StartDato er etter SluttDato
+### Undersøkelse Kontroll 2a: StartDato er etter SluttDato
 
-### X Undersøkelse Kontroll 2c: SluttDato mot virksomhetens SluttDato
+Gitt at man har en Undersøkelse der StartDato og Konklusjon/SluttDato finnes<br/>
+når StartDato er etter SluttDato<br/>
+så gi feilmeldingen "Undersøkelsens startdato {StartDato} er etter sluttdato {Konklusjon/SluttDato}"
 
-### X Undersøkelse Kontroll 2e: StartDato mot virksomhetens StartDato
+Alvorlighetsgrad: ERROR
 
-### X Undersøkelse Kontroll 3: Kode med Presisering
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationStartDateAfterEndDateSpec.groovy)
 
-### X Undersøkelse Kontroll 4: Undersøkelse med SluttDato skal være konkludert
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationStartDateAfterEndDate.kt)
 
-### X Undersøkelse Kontroll 7: Konkludert undersøkelse skal ha vedtaksgrunnlag
 
-### X Undersøkelse Kontroll 10: Undersøkelse skal ha relasjon til melding
+
+### Undersøkelse Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+
+Gitt at man har en Undersøkelse der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
+når undersøkelsens SluttDato er etter virksomhetens SluttDato<br/>
+så gi feilmeldingen "Undersøkelsens sluttdato {Konklusjon/SluttDato} er etter virksomhetens sluttdato {SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationEndDateAfterBusinessEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationEndDateAfterBusinessEndDate.kt)
+
+
+
+### Undersøkelse Kontroll 2e: StartDato er før virksomhetens StartDato
+
+Gitt at man har en Undersøkelse der StartDato finnes og virksomhet der StartDato finnes<br/>
+når undersøkelsens StartDato er før virksomhetens StartDato <br/>
+så gi feilmeldingen "Undersøkelsens startdato {StartDato } er før virksomhetens startdato {StartDato }"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationStartDateBeforeBusinessStartDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationStartDateBeforeBusinessStartDate.kt)
+
+
+
+### Undersøkelse Kontroll 3: Vedtaksgrunnlag mangler presisering
+
+Gitt at man har et Vedtaksgrunnlag der Kode er 18 (= Andre forhold ved foreldre/familien) eller 19 (= Andre forhold ved barnets situasjon)<br/>
+når Vedtaksgrunnlag mangler Presisering<br/>
+så gi feilmeldingen "Vedtaksgrunnlag med kode ({Kode}) mangler presisering"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationDecisionMissingClarificationSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationDecisionMissingClarification.kt)
+
+
+
+### Undersøkelse Kontroll 7: Konkludert undersøkelse mangler vedtaksgrunnlag
+
+Gitt at man har en Undersøkelse der Konklusjon finnes og Konklusjon sin Kode er 1 eller 2<br/>
+når Vedtaksgrunnlag mangler<br/>
+så gi feilmeldingen "Undersøkelse konkludert med kode {Konklusjon/Kode} mangler vedtaksgrunnlag"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationConcludedMissingDecisionSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationConcludedMissingDecision.kt)
+
+
+
+### Undersøkelse Kontroll 10: Undersøkelse skal ha relasjon til melding
+
+Gitt at man har en Undersøkelse, en Relasjon og en Melding<br/>
+når en relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType mangler<br/>
+så gi feilmeldingen "Undersøkelse mangler en relasjon til melding"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationRelatedFromMessageSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationRelatedFromMessage.kt)
+
+
+
+### Undersøkelse Kontroll 11: Fristoverskridelse på behandlingstid på mer enn 97 dager etter melding sin startdato
+
+Gitt at man har en konkludert Undersøkelse med en Relasjon til en Melding<br/> 
+der relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType<br/>
+og undersøkelse sin Konklusjon/SluttDato er satt <br/>
+når Undersøkelse sin Konklusjon/SluttDato er mer enn 7 + 90 dager etter Melding sin StartDato <br/> 
+og UtvidetFrist sin Invilget enten mangler eller er lik 2 (= "Nei"), <br/> 
+så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 90 dager etter melding sin startdato"
+
+Alvorlighetsgrad: Warning
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan97DaysSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan97Days.kt)
+
+
+
+### X Undersøkelse Kontroll 12: Fristoverskridelse på behandlingstid på mer enn 187 dager etter melding sin startdato
+
+Gitt at man har en konkludert Undersøkelse med en Relasjon til en Melding
+der relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType,<br/>
+og undersøkelse sin Konklusjon/SluttDato er satt
+når Undersøkelse sin Konklusjon/SluttDato er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
+så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato"
+
+Alvorlighetsgrad: Warning
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan187DaysSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan187Days.kt)
+
+
+
+### X Undersøkelse Kontroll 13: Undersøkelse skal konkluderes etter 187 dagers behandlingstid etter melding sin startdato
+
+Gitt at man har en konkludert Undersøkelse med en Relasjon til en Melding<br/>
+når undersøkelse sin Konklusjon/SluttDato er satt, <br/>
+og relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType,<br/>
+og Undersøkelse sin Konklusjon/SluttDato er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
+så gi feilmeldingen "Undersøkelse med utvidet frist skal konkluderes innen 7 + 180 dager etter melding sin startdato"
+
+Alvorlighetsgrad: Warning
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationConcludedMissingDecisionSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationConcludedMissingDecision.kt)
 
 
 
@@ -392,11 +509,47 @@ Alvorlighetsgrad: Warning
 
 ## Plan
 
-### X Plan Kontroll 2a: StartDato er etter SluttDato
+### Plan Kontroll 2a: StartDato er etter SluttDato
 
-### X Plan Kontroll 2c: SluttDato mot virksomhetens SluttDato
+Gitt at man har en Plan der StartDato og Konklusjon/SluttDato finnes<br/>
+når StartDato er etter SluttDato<br/>
+så gi feilmeldingen "Planens startdato {StartDato} er etter sluttdato {Konklusjon/SluttDato}"
 
-### X Plan Kontroll 2e: StartDato mot virksomhetens StartDato
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanStartDateAfterEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanStartDateAfterEndDate.kt)
+
+
+
+### Plan Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+
+Gitt at man har en Plan der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
+når planens SluttDato er etter virksomhetens SluttDato<br/>
+så gi feilmeldingen "Planens sluttdato {Konklusjon/SluttDato} er etter virksomhetens sluttdato {SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanEndDateAfterBusinessEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanEndDateAfterBusinessEndDate.kt)
+
+
+
+### Plan Kontroll 2e: StartDato er før virksomhetens StartDato
+
+Gitt at man har en Plan der StartDato finnes og virksomhet der StartDato finnes<br/>
+når planens StartDato er før virksomhetens StartDato <br/>
+så gi feilmeldingen "Planens startdato {StartDato } er før virksomhetens startdato {StartDato }"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanStartDateBeforeBusinessStartDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanStartDateBeforeBusinessStartDate.kt)
+
+
 
 <a name="Ettervern"></a>
 ## Ettervern
@@ -414,7 +567,7 @@ Alvorlighetsgrad: Warning
 
 ### X Plan Kontroll 2f: SluttDato mot virksomhetens StartDato
 
-<a name="Oversendelse_til_fylkesnemnd"></a>
+<a name="OversendelseTilFylkesnemnd"></a>
 
 ## Oversendelse til fylkesnemnd
 

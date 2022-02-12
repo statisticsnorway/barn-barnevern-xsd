@@ -4,12 +4,12 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.xsd.MeldingType
+import no.ssb.barn.xsd.UndersokelseType
 
-class MessageEndDateAfterBusinessEndDate : AbstractRule(
+class InvestigationEndDateAfterBusinessEndDate : AbstractRule(
     WarningLevel.ERROR,
-    "Melding Kontroll 2c: Sluttdato er etter virksomhetens sluttdato",
-    MeldingType::class.java.simpleName
+    "Undersøkelse Kontroll 2c: Sluttdato er etter virksomhetens sluttdato",
+    UndersokelseType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val sak = context.rootObject.sak
@@ -18,16 +18,15 @@ class MessageEndDateAfterBusinessEndDate : AbstractRule(
             .map { virksomhet ->
                 val businessEndDate = virksomhet.sluttDato ?: return@map null
 
-                virksomhet.melding.asSequence()
-                    .filter { melding ->
-                        val conclusion = melding.konklusjon
-                        conclusion != null && conclusion.sluttDato.isAfter(businessEndDate)
+                virksomhet.undersokelse.asSequence()
+                    .filter { undersokelse ->
+                        val conclusion = undersokelse.konklusjon
+                        conclusion != null && undersokelse.konklusjon!!.sluttDato.isAfter(businessEndDate)
                     }
                     .map {
                         createReportEntry(
-                            "Meldingens sluttdato (${it.konklusjon!!.sluttDato})"
-                                    + " er etter virksomhetens"
-                                    + " sluttdato ($businessEndDate)",
+                            "Undersøkelsens sluttdato (${it.konklusjon!!.sluttDato})"
+                                    + " er etter virksomhetens sluttdato ($businessEndDate)",
                             it.id
                         )
                     }

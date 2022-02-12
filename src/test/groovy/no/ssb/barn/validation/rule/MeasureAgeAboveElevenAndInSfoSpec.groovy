@@ -58,7 +58,7 @@ class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
         }
 
         where:
-        age | createKategori | code     || errorExpected
+        age  | createKategori | code     || errorExpected
         11   | false          | ""       || false
         12   | false          | ""       || false
         11   | true           | "~kode~" || false
