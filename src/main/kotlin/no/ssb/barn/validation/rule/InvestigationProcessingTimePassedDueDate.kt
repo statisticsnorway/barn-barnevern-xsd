@@ -20,14 +20,8 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
 
         return relations
             .map { relation ->
-                if (!(relation.tilType == BegrepsType.UNDERSOKELSE
-                            && relation.fraType == BegrepsType.MELDING
-                            )
-                ) {
+                if (relation.tilType != BegrepsType.UNDERSOKELSE || relation.fraType != BegrepsType.MELDING)
                     return@map null
-                }
-
-                val currentDate = context.rootObject.datoUttrekk
 
                 val message = messages.firstOrNull { message ->
                     message.id == relation.fraId
@@ -37,11 +31,10 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                     investigation.id == relation.tilId
                 } ?: return@map null
 
-                val conclusion = investigation.konklusjon // when JaCoCo improves, use "?."
-
-                if (conclusion != null) {
+                if (investigation.konklusjon != null)
                     return@map null
-                }
+
+                val currentDate = context.rootObject.datoUttrekk
 
                 if (currentDate.toLocalDate().isAfter(message.startDato.plusDays(7 + 90))
                     && (investigation.utvidetFrist == null
@@ -61,7 +54,6 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                         relation.tilId
                     )
                 }
-
 
                 return@map null
             }
