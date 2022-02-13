@@ -412,7 +412,6 @@ og UtvidetFrist sin Invilget enten mangler eller er lik 2 (= "Nei"), <br/>
 så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 90 dager etter melding sin startdato"
 
 når Datouttrekk er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
-og UtvidetFrist sin Invilget er lik 1 (= "Ja"), <br/>
 så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato"
 
 Alvorlighetsgrad: Warning

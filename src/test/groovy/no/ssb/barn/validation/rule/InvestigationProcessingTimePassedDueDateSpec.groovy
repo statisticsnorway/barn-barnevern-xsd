@@ -40,11 +40,11 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
         and:
         relation.fraId = messageId as UUID
         and:
-        relation.fraType = BegrepsType.MELDING
+        relation.fraType = relationFromType
         and:
         relation.tilId = investigationId as UUID
         and:
-        relation.tilType = BegrepsType.UNDERSOKELSE
+        relation.tilType = relationToType
         and:
         def investigation = context.rootObject.sak.virksomhet[0].undersokelse[0]
         and:
@@ -69,19 +69,22 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
         }
 
         where:
-        messageId         | messageStartDate               | investigationId   | daysText  | extendedDueDateGranted | removeExtendedDueDate || errorExpected
-        UUID.randomUUID() | LocalDate.now().minusDays(97)  | UUID.randomUUID() | "7 + 90"  | null                   | true                  || false
-        UUID.randomUUID() | LocalDate.now().minusDays(97)  | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || false
-        UUID.randomUUID() | LocalDate.now().minusDays(97)  | UUID.randomUUID() | "7 + 90"  | "1"                    | false                 || false
-        UUID.randomUUID() | LocalDate.now().minusDays(98)  | UUID.randomUUID() | "7 + 90"  | null                   | true                  || true
-        UUID.randomUUID() | LocalDate.now().minusDays(98)  | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || true
-        UUID.randomUUID() | LocalDate.now().minusDays(98)  | UUID.randomUUID() | "7 + 90"  | "1"                    | false                 || false
-        UUID.randomUUID() | LocalDate.now().minusDays(187) | UUID.randomUUID() | "7 + 90"  | null                   | true                  || true
-        UUID.randomUUID() | LocalDate.now().minusDays(187) | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || true
-        UUID.randomUUID() | LocalDate.now().minusDays(187) | UUID.randomUUID() | "7 + 90"  | "1"                    | false                 || false
-        UUID.randomUUID() | LocalDate.now().minusDays(188) | UUID.randomUUID() | "7 + 90"  | null                   | true                  || true
-        UUID.randomUUID() | LocalDate.now().minusDays(188) | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || true
-        UUID.randomUUID() | LocalDate.now().minusDays(188) | UUID.randomUUID() | "7 + 180" | "1"                    | false                 || true
+        relationFromType    | relationToType           | messageId         | messageStartDate               | investigationId   | daysText  | extendedDueDateGranted | removeExtendedDueDate || errorExpected
+        BegrepsType.MELDING | BegrepsType.VEDTAK       | UUID.randomUUID() | LocalDate.now()                | UUID.randomUUID() | ""        | null                   | false                 || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(97)  | UUID.randomUUID() | "7 + 90"  | null                   | true                  || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(97)  | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(97)  | UUID.randomUUID() | "7 + 90"  | "1"                    | false                 || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(98)  | UUID.randomUUID() | "7 + 90"  | null                   | true                  || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(98)  | UUID.randomUUID() | "7 + 90"  | null                   | false                 || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(98)  | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(98)  | UUID.randomUUID() | "7 + 90"  | "1"                    | false                 || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(187) | UUID.randomUUID() | "7 + 90"  | null                   | true                  || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(187) | UUID.randomUUID() | "7 + 90"  | null                   | false                 || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(187) | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(187) | UUID.randomUUID() | "7 + 90"  | "1"                    | false                 || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(188) | UUID.randomUUID() | "7 + 90"  | null                   | true                  || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(188) | UUID.randomUUID() | "7 + 90"  | "2"                    | false                 || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | LocalDate.now().minusDays(188) | UUID.randomUUID() | "7 + 180" | "1"                    | false                 || true
     }
 
 }

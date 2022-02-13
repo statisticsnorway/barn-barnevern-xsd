@@ -21,17 +21,22 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
         return relations
             .map { relation ->
                 if (!(relation.tilType == BegrepsType.UNDERSOKELSE
-                            && relation.tilId in investigations.map { it.id }
                             && relation.fraType == BegrepsType.MELDING
-                            && relation.fraId in messages.map { it.id }
                             )
                 ) {
                     return@map null
                 }
 
                 val currentDate = context.rootObject.datoUttrekk
-                val message = messages.first { message -> message.id == relation.fraId }
-                val investigation = investigations.first { investigation -> investigation.id == relation.tilId }
+
+                val message = messages.firstOrNull { message ->
+                    message.id == relation.fraId
+                } ?: return@map null
+
+                val investigation = investigations.firstOrNull { investigation ->
+                    investigation.id == relation.tilId
+                } ?: return@map null
+
                 val conclusion = investigation.konklusjon // when JaCoCo improves, use "?."
 
                 if (conclusion != null) {
@@ -50,9 +55,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                     )
                 }
 
-                if (currentDate.toLocalDate().isAfter(message.startDato.plusDays(7 + 180))
-                    && investigation.utvidetFrist!!.innvilget == "1"
-                ) {
+                if (currentDate.toLocalDate().isAfter(message.startDato.plusDays(7 + 180))) {
                     return@map createReportEntry(
                         "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato",
                         relation.tilId
