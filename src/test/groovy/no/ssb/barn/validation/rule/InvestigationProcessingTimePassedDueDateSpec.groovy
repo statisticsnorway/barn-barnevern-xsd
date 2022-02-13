@@ -82,12 +82,10 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
         where:
         relationFromType    | relationToType           | resetMessageId | messageStartDate               | resetInvestigationId | daysText  | extendedDueDateGranted | removeExtendedDueDate | removeConclusion || errorExpected
         BegrepsType.VEDTAK  | BegrepsType.TILTAK       | false          | LocalDate.now()                | false                | ""        | null                   | false                 | true             || false
+        BegrepsType.VEDTAK  | BegrepsType.TILTAK       | true           | LocalDate.now()                | true                 | ""        | null                   | false                 | true             || false
         BegrepsType.MELDING | BegrepsType.VEDTAK       | false          | LocalDate.now()                | false                | ""        | null                   | false                 | true             || false
-
         BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | true           | LocalDate.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
         BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDate.now().minusDays(97)  | true                 | "7 + 90"  | null                   | true                  | false            || false
-
-
         BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDate.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
         BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDate.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | true             || false
         BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDate.now().minusDays(97)  | false                | "7 + 90"  | "2"                    | false                 | true             || false
