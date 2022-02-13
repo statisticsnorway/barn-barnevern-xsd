@@ -401,52 +401,26 @@ Alvorlighetsgrad: ERROR
 
 
 
-### Undersøkelse Kontroll 11: Fristoverskridelse på behandlingstid på mer enn 97 dager etter melding sin startdato
+### Undersøkelse Kontroll 11: Fristoverskridelse på behandlingstid i forhold til melding sin startdato
 
-Gitt at man har en konkludert Undersøkelse med en Relasjon til en Melding<br/> 
+Gitt at man har en ukonkludert Undersøkelse med en Relasjon til en Melding<br/> 
 der relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType<br/>
-og undersøkelse sin Konklusjon/SluttDato er satt <br/>
-når Undersøkelse sin Konklusjon/SluttDato er mer enn 7 + 90 dager etter Melding sin StartDato <br/> 
+og undersøkelse sin Konklusjon/SluttDato mangler <br/>
+
+når Datouttrekk er mer enn 7 + 90 dager etter Melding sin StartDato <br/> 
 og UtvidetFrist sin Invilget enten mangler eller er lik 2 (= "Nei"), <br/> 
 så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 90 dager etter melding sin startdato"
 
-Alvorlighetsgrad: Warning
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan97DaysSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan97Days.kt)
-
-
-
-### X Undersøkelse Kontroll 12: Fristoverskridelse på behandlingstid på mer enn 187 dager etter melding sin startdato
-
-Gitt at man har en konkludert Undersøkelse med en Relasjon til en Melding
-der relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType,<br/>
-og undersøkelse sin Konklusjon/SluttDato er satt
-når Undersøkelse sin Konklusjon/SluttDato er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
+når Datouttrekk er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
+og UtvidetFrist sin Invilget er lik 1 (= "Ja"), <br/>
 så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato"
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan187DaysSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationProcessingTimePassedDueDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationProcessingTimeMoreThan187Days.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationProcessingTimePassedDueDate.kt)
 
-
-
-### X Undersøkelse Kontroll 13: Undersøkelse skal konkluderes etter 187 dagers behandlingstid etter melding sin startdato
-
-Gitt at man har en konkludert Undersøkelse med en Relasjon til en Melding<br/>
-når undersøkelse sin Konklusjon/SluttDato er satt, <br/>
-og relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType,<br/>
-og Undersøkelse sin Konklusjon/SluttDato er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
-så gi feilmeldingen "Undersøkelse med utvidet frist skal konkluderes innen 7 + 180 dager etter melding sin startdato"
-
-Alvorlighetsgrad: Warning
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationConcludedMissingDecisionSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationConcludedMissingDecision.kt)
 
 
 
