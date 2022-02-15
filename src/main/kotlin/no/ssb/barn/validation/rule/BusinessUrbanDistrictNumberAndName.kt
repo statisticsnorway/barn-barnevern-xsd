@@ -11,12 +11,20 @@ class BusinessUrbanDistrictNumberAndName : AbstractRule(
     "Virksomhet Kontroll 3: Bydelsnummer og bydelsnavn",
     VirksomhetType::class.java.simpleName
 ) {
-    private val businessIdList = listOf(
-        "958935420", // Oslo
-        "964338531", // Bergen
-        "942110464", // Trondheim
-        "964965226"  // Stavanger
-    )
+    companion object{
+
+        const val OSLO_COMPANY_ID = "958935420"
+        const val BERGEN_COMPANY_ID = "964338531"
+        const val TRONDHEIM_COMPANY_ID = "942110464"
+        const val STAVANGER_COMPANY_ID = "964965226"
+
+        private val businessIdList = listOf(
+            OSLO_COMPANY_ID,
+            BERGEN_COMPANY_ID,
+            TRONDHEIM_COMPANY_ID,
+            STAVANGER_COMPANY_ID
+        )
+    }
 
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.virksomhet.asSequence()

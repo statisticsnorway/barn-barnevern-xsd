@@ -55,16 +55,22 @@ class BusinessUrbanDistrictNumberAndNameSpec extends Specification {
         }
 
         where:
-        businessId  | urbanDistrictId | urbanDistrictName || errorExpected
-        "999999999" | null            | null              || false
-        "958935420" | null            | null              || true
-        "958935420" | ""              | ""                || true
-        "958935420" | "01"            | "Name"            || false
-        "964338531" | null            | null              || true
-        "964338531" | "01"            | "Name"            || false
-        "942110464" | null            | null              || true
-        "942110464" | "01"            | "Name"            || false
-        "964965226" | null            | null              || true
-        "964965226" | "01"            | "Name"            || false
+        businessId                                              | urbanDistrictId | urbanDistrictName || errorExpected
+        "999999999"                                             | null            | null              || false
+
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | null              || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | ""                || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | ""                || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | "42"              || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | "42"              || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | null              || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "42"            | null              || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "42"            | ""                || true
+        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "01"            | "Name"            || false
+
+
+        BusinessUrbanDistrictNumberAndName.BERGEN_COMPANY_ID    | "01"            | "Name"            || false
+        BusinessUrbanDistrictNumberAndName.TRONDHEIM_COMPANY_ID | "01"            | "Name"            || false
+        BusinessUrbanDistrictNumberAndName.STAVANGER_COMPANY_ID | "01"            | "Name"            || false
     }
 }
