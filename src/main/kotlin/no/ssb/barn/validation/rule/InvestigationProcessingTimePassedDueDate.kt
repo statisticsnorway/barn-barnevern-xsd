@@ -20,8 +20,8 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
 
         return relations
             .filter { relation ->
-                relation.tilType == BegrepsType.UNDERSOKELSE
-                        && relation.fraType == BegrepsType.MELDING
+                relation.fraType == BegrepsType.MELDING
+                        && relation.tilType == BegrepsType.UNDERSOKELSE
             }
             .map { relation ->
                 val message = messages.firstOrNull { message ->
