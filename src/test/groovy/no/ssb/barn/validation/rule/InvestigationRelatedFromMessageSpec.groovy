@@ -67,14 +67,17 @@ class InvestigationRelatedFromMessageSpec extends Specification {
         }
 
         where:
-        fromId            | fromType            | toId              | toType                   || errorExpected
-        UUID.randomUUID() | BegrepsType.MELDING | UUID.randomUUID() | BegrepsType.UNDERSOKELSE || false
-        UUID.randomUUID() | BegrepsType.MELDING | null              | BegrepsType.UNDERSOKELSE || true
-        null              | BegrepsType.MELDING | null              | BegrepsType.UNDERSOKELSE || true
+        fromId            | fromType                 | toId              | toType                   || errorExpected
+        UUID.randomUUID() | BegrepsType.MELDING      | UUID.randomUUID() | BegrepsType.UNDERSOKELSE || false
+        UUID.randomUUID() | BegrepsType.MELDING      | null              | BegrepsType.UNDERSOKELSE || true
+        null              | BegrepsType.MELDING      | null              | BegrepsType.UNDERSOKELSE || true
 
-        UUID.randomUUID() | BegrepsType.MELDING | UUID.randomUUID() | BegrepsType.MELDING      || true
-        null              | BegrepsType.MELDING | UUID.randomUUID() | BegrepsType.MELDING      || true
-        UUID.randomUUID() | BegrepsType.MELDING | null              | BegrepsType.MELDING      || true
-        null              | BegrepsType.MELDING | null              | BegrepsType.MELDING      || true
+        UUID.randomUUID() | BegrepsType.MELDING      | UUID.randomUUID() | BegrepsType.MELDING      || true
+        null              | BegrepsType.MELDING      | UUID.randomUUID() | BegrepsType.MELDING      || true
+        UUID.randomUUID() | BegrepsType.MELDING      | null              | BegrepsType.MELDING      || true
+        null              | BegrepsType.MELDING      | null              | BegrepsType.MELDING      || true
+
+        UUID.randomUUID() | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | BegrepsType.UNDERSOKELSE || true
+        UUID.randomUUID() | BegrepsType.UNDERSOKELSE | null              | BegrepsType.UNDERSOKELSE || true
     }
 }

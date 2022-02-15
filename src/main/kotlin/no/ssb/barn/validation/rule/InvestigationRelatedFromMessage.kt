@@ -22,11 +22,11 @@ class InvestigationRelatedFromMessage : AbstractRule(
             .filter { investigation ->
                 relations
                     .none { relation ->
-                        with(relation){
-                            tilType == BegrepsType.UNDERSOKELSE
-                                    && tilId == investigation.id
-                                    && fraType == BegrepsType.MELDING
+                        with(relation) {
+                            fraType == BegrepsType.MELDING
                                     && fraId in messages.map { it.id }
+                                    && tilType == BegrepsType.UNDERSOKELSE
+                                    && tilId == investigation.id
                         }
                     }
             }
