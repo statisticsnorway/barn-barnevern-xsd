@@ -19,10 +19,11 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
         val messages = businesses.flatMap { virksomhet -> virksomhet.melding }
 
         return relations
+            .filter { relation ->
+                relation.tilType == BegrepsType.UNDERSOKELSE
+                        && relation.fraType == BegrepsType.MELDING
+            }
             .map { relation ->
-                if (!(relation.tilType == BegrepsType.UNDERSOKELSE && relation.fraType == BegrepsType.MELDING))
-                    return@map null
-
                 val message = messages.firstOrNull { message ->
                     message.id == relation.fraId
                 } ?: return@map null

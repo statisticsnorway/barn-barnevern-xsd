@@ -72,5 +72,6 @@ class InvestigationRelatedFromMessageSpec extends Specification {
         UUID.randomUUID() | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | BegrepsType.MELDING      || true
         UUID.randomUUID() | BegrepsType.UNDERSOKELSE | null              | BegrepsType.UNDERSOKELSE || true
         UUID.randomUUID() | BegrepsType.MELDING      | null              | BegrepsType.UNDERSOKELSE || true
+        null              | BegrepsType.MELDING      | null              | BegrepsType.UNDERSOKELSE || true
     }
 }
