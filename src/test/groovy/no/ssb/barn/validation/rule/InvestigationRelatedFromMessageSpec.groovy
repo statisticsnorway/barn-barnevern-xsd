@@ -38,21 +38,21 @@ class InvestigationRelatedFromMessageSpec extends Specification {
         given:
         def message = context.rootObject.sak.virksomhet[0].melding[0]
         and:
-        message.id = messageId ?: UUID.randomUUID()
+        message.id = fromId ?: UUID.randomUUID()
         and:
         def relation = context.rootObject.sak.virksomhet[0].relasjon[0]
         and:
-        relation.fraId = messageId ?: UUID.randomUUID()
+        relation.fraId = fromId ?: UUID.randomUUID()
         and:
-        relation.fraType = BegrepsType.MELDING
+        relation.fraType = fromType
         and:
-        relation.tilId = investigationId
+        relation.tilId = toId ?: UUID.randomUUID()
         and:
-        relation.tilType = BegrepsType.UNDERSOKELSE
+        relation.tilType = toType
         and:
         def investigation = context.rootObject.sak.virksomhet[0].undersokelse[0]
         and:
-        investigation.id = investigationId
+        investigation.id = toId ?: UUID.randomUUID()
 
         when:
         def reportEntries = sut.validate(context)
@@ -67,8 +67,10 @@ class InvestigationRelatedFromMessageSpec extends Specification {
         }
 
         where:
-        messageId         | investigationId   || errorExpected
-        UUID.randomUUID() | UUID.randomUUID() || false
-        null              | UUID.randomUUID() || true
+        fromId            | fromType                 | toId              | toType                   || errorExpected
+        UUID.randomUUID() | BegrepsType.MELDING      | UUID.randomUUID() | BegrepsType.UNDERSOKELSE || false
+        UUID.randomUUID() | BegrepsType.UNDERSOKELSE | UUID.randomUUID() | BegrepsType.MELDING      || true
+        UUID.randomUUID() | BegrepsType.UNDERSOKELSE | null              | BegrepsType.UNDERSOKELSE || true
+        UUID.randomUUID() | BegrepsType.MELDING      | null              | BegrepsType.UNDERSOKELSE || true
     }
 }

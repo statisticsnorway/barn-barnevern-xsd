@@ -21,7 +21,7 @@ class InvestigationRelatedFromMessage : AbstractRule(
         return investigations
             .filter { investigation ->
                 relations
-                    .filter { relation ->
+                    .none { relation ->
                         with(relation){
                             tilType == BegrepsType.UNDERSOKELSE
                                     && tilId == investigation.id
@@ -29,7 +29,6 @@ class InvestigationRelatedFromMessage : AbstractRule(
                                     && fraId in messages.map { it.id }
                         }
                     }
-                    .count() < 1
             }
             .map {
                 createReportEntry(
