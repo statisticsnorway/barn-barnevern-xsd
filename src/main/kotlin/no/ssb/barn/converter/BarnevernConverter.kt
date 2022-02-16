@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import no.ssb.barn.xsd.BarnevernType
+import no.ssb.barn.xsd.TiltakTypeJson
 import java.io.StringWriter
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -27,12 +28,27 @@ object BarnevernConverter {
     fun unmarshallXmlAndValidationReportToMap(
         xml: String,
         validationReportJson: String
-    ): MutableMap<String, Any> =
-        gson.fromJson<MutableMap<String, Any>>(gson.toJson(unmarshallXml(xml)))
+    ): Map<String, Any> =
+        gson.fromJson<MutableMap<String, Any>>(unmarshallXmlToJson(xml))
             .also {
                 it[VALIDATION_REPORT_KEY] =
                     gson.fromJson<Map<String, Any>>(validationReportJson)
             }
+
+    @JvmStatic
+    fun unmarshallXmlToJson(xml: String): String =
+        unmarshallXml(xml).apply {
+            sak.virksomhet = sak.virksomhet
+                .map { virksomhet ->
+                    virksomhet.apply {
+                        tiltak = virksomhet.tiltak
+                            .map { TiltakTypeJson(it) }
+                            .toMutableList()
+                    }
+                }.toMutableList()
+        }.let { barnevernType ->
+            gson.toJson(barnevernType)
+        }
 
     @JvmStatic
     fun marshallInstance(barnevernType: BarnevernType): String =

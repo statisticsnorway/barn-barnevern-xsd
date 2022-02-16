@@ -6,9 +6,9 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.UndersokelseType
 
-class InvestigationDecisionRequired : AbstractRule(
+class InvestigationConcludedMissingDecision : AbstractRule(
     WarningLevel.ERROR,
-    "Undersøkelse Kontroll 7: Konkludert undersøkelse skal ha vedtaksgrunnlag",
+    "Undersøkelse Kontroll 7: Konkludert undersøkelse mangler vedtaksgrunnlag",
     UndersokelseType::class.java.simpleName
 ) {
     private val codesThatRequiresDecision = listOf("1", "2")
@@ -17,15 +17,14 @@ class InvestigationDecisionRequired : AbstractRule(
         context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.undersokelse }
             .filter { undersokelse ->
-                codesThatRequiresDecision.contains(undersokelse.konklusjon?.kode)
+                val conclusion = undersokelse.konklusjon
+                conclusion != null
+                        && conclusion.kode in codesThatRequiresDecision
                         && !undersokelse.vedtaksgrunnlag.any()
             }
             .map {
                 createReportEntry(
-                    "Undersøkelse (${it.id})."
-                            + " Undersøkelse konkludert med kode"
-                            + " ${it.konklusjon!!.kode}"
-                            + " skal ha vedtaksgrunnlag",
+                    "Undersøkelse konkludert med kode ${it.konklusjon!!.kode} mangler vedtaksgrunnlag",
                     it.id
                 )
             }

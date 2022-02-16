@@ -8,7 +8,7 @@ import no.ssb.barn.xsd.SaksinnholdType
 
 class InvestigationDecisionClarificationRequired : AbstractRule(
     WarningLevel.ERROR,
-    "Vedtaksgrunnlag Kontroll 2: Kontroll av kode og presisering",
+    "Undersøkelse Kontroll 3: Vedtaksgrunnlag mangler presisering",
     SaksinnholdType::class.java.simpleName
 ) {
     private val codesThatRequiresClarification = listOf("18", "19")

@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
     propOrder = ["id", "migrertId", "startDato",
         "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
 )
-data class TiltakType(
+open class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class

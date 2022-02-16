@@ -6,6 +6,7 @@ import no.ssb.barn.util.ValidationUtils
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
+import no.ssb.barn.xsd.erOmsorgsTiltak
 
 class LegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
     WarningLevel.ERROR,
@@ -20,18 +21,7 @@ class LegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
 
         return context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
-            .filter { tiltak ->
-                val legalBasis = tiltak.lovhjemmel
-                legalBasis != null
-                        && legalBasis.kapittel == "4"
-                        && (
-                        legalBasis.paragraf == "12"
-                                ||
-                                legalBasis.paragraf == "8"
-                                && legalBasis.ledd.any {
-                            listOf("2", "3").contains(it)
-                        })
-            }
+            .filter { tiltak -> tiltak.erOmsorgsTiltak() }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}). Individet er $age år og skal "

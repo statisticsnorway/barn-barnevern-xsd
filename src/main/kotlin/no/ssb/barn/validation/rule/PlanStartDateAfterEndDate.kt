@@ -6,31 +6,27 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.PlanType
 
-class PlanEndDateBeforeIndividEndDate : AbstractRule(
+class PlanStartDateAfterEndDate : AbstractRule(
     WarningLevel.ERROR,
-    "Plan Kontroll 2c: Sluttdato mot individets sluttdato",
+    "Plan Kontroll 2a: Startdato etter sluttdato",
     PlanType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val sak = context.rootObject.sak
-        val individEndDate = sak.sluttDato ?: return null
-
-        return sak.virksomhet.asSequence()
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.plan }
             .filter { plan ->
                 val conclusion = plan.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
-                        && conclusion.sluttDato.isAfter(individEndDate)
+                        && plan.startDato.isAfter(conclusion.sluttDato)
             }
             .map {
                 createReportEntry(
-                    "Plan (${it.id}). Planens sluttdato"
-                            + " (${it.konklusjon!!.sluttDato}) er etter individets"
-                            + " sluttdato ($individEndDate)",
+                    "Plan (${it.id}}). Planens startdato (${it.startDato})"
+                            + " er etter planens sluttdato"
+                            + " (${it.konklusjon!!.sluttDato})",
                     it.id
                 )
             }
             .toList()
             .ifEmpty { null }
-    }
 }

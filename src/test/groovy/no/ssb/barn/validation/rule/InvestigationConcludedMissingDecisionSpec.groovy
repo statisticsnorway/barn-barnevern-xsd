@@ -3,22 +3,32 @@ package no.ssb.barn.validation.rule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.SaksinnholdType
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class InvestigationDecisionRequiredSpec extends Specification {
+@Narrative("""
+Undersøkelse Kontroll 7: Konkludert undersøkelse mangler vedtaksgrunnlag
+
+Gitt at man har en Undersøkelse der Konklusjon finnes og Konklusjon sin Kode er 1 eller 2<br/>
+når Vedtaksgrunnlag mangler<br/>
+så gi feilmeldingen "Undersøkelse konkludert med kode {Konklusjon/Kode} mangler vedtaksgrunnlag"
+
+Alvorlighetsgrad: ERROR
+""")
+class InvestigationConcludedMissingDecisionSpec extends Specification {
 
     @Subject
-    InvestigationDecisionRequired sut
+    InvestigationConcludedMissingDecision sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new InvestigationDecisionRequired()
+        sut = new InvestigationConcludedMissingDecision()
         context = getTestContext()
     }
 
@@ -40,7 +50,7 @@ class InvestigationDecisionRequiredSpec extends Specification {
         if (errorExpected) {
             assert 1 == reportEntries.size()
             assert WarningLevel.ERROR == reportEntries[0].warningLevel
-            assert reportEntries[0].errorText.contains("skal ha vedtaksgrunnlag")
+            assert reportEntries[0].errorText.contains("mangler vedtaksgrunnlag")
         }
 
         where:
