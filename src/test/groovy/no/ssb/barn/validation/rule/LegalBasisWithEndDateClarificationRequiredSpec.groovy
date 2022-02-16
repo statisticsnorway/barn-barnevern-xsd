@@ -83,6 +83,12 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
         true             | true             | true             | "4"      | "12"     | null | "5"   | null            || false
         true             | true             | true             | "4"      | "12"     | null | "5"   | ""              || false
         true             | true             | false            | "4"      | "12"     | null | "5"   | "~presisering~" || false
+
+        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | null            || true
+        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | ""              || true
+
+        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | null            || true
+        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | ""              || true
         // END test where tiltak.erOmsorgsTiltak() == true
 
 
@@ -103,12 +109,6 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
 
         true             | true             | true             | "4"      | "8"      | null | "4"   | null            || false
         true             | true             | true             | "4"      | "8"      | null | "4"   | ""              || false
-
-        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | null            || true
-        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | ""              || true
-
-        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | null            || true
-        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | ""              || true
 
         true             | true             | true             | "4"      | "8"      | "42" | "4"   | null            || false
         true             | true             | true             | "4"      | "8"      | "42" | "4"   | ""              || false
