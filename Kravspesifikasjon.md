@@ -89,8 +89,8 @@ Alvorlighetsgrad: ERROR
 
 ### Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet
 
-Gitt at man har en Sak og utleder alder ved hjelp av fødselsnummer<br/>
-når alder er 25 eller større<br/>
+Gitt at man har en Sak med datoUttrekk og fødselsdato<br/>
+når datoUttrekk minus fødselsdato er lik 25 år eller større<br/>
 så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient"
 
 Alvorlighetsgrad: ERROR
@@ -168,7 +168,7 @@ Alvorlighetsgrad: ERROR
 
 Gitt at man har en Sak der StartDato finnes og virksomhet der StartDato finnes<br/>
 når virksomhetens StartDato er før sakens StartDato <br/>
-så gi feilmeldingen "Virksomhetens startdato {StartDato } er før sakens startdato {StartDato }"
+så gi feilmeldingen "Virksomhetens startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
@@ -349,7 +349,7 @@ Alvorlighetsgrad: ERROR
 
 Gitt at man har en Undersøkelse der StartDato finnes og virksomhet der StartDato finnes<br/>
 når undersøkelsens StartDato er før virksomhetens StartDato <br/>
-så gi feilmeldingen "Undersøkelsens startdato {StartDato } er før virksomhetens startdato {StartDato }"
+så gi feilmeldingen "Undersøkelsens startdato {StartDato} er før virksomhetens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
@@ -440,31 +440,132 @@ Alvorlighetsgrad: Warning
 
 ### X Tiltak Kontroll 2a: StartDato er etter SluttDato
 
+Gitt at man har et Tiltak der StartDato og Konklusjon/SluttDato finnes<br/>
+når StartDato er etter SluttDato<br/>
+så gi feilmeldingen "Tiltakets startdato {StartDato} er etter sluttdato {Konklusjon/SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
+
+
 ### X Tiltak Kontroll 2c: SluttDato mot virksomhetens SluttDato
 
-### X Tiltak Kontroll 2e: StartDato mot virksomhetens StartDato
+Gitt at man har et Tiltak der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
+når tiltakets SluttDato er etter virksomhetens SluttDato<br/>
+så gi feilmeldingen "Tiltakets sluttdato {Konklusjon/SluttDato} er etter Virksomhetens sluttdato {SluttDato}"
 
-### X Tiltak Kontroll  4: Omsorgstiltak med sluttdato krever årsak til opphevelse
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
+
+
+### X Tiltak Kontroll 2e: StartDato er før virksomhetens StartDato
+
+Gitt at man har et Tiltak der StartDato finnes og virksomhet der StartDato finnes<br/>
+når tiltakets StartDato er før virksomhetens StartDato <br/>
+så gi feilmeldingen "Tiltakets startdato {StartDato} er før virksomhetens startdato {StartDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
+
+### X Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse
+
+Gitt at man har et Tiltak der SluttDato er satt og<br/>
+tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
+Paragraf er 12<br/>
+eller Paragraf er 8 og Ledd er 2 eller 3<br/>
+når Opphevelse mangler  
+så gi feilmeldingen "Omsorgstiltak med sluttdato krever årsak til opphevelse."
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
+
 
 ### X Tiltak Kontroll 5: Kontroll om barnet er over 7 år og er i barnehage
 
-### [Tiltak Kontroll 6: Klienten er 11 år eller eldre og i SFO](src/test/groovy/no/ssb/barn/validation/rule/MeasureAgeAboveElevenAndInSfoSpec.groovy)
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
+når barnets alder er større enn 7 år og tiltakets kategori er '4.1' Barnehage<br/>
+så gi feilmelding "Barnet er over 7 år og i barnehage."
 
-Gitt at det er en sak med tiltak og fødselnummer (slik at man kan utlede alder)<br/>
+Alvorlighetsgrad: Warning
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
+
+### Tiltak Kontroll 6: Klienten er 11 år eller eldre og i SFO
+
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
 når barnets alder er større enn 11 år og tiltakets kategori er '4.2' SFO/AKS<br/>
 så gi feilmelding "Klienten er over 11 år og i SFO"
 
 Alvorlighetsgrad: Warning
 
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureAgeAboveElevenAndInSfoSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureAgeAboveElevenAndInSfo.kt)
+
+
 ### X Tiltak Kontroll 7: Kontroll om presisering av tiltakskategori
 
+Gitt at man har et Tiltak der Kategori/Kode er en følgende koder:<br/>
+1.99, 2.99, 3.7, 3.99, 4.99, 5.99, 6.99, 7.99 eller 8.99
+når presisering mangler
+så gi feilmelding "Tiltakskategori (kode) mangler presisering."
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
 
 
 ### X Tiltak Kontroll  8: Kontroll av kode og presisering av opphevelse
 
+Gitt at man har et Tiltak der Opphevelse/Kode er 4
+når presisering mangler
+så gi feilmelding "Tiltakskategori (kode) mangler presisering."
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
 
 
 ### X Tiltak Kontroll 9: Kontroll om flere plasseringstiltak er oppgitt i samme tidsperiode
+
+Gitt at man har 2 eller flere Tiltak der Kategori/Kode er en følgende koder:<br/>
+1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2
+når tiltak1 sin StartDato er før tiltak2 sin StartDato
+og tiltak2 sin SluttDato er etter tiltak1 sin SluttDato
+og tiltak1 sin SluttDato er mer enn 3 måneder etter tiltak2 sin StartDato
+så gi feilmelding "Flere plasseringstiltak i samme periode. Plasseringstiltak kan ikke overlappe med mer enn 3 måneder."
+
+Alvorlighetsgrad: Warning
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
+
 
 <a name="TiltakLovhjemmel"></a>
 
@@ -472,10 +573,31 @@ Alvorlighetsgrad: Warning
 
 #### X Tiltak Kontroll 12: Kontroll av omsorgstiltak med sluttdato, krever årsak til opphevelse
 
+Er denne lik Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse?
+
+
+
 #### X Tiltak Kontroll 13: Kontroll om individ er over 18 år og har omsorgtiltak
+
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder) og<br/>
+tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
+Paragraf er 12<br/>
+eller Paragraf er 8 og Ledd er 2 eller 3<br/>
+når alder er 18 år eller større
+så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+
 
 #### X Tiltak Kontroll 14: Kontroll om lovhjemmel er fylt ut med tallet 0
 
+Gitt at det er en sak med tiltak <br/>
+når Lovhjemmel alder er 18 år eller større
+så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
 
 
 <a name="Plan"></a>
@@ -514,7 +636,7 @@ Alvorlighetsgrad: ERROR
 
 Gitt at man har en Plan der StartDato finnes og virksomhet der StartDato finnes<br/>
 når planens StartDato er før virksomhetens StartDato <br/>
-så gi feilmeldingen "Planens startdato {StartDato } er før virksomhetens startdato {StartDato }"
+så gi feilmeldingen "Planens startdato {StartDato} er før virksomhetens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
