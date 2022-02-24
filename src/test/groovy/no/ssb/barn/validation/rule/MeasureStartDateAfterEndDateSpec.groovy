@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -10,16 +11,25 @@ import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class MeasureEndDateAfterStartDateSpec extends Specification {
+@Narrative("""
+Tiltak Kontroll 2a: StartDato er etter SluttDato
+
+Gitt at man har et Tiltak der StartDato og Konklusjon/SluttDato finnes<br/>
+når StartDato er etter SluttDato<br/>
+så gi feilmeldingen "Tiltakets startdato {StartDato} er etter sluttdato {Konklusjon/SluttDato}"
+
+Alvorlighetsgrad: ERROR
+""")
+class MeasureStartDateAfterEndDateSpec extends Specification {
 
     @Subject
-    MeasureEndDateAfterStartDate sut
+    MeasureStartDateAfterEndDate sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new MeasureEndDateAfterStartDate()
+        sut = new MeasureStartDateAfterEndDate()
         context = getTestContext()
     }
 

@@ -9,10 +9,10 @@ import java.util.*
 class TiltakTypeJson(
     id: UUID,
     migrertId: String?,
-    startDato: LocalDate?,
-    lovhjemmel: LovhjemmelType?,
+    startDato: LocalDate,
+    lovhjemmel: LovhjemmelType,
     jmfrLovhjemmel: MutableList<LovhjemmelType>,
-    kategori: KategoriType?,
+    kategori: KategoriType,
     tilsyn: MutableList<TilsynType>,
     oppfolging: MutableList<OppfolgingType>,
     opphevelse: OpphevelseType?,

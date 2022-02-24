@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -10,6 +11,15 @@ import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
+@Narrative("""
+Tiltak Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+
+Gitt at man har et Tiltak der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
+når tiltakets SluttDato er etter virksomhetens SluttDato<br/>
+så gi feilmeldingen "Tiltakets sluttdato {Konklusjon/SluttDato} er etter Virksomhetens sluttdato {SluttDato}"
+
+Alvorlighetsgrad: ERROR
+""")
 class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
 
     @Subject

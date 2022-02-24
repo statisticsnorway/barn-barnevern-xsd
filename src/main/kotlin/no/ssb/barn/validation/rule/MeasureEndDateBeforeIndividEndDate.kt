@@ -1,9 +1,9 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 
 class MeasureEndDateBeforeIndividEndDate : AbstractRule(
@@ -26,7 +26,9 @@ class MeasureEndDateBeforeIndividEndDate : AbstractRule(
                 createReportEntry(
                     "Tiltak (${it.id}). Sluttdato"
                             + " (${it.konklusjon!!.sluttDato}) er etter individets"
-                            + " sluttdato ($individEndDate)"
+                            + " sluttdato ($individEndDate)",
+                    it.id
+
                 )
             }
             .toList()

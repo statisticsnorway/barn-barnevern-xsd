@@ -21,5 +21,5 @@ data class LovhjemmelType(
         var ledd: MutableList<String> = mutableListOf(),
 
         @field:XmlElement(name = "Punktum")
-        var punktum: MutableList<String> = mutableListOf()
+        var punktum: MutableList<String>? = mutableListOf()
 )

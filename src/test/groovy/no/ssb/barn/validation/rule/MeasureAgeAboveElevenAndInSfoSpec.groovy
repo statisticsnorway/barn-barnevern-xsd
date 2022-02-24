@@ -12,9 +12,11 @@ import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
-Gitt at det er en sak med tiltak og fødselnummer (slik at man kan utlede alder)
-dersom barnets alder er større enn 11 år og tiltakets kategori er '4.2' SFO/AKS
-så gi feilmelding "Klienten er over 11 år og i SFO"
+Tiltak Kontroll 6: Barnet er over 11 år og i SFO
+
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
+når barnets alder er større enn 11 år og tiltakets kategori er '4.2' SFO/AKS<br/>
+så gi feilmelding "Barnet er over 11 år og i SFO"
 
 Alvorlighetsgrad: Warning
 """)
@@ -36,7 +38,7 @@ class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
         given: "det er en sak "
         def sak = context.rootObject.sak
         and: "som har tiltak med kategorikode"
-        sak.virksomhet[0].tiltak[0].kategori = (createKategori) ? new KategoriType(code, "~presisering~") : null
+        sak.virksomhet[0].tiltak[0].kategori = new KategoriType(code, "~presisering~")
         and: "som har et fødselnummer (her generert basert på en gitt alder)"
         sak.fodselsnummer = getMockSocialSecurityNumber(age)
 
@@ -54,18 +56,16 @@ class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
             and: "at riktig alvorlighetsgrad er satt"
             assert WarningLevel.WARNING == reportEntries[0].warningLevel
             and: "at feilmeldingsteksten inneholder en gitt tekst"
-            assert reportEntries[0].errorText.contains("Klienten er over 11 år og i SFO")
+            assert reportEntries[0].errorText.contains("Barnet er over 11 år og i SFO")
         }
 
         where:
-        age  | createKategori | code     || errorExpected
-        11   | false          | ""       || false
-        12   | false          | ""       || false
-        11   | true           | "~kode~" || false
-        12   | true           | "~kode~" || false
-        11   | true           | "4.2"    || false
-        11   | true           | "4.2"    || false
-        12   | true           | "4.2"    || true
-        12   | true           | "4.3"    || false
+        age  | code     || errorExpected
+        11   | "~kode~" || false
+        12   | "~kode~" || false
+        11   | "4.2"    || false
+        11   | "4.2"    || false
+        12   | "4.2"    || true
+        12   | "4.3"    || false
     }
 }

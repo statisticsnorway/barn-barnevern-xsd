@@ -1,6 +1,8 @@
 package no.ssb.barn.util
 
 import no.ssb.barn.generator.RandomUtils
+import no.ssb.barn.xsd.KategoriType
+import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.TiltakKonklusjonType
 import no.ssb.barn.xsd.TiltakType
 import org.xml.sax.SAXException
@@ -186,9 +188,9 @@ class ValidationUtilsSpec extends Specification {
                 UUID.randomUUID(),
                 null,
                 start,
-                null,
+                new LovhjemmelType(),
                 List.of(),
-                null,
+                new KategoriType(),
                 List.of(),
                 List.of(),
                 null,

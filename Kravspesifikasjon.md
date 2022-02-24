@@ -1,26 +1,25 @@
 # Kravspesifikasjon for validering
 
 ## Innhold
-- [Filbeskrivelse](#Filbeskrivelse)
-- [Sak](#Sak)
-- [Virksomhet](#Virksomhet)
-- [Melding](#Melding)
-  - [Melder](#Melder)
-  - [Saksinnhold](#Saksinnhold)
-- [Undersøkelse](#Undersokelse)
-- [Vedtak](#Vedtak)
-- [Tiltak](#Tiltak)
-  - [Lovhjemmel](#TiltakLovhjemmel)
-- [Plan](#Plan)
-- [Ettervern](#Ettervern)
-- [Flytting](#Flytting)
-- [Oversendelse til fylkesnemnd](#OversendelseTilFylkesnemnd)
+- [Filbeskrivelse](#filbeskrivelse)
+- [Sak](#sak)
+- [Virksomhet](#virksomhet)
+- [Melding](#melding)
+  - [Melder](#melder)
+  - [Saksinnhold](#saksinnhold)
+- [Undersøkelse](#undersokelse)
+- [Vedtak](#vedtak)
+- [Tiltak](#tiltak)
+  - [Lovhjemmel](#tiltakLovhjemmel)
+- [Plan](#plan)
+- [Ettervern](#ettervern)
+- [Flytting](#flytting)
+- [Oversendelse til fylkesnemnd](#oversendelse-til-fylkesnemnd)
 
 
 
 
-<a name="Filbeskrivelse"></a>
-## Filbeskrivelse
+## <a name="filbeskrivelse">Filbeskrivelse</a>
 
 ### Validéring av innhold mot filbeskrivelse
 
@@ -34,8 +33,7 @@ Alvorlighetsgrad: FATAL
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/XsdRule.kt)
 
-<a name="Sak"></a>
-## Sak
+## <a name="sak">Sak</a>
 
 ### Sak Kontroll 2a: StartDato er etter SluttDato
 
@@ -132,9 +130,8 @@ Alvorlighetsgrad: Warning
 
 
 
-<a name="Virksomhet"></a>
 
-## Virksomhet
+## <a name="virksomhet">Virksomhet</a>
 
 ### Virksomhet Kontroll 2a: StartDato er etter SluttDato
 
@@ -192,9 +189,8 @@ Alvorlighetsgrad: ERROR
 
 
 
-<a name="Melding"></a>
 
-## Melding
+## <a name="melding">Melding</a> 
 
 ### Melding Kontroll 2a: StartDato er etter SluttDato
 
@@ -279,9 +275,8 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageMissingCaseContent.kt)
 
 
-<a name="Melder"></a>
 
-### Melder
+### <a name="melder">Melder</a> 
 
 #### Melder Kontroll 2: Mangler Presisering
 
@@ -296,9 +291,8 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageReporterMissingClarification.kt)
 
 
-<a name="Saksinnhold"></a>
 
-### Saksinnhold
+### <a name="saksinnhold">Saksinnhold</a> 
 
 #### Saksinnhold Kontroll 2: Mangler Presisering
 
@@ -314,8 +308,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-<a name="Undersokelse"></a>
-## Undersøkelse
+## <a name="undersokelse">Undersøkelse</a> 
 
 ### Undersøkelse Kontroll 2a: StartDato er etter SluttDato
 
@@ -425,8 +418,7 @@ Alvorlighetsgrad: Warning
 
 
 
-<a name="Vedtak"></a>
-## Vedtak
+## <a name="vedtak">Vedtak</a> 
 
 ### X Vedtak Kontroll 2a: StartDato er etter SluttDato
 
@@ -434,11 +426,11 @@ Alvorlighetsgrad: Warning
 
 ### X Vedtak Kontroll 2e: StartDato mot virksomhetens StartDato
 
-<a name="Tiltak"></a>
 
-## Tiltak
 
-### X Tiltak Kontroll 2a: StartDato er etter SluttDato
+## <a name="tiltak">Tiltak</a> 
+
+### Tiltak Kontroll 2a: StartDato er etter SluttDato
 
 Gitt at man har et Tiltak der StartDato og Konklusjon/SluttDato finnes<br/>
 når StartDato er etter SluttDato<br/>
@@ -446,13 +438,13 @@ så gi feilmeldingen "Tiltakets startdato {StartDato} er etter sluttdato {Konklu
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureStartDateAfterEndDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureStartDateAfterEndDate.kt)
 
 
 
-### X Tiltak Kontroll 2c: SluttDato mot virksomhetens SluttDato
+### Tiltak Kontroll 2c: SluttDato er etter virksomhetens SluttDato
 
 Gitt at man har et Tiltak der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
 når tiltakets SluttDato er etter virksomhetens SluttDato<br/>
@@ -460,13 +452,13 @@ så gi feilmeldingen "Tiltakets sluttdato {Konklusjon/SluttDato} er etter Virkso
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDate.kt)
 
 
 
-### X Tiltak Kontroll 2e: StartDato er før virksomhetens StartDato
+### Tiltak Kontroll 2e: StartDato er før virksomhetens StartDato
 
 Gitt at man har et Tiltak der StartDato finnes og virksomhet der StartDato finnes<br/>
 når tiltakets StartDato er før virksomhetens StartDato <br/>
@@ -474,12 +466,12 @@ så gi feilmeldingen "Tiltakets startdato {StartDato} er før virksomhetens star
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureStartDateBeforeBusinessStartDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureStartDateBeforeBusinessStartDate.kt)
 
 
-### X Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse
+### Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse
 
 Gitt at man har et Tiltak der SluttDato er satt og<br/>
 tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
@@ -490,13 +482,13 @@ så gi feilmeldingen "Omsorgstiltak med sluttdato krever årsak til opphevelse."
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureCareMeasureWithEndDateRequiresReasonForRevocationSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureCareMeasureWithEndDateRequiresReasonForRevocation.kt)
 
 
 
-### X Tiltak Kontroll 5: Kontroll om barnet er over 7 år og er i barnehage
+### Tiltak Kontroll 5: Barnet er over 7 år og er i barnehage
 
 Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
 når barnets alder er større enn 7 år og tiltakets kategori er '4.1' Barnehage<br/>
@@ -504,16 +496,16 @@ så gi feilmelding "Barnet er over 7 år og i barnehage."
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureAgeAboveSevenAndInKindergartenSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureAgeAboveSevenAndInKindergarten.kt)
 
 
-### Tiltak Kontroll 6: Klienten er 11 år eller eldre og i SFO
+### Tiltak Kontroll 6: Barnet er over 11 år og i SFO
 
 Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
 når barnets alder er større enn 11 år og tiltakets kategori er '4.2' SFO/AKS<br/>
-så gi feilmelding "Klienten er over 11 år og i SFO"
+så gi feilmelding "Barnet er over 11 år og i SFO"
 
 Alvorlighetsgrad: Warning
 
@@ -522,7 +514,7 @@ Alvorlighetsgrad: Warning
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureAgeAboveElevenAndInSfo.kt)
 
 
-### X Tiltak Kontroll 7: Kontroll om presisering av tiltakskategori
+### Tiltak Kontroll 7: Kontroll om presisering av tiltakskategori
 
 Gitt at man har et Tiltak der Kategori/Kode er en følgende koder:<br/>
 1.99, 2.99, 3.7, 3.99, 4.99, 5.99, 6.99, 7.99 eller 8.99
@@ -531,45 +523,47 @@ så gi feilmelding "Tiltakskategori (kode) mangler presisering."
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureClarificationRequiredSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureClarificationRequired.kt)
 
 
-### X Tiltak Kontroll  8: Kontroll av kode og presisering av opphevelse
+### Tiltak Kontroll 8: Kontroll av kode og presisering av opphevelse
 
 Gitt at man har et Tiltak der Opphevelse/Kode er 4
 når presisering mangler
-så gi feilmelding "Tiltakskategori (kode) mangler presisering."
+så gi feilmelding "Opphevelse (kode) mangler presisering."
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureRepealClarificationRequiredSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureRepealClarificationRequired.kt)
 
 
 
 ### X Tiltak Kontroll 9: Kontroll om flere plasseringstiltak er oppgitt i samme tidsperiode
 
 Gitt at man har 2 eller flere Tiltak der Kategori/Kode er en følgende koder:<br/>
-1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2
-når tiltak1 sin StartDato er før tiltak2 sin StartDato
-og tiltak2 sin SluttDato er etter tiltak1 sin SluttDato
-og tiltak1 sin SluttDato er mer enn 3 måneder etter tiltak2 sin StartDato
-så gi feilmelding "Flere plasseringstiltak i samme periode. Plasseringstiltak kan ikke overlappe med mer enn 3 måneder."
+1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2<br/>
+og utled den seneste startDato (PeriodeStartDato) <br/>
+utifra tiltak1 sin StartDato og tiltak2 sin StartDato<br/>
+og utled den tidligste sluttDato (PeriodeSluttDato) <br/>
+utifra tiltak1 sin SluttDato eller DatoUttrekk hvis tiltak1 sin SluttDato er blank og tiltak2 sin SluttDato eller DatoUttrekk hvis tiltak2 sin SluttDato er blank<br/>
+når tiltak1 sin SluttDato er etter tiltak2 sin StartDato og PeriodeSluttDato er mer enn 90 etter PeriodeStartDato<br/>
+så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 3 måneder."
+
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureMultipleAllocationsWithinPeriodSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureMultipleAllocationsWithinPeriod.kt)
 
 
 
-<a name="TiltakLovhjemmel"></a>
 
-### Lovhjemmel
+### <a name="tiltaklovhjemmel">Lovhjemmel</a> 
 
 #### X Tiltak Kontroll 12: Kontroll av omsorgstiltak med sluttdato, krever årsak til opphevelse
 
@@ -599,10 +593,13 @@ Gitt at det er en sak med tiltak <br/>
 når Lovhjemmel alder er 18 år eller større
 så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
 
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
 
-<a name="Plan"></a>
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
 
-## Plan
+
+
+## <a name="plan">Plan</a> 
 
 ### Plan Kontroll 2a: StartDato er etter SluttDato
 
@@ -646,8 +643,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-<a name="Ettervern"></a>
-## Ettervern
+## <a name="ettervern">Ettervern</a> 
 
 ### X Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
 
@@ -655,16 +651,15 @@ Alvorlighetsgrad: ERROR
 
 ### X Ettervern Kontroll 2e: StartDato mot virksomhetens StartDato
 
-<a name="Flytting"></a>
-## Flytting
+
+## <a name="flytting">Flytting</a> 
 
 ### X Plan Kontroll 2c: SluttDato mot virksomhetens SluttDato
 
 ### X Plan Kontroll 2f: SluttDato mot virksomhetens StartDato
 
-<a name="OversendelseTilFylkesnemnd"></a>
 
-## Oversendelse til fylkesnemnd
+## <a name="oversendelse-til-fylkesnemnd">Oversendelse til fylkesnemnd</a> 
 
 ### X Plan Kontroll 2c: StartDato mot virksomhetens SluttDato
 

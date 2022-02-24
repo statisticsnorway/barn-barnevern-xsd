@@ -20,10 +20,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 val category = tiltak.kategori  // when JaCoCo improves, use "?."
-                category != null
-                        && kodelistePlasseringstiltak.contains(category.kode)
-                        && tiltak.startDato != null
-                        && tiltak.konklusjon != null
+                category.kode in kodelistePlasseringstiltak && tiltak.konklusjon != null
             }
             .toList()
 

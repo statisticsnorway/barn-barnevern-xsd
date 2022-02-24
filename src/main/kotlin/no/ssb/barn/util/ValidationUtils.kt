@@ -23,10 +23,10 @@ object ValidationUtils {
     ): Boolean {
 
         val outerRange =
-            outerMeasure.startDato!!.rangeTo(outerMeasure.konklusjon!!.sluttDato)
+            outerMeasure.startDato.rangeTo(outerMeasure.konklusjon?.sluttDato ?: LocalDate.now())
 
         val innerRange =
-            innerMeasure.startDato!!.rangeTo(innerMeasure.konklusjon!!.sluttDato)
+            innerMeasure.startDato.rangeTo(innerMeasure.konklusjon?.sluttDato ?: LocalDate.now())
 
         return areOverlapping(outerRange, innerRange)
                 && getMaxDate(outerRange.start, innerRange.start)
@@ -101,7 +101,8 @@ object ValidationUtils {
                     .zip(sequenceOf(4, 6, 3, 2, 4, 6, 3, 2, 7, 5)) { digit, weight -> digit * weight }
                     .sum()
                     .mod(11)
-                    .let { it.toString().padStart(2, '0') } == duf.substring(10)
+                    .toString()
+                    .padStart(2, '0') == duf.substring(10)
 
     @JvmStatic
     fun validateFNR(fnr: String): Boolean =

@@ -31,24 +31,20 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
         given:
         def measure = context.rootObject.sak.virksomhet[0].tiltak[0]
         and:
-        measure.lovhjemmel = null
-        and:
-        measure.konklusjon = null
+        measure.lovhjemmel = new LovhjemmelType(
+                "~lov~",
+                kapittel,
+                paragraf,
+                ledd != null ? List.of(ledd) : List.of() as List<String>,
+                List.of())
         and:
         measure.opphevelse = null
-        and:
-        if (createLovhjemmel) {
-            measure.lovhjemmel = new LovhjemmelType(
-                    "~lov~",
-                    kapittel,
-                    paragraf,
-                    ledd != null ? List.of(ledd) : List.of() as List<String>,
-                    List.of())
-        }
         and:
         if (createOpphevelse) {
             measure.opphevelse = new OpphevelseType(kode, presisering)
         }
+        and:
+        measure.konklusjon = null
         and:
         if (createKonklusjon) {
             measure.konklusjon = new TiltakKonklusjonType(LocalDate.now())
@@ -69,48 +65,48 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
         }
 
         where:
-        createLovhjemmel | createOpphevelse | createKonklusjon | kapittel | paragraf | ledd | kode  | presisering     || errorExpected
+        createOpphevelse | createKonklusjon | kapittel | paragraf | ledd | kode  | presisering     || errorExpected
 
         // START test where tiltak.erOmsorgsTiltak() == true
-        true             | false            | false            | "4"      | "12"     | null | "N/A" | "N/A"           || false
-        true             | false            | true             | "4"      | "12"     | null | "N/A" | "N/A"           || false
-        true             | true             | true             | "4"      | "12"     | null | "N/A" | "N/A"           || false
-        true             | true             | true             | "4"      | "12"     | null | "4"   | "~presisering~" || false
-        true             | true             | true             | "4"      | "12"     | null | "4"   | ""              || true
-        true             | true             | true             | "4"      | "12"     | null | "4"   | null            || true
-        true             | true             | false            | "4"      | "12"     | null | "N/A" | "N/A"           || false
+        false            | false            | "4"      | "12"     | null | "N/A" | "N/A"           || false
+        false            | true             | "4"      | "12"     | null | "N/A" | "N/A"           || false
+        true             | true             | "4"      | "12"     | null | "N/A" | "N/A"           || false
+        true             | true             | "4"      | "12"     | null | "4"   | "~presisering~" || false
+        true             | true             | "4"      | "12"     | null | "4"   | ""              || true
+        true             | true             | "4"      | "12"     | null | "4"   | null            || true
+        true             | false            | "4"      | "12"     | null | "N/A" | "N/A"           || false
 
-        true             | true             | true             | "4"      | "12"     | null | "5"   | null            || false
-        true             | true             | true             | "4"      | "12"     | null | "5"   | ""              || false
-        true             | true             | false            | "4"      | "12"     | null | "5"   | "~presisering~" || false
+        true             | true             | "4"      | "12"     | null | "5"   | null            || false
+        true             | true             | "4"      | "12"     | null | "5"   | ""              || false
+        true             | false            | "4"      | "12"     | null | "5"   | "~presisering~" || false
 
-        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | null            || true
-        true             | true             | true             | "4"      | "8"      | "2"  | "4"   | ""              || true
+        true             | true             | "4"      | "8"      | "2"  | "4"   | null            || true
+        true             | true             | "4"      | "8"      | "2"  | "4"   | ""              || true
 
-        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | null            || true
-        true             | true             | true             | "4"      | "8"      | "3"  | "4"   | ""              || true
+        true             | true             | "4"      | "8"      | "3"  | "4"   | null            || true
+        true             | true             | "4"      | "8"      | "3"  | "4"   | ""              || true
         // END test where tiltak.erOmsorgsTiltak() == true
 
 
-        false            | false            | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
-        true             | false            | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
-        true             | true             | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
-        true             | true             | true             | "N/A"    | "N/A"    | null | "42"  | "N/A"           || false
-        true             | true             | true             | "N/A"    | "N/A"    | null | "4"   | "~presisering~" || false
+        false            | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
+        false            | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
+        true             | false            | "N/A"    | "N/A"    | null | "N/A" | "N/A"           || false
+        true             | true             | "N/A"    | "N/A"    | null | "42"  | "N/A"           || false
+        true             | true             | "N/A"    | "N/A"    | null | "4"   | "~presisering~" || false
 
-        true             | true             | true             | "42"     | "N/A"    | null | "4"   | null            || false
-        true             | true             | true             | "42"     | "N/A"    | null | "4"   | ""              || false
+        true             | true             | "42"     | "N/A"    | null | "4"   | null            || false
+        true             | true             | "42"     | "N/A"    | null | "4"   | ""              || false
 
-        true             | true             | true             | "4"      | "N/A"    | null | "4"   | null            || false
-        true             | true             | true             | "4"      | "N/A"    | null | "4"   | ""              || false
+        true             | true             | "4"      | "N/A"    | null | "4"   | null            || false
+        true             | true             | "4"      | "N/A"    | null | "4"   | ""              || false
 
-        true             | true             | true             | "4"      | "42"     | null | "4"   | null            || false
-        true             | true             | true             | "4"      | "42"     | null | "4"   | ""              || false
+        true             | true             | "4"      | "42"     | null | "4"   | null            || false
+        true             | true             | "4"      | "42"     | null | "4"   | ""              || false
 
-        true             | true             | true             | "4"      | "8"      | null | "4"   | null            || false
-        true             | true             | true             | "4"      | "8"      | null | "4"   | ""              || false
+        true             | true             | "4"      | "8"      | null | "4"   | null            || false
+        true             | true             | "4"      | "8"      | null | "4"   | ""              || false
 
-        true             | true             | true             | "4"      | "8"      | "42" | "4"   | null            || false
-        true             | true             | true             | "4"      | "8"      | "42" | "4"   | ""              || false
+        true             | true             | "4"      | "8"      | "42" | "4"   | null            || false
+        true             | true             | "4"      | "8"      | "42" | "4"   | ""              || false
     }
 }

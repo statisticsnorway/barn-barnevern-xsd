@@ -37,7 +37,7 @@ class VersionOneValidator : ValidatorContract {
         MeasureAgeAboveElevenAndInSfo(),
         MeasureAgeAboveSevenAndInKindergarten(),
         MeasureClarificationRequired(),
-        MeasureEndDateAfterStartDate(),
+        MeasureStartDateAfterEndDate(),
         MeasureEndDateBeforeIndividEndDate(),
         MeasureMultipleAllocationsWithinPeriod(),
         MeasureRepealClarificationRequired(),

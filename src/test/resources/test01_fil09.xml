@@ -21,11 +21,24 @@
 			<Tiltak Id="be6dff10-c654-4a88-8310-a42d3e268e7d" StartDato="2021-04-08">
 				<Lovhjemmel>
 					<Lov>BVL</Lov>
-					<Kapittel>4</Kapittel>
-					<Paragraf>12</Paragraf>
+					<Kapittel>1</Kapittel>
+					<Paragraf>1</Paragraf>
 					<Ledd>1</Ledd>
 				</Lovhjemmel>
+				<JmfrLovhjemmel>
+					<Lov>BVL</Lov>
+					<Kapittel>1</Kapittel>
+					<Paragraf>1</Paragraf>
+					<Ledd>1</Ledd>
+				</JmfrLovhjemmel>
+				<JmfrLovhjemmel>
+					<Lov>BVL</Lov>
+					<Kapittel>1</Kapittel>
+					<Paragraf>1</Paragraf>
+					<Ledd>1</Ledd>
+				</JmfrLovhjemmel>
 				<Kategori Kode="3.10"/>
+				<Opphevelse Kode="1" Presisering=""/>
 				<Konklusjon SluttDato="2021-07-09"/>
 			</Tiltak>
 			<Vedtak Id="5365c6e6-be78-4a3e-8b28-b7af12085ede" StartDato="2021-04-08">

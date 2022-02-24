@@ -1,15 +1,31 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
+@Narrative("""
+Tiltak Kontroll 9: Kontroll om flere plasseringstiltak er oppgitt i samme tidsperiode
+
+Gitt at man har 2 eller flere Tiltak der Kategori/Kode er en følgende koder:<br/>
+1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2<br/>
+og utled den seneste startDato (PeriodeStartDato) <br/>
+utifra tiltak1 sin StartDato og tiltak2 sin StartDato<br/>
+og utled den tidligste sluttDato (PeriodeSluttDato) <br/>
+utifra tiltak1 sin SluttDato eller DatoUttrekk hvis tiltak1 sin SluttDato er blank og tiltak2 sin SluttDato eller DatoUttrekk hvis tiltak2 sin SluttDato er blank<br/>
+når tiltak1 sin SluttDato er etter tailtakk sin StartDato og PeriodeSluttDato er mer enn 90 etter PeriodeStartDato<br/>
+så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 3 måneder."
+
+Alvorlighetsgrad: Warning
+""")
 class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
 
     @Subject
@@ -26,6 +42,10 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
+        def sak = context.rootObject
+        and:
+        sak.datoUttrekk = LocalDateTime.now()
+        and:
         def virksomhet = context.rootObject.sak.virksomhet[0]
         and:
         def firstMeasure = virksomhet.tiltak[0]
@@ -34,11 +54,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         and:
         firstMeasure.konklusjon.sluttDato = firstEndDate
         and:
-        if (resetCategory) {
-            firstMeasure.kategori = null
-        } else {
-            firstMeasure.kategori.kode = categoryCode
-        }
+        firstMeasure.kategori.kode = categoryCode
         and:
         if (resetConclusion) {
             firstMeasure.konklusjon = null
@@ -54,11 +70,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
             secondMeasure.startDato = secondStartDate
             secondMeasure.konklusjon.sluttDato = secondEndDate
 
-            if (resetCategory) {
-                secondMeasure.kategori = null
-            } else {
-                secondMeasure.kategori.kode = categoryCode
-            }
+            secondMeasure.kategori.kode = categoryCode
 
             if (resetConclusion) {
                 secondMeasure.konklusjon = null
@@ -78,25 +90,28 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         }
 
         where:
-        resetCategory | resetConclusion | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
-        true          | false           | getDate(-3)    | getDate(0)   | false            | null            | null          | "N/A"        || false
-        false         | true            | getDate(-3)    | getDate(0)   | false            | null            | null          | "N/A"        || false
-        false         | false           | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
-        false         | false           | getDate(-3)    | getDate(0)   | true             | null            | getDate(0)    | "1.1"        || false
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
-        false         | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
+        resetConclusion | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
+        true            | getDate(-3)    | getDate(0)   | false            | null            | null          | "N/A"        || false
+        false           | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
+// TODO to Roar:
+//  the case of two overlapping Measures where one or neither has an endDate yet,
+//  then sak.datoUttrekk needs to be used as a default endDate for the measure(s) where endDate is missing
+//        true            | getDate(-4)    | getDate(0)   | true             | getDate(-4)     | getDate(0)    | "8.2"        || true
+
     }
 
     static def getDate(months) {

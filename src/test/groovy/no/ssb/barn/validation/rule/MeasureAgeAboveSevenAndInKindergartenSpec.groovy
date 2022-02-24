@@ -1,8 +1,9 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.KategoriType
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -10,6 +11,15 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
+@Narrative("""
+Tiltak Kontroll 5: Kontroll om barnet er over 7 år og er i barnehage
+
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
+når barnets alder er større enn 7 år og tiltakets kategori er '4.1' Barnehage<br/>
+så gi feilmelding "Barnet er over 7 år og i barnehage."
+
+Alvorlighetsgrad: Warning
+""")
 class MeasureAgeAboveSevenAndInKindergartenSpec extends Specification {
 
     @Subject
@@ -32,13 +42,7 @@ class MeasureAgeAboveSevenAndInKindergartenSpec extends Specification {
         and:
         sak.virksomhet[0].tiltak = List.of(sak.virksomhet[0].tiltak[0])
         and:
-        sak.virksomhet[0].tiltak[0].kategori = null
-        and:
-        if (createKategori) {
-            sak.virksomhet[0].tiltak[0].kategori = new KategoriType(
-                    code, "~presisering~"
-            )
-        }
+        sak.virksomhet[0].tiltak[0].kategori = new KategoriType(code, "~presisering~")
 
         when:
         def reportEntries = sut.validate(context)
@@ -55,14 +59,12 @@ class MeasureAgeAboveSevenAndInKindergartenSpec extends Specification {
         }
 
         where:
-        age | createKategori | code     || errorExpected
-        7   | false          | ""       || false
-        8   | false          | ""       || false
-        7   | true           | "~kode~" || false
-        8   | true           | "~kode~" || false
-        7   | true           | "4.1"    || false
-        7   | true           | "4.1"    || false
-        8   | true           | "4.1"    || true
-        8   | true           | "4.2"    || false
+        age | code     || errorExpected
+        7   | "~kode~" || false
+        8   | "~kode~" || false
+        7   | "4.1"    || false
+        7   | "4.1"    || false
+        8   | "4.1"    || true
+        8   | "4.2"    || false
     }
 }

@@ -28,16 +28,16 @@ open class TiltakType(
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
         LocalDateAdapter::class
-    ) var startDato: LocalDate? = null,
+    ) var startDato: LocalDate = LocalDate.now(),
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
-    var lovhjemmel: LovhjemmelType? = null,
+    var lovhjemmel: LovhjemmelType = LovhjemmelType(),
 
     @field:XmlElement(name = "JmfrLovhjemmel")
     var jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf(),
 
     @field:XmlElement(name = "Kategori", required = true)
-    var kategori: KategoriType? = null,
+    var kategori: KategoriType = KategoriType(),
 
     @field:XmlElement(name = "Tilsyn")
     var tilsyn: MutableList<TilsynType> = mutableListOf(),

@@ -6,9 +6,9 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.TiltakType
 
-class MeasureEndDateAfterStartDate : AbstractRule(
+class MeasureStartDateAfterEndDate : AbstractRule(
     WarningLevel.ERROR,
-    "Tiltak Kontroll 2a: Startdato etter sluttdato",
+    "Tiltak Kontroll 2a: Startdato er etter sluttdato",
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
@@ -16,13 +16,14 @@ class MeasureEndDateAfterStartDate : AbstractRule(
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
                 val conclusion = tiltak.konklusjon // when JaCoCo improves, use "?."
-                conclusion != null && conclusion.sluttDato.isBefore(tiltak.startDato)
+                conclusion != null && tiltak.startDato.isAfter(conclusion.sluttDato)
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}}). Startdato (${it.startDato})"
                             + " for tiltaket er etter sluttdato"
-                            + " (${it.konklusjon!!.sluttDato}) for tiltaket"
+                            + " (${it.konklusjon!!.sluttDato}) for tiltaket",
+                    it.id
                 )
             }
             .toList()

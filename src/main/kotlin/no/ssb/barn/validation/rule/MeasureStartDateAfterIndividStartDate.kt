@@ -1,9 +1,9 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 
 class MeasureStartDateAfterIndividStartDate : AbstractRule(
@@ -17,13 +17,14 @@ class MeasureStartDateAfterIndividStartDate : AbstractRule(
         return context.rootObject.sak.virksomhet.asSequence()
             .flatMap { virksomhet -> virksomhet.tiltak }
             .filter { tiltak ->
-                tiltak.startDato?.isBefore(individStartDate) == true
+                tiltak.startDato.isBefore(individStartDate) == true
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}}). Startdato (${it.startDato}) skal"
                             + " være lik eller etter individets startdato"
-                            + " ($individStartDate)"
+                            + " ($individStartDate)",
+                    it.id
                 )
             }
             .toList()

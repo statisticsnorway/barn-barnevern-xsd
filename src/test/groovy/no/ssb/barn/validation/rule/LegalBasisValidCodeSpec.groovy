@@ -1,7 +1,7 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.LovhjemmelType
 import spock.lang.Specification
 import spock.lang.Subject
@@ -29,17 +29,13 @@ class LegalBasisValidCodeSpec extends Specification {
         and:
         sak.virksomhet[0].tiltak = List.of(sak.virksomhet[0].tiltak[0])
         and:
-        sak.virksomhet[0].tiltak[0].lovhjemmel = null
-        and:
-        if (createLegalBasis) {
-            sak.virksomhet[0].tiltak[0].lovhjemmel = new LovhjemmelType(
-                    "~lov~",
-                    kapittel,
-                    paragraf,
-                    List.of("~ledd~"),
-                    List.of("~punktum~")
-            )
-        }
+        sak.virksomhet[0].tiltak[0].lovhjemmel = new LovhjemmelType(
+                "~lov~",
+                kapittel,
+                paragraf,
+                List.of("~ledd~"),
+                List.of("~punktum~")
+        )
 
         when:
         def reportEntries = sut.validate(context)
@@ -57,13 +53,13 @@ class LegalBasisValidCodeSpec extends Specification {
         }
 
         where:
-        createLegalBasis | kapittel | paragraf || errorExpected
-        false            | ""       | ""       || false
-        true             | ""       | ""       || false
-        true             | "1"      | ""       || false
-        true             | ""       | "1"      || false
-        true             | "01234"  | ""       || true
-        true             | ""       | "01234"  || true
-        true             | "01234"  | "01234"  || true
+        kapittel | paragraf || errorExpected
+        ""       | ""       || false
+        ""       | ""       || false
+        "1"      | ""       || false
+        ""       | "1"      || false
+        "01234"  | ""       || true
+        ""       | "01234"  || true
+        "01234"  | "01234"  || true
     }
 }

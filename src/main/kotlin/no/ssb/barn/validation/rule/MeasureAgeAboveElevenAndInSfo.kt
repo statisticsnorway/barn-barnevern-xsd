@@ -9,7 +9,7 @@ import no.ssb.barn.xsd.TiltakType
 
 class MeasureAgeAboveElevenAndInSfo : AbstractRule(
     WarningLevel.WARNING,
-    "Barn over 11 år og i SFO",
+    "Tiltak Kontroll 6: Barnet er over 11 år og i SFO",
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
@@ -19,11 +19,11 @@ class MeasureAgeAboveElevenAndInSfo : AbstractRule(
             return context.rootObject.sak.virksomhet.asSequence()
                 .flatMap { virksomhet -> virksomhet.tiltak }
                 .filter { tiltak ->
-                    tiltak.kategori?.kode == "4.2"
+                    tiltak.kategori.kode == "4.2"
                 }
                 .map {
                     createReportEntry(
-                        "Klienten er over 11 år og i SFO. Barnets alder er $age år.",
+                        "Barnet er over 11 år og i SFO",
                         it.id
                     )
                 }
