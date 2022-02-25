@@ -87,12 +87,25 @@ For innsending av barnevernsdata
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
 			<xs:annotation>
 				<xs:appinfo>
 		  Dato og klokkeslett for uttrekket
 		</xs:appinfo>
 			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ForrigeId">
+			<xs:annotation>
+				<xs:appinfo>UUID</xs:appinfo>
+				<xs:documentation>Globalt attributt for UUID, f.eks databaseID/surrogatnøkkel i fagsystemet</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="36"/>
+					<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
+				</xs:restriction>
+			</xs:simpleType>
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="FagsystemType">
