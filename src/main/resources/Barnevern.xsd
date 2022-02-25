@@ -1125,7 +1125,7 @@ Dato tilsynsbesøket faktisk ble utført
 					<xs:documentation>Krav fra privat part om endring av tidligere vedtak fattet av fylkesnemnda</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Status" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Status" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:attribute name="EndretDato" use="required"/>
 					<xs:attribute name="Kode" use="required">
