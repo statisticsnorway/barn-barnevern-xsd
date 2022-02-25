@@ -66,7 +66,9 @@ For innsending av barnevernsdata
 	</xs:element>
 	<!-- TYPEDEFINISJONER -->
 	<xs:complexType name="BarnevernType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Fagsystem" type="FagsystemType">
 				<xs:annotation>
@@ -168,6 +170,29 @@ For innsending av barnevernsdata
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute name="Bydelsnummer" use="optional">
+			<xs:annotation>
+				<xs:documentation>2-sifret bydelsnummer for bydelen, brukes av f.eks. Oslo</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="2"/>
+					<xs:maxLength value="2"/>
+					<xs:pattern value="\d{2}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Bydelsnavn">
+			<xs:annotation>
+				<xs:documentation>Bydelsnavn for bydelen, f.eks. Gamle Oslo ved rapportering av bydel fra Oslo</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="250"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="SakType">
 		<xs:annotation>
@@ -176,7 +201,39 @@ For innsending av barnevernsdata
 	  </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Virksomhet" type="VirksomhetType" maxOccurs="unbounded"/>
+			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Bekymringsmelding</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tiltaks- eller omsorgsplan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Alle typer vedtak som fattes i en barnevernsak, også av fylkesnemnda</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tilbud om ettervern. Eventuelt ettervernstiltak registreres som Tiltak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OversendelseFylkesnemnd" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Flytting" type="FlyttingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Relasjon" type="RelasjonType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId" use="optional"/>
@@ -534,7 +591,9 @@ For innsending av barnevernsdata
 	</xs:complexType>
 	<!-- Saksinnhold -->
 	<xs:complexType name="SaksinnholdType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -645,7 +704,9 @@ For innsending av barnevernsdata
 	</xs:complexType>
 	<!-- Undersøkelse -->
 	<xs:complexType name="UndersokelseType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="UtvidetFrist" minOccurs="0">
@@ -1021,7 +1082,9 @@ Dato tilsynsbesøket faktisk ble utført
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="OversendelseBarneverntjenesteType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
@@ -1037,7 +1100,9 @@ Dato tilsynsbesøket faktisk ble utført
 	</xs:complexType>
 	<!-- Vedtak -->
 	<xs:complexType name="VedtakType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
@@ -1106,7 +1171,9 @@ Dato tilsynsbesøket faktisk ble utført
 	</xs:complexType>
 	<!-- Ettervern -->
 	<xs:complexType name="EttervernType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Konklusjon" minOccurs="0">
 				<xs:complexType>
@@ -1166,42 +1233,10 @@ Dato tilsynsbesøket faktisk ble utført
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="VirksomhetType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
-		<xs:sequence>
-			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Bekymringsmelding</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Tiltaks- eller omsorgsplan</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Alle typer vedtak som fattes i en barnevernsak, også av fylkesnemnda</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Tilbud om ettervern. Eventuelt ettervernstiltak registreres som Tiltak</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="OversendelseFylkesnemnd" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Flytting" type="FlyttingType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="Relasjon" type="RelasjonType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
 		<xs:attribute ref="StartDato" use="required"/>
 		<xs:attribute ref="SluttDato" use="optional">
 			<xs:annotation>
@@ -1221,29 +1256,6 @@ Dato tilsynsbesøket faktisk ble utført
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="Bydelsnummer" use="optional">
-			<xs:annotation>
-				<xs:documentation>2-sifret bydelsnummer for bydelen, brukes av f.eks. Oslo</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="2"/>
-					<xs:maxLength value="2"/>
-					<xs:pattern value="\d{2}"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="Bydelsnavn">
-			<xs:annotation>
-				<xs:documentation>Bydelsnavn for bydelen, f.eks. Gamle Oslo ved rapportering av bydel fra Oslo</xs:documentation>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="250"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
 		<xs:attribute name="Distriktsnummer">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -1255,7 +1267,9 @@ Dato tilsynsbesøket faktisk ble utført
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="RelasjonType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="FraId" type="IdType" use="required"/>
 		<xs:attribute name="FraType" type="BegrepsType" use="required"/>
@@ -1263,7 +1277,9 @@ Dato tilsynsbesøket faktisk ble utført
 		<xs:attribute name="TilType" type="BegrepsType" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="FlyttingType">
-		<xs:annotation><xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation></xs:annotation>
+		<xs:annotation>
+			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ArsakFra" type="ArsakFraType"/>
 			<xs:element name="FlyttingTil" type="FlyttingTilType"/>
