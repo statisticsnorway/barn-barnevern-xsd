@@ -248,6 +248,13 @@ For innsending av barnevernsdata
 					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="Slettet" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute ref="Id" use="required"/>
+					<xs:attribute name="Type" type="BegrepsType" use="required"/>
+					<xs:attribute ref="SluttDato" use="required"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId" use="optional"/>
