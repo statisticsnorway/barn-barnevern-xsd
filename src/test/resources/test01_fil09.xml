@@ -61,10 +61,10 @@
 				<Status EndretDato="2021-07-09" Kode="3"/>
 				<Konklusjon SluttDato="2021-07-09"/>
 			</Vedtak>
-			<Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d" Id="q1" TilId="d28aa453-724a-4538-8c4e-2f27b36b7530" TilType="Undersokelse"/>
-			<Relasjon FraType="Undersokelse" FraId="d28aa453-724a-4538-8c4e-2f27b36b7530" Id="q2" TilId="5365c6e6-be78-4a3e-8b28-b7af12085ede" TilType="Vedtak"/>
-			<Relasjon FraType="Vedtak" FraId="5365c6e6-be78-4a3e-8b28-b7af12085ede" Id="q3" TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
-			<Relasjon FraType="Vedtak" FraId="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" Id="q4" TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
+			<Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d" Id="d28aa453-724a-4538-8c4e-2f27b36b7531" TilId="d28aa453-724a-4538-8c4e-2f27b36b7530" TilType="Undersokelse"/>
+			<Relasjon FraType="Undersokelse" FraId="d28aa453-724a-4538-8c4e-2f27b36b7530" Id="d28aa453-724a-4538-8c4e-2f27b36b7532" TilId="5365c6e6-be78-4a3e-8b28-b7af12085ede" TilType="Vedtak"/>
+			<Relasjon FraType="Vedtak" FraId="5365c6e6-be78-4a3e-8b28-b7af12085ede" Id="d28aa453-724a-4538-8c4e-2f27b36b7533" TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
+			<Relasjon FraType="Vedtak" FraId="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" Id="d28aa453-724a-4538-8c4e-2f27b36b7534" TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
 		</Virksomhet>
 	</Sak>
 </Barnevern>
