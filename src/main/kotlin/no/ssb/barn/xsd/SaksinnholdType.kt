@@ -66,36 +66,6 @@ data class SaksinnholdType(
                     validTo2020,
                     "4 deles i 20, 21, 22, 23 og 24"
                 ),
-                CodeListItem(
-                    "20",
-                    "Foreldres manglende beskyttelse av barnet",
-                    validFrom2021
-                ),
-                CodeListItem(
-                    "21",
-                    "Foreldres manglende stimulering og regulering av barnet",
-                    validFrom2021
-                ),
-                CodeListItem(
-                    "22",
-                    "Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet",
-                    validFrom2021
-                ),
-                CodeListItem(
-                    "23",
-                    "Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester",
-                    validFrom2021
-                ),
-                CodeListItem(
-                    "24",
-                    "Konflikt mellom foreldre som ikke bor sammen",
-                    validFrom2021
-                ),
-                CodeListItem(
-                    "28",
-                    "Foreldres manglende oppfølging av barnets behov for helsetjenester",
-                    validFrom2021
-                ),
                 CodeListItem("5", "Foreldres kriminalitet", validFrom2013),
                 CodeListItem("6", "Høy grad av konflikt hjemme", validFrom2013),
                 CodeListItem(
@@ -152,6 +122,46 @@ data class SaksinnholdType(
                     "Barnets relasjonsvansker(mistanke om eller diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner)",
                     validFrom2013
                 ),
+                CodeListItem(
+                    "18",
+                    "Andre forhold ved foreldre/ familien (krever presisering)(Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)",
+                    validFrom2013
+                ),
+                CodeListItem(
+                    "19",
+                    "Andre forhold ved barnets situasjon (krever presisering)(Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)",
+                    validFrom2013
+                ),
+                CodeListItem(
+                    "20",
+                    "Foreldres manglende beskyttelse av barnet",
+                    validFrom2021
+                ),
+                CodeListItem(
+                    "21",
+                    "Foreldres manglende stimulering og regulering av barnet",
+                    validFrom2021
+                ),
+                CodeListItem(
+                    "22",
+                    "Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet",
+                    validFrom2021
+                ),
+                CodeListItem(
+                    "23",
+                    "Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester",
+                    validFrom2021
+                ),
+                CodeListItem(
+                    "24",
+                    "Konflikt mellom foreldre som ikke bor sammen",
+                    validFrom2021
+                ),
+                CodeListItem(
+                    "28",
+                    "Foreldres manglende oppfølging av barnets behov for helsetjenester",
+                    validFrom2021
+                ),
                 CodeListItem("25", "Barnets atferd", validFrom2021),
                 CodeListItem(
                     "26",
@@ -162,16 +172,6 @@ data class SaksinnholdType(
                     "27",
                     "Barnet utsatt for menneskehandel",
                     validFrom2021
-                ),
-                CodeListItem(
-                    "18",
-                    "Andre forhold ved foreldre/ familien (krever presisering)(Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)",
-                    validFrom2013
-                ),
-                CodeListItem(
-                    "19",
-                    "Andre forhold ved barnets situasjon (krever presisering)(Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)",
-                    validFrom2013
                 )
             )
     }
