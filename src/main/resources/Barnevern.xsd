@@ -400,8 +400,8 @@ For innsending av barnevernsdata
 	<!-- Melding -->
 	<xs:complexType name="MeldingType">
 		<xs:sequence>
-			<xs:element name="Melder" type="MelderType" maxOccurs="unbounded"/>
-			<xs:element name="Saksinnhold" type="SaksinnholdType" maxOccurs="unbounded"/>
+			<xs:element name="Melder" type="MelderType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Konklusjon" minOccurs="0">
 				<xs:complexType>
 					<xs:attribute ref="SluttDato" use="required">
@@ -479,16 +479,6 @@ For innsending av barnevernsdata
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
-			<xs:element name="Konklusjon" minOccurs="0">
-				<xs:complexType>
-					<xs:attribute ref="SluttDato" use="required">
-						<xs:annotation>
-							<xs:documentation>Avslutningsdato for tiltaket
-		</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-				</xs:complexType>
-			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId" use="optional"/>
@@ -1019,6 +1009,12 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 	</xs:complexType>
 	<!-- Opphevelse -->
 	<xs:complexType name="OpphevelseType">
+		<xs:attribute ref="SluttDato" use="required">
+			<xs:annotation>
+				<xs:documentation>Avslutningsdato for tiltaket
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
