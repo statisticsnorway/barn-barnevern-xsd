@@ -242,7 +242,6 @@ For innsending av barnevernsdata
 					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Flytting" type="FlyttingType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Relasjon" type="RelasjonType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
@@ -401,8 +400,8 @@ For innsending av barnevernsdata
 	<!-- Melding -->
 	<xs:complexType name="MeldingType">
 		<xs:sequence>
-			<xs:element name="Melder" type="MelderType" maxOccurs="unbounded"/>
-			<xs:element name="Saksinnhold" type="SaksinnholdType" maxOccurs="unbounded"/>
+			<xs:element name="Melder" type="MelderType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Konklusjon" minOccurs="0">
 				<xs:complexType>
 					<xs:attribute ref="SluttDato" use="required">
@@ -480,16 +479,6 @@ For innsending av barnevernsdata
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
-			<xs:element name="Konklusjon" minOccurs="0">
-				<xs:complexType>
-					<xs:attribute ref="SluttDato" use="required">
-						<xs:annotation>
-							<xs:documentation>Avslutningsdato for tiltaket
-		</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-				</xs:complexType>
-			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId" use="optional"/>
@@ -1020,6 +1009,12 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 	</xs:complexType>
 	<!-- Opphevelse -->
 	<xs:complexType name="OpphevelseType">
+		<xs:attribute ref="SluttDato" use="required">
+			<xs:annotation>
+				<xs:documentation>Avslutningsdato for tiltaket
+		</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -1250,7 +1245,6 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="Vedtak"/>
 			<xs:enumeration value="Ettervern"/>
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
-			<xs:enumeration value="Flytting"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="VirksomhetType">
@@ -1296,159 +1290,5 @@ Dato tilsynsbesøket faktisk ble utført
 		<xs:attribute name="FraType" type="BegrepsType" use="required"/>
 		<xs:attribute name="TilId" type="IdType" use="required"/>
 		<xs:attribute name="TilType" type="BegrepsType" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="FlyttingType">
-		<xs:annotation>
-			<xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="ArsakFra" type="ArsakFraType"/>
-			<xs:element name="FlyttingTil" type="FlyttingTilType"/>
-		</xs:sequence>
-		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute ref="MigrertId" use="optional"/>
-		<xs:attribute ref="SluttDato" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="ArsakFraType">
-		<xs:attribute name="Kode" use="required">
-			<xs:annotation>
-				<xs:documentation>
-1 Årsaker til flytting fra fosterhjem:
-
-1.1 Barnevernstjenesten avslutter kontrakt med fosterhjem:
-
-1.1.1 = Omsorgsplasseringen opphører 
-1.1.2 = Barnet blir myndig 
-1.1.3 = Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet) 
-1.1.4 = Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. 
-1.1.5 = Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.) (krever presisering)
- 
-1.2 Fosterforeldre avslutter kontrakten med barnevernet:
-
-1.2.1 = Barnet har behov fosterforeldre ikke kan dekke 
-1.2.2 = Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) 
-1.2.3 = Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.) (krever presisering) 
- 
-1.3 = Barnet flytter sammen med fosterforeldre til nytt bosted
-
-2 Årsaker til flytting fra institusjon:
-
-2.1 = Avsluttet i henhold til plan ved oppstart av institusjonsoppholdet
-2.2 = Institusjonen barnet bor i klarer ikke å dekke barnets behov (manglende kompetanse hos ansatte, beboersammensetning, fysiske forhold ved institusjonen osv)
-2.3 = Barnet har behov for annen type plasseringstiltak (annen type institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. 
-2.4 = Barnet blir myndig og velger selv å flytte ut
-2.5 = Barnet trekker samtykke
-2.6 = Foreldre trekker samtykke
-2.7 = Ikke medhold i fylkesnemnda
-2.8 = Uenighet mellom barnevernstjenesten og Bufetat om oppdragets omfang og/eller økonomi,
-2.9 = Andre grunner (krever presisering)
-				 </xs:documentation>
-				<xs:appinfo xml:lang="json">
-{
-   "type":"codelist",
-   "term":"Flytting",
-   "title":"ArsakFra",
-   "path":"/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode",
-   "items":[
-	  { "code":"1.1.1", "validFrom":"2022-01-01", "title":"Omsorgsplasseringen opphører " },
-	  { "code":"1.1.2", "validFrom":"2022-01-01", "title":"Barnet blir myndig " },
-	  { "code":"1.1.3", "validFrom":"2022-01-01", "title":"Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet) " },
-	  { "code":"1.1.4", "validFrom":"2022-01-01", "title":"Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. " },
-	  { "code":"1.1.5", "validFrom":"2022-01-01", "title":"Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.) (krever presisering)" },
-	  { "code":"1.2.1", "validFrom":"2022-01-01", "title":"Barnet har behov fosterforeldre ikke kan dekke " },
-	  { "code":"1.2.2", "validFrom":"2022-01-01", "title":"Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) " },
-	  { "code":"1.2.3", "validFrom":"2022-01-01", "title":"Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.) (krever presisering) " },
-	  { "code":"1.3", "validFrom":"2022-01-01", "title":"Barnet flytter sammen med fosterforeldre til nytt bosted" },
-	  { "code":"2.1", "validFrom":"2022-01-01", "title":"Avsluttet i henhold til plan ved oppstart av institusjonsoppholdet" },
-	  { "code":"2.2", "validFrom":"2022-01-01", "title":"Institusjonen barnet bor i klarer ikke å dekke barnets behov (manglende kompetanse hos ansatte, beboersammensetning, fysiske forhold ved institusjonen osv)" },
-	  { "code":"2.3", "validFrom":"2022-01-01", "title":"Barnet har behov for annen type plasseringstiltak (annen type institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. " },
-	  { "code":"2.4", "validFrom":"2022-01-01", "title":"Barnet blir myndig og velger selv å flytte ut" },
-	  { "code":"2.5", "validFrom":"2022-01-01", "title":"Barnet trekker samtykke" },
-	  { "code":"2.6", "validFrom":"2022-01-01", "title":"Foreldre trekker samtykke" },
-	  { "code":"2.7", "validFrom":"2022-01-01", "title":"Ikke medhold i fylkesnemnda" },
-	  { "code":"2.8", "validFrom":"2022-01-01", "title":"Uenighet mellom barnevernstjenesten og Bufetat om oppdragets omfang og/eller økonomi," },
-	  { "code":"2.9", "validFrom":"2022-01-01", "title":"Andre grunner (krever presisering)" } 
-   ]
-}
-							</xs:appinfo>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:minLength value="3"/>
-					<xs:maxLength value="5"/>
-					<xs:enumeration value="1.1.1"/>
-					<xs:enumeration value="1.1.2"/>
-					<xs:enumeration value="1.1.3"/>
-					<xs:enumeration value="1.1.4"/>
-					<xs:enumeration value="1.1.5"/>
-					<xs:enumeration value="1.2.1"/>
-					<xs:enumeration value="1.2.2"/>
-					<xs:enumeration value="1.2.3"/>
-					<xs:enumeration value="1.3"/>
-					<xs:enumeration value="2.1"/>
-					<xs:enumeration value="2.2"/>
-					<xs:enumeration value="2.3"/>
-					<xs:enumeration value="2.4"/>
-					<xs:enumeration value="2.5"/>
-					<xs:enumeration value="2.6"/>
-					<xs:enumeration value="2.7"/>
-					<xs:enumeration value="2.8"/>
-					<xs:enumeration value="2.9"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute ref="Presisering"/>
-	</xs:complexType>
-	<xs:complexType name="FlyttingTilType">
-		<xs:attribute name="Kode" use="required">
-			<xs:annotation>
-				<xs:documentation>
-Barnet/ungdommen flytter til:
-1 = Fosterhjem i familie og nære nettverk
-2 = Fosterhjem utenfor familie og nære nettverk
-3 = Beredskapshjem
-4 = Barnevernsinstitusjon
-5 = Bolig med oppfølging
-6 = Foreldre
-7 = Egen bolig uten oppfølging
-8 = Annet bosted (spesifiser)
-9 = Adresseendring
-				 </xs:documentation>
-				<xs:appinfo xml:lang="json">
-{
-   "type":"codelist",
-   "term":"Flytting",
-   "title":"FlytteTil",
-   "path":"/Barnevern/Sak/Virksomhet/Flytting/FlytteTil/@Kode",
-   "items":[
-	  {"code" : "1", "validFrom" : "2022-01-01", "title" : "Fosterhjem i familie og nære nettverk"},
-	  {"code" : "2", "validFrom" : "2022-01-01", "title" : "Fosterhjem utenfor familie og nære nettverk"},
-	  {"code" : "3", "validFrom" : "2022-01-01", "title" : "Beredskapshjem"},
-	  {"code" : "4", "validFrom" : "2022-01-01", "title" : "Barnevernsinstitusjon"},
-	  {"code" : "5", "validFrom" : "2022-01-01", "title" : "Bolig med oppfølging"},
-	  {"code" : "6", "validFrom" : "2022-01-01", "title" : "Foreldre"},
-	  {"code" : "7", "validFrom" : "2022-01-01", "title" : "Egen bolig uten oppfølging"},
-	  {"code" : "8", "validFrom" : "2022-01-01", "title" : "Annet bosted (spesifiser)"},
-	  {"code" : "9", "validFrom" : "2022-01-01", "title" : "Adresseendring"}
-   ]
-}
-							</xs:appinfo>
-			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:length value="1"/>
-					<xs:enumeration value="1"/>
-					<xs:enumeration value="2"/>
-					<xs:enumeration value="3"/>
-					<xs:enumeration value="4"/>
-					<xs:enumeration value="5"/>
-					<xs:enumeration value="6"/>
-					<xs:enumeration value="7"/>
-					<xs:enumeration value="8"/>
-					<xs:enumeration value="9"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute ref="Presisering"/>
 	</xs:complexType>
 </xs:schema>
