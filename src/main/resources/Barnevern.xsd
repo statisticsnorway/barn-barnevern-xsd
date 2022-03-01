@@ -268,7 +268,7 @@ For innsending av barnevernsdata
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
-					<xs:maxLength value="20"/>
+					<xs:maxLength value="36"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
