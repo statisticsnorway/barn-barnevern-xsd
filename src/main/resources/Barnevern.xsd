@@ -268,11 +268,11 @@ For innsending av barnevernsdata
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:minLength value="1"/>
-					<xs:maxLength value="20"/>
+					<xs:maxLength value="36"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="Fodselsnummer" use="optional">
+		<xs:attribute name="Fodselsnummer" use="required">
 			<xs:annotation>
 				<xs:documentation>Fødselsnummer (https://www.udi.no/ord-og-begreper/fodselsnummer/), 
 				D-nummer (https://www.udi.no/ord-og-begreper/d-nummer/), 
@@ -301,10 +301,17 @@ For innsending av barnevernsdata
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="Fodseldato" type="xs:date"/>
-		<xs:attribute name="Kjonn">
+		<xs:attribute name="Fodseldato" type="xs:date" use="required">
 			<xs:annotation>
 				<xs:documentation xml:lang="no">
+Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Kjonn" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="no">
+0 = Ufødt
 1 = Mann / Gutt
 2 = Kvinne / Jente
 				</xs:documentation>
@@ -315,6 +322,7 @@ For innsending av barnevernsdata
    "title":"Kjønn",
    "path":"/Barnevern/Sak/@Kjonn",
    "items":[
+	  {"code":"0", "validFrom":"2022-01-01", "title":"Ufødt"},
 	  {"code":"1", "validFrom":"2022-01-01", "title":"Mann / Gutt"},
 	  {"code":"2","validFrom":"2022-01-01","title":"Kvinne / Jente"}
    ]
