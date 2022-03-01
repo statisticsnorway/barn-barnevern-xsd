@@ -68,12 +68,12 @@ class ValidationUtilsSpec extends Specification {
         (getSourceFromClasspath(filename) != null) == result
 
         where:
-        filename            || result
-        "/Barnevern.xsd"    || true
-        "/test01_fil01.xml" || true
-        "/test01_fil02.xml" || true
-        "/invalid.xml"      || true
-        "/nonExistentFile"  || false
+        filename                     || result
+        "/Barnevern.xsd"             || true
+        "/test01_file01_changes.xml" || true
+        "/test01_file02_changes.xml" || true
+        "/invalid.xml"               || true
+        "/nonExistentFile"           || false
     }
 
     def "Should validate valid xml files, xsd = #xsd, xml = #xml, result = #result"() {
@@ -86,9 +86,22 @@ class ValidationUtilsSpec extends Specification {
         validationResult == result
 
         where:
-        xsd              | xml                 || result
-        "/Barnevern.xsd" | "/test01_fil01.xml" || true
-        "/Barnevern.xsd" | "/test01_fil02.xml" || true
+        xsd              | xml                          || result
+        "/Barnevern.xsd" | "/test00_file01_changes.xml"          || true
+        "/Barnevern.xsd" | "/test01_file01_changes.xml" || true
+        "/Barnevern.xsd" | "/test01_file02_changes.xml" || true
+        "/Barnevern.xsd" | "/test01_file03_changes.xml" || true
+        "/Barnevern.xsd" | "/test01_fil04.xml"          || true
+        "/Barnevern.xsd" | "/test01_fil05.xml"          || true
+        "/Barnevern.xsd" | "/test01_fil06.xml"          || true
+        "/Barnevern.xsd" | "/test01_fil07.xml"          || true
+        "/Barnevern.xsd" | "/test01_fil08.xml"          || true
+        "/Barnevern.xsd" | "/test01_fil09.xml"          || true
+
+        "/Barnevern.xsd" | "/test01_file01_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file02_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file03_total.xml"   || true
+
     }
 
     def "Should produce SAXException for invalid xml files, xsd = #xsd, xml = #xml"() {

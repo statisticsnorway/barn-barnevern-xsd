@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Barnevern DatoUttrekk="2012-12-13T12:12:12">
+<Barnevern Id="str1234" DatoUttrekk="2012-12-13T12:12:12">
     <Fagsystem Leverandor="str1234" Navn="str1234" Versjon="str1234"/>
     <Avgiver Organisasjonsnummer="123456789" Kommunenummer="0301" Kommunenavn="str1234" Bydelsnummer="11" Bydelsnavn="str1234" Distriktsnummer="123"/>
     <Sak Id="str1234" StartDato="2012-12-13" SluttDato="2012-12-13" Journalnummer="str1234" Fodselsnummer="12345678912" DUFnummer="123456789123" Saksbehandler="str1234" Avsluttet="true">

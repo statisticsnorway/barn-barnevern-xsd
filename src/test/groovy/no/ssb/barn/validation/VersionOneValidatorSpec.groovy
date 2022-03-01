@@ -18,7 +18,7 @@ class VersionOneValidatorSpec extends Specification {
 
     def "when validate with valid XML receive report without entries"() {
         given:
-        def context = getTestContextXmlOnly("test01_fil01.xml")
+        def context = getTestContextXmlOnly("test01_file01_changes.xml")
 
         when:
         def report = sut.validate(context)

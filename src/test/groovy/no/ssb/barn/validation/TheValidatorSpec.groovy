@@ -47,7 +47,7 @@ class TheValidatorSpec extends Specification {
         def validationReport = sut.validate(
                 UUID.randomUUID().toString(),
                 1,
-                getResourceAsString("test01_fil01.xml"))
+                getResourceAsString("test01_file01_changes.xml"))
 
         then:
         WarningLevel.OK == validationReport.severity
