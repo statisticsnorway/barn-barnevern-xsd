@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import java.time.LocalDate
+import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.UuidAdapter
+import java.time.LocalDateTime
+import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.converter.UuidAdapter
-import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TilsynType", propOrder = ["id", "utfortDato"])
@@ -19,7 +19,7 @@ data class TilsynType(
     @field:XmlAttribute(name = "UtfortDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
+        LocalDateTimeAdapter::class
     )
-    var utfortDato: LocalDate = LocalDate.now()
+    var utfortDato: LocalDateTime = LocalDateTime.now()
 )

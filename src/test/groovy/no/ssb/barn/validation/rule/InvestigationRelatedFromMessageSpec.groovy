@@ -36,11 +36,11 @@ class InvestigationRelatedFromMessageSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def message = context.rootObject.sak.virksomhet[0].melding[0]
+        def message = context.rootObject.sak.melding[0]
         and:
         message.id = fromId ?: UUID.randomUUID()
         and:
-        def relation = context.rootObject.sak.virksomhet[0].relasjon[0]
+        def relation = context.rootObject.sak.relasjon[0]
         and:
         relation.fraId = fromId ?: UUID.randomUUID()
         and:
@@ -50,7 +50,7 @@ class InvestigationRelatedFromMessageSpec extends Specification {
         and:
         relation.tilType = toType
         and:
-        def investigation = context.rootObject.sak.virksomhet[0].undersokelse[0]
+        def investigation = context.rootObject.sak.undersokelse[0]
         and:
         investigation.id = toId ?: UUID.randomUUID()
 

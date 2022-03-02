@@ -17,7 +17,6 @@ class VersionOneValidatorSpec extends Specification {
         sut = new VersionOneValidator()
     }
 
-    @Ignore("Fix me")
     def "when validate with valid XML receive report without entries"() {
         given:
         def context = getTestContextXmlOnly("test01_file01_changes.xml")
@@ -31,7 +30,6 @@ class VersionOneValidatorSpec extends Specification {
         WarningLevel.OK == report.severity
     }
 
-    @Ignore("Fix me")
     def "when message-level start date is before case-level start date, receive error"() {
         given:
         def context = getTestContextXmlOnly("sluttdato_etter_startdato.xml")

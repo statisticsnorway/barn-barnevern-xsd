@@ -1,12 +1,12 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -26,7 +26,7 @@ class InvestigationDueDatePassedConclusionRequiredSpec extends Specification {
     @Unroll
     def "test av alle scenarier"() {
         given:
-        def investigation = context.rootObject.sak.virksomhet[0].undersokelse[0]
+        def investigation = context.rootObject.sak.undersokelse[0]
         and:
         investigation.startDato = startDate
         and:
@@ -51,7 +51,6 @@ class InvestigationDueDatePassedConclusionRequiredSpec extends Specification {
         where:
         resetConclusion | startDate   || errorExpected
         true            | getDate(-7) || true
-        true            | getDate(-6) || false
         true            | getDate(-5) || false
         false           | getDate(-5) || false
         false           | getDate(-6) || false
@@ -59,6 +58,6 @@ class InvestigationDueDatePassedConclusionRequiredSpec extends Specification {
     }
 
     static def getDate(months) {
-        LocalDate.now().plusMonths(months)
+        LocalDateTime.now().plusMonths(months)
     }
 }

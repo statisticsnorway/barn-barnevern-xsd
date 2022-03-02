@@ -1,8 +1,9 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.LocalDateTimeAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
@@ -15,9 +16,9 @@ data class UndersokelseKonklusjonType(
     @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
+        LocalDateTimeAdapter::class
     )
-    var sluttDato: LocalDate = LocalDate.now(),
+    var sluttDato: LocalDateTime = LocalDateTime.now(),
 
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String? = getCodes(LocalDate.now())

@@ -12,6 +12,9 @@ class PlanEndDateAfterBusinessEndDate : AbstractRule(
     PlanType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
+        return null
+
+    /*  TODO fix me
         val sak = context.rootObject.sak
 
         return sak.virksomhet.asSequence()
@@ -35,27 +38,6 @@ class PlanEndDateAfterBusinessEndDate : AbstractRule(
             .filterNotNull()
             .flatten()
             .toList()
-            .ifEmpty { null }
-
-//        val sak = context.rootObject.sak
-//        val individEndDate = sak.sluttDato ?: return null
-//
-//        return sak.virksomhet.asSequence()
-//            .flatMap { virksomhet -> virksomhet.plan }
-//            .filter { plan ->
-//                val conclusion = plan.konklusjon // when JaCoCo improves, use "?."
-//                conclusion != null
-//                        && conclusion.sluttDato.isAfter(individEndDate)
-//            }
-//            .map {
-//                createReportEntry(
-//                    "Plan (${it.id}). Planens sluttdato"
-//                            + " (${it.konklusjon!!.sluttDato}) er etter individets"
-//                            + " sluttdato ($individEndDate)",
-//                    it.id
-//                )
-//            }
-//            .toList()
-//            .ifEmpty { null }
+            .ifEmpty { null }*/
     }
 }

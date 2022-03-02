@@ -8,6 +8,7 @@ import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
+// TODO: DELETE
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "FlyttingType",

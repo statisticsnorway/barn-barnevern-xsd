@@ -16,8 +16,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val measures = context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        val measures = context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val category = tiltak.kategori  // when JaCoCo improves, use "?."
                 category.kode in kodelistePlasseringstiltak && tiltak.konklusjon != null
@@ -47,7 +46,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                             ) +
                             " er mer enn 3 måneder etter ${innerMeasure.id}"
                 " med startdato " +
-                        innerMeasure.startDato!!.format(
+                        innerMeasure.startDato.format(
                             DateTimeFormatter.ofPattern(
                                 "dd.MM.yyyy"
                             )

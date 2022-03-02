@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -9,7 +9,7 @@ import java.util.*
 class TiltakTypeJson(
     id: UUID,
     migrertId: String?,
-    startDato: LocalDate,
+    startDato: LocalDateTime,
     lovhjemmel: LovhjemmelType,
     jmfrLovhjemmel: MutableList<LovhjemmelType>,
     kategori: KategoriType,

@@ -1,7 +1,6 @@
 package no.ssb.barn.validation
 
 import no.ssb.barn.report.WarningLevel
-import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -42,7 +41,6 @@ class TheValidatorSpec extends Specification {
         WarningLevel.FATAL == validationReport.severity
     }
 
-    @Ignore("Fix me")
     def "when validate with valid xml, receive validation report with OK"() {
         when:
         def validationReport = sut.validate(

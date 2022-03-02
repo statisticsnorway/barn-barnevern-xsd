@@ -34,11 +34,11 @@ class BusinessUrbanDistrictNumberAndNameSpec extends Specification {
     @Unroll("businessId: #businessId, urbanDistrictId: #urbanDistrictId, urbanDistrictName: #urbanDistrictName")
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.sak.virksomhet[0].organisasjonsnummer = businessId
+        context.rootObject.avgiver.organisasjonsnummer = businessId
         and:
-        context.rootObject.sak.virksomhet[0].bydelsnummer = urbanDistrictId
+        context.rootObject.avgiver.bydelsnummer = urbanDistrictId
         and:
-        context.rootObject.sak.virksomhet[0].bydelsnavn = urbanDistrictName
+        context.rootObject.avgiver.bydelsnavn = urbanDistrictName
 
         when:
         def reportEntries = sut.validate(context)

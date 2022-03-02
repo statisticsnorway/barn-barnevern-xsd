@@ -7,7 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -36,7 +36,7 @@ class InvestigationStartDateAfterEndDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def undersokelse = context.rootObject.sak.virksomhet[0].undersokelse[0]
+        def undersokelse = context.rootObject.sak.undersokelse[0]
         and:
         undersokelse.startDato = startDate
         and:
@@ -61,10 +61,10 @@ class InvestigationStartDateAfterEndDateSpec extends Specification {
         }
 
         where:
-        resetConclusion | startDate                   | endDate                     || errorExpected
-        false           | LocalDate.now()             | LocalDate.now()             || false
-        false           | LocalDate.now()             | LocalDate.now().plusDays(1) || false
-        true            | LocalDate.now()             | LocalDate.now()             || false
-        false           | LocalDate.now().plusDays(1) | LocalDate.now()             || true
+        resetConclusion | startDate                       | endDate                         || errorExpected
+        false           | LocalDateTime.now()             | LocalDateTime.now()             || false
+        false           | LocalDateTime.now()             | LocalDateTime.now().plusDays(1) || false
+        true            | LocalDateTime.now()             | LocalDateTime.now()             || false
+        false           | LocalDateTime.now().plusDays(1) | LocalDateTime.now()             || true
     }
 }

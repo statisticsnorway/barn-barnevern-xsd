@@ -1,13 +1,13 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -36,7 +36,7 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def measure = context.rootObject.sak.virksomhet[0].tiltak[0]
+        def measure = context.rootObject.sak.tiltak[0]
         and:
         measure.startDato = measureStartDate
         and:
@@ -60,9 +60,9 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
 
         where:
         measureStartDate              | measureEndDate                | removeConclusion || errorExpected
-        LocalDate.now().minusYears(1) | LocalDate.now()               | false            || false
-        LocalDate.now()               | LocalDate.now()               | false            || false
-        LocalDate.now()               | LocalDate.now().minusYears(1) | false            || true
-        LocalDate.now()               | LocalDate.now().minusYears(1) | true             || false
+        LocalDateTime.now().minusYears(1) | LocalDateTime.now() | false || false
+        LocalDateTime.now()               | LocalDateTime.now()               | false            || false
+        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) | false            || true
+        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) | true             || false
     }
 }

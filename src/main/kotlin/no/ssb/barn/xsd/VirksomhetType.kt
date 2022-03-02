@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import java.time.LocalDate
+import no.ssb.barn.converter.LocalDateTimeAdapter
+import java.time.LocalDateTime
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
@@ -17,16 +17,16 @@ data class VirksomhetType(
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
+        LocalDateTimeAdapter::class
     )
-    var startDato: LocalDate = LocalDate.now(),
+    var startDato: LocalDateTime = LocalDateTime.now(),
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
+        LocalDateTimeAdapter::class
     )
-    var sluttDato: LocalDate? = null,
+    var sluttDato: LocalDateTime? = null,
 
     @field:XmlAttribute(name = "Organisasjonsnummer", required = true)
     var organisasjonsnummer: String = "999999999",

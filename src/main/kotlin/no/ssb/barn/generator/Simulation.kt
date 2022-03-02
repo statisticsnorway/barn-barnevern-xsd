@@ -2,6 +2,7 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.BarnevernType
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 class Simulation(
@@ -24,11 +25,11 @@ class Simulation(
 
     private fun produceCasesForCurrentDate(currentDate: LocalDate): Sequence<BarnevernType> =
         (1..(minUpdatesPerDay..maxUpdatesPerDay).random()).asSequence()
-            .map { mutateOrCreateCaseEntry(currentDate) }
+            .map { mutateOrCreateCaseEntry(currentDate.atStartOfDay()) }
 
-    private fun mutateOrCreateCaseEntry(currentDate: LocalDate): BarnevernType =
+    private fun mutateOrCreateCaseEntry(currentDate: LocalDateTime): BarnevernType =
         if (mutableCaseCount(
-                currentDate,
+                currentDate.toLocalDate(),
                 caseSet
             ) < 1 || shouldCreateNewCase()
         ) {
@@ -56,7 +57,7 @@ class Simulation(
 
                     // update case timestamp
                     barnevern.datoUttrekk =
-                        currentDate.atStartOfDay().plusHours(
+                        currentDate.plusHours(
                             (8..20).random().toLong()
                         )
 
@@ -74,11 +75,11 @@ class Simulation(
 
         @JvmStatic
         fun getRandomCaseToMutate(
-            currentDate: LocalDate, caseSet: Set<CaseEntry>
+            currentDate: LocalDateTime, caseSet: Set<CaseEntry>
         ): CaseEntry =
             caseSet
                 .filter { it.updated.isBefore(currentDate) }
-                .drop((0 until mutableCaseCount(currentDate, caseSet)).random())
+                .drop((0 until mutableCaseCount(currentDate.toLocalDate(), caseSet)).random())
                 .first()
 
         @JvmStatic
@@ -86,6 +87,6 @@ class Simulation(
             currentDate: LocalDate,
             caseSet: Set<CaseEntry>
         ): Int =
-            caseSet.count { it.updated.isBefore(currentDate) }
+            caseSet.count { it.updated.toLocalDate().isBefore(currentDate) }
     }
 }

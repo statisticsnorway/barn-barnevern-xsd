@@ -4,7 +4,7 @@ import no.ssb.barn.xsd.BarnevernType
 import spock.lang.Specification
 import spock.lang.Subject
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.stream.StreamSupport
 
 class SimulationSpec extends Specification {
@@ -92,7 +92,7 @@ class SimulationSpec extends Specification {
 
     def "mutableCaseCount test of all scenarios"() {
         when:
-        def result = Simulation.mutableCaseCount(currentDate, caseSet as Set<CaseEntry>)
+        def result = Simulation.mutableCaseCount(currentDate.toLocalDate(), caseSet as Set<CaseEntry>)
 
         then:
         noExceptionThrown()
@@ -111,11 +111,11 @@ class SimulationSpec extends Specification {
         today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || 2
     }
 
-    static def today = LocalDate.now()
+    static def today = LocalDateTime.now()
     static def yesterday = today.minusDays(1)
     static def tomorrow = today.plusDays(1)
 
-    static def getCaseEntry(LocalDate date) {
+    static def getCaseEntry(LocalDateTime date) {
         new CaseEntry(
                 UUID.randomUUID(),
                 new BarnevernType(),

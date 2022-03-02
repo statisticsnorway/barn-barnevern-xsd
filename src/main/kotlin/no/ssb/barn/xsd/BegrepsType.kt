@@ -22,10 +22,7 @@ enum class BegrepsType(val begrep: String) {
     ETTERVERN("Ettervern"),
 
     @field:XmlEnumValue("OversendelseBarneverntjeneste")
-    OVERSENDELSE_BARNEVERNTJENESTE("OversendelseBarneverntjeneste"),
-
-    @field:XmlEnumValue("Flytting")
-    FLYTTING("Flytting");
+    OVERSENDELSE_BARNEVERNTJENESTE("OversendelseBarneverntjeneste");
 
     private var value: String? = null
 

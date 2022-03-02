@@ -12,6 +12,7 @@ import spock.lang.Unroll
 
 import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.Year
 
 class ValidationUtilsSpec extends Specification {
@@ -22,10 +23,10 @@ class ValidationUtilsSpec extends Specification {
         ValidationUtils.getMinDate(first, second) == (expectFirstToBeReturned ? first : second)
 
         where:
-        first                     | second                    || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || true
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || false
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
+        first                                    | second                                   || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 2).atStartOfDay() || true
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 11, 2).atStartOfDay() || false
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 1).atStartOfDay() || false
     }
 
     @Unroll
@@ -34,10 +35,10 @@ class ValidationUtilsSpec extends Specification {
         ValidationUtils.getMaxDate(first, second) == (expectFirstToBeReturned ? first : second)
 
         where:
-        first                     | second                    || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || false
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || true
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
+        first                                    | second                                   || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 2).atStartOfDay() || false
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 11, 2).atStartOfDay() || true
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 1).atStartOfDay() || false
     }
 
     @Unroll
@@ -90,20 +91,20 @@ class ValidationUtilsSpec extends Specification {
 
         where:
         xsd              | xml                          || result
-        "/Barnevern.xsd" | "/test00_file01_changes.xml"          || true
+        "/Barnevern.xsd" | "/test00_file01_changes.xml" || true
         "/Barnevern.xsd" | "/test01_file01_changes.xml" || true
         "/Barnevern.xsd" | "/test01_file02_changes.xml" || true
         "/Barnevern.xsd" | "/test01_file03_changes.xml" || true
-        "/Barnevern.xsd" | "/test01_fil04.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil05.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil06.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil07.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil08.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil09.xml"          || true
 
         "/Barnevern.xsd" | "/test01_file01_total.xml"   || true
         "/Barnevern.xsd" | "/test01_file02_total.xml"   || true
         "/Barnevern.xsd" | "/test01_file03_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file04_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file05_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file06_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file07_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file08_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file09_total.xml"  || true
     }
 
     def "Should produce SAXException for invalid xml files, xsd = #xsd, xml = #xml"() {
@@ -198,7 +199,7 @@ class ValidationUtilsSpec extends Specification {
 
     // util stuff from here
 
-    static def createMeasure(LocalDate start, LocalDate end) {
+    static def createMeasure(LocalDateTime start, LocalDateTime end) {
         new TiltakType(
                 UUID.randomUUID(),
                 null,
@@ -214,7 +215,7 @@ class ValidationUtilsSpec extends Specification {
     }
 
     static def createDate(monthsAhead) {
-        LocalDate.now().plusMonths(monthsAhead)
+        LocalDateTime.now().plusMonths(monthsAhead)
     }
 
     static def getSsnByAge(int age) {

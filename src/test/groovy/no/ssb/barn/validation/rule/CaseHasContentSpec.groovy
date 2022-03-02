@@ -37,13 +37,13 @@ class CaseHasContentSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def virksomhet = context.rootObject.sak.virksomhet[0]
+        def sak = context.rootObject.sak
         and:
-        virksomhet.melding = messages as List<MeldingType>
+        sak.melding = messages as List<MeldingType>
         and:
-        virksomhet.tiltak = measures as List<TiltakType>
+        sak.tiltak = measures as List<TiltakType>
         and:
-        virksomhet.plan = plans as List<PlanType>
+        sak.plan = plans as List<PlanType>
 
         when:
         def reportEntries = sut.validate(context)

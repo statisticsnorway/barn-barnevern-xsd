@@ -1,7 +1,7 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.OpphevelseType
 import no.ssb.barn.xsd.TiltakKonklusjonType
@@ -9,7 +9,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -29,7 +29,7 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
     @Unroll
     def "test alle scenarier"() {
         given:
-        def measure = context.rootObject.sak.virksomhet[0].tiltak[0]
+        def measure = context.rootObject.sak.tiltak[0]
         and:
         measure.lovhjemmel = new LovhjemmelType(
                 "~lov~",
@@ -41,13 +41,13 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
         measure.opphevelse = null
         and:
         if (createOpphevelse) {
-            measure.opphevelse = new OpphevelseType(kode, presisering)
+            measure.opphevelse = new OpphevelseType(kode, presisering, LocalDateTime.now())
         }
         and:
         measure.konklusjon = null
         and:
         if (createKonklusjon) {
-            measure.konklusjon = new TiltakKonklusjonType(LocalDate.now())
+            measure.konklusjon = new TiltakKonklusjonType(LocalDateTime.now())
         }
 
         when:

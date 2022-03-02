@@ -16,8 +16,7 @@ class MessageCaseContentMissingClarification : AbstractRule(
     private val codesThatRequiresClarification = listOf("18", "19")
 
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.melding }
+        context.rootObject.sak.melding.asSequence()
             .flatMap { melding -> melding.saksinnhold }
             .filter { saksinnhold ->
                 saksinnhold.kode in codesThatRequiresClarification
@@ -25,7 +24,8 @@ class MessageCaseContentMissingClarification : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    "Saksinnhold med kode (${it.kode}) mangler presisering")
+                    "Saksinnhold med kode (${it.kode}) mangler presisering"
+                )
             }
             .toList()
             .ifEmpty { null }

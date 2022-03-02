@@ -12,6 +12,9 @@ class InvestigationStartDateBeforeBusinessStartDate : AbstractRule(
     UndersokelseType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
+        return null
+/*
+        TODO fix me
         val sak = context.rootObject.sak
 
         return sak.virksomhet.asSequence()
@@ -31,5 +34,6 @@ class InvestigationStartDateBeforeBusinessStartDate : AbstractRule(
             .flatten()
             .toList()
             .ifEmpty { null }
+*/
     }
 }

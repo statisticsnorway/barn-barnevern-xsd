@@ -13,10 +13,9 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
     UndersokelseType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val businesses = context.rootObject.sak.virksomhet.asSequence()
-        val investigations = businesses.flatMap { virksomhet -> virksomhet.undersokelse }
-        val relations = businesses.flatMap { virksomhet -> virksomhet.relasjon }
-        val messages = businesses.flatMap { virksomhet -> virksomhet.melding }
+        val investigations = context.rootObject.sak.undersokelse
+        val relations = context.rootObject.sak.relasjon
+        val messages = context.rootObject.sak.melding
 
         return relations
             .filter { relation ->
@@ -37,7 +36,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
 
                 val currentDate = context.rootObject.datoUttrekk
 
-                if (currentDate.toLocalDate().isAfter(message.startDato.plusDays(7 + 90))
+                if (currentDate.isAfter(message.startDato.plusDays(7 + 90))
                     && (investigation.utvidetFrist == null
                             || investigation.utvidetFrist!!.innvilget == null
                             || investigation.utvidetFrist!!.innvilget == "2"
@@ -49,7 +48,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                     )
                 }
 
-                if (currentDate.toLocalDate().isAfter(message.startDato.plusDays(7 + 180))) {
+                if (currentDate.isAfter(message.startDato.plusDays(7 + 180))) {
                     return@map createReportEntry(
                         "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato",
                         relation.tilId

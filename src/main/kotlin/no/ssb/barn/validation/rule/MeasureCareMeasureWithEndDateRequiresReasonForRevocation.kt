@@ -13,8 +13,7 @@ class MeasureCareMeasureWithEndDateRequiresReasonForRevocation : AbstractRule(
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val revocation = tiltak.opphevelse // when JaCoCo improves, use "?."
                 (isCareMeasure(tiltak.lovhjemmel) || tiltak.jmfrLovhjemmel.any{ isCareMeasure(it) })

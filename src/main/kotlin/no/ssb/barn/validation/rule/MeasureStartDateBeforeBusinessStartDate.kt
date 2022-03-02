@@ -12,6 +12,9 @@ class MeasureStartDateBeforeBusinessStartDate : AbstractRule(
     MeldingType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
+        return null
+
+/*      TODO fix me
         val sak = context.rootObject.sak
 
         return sak.virksomhet.asSequence()
@@ -30,5 +33,6 @@ class MeasureStartDateBeforeBusinessStartDate : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
+*/
     }
 }

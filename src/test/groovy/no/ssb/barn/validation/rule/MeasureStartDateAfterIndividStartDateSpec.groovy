@@ -1,12 +1,12 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -28,7 +28,7 @@ class MeasureStartDateAfterIndividStartDateSpec extends Specification {
         given:
         context.rootObject.sak.startDato = individStartDate
         and:
-        context.rootObject.sak.virksomhet[0].tiltak[0].startDato = measureStartDate
+        context.rootObject.sak.tiltak[0].startDato = measureStartDate
 
         when:
         def reportEntries = sut.validate(context)
@@ -43,9 +43,9 @@ class MeasureStartDateAfterIndividStartDateSpec extends Specification {
         }
 
         where:
-        individStartDate              | measureStartDate              || errorExpected
-        LocalDate.now().minusYears(1) | LocalDate.now()               || false
-        LocalDate.now()               | LocalDate.now()               || false
-        LocalDate.now()               | LocalDate.now().minusYears(1) || true
+        individStartDate                  | measureStartDate                  || errorExpected
+        LocalDateTime.now().minusYears(1) | LocalDateTime.now()               || false
+        LocalDateTime.now()               | LocalDateTime.now()               || false
+        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) || true
     }
 }

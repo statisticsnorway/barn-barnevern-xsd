@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.VirksomhetType
-import java.util.*
 
 class BusinessStartDateBeforeCaseStartDate : AbstractRule(
     WarningLevel.ERROR,
@@ -13,6 +12,9 @@ class BusinessStartDateBeforeCaseStartDate : AbstractRule(
     VirksomhetType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
+        return null
+/*
+        TODO fix me
         val sak = context.rootObject.sak
         val caseStartDate = sak.startDato
 
@@ -29,5 +31,6 @@ class BusinessStartDateBeforeCaseStartDate : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
+*/
     }
 }

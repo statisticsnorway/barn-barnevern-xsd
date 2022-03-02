@@ -12,8 +12,7 @@ class InvestigationStartDateAfterEndDate : AbstractRule(
     UndersokelseType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.undersokelse }
+        context.rootObject.sak.undersokelse.asSequence()
             .filter { undersokelse ->
                 with(undersokelse) {
                     konklusjon != null && startDato.isAfter(konklusjon!!.sluttDato)

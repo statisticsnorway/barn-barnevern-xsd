@@ -6,9 +6,10 @@ import javax.xml.bind.annotation.adapters.XmlAdapter
 
 class LocalDateTimeAdapter : XmlAdapter<String, LocalDateTime>() {
 
-    override fun marshal(dateTime: LocalDateTime): String =
-        dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    override fun marshal(dateTime: LocalDateTime?): String? =
+        dateTime?.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 
-    override fun unmarshal(dateTime: String): LocalDateTime =
-        LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    override fun unmarshal(dateTime: String?): LocalDateTime? =
+        if (dateTime.isNullOrEmpty()) null
+        else LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 }

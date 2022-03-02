@@ -7,7 +7,6 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
@@ -42,13 +41,11 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def sak = context.rootObject
+        context.rootObject.datoUttrekk = LocalDateTime.now()
         and:
-        sak.datoUttrekk = LocalDateTime.now()
+        def sak = context.rootObject.sak
         and:
-        def virksomhet = context.rootObject.sak.virksomhet[0]
-        and:
-        def firstMeasure = virksomhet.tiltak[0]
+        def firstMeasure = sak.tiltak[0]
         and:
         firstMeasure.startDato = firstStartDate
         and:
@@ -62,9 +59,9 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         and:
         if (useSecondContext) {
             def secondContext = getTestContext()
-            virksomhet.tiltak[1] = secondContext.rootObject.sak.virksomhet[0].tiltak[0]
+            sak.tiltak[1] = secondContext.rootObject.sak.tiltak[0]
 
-            def secondMeasure = virksomhet.tiltak[1]
+            def secondMeasure = sak.tiltak[1]
 
             secondMeasure.id = UUID.randomUUID()
             secondMeasure.startDato = secondStartDate
@@ -115,6 +112,6 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     }
 
     static def getDate(months) {
-        LocalDate.now().plusMonths(months)
+        LocalDateTime.now().plusMonths(months)
     }
 }

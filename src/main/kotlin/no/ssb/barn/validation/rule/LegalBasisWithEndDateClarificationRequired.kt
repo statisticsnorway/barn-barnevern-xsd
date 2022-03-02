@@ -13,8 +13,7 @@ class LegalBasisWithEndDateClarificationRequired : AbstractRule(
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val conclusion = tiltak.konklusjon
                 val repeal = tiltak.opphevelse

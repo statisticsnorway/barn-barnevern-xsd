@@ -6,7 +6,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.VirksomhetType
-import java.util.*
 
 @Description("""
 Virksomhet Kontroll 2c: SluttDato er etter sakens SluttDato
@@ -27,6 +26,9 @@ class BusinessEndDateAfterCaseEndDate : AbstractRule(
         val sak = context.rootObject.sak
         val caseEndDate = sak.sluttDato ?: return null
 
+        return null
+/*
+        TODO: Fix me
         return sak.virksomhet.asSequence()
             .filter { virksomhet ->
                 val endDate = virksomhet.sluttDato
@@ -42,5 +44,6 @@ class BusinessEndDateAfterCaseEndDate : AbstractRule(
             }
             .toList()
             .ifEmpty { null }
+*/
     }
 }

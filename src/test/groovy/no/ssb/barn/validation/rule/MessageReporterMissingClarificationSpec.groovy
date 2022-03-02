@@ -1,13 +1,11 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
-
-import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -36,7 +34,7 @@ class MessageReporterMissingClarificationSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def reporter = context.rootObject.sak.virksomhet[0].melding[0].melder[0]
+        def reporter = context.rootObject.sak.melding[0].melder[0]
         and:
         reporter.kode = code
         and:

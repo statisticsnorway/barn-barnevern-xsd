@@ -12,8 +12,7 @@ class PlanStartDateAfterEndDate : AbstractRule(
     PlanType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.plan }
+        context.rootObject.sak.plan.asSequence()
             .filter { plan ->
                 val conclusion = plan.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null

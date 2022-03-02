@@ -38,14 +38,11 @@ object BarnevernConverter {
     @JvmStatic
     fun unmarshallXmlToJson(xml: String): String =
         unmarshallXml(xml).apply {
-            sak.virksomhet = sak.virksomhet
-                .map { virksomhet ->
-                    virksomhet.apply {
-                        tiltak = virksomhet.tiltak
-                            .map { TiltakTypeJson(it) }
-                            .toMutableList()
-                    }
-                }.toMutableList()
+            sak.apply {
+                tiltak = sak.tiltak
+                    .map { TiltakTypeJson(it) }
+                    .toMutableList()
+            }
         }.let { barnevernType ->
             gson.toJson(barnevernType)
         }

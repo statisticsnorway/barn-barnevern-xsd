@@ -12,21 +12,13 @@ class CaseAgeAboveEighteenAndMeasures : AbstractRule(
     "Sak Kontroll 08: Alder i forhold til tiltak",
     SakType::class.java.simpleName
 ) {
-    override fun validate(context: ValidationContext): List<ReportEntry>? {
-        if (getAge(context.rootObject.sak.fodselsnummer) < 18) {
-            return null
-        }
-
-        return context.rootObject.sak.virksomhet.asSequence()
-            .filter { virksomhet -> !virksomhet.tiltak.any() }
-            .map {
-                createReportEntry(
-                    "Klienten er over 18 år og skal dermed ha tiltak",
-                    context.rootObject.sak.id
-                )
-            }
-            .distinct()
-            .toList()
-            .ifEmpty { null }
-    }
+    override fun validate(context: ValidationContext): List<ReportEntry>? =
+        if (getAge(context.rootObject.sak.fodselsnummer) < 18
+            || context.rootObject.sak.tiltak.any())
+            null
+        else
+            createSingleReportEntryList(
+                "Klienten er over 18 år og skal dermed ha tiltak",
+                context.rootObject.sak.id
+            )
 }

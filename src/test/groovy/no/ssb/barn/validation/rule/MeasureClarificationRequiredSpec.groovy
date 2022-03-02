@@ -38,7 +38,7 @@ class MeasureClarificationRequiredSpec extends Specification {
         given:
         def sak = context.rootObject.sak
         and:
-        sak.virksomhet[0].tiltak[0].kategori = new KategoriType(code, clarification)
+        sak.tiltak[0].kategori = new KategoriType(code, clarification)
 
         when:
         def reportEntries = sut.validate(context)

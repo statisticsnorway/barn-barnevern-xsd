@@ -12,11 +12,10 @@ class LegalBasisValidCode : AbstractRule(
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val legalBasis = tiltak.lovhjemmel
-                legalBasis != null
+                legalBasis != null // TODO: investigate
                         &&
                         (legalBasis.paragraf.startsWith("0")
                                 || legalBasis.kapittel.startsWith("0"))

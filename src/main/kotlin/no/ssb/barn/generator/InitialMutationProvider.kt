@@ -2,15 +2,16 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.BarnevernType
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 object InitialMutationProvider {
 
     @JvmStatic
-    fun createInitialMutation(currentDate: LocalDate): BarnevernType =
+    fun createInitialMutation(currentDate: LocalDateTime): BarnevernType =
         BarnevernType()
             .apply {
 
-                datoUttrekk = currentDate.atStartOfDay().plusHours(
+                datoUttrekk = currentDate.plusHours(
                     (8..20).random().toLong()
                 )
                 fagsystem = RandomUtils.generateRandomFagsystemType()
@@ -26,17 +27,11 @@ object InitialMutationProvider {
                     fodselsnummer = socialSecurityId
                     fodseldato = RandomUtils.getDateOfBirthFromSsn(socialSecurityId)
                     kjonn = RandomUtils.getGenderFromSsn(socialSecurityId)
+
+                    RandomUtils.generateRandomMeldingType(currentDate)
+                        .also { melding ->
+                            this.melding.add(melding)
+                        }
                 }
-
-                RandomUtils.generateRandomVirksomhetType(avgiver)
-                    .also { virksomhet ->
-                        virksomhet.startDato = currentDate
-                        sak.virksomhet.add(virksomhet)
-
-                        RandomUtils.generateRandomMeldingType(currentDate)
-                            .also { melding ->
-                                virksomhet.melding.add(melding)
-                            }
-                    }
             }
 }

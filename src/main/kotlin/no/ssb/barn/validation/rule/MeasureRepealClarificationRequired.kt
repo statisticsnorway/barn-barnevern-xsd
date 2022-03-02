@@ -14,8 +14,7 @@ class MeasureRepealClarificationRequired : AbstractRule(
     private val codesThatRequiresClarification = listOf("4")
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        return context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        return context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val repeal = tiltak.opphevelse // when JaCoCo improves, use "?."
 

@@ -35,7 +35,7 @@ class MessageMissingReportersSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def melding = context.rootObject.sak.virksomhet[0].melding[0]
+        def melding = context.rootObject.sak.melding[0]
         and:
         if (setConclusion) {
             melding.konklusjon.kode = "1"

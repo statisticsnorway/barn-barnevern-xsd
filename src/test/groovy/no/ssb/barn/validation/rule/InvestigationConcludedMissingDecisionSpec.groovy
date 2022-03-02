@@ -35,7 +35,7 @@ class InvestigationConcludedMissingDecisionSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def investigation = context.rootObject.sak.virksomhet[0].undersokelse[0]
+        def investigation = context.rootObject.sak.undersokelse[0]
         and:
         investigation.konklusjon.kode = code
         and:

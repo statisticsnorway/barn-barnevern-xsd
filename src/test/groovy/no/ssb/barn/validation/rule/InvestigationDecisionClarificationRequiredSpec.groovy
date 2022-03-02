@@ -31,7 +31,7 @@ class InvestigationDecisionClarificationRequiredSpec extends Specification {
         and:
         decision.presisering = clarification
         and:
-        context.rootObject.sak.virksomhet[0].undersokelse[0].vedtaksgrunnlag =
+        context.rootObject.sak.undersokelse[0].vedtaksgrunnlag =
                 List.of(decision)
 
         when:

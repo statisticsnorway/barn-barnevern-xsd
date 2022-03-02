@@ -14,10 +14,9 @@ class MeasureStartDateAfterIndividStartDate : AbstractRule(
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val individStartDate = context.rootObject.sak.startDato
 
-        return context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        return context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
-                tiltak.startDato.isBefore(individStartDate) == true
+                tiltak.startDato.isBefore(individStartDate)
             }
             .map {
                 createReportEntry(

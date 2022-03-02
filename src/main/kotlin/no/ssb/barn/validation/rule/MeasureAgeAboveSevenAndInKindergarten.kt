@@ -16,8 +16,7 @@ class MeasureAgeAboveSevenAndInKindergarten : AbstractRule(
         val age = ValidationUtils.getAge(context.rootObject.sak.fodselsnummer)
 
         if (age > 7) {
-            return context.rootObject.sak.virksomhet.asSequence()
-                .flatMap { virksomhet -> virksomhet.tiltak }
+            return context.rootObject.sak.tiltak.asSequence()
                 .filter { tiltak ->
                     tiltak.kategori.kode == "4.1"
                 }

@@ -12,6 +12,9 @@ class BusinessEndDateAfterStartDate : AbstractRule(
     VirksomhetType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
+        return null
+/*
+        TODO fix me
         val startDate = context.rootObject.sak.virksomhet[0].startDato
         val endDate = context.rootObject.sak.virksomhet[0].sluttDato
 
@@ -22,5 +25,6 @@ class BusinessEndDateAfterStartDate : AbstractRule(
                 "Virksomhetens startdato ($startDate) er etter sluttdato ($endDate)",
                 context.rootObject.sak.id
             )
+*/
     }
 }

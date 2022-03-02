@@ -5,13 +5,14 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class InitialMutationProviderSpec extends Specification {
 
     @Unroll
     def "when calling createInitialMutation receive valid instance"() {
         when:
-        def instance = InitialMutationProvider.createInitialMutation(LocalDate.now())
+        def instance = InitialMutationProvider.createInitialMutation(LocalDateTime.now())
 
         then:
         noExceptionThrown()

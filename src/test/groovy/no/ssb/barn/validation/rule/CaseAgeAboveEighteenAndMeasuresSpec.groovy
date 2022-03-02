@@ -38,7 +38,7 @@ class CaseAgeAboveEighteenAndMeasuresSpec extends Specification {
         context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(age)
         and:
         if (resetMeasures) {
-            context.rootObject.sak.virksomhet[0].tiltak = List.of()
+            context.rootObject.sak.tiltak = List.of()
         }
 
         when:

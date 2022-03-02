@@ -13,10 +13,9 @@ class InvestigationRelatedFromMessage : AbstractRule(
     UndersokelseType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val businesses = context.rootObject.sak.virksomhet.asSequence()
-        val investigations = businesses.flatMap { virksomhet -> virksomhet.undersokelse }
-        val relations = businesses.flatMap { virksomhet -> virksomhet.relasjon }
-        val messages = businesses.flatMap { virksomhet -> virksomhet.melding }
+        val investigations = context.rootObject.sak.undersokelse
+        val relations = context.rootObject.sak.relasjon
+        val messages = context.rootObject.sak.melding
 
         return investigations
             .filter { investigation ->
