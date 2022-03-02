@@ -3,10 +3,9 @@ package no.ssb.barn.util
 import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.xsd.KategoriType
 import no.ssb.barn.xsd.LovhjemmelType
-import no.ssb.barn.xsd.TiltakKonklusjonType
+import no.ssb.barn.xsd.OpphevelseType
 import no.ssb.barn.xsd.TiltakType
 import org.xml.sax.SAXException
-import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -79,7 +78,6 @@ class ValidationUtilsSpec extends Specification {
     }
 
     @Unroll
-    @Ignore("Fix me")
     def "Should validate valid xml files, xsd = #xsd, xml = #xml, result = #result"() {
         when:
         def sourceXSD = getSourceFromClasspath(xsd)
@@ -104,7 +102,7 @@ class ValidationUtilsSpec extends Specification {
         "/Barnevern.xsd" | "/test01_file06_total.xml"   || true
         "/Barnevern.xsd" | "/test01_file07_total.xml"   || true
         "/Barnevern.xsd" | "/test01_file08_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file09_total.xml"  || true
+        "/Barnevern.xsd" | "/test01_file09_total.xml"   || true
     }
 
     def "Should produce SAXException for invalid xml files, xsd = #xsd, xml = #xml"() {
@@ -209,8 +207,7 @@ class ValidationUtilsSpec extends Specification {
                 new KategoriType(),
                 List.of(),
                 List.of(),
-                null,
-                new TiltakKonklusjonType(end)
+                new OpphevelseType(RandomUtils.generateRandomString(10), null, end)
         )
     }
 

@@ -15,11 +15,9 @@ class LegalBasisWithEndDateClarificationRequired : AbstractRule(
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
-                val conclusion = tiltak.konklusjon
                 val repeal = tiltak.opphevelse
 
                 tiltak.erOmsorgsTiltak()
-                        && conclusion != null
                         && repeal != null
                         && repeal.kode == "4"
                         && repeal.presisering.isNullOrEmpty()

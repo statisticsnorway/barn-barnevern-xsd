@@ -19,7 +19,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
         val measures = context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val category = tiltak.kategori  // when JaCoCo improves, use "?."
-                category.kode in kodelistePlasseringstiltak && tiltak.konklusjon != null
+                category.kode in kodelistePlasseringstiltak && tiltak.opphevelse != null
             }
             .toList()
 
@@ -41,7 +41,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
 
                 val errorMsg =
                     "Plasseringstiltak ${outerMeasure.id} med sluttdato " +
-                            outerMeasure.konklusjon!!.sluttDato.format(
+                            outerMeasure.opphevelse!!.sluttDato.format(
                                 DateTimeFormatter.ofPattern("dd.MM.yyyy")
                             ) +
                             " er mer enn 3 måneder etter ${innerMeasure.id}"

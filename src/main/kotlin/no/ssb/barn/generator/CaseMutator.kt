@@ -149,6 +149,12 @@ object CaseMutator {
     @JvmStatic
     fun fromInvestigationEndedToDecision(caseEntry: CaseEntry) {
         val decision = createVedtakType()
+        decision.jmfrLovhjemmel = mutableListOf(
+            LovhjemmelType(
+                ledd = mutableListOf("~ledd~")
+            )
+        )
+        decision.status = mutableListOf(VedtakStatusType())
 
         caseEntry.barnevern.sak.vedtak.add(decision)
 
@@ -188,7 +194,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().opphevelse = OpphevelseType()
 
             plan.add(PlanType())
         }
@@ -199,7 +205,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().opphevelse = OpphevelseType()
 
             vedtak.add(createVedtakType())
         }
@@ -210,7 +216,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().opphevelse = OpphevelseType()
 
             ettervern.add(EttervernType())
         }
@@ -407,8 +413,17 @@ object CaseMutator {
         )
     )
 
-    private fun createVedtakType(): VedtakType =
-        VedtakType(lovhjemmel = createLegalBasis())
+    private fun createVedtakType(): VedtakType {
+        return VedtakType(
+            status = mutableListOf(VedtakStatusType()),
+            lovhjemmel = createLegalBasis(),
+            jmfrLovhjemmel = mutableListOf(
+                LovhjemmelType(
+                    ledd = mutableListOf("~ledd~")
+                )
+            )
+        )
+    }
 
     private fun createTiltakType(startDate: LocalDateTime): TiltakType =
         TiltakType(

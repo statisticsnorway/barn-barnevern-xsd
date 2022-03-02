@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(
     name = "TiltakType",
     propOrder = ["id", "migrertId", "startDato",
-        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
+        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse"]
 )
 open class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -47,8 +47,4 @@ open class TiltakType(
 
     @field:XmlElement(name = "Opphevelse")
     var opphevelse: OpphevelseType? = null,
-
-    // TODO: DELETE
-    @field:XmlElement(name = "Konklusjon")
-    var konklusjon: TiltakKonklusjonType? = null
 )

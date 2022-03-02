@@ -11,7 +11,7 @@
             <Konklusjon SluttDato="2021-01-08T12:34:56+01:00" Kode="2"/>
         </Melding>
         <Undersokelse StartDato="2021-01-08T12:34:56+01:00" Id="d28aa453-724a-4538-8c4e-2f27b36b7530">
-            <Vedtaksgrunnlag Kode="1" Presisering=""/>
+            <Vedtaksgrunnlag Kode="1" Presisering="~presisering~"/>
             <UtvidetFrist StartDato="2021-02-08T12:34:56+01:00" Innvilget="2"/>
             <Konklusjon SluttDato="2021-04-08T12:34:56+01:00" Kode="1"/>
         </Undersokelse>
@@ -39,8 +39,7 @@
                 <Ledd>1</Ledd>
             </JmfrLovhjemmel>
             <Kategori Kode="3.10"/>
-            <Opphevelse Kode="1" Presisering=""/>
-            <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
+            <Opphevelse Kode="1" Presisering="~presisering~" SluttDato="2021-07-09T12:34:56+01:00"/>
         </Tiltak>
         <Vedtak Id="5365c6e6-be78-4a3e-8b28-b7af12085ede" StartDato="2021-04-08T12:34:56+01:00">
             <Lovhjemmel>
@@ -62,13 +61,13 @@
             <Status EndretDato="2021-07-09T12:34:56+01:00" Kode="3"/>
             <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
         </Vedtak>
-        <Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d" Id="q1"
+        <Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d" Id="bb6b82ea-c3da-4882-b591-cccd833c262e"
                   TilId="d28aa453-724a-4538-8c4e-2f27b36b7530" TilType="Undersokelse"/>
-        <Relasjon FraType="Undersokelse" FraId="d28aa453-724a-4538-8c4e-2f27b36b7530" Id="q2"
+        <Relasjon FraType="Undersokelse" FraId="d28aa453-724a-4538-8c4e-2f27b36b7530" Id="d28aa453-724a-4538-8c4e-2f27b36b7531"
                   TilId="5365c6e6-be78-4a3e-8b28-b7af12085ede" TilType="Vedtak"/>
-        <Relasjon FraType="Vedtak" FraId="5365c6e6-be78-4a3e-8b28-b7af12085ede" Id="q3"
+        <Relasjon FraType="Vedtak" FraId="5365c6e6-be78-4a3e-8b28-b7af12085ede" Id="5365c6e6-be78-4a3e-8b28-b7af12085edf"
                   TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
-        <Relasjon FraType="Vedtak" FraId="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" Id="q4"
+        <Relasjon FraType="Vedtak" FraId="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" Id="ab0e61dd-1703-40e9-a6eb-d3cab2dc47cf"
                   TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
     </Sak>
 </Barnevern>

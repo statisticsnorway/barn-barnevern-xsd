@@ -40,10 +40,10 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
         and:
         measure.startDato = measureStartDate
         and:
-        measure.konklusjon.sluttDato = measureEndDate
+        measure.opphevelse.sluttDato = measureEndDate
         and:
-        if (removeConclusion) {
-            measure.konklusjon = null
+        if (removeRepeal) {
+            measure.opphevelse = null
         }
 
         when:
@@ -59,10 +59,10 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
         }
 
         where:
-        measureStartDate              | measureEndDate                | removeConclusion || errorExpected
-        LocalDateTime.now().minusYears(1) | LocalDateTime.now() | false || false
-        LocalDateTime.now()               | LocalDateTime.now()               | false            || false
-        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) | false            || true
-        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) | true             || false
+        measureStartDate                  | measureEndDate                    | removeRepeal || errorExpected
+        LocalDateTime.now().minusYears(1) | LocalDateTime.now()               | false        || false
+        LocalDateTime.now()               | LocalDateTime.now()               | false        || false
+        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) | false        || true
+        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) | true         || false
     }
 }

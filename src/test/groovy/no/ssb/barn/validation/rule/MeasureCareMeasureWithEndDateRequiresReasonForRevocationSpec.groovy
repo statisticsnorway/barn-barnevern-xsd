@@ -45,8 +45,6 @@ class MeasureCareMeasureWithEndDateRequiresReasonForRevocationSpec extends Speci
         and:
         measure.startDato = LocalDateTime.now().minusMonths(3)
         and:
-        measure.konklusjon.sluttDato = LocalDateTime.now()
-        and:
         measure.lovhjemmel = new LovhjemmelType("BVL", chapter, paragraph, List.of(section), null)
         and:
         measure.jmfrLovhjemmel[0] = (chapter0 == null)

@@ -113,23 +113,6 @@ object RandomUtils {
             FagsystemType("Netcompany", "Modulus Barn", "0.1.0"),
         ).random()
 
-/* TODO: DELETE
-    @JvmStatic
-    fun generateRandomVirksomhetType(avgiver: AvgiverType): VirksomhetType =
-        VirksomhetType().apply {
-
-            // we should probably use orgnr for bydel when Oslo
-            organisasjonsnummer = avgiver.organisasjonsnummer
-
-            if (avgiver.kommunenummer == GeneratorConstants.OSLO) {
-                cityPartsOslo.entries.random().also {
-                    bydelsnummer = it.key
-                    bydelsnavn = it.value
-                }
-            }
-        }
-*/
-
     @JvmStatic
     fun generateRandomMeldingType(currentDate: LocalDateTime): MeldingType =
         MeldingType().apply {

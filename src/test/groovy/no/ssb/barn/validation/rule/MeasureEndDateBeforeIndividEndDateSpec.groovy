@@ -1,13 +1,12 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
@@ -39,10 +38,10 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         given:
         context.rootObject.sak.sluttDato = individEndDate
         and:
-        context.rootObject.sak.tiltak[0].konklusjon.sluttDato = measureEndDate
+        context.rootObject.sak.tiltak[0].opphevelse.sluttDato = measureEndDate
         and:
-        if (resetConclusion) {
-            context.rootObject.sak.tiltak[0].konklusjon = null
+        if (resetRepeal) {
+            context.rootObject.sak.tiltak[0].opphevelse = null
         }
 
         when:
@@ -58,7 +57,7 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         }
 
         where:
-        resetConclusion | individEndDate                    | measureEndDate                    || errorExpected
+        resetRepeal | individEndDate | measureEndDate || errorExpected
         false           | LocalDateTime.now().minusYears(1) | LocalDateTime.now()               || true
         true            | LocalDateTime.now().minusYears(1) | LocalDateTime.now()               || false
         false           | LocalDateTime.now()               | LocalDateTime.now().minusHours(1) || false

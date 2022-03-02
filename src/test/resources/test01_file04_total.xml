@@ -20,6 +20,7 @@
                 <Paragraf>12</Paragraf>
                 <Ledd>1</Ledd>
             </Lovhjemmel>
+            <Status EndretDato="2021-04-08T12:34:56+01:00" Kode="1"/>
         </Vedtak>
         <Relasjon FraType="Melding" FraId="7317a453-2d65-465a-9589-519311d66579"
                   Id="7317a453-2d65-465a-9589-519311d66579" TilId="7317a453-2d65-465a-9589-519311d66579"

@@ -73,7 +73,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromMessageToDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MESSAGE)
@@ -106,7 +105,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromInvestigationToDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION_STARTED)
@@ -124,7 +122,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromMeasureToPlan expect one instance of PlanType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
@@ -142,7 +139,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromMeasureToDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
@@ -160,7 +156,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromMeasureToAfterCare expect one instance of EttervernType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
@@ -178,7 +173,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromDecisionToMeasure expect one instance of TiltakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
@@ -196,7 +190,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromDecisionToAnotherDecision expect one instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
@@ -212,7 +205,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromDecisionToAfterCare expect one instance of EttervernType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
@@ -230,7 +222,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromAfterCareToMeasure expect one instance of TiltakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.AFTERCARE)
@@ -248,7 +239,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Fix me")
     def "fromAfterCareToDecision expect one more instance of VedtakType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.AFTERCARE)

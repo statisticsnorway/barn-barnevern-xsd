@@ -23,10 +23,10 @@ object ValidationUtils {
     ): Boolean {
 
         val outerRange =
-            outerMeasure.startDato.rangeTo(outerMeasure.konklusjon?.sluttDato ?: LocalDateTime.now())
+            outerMeasure.startDato.rangeTo(outerMeasure.opphevelse?.sluttDato ?: LocalDateTime.now())
 
         val innerRange =
-            innerMeasure.startDato.rangeTo(innerMeasure.konklusjon?.sluttDato ?: LocalDateTime.now())
+            innerMeasure.startDato.rangeTo(innerMeasure.opphevelse?.sluttDato ?: LocalDateTime.now())
 
         return areOverlapping(outerRange, innerRange)
                 && getMaxDate(outerRange.start, innerRange.start)

@@ -13,10 +13,10 @@
         <Undersokelse StartDato="2021-01-08T12:34:56+01:00" Id="7317a453-2d65-465a-9589-519311d66579">
             <Konklusjon SluttDato="2021-04-08T12:34:56+01:00" Kode="1"/>
         </Undersokelse>
-        <Plan Id="1" StartDato="2021-07-09T12:34:56+01:00" Plantype="1">
+        <Plan Id="7317a453-2d65-465a-9589-519311d66578" StartDato="2021-07-09T12:34:56+01:00" Plantype="1">
             <Evaluering UtfortDato="2021-10-12T12:34:56+01:00"/>
         </Plan>
-        <Tiltak Id="1" StartDato="2021-04-08T12:34:56+01:00">
+        <Tiltak Id="bb6b82ea-c3da-4882-b591-cccd833c262f" StartDato="2021-04-08T12:34:56+01:00">
             <Lovhjemmel>
                 <Lov>BVL</Lov>
                 <Kapittel>4</Kapittel>
@@ -24,9 +24,9 @@
                 <Ledd>1</Ledd>
             </Lovhjemmel>
             <Kategori Kode="3.10"/>
-            <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
+            <Opphevelse Kode="1" SluttDato="2021-07-09T12:34:56+01:00"/>
         </Tiltak>
-        <Vedtak Id="1" StartDato="2021-04-08T12:34:56+01:00">
+        <Vedtak Id="bb6b82ea-c3da-4882-b591-cccd833c262b" StartDato="2021-04-08T12:34:56+01:00">
             <Lovhjemmel>
                 <Lov>BVL</Lov>
                 <Kapittel>4</Kapittel>
@@ -36,7 +36,7 @@
             <Status EndretDato="2021-04-09T12:34:56+01:00" Kode="3"/>
             <Konklusjon SluttDato="2021-04-09T12:34:56+01:00"/>
         </Vedtak>
-        <Vedtak Id="2" StartDato="2021-07-08T12:34:56+01:00">
+        <Vedtak Id="bb6b82ea-c3da-4882-b591-cccd833c262a" StartDato="2021-07-08T12:34:56+01:00">
             <Lovhjemmel>
                 <Lov>BVL</Lov>
                 <Kapittel>4</Kapittel>
@@ -46,9 +46,13 @@
             <Status EndretDato="2021-07-09T12:34:56+01:00" Kode="3"/>
             <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
         </Vedtak>
-        <Relasjon FraType="Melding" FraId="1" Id="q1" TilId="1" TilType="Undersokelse"/>
-        <Relasjon FraType="Undersokelse" FraId="1" Id="q2" TilId="1" TilType="Vedtak"/>
-        <Relasjon FraType="Vedtak" FraId="1" Id="q3" TilId="1" TilType="Tiltak"/>
-        <Relasjon FraType="Vedtak" FraId="2" Id="q4" TilId="1" TilType="Tiltak"/>
+        <Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d" Id="bb6b82ea-c3da-4882-b591-cccd833c262e"
+                  TilId="d28aa453-724a-4538-8c4e-2f27b36b7530" TilType="Undersokelse"/>
+        <Relasjon FraType="Undersokelse" FraId="d28aa453-724a-4538-8c4e-2f27b36b7530" Id="d28aa453-724a-4538-8c4e-2f27b36b7531"
+                  TilId="5365c6e6-be78-4a3e-8b28-b7af12085ede" TilType="Vedtak"/>
+        <Relasjon FraType="Vedtak" FraId="5365c6e6-be78-4a3e-8b28-b7af12085ede" Id="5365c6e6-be78-4a3e-8b28-b7af12085edf"
+                  TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
+        <Relasjon FraType="Vedtak" FraId="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" Id="ab0e61dd-1703-40e9-a6eb-d3cab2dc47cf"
+                  TilId="be6dff10-c654-4a88-8310-a42d3e268e7d" TilType="Tiltak"/>
     </Sak>
 </Barnevern>
