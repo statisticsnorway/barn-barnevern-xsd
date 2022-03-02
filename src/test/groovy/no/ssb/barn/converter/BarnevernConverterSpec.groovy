@@ -11,6 +11,8 @@ import spock.lang.Unroll
 import javax.xml.bind.UnmarshalException
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
@@ -60,7 +62,7 @@ class BarnevernConverterSpec extends Specification {
 
     def "when unmarshalling instance to map, map is not null"() {
         given:
-        def xml = getResourceAsString("test01_fil09.xml")
+        def xml = getResourceAsString("test01_file09_total.xml")
 
         when:
         def map = BarnevernConverter.unmarshallXmlAndValidationReportToMap(xml, VALIDATION_REPORT_JSON)
@@ -86,7 +88,7 @@ class BarnevernConverterSpec extends Specification {
 
     def "when marshalling instance to XML, xml is valid"() {
         given:
-        def instance = InitialMutationProvider.createInitialMutation(LocalDateTime.now())
+        def instance = InitialMutationProvider.createInitialMutation(ZonedDateTime.now())
 
         when:
         def xml = BarnevernConverter.marshallInstance(instance)
@@ -102,11 +104,11 @@ class BarnevernConverterSpec extends Specification {
     def "should convert XML to objects, JAXB.unmarshal()"() {
         given:
         def xmlString = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
-                <Barnevern xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" DatoUttrekk=\"2021-01-01T13:22:00\">
+                <Barnevern xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" DatoUttrekk=\"2021-01-01T13:22:00+01:00\">
                     <Fagsystem Versjon=\"1.0\" Navn=\"OJJ's Manuell Touch\" Leverandor=\"SSB\"/>
                     <Avgiver Kommunenummer=\"3401\" Kommunenavn=\"Kongsvinger kommune\" Organisasjonsnummer=\"944117784\"/>
                     <Sak StartDato=\"2021-01-01\" Id=\"1\" Journalnummer=\"test1\" Fodselsnummer=\"02011088123\">
-                        <Melding StartDato=\"2021-01-01\" Id=\"1\">
+                        <Melding StartDato=\"2021-01-01T13:22:00+01:00\" Id=\"1\">
                             <Melder Kode=\"1\"/>
                             <Saksinnhold Kode=\"1\"/>
                         </Melding>
@@ -134,7 +136,7 @@ class BarnevernConverterSpec extends Specification {
         def melding = new MeldingType(
                 UUID.randomUUID(),
                 null,
-                datetime,
+                ZonedDateTime.of(datetime, ZoneId.systemDefault()),
                 List.of(melder),
                 List.of(saksinnhold),
                 null
@@ -143,7 +145,7 @@ class BarnevernConverterSpec extends Specification {
         def sak = new SakType(
                 UUID.randomUUID(),
                 null,
-                datetime,
+                ZonedDateTime.of(datetime, ZoneId.systemDefault()),
                 null,
                 RandomUtils.generateRandomString(9),
                 "02011088123",
@@ -167,7 +169,7 @@ class BarnevernConverterSpec extends Specification {
         def barnevern = new BarnevernType(
                 UUID.randomUUID(),
                 null,
-                datetime,
+                ZonedDateTime.of(datetime, ZoneId.systemDefault()),
                 fagsystem,
                 avgiver,
                 sak

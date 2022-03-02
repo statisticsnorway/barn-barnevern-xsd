@@ -2,7 +2,7 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.BarnevernType
 import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.*
 
 class Simulation(
@@ -20,14 +20,14 @@ class Simulation(
 
     fun run(daysBack: Int): Sequence<BarnevernType> =
         (-daysBack until 1).asSequence()
-            .map { LocalDate.now().plusDays(it.toLong()) }
+            .map { ZonedDateTime.now().plusDays(it.toLong()) }
             .flatMap { produceCasesForCurrentDate(it) }
 
-    private fun produceCasesForCurrentDate(currentDate: LocalDate): Sequence<BarnevernType> =
+    private fun produceCasesForCurrentDate(currentDate: ZonedDateTime): Sequence<BarnevernType> =
         (1..(minUpdatesPerDay..maxUpdatesPerDay).random()).asSequence()
-            .map { mutateOrCreateCaseEntry(currentDate.atStartOfDay()) }
+            .map { mutateOrCreateCaseEntry(currentDate) }
 
-    private fun mutateOrCreateCaseEntry(currentDate: LocalDateTime): BarnevernType =
+    private fun mutateOrCreateCaseEntry(currentDate: ZonedDateTime): BarnevernType =
         if (mutableCaseCount(
                 currentDate.toLocalDate(),
                 caseSet
@@ -75,7 +75,7 @@ class Simulation(
 
         @JvmStatic
         fun getRandomCaseToMutate(
-            currentDate: LocalDateTime, caseSet: Set<CaseEntry>
+            currentDate: ZonedDateTime, caseSet: Set<CaseEntry>
         ): CaseEntry =
             caseSet
                 .filter { it.updated.isBefore(currentDate) }

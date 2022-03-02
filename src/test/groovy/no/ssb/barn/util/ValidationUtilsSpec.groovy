@@ -11,15 +11,19 @@ import spock.lang.Unroll
 
 import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.Year
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class ValidationUtilsSpec extends Specification {
 
     @Unroll
     def "minDate receive min date"() {
         expect:
-        ValidationUtils.getMinDate(first, second) == (expectFirstToBeReturned ? first : second)
+        ValidationUtils.getMinDate(
+                ZonedDateTime.of(first, ZoneId.systemDefault()),
+                ZonedDateTime.of(second, ZoneId.systemDefault())
+        ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
 
         where:
         first                                    | second                                   || expectFirstToBeReturned
@@ -31,7 +35,10 @@ class ValidationUtilsSpec extends Specification {
     @Unroll
     def "maxDate receive max date"() {
         expect:
-        ValidationUtils.getMaxDate(first, second) == (expectFirstToBeReturned ? first : second)
+        ValidationUtils.getMaxDate(
+                ZonedDateTime.of(first, ZoneId.systemDefault()),
+                ZonedDateTime.of(second, ZoneId.systemDefault())
+        ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
 
         where:
         first                                    | second                                   || expectFirstToBeReturned
@@ -197,7 +204,7 @@ class ValidationUtilsSpec extends Specification {
 
     // util stuff from here
 
-    static def createMeasure(LocalDateTime start, LocalDateTime end) {
+    static def createMeasure(ZonedDateTime start, ZonedDateTime end) {
         new TiltakType(
                 UUID.randomUUID(),
                 null,
@@ -212,7 +219,7 @@ class ValidationUtilsSpec extends Specification {
     }
 
     static def createDate(monthsAhead) {
-        LocalDateTime.now().plusMonths(monthsAhead)
+        ZonedDateTime.now().plusMonths(monthsAhead)
     }
 
     static def getSsnByAge(int age) {

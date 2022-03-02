@@ -6,7 +6,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -58,6 +58,6 @@ class InvestigationDueDatePassedConclusionRequiredSpec extends Specification {
     }
 
     static def getDate(months) {
-        LocalDateTime.now().plusMonths(months)
+        ZonedDateTime.now().plusMonths(months)
     }
 }

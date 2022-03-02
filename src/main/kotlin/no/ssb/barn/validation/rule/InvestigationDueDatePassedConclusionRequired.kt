@@ -5,7 +5,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.UndersokelseType
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 class InvestigationDueDatePassedConclusionRequired : AbstractRule(
     WarningLevel.WARNING,
@@ -17,7 +17,7 @@ class InvestigationDueDatePassedConclusionRequired : AbstractRule(
             .filter { undersokelse ->
                 undersokelse.konklusjon == null
                         && undersokelse.startDato.plusMonths(6)
-                    .isBefore(LocalDateTime.now())
+                    .isBefore(ZonedDateTime.now())
             }
             .map {
                 createReportEntry(

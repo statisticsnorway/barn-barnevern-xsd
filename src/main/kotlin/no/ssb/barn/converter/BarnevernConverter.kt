@@ -7,7 +7,7 @@ import no.ssb.barn.xsd.BarnevernType
 import no.ssb.barn.xsd.TiltakTypeJson
 import java.io.StringWriter
 import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import javax.xml.bind.JAXBContext
 
 
@@ -60,7 +60,7 @@ object BarnevernConverter {
     val gson: Gson = GsonBuilder()
         .registerTypeAdapter(LocalDate::class.java, GsonLocalDateAdapter())
         .registerTypeAdapter(
-            LocalDateTime::class.java,
+            ZonedDateTime::class.java,
             GsonLocalDateTimeAdapter()
         )
         .create()

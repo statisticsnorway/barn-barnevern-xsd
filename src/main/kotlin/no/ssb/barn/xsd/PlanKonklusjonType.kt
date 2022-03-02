@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
 import no.ssb.barn.converter.LocalDateTimeAdapter
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
@@ -13,5 +13,5 @@ data class PlanKonklusjonType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: LocalDateTime = LocalDateTime.now()
+    var sluttDato: ZonedDateTime = ZonedDateTime.now()
 )

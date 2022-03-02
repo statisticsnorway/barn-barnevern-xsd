@@ -2,12 +2,12 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.BarnevernType
 import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 object InitialMutationProvider {
 
     @JvmStatic
-    fun createInitialMutation(currentDate: LocalDateTime): BarnevernType =
+    fun createInitialMutation(currentDate: ZonedDateTime): BarnevernType =
         BarnevernType()
             .apply {
 

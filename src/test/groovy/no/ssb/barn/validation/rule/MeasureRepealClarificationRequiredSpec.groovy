@@ -8,7 +8,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -39,7 +39,7 @@ class MeasureRepealClarificationRequiredSpec extends Specification {
         given:
             context.rootObject.sak.tiltak[0].opphevelse = (code == null)
                     ? null
-                    : new OpphevelseType(code, clarification, LocalDateTime.now())
+                    : new OpphevelseType(code, clarification, ZonedDateTime.now())
 
         when:
         def reportEntries = sut.validate(context)

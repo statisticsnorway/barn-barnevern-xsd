@@ -7,7 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -62,9 +62,9 @@ class MessageStartDateAfterEndDateSpec extends Specification {
 
         where:
         resetConclusion | startDate                       | endDate                         || errorExpected
-        false           | LocalDateTime.now()             | LocalDateTime.now()             || false
-        false           | LocalDateTime.now()             | LocalDateTime.now().plusDays(1) || false
-        true            | LocalDateTime.now()             | LocalDateTime.now()             || false
-        false           | LocalDateTime.now().plusDays(1) | LocalDateTime.now()             || true
+        false           | ZonedDateTime.now()             | ZonedDateTime.now()             || false
+        false           | ZonedDateTime.now()             | ZonedDateTime.now().plusDays(1) || false
+        true            | ZonedDateTime.now()             | ZonedDateTime.now()             || false
+        false           | ZonedDateTime.now().plusDays(1) | ZonedDateTime.now()             || true
     }
 }

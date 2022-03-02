@@ -7,7 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -56,8 +56,8 @@ class CaseEndDateAfterStartDateSpec extends Specification {
 
         where:
         startDate                     | endDate                       || errorExpected
-        LocalDateTime.now().minusYears(1) | LocalDateTime.now() || false
-        LocalDateTime.now()               | null                          || false
-        LocalDateTime.now()               | LocalDateTime.now().minusYears(1) || true
+        ZonedDateTime.now().minusYears(1) | ZonedDateTime.now() || false
+        ZonedDateTime.now()               | null                          || false
+        ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) || true
     }
 }

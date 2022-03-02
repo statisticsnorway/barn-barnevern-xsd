@@ -4,15 +4,14 @@ import no.ssb.barn.converter.BarnevernConverter
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 class InitialMutationProviderSpec extends Specification {
 
     @Unroll
     def "when calling createInitialMutation receive valid instance"() {
         when:
-        def instance = InitialMutationProvider.createInitialMutation(LocalDateTime.now())
+        def instance = InitialMutationProvider.createInitialMutation(ZonedDateTime.now())
 
         then:
         noExceptionThrown()

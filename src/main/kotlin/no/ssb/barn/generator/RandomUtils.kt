@@ -5,7 +5,7 @@ import no.ssb.barn.util.ValidationUtils.controlSumDigits2
 import no.ssb.barn.util.ValidationUtils.modulo11
 import no.ssb.barn.xsd.*
 import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 @Suppress("SpellCheckingInspection")
@@ -114,7 +114,7 @@ object RandomUtils {
         ).random()
 
     @JvmStatic
-    fun generateRandomMeldingType(currentDate: LocalDateTime): MeldingType =
+    fun generateRandomMeldingType(currentDate: ZonedDateTime): MeldingType =
         MeldingType().apply {
             id = java.util.UUID.randomUUID()
             startDato = currentDate

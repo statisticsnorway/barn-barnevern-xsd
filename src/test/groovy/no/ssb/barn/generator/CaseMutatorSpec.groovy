@@ -5,10 +5,9 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.validation.VersionOneValidator
 import no.ssb.barn.xsd.BarnevernType
-import spock.lang.Ignore
 import spock.lang.Specification
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 class CaseMutatorSpec extends Specification {
 
@@ -261,8 +260,8 @@ class CaseMutatorSpec extends Specification {
     static def createCaseEntry(BarnevernState state) {
         def instance = new CaseEntry(
                 UUID.randomUUID(),
-                InitialMutationProvider.createInitialMutation(LocalDateTime.now()),
-                LocalDateTime.now(),
+                InitialMutationProvider.createInitialMutation(ZonedDateTime.now()),
+                ZonedDateTime.now(),
                 1,
                 state)
 

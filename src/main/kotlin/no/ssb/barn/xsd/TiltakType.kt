@@ -2,7 +2,7 @@ package no.ssb.barn.xsd
 
 import no.ssb.barn.converter.LocalDateTimeAdapter
 import no.ssb.barn.converter.UuidAdapter
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -28,7 +28,7 @@ open class TiltakType(
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
-    ) var startDato: LocalDateTime = LocalDateTime.now(),
+    ) var startDato: ZonedDateTime = ZonedDateTime.now(),
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
     var lovhjemmel: LovhjemmelType = LovhjemmelType(),

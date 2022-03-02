@@ -8,7 +8,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -40,7 +40,7 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
         measure.opphevelse = null
         and:
         if (createOpphevelse) {
-            measure.opphevelse = new OpphevelseType(kode, presisering, LocalDateTime.now())
+            measure.opphevelse = new OpphevelseType(kode, presisering, ZonedDateTime.now())
         }
 
         when:

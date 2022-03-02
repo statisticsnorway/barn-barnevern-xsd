@@ -4,7 +4,7 @@ import no.ssb.barn.xsd.BarnevernType
 import spock.lang.Specification
 import spock.lang.Subject
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.stream.StreamSupport
 
 class SimulationSpec extends Specification {
@@ -111,11 +111,11 @@ class SimulationSpec extends Specification {
         today       | Set.of(getCaseEntry(yesterday), getCaseEntry(yesterday)) || 2
     }
 
-    static def today = LocalDateTime.now()
+    static def today = ZonedDateTime.now()
     static def yesterday = today.minusDays(1)
     static def tomorrow = today.plusDays(1)
 
-    static def getCaseEntry(LocalDateTime date) {
+    static def getCaseEntry(ZonedDateTime date) {
         new CaseEntry(
                 UUID.randomUUID(),
                 new BarnevernType(),

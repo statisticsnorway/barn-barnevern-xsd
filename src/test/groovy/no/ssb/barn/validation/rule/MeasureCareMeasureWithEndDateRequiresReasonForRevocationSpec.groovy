@@ -9,7 +9,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -43,7 +43,7 @@ class MeasureCareMeasureWithEndDateRequiresReasonForRevocationSpec extends Speci
         given:
         def measure = context.rootObject.sak.tiltak[0]
         and:
-        measure.startDato = LocalDateTime.now().minusMonths(3)
+        measure.startDato = ZonedDateTime.now().minusMonths(3)
         and:
         measure.lovhjemmel = new LovhjemmelType("BVL", chapter, paragraph, List.of(section), null)
         and:
@@ -53,7 +53,7 @@ class MeasureCareMeasureWithEndDateRequiresReasonForRevocationSpec extends Speci
         and:
         measure.opphevelse = (revocationCode == null)
                 ? null
-                : new OpphevelseType(revocationCode, null, LocalDateTime.now())
+                : new OpphevelseType(revocationCode, null, ZonedDateTime.now())
 
         when:
         def reportEntries = sut.validate(context)

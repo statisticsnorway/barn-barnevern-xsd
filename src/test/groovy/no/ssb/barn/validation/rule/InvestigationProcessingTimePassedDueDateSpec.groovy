@@ -7,7 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -27,7 +27,7 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.datoUttrekk = LocalDateTime.now()
+        context.rootObject.datoUttrekk = ZonedDateTime.now()
         and:
         def messageId = UUID.randomUUID()
         and:
@@ -57,7 +57,7 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
         and:
         investigation.id = investigationId
         and:
-        investigation.konklusjon.sluttDato = LocalDateTime.now().minusDays(1)
+        investigation.konklusjon.sluttDato = ZonedDateTime.now().minusDays(1)
         and:
         investigation.utvidetFrist.innvilget = extendedDueDateGranted
         and:
@@ -79,30 +79,30 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
         }
 
         where:
-        relationFromType    | relationToType           | resetMessageId | messageStartDate               | resetInvestigationId | daysText  | extendedDueDateGranted | removeExtendedDueDate | removeConclusion || errorExpected
-        BegrepsType.VEDTAK  | BegrepsType.TILTAK       | false          | LocalDateTime.now()                | false                | ""        | null                   | false                 | true             || false
-        BegrepsType.VEDTAK  | BegrepsType.TILTAK       | true           | LocalDateTime.now()                | true                 | ""        | null                   | false                 | true             || false
-        BegrepsType.MELDING | BegrepsType.VEDTAK       | false          | LocalDateTime.now()                | false                | ""        | null                   | false                 | true             || false
-        BegrepsType.VEDTAK  | BegrepsType.UNDERSOKELSE | true           | LocalDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | true           | LocalDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(97)  | true                 | "7 + 90"  | null                   | true                  | false            || false
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
+        relationFromType    | relationToType           | resetMessageId | messageStartDate                   | resetInvestigationId | daysText  | extendedDueDateGranted | removeExtendedDueDate | removeConclusion || errorExpected
+        BegrepsType.VEDTAK  | BegrepsType.TILTAK       | false          | ZonedDateTime.now()                | false                | ""        | null                   | false                 | true             || false
+        BegrepsType.VEDTAK  | BegrepsType.TILTAK       | true           | ZonedDateTime.now()                | true                 | ""        | null                   | false                 | true             || false
+        BegrepsType.MELDING | BegrepsType.VEDTAK       | false          | ZonedDateTime.now()                | false                | ""        | null                   | false                 | true             || false
+        BegrepsType.VEDTAK  | BegrepsType.UNDERSOKELSE | true           | ZonedDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | true           | ZonedDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(97)  | true                 | "7 + 90"  | null                   | true                  | false            || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | false            || false
 /*
         TODO fix me
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | true             || false
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(97)  | false                | "7 + 90"  | "2"                    | false                 | true             || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(97)  | false                | "7 + 90"  | null                   | true                  | true             || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(97)  | false                | "7 + 90"  | "2"                    | false                 | true             || false
 */
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(97)  | false                | "7 + 90"  | "1"                    | false                 | true             || false
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(98)  | false                | "7 + 90"  | null                   | true                  | true             || true
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(98)  | false                | "7 + 90"  | null                   | false                 | true             || true
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(98)  | false                | "7 + 90"  | "2"                    | false                 | true             || true
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(98)  | false                | "7 + 90"  | "1"                    | false                 | true             || false
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(187) | false                | "7 + 90"  | null                   | true                  | true             || true
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(187) | false                | "7 + 90"  | null                   | false                 | true             || true
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(187) | false                | "7 + 90"  | "2"                    | false                 | true             || true
-        // TODO fix me BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(187) | false                | "7 + 90"  | "1"                    | false                 | true             || false
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(188) | false                | "7 + 90"  | null                   | true                  | true             || true
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(188) | false                | "7 + 90"  | "2"                    | false                 | true             || true
-        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | LocalDateTime.now().minusDays(188) | false                | "7 + 180" | "1"                    | false                 | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(97)  | false                | "7 + 90"  | "1"                    | false                 | true             || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(98)  | false                | "7 + 90"  | null                   | true                  | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(98)  | false                | "7 + 90"  | null                   | false                 | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(98)  | false                | "7 + 90"  | "2"                    | false                 | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(98)  | false                | "7 + 90"  | "1"                    | false                 | true             || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(187) | false                | "7 + 90"  | null                   | true                  | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(187) | false                | "7 + 90"  | null                   | false                 | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(187) | false                | "7 + 90"  | "2"                    | false                 | true             || true
+        // TODO fix me BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(187) | false                | "7 + 90"  | "1"                    | false                 | true             || false
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(188) | false                | "7 + 90"  | null                   | true                  | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(188) | false                | "7 + 90"  | "2"                    | false                 | true             || true
+        BegrepsType.MELDING | BegrepsType.UNDERSOKELSE | false          | ZonedDateTime.now().minusDays(188) | false                | "7 + 180" | "1"                    | false                 | true             || true
     }
 }

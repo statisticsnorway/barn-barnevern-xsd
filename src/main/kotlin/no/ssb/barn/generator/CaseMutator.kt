@@ -2,7 +2,7 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.*
 import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.*
 
 object CaseMutator {
@@ -116,7 +116,7 @@ object CaseMutator {
             )
         )
 
-        val measure = createTiltakType(LocalDateTime.now())
+        val measure = createTiltakType(ZonedDateTime.now())
         caseEntry.barnevern.sak.tiltak.add(measure)
         caseEntry.barnevern.sak.relasjon.add(
             RelasjonType(
@@ -131,7 +131,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromInvestigationEndedToMeasure(caseEntry: CaseEntry) {
-        val measure = createTiltakType(LocalDateTime.now())
+        val measure = createTiltakType(ZonedDateTime.now())
 
         caseEntry.barnevern.sak.tiltak.add(measure)
 
@@ -425,7 +425,7 @@ object CaseMutator {
         )
     }
 
-    private fun createTiltakType(startDate: LocalDateTime): TiltakType =
+    private fun createTiltakType(startDate: ZonedDateTime): TiltakType =
         TiltakType(
             startDato = startDate,
             kategori = KategoriType(

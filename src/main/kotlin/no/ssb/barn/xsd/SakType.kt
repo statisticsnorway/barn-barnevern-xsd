@@ -5,7 +5,7 @@ import no.ssb.barn.converter.LocalDateTimeAdapter
 import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.generator.RandomUtils
 import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -33,14 +33,14 @@ data class SakType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var startDato: LocalDateTime = LocalDateTime.now(),
+    var startDato: ZonedDateTime = ZonedDateTime.now(),
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: LocalDateTime? = null,
+    var sluttDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Journalnummer", required = true)
     var journalnummer: String = RandomUtils.generateRandomString(20),
