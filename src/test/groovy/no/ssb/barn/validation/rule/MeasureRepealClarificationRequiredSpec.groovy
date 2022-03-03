@@ -8,6 +8,8 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
+import java.time.ZonedDateTime
+
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
@@ -35,9 +37,9 @@ class MeasureRepealClarificationRequiredSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-            context.rootObject.sak.virksomhet[0].tiltak[0].opphevelse = (code == null)
+            context.rootObject.sak.tiltak[0].opphevelse = (code == null)
                     ? null
-                    : new OpphevelseType(code, clarification)
+                    : new OpphevelseType(code, clarification, ZonedDateTime.now())
 
         when:
         def reportEntries = sut.validate(context)

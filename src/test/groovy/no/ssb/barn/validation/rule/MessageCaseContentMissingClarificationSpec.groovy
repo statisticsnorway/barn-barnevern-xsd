@@ -33,7 +33,7 @@ class MessageCaseContentMissingClarificationSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def saksinnhold = context.rootObject.sak.virksomhet[0].melding[0].saksinnhold[0]
+        def saksinnhold = context.rootObject.sak.melding[0].saksinnhold[0]
         and:
         saksinnhold.kode = code
         and:

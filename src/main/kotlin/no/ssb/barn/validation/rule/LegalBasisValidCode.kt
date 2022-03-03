@@ -12,20 +12,16 @@ class LegalBasisValidCode : AbstractRule(
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
-                val legalBasis = tiltak.lovhjemmel
-                legalBasis != null
-                        &&
-                        (legalBasis.paragraf.startsWith("0")
-                                || legalBasis.kapittel.startsWith("0"))
+                (tiltak.lovhjemmel.paragraf.startsWith("0")
+                        || tiltak.lovhjemmel.kapittel.startsWith("0"))
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}). Kapittel"
-                            + " (${it.lovhjemmel!!.kapittel}) eller paragraf"
-                            + " (${it.lovhjemmel!!.paragraf}) er rapportert med"
+                            + " (${it.lovhjemmel.kapittel}) eller paragraf"
+                            + " (${it.lovhjemmel.paragraf}) er rapportert med"
                             + " den ugyldige koden 0",
                     it.id
                 )

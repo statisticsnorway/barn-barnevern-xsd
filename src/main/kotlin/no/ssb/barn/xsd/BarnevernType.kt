@@ -1,7 +1,9 @@
 package no.ssb.barn.xsd
 
 import no.ssb.barn.converter.LocalDateTimeAdapter
-import java.time.LocalDateTime
+import no.ssb.barn.converter.UuidAdapter
+import java.time.ZonedDateTime
+import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
@@ -9,15 +11,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "BarnevernType",
-    propOrder = ["datoUttrekk", "fagsystem", "avgiver", "sak"]
+    propOrder = ["id", "datoUttrekk", "forrigeId", "fagsystem", "avgiver", "sak"]
 )
 data class BarnevernType(
+    @field:XmlAttribute(name = "Id", required = true)
+    @field:XmlJavaTypeAdapter(
+        UuidAdapter::class
+    )
+    var id: UUID = UUID.randomUUID(),
+
+    @field:XmlAttribute(name = "ForrigeId")
+    var forrigeId: String? = null,
+
     @field:XmlAttribute(name = "DatoUttrekk", required = true)
     @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var datoUttrekk: LocalDateTime = LocalDateTime.now(),
+    var datoUttrekk: ZonedDateTime = ZonedDateTime.now(),
 
     @field:XmlElement(name = "Fagsystem", required = true)
     var fagsystem: FagsystemType = FagsystemType(),

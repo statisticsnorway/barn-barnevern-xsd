@@ -15,17 +15,16 @@ class MeasureEndDateBeforeIndividEndDate : AbstractRule(
         val sak = context.rootObject.sak
         val individEndDate = sak.sluttDato ?: return null
 
-        return sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        return sak.tiltak.asSequence()
             .filter { tiltak ->
-                val conclusion = tiltak.konklusjon // when JaCoCo improves, use "?."
-                conclusion != null
-                        && conclusion.sluttDato.isAfter(individEndDate)
+                val repeal = tiltak.opphevelse // when JaCoCo improves, use "?."
+                repeal != null
+                        && repeal.sluttDato.isAfter(individEndDate)
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}). Sluttdato"
-                            + " (${it.konklusjon!!.sluttDato}) er etter individets"
+                            + " (${it.opphevelse!!.sluttDato}) er etter individets"
                             + " sluttdato ($individEndDate)",
                     it.id
 

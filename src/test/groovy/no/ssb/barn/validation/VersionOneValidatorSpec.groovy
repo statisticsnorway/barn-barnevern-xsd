@@ -1,6 +1,7 @@
 package no.ssb.barn.validation
 
 import no.ssb.barn.report.WarningLevel
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -37,7 +38,7 @@ class VersionOneValidatorSpec extends Specification {
         def report = sut.validate(context)
 
         then:
-        2 == report.reportEntries.size()
+        report.reportEntries.any()
         and:
         WarningLevel.ERROR == report.severity
     }

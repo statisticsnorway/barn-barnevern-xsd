@@ -1,11 +1,11 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import java.time.LocalDate
+import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.UuidAdapter
+import java.time.ZonedDateTime
+import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
-import no.ssb.barn.converter.UuidAdapter
-import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OversendelsePrivatKravType", propOrder = ["id", "startDato", "konklusjon"])
@@ -19,9 +19,9 @@ data class OversendelsePrivatKravType(
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
+        LocalDateTimeAdapter::class
     )
-    var startDato: LocalDate = LocalDate.now(),
+    var startDato: ZonedDateTime = ZonedDateTime.now(),
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: OversendelsePrivatKravKonklusjonType? = null

@@ -9,10 +9,9 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
-
 
 @Narrative("""
 Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse
@@ -42,11 +41,9 @@ class MeasureCareMeasureWithEndDateRequiresReasonForRevocationSpec extends Speci
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def measure = context.rootObject.sak.virksomhet[0].tiltak[0]
+        def measure = context.rootObject.sak.tiltak[0]
         and:
-        measure.startDato = LocalDate.now().minusMonths(3)
-        and:
-        measure.konklusjon.sluttDato = LocalDate.now()
+        measure.startDato = ZonedDateTime.now().minusMonths(3)
         and:
         measure.lovhjemmel = new LovhjemmelType("BVL", chapter, paragraph, List.of(section), null)
         and:
@@ -56,7 +53,7 @@ class MeasureCareMeasureWithEndDateRequiresReasonForRevocationSpec extends Speci
         and:
         measure.opphevelse = (revocationCode == null)
                 ? null
-                : new OpphevelseType(revocationCode, null)
+                : new OpphevelseType(revocationCode, null, ZonedDateTime.now())
 
         when:
         def reportEntries = sut.validate(context)

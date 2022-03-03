@@ -3,7 +3,7 @@ package no.ssb.barn.util
 import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.xsd.KategoriType
 import no.ssb.barn.xsd.LovhjemmelType
-import no.ssb.barn.xsd.TiltakKonklusjonType
+import no.ssb.barn.xsd.OpphevelseType
 import no.ssb.barn.xsd.TiltakType
 import org.xml.sax.SAXException
 import spock.lang.Specification
@@ -12,31 +12,39 @@ import spock.lang.Unroll
 import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
 import java.time.Year
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class ValidationUtilsSpec extends Specification {
 
     @Unroll
     def "minDate receive min date"() {
         expect:
-        ValidationUtils.getMinDate(first, second) == (expectFirstToBeReturned ? first : second)
+        ValidationUtils.getMinDate(
+                ZonedDateTime.of(first, ZoneId.systemDefault()),
+                ZonedDateTime.of(second, ZoneId.systemDefault())
+        ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
 
         where:
-        first                     | second                    || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || true
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || false
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
+        first                                    | second                                   || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 2).atStartOfDay() || true
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 11, 2).atStartOfDay() || false
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 1).atStartOfDay() || false
     }
 
     @Unroll
     def "maxDate receive max date"() {
         expect:
-        ValidationUtils.getMaxDate(first, second) == (expectFirstToBeReturned ? first : second)
+        ValidationUtils.getMaxDate(
+                ZonedDateTime.of(first, ZoneId.systemDefault()),
+                ZonedDateTime.of(second, ZoneId.systemDefault())
+        ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
 
         where:
-        first                     | second                    || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || false
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || true
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
+        first                                    | second                                   || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 2).atStartOfDay() || false
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 11, 2).atStartOfDay() || true
+        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 1).atStartOfDay() || false
     }
 
     @Unroll
@@ -76,6 +84,7 @@ class ValidationUtilsSpec extends Specification {
         "/nonExistentFile"           || false
     }
 
+    @Unroll
     def "Should validate valid xml files, xsd = #xsd, xml = #xml, result = #result"() {
         when:
         def sourceXSD = getSourceFromClasspath(xsd)
@@ -87,21 +96,20 @@ class ValidationUtilsSpec extends Specification {
 
         where:
         xsd              | xml                          || result
-        "/Barnevern.xsd" | "/test00_file01_changes.xml"          || true
+        "/Barnevern.xsd" | "/test00_file01_changes.xml" || true
         "/Barnevern.xsd" | "/test01_file01_changes.xml" || true
         "/Barnevern.xsd" | "/test01_file02_changes.xml" || true
         "/Barnevern.xsd" | "/test01_file03_changes.xml" || true
-        "/Barnevern.xsd" | "/test01_fil04.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil05.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil06.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil07.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil08.xml"          || true
-        "/Barnevern.xsd" | "/test01_fil09.xml"          || true
 
         "/Barnevern.xsd" | "/test01_file01_total.xml"   || true
         "/Barnevern.xsd" | "/test01_file02_total.xml"   || true
         "/Barnevern.xsd" | "/test01_file03_total.xml"   || true
-
+        "/Barnevern.xsd" | "/test01_file04_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file05_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file06_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file07_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file08_total.xml"   || true
+        "/Barnevern.xsd" | "/test01_file09_total.xml"   || true
     }
 
     def "Should produce SAXException for invalid xml files, xsd = #xsd, xml = #xml"() {
@@ -196,7 +204,7 @@ class ValidationUtilsSpec extends Specification {
 
     // util stuff from here
 
-    static def createMeasure(LocalDate start, LocalDate end) {
+    static def createMeasure(ZonedDateTime start, ZonedDateTime end) {
         new TiltakType(
                 UUID.randomUUID(),
                 null,
@@ -206,13 +214,12 @@ class ValidationUtilsSpec extends Specification {
                 new KategoriType(),
                 List.of(),
                 List.of(),
-                null,
-                new TiltakKonklusjonType(end)
+                new OpphevelseType(RandomUtils.generateRandomString(10), null, end)
         )
     }
 
     static def createDate(monthsAhead) {
-        LocalDate.now().plusMonths(monthsAhead)
+        ZonedDateTime.now().plusMonths(monthsAhead)
     }
 
     static def getSsnByAge(int age) {

@@ -38,7 +38,7 @@ class MeasureAgeAboveElevenAndInSfoSpec extends Specification {
         given: "det er en sak "
         def sak = context.rootObject.sak
         and: "som har tiltak med kategorikode"
-        sak.virksomhet[0].tiltak[0].kategori = new KategoriType(code, "~presisering~")
+        sak.tiltak[0].kategori = new KategoriType(code, "~presisering~")
         and: "som har et fødselnummer (her generert basert på en gitt alder)"
         sak.fodselsnummer = getMockSocialSecurityNumber(age)
 

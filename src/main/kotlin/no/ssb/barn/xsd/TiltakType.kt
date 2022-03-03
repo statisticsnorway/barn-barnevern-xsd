@@ -1,8 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.LocalDateTimeAdapter
 import no.ssb.barn.converter.UuidAdapter
-import java.time.LocalDate
+import java.time.ZonedDateTime
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(
     name = "TiltakType",
     propOrder = ["id", "migrertId", "startDato",
-        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
+        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tilsyn", "oppfolging", "opphevelse"]
 )
 open class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -27,8 +27,8 @@ open class TiltakType(
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
-    ) var startDato: LocalDate = LocalDate.now(),
+        LocalDateTimeAdapter::class
+    ) var startDato: ZonedDateTime = ZonedDateTime.now(),
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
     var lovhjemmel: LovhjemmelType = LovhjemmelType(),
@@ -47,7 +47,4 @@ open class TiltakType(
 
     @field:XmlElement(name = "Opphevelse")
     var opphevelse: OpphevelseType? = null,
-
-    @field:XmlElement(name = "Konklusjon")
-    var konklusjon: TiltakKonklusjonType? = null
 )

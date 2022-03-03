@@ -1,13 +1,13 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -38,10 +38,10 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         given:
         context.rootObject.sak.sluttDato = individEndDate
         and:
-        context.rootObject.sak.virksomhet[0].tiltak[0].konklusjon.sluttDato = measureEndDate
+        context.rootObject.sak.tiltak[0].opphevelse.sluttDato = measureEndDate
         and:
-        if (resetConclusion) {
-            context.rootObject.sak.virksomhet[0].tiltak[0].konklusjon = null
+        if (resetRepeal) {
+            context.rootObject.sak.tiltak[0].opphevelse = null
         }
 
         when:
@@ -57,12 +57,12 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         }
 
         where:
-        resetConclusion | individEndDate                | measureEndDate                || errorExpected
-        false           | LocalDate.now().minusYears(1) | LocalDate.now()               || true
-        true            | LocalDate.now().minusYears(1) | LocalDate.now()               || false
-        false           | LocalDate.now()               | LocalDate.now()               || false
-        true            | LocalDate.now()               | LocalDate.now()               || false
-        false           | LocalDate.now()               | LocalDate.now().minusYears(1) || false
-        true            | LocalDate.now()               | LocalDate.now().minusYears(1) || false
+        resetRepeal | individEndDate | measureEndDate || errorExpected
+        false           | ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || true
+        true            | ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || false
+        false           | ZonedDateTime.now()               | ZonedDateTime.now().minusHours(1) || false
+        true            | ZonedDateTime.now()               | ZonedDateTime.now()               || false
+        false           | ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) || false
+        true            | ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) || false
     }
 }

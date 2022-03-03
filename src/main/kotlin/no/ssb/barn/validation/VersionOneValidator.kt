@@ -12,9 +12,6 @@ class VersionOneValidator : ValidatorContract {
     )
 
     private val rules = listOf(
-        BusinessEndDateAfterCaseEndDate(),
-        BusinessEndDateAfterStartDate(),
-        BusinessStartDateBeforeCaseStartDate(),
         BusinessUrbanDistrictNumberAndName(),
         CaseAgeAboveEighteenAndMeasures(),
         CaseAgeAboveTwentyFive(),
@@ -26,11 +23,9 @@ class VersionOneValidator : ValidatorContract {
         InvestigationDecisionClarificationRequired(),
         InvestigationDecisionMissingClarification(),
         InvestigationDueDatePassedConclusionRequired(),
-        InvestigationEndDateAfterBusinessEndDate(),
         InvestigationProcessingTimePassedDueDate(),
         InvestigationRelatedFromMessage(),
         InvestigationStartDateAfterEndDate(),
-        InvestigationStartDateBeforeBusinessStartDate(),
         LegalBasisAgeAboveEighteenNoMeasure(),
         LegalBasisValidCode(),
         LegalBasisWithEndDateClarificationRequired(),
@@ -43,16 +38,12 @@ class VersionOneValidator : ValidatorContract {
         MeasureRepealClarificationRequired(),
         MeasureStartDateAfterIndividStartDate(),
         MessageCaseContentMissingClarification(),
-        MessageEndDateAfterBusinessEndDate(),
         MessageMissingCaseContent(),
         MessageMissingReporters(),
         MessageProcessingTimeOverdue(),
         MessageReporterMissingClarification(),
         MessageStartDateAfterEndDate(),
-        MessageStartDateBeforeBusinessStartDate(),
         PlanStartDateAfterEndDate(),
-        PlanEndDateAfterBusinessEndDate(),
-        PlanStartDateBeforeBusinessStartDate(),
         RegionCityPart()
     )
 

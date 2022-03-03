@@ -3,19 +3,21 @@ package no.ssb.barn.converter
 import spock.lang.Specification
 
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class LocalDateTimeAdapterSpec extends Specification {
 
-    def dateTime = LocalDateTime.of(2020, 1, 31, 23, 59, 1)
-    def dateTimeString = "2020-01-31T23:59:01"
+    def dateTime = ZonedDateTime.of(LocalDateTime.of(2020, 1, 31, 23, 59, 1), ZoneId.of("+01:00"))
+    def dateTimeString = "2020-01-31T23:59:01+01:00"
 
     def "Marshal"() {
         expect:
-        dateTime == new LocalDateTimeAdapter().unmarshal(dateTimeString)
+        dateTimeString == new LocalDateTimeAdapter().marshal(dateTime)
     }
 
     def "Unmarshal"() {
         expect:
-        dateTimeString == new LocalDateTimeAdapter().marshal(dateTime)
+        dateTime == new LocalDateTimeAdapter().unmarshal(dateTimeString)
     }
 }

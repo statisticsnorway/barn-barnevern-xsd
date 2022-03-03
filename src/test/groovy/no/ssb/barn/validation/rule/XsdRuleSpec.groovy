@@ -33,7 +33,7 @@ class XsdRuleSpec extends Specification {
         given:
         def context = new ValidationContext(
                 UUID.randomUUID().toString(),
-                getResourceAsString("test01_fil0" + i + ".xml"))
+                getResourceAsString("test01_file0" + i + "_total.xml"))
 
         when:
         def reportEntry = sut.validate(context)

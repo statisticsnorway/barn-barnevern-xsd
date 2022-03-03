@@ -19,8 +19,7 @@ class LegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
             return null
         }
 
-        return context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        return context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak -> tiltak.erOmsorgsTiltak() }
             .map {
                 createReportEntry(

@@ -5,8 +5,8 @@ import org.xml.sax.SAXException
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.Year
+import java.time.ZonedDateTime
 import java.util.regex.Pattern
 import javax.xml.XMLConstants
 import javax.xml.transform.Source
@@ -23,10 +23,10 @@ object ValidationUtils {
     ): Boolean {
 
         val outerRange =
-            outerMeasure.startDato.rangeTo(outerMeasure.konklusjon?.sluttDato ?: LocalDate.now())
+            outerMeasure.startDato.rangeTo(outerMeasure.opphevelse?.sluttDato ?: ZonedDateTime.now())
 
         val innerRange =
-            innerMeasure.startDato.rangeTo(innerMeasure.konklusjon?.sluttDato ?: LocalDate.now())
+            innerMeasure.startDato.rangeTo(innerMeasure.opphevelse?.sluttDato ?: ZonedDateTime.now())
 
         return areOverlapping(outerRange, innerRange)
                 && getMaxDate(outerRange.start, innerRange.start)
@@ -41,17 +41,17 @@ object ValidationUtils {
     }
 
     private fun areOverlapping(
-        first: ClosedRange<LocalDate>, second: ClosedRange<LocalDate>
+        first: ClosedRange<ZonedDateTime>, second: ClosedRange<ZonedDateTime>
     ): Boolean =
         first.start.isBefore(second.endInclusive)
                 && second.start.isBefore(first.endInclusive)
 
     @JvmStatic
-    fun getMaxDate(first: LocalDate, second: LocalDate): LocalDate =
+    fun getMaxDate(first: ZonedDateTime, second: ZonedDateTime): ZonedDateTime =
         if (first.isAfter(second)) first else second
 
     @JvmStatic
-    fun getMinDate(first: LocalDate, second: LocalDate): LocalDate =
+    fun getMinDate(first: ZonedDateTime, second: ZonedDateTime): ZonedDateTime =
         if (first.isBefore(second)) first else second
 
     @JvmStatic

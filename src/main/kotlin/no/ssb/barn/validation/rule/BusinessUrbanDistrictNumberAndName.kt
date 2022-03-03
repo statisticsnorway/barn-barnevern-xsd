@@ -4,12 +4,12 @@ import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.xsd.VirksomhetType
+import no.ssb.barn.xsd.AvgiverType
 
 class BusinessUrbanDistrictNumberAndName : AbstractRule(
     WarningLevel.ERROR,
     "Virksomhet Kontroll 3: Bydelsnummer og bydelsnavn",
-    VirksomhetType::class.java.simpleName
+    AvgiverType::class.java.simpleName
 ) {
     companion object{
 
@@ -26,20 +26,17 @@ class BusinessUrbanDistrictNumberAndName : AbstractRule(
         )
     }
 
-    override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .filter { virksomhet ->
-                with(virksomhet) {
-                    return@filter organisasjonsnummer in businessIdList
-                            && (bydelsnummer.isNullOrBlank() || bydelsnavn.isNullOrBlank())
-                }
-            }
-            .map {
-                createReportEntry(
-                    "Virksomhetens Bydelsnummer og Bydelsnavn skal være utfylt",
-                    context.rootObject.sak.id
-                )
-            }
-            .toList()
-            .ifEmpty { null }
+    override fun validate(context: ValidationContext): List<ReportEntry>? {
+        if (context.rootObject.avgiver.organisasjonsnummer !in businessIdList) {
+            return null
+        }
+
+        return if (context.rootObject.avgiver.bydelsnummer.isNullOrEmpty()
+            || context.rootObject.avgiver.bydelsnavn.isNullOrEmpty())
+            createSingleReportEntryList(
+                "Virksomhetens Bydelsnummer og Bydelsnavn skal være utfylt",
+                context.rootObject.id)
+        else
+            null
+    }
 }

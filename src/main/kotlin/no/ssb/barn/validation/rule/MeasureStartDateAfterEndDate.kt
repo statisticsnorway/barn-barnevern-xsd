@@ -12,17 +12,16 @@ class MeasureStartDateAfterEndDate : AbstractRule(
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
-                val conclusion = tiltak.konklusjon // when JaCoCo improves, use "?."
-                conclusion != null && tiltak.startDato.isAfter(conclusion.sluttDato)
+                val repeal = tiltak.opphevelse // when JaCoCo improves, use "?."
+                repeal != null && tiltak.startDato.isAfter(repeal.sluttDato)
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}}). Startdato (${it.startDato})"
                             + " for tiltaket er etter sluttdato"
-                            + " (${it.konklusjon!!.sluttDato}) for tiltaket",
+                            + " (${it.opphevelse!!.sluttDato}) for tiltaket",
                     it.id
                 )
             }

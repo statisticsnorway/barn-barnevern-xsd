@@ -1,15 +1,13 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.converter.BarnevernConverter
-import no.ssb.barn.validation.SharedValidationConstants
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.validation.VersionOneValidator
-import no.ssb.barn.validation.rule.MeasureMultipleAllocationsWithinPeriod
 import no.ssb.barn.xsd.BarnevernType
 import spock.lang.Specification
 
-import java.time.LocalDate
+import java.time.ZonedDateTime
 
 class CaseMutatorSpec extends Specification {
 
@@ -63,15 +61,13 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MESSAGE)
         and: "make sure instance does not contain any UndersokelseType instances"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.undersokelse.any())
+        assert !caseEntry.barnevern.sak.undersokelse.any()
 
         when:
         CaseMutator.fromMessageToInvestigationStarted(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.undersokelse.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.undersokelse.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -80,15 +76,13 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MESSAGE)
         and: "make sure instance does not contain any VedtakType instances"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.vedtak.any())
+        assert !caseEntry.barnevern.sak.any(it -> it.vedtak.any())
 
         when:
         CaseMutator.fromMessageToDecision(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.vedtak.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.vedtak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -97,17 +91,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION_STARTED)
         and: "make sure we have UndersokelseType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.undersokelse.any())
+        assert caseEntry.barnevern.sak.undersokelse.any()
         and: "make sure we don't have TiltakType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
+        assert !caseEntry.barnevern.sak.tiltak.any()
 
         when:
         CaseMutator.fromInvestigationEndedToMeasure(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.tiltak.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.tiltak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -116,17 +108,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.INVESTIGATION_STARTED)
         and: "make sure we have UndersokelseType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.undersokelse.any())
+        assert caseEntry.barnevern.sak.undersokelse.any()
         and: "make sure we don't have VedtakType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.vedtak.any())
+        assert !caseEntry.barnevern.sak.vedtak.any()
 
         when:
         CaseMutator.fromInvestigationEndedToDecision(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.vedtak.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.vedtak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -135,17 +125,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
         and: "make sure we have TiltakType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
+        assert caseEntry.barnevern.sak.tiltak.any()
         and: "make sure we don't have PlanType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.plan.any())
+        assert !caseEntry.barnevern.sak.plan.any()
 
         when:
         CaseMutator.fromMeasureToPlan(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.plan.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.plan.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -154,17 +142,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
         and: "make sure we have TiltakType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
+        assert caseEntry.barnevern.sak.tiltak.any()
         and: "make sure we don't have VedtakType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.vedtak.any())
+        assert !caseEntry.barnevern.sak.vedtak.any()
 
         when:
         CaseMutator.fromMeasureToDecision(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.vedtak.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.vedtak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -173,17 +159,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)
         and: "make sure we have TiltakType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
+        assert caseEntry.barnevern.sak.tiltak.any()
         and: "make sure we don't have EttervernType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.ettervern.any())
+        assert !caseEntry.barnevern.sak.ettervern.any()
 
         when:
         CaseMutator.fromMeasureToAfterCare(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.ettervern.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.ettervern.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -192,17 +176,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
         and: "make sure we have VedtakType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.vedtak.any())
+        assert caseEntry.barnevern.sak.vedtak.any()
         and: "make sure we don't have TiltakType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
+        assert !caseEntry.barnevern.sak.tiltak.any()
 
         when:
         CaseMutator.fromDecisionToMeasure(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.tiltak.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.tiltak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -211,15 +193,13 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
         and: "make sure we have a single VedtakType instance"
-        assert 1 == caseEntry.barnevern.sak.virksomhet.count(it -> it.vedtak.any())
+        assert 1 == caseEntry.barnevern.sak.vedtak.size()
 
         when:
         CaseMutator.fromDecisionToAnotherDecision(caseEntry)
 
         then:
-        2 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.vedtak.size())
-                .sum()
+        2 == caseEntry.barnevern.sak.vedtak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -228,17 +208,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.DECISION)
         and: "make sure we have VedtakType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.vedtak.any())
+        assert caseEntry.barnevern.sak.vedtak.any()
         and: "make sure we don't have EttervernType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.ettervern.any())
+        assert !caseEntry.barnevern.sak.ettervern.any()
 
         when:
         CaseMutator.fromDecisionToAfterCare(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.ettervern.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.ettervern.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -247,17 +225,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.AFTERCARE)
         and: "make sure we have EttervernType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.ettervern.any())
+        assert caseEntry.barnevern.sak.ettervern.any()
         and: "make sure we don't have TiltakType instance"
-        assert !caseEntry.barnevern.sak.virksomhet.any(it -> it.tiltak.any())
+        assert !caseEntry.barnevern.sak.tiltak.any()
 
         when:
         CaseMutator.fromAfterCareToMeasure(caseEntry)
 
         then:
-        1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.tiltak.size())
-                .sum()
+        1 == caseEntry.barnevern.sak.tiltak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -266,19 +242,15 @@ class CaseMutatorSpec extends Specification {
         given:
         def caseEntry = createCaseEntry(BarnevernState.AFTERCARE)
         and: "make sure we have EttervernType instance"
-        assert caseEntry.barnevern.sak.virksomhet.any(it -> it.ettervern.any())
+        assert caseEntry.barnevern.sak.ettervern.any()
         and: "count existing number of VedtakType instances"
-        def initialNumberOfDecisions = caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.vedtak.size())
-                .sum()
+        def initialNumberOfDecisions = caseEntry.barnevern.sak.vedtak.size()
 
         when:
         CaseMutator.fromAfterCareToDecision(caseEntry)
 
         then:
-        initialNumberOfDecisions + 1 == caseEntry.barnevern.sak.virksomhet.stream()
-                .mapToInt(it -> it.vedtak.size())
-                .sum()
+        initialNumberOfDecisions + 1 == caseEntry.barnevern.sak.vedtak.size()
         and:
         isValid(caseEntry.barnevern)
     }
@@ -288,8 +260,8 @@ class CaseMutatorSpec extends Specification {
     static def createCaseEntry(BarnevernState state) {
         def instance = new CaseEntry(
                 UUID.randomUUID(),
-                InitialMutationProvider.createInitialMutation(LocalDate.now()),
-                LocalDate.now(),
+                InitialMutationProvider.createInitialMutation(ZonedDateTime.now()),
+                ZonedDateTime.now(),
                 1,
                 state)
 

@@ -1,13 +1,13 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -36,7 +36,7 @@ class PlanStartDateAfterEndDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def plan = context.rootObject.sak.virksomhet[0].plan[0]
+        def plan = context.rootObject.sak.plan[0]
         and:
         plan.startDato = planStartDate
         and:
@@ -59,10 +59,10 @@ class PlanStartDateAfterEndDateSpec extends Specification {
         }
 
         where:
-        resetConclusion | planStartDate                 | planEndDate                   || errorExpected
-        false           | LocalDate.now().minusYears(1) | LocalDate.now()               || false
-        false           | LocalDate.now()               | LocalDate.now()               || false
-        false           | LocalDate.now()               | LocalDate.now().minusYears(1) || true
-        true            | LocalDate.now()               | LocalDate.now().minusYears(1) || false
+        resetConclusion | planStartDate                     | planEndDate                       || errorExpected
+        false           | ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || false
+        false           | ZonedDateTime.now()               | ZonedDateTime.now()               || false
+        false           | ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) || true
+        true            | ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) || false
     }
 }

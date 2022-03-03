@@ -12,8 +12,7 @@ class MessageMissingReporters : AbstractRule(
     MeldingType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.melding }
+        context.rootObject.sak.melding.asSequence()
             .filter { melding ->
                 val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null

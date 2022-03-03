@@ -5,6 +5,7 @@ import no.ssb.barn.util.ValidationUtils.controlSumDigits2
 import no.ssb.barn.util.ValidationUtils.modulo11
 import no.ssb.barn.xsd.*
 import java.time.LocalDate
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 @Suppress("SpellCheckingInspection")
@@ -113,29 +114,14 @@ object RandomUtils {
         ).random()
 
     @JvmStatic
-    fun generateRandomVirksomhetType(avgiver: AvgiverType): VirksomhetType =
-        VirksomhetType().apply {
-
-            // we should probably use orgnr for bydel when Oslo
-            organisasjonsnummer = avgiver.organisasjonsnummer
-
-            if (avgiver.kommunenummer == GeneratorConstants.OSLO) {
-                cityPartsOslo.entries.random().also {
-                    bydelsnummer = it.key
-                    bydelsnavn = it.value
-                }
-            }
-        }
-
-    @JvmStatic
-    fun generateRandomMeldingType(currentDate: LocalDate): MeldingType =
+    fun generateRandomMeldingType(currentDate: ZonedDateTime): MeldingType =
         MeldingType().apply {
             id = java.util.UUID.randomUUID()
             startDato = currentDate
-            melder.add(MelderType(MelderType.getRandomCode(currentDate)))
+            melder.add(MelderType(MelderType.getRandomCode(currentDate.toLocalDate())))
             saksinnhold.add(
                 SaksinnholdType(
-                    SaksinnholdType.getRandomCode(currentDate)
+                    SaksinnholdType.getRandomCode(currentDate.toLocalDate())
                 )
             )
         }

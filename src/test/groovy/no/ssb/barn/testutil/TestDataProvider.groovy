@@ -22,7 +22,7 @@ class TestDataProvider {
     }
 
     static ValidationContext getTestContext() {
-        def xmlAsString = getResourceAsString("test01_fil09.xml")
+        def xmlAsString = getResourceAsString("test01_file09_total.xml")
 
         new ValidationContext(
                 UUID.randomUUID().toString(),

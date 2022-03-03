@@ -1,9 +1,9 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 
 class MeasureRepealClarificationRequired : AbstractRule(
@@ -14,16 +14,15 @@ class MeasureRepealClarificationRequired : AbstractRule(
     private val codesThatRequiresClarification = listOf("4")
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        return context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.tiltak }
+        return context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val repeal = tiltak.opphevelse // when JaCoCo improves, use "?."
 
                 if (repeal != null) {
                     val clarification = repeal.presisering
 
-                    (((repeal.kode in codesThatRequiresClarification)
-                            && (clarification.isNullOrEmpty() || clarification.isBlank())))
+                    repeal.kode in codesThatRequiresClarification
+                            && (clarification.isNullOrEmpty() || clarification.isBlank())
                 } else {
                     false
                 }

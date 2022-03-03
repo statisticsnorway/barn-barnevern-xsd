@@ -5,14 +5,14 @@ import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
 import java.lang.reflect.Type
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-class GsonLocalDateTimeAdapter : JsonSerializer<LocalDateTime?> {
+class GsonLocalDateTimeAdapter : JsonSerializer<ZonedDateTime?> {
     override fun serialize(
-        date: LocalDateTime?,
+        date: ZonedDateTime?,
         typeOfSrc: Type?,
         context: JsonSerializationContext?
     ): JsonElement =
-        JsonPrimitive(date?.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+        JsonPrimitive(date?.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME))
 }

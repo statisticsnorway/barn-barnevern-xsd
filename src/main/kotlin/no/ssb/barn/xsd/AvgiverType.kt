@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "AvgiverType",
-    propOrder = ["organisasjonsnummer", "kommunenummer", "kommunenavn"]
+    propOrder = ["organisasjonsnummer", "kommunenummer", "kommunenavn", "bydelsnummer", "bydelsnavn"]
 )
 data class AvgiverType(
     @field:XmlAttribute(name = "Organisasjonsnummer", required = true)
@@ -19,4 +19,11 @@ data class AvgiverType(
 
     @field:XmlAttribute(name = "Kommunenavn", required = true)
     var kommunenavn: String = "",
+
+    @field:XmlAttribute(name = "Bydelsnummer")
+    var bydelsnummer: String? = null,
+
+    @field:XmlAttribute(name = "Bydelsnavn")
+    var bydelsnavn: String? = null
+
 )

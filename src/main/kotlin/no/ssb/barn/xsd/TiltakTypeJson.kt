@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import java.time.LocalDate
+import java.time.ZonedDateTime
 import java.util.*
 
 /**
@@ -9,14 +9,13 @@ import java.util.*
 class TiltakTypeJson(
     id: UUID,
     migrertId: String?,
-    startDato: LocalDate,
+    startDato: ZonedDateTime,
     lovhjemmel: LovhjemmelType,
     jmfrLovhjemmel: MutableList<LovhjemmelType>,
     kategori: KategoriType,
     tilsyn: MutableList<TilsynType>,
     oppfolging: MutableList<OppfolgingType>,
     opphevelse: OpphevelseType?,
-    konklusjon: TiltakKonklusjonType?,
     var erOmsorgsTiltak: Boolean
 ) : TiltakType(
     id = id,
@@ -27,8 +26,7 @@ class TiltakTypeJson(
     kategori = kategori,
     tilsyn = tilsyn,
     oppfolging = oppfolging,
-    opphevelse = opphevelse,
-    konklusjon = konklusjon
+    opphevelse = opphevelse
 ) {
     /**
      * Constructor for use when creating new instances based on
@@ -46,7 +44,6 @@ class TiltakTypeJson(
         tiltakType.tilsyn,
         tiltakType.oppfolging,
         tiltakType.opphevelse,
-        tiltakType.konklusjon,
         erOmsorgsTiltak = tiltakType.erOmsorgsTiltak()
     )
 }

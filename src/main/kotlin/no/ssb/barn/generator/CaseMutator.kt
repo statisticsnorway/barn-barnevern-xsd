@@ -2,6 +2,7 @@ package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.*
 import java.time.LocalDate
+import java.time.ZonedDateTime
 import java.util.*
 
 object CaseMutator {
@@ -23,7 +24,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMessageToCaseClosed(caseEntry: CaseEntry) {
-        caseEntry.lastCompany.melding.last().konklusjon =
+        caseEntry.barnevern.sak.melding.last().konklusjon =
             MeldingKonklusjonType(
                 kode = MeldingKonklusjonType.getCodes(LocalDate.now())
                     .first { it.code == "1" }.code
@@ -32,53 +33,47 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMessageToInvestigationStarted(caseEntry: CaseEntry) {
-        caseEntry.lastCompany.also { company ->
+        // close active message
+        caseEntry.barnevern.sak.melding.last().konklusjon = MeldingKonklusjonType(
+            kode = MeldingKonklusjonType.getCodes(LocalDate.now())
+                .first { it.code == "2" }.code
+        )
 
-            // close active message
-            company.melding.last().konklusjon = MeldingKonklusjonType(
-                kode = MeldingKonklusjonType.getCodes(LocalDate.now())
-                    .first { it.code == "2" }.code
-            )
+        UndersokelseType().also { investigation ->
+            caseEntry.barnevern.sak.undersokelse.add(investigation)
 
-            UndersokelseType().also { investigation ->
-                company.undersokelse.add(investigation)
-
-                company.relasjon.add(
-                    RelasjonType(
-                        id = UUID.randomUUID(),
-                        fraId = company.melding.last().id,
-                        fraType = BegrepsType.MELDING,
-                        tilId = investigation.id,
-                        tilType = BegrepsType.UNDERSOKELSE
-                    )
+            caseEntry.barnevern.sak.relasjon.add(
+                RelasjonType(
+                    id = UUID.randomUUID(),
+                    fraId = caseEntry.barnevern.sak.melding.last().id,
+                    fraType = BegrepsType.MELDING,
+                    tilId = investigation.id,
+                    tilType = BegrepsType.UNDERSOKELSE
                 )
-            }
+            )
         }
     }
 
     @JvmStatic
     fun fromMessageToDecision(caseEntry: CaseEntry) {
-        caseEntry.lastCompany.also { company ->
+        // close active message
+        caseEntry.barnevern.sak.melding.last().konklusjon = MeldingKonklusjonType(
+            kode = MeldingKonklusjonType.getCodes(LocalDate.now())
+                .first { it.code == "2" }.code
+        )
 
-            // close active message
-            company.melding.last().konklusjon = MeldingKonklusjonType(
-                kode = MeldingKonklusjonType.getCodes(LocalDate.now())
-                    .first { it.code == "2" }.code
-            )
+        createVedtakType().also { decision ->
+            caseEntry.barnevern.sak.vedtak.add(decision)
 
-            createVedtakType().also { decision ->
-                company.vedtak.add(decision)
-
-                company.relasjon.add(
-                    RelasjonType(
-                        id = UUID.randomUUID(),
-                        fraId = company.melding.last().id,
-                        fraType = BegrepsType.MELDING,
-                        tilId = decision.id,
-                        tilType = BegrepsType.VEDTAK
-                    )
+            caseEntry.barnevern.sak.relasjon.add(
+                RelasjonType(
+                    id = UUID.randomUUID(),
+                    fraId = caseEntry.barnevern.sak.melding.last().id,
+                    fraType = BegrepsType.MELDING,
+                    tilId = decision.id,
+                    tilType = BegrepsType.VEDTAK
                 )
-            }
+            )
         }
     }
 
@@ -86,7 +81,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromInvestigationStartedToEnded(caseEntry: CaseEntry) {
-        caseEntry.lastCompany
+        caseEntry.barnevern.sak
             .undersokelse
             .last()
             .konklusjon = UndersokelseKonklusjonType(
@@ -99,8 +94,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromInvestigationStartedToMeasureViaDecision(caseEntry: CaseEntry) {
-        val company = caseEntry.lastCompany
-        val investigation = company.undersokelse.last()
+        val investigation = caseEntry.barnevern.sak.undersokelse.last()
 
         investigation.konklusjon = UndersokelseKonklusjonType(
             kode = UndersokelseKonklusjonType.getCodes(LocalDate.now())
@@ -111,8 +105,8 @@ object CaseMutator {
         val decision = createVedtakType()
         decision.konklusjon = VedtakKonklusjonType()
 
-        company.vedtak.add(decision)
-        company.relasjon.add(
+        caseEntry.barnevern.sak.vedtak.add(decision)
+        caseEntry.barnevern.sak.relasjon.add(
             RelasjonType(
                 id = UUID.randomUUID(),
                 fraId = investigation.id,
@@ -122,9 +116,9 @@ object CaseMutator {
             )
         )
 
-        val measure = createTiltakType(LocalDate.now())
-        company.tiltak.add(measure)
-        company.relasjon.add(
+        val measure = createTiltakType(ZonedDateTime.now())
+        caseEntry.barnevern.sak.tiltak.add(measure)
+        caseEntry.barnevern.sak.relasjon.add(
             RelasjonType(
                 id = UUID.randomUUID(),
                 fraId = decision.id,
@@ -137,15 +131,14 @@ object CaseMutator {
 
     @JvmStatic
     fun fromInvestigationEndedToMeasure(caseEntry: CaseEntry) {
-        val company = caseEntry.lastCompany
-        val measure = createTiltakType(LocalDate.now())
+        val measure = createTiltakType(ZonedDateTime.now())
 
-        company.tiltak.add(measure)
+        caseEntry.barnevern.sak.tiltak.add(measure)
 
-        company.relasjon.add(
+        caseEntry.barnevern.sak.relasjon.add(
             RelasjonType(
                 id = UUID.randomUUID(),
-                fraId = company.undersokelse.last().id,
+                fraId = caseEntry.barnevern.sak.undersokelse.last().id,
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = measure.id,
                 tilType = BegrepsType.TILTAK
@@ -155,15 +148,20 @@ object CaseMutator {
 
     @JvmStatic
     fun fromInvestigationEndedToDecision(caseEntry: CaseEntry) {
-        val company = caseEntry.lastCompany
         val decision = createVedtakType()
+        decision.jmfrLovhjemmel = mutableListOf(
+            LovhjemmelType(
+                ledd = mutableListOf("~ledd~")
+            )
+        )
+        decision.status = mutableListOf(VedtakStatusType())
 
-        company.vedtak.add(decision)
+        caseEntry.barnevern.sak.vedtak.add(decision)
 
-        company.relasjon.add(
+        caseEntry.barnevern.sak.relasjon.add(
             RelasjonType(
                 id = UUID.randomUUID(),
-                fraId = company.undersokelse.last().id,
+                fraId = caseEntry.barnevern.sak.undersokelse.last().id,
                 fraType = BegrepsType.UNDERSOKELSE,
                 tilId = decision.id,
                 tilType = BegrepsType.VEDTAK
@@ -175,7 +173,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromPlanToEvaluatedPlan(caseEntry: CaseEntry) {
-        caseEntry.lastCompany
+        caseEntry.barnevern.sak
             .plan
             .last()
             .evaluering.add(PlanEvalueringType())
@@ -183,7 +181,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromPlanToCaseClosed(caseEntry: CaseEntry) {
-        caseEntry.lastCompany
+        caseEntry.barnevern.sak
             .plan
             .last()
             .konklusjon = PlanKonklusjonType()
@@ -193,10 +191,10 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMeasureToPlan(caseEntry: CaseEntry) {
-        with(caseEntry.lastCompany) {
+        with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().opphevelse = OpphevelseType()
 
             plan.add(PlanType())
         }
@@ -204,10 +202,10 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMeasureToDecision(caseEntry: CaseEntry) {
-        with(caseEntry.lastCompany) {
+        with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().opphevelse = OpphevelseType()
 
             vedtak.add(createVedtakType())
         }
@@ -215,10 +213,10 @@ object CaseMutator {
 
     @JvmStatic
     fun fromMeasureToAfterCare(caseEntry: CaseEntry) {
-        with(caseEntry.lastCompany) {
+        with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().opphevelse = OpphevelseType()
 
             ettervern.add(EttervernType())
         }
@@ -228,7 +226,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromDecisionToMeasure(caseEntry: CaseEntry) {
-        with(caseEntry.lastCompany) {
+        with(caseEntry.barnevern.sak) {
             // close current decision
             vedtak.last().konklusjon = VedtakKonklusjonType()
 
@@ -249,7 +247,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromDecisionToAnotherDecision(caseEntry: CaseEntry) {
-        with(caseEntry.lastCompany) {
+        with(caseEntry.barnevern.sak) {
             // close current decision
             vedtak.last().konklusjon = VedtakKonklusjonType()
 
@@ -272,7 +270,7 @@ object CaseMutator {
 
     @JvmStatic
     fun fromDecisionToAfterCare(caseEntry: CaseEntry) {
-        with(caseEntry.lastCompany) {
+        with(caseEntry.barnevern.sak) {
             // close current decision
             vedtak.last().konklusjon = VedtakKonklusjonType()
 
@@ -289,7 +287,6 @@ object CaseMutator {
                 )
             )
         }
-
     }
 
     // START Ettervern
@@ -297,7 +294,7 @@ object CaseMutator {
     @JvmStatic
     fun fromAfterCareToCaseClosed(caseEntry: CaseEntry) {
         // close current after-care
-        caseEntry.lastCompany
+        caseEntry.barnevern.sak
             .ettervern
             .last().konklusjon = EttervernKonklusjonType(
             kode = EttervernKonklusjonType.getCodes(LocalDate.now())
@@ -308,12 +305,12 @@ object CaseMutator {
     @JvmStatic
     fun fromAfterCareToMeasure(caseEntry: CaseEntry) {
         // close current after-care
-        caseEntry.lastCompany
+        caseEntry.barnevern.sak
             .ettervern
             .last()
             .konklusjon = EttervernKonklusjonType()
 
-        caseEntry.barnevern.sak.virksomhet.last().tiltak.add(
+        caseEntry.barnevern.sak.tiltak.add(
             createTiltakType(caseEntry.updated)
         )
     }
@@ -321,12 +318,12 @@ object CaseMutator {
     @JvmStatic
     fun fromAfterCareToDecision(caseEntry: CaseEntry) {
         // close current after-care
-        caseEntry.lastCompany
+        caseEntry.barnevern.sak
             .ettervern
             .last()
             .konklusjon = EttervernKonklusjonType()
 
-        caseEntry.barnevern.sak.virksomhet.last().vedtak.add(
+        caseEntry.barnevern.sak.vedtak.add(
             createVedtakType()
         )
     }
@@ -416,14 +413,23 @@ object CaseMutator {
         )
     )
 
-    private fun createVedtakType(): VedtakType =
-        VedtakType(lovhjemmel = createLegalBasis())
+    private fun createVedtakType(): VedtakType {
+        return VedtakType(
+            status = mutableListOf(VedtakStatusType()),
+            lovhjemmel = createLegalBasis(),
+            jmfrLovhjemmel = mutableListOf(
+                LovhjemmelType(
+                    ledd = mutableListOf("~ledd~")
+                )
+            )
+        )
+    }
 
-    private fun createTiltakType(startDate: LocalDate): TiltakType =
+    private fun createTiltakType(startDate: ZonedDateTime): TiltakType =
         TiltakType(
             startDato = startDate,
             kategori = KategoriType(
-                kode = KategoriType.getCodes(startDate).random().code,
+                kode = KategoriType.getCodes(startDate.toLocalDate()).random().code,
                 presisering = "~Presisering~"
             ),
             lovhjemmel = createLegalBasis()

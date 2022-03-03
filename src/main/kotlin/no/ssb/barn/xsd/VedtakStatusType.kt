@@ -1,8 +1,9 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.LocalDateTimeAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
+import java.time.ZonedDateTime
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
@@ -12,9 +13,9 @@ data class VedtakStatusType(
     @field:XmlAttribute(name = "EndretDato", required = true)
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
+        LocalDateTimeAdapter::class
     )
-    var endretDato: LocalDate = LocalDate.now(),
+    var endretDato: ZonedDateTime = ZonedDateTime.now(),
 
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String? = getCodes(LocalDate.of(2022, 1, 1))

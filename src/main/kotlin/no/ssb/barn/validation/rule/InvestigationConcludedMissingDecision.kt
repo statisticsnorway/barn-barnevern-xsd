@@ -14,8 +14,7 @@ class InvestigationConcludedMissingDecision : AbstractRule(
     private val codesThatRequiresDecision = listOf("1", "2")
 
     override fun validate(context: ValidationContext): List<ReportEntry>? =
-        context.rootObject.sak.virksomhet.asSequence()
-            .flatMap { virksomhet -> virksomhet.undersokelse }
+        context.rootObject.sak.undersokelse.asSequence()
             .filter { undersokelse ->
                 val conclusion = undersokelse.konklusjon
                 conclusion != null

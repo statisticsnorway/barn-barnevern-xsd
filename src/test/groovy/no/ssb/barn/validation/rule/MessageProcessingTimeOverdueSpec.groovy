@@ -1,13 +1,13 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -36,7 +36,7 @@ class MessageProcessingTimeOverdueSpec extends Specification {
     @Unroll
     def "test av alle scenarier"() {
         given:
-        def message = context.rootObject.sak.virksomhet[0].melding[0]
+        def message = context.rootObject.sak.melding[0]
         and:
         message.startDato = startDate
         and:
@@ -65,10 +65,10 @@ class MessageProcessingTimeOverdueSpec extends Specification {
         true            | getDate(-7) | getDate(0)  || false
         false           | getDate(-3) | getDate(0)  || false
         false           | getDate(-9) | getDate(-1) || true
-        false           | getDate(-7) | getDate(0)  || false
+        false           | getDate(-6) | getDate(0)  || false
     }
 
     static def getDate(days) {
-        LocalDate.now().plusDays(days)
+        ZonedDateTime.now().plusDays(days)
     }
 }

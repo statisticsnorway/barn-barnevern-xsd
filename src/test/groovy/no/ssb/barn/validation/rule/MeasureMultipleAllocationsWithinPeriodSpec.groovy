@@ -7,8 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -42,38 +41,36 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def sak = context.rootObject
+        context.rootObject.datoUttrekk = ZonedDateTime.now()
         and:
-        sak.datoUttrekk = LocalDateTime.now()
+        def sak = context.rootObject.sak
         and:
-        def virksomhet = context.rootObject.sak.virksomhet[0]
-        and:
-        def firstMeasure = virksomhet.tiltak[0]
+        def firstMeasure = sak.tiltak[0]
         and:
         firstMeasure.startDato = firstStartDate
         and:
-        firstMeasure.konklusjon.sluttDato = firstEndDate
+        firstMeasure.opphevelse.sluttDato = firstEndDate
         and:
         firstMeasure.kategori.kode = categoryCode
         and:
-        if (resetConclusion) {
-            firstMeasure.konklusjon = null
+        if (resetRepeal) {
+            firstMeasure.opphevelse = null
         }
         and:
         if (useSecondContext) {
             def secondContext = getTestContext()
-            virksomhet.tiltak[1] = secondContext.rootObject.sak.virksomhet[0].tiltak[0]
+            sak.tiltak[1] = secondContext.rootObject.sak.tiltak[0]
 
-            def secondMeasure = virksomhet.tiltak[1]
+            def secondMeasure = sak.tiltak[1]
 
             secondMeasure.id = UUID.randomUUID()
             secondMeasure.startDato = secondStartDate
-            secondMeasure.konklusjon.sluttDato = secondEndDate
+            secondMeasure.opphevelse.sluttDato = secondEndDate
 
             secondMeasure.kategori.kode = categoryCode
 
-            if (resetConclusion) {
-                secondMeasure.konklusjon = null
+            if (resetRepeal) {
+                secondMeasure.opphevelse = null
             }
         }
 
@@ -90,23 +87,23 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         }
 
         where:
-        resetConclusion | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
-        true            | getDate(-3)    | getDate(0)   | false            | null            | null          | "N/A"        || false
-        false           | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
+        resetRepeal | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
+        true        | getDate(-3)    | getDate(0)   | false            | null            | null          | "N/A"        || false
+        false       | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
+        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
 // TODO to Roar:
 //  the case of two overlapping Measures where one or neither has an endDate yet,
 //  then sak.datoUttrekk needs to be used as a default endDate for the measure(s) where endDate is missing
@@ -115,6 +112,6 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     }
 
     static def getDate(months) {
-        LocalDate.now().plusMonths(months)
+        ZonedDateTime.now().plusMonths(months)
     }
 }
