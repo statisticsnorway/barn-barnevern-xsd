@@ -71,6 +71,5 @@ class BusinessUrbanDistrictNumberAndNameSpec extends Specification {
 
         BusinessUrbanDistrictNumberAndName.BERGEN_COMPANY_ID    | "01"            | "Name"            || false
         BusinessUrbanDistrictNumberAndName.TRONDHEIM_COMPANY_ID | "01"            | "Name"            || false
-        BusinessUrbanDistrictNumberAndName.STAVANGER_COMPANY_ID | "01"            | "Name"            || false
     }
 }

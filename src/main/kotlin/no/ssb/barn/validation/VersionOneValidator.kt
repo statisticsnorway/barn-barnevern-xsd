@@ -52,8 +52,7 @@ class VersionOneValidator : ValidatorContract {
         MessageStartDateBeforeBusinessStartDate(),
         PlanStartDateAfterEndDate(),
         PlanEndDateAfterBusinessEndDate(),
-        PlanStartDateBeforeBusinessStartDate(),
-        RegionCityPart()
+        PlanStartDateBeforeBusinessStartDate()
     )
 
     override fun validate(context: ValidationContext): ValidationReport {

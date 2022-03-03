@@ -16,13 +16,11 @@ class BusinessUrbanDistrictNumberAndName : AbstractRule(
         const val OSLO_COMPANY_ID = "958935420"
         const val BERGEN_COMPANY_ID = "964338531"
         const val TRONDHEIM_COMPANY_ID = "942110464"
-        const val STAVANGER_COMPANY_ID = "964965226"
 
         private val businessIdList = setOf(
             OSLO_COMPANY_ID,
             BERGEN_COMPANY_ID,
             TRONDHEIM_COMPANY_ID,
-            STAVANGER_COMPANY_ID
         )
     }
 
