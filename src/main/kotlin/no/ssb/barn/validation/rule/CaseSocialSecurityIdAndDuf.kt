@@ -15,7 +15,6 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
     SakType::class.java.simpleName
 ) {
     private val dufPattern = Pattern.compile("^\\d{12}$")
-
     private val suffixExceptions = setOf("00100", "00200", "55555", "99999")
 
     override fun validate(context: ValidationContext): List<ReportEntry>? {

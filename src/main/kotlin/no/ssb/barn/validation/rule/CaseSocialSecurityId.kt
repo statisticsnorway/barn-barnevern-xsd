@@ -16,8 +16,7 @@ class CaseSocialSecurityId : AbstractRule(
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         val fodselsnummer = context.rootObject.sak.fodselsnummer ?: ""
 
-        return if (!validateFNR(fodselsnummer)
-        ) {
+        return if (!validateFNR(fodselsnummer)) {
             createSingleReportEntryList(
                 "Saken har ufullstendig fødselsnummer. Korriger fødselsnummer.",
                 context.rootObject.sak.id

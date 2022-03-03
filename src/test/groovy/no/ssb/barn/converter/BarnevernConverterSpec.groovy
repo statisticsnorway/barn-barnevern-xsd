@@ -75,7 +75,7 @@ class BarnevernConverterSpec extends Specification {
 
     def "when unmarshalling instance to json, json is not null"() {
         given:
-        def xml = getResourceAsString("test01_fil09.xml")
+        def xml = getResourceAsString("test01_file09_total.xml")
 
         when:
         def json = BarnevernConverter.unmarshallXmlToJson(xml)

@@ -12,6 +12,7 @@ class MeasureCareMeasureWithEndDateRequiresReasonForRevocation : AbstractRule(
     "Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse",
     TiltakType::class.java.simpleName
 ) {
+    // TODO: Investigate jmfrLovhjemmel
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->

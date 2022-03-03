@@ -1,12 +1,16 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.generator.GeneratorConstants
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.AvgiverType
 
+/**
+ * TODO: Investigate. This rule addresses the same as BusinessUrbanDistrictNumberAndName,
+ * but is more forgiving. Delete candidate.
+ */
 class RegionCityPart : AbstractRule(
     WarningLevel.ERROR,
     "Individ Kontroll 09: Bydelsnummer",

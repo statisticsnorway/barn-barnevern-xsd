@@ -1,9 +1,9 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 
 class MeasureRepealClarificationRequired : AbstractRule(
@@ -21,8 +21,8 @@ class MeasureRepealClarificationRequired : AbstractRule(
                 if (repeal != null) {
                     val clarification = repeal.presisering
 
-                    (((repeal.kode in codesThatRequiresClarification)
-                            && (clarification.isNullOrEmpty() || clarification.isBlank())))
+                    repeal.kode in codesThatRequiresClarification
+                            && (clarification.isNullOrEmpty() || clarification.isBlank())
                 } else {
                     false
                 }

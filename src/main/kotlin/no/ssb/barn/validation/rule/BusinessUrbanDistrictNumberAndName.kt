@@ -6,9 +6,6 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.AvgiverType
 
-/**
- * NOTE: This rule is very similar to rule RegionCityPart
- */
 class BusinessUrbanDistrictNumberAndName : AbstractRule(
     WarningLevel.ERROR,
     "Virksomhet Kontroll 3: Bydelsnummer og bydelsnavn",

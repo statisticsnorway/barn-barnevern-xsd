@@ -58,7 +58,7 @@ class TheValidatorSpec extends Specification {
         def validationReport = sut.validate(
                 UUID.randomUUID().toString(),
                 1,
-                getResourceAsString("barnevern_with_errors.xml"))
+                getResourceAsString("invalid.xml"))
 
         then:
         noExceptionThrown()
@@ -77,7 +77,7 @@ class TheValidatorSpec extends Specification {
         def validationReport = sut.validateXmlStructure(
                 UUID.randomUUID().toString(),
                 invalidXsdVersion,
-                getResourceAsString("barnevern_with_errors.xml"))
+                getResourceAsString("invalid.xml"))
 
         then:
         noExceptionThrown()
