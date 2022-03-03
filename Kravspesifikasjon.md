@@ -471,23 +471,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureStartDateBeforeBusinessStartDate.kt)
 
 
-### Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse
-
-Gitt at man har et Tiltak der SluttDato er satt og<br/>
-tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
-Paragraf er 12<br/>
-eller Paragraf er 8 og Ledd er 2 eller 3<br/>
-når Opphevelse mangler  
-så gi feilmeldingen "Omsorgstiltak med sluttdato krever årsak til opphevelse."
-
-Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureCareMeasureWithEndDateRequiresReasonForRevocationSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureCareMeasureWithEndDateRequiresReasonForRevocation.kt)
-
-
-
 ### Tiltak Kontroll 5: Barnet er over 7 år og er i barnehage
 
 Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
