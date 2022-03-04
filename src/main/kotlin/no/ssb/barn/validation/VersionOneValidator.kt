@@ -12,9 +12,6 @@ class VersionOneValidator : ValidatorContract {
     )
 
     private val rules = listOf(
-        BusinessEndDateAfterCaseEndDate(),
-        BusinessEndDateAfterStartDate(),
-        BusinessStartDateBeforeCaseStartDate(),
         BusinessUrbanDistrictNumberAndName(),
         CaseAgeAboveEighteenAndMeasures(),
         CaseAgeAboveTwentyFive(),
