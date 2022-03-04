@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
+import no.ssb.barn.converter.LocalDateTimeAdapter
 import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
@@ -27,7 +27,7 @@ data class FlyttingType(
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
+        LocalDateTimeAdapter::class
     )
     var sluttDato: ZonedDateTime? = ZonedDateTime.now(),
 

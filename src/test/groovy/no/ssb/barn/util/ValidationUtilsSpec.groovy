@@ -214,7 +214,7 @@ class ValidationUtilsSpec extends Specification {
                 new KategoriType(),
                 List.of(),
                 List.of(),
-                new OpphevelseType(RandomUtils.generateRandomString(10), null, end)
+                new OpphevelseType(RandomUtils.generateRandomString(10), null, end, null)
         )
     }
 
