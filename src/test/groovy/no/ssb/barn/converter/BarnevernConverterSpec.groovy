@@ -2,6 +2,7 @@ package no.ssb.barn.converter
 
 import no.ssb.barn.generator.InitialMutationProvider
 import no.ssb.barn.generator.RandomUtils
+import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.validation.rule.XsdRule
 import no.ssb.barn.xsd.*
@@ -11,7 +12,6 @@ import spock.lang.Unroll
 import javax.xml.bind.UnmarshalException
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
@@ -136,7 +136,7 @@ class BarnevernConverterSpec extends Specification {
         def melding = new MeldingType(
                 UUID.randomUUID(),
                 null,
-                ZonedDateTime.of(datetime, ZoneId.systemDefault()),
+                ZonedDateTime.of(datetime, TestDataProvider.ZONE_ID),
                 List.of(melder),
                 List.of(saksinnhold),
                 null
@@ -145,7 +145,7 @@ class BarnevernConverterSpec extends Specification {
         def sak = new SakType(
                 UUID.randomUUID(),
                 null,
-                ZonedDateTime.of(datetime, ZoneId.systemDefault()),
+                ZonedDateTime.of(datetime, TestDataProvider.ZONE_ID),
                 null,
                 RandomUtils.generateRandomString(9),
                 "02011088123",
@@ -169,7 +169,7 @@ class BarnevernConverterSpec extends Specification {
         def barnevern = new BarnevernType(
                 UUID.randomUUID(),
                 null,
-                ZonedDateTime.of(datetime, ZoneId.systemDefault()),
+                ZonedDateTime.of(datetime, TestDataProvider.ZONE_ID),
                 fagsystem,
                 avgiver,
                 sak

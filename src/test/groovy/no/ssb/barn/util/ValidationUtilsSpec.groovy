@@ -1,6 +1,7 @@
 package no.ssb.barn.util
 
 import no.ssb.barn.generator.RandomUtils
+import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.KategoriType
 import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.OpphevelseType
@@ -12,7 +13,6 @@ import spock.lang.Unroll
 import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
 import java.time.Year
-import java.time.ZoneId
 import java.time.ZonedDateTime
 
 class ValidationUtilsSpec extends Specification {
@@ -21,8 +21,8 @@ class ValidationUtilsSpec extends Specification {
     def "minDate receive min date"() {
         expect:
         ValidationUtils.getMinDate(
-                ZonedDateTime.of(first, ZoneId.systemDefault()),
-                ZonedDateTime.of(second, ZoneId.systemDefault())
+                ZonedDateTime.of(first, TestDataProvider.ZONE_ID),
+                ZonedDateTime.of(second, TestDataProvider.ZONE_ID)
         ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
 
         where:
@@ -36,8 +36,8 @@ class ValidationUtilsSpec extends Specification {
     def "maxDate receive max date"() {
         expect:
         ValidationUtils.getMaxDate(
-                ZonedDateTime.of(first, ZoneId.systemDefault()),
-                ZonedDateTime.of(second, ZoneId.systemDefault())
+                ZonedDateTime.of(first, TestDataProvider.ZONE_ID),
+                ZonedDateTime.of(second, TestDataProvider.ZONE_ID)
         ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
 
         where:

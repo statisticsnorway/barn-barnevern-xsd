@@ -4,8 +4,11 @@ import no.ssb.barn.converter.BarnevernConverter
 import no.ssb.barn.validation.ValidationContext
 
 import java.time.Year
+import java.time.ZoneId
 
 class TestDataProvider {
+
+    static ZONE_ID = ZoneId.of("Europe/Oslo")
 
     static String getMockSocialSecurityNumber(int age){
         def twoDigitBirthYear = (Year.now().minusYears(age).value % 100)
