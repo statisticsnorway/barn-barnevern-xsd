@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OpphevelseType", propOrder = ["kode", "presisering", "sluttDato"])
+@XmlType(name = "OpphevelseType", propOrder = ["kode", "presisering", "sluttDato", "flytting"])
 data class OpphevelseType(
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String = "1",
@@ -19,5 +19,8 @@ data class OpphevelseType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime = ZonedDateTime.now()
+    var sluttDato: ZonedDateTime = ZonedDateTime.now(),
+
+    @field:XmlElement(name = "Flytting")
+    var flytting: FlyttingType? = null
 )

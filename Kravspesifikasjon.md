@@ -216,7 +216,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterCaseEndDate.kt)
 
 
 
@@ -230,7 +230,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageStartDateBeforeBusinessStartDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageStartDateBeforeBusinessStartDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageStartDateBeforeCaseStartDate.kt)
 
 
 
@@ -334,7 +334,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationEndDateAfterBusinessEndDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationEndDateAfterBusinessEndDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationEndDateAfterCaseEndDate.kt)
 
 
 
@@ -348,7 +348,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationStartDateBeforeBusinessStartDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationStartDateBeforeBusinessStartDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationStartDateBeforeCaseStartDate.kt)
 
 
 
@@ -454,7 +454,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterCaseEndDate.kt)
 
 
 
@@ -468,7 +468,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureStartDateBeforeBusinessStartDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureStartDateBeforeBusinessStartDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureStartDateBeforeCaseStartDate.kt)
 
 
 ### Tiltak Kontroll 5: Barnet er over 7 år og er i barnehage
@@ -608,7 +608,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanEndDateAfterBusinessEndDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanEndDateAfterBusinessEndDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanEndDateAfterCaseEndDate.kt)
 
 
 
@@ -622,7 +622,7 @@ Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanStartDateBeforeBusinessStartDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanStartDateBeforeBusinessStartDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanStartDateBeforeCaseStartDate.kt)
 
 
 

@@ -40,7 +40,7 @@ class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
         measure.opphevelse = null
         and:
         if (createOpphevelse) {
-            measure.opphevelse = new OpphevelseType(kode, presisering, ZonedDateTime.now())
+            measure.opphevelse = new OpphevelseType(kode, presisering, ZonedDateTime.now(), null)
         }
 
         when:
