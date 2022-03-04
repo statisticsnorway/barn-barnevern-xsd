@@ -26,11 +26,11 @@ class VersionOneValidator : ValidatorContract {
         InvestigationDecisionClarificationRequired(),
         InvestigationDecisionMissingClarification(),
         InvestigationDueDatePassedConclusionRequired(),
-        InvestigationEndDateAfterBusinessEndDate(),
+        InvestigationEndDateAfterCaseEndDate(),
         InvestigationProcessingTimePassedDueDate(),
         InvestigationRelatedFromMessage(),
         InvestigationStartDateAfterEndDate(),
-        InvestigationStartDateBeforeBusinessStartDate(),
+        InvestigationStartDateBeforeCaseStartDate(),
         LegalBasisAgeAboveEighteenNoMeasure(),
         LegalBasisValidCode(),
         LegalBasisWithEndDateClarificationRequired(),
@@ -43,16 +43,16 @@ class VersionOneValidator : ValidatorContract {
         MeasureRepealClarificationRequired(),
         MeasureStartDateAfterIndividStartDate(),
         MessageCaseContentMissingClarification(),
-        MessageEndDateAfterBusinessEndDate(),
+        MessageEndDateAfterCaseEndDate(),
         MessageMissingCaseContent(),
         MessageMissingReporters(),
         MessageProcessingTimeOverdue(),
         MessageReporterMissingClarification(),
         MessageStartDateAfterEndDate(),
-        MessageStartDateBeforeBusinessStartDate(),
+        MessageStartDateBeforeCaseStartDate(),
         PlanStartDateAfterEndDate(),
-        PlanEndDateAfterBusinessEndDate(),
-        PlanStartDateBeforeBusinessStartDate()
+        PlanEndDateAfterCaseEndDate(),
+        PlanStartDateBeforeCaseStartDate()
     )
 
     override fun validate(context: ValidationContext): ValidationReport {
