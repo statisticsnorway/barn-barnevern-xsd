@@ -90,6 +90,9 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         resetRepeal | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
         true        | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.0"        || false
         false       | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.0"        || false
+        true        | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
+        false       | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
+
         false       | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
         false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
         false       | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
