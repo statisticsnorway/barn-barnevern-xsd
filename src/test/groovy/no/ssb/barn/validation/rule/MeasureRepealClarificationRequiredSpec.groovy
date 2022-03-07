@@ -37,9 +37,9 @@ class MeasureRepealClarificationRequiredSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-            context.rootObject.sak.tiltak[0].opphevelse = (code == null)
-                    ? null
-                    : new OpphevelseType(code, clarification, ZonedDateTime.now(), null)
+        context.rootObject.sak.tiltak[0].opphevelse = (code == null)
+                ? null
+                : new OpphevelseType(code, clarification, ZonedDateTime.now(), null)
 
         when:
         def reportEntries = sut.validate(context)

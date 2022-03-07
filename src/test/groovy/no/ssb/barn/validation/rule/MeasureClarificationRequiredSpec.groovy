@@ -57,6 +57,8 @@ class MeasureClarificationRequiredSpec extends Specification {
         where:
         code   | clarification   || errorExpected
         "1.1"  | null            || false
+
+        "1.99" | ""              || true
         "1.99" | null            || true
         "2.99" | null            || true
         "3.7"  | null            || true
@@ -66,6 +68,7 @@ class MeasureClarificationRequiredSpec extends Specification {
         "6.99" | null            || true
         "7.99" | null            || true
         "8.99" | null            || true
+
         "1.99" | "~presisering~" || false
         "2.99" | "~presisering~" || false
         "3.7"  | "~presisering~" || false

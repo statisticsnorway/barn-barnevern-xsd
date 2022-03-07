@@ -16,16 +16,10 @@ class MeasureRepealClarificationRequired : AbstractRule(
     override fun validate(context: ValidationContext): List<ReportEntry>? {
         return context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
-                val repeal = tiltak.opphevelse // when JaCoCo improves, use "?."
-
-                if (repeal != null) {
-                    val clarification = repeal.presisering
-
-                    repeal.kode in codesThatRequiresClarification
-                            && (clarification.isNullOrEmpty() || clarification.isBlank())
-                } else {
-                    false
-                }
+                val repeal = tiltak.opphevelse
+                repeal != null
+                        && repeal.kode in codesThatRequiresClarification
+                        && repeal.presisering.isNullOrEmpty()
             }
             .map {
                 createReportEntry(
