@@ -383,7 +383,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
    "term":"Plan",
    "title":"Plantype",
    "description":"Kjønn",
-   "path":"/Barnevern/Sak/Virksomhet/Plan/@Plantype",
+   "path":"/Barnevern/Sak/Plan/@Plantype",
    "items":[
 	  { "code":"1", "validFrom":"2013-01-01", "title":"Tiltaksplan etter § 4-5" },
 	  { "code":"2", "validFrom":"2013-01-01", "title":"Tiltaksplan etter § 4-28" },
@@ -432,7 +432,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
    "type":"codelist",
    "term":"Melding",
    "title":"Konklusjon",
-   "path":"/Barnevern/Sak/Virksomhet/Melding/Konklusjon/@Kode",
+   "path":"/Barnevern/Sak/Melding/Konklusjon/@Kode",
    "items":[
 	  {"code":"1", "validFrom":"2013-01-01", "title":"Henlagt " },
 	  {"code":"2", "validFrom":"2013-01-01", "title":"Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse" },
@@ -542,7 +542,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
    "type":"codelist",
    "term":"Melding",
    "title":"Melder",
-   "path":"/Barnevern/Sak/Virksomhet/Melding/Melder/@Kode",
+   "path":"/Barnevern/Sak/Melding/Melder/@Kode",
    "items":[
 	  { "code":"1", "validFrom":"2013-01-01", "title":"Barnet selv" },
 	  { "code":"2", "validFrom":"2013-01-01", "title":"Mor/ far/ foresatte" },
@@ -649,7 +649,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
    "type":"codelist",
    "term":"Melding",
    "title":"Saksinnhold",
-   "path":"/Barnevern/Sak/Virksomhet/Melding/Saksinnhold/@Kode",
+   "path":"/Barnevern/Sak/Melding/Saksinnhold/@Kode",
    "items":[
 	  { "code":"1", "validFrom":"2013-01-01", "title":"Foreldres somatiske sykdom" },
 	  { "code":"2", "validFrom":"2013-01-01", "title":"Foreldres psykiske problem/ lidelse" },
@@ -746,7 +746,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
    "type":"codelist",
    "term":"Undersokelse",
    "title":"UtvidetFrist",
-   "path":" /Barnevern/Sak/Virksomhet/Undersokelse/UtvidetFrist/@Innvilget",
+   "path":" /Barnevern/Sak/Undersokelse/UtvidetFrist/@Innvilget",
    "items":[
 	  {"code":"1", "validFrom":"2022-01-01", "title":"Ja" },
 	  {"code":"2", "validFrom":"2022-01-01", "title":"Nei" }
@@ -788,7 +788,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
    "type":"codelist",
    "term":"Undersokelse",
    "title":"Konklusjon",
-   "path":"/Barnevern/Sak/Virksomhet/Undersokelse/Konklusjon/@Kode",
+   "path":"/Barnevern/Sak/Undersokelse/Konklusjon/@Kode",
    "items":[
 	  { "code":"1", "validFrom":"2013-01-01", "title":"Barneverntjenesten fatter vedtak om tiltak" },
 	  { "code":"2", "validFrom":"2013-01-01", "title":"Begjæring om tiltak for fylkesnemnda" },
@@ -894,7 +894,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
    "type":"codelist",
    "term":"Tiltak",
    "title":"Kategori",
-   "path":"/Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode",
+   "path":"/Barnevern/Sak/Tiltak/Kategori/@Kode",
    "items":[
 	  {"code" : "1.1", "validFrom" : "2013-01-01", "title" : "Barnvernsinstitusjoner (gjelder alle typer barnevernsinstitusjoner)"},
 	  {"code" : "1.2", "validFrom" : "2013-01-01", "title" : "Plassering i institusjon etter annen lov"},
@@ -1039,7 +1039,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
    "type":"codelist",
    "term":"Tiltak",
    "title":"Opphevelse",
-   "path":"/Barnevern/Sak/Virksomhet/Tiltak/Opphevelse/@Kode",
+   "path":"/Barnevern/Sak/Tiltak/Opphevelse/@Kode",
    "items":[
 	  {"code" : "1", "validFrom" : "2013-01-01", "title" : "Barnet tilbakeført til foreldre/ familien jamfør § 4-21"},
 	  {"code" : "2", "validFrom" : "2013-01-01", "title" : "Barnet har fylt 18 år"},
@@ -1154,7 +1154,7 @@ Dato tilsynsbesøket faktisk ble utført
    "type":"codelist",
    "term":"Vedtak",
    "title":"Status",
-   "path":"/Barnevern/Sak/Virksomhet/Vedtak/Status/@Kode",
+   "path":"/Barnevern/Sak/Vedtak/Status/@Kode",
    "items":[
 	  {"code" : "1", "validFrom" : "2022-01-01", "title" : "Godkjent"},
 	  {"code" : "2", "validFrom" : "2022-01-01", "title" : "Begjæring oversendt nemnd  "},
@@ -1217,7 +1217,7 @@ Dato tilsynsbesøket faktisk ble utført
    "type":"codelist",
    "term":"Ettervern",
    "title":"Konklusjon",
-   "path":"/Barnevern/Sak/Virksomhet/Ettervern/Konklusjon/@Kode",
+   "path":"/Barnevern/Sak/Ettervern/Konklusjon/@Kode",
    "items":[
 	  {"code" : "1", "validFrom" : "2022-01-01", "title" : "Gitt tilbud om tiltak, akseptert "},
 	  {"code" : "2", "validFrom" : "2022-01-01", "title" : "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak "},
@@ -1347,7 +1347,7 @@ Dato tilsynsbesøket faktisk ble utført
    "type":"codelist",
    "term":"Flytting",
    "title":"ArsakFra",
-   "path":"/Barnevern/Sak/Virksomhet/Flytting/ArsakFra/@Kode",
+   "path":"/Barnevern/Sak/Tiltak/Opphevelse/Flytting/ArsakFra/@Kode",
    "items":[
 	  { "code":"1.1.1", "validFrom":"2022-01-01", "title":"Omsorgsplasseringen opphører " },
 	  { "code":"1.1.2", "validFrom":"2022-01-01", "title":"Barnet blir myndig " },
@@ -1418,7 +1418,7 @@ Barnet/ungdommen flytter til:
    "type":"codelist",
    "term":"Flytting",
    "title":"FlytteTil",
-   "path":"/Barnevern/Sak/Virksomhet/Flytting/FlytteTil/@Kode",
+   "path":"/Barnevern/Sak/Tiltak/Opphevelse/Flytting/FlytteTil/@Kode",
    "items":[
 	  {"code" : "1", "validFrom" : "2022-01-01", "title" : "Fosterhjem i familie og nære nettverk"},
 	  {"code" : "2", "validFrom" : "2022-01-01", "title" : "Fosterhjem utenfor familie og nære nettverk"},
