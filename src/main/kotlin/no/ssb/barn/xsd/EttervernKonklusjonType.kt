@@ -15,7 +15,7 @@ data class EttervernKonklusjonType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime? = ZonedDateTime.now(),
+    var sluttDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String = getCodes(LocalDate.of(2022, 1, 1))[0].code

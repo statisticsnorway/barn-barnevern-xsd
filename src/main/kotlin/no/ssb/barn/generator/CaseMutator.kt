@@ -184,7 +184,7 @@ object CaseMutator {
         caseEntry.barnevern.sak
             .plan
             .last()
-            .konklusjon = PlanKonklusjonType()
+            .konklusjon = PlanKonklusjonType(ZonedDateTime.now())
     }
 
     // START Tiltak
@@ -218,7 +218,7 @@ object CaseMutator {
             // close current measure
             tiltak.last().opphevelse = OpphevelseType()
 
-            ettervern.add(EttervernType())
+            ettervern.add(EttervernType(tilbudSendtDato = ZonedDateTime.now()))
         }
     }
 
@@ -274,7 +274,7 @@ object CaseMutator {
             // close current decision
             vedtak.last().konklusjon = VedtakKonklusjonType()
 
-            val afterCare = EttervernType()
+            val afterCare = EttervernType(tilbudSendtDato = ZonedDateTime.now())
             ettervern.add(afterCare)
 
             relasjon.add(
@@ -297,6 +297,7 @@ object CaseMutator {
         caseEntry.barnevern.sak
             .ettervern
             .last().konklusjon = EttervernKonklusjonType(
+            sluttDato = ZonedDateTime.now(),
             kode = EttervernKonklusjonType.getCodes(LocalDate.now())
                 .first { it.code == "1" }.code
         )
@@ -308,7 +309,7 @@ object CaseMutator {
         caseEntry.barnevern.sak
             .ettervern
             .last()
-            .konklusjon = EttervernKonklusjonType()
+            .konklusjon = EttervernKonklusjonType(sluttDato = ZonedDateTime.now())
 
         caseEntry.barnevern.sak.tiltak.add(
             createTiltakType(caseEntry.updated)
@@ -321,7 +322,7 @@ object CaseMutator {
         caseEntry.barnevern.sak
             .ettervern
             .last()
-            .konklusjon = EttervernKonklusjonType()
+            .konklusjon = EttervernKonklusjonType(sluttDato = ZonedDateTime.now())
 
         caseEntry.barnevern.sak.vedtak.add(
             createVedtakType()

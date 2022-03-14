@@ -29,7 +29,7 @@ data class FlyttingType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime? = ZonedDateTime.now(),
+    var sluttDato: ZonedDateTime? = null,
 
     @field:XmlElement(name = "ArsakFra")
     var arsakFra: ArsakFraType = ArsakFraType(),
