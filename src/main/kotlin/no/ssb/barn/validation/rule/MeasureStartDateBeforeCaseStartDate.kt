@@ -17,7 +17,7 @@ class MeasureStartDateBeforeCaseStartDate : AbstractRule(
 
         return sak.tiltak.asSequence()
             .filter { tiltak ->
-                tiltak.startDato.isBefore(sak.startDato)
+                tiltak.startDato!!.isBefore(sak.startDato)
             }
             .map {
                 createReportEntry(

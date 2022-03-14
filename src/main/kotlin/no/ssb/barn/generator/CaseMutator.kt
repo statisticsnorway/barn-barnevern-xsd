@@ -26,6 +26,7 @@ object CaseMutator {
     fun fromMessageToCaseClosed(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.melding.last().konklusjon =
             MeldingKonklusjonType(
+                sluttDato = ZonedDateTime.now(),
                 kode = MeldingKonklusjonType.getCodes(LocalDate.now())
                     .first { it.code == "1" }.code
             )
@@ -35,11 +36,15 @@ object CaseMutator {
     fun fromMessageToInvestigationStarted(caseEntry: CaseEntry) {
         // close active message
         caseEntry.barnevern.sak.melding.last().konklusjon = MeldingKonklusjonType(
+            sluttDato = ZonedDateTime.now(),
             kode = MeldingKonklusjonType.getCodes(LocalDate.now())
                 .first { it.code == "2" }.code
         )
 
-        UndersokelseType(id = UUID.randomUUID()).also { investigation ->
+        UndersokelseType(
+            id = UUID.randomUUID(),
+            startDato = ZonedDateTime.now()
+        ).also { investigation ->
             caseEntry.barnevern.sak.undersokelse.add(investigation)
 
             caseEntry.barnevern.sak.relasjon.add(
@@ -58,6 +63,7 @@ object CaseMutator {
     fun fromMessageToDecision(caseEntry: CaseEntry) {
         // close active message
         caseEntry.barnevern.sak.melding.last().konklusjon = MeldingKonklusjonType(
+            sluttDato = ZonedDateTime.now(),
             kode = MeldingKonklusjonType.getCodes(LocalDate.now())
                 .first { it.code == "2" }.code
         )
@@ -85,6 +91,7 @@ object CaseMutator {
             .undersokelse
             .last()
             .konklusjon = UndersokelseKonklusjonType(
+            sluttDato = ZonedDateTime.now(),
             kode = UndersokelseKonklusjonType.getCodes(LocalDate.now())
                 .filter { it.code != "1" }
                 .random()
@@ -97,13 +104,14 @@ object CaseMutator {
         val investigation = caseEntry.barnevern.sak.undersokelse.last()
 
         investigation.konklusjon = UndersokelseKonklusjonType(
+            sluttDato = ZonedDateTime.now(),
             kode = UndersokelseKonklusjonType.getCodes(LocalDate.now())
                 .first { it.code == "1" }
                 .code
         )
 
         val decision = createVedtakType()
-        decision.konklusjon = VedtakKonklusjonType()
+        decision.konklusjon = VedtakKonklusjonType(sluttDato = ZonedDateTime.now())
 
         caseEntry.barnevern.sak.vedtak.add(decision)
         caseEntry.barnevern.sak.relasjon.add(
@@ -154,7 +162,7 @@ object CaseMutator {
                 ledd = mutableListOf("~ledd~")
             )
         )
-        decision.status = mutableListOf(VedtakStatusType())
+        decision.status = mutableListOf(VedtakStatusType(endretDato = ZonedDateTime.now()))
 
         caseEntry.barnevern.sak.vedtak.add(decision)
 
@@ -233,7 +241,7 @@ object CaseMutator {
     fun fromDecisionToMeasure(caseEntry: CaseEntry) {
         with(caseEntry.barnevern.sak) {
             // close current decision
-            vedtak.last().konklusjon = VedtakKonklusjonType()
+            vedtak.last().konklusjon = VedtakKonklusjonType(sluttDato = ZonedDateTime.now())
 
             val measure = createTiltakType(caseEntry.updated)
             tiltak.add(measure)
@@ -254,7 +262,7 @@ object CaseMutator {
     fun fromDecisionToAnotherDecision(caseEntry: CaseEntry) {
         with(caseEntry.barnevern.sak) {
             // close current decision
-            vedtak.last().konklusjon = VedtakKonklusjonType()
+            vedtak.last().konklusjon = VedtakKonklusjonType(sluttDato = ZonedDateTime.now())
 
             val decision = createVedtakType()
             vedtak.add(decision)
@@ -277,7 +285,7 @@ object CaseMutator {
     fun fromDecisionToAfterCare(caseEntry: CaseEntry) {
         with(caseEntry.barnevern.sak) {
             // close current decision
-            vedtak.last().konklusjon = VedtakKonklusjonType()
+            vedtak.last().konklusjon = VedtakKonklusjonType(sluttDato = ZonedDateTime.now())
 
             val afterCare = EttervernType(
                 id = UUID.randomUUID(),
@@ -425,7 +433,8 @@ object CaseMutator {
     private fun createVedtakType(): VedtakType {
         return VedtakType(
             id = UUID.randomUUID(),
-            status = mutableListOf(VedtakStatusType()),
+            startDato = ZonedDateTime.now(),
+            status = mutableListOf(VedtakStatusType(endretDato = ZonedDateTime.now())),
             lovhjemmel = createLegalBasis(),
             jmfrLovhjemmel = mutableListOf(
                 LovhjemmelType(

@@ -21,7 +21,7 @@ class MessageEndDateAfterCaseEndDate : AbstractRule(
             sak.melding.asSequence()
                 .filter { melding ->
                     val conclusion = melding.konklusjon
-                    conclusion != null && conclusion.sluttDato.isAfter(sak.sluttDato)
+                    conclusion != null && conclusion.sluttDato!!.isAfter(sak.sluttDato)
                 }
                 .map {
                     createReportEntry(

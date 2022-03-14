@@ -13,5 +13,5 @@ data class VedtakKonklusjonType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime = ZonedDateTime.now()
+    var sluttDato: ZonedDateTime? = null
 )

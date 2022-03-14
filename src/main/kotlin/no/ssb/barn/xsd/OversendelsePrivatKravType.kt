@@ -21,7 +21,7 @@ data class OversendelsePrivatKravType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var startDato: ZonedDateTime = ZonedDateTime.now(),
+    var startDato: ZonedDateTime? = null,
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: OversendelsePrivatKravKonklusjonType? = null

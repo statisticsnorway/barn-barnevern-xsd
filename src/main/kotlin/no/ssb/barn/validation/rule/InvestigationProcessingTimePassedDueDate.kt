@@ -6,6 +6,7 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.BegrepsType
 import no.ssb.barn.xsd.UndersokelseType
+import java.time.ZonedDateTime
 import java.util.*
 
 class InvestigationProcessingTimePassedDueDate : AbstractRule(
@@ -35,9 +36,9 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                 if (investigation.konklusjon != null)
                     return@map null
 
-                val currentDate = context.rootObject.datoUttrekk
+                val currentDate = context.rootObject.datoUttrekk as ZonedDateTime
 
-                if (currentDate.isAfter(message.startDato.plusDays(7 + 90))
+                if (currentDate.isAfter(message.startDato!!.plusDays(7 + 90))
                     && (investigation.utvidetFrist == null
                             || investigation.utvidetFrist!!.innvilget == null
                             || investigation.utvidetFrist!!.innvilget == "2"
@@ -49,7 +50,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                     )
                 }
 
-                if (currentDate.isAfter(message.startDato.plusDays(7 + 180))) {
+                if (currentDate.isAfter(message.startDato!!.plusDays(7 + 180))) {
                     return@map createReportEntry(
                         "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato",
                         relation.tilId as UUID

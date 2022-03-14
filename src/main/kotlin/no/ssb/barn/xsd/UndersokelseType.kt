@@ -27,7 +27,7 @@ data class UndersokelseType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var startDato: ZonedDateTime = ZonedDateTime.now(),
+    var startDato: ZonedDateTime? = null,
 
     @field:XmlElement(name = "Vedtaksgrunnlag")
     var vedtaksgrunnlag: MutableList<SaksinnholdType> = mutableListOf(),

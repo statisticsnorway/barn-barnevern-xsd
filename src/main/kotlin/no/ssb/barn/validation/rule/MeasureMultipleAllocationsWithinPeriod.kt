@@ -47,7 +47,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                             ) +
                             " er mer enn 3 måneder etter ${innerMeasure.id}"
                 " med startdato " +
-                        innerMeasure.startDato.format(
+                        innerMeasure.startDato!!.format(
                             DateTimeFormatter.ofPattern(
                                 "dd.MM.yyyy"
                             )

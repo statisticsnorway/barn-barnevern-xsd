@@ -21,5 +21,5 @@ data class TilsynType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var utfortDato: ZonedDateTime = ZonedDateTime.now()
+    var utfortDato: ZonedDateTime? = null
 )

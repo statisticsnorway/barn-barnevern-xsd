@@ -17,7 +17,7 @@ class MessageProcessingTimeOverdue : AbstractRule(
             .filter { melding ->
                 val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
-                        && conclusion.sluttDato.isAfter(melding.startDato.plusDays(7))
+                        && conclusion.sluttDato!!.isAfter(melding.startDato!!.plusDays(7))
             }
             .map {
                 createReportEntry(

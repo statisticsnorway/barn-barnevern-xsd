@@ -28,7 +28,7 @@ open class TiltakType(
     @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
-    ) var startDato: ZonedDateTime = ZonedDateTime.now(),
+    ) var startDato: ZonedDateTime? = null,
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
     var lovhjemmel: LovhjemmelType = LovhjemmelType(),

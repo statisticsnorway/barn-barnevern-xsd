@@ -33,7 +33,7 @@ data class SakType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var startDato: ZonedDateTime = ZonedDateTime.now(),
+    var startDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "dateTime")

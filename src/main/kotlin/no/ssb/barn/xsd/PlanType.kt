@@ -29,7 +29,7 @@ data class PlanType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var startDato: ZonedDateTime = ZonedDateTime.now(),
+    var startDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Plantype", required = true)
     var plantype: String? = getPlantype(LocalDate.now())
