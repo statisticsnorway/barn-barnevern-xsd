@@ -37,5 +37,5 @@ data class BarnevernType(
     var avgiver: AvgiverType = AvgiverType(),
 
     @field:XmlElement(name = "Sak", type = SakType::class, required = true)
-    var sak: SakType = SakType(id = UUID.randomUUID()) // TODO: Fix
+    var sak: SakType = SakType()
 )

@@ -1,6 +1,7 @@
 package no.ssb.barn.generator
 
 import no.ssb.barn.xsd.BarnevernType
+import no.ssb.barn.xsd.SakType
 import java.time.LocalDate
 import java.time.ZonedDateTime
 import java.util.*
@@ -22,6 +23,8 @@ object InitialMutationProvider {
                     LocalDate.now().minusYears(20),
                     LocalDate.now().minusYears(1)
                 )
+
+                sak = SakType(id = UUID.randomUUID())
 
                 sak.apply {
                     startDato = currentDate
