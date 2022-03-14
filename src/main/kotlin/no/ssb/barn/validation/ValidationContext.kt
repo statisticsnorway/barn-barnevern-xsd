@@ -1,6 +1,7 @@
 package no.ssb.barn.validation
 
 import no.ssb.barn.xsd.BarnevernType
+import java.util.*
 
 data class ValidationContext(
     val messageId: String,
@@ -10,6 +11,6 @@ data class ValidationContext(
     constructor(messageId: String, xml: String) : this(
         messageId,
         xml,
-        BarnevernType()
+        BarnevernType(id = UUID.randomUUID())
     )
 }

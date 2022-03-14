@@ -9,6 +9,7 @@ import no.ssb.barn.validation.SharedValidationConstants.kodelistePlasseringstilt
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
     WarningLevel.WARNING,
@@ -56,7 +57,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                 reportEntries.add(
                     createReportEntry(
                         errorMsg,
-                        outerMeasure.id
+                        outerMeasure.id as UUID
                     )
                 )
             }

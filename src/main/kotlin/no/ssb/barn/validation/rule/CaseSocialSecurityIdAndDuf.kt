@@ -7,6 +7,7 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.SharedValidationConstants.SOCIAL_SECURITY_AND_DUF_RULE_NAME
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SakType
+import java.util.*
 import java.util.regex.Pattern
 
 class CaseSocialSecurityIdAndDuf : AbstractRule(
@@ -31,7 +32,7 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
             } else {
                 createSingleReportEntryList(
                     "Feil i fødselsnummer. Kan ikke identifisere klienten.",
-                    context.rootObject.sak.id
+                    context.rootObject.sak.id as UUID
                 )
             }
         }
@@ -40,7 +41,7 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
             return if (!dufPattern.matcher(duFnummer).matches()) {
                 createSingleReportEntryList(
                     "DUFnummer mangler. Kan ikke identifisere klienten.",
-                    context.rootObject.sak.id
+                    context.rootObject.sak.id as UUID
                 )
             } else {
                 null
@@ -49,7 +50,7 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
 
         return createSingleReportEntryList(
             "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere klienten.",
-            context.rootObject.sak.id
+            context.rootObject.sak.id as UUID
         )
     }
 }

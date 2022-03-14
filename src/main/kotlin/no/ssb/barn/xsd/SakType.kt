@@ -23,7 +23,7 @@ data class SakType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,

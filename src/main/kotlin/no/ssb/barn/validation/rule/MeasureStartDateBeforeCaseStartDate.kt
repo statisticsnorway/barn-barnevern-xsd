@@ -5,6 +5,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MeldingType
+import java.util.*
 
 class MeasureStartDateBeforeCaseStartDate : AbstractRule(
     WarningLevel.ERROR,
@@ -22,7 +23,7 @@ class MeasureStartDateBeforeCaseStartDate : AbstractRule(
                 createReportEntry(
                     "Tiltakets startdato (${it.startDato}) er før"
                             + " sakens startdato (${sak.startDato})",
-                    it.id
+                    it.id as UUID
                 )
             }
             .toList()

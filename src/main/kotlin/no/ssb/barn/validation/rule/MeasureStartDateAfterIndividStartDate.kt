@@ -5,6 +5,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
+import java.util.*
 
 class MeasureStartDateAfterIndividStartDate : AbstractRule(
     WarningLevel.ERROR,
@@ -23,7 +24,7 @@ class MeasureStartDateAfterIndividStartDate : AbstractRule(
                     "Tiltak (${it.id}}). Startdato (${it.startDato}) skal"
                             + " være lik eller etter individets startdato"
                             + " ($individStartDate)",
-                    it.id
+                    it.id as UUID
                 )
             }
             .toList()

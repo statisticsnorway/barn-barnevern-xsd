@@ -3,12 +3,13 @@ package no.ssb.barn.generator
 import no.ssb.barn.xsd.BarnevernType
 import java.time.LocalDate
 import java.time.ZonedDateTime
+import java.util.*
 
 object InitialMutationProvider {
 
     @JvmStatic
     fun createInitialMutation(currentDate: ZonedDateTime): BarnevernType =
-        BarnevernType()
+        BarnevernType(id = UUID.randomUUID())
             .apply {
 
                 datoUttrekk = currentDate.plusHours(

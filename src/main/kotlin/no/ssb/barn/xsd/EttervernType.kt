@@ -14,7 +14,7 @@ data class EttervernType(
         @field:XmlJavaTypeAdapter(
                 UuidAdapter::class
         )
-        var id: UUID = UUID.randomUUID(),
+        var id: UUID? = null,
 
         @field:XmlAttribute(name = "TilbudSendtDato", required = true)
         @field:XmlSchemaType(name = "dateTime")

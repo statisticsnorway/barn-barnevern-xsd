@@ -5,6 +5,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
+import java.util.*
 
 class MeasureEndDateBeforeIndividEndDate : AbstractRule(
     WarningLevel.ERROR,
@@ -26,7 +27,7 @@ class MeasureEndDateBeforeIndividEndDate : AbstractRule(
                     "Tiltak (${it.id}). Sluttdato"
                             + " (${it.opphevelse!!.sluttDato}) er etter individets"
                             + " sluttdato ($individEndDate)",
-                    it.id
+                    it.id as UUID
 
                 )
             }
