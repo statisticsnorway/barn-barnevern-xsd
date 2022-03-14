@@ -6,6 +6,7 @@ import no.ssb.barn.util.ValidationUtils.getAge
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SakType
+import java.util.*
 
 class CaseAgeAboveEighteenAndMeasures : AbstractRule(
     WarningLevel.ERROR,
@@ -19,6 +20,6 @@ class CaseAgeAboveEighteenAndMeasures : AbstractRule(
         else
             createSingleReportEntryList(
                 "Klienten er over 18 år og skal dermed ha tiltak",
-                context.rootObject.sak.id
+                context.rootObject.sak.id as UUID
             )
 }

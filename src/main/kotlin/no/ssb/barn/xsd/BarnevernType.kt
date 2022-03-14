@@ -18,7 +18,7 @@ data class BarnevernType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @field:XmlAttribute(name = "ForrigeId")
     var forrigeId: String? = null,
@@ -37,5 +37,5 @@ data class BarnevernType(
     var avgiver: AvgiverType = AvgiverType(),
 
     @field:XmlElement(name = "Sak", type = SakType::class, required = true)
-    var sak: SakType = SakType()
+    var sak: SakType = SakType(id = UUID.randomUUID()) // TODO: Fix
 )

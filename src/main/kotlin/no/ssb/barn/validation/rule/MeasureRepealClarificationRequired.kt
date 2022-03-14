@@ -5,6 +5,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
+import java.util.*
 
 class MeasureRepealClarificationRequired : AbstractRule(
     WarningLevel.ERROR,
@@ -24,7 +25,7 @@ class MeasureRepealClarificationRequired : AbstractRule(
             .map {
                 createReportEntry(
                     "Opphevelse (${it.opphevelse!!.kode}) mangler presisering.",
-                    it.id
+                    it.id as UUID
                 )
             }
             .toList()

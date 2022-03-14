@@ -11,11 +11,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "EttervernKonklusjon", propOrder = ["sluttDato", "kode"])
 data class EttervernKonklusjonType(
     @field:XmlAttribute(name = "SluttDato")
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime? = ZonedDateTime.now(),
+    var sluttDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String = getCodes(LocalDate.of(2022, 1, 1))[0].code

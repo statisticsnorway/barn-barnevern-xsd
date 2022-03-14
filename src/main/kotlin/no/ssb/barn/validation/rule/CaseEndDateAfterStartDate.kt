@@ -1,10 +1,11 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SakType
+import java.util.*
 
 class CaseEndDateAfterStartDate : AbstractRule(
     WarningLevel.ERROR,
@@ -20,7 +21,7 @@ class CaseEndDateAfterStartDate : AbstractRule(
         else
             createSingleReportEntryList(
                 "Sakens startdato ($startDate) er etter sluttdato ($endDate)",
-                context.rootObject.sak.id
+                context.rootObject.sak.id as UUID
             )
     }
 }

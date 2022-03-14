@@ -19,17 +19,17 @@ data class FlyttingType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,
 
     @field:XmlAttribute(name = "SluttDato")
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime? = ZonedDateTime.now(),
+    var sluttDato: ZonedDateTime? = null,
 
     @field:XmlElement(name = "ArsakFra")
     var arsakFra: ArsakFraType = ArsakFraType(),

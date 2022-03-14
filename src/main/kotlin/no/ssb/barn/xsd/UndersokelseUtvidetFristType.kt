@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "UtvidetFrist", propOrder = ["startDato", "innvilget"])
 data class UndersokelseUtvidetFristType(
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

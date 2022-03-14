@@ -19,13 +19,13 @@ open class TiltakType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     ) var startDato: ZonedDateTime = ZonedDateTime.now(),

@@ -4,12 +4,18 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import java.time.LocalDate
+import java.time.ZonedDateTime
 
 class FlyttingTypeSpec extends Specification {
 
     def "when constructor is called without values, expect no errors"() {
         when:
-        def sut = new FlyttingType()
+        def sut = new FlyttingType(
+                UUID.randomUUID(),
+                null,
+                ZonedDateTime.now(),
+                new ArsakFraType("kode", null),
+                new FlyttingTilType("kode", null))
 
         then:
         noExceptionThrown()
@@ -17,8 +23,6 @@ class FlyttingTypeSpec extends Specification {
         null != sut.id
         and:
         null == sut.migrertId
-        and:
-        null != sut.sluttDato
         and:
         null != sut.sluttDato
     }

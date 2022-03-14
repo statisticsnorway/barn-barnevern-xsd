@@ -6,6 +6,7 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 import no.ssb.barn.xsd.erOmsorgsTiltak
+import java.util.*
 
 class LegalBasisWithEndDateClarificationRequired : AbstractRule(
     WarningLevel.WARNING,
@@ -26,7 +27,7 @@ class LegalBasisWithEndDateClarificationRequired : AbstractRule(
                 createReportEntry(
                     "Tiltak (${it.id}). Opphevelse av omsorgstiltak"
                             + " mangler presisering",
-                    it.id
+                    it.id as UUID
                 )
             }
             .toList()

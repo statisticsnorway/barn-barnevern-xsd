@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "PlanKonklusjon", propOrder = ["sluttDato"])
 data class PlanKonklusjonType(
     @field:XmlAttribute(name = "SluttDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime = ZonedDateTime.now()
+    var sluttDato: ZonedDateTime? = null
 )

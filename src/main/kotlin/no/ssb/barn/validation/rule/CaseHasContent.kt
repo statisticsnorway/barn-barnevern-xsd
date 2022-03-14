@@ -5,6 +5,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SakType
+import java.util.*
 
 class CaseHasContent : AbstractRule(
     WarningLevel.ERROR,
@@ -19,6 +20,6 @@ class CaseHasContent : AbstractRule(
         else
             createSingleReportEntryList(
                 "Klienten har ingen meldinger, planer eller tiltak.",
-                context.rootObject.sak.id
+                context.rootObject.sak.id as UUID
             )
 }

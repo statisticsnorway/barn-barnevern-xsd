@@ -14,10 +14,10 @@ data class OppfolgingType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @field:XmlAttribute(name = "UtfortDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

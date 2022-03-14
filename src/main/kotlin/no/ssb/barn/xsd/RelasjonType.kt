@@ -15,13 +15,13 @@ data class RelasjonType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @field:XmlAttribute(name = "FraId", required = true)
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var fraId: UUID = UUID.randomUUID(),
+    var fraId: UUID? = null,
 
     @field:XmlAttribute(name = "FraType", required = true)
     var fraType: BegrepsType = BegrepsType.MELDING,
@@ -30,7 +30,7 @@ data class RelasjonType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var tilId: UUID = UUID.randomUUID(),
+    var tilId: UUID? = null,
 
     @field:XmlAttribute(name = "TilType", required = true)
     var tilType: BegrepsType = BegrepsType.UNDERSOKELSE

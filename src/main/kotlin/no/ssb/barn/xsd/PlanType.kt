@@ -19,13 +19,13 @@ data class PlanType(
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class
     )
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @field:XmlAttribute(name = "MigrertId")
     var migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
@@ -41,7 +41,7 @@ data class PlanType(
     var evaluering: MutableList<PlanEvalueringType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: PlanKonklusjonType? = PlanKonklusjonType()
+    var konklusjon: PlanKonklusjonType? = null
 ) {
     companion object {
 

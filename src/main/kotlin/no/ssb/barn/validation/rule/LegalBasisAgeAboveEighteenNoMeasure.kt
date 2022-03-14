@@ -7,6 +7,7 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 import no.ssb.barn.xsd.erOmsorgsTiltak
+import java.util.*
 
 class LegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
     WarningLevel.ERROR,
@@ -25,7 +26,7 @@ class LegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
                 createReportEntry(
                     "Tiltak (${it.id}). Individet er $age år og skal "
                             + "dermed ikke ha omsorgstiltak",
-                    it.id
+                    it.id as UUID
                 )
             }
             .toList()

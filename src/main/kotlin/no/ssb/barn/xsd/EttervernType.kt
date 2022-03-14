@@ -14,14 +14,14 @@ data class EttervernType(
         @field:XmlJavaTypeAdapter(
                 UuidAdapter::class
         )
-        var id: UUID = UUID.randomUUID(),
+        var id: UUID? = null,
 
         @field:XmlAttribute(name = "TilbudSendtDato", required = true)
-        @field:XmlSchemaType(name = "date")
+        @field:XmlSchemaType(name = "dateTime")
         @field:XmlJavaTypeAdapter(
                 LocalDateTimeAdapter::class)
-        var tilbudSendtDato: ZonedDateTime? = ZonedDateTime.now(),
+        var tilbudSendtDato: ZonedDateTime? = null,
 
         @field:XmlElement(name = "Konklusjon")
-        var konklusjon: EttervernKonklusjonType? = EttervernKonklusjonType()
+        var konklusjon: EttervernKonklusjonType? = null
 )

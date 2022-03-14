@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.PlanKonklusjonType
 import spock.lang.*
 
 import java.time.ZonedDateTime
@@ -40,7 +41,7 @@ class PlanEndDateAfterCaseEndDateSpec extends Specification {
         if (resetConclusion) {
             plan.konklusjon = null
         } else {
-            plan.konklusjon.sluttDato = planEndDate
+            plan.konklusjon = new PlanKonklusjonType(planEndDate)
         }
 
         when:

@@ -10,6 +10,8 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
+import java.time.ZonedDateTime
+
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
@@ -60,10 +62,14 @@ class CaseHasContentSpec extends Specification {
         }
 
         where:
-        messages                   | measures                  | plans                   || errorExpected
-        List.of()                  | List.of()                 | List.of()               || true
-        List.of(new MeldingType()) | List.of()                 | List.of()               || false
-        List.of()                  | List.of(new TiltakType()) | List.of()               || false
-        List.of()                  | List.of()                 | List.of(new PlanType()) || false
+        messages                   | measures                  | plans                         || errorExpected
+        List.of()                  | List.of()                 | List.of()                     || true
+        List.of(new MeldingType()) | List.of()                 | List.of()                     || false
+        List.of()                  | List.of(new TiltakType()) | List.of()                     || false
+        List.of()                  | List.of()                 | List.of(createPlanType()) || false
+    }
+
+    def createPlanType() {
+        new PlanType(UUID.randomUUID(), null, ZonedDateTime.now(), null, List.of(), null)
     }
 }
