@@ -122,7 +122,6 @@ class CaseMutatorSpec extends Specification {
         isValid(caseEntry.barnevern)
     }
 
-    @Ignore("Please fix me, Roar;-)")
     def "fromMeasureToPlan expect one instance of PlanType"() {
         given:
         def caseEntry = createCaseEntry(BarnevernState.MEASURE)

@@ -204,7 +204,7 @@ object CaseMutator {
             // close current measure
             tiltak.last().konklusjon = TiltakKonklusjonType()
 
-            plan.add(PlanType(id = UUID.randomUUID()))
+            plan.add(PlanType(id = UUID.randomUUID(), startDato = ZonedDateTime.now()))
         }
     }
 
