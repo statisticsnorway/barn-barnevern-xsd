@@ -242,6 +242,7 @@ For innsending av barnevernsdata
 					<xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="Flytting" type="FlyttingType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Relasjon" type="RelasjonType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak</xs:documentation>
@@ -476,6 +477,12 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
 			<xs:element name="Kategori" type="KategoriType"/>
+			<xs:element name="Tilsynskommune" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute ref="StartDato" use="required"/>
+					<xs:attribute name="Kommunenummer" use="required"/>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Tilsyn i fosterhjem utført av uavhengig part</xs:documentation>
@@ -487,6 +494,16 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
+			<xs:element name="Konklusjon" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute ref="SluttDato" use="required">
+						<xs:annotation>
+							<xs:documentation>Avslutningsdato for tiltaket
+		</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId" use="optional"/>
@@ -1017,15 +1034,6 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 	</xs:complexType>
 	<!-- Opphevelse -->
 	<xs:complexType name="OpphevelseType">
-		<xs:sequence>
-			<xs:element name="Flytting" type="FlyttingType" minOccurs="0"/>
-		</xs:sequence>
-		<xs:attribute ref="SluttDato" use="required">
-			<xs:annotation>
-				<xs:documentation>Avslutningsdato for tiltaket
-		</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
 		<xs:attribute name="Kode" use="required">
 			<xs:annotation>
 				<xs:documentation>
@@ -1307,6 +1315,8 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:element name="ArsakFra" type="ArsakFraType"/>
 			<xs:element name="FlyttingTil" type="FlyttingTilType"/>
 		</xs:sequence>
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="SluttDato" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="ArsakFraType">
 		<xs:attribute name="Kode" use="required">
@@ -1418,7 +1428,7 @@ Barnet/ungdommen flytter til:
    "type":"codelist",
    "term":"Flytting",
    "title":"FlytteTil",
-   "path":"/Barnevern/Sak/Tiltak/Opphevelse/Flytting/FlytteTil/@Kode",
+   "path":"/Barnevern/Sak/Virksomhet/Flytting/FlytteTil/@Kode",
    "items":[
 	  {"code" : "1", "validFrom" : "2022-01-01", "title" : "Fosterhjem i familie og nære nettverk"},
 	  {"code" : "2", "validFrom" : "2022-01-01", "title" : "Fosterhjem utenfor familie og nære nettverk"},
@@ -1427,7 +1437,7 @@ Barnet/ungdommen flytter til:
 	  {"code" : "5", "validFrom" : "2022-01-01", "title" : "Bolig med oppfølging"},
 	  {"code" : "6", "validFrom" : "2022-01-01", "title" : "Foreldre"},
 	  {"code" : "7", "validFrom" : "2022-01-01", "title" : "Egen bolig uten oppfølging"},
-	  {"code" : "8", "validFrom" : "2022-01-01", "title" : "Annet bosted (spesifiser)"},
+	  {"code" : "8", "validFrom" : "2022-01-01", "title" : "Annet bosted (krever presisering)"},
 	  {"code" : "9", "validFrom" : "2022-01-01", "title" : "Adresseendring"}
    ]
 }
