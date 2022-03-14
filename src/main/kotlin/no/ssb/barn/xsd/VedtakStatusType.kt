@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "Status", propOrder = ["endretDato", "kode"])
 data class VedtakStatusType(
     @field:XmlAttribute(name = "EndretDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

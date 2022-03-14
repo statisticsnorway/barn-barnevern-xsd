@@ -23,7 +23,7 @@ data class MeldingType(
     var migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

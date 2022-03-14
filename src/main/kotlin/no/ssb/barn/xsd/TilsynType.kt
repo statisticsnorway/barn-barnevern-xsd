@@ -17,7 +17,7 @@ data class TilsynType(
     var id: UUID = UUID.randomUUID(),
 
     @field:XmlAttribute(name = "UtfortDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

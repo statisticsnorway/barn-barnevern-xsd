@@ -17,7 +17,7 @@ data class EttervernType(
         var id: UUID = UUID.randomUUID(),
 
         @field:XmlAttribute(name = "TilbudSendtDato", required = true)
-        @field:XmlSchemaType(name = "date")
+        @field:XmlSchemaType(name = "dateTime")
         @field:XmlJavaTypeAdapter(
                 LocalDateTimeAdapter::class)
         var tilbudSendtDato: ZonedDateTime? = ZonedDateTime.now(),

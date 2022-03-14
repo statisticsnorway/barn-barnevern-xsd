@@ -20,7 +20,7 @@ class PlanEndDateAfterCaseEndDate : AbstractRule(
             sak.plan.asSequence()
                 .filter { plan ->
                     val conclusion = plan.konklusjon
-                    conclusion != null && conclusion.sluttDato.isAfter(sak.sluttDato)
+                    conclusion != null && conclusion.sluttDato!!.isAfter(sak.sluttDato)
                 }
                 .map {
                     createReportEntry(

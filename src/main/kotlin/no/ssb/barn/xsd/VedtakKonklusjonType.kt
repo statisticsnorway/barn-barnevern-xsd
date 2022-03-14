@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "VedtakKonklusjon", propOrder = ["sluttDato"])
 data class VedtakKonklusjonType(
     @field:XmlAttribute(name = "SluttDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

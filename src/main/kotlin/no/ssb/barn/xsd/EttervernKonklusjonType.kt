@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "EttervernKonklusjon", propOrder = ["sluttDato", "kode"])
 data class EttervernKonklusjonType(
     @field:XmlAttribute(name = "SluttDato")
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

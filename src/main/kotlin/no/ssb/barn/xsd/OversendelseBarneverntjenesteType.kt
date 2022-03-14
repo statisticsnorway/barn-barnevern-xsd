@@ -17,7 +17,7 @@ data class OversendelseBarneverntjenesteType(
     var id: UUID = UUID.randomUUID(),
 
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     ) var startDato: ZonedDateTime = ZonedDateTime.now(),

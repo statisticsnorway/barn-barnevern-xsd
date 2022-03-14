@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.PlanKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -40,7 +41,7 @@ class PlanStartDateAfterEndDateSpec extends Specification {
         and:
         plan.startDato = planStartDate
         and:
-        plan.konklusjon.sluttDato = planEndDate
+        plan.konklusjon = new PlanKonklusjonType(planEndDate)
         and:
         if (resetConclusion) {
             plan.konklusjon = null

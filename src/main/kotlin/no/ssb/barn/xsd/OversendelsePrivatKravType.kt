@@ -17,7 +17,7 @@ data class OversendelsePrivatKravType(
     var id: UUID = UUID.randomUUID(),
 
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )

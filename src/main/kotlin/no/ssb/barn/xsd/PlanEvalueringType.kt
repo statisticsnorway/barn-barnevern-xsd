@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "Evaluering", propOrder = ["utfortDato"])
 data class PlanEvalueringType (
         @field:XmlAttribute(name = "UtfortDato", required = true)
-        @field:XmlSchemaType(name = "date")
+        @field:XmlSchemaType(name = "dateTime")
         @field:XmlJavaTypeAdapter(
                 LocalDateTimeAdapter::class
         )

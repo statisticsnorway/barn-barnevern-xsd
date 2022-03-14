@@ -25,7 +25,7 @@ data class FlyttingType(
     var migrertId: String? = null,
 
     @field:XmlAttribute(name = "SluttDato")
-    @field:XmlSchemaType(name = "date")
+    @field:XmlSchemaType(name = "dateTime")
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
