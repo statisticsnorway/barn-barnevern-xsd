@@ -5,6 +5,7 @@ import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.KategoriType
 import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.OpphevelseType
+import no.ssb.barn.xsd.TiltakKonklusjonType
 import no.ssb.barn.xsd.TiltakType
 import org.xml.sax.SAXException
 import spock.lang.Specification
@@ -214,7 +215,8 @@ class ValidationUtilsSpec extends Specification {
                 new KategoriType(),
                 List.of(),
                 List.of(),
-                new OpphevelseType(RandomUtils.generateRandomString(10), null, end, null)
+                new OpphevelseType(RandomUtils.generateRandomString(10), null),
+                new TiltakKonklusjonType(end)
         )
     }
 

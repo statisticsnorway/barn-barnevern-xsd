@@ -42,7 +42,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
 
                 val errorMsg =
                     "Plasseringstiltak ${outerMeasure.id} med sluttdato " +
-                            outerMeasure.opphevelse!!.sluttDato.format(
+                            outerMeasure.konklusjon!!.sluttDato.format(
                                 DateTimeFormatter.ofPattern("dd.MM.yyyy")
                             ) +
                             " er mer enn 3 måneder etter ${innerMeasure.id}"

@@ -40,10 +40,10 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
         and:
         measure.startDato = measureStartDate
         and:
-        measure.opphevelse.sluttDato = measureEndDate
+        measure.konklusjon.sluttDato = measureEndDate
         and:
         if (removeRepeal) {
-            measure.opphevelse = null
+            measure.konklusjon = null
         }
 
         when:

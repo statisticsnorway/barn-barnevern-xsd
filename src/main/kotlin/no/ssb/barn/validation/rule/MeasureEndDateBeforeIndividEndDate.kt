@@ -18,14 +18,14 @@ class MeasureEndDateBeforeIndividEndDate : AbstractRule(
 
         return sak.tiltak.asSequence()
             .filter { tiltak ->
-                val repeal = tiltak.opphevelse // when JaCoCo improves, use "?."
+                val repeal = tiltak.konklusjon // when JaCoCo improves, use "?."
                 repeal != null
                         && repeal.sluttDato.isAfter(individEndDate)
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}). Sluttdato"
-                            + " (${it.opphevelse!!.sluttDato}) er etter individets"
+                            + " (${it.konklusjon!!.sluttDato}) er etter individets"
                             + " sluttdato ($individEndDate)",
                     it.id as UUID
 

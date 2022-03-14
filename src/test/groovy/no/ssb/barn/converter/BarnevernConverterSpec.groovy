@@ -160,7 +160,9 @@ class BarnevernConverterSpec extends Specification {
                 List<VedtakType>.of(),
                 List<EttervernType>.of(),
                 List<OversendelseBarneverntjenesteType>.of(),
-                List<RelasjonType>.of()
+                List<FlyttingType>.of(),
+                List<RelasjonType>.of(),
+                List<SlettetType>.of()
         )
         def avgiver = RandomUtils.generateRandomAvgiverType()
         def fagsystem = new FagsystemType(

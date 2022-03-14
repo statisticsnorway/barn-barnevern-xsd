@@ -24,7 +24,8 @@
                 <Ledd>1</Ledd>
             </Lovhjemmel>
             <Kategori Kode="3.10"/>
-            <Opphevelse Kode="1" SluttDato="2021-07-09T12:34:56+01:00"/>
+            <Opphevelse Kode="1"/>
+            <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
         </Tiltak>
         <Vedtak Id="bb6b82ea-c3da-4882-b591-cccd833c262b" StartDato="2021-04-08T12:34:56+01:00">
             <Lovhjemmel>

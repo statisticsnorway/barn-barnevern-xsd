@@ -39,7 +39,7 @@ class MeasureRepealClarificationRequiredSpec extends Specification {
         given:
         context.rootObject.sak.tiltak[0].opphevelse = (code == null)
                 ? null
-                : new OpphevelseType(code, clarification, ZonedDateTime.now(), null)
+                : new OpphevelseType(code, clarification)
 
         when:
         def reportEntries = sut.validate(context)

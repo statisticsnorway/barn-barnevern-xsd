@@ -194,7 +194,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().opphevelse = OpphevelseType()
+            tiltak.last().konklusjon = TiltakKonklusjonType()
 
             plan.add(PlanType(id = UUID.randomUUID()))
         }
@@ -205,7 +205,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().opphevelse = OpphevelseType()
+            tiltak.last().konklusjon = TiltakKonklusjonType()
 
             vedtak.add(createVedtakType())
         }
@@ -216,7 +216,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().opphevelse = OpphevelseType()
+            tiltak.last().konklusjon = TiltakKonklusjonType()
 
             ettervern.add(
                 EttervernType(

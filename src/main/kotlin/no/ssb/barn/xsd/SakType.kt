@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
     propOrder = ["id", "migrertId", "startDato", "sluttDato",
         "journalnummer", "fodselsnummer", "duFnummer", "fodseldato", "kjonn",
         "avsluttet", "melding", "undersokelse", "plan", "tiltak", "vedtak", "ettervern", "oversendelseBarneverntjeneste",
-        "relasjon"]
+        "flytting", "relasjon", "slettet"]
 )
 data class SakType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -85,6 +85,12 @@ data class SakType(
     @field:XmlElement(name = "OversendelseBarneverntjeneste")
     var oversendelseBarneverntjeneste: MutableList<OversendelseBarneverntjenesteType> = mutableListOf(),
 
+    @field:XmlElement(name = "Flytting")
+    var flytting: MutableList<FlyttingType> = mutableListOf(),
+
     @field:XmlElement(name = "Relasjon")
     var relasjon: MutableList<RelasjonType> = mutableListOf(),
+
+    @field:XmlElement(name = "Slettet")
+    var slettet: MutableList<SlettetType> = mutableListOf()
 )

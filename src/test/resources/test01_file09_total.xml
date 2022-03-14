@@ -39,7 +39,8 @@
                 <Ledd>1</Ledd>
             </JmfrLovhjemmel>
             <Kategori Kode="3.10"/>
-            <Opphevelse Kode="1" Presisering="~presisering~" SluttDato="2021-07-09T12:34:56+01:00"/>
+            <Opphevelse Kode="1" Presisering="~presisering~"/>
+            <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
         </Tiltak>
         <Vedtak Id="5365c6e6-be78-4a3e-8b28-b7af12085ede" StartDato="2021-04-08T12:34:56+01:00">
             <Lovhjemmel>

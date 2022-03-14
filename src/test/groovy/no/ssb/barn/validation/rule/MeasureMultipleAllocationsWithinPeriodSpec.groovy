@@ -49,12 +49,12 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         and:
         firstMeasure.startDato = firstStartDate
         and:
-        firstMeasure.opphevelse.sluttDato = firstEndDate
+        firstMeasure.konklusjon.sluttDato = firstEndDate
         and:
         firstMeasure.kategori.kode = categoryCode
         and:
         if (resetRepeal) {
-            firstMeasure.opphevelse = null
+            firstMeasure.konklusjon = null
         }
         and:
         if (useSecondContext) {
@@ -65,12 +65,12 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
 
             secondMeasure.id = UUID.randomUUID()
             secondMeasure.startDato = secondStartDate
-            secondMeasure.opphevelse.sluttDato = secondEndDate
+            secondMeasure.konklusjon.sluttDato = secondEndDate
 
             secondMeasure.kategori.kode = categoryCode
 
             if (resetRepeal) {
-                secondMeasure.opphevelse = null
+                secondMeasure.konklusjon = null
             }
         }
 

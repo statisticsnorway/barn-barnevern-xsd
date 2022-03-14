@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
     name = "SlettetType",
     propOrder = ["id", "type", "sluttDato"]
 )
-class SlettetType(
+data class SlettetType(
     @field:XmlAttribute(name = "Id", required = true)
     @field:XmlJavaTypeAdapter(
         UuidAdapter::class

@@ -38,10 +38,10 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         given:
         context.rootObject.sak.sluttDato = individEndDate
         and:
-        context.rootObject.sak.tiltak[0].opphevelse.sluttDato = measureEndDate
+        context.rootObject.sak.tiltak[0].konklusjon.sluttDato = measureEndDate
         and:
         if (resetRepeal) {
-            context.rootObject.sak.tiltak[0].opphevelse = null
+            context.rootObject.sak.tiltak[0].konklusjon = null
         }
 
         when:
