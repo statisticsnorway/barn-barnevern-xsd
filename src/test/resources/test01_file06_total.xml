@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Barnevern Id="1b1907ef-2080-42c8-b704-3b33bf0b0982" DatoUttrekk="2021-01-01T13:22:00"
+<Barnevern Id="1b1907ef-2080-42c8-b704-3b33bf0b0982" DatoUttrekk="2021-01-01T13:22:00+01:00"
            ForrigeId="b8c7cd5a-376b-405c-9f0f-2cf1002752d9">
     <Fagsystem Versjon="1.0" Navn="OJJ's Manuell Touch" Leverandor="SSB"/>
     <Avgiver Kommunenummer="3401" Kommunenavn="Kongsvinger kommune" Organisasjonsnummer="944117784"/>

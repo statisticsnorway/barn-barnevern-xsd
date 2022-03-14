@@ -28,7 +28,7 @@ data class BarnevernType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var datoUttrekk: ZonedDateTime = ZonedDateTime.now(),
+    var datoUttrekk: ZonedDateTime? = null,
 
     @field:XmlElement(name = "Fagsystem", required = true)
     var fagsystem: FagsystemType = FagsystemType(),

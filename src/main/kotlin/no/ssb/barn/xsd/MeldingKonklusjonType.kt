@@ -18,7 +18,7 @@ data class MeldingKonklusjonType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime = ZonedDateTime.now(),
+    var sluttDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String? = getCodes(LocalDate.now())

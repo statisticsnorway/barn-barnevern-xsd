@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Barnevern Id="70d71de9-7b67-4d2d-a31b-9179bc91b790" DatoUttrekk="2021-01-09T02:00:00" ForrigeId="8ed88ce5-07cc-40ff-8e3d-b8d9a2421de6">
+<Barnevern Id="70d71de9-7b67-4d2d-a31b-9179bc91b790" DatoUttrekk="2021-01-09T02:00:00+01:00" ForrigeId="8ed88ce5-07cc-40ff-8e3d-b8d9a2421de6">
     <Fagsystem Versjon="1.0" Navn="OJJ's Manuell Touch" Leverandor="SSB"/>
     <Avgiver Kommunenummer="3401" Kommunenavn="Kongsvinger kommune" Organisasjonsnummer="944117784"/>
     <Sak StartDato="2021-01-01T20:01:01+01:00" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1" Fodselsnummer="02011088123" Fodseldato="2010-01-02" Kjonn="1">

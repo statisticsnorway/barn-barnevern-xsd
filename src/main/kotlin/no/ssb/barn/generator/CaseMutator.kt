@@ -26,6 +26,7 @@ object CaseMutator {
     fun fromMessageToCaseClosed(caseEntry: CaseEntry) {
         caseEntry.barnevern.sak.melding.last().konklusjon =
             MeldingKonklusjonType(
+                sluttDato = ZonedDateTime.now(),
                 kode = MeldingKonklusjonType.getCodes(LocalDate.now())
                     .first { it.code == "1" }.code
             )
@@ -35,6 +36,7 @@ object CaseMutator {
     fun fromMessageToInvestigationStarted(caseEntry: CaseEntry) {
         // close active message
         caseEntry.barnevern.sak.melding.last().konklusjon = MeldingKonklusjonType(
+            sluttDato = ZonedDateTime.now(),
             kode = MeldingKonklusjonType.getCodes(LocalDate.now())
                 .first { it.code == "2" }.code
         )
@@ -58,6 +60,7 @@ object CaseMutator {
     fun fromMessageToDecision(caseEntry: CaseEntry) {
         // close active message
         caseEntry.barnevern.sak.melding.last().konklusjon = MeldingKonklusjonType(
+            sluttDato = ZonedDateTime.now(),
             kode = MeldingKonklusjonType.getCodes(LocalDate.now())
                 .first { it.code == "2" }.code
         )
