@@ -17,7 +17,7 @@ class InvestigationDueDatePassedConclusionRequired : AbstractRule(
         context.rootObject.sak.undersokelse.asSequence()
             .filter { undersokelse ->
                 undersokelse.konklusjon == null
-                        && undersokelse.startDato.plusMonths(6)
+                        && undersokelse.startDato!!.plusMonths(6)
                     .isBefore(ZonedDateTime.now())
             }
             .map {

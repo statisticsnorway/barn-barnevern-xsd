@@ -13,5 +13,5 @@ data class PlanEvalueringType (
         @field:XmlJavaTypeAdapter(
                 LocalDateTimeAdapter::class
         )
-        var utfortDato: ZonedDateTime = ZonedDateTime.now()
+        var utfortDato: ZonedDateTime? = null
 )

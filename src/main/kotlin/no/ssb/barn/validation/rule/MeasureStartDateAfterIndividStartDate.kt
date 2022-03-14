@@ -17,7 +17,7 @@ class MeasureStartDateAfterIndividStartDate : AbstractRule(
 
         return context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
-                tiltak.startDato.isBefore(individStartDate)
+                tiltak.startDato!!.isBefore(individStartDate)
             }
             .map {
                 createReportEntry(

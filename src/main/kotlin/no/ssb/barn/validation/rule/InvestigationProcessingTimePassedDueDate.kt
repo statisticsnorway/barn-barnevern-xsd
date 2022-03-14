@@ -38,7 +38,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
 
                 val currentDate = context.rootObject.datoUttrekk as ZonedDateTime
 
-                if (currentDate.isAfter(message.startDato.plusDays(7 + 90))
+                if (currentDate.isAfter(message.startDato!!.plusDays(7 + 90))
                     && (investigation.utvidetFrist == null
                             || investigation.utvidetFrist!!.innvilget == null
                             || investigation.utvidetFrist!!.innvilget == "2"
@@ -50,7 +50,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                     )
                 }
 
-                if (currentDate.isAfter(message.startDato.plusDays(7 + 180))) {
+                if (currentDate.isAfter(message.startDato!!.plusDays(7 + 180))) {
                     return@map createReportEntry(
                         "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato",
                         relation.tilId as UUID

@@ -20,7 +20,7 @@ class MeasureEndDateBeforeIndividEndDate : AbstractRule(
             .filter { tiltak ->
                 val repeal = tiltak.opphevelse // when JaCoCo improves, use "?."
                 repeal != null
-                        && repeal.sluttDato.isAfter(individEndDate)
+                        && repeal.sluttDato!!.isAfter(individEndDate)
             }
             .map {
                 createReportEntry(

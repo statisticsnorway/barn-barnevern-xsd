@@ -19,7 +19,7 @@ data class OpphevelseType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime = ZonedDateTime.now(),
+    var sluttDato: ZonedDateTime? = null,
 
     @field:XmlElement(name = "Flytting")
     var flytting: FlyttingType? = null

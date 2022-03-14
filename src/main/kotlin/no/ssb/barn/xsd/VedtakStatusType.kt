@@ -15,7 +15,7 @@ data class VedtakStatusType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var endretDato: ZonedDateTime = ZonedDateTime.now(),
+    var endretDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Kode", required = true)
     var kode: String? = getCodes(LocalDate.of(2022, 1, 1))

@@ -17,7 +17,7 @@ class PlanStartDateBeforeCaseStartDate : AbstractRule(
 
         return sak.plan.asSequence()
             .filter { plan ->
-                plan.startDato.isBefore(sak.startDato)
+                plan.startDato!!.isBefore(sak.startDato)
             }
             .map {
                 createReportEntry(

@@ -16,7 +16,7 @@ class InvestigationStartDateAfterEndDate : AbstractRule(
         context.rootObject.sak.undersokelse.asSequence()
             .filter { undersokelse ->
                 with(undersokelse) {
-                    konklusjon != null && startDato.isAfter(konklusjon!!.sluttDato)
+                    konklusjon != null && startDato!!.isAfter(konklusjon!!.sluttDato)
                 }
             }
             .map {

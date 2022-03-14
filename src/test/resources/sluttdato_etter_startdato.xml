@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Barnevern Id="0b6ceeba-677d-45da-bf4d-cb14e3631c28" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           DatoUttrekk="2021-01-01T13:22:00" xsi:noNamespaceSchemaLocation="Barnevern.xsd">
+           DatoUttrekk="2021-01-01T13:22:00+01:00" xsi:noNamespaceSchemaLocation="Barnevern.xsd">
     <Fagsystem Versjon="1.0" Navn="OJJ's Manuell Touch" Leverandor="SSB"/>
     <Avgiver Kommunenummer="3401" Kommunenavn="Kongsvinger kommune" Organisasjonsnummer="944117784"/>
-    <Sak StartDato="2021-01-01T13:22:00" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1" Kjonn="1"
+    <Sak StartDato="2021-01-01T13:22:00+01:00" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1" Kjonn="1"
          Fodseldato="2010-01-02" Fodselsnummer="02011088123">
         <Melding StartDato="2021-01-01T13:22:00+01:00" Id="bb6b82ea-c3da-4882-b591-cccd833c262d">
             <Melder Kode="1"/>
@@ -33,7 +33,7 @@
                 <Paragraf>12</Paragraf>
                 <Ledd>1</Ledd>
             </Lovhjemmel>
-            <Status EndretDato="2021-04-09T13:22:00" Kode="3"/>
+            <Status EndretDato="2021-04-09T13:22:00+01:00" Kode="3"/>
             <Konklusjon SluttDato="2021-04-09T13:22:00+01:00"/>
         </Vedtak>
         <Vedtak Id="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" StartDato="2021-07-08T13:22:00+01:00">
@@ -44,7 +44,7 @@
                 <Ledd>1</Ledd>
             </Lovhjemmel>
             <Status EndretDato="2021-07-09T13:22:00+01:00" Kode="3"/>
-            <Konklusjon SluttDato="2021-07-09T13:22:00"/>
+            <Konklusjon SluttDato="2021-07-09T13:22:00+01:00"/>
         </Vedtak>
         <Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d"
                   Id="7a94702c-612c-4491-a679-e60bc34a26c5" TilId="d28aa453-724a-4538-8c4e-2f27b36b7530"

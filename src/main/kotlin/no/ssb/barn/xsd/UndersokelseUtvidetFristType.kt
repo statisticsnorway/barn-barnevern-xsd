@@ -15,7 +15,7 @@ data class UndersokelseUtvidetFristType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var startDato: ZonedDateTime = ZonedDateTime.now(),
+    var startDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Innvilget")
     var innvilget: String? = getInnvilget(LocalDate.now())
