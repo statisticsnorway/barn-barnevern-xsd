@@ -108,11 +108,14 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
         false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
         false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
-// TODO to Roar:
-//  the case of two overlapping Measures where one or neither has an endDate yet,
-//  then sak.datoUttrekk needs to be used as a default endDate for the measure(s) where endDate is missing
-//        true            | getDate(-4)    | getDate(0)   | true             | getDate(-4)     | getDate(0)    | "8.2"        || true
 
+        // testing that missing conclusion endDate works
+        true        | getDate(-4)    | null         | true             | getDate(-4)     | getDate(0)    | "8.2"        || true
+        true        | getDate(-4)    | null         | true             | getDate(-4)     | null          | "8.2"        || true
+        true        | getDate(-4)    | getDate(0)   | true             | getDate(-4)     | null          | "8.2"        || true
+        true        | getDate(-2)    | null         | true             | getDate(-4)     | getDate(0)    | "8.2"        || false
+        true        | getDate(-2)    | null         | true             | getDate(-4)     | null          | "8.2"        || false
+        true        | getDate(-2)    | getDate(0)   | true             | getDate(-4)     | null          | "8.2"        || false
     }
 
     static def getDate(months) {

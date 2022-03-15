@@ -19,14 +19,14 @@ object ValidationUtils {
 
     @JvmStatic
     fun areOverlappingWithAtLeastThreeMonths(
-        outerMeasure: TiltakType, innerMeasure: TiltakType
+        outerMeasure: TiltakType, innerMeasure: TiltakType, datoUttrekk: ZonedDateTime
     ): Boolean {
 
         val outerRange =
-            outerMeasure.startDato!!.rangeTo(outerMeasure.konklusjon?.sluttDato ?: ZonedDateTime.now())
+            outerMeasure.startDato!!.rangeTo(outerMeasure.konklusjon?.sluttDato ?: datoUttrekk)
 
         val innerRange =
-            innerMeasure.startDato!!.rangeTo(innerMeasure.konklusjon?.sluttDato ?: ZonedDateTime.now())
+            innerMeasure.startDato!!.rangeTo(innerMeasure.konklusjon?.sluttDato ?: datoUttrekk)
 
         return areOverlapping(outerRange, innerRange)
                 && getMaxDate(outerRange.start, innerRange.start)

@@ -5,6 +5,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
+import java.time.ZonedDateTime
 import java.util.*
 
 class MeasureEndDateBeforeIndividEndDate : AbstractRule(
@@ -18,9 +19,9 @@ class MeasureEndDateBeforeIndividEndDate : AbstractRule(
 
         return sak.tiltak.asSequence()
             .filter { tiltak ->
-                val repeal = tiltak.konklusjon // when JaCoCo improves, use "?."
-                repeal != null
-                        && repeal.sluttDato.isAfter(individEndDate)
+                val conclusion = tiltak.konklusjon // when JaCoCo improves, use "?."
+                conclusion?.sluttDato != null
+                        && (conclusion.sluttDato as ZonedDateTime).isAfter(individEndDate)
             }
             .map {
                 createReportEntry(

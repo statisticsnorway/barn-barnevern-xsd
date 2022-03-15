@@ -202,7 +202,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().konklusjon = TiltakKonklusjonType(ZonedDateTime.now())
 
             plan.add(PlanType(id = UUID.randomUUID(), startDato = ZonedDateTime.now()))
         }
@@ -213,7 +213,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().konklusjon = TiltakKonklusjonType(ZonedDateTime.now())
 
             vedtak.add(createVedtakType())
         }
@@ -224,7 +224,7 @@ object CaseMutator {
         with(caseEntry.barnevern.sak) {
 
             // close current measure
-            tiltak.last().konklusjon = TiltakKonklusjonType()
+            tiltak.last().konklusjon = TiltakKonklusjonType(ZonedDateTime.now())
 
             ettervern.add(
                 EttervernType(
