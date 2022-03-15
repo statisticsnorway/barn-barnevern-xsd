@@ -8,6 +8,7 @@ import no.ssb.barn.validation.SharedValidationConstants.MULTIPLE_MEASURES_RULE_N
 import no.ssb.barn.validation.SharedValidationConstants.kodelistePlasseringstiltak
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -34,15 +35,19 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
             measures.forEachIndexed inner@{ innerIndex, innerMeasure ->
                 if (outerIndex == innerIndex || !areOverlappingWithAtLeastThreeMonths(
                         outerMeasure,
-                        innerMeasure
+                        innerMeasure,
+                        context.rootObject.datoUttrekk as ZonedDateTime
                     )
                 ) {
                     return@inner
                 }
 
+                // if sluttDato is missing, use datoUttrekk as fall-back
+                val endDate = outerMeasure.konklusjon?.sluttDato ?: context.rootObject.datoUttrekk
+
                 val errorMsg =
                     "Plasseringstiltak ${outerMeasure.id} med sluttdato " +
-                            outerMeasure.konklusjon!!.sluttDato.format(
+                            endDate!!.format(
                                 DateTimeFormatter.ofPattern("dd.MM.yyyy")
                             ) +
                             " er mer enn 3 måneder etter ${innerMeasure.id}"
