@@ -518,7 +518,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-#### X Tiltak Kontroll 14: Lovhjemmel er fyllt ut med tallet 0
+#### Tiltak Kontroll 14: Lovhjemmel er fyllt ut med tallet 0
 
 Gitt at det er en sak med tiltak <br/>
 når Lovhjemmel sin kapittel, paragraf, ledd eller punktum er utfylt med 0
