@@ -156,6 +156,23 @@ object ValidationUtils {
             -1
         }
 
+    @JvmStatic
+    fun isCareMeasure(measure: TiltakType): Boolean =
+        with(measure.lovhjemmel) {
+            (kapittel == "4" && paragraf == "12")
+                    || (kapittel == "4" && paragraf == "8" && ledd.any { it in listOf("2", "3") })
+        }
+                ||
+                with(measure) {
+                    jmfrLovhjemmel.any { jmfrlovhjemmel ->
+                        with(jmfrlovhjemmel) {
+                            (kapittel == "4" && paragraf == "12")
+                                    || (kapittel == "4" && paragraf == "8" && ledd.any { it in listOf("2", "3") })
+                        }
+                    }
+                }
+
+
     private fun isValidDate(dateStr: String): Boolean {
         val sdf: DateFormat = SimpleDateFormat("ddMMyy")
         sdf.isLenient = false

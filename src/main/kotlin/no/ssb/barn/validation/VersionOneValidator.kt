@@ -12,7 +12,7 @@ class VersionOneValidator : ValidatorContract {
     )
 
     private val rules = listOf(
-        BusinessUrbanDistrictNumberAndName(),
+        ReporterUrbanDistrictNumberAndName(),
         CaseAgeAboveEighteenAndMeasures(),
         CaseAgeAboveTwentyFive(),
         CaseEndDateAfterStartDate(),
@@ -28,9 +28,9 @@ class VersionOneValidator : ValidatorContract {
         InvestigationRelatedFromMessage(),
         InvestigationStartDateAfterEndDate(),
         InvestigationStartDateBeforeCaseStartDate(),
-        LegalBasisAgeAboveEighteenNoMeasure(),
-        LegalBasisValidCode(),
-        LegalBasisWithEndDateClarificationRequired(),
+        MeasureLegalBasisAgeAboveEighteenNoMeasure(),
+        MeasureLegalBasisValidCode(),
+        MeasureLegalBasisWithEndDateClarificationRequired(),
         MeasureAgeAboveElevenAndInSfo(),
         MeasureAgeAboveSevenAndInKindergarten(),
         MeasureClarificationRequired(),

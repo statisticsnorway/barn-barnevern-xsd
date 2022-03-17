@@ -4,24 +4,35 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.OpphevelseType
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.ZonedDateTime
-
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class LegalBasisWithEndDateClarificationRequiredSpec extends Specification {
+@Narrative("""
+Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse
+
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder) og<br/>
+tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
+Paragraf er 12<br/>
+eller Paragraf er 8 og Ledd er 2 eller 3<br/>
+når alder er 18 år eller større
+så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
+
+Alvorlighetsgrad: ERROR
+""")
+class MeasureLegalBasisWithEndDateClarificationRequiredSpec extends Specification {
 
     @Subject
-    LegalBasisWithEndDateClarificationRequired sut
+    MeasureLegalBasisWithEndDateClarificationRequired sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new LegalBasisWithEndDateClarificationRequired()
+        sut = new MeasureLegalBasisWithEndDateClarificationRequired()
         context = getTestContext()
     }
 

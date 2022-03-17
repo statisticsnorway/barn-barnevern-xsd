@@ -3,6 +3,7 @@ package no.ssb.barn.validation.rule
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.LovhjemmelType
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -10,16 +11,28 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getMockSocialSecurityNumber
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
-class LegalBasisAgeAboveEighteenNoMeasureSpec extends Specification {
+@Narrative("""
+Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak
+
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder) og<br/>
+tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
+Paragraf er 12<br/>
+eller Paragraf er 8 og Ledd er 2 eller 3<br/>
+når alder er 18 år eller større
+så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
+
+Alvorlighetsgrad: ERROR
+""")
+class MeasureLegalBasisAgeAboveEighteenNoMeasureSpec extends Specification {
 
     @Subject
-    LegalBasisAgeAboveEighteenNoMeasure sut
+    MeasureLegalBasisAgeAboveEighteenNoMeasure sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new LegalBasisAgeAboveEighteenNoMeasure()
+        sut = new MeasureLegalBasisAgeAboveEighteenNoMeasure()
         context = getTestContext()
     }
 

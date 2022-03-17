@@ -8,25 +8,26 @@ import no.ssb.barn.xsd.TiltakType
 import no.ssb.barn.xsd.erOmsorgsTiltak
 import java.util.*
 
-class LegalBasisWithEndDateClarificationRequired : AbstractRule(
+class MeasureLegalBasisWithEndDateClarificationRequired : AbstractRule(
     WarningLevel.WARNING,
-    "Lovhjemmel Kontroll 2: omsorgstiltak med sluttdato krever årsak til opphevelse",
+    "Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse",
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
+                val conclusion = tiltak.konklusjon
                 val repeal = tiltak.opphevelse
 
                 tiltak.erOmsorgsTiltak()
+                        && conclusion != null
                         && repeal != null
                         && repeal.kode == "4"
                         && repeal.presisering.isNullOrEmpty()
             }
             .map {
                 createReportEntry(
-                    "Tiltak (${it.id}). Opphevelse av omsorgstiltak"
-                            + " mangler presisering",
+                    "Opphevelse av omsorgstiltak mangler presisering",
                     it.id as UUID
                 )
             }

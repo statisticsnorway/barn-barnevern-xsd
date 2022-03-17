@@ -16,11 +16,8 @@ Tiltak Kontroll 9: Kontroll om flere plasseringstiltak er oppgitt i samme tidspe
 
 Gitt at man har 2 eller flere Tiltak der Kategori/Kode er en følgende koder:<br/>
 1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2<br/>
-og utled den seneste startDato (PeriodeStartDato) <br/>
-utifra tiltak1 sin StartDato og tiltak2 sin StartDato<br/>
-og utled den tidligste sluttDato (PeriodeSluttDato) <br/>
-utifra tiltak1 sin SluttDato eller DatoUttrekk hvis tiltak1 sin SluttDato er blank og tiltak2 sin SluttDato eller DatoUttrekk hvis tiltak2 sin SluttDato er blank<br/>
-når tiltak1 sin SluttDato er etter tailtakk sin StartDato og PeriodeSluttDato er mer enn 90 etter PeriodeStartDato<br/>
+og for de tiltakene der SluttDato mangler så brukes DatoUttrekk i stedet<br/>
+når tiltak1 overlapper tiltak2 med mer enn 90 dager<br/>
 så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 3 måneder."
 
 Alvorlighetsgrad: Warning

@@ -9,9 +9,9 @@ import no.ssb.barn.xsd.TiltakType
 import no.ssb.barn.xsd.erOmsorgsTiltak
 import java.util.*
 
-class LegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
+class MeasureLegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
     WarningLevel.ERROR,
-    "Lovhjemmel Kontroll 3: Individet er over 18 år og har omsorgstiltak",
+    "Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak",
     TiltakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {

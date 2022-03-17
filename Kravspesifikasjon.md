@@ -2,15 +2,14 @@
 
 ## Innhold
 - [Filbeskrivelse](#filbeskrivelse)
+- [Avgiver](#avgiver)
 - [Sak](#sak)
-- [Virksomhet](#virksomhet)
 - [Melding](#melding)
   - [Melder](#melder)
   - [Saksinnhold](#saksinnhold)
 - [Undersøkelse](#undersokelse)
 - [Vedtak](#vedtak)
 - [Tiltak](#tiltak)
-  - [Lovhjemmel](#tiltakLovhjemmel)
 - [Plan](#plan)
 - [Ettervern](#ettervern)
 - [Flytting](#flytting)
@@ -32,6 +31,24 @@ Alvorlighetsgrad: FATAL
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/XsdRuleSpec.groovy) 
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/XsdRule.kt)
+
+
+## <a name="avgiver">Avgiver</a>
+
+### Avgiver Kontroll 1: Bydelsnummer og bydelsnavn
+
+Gitt at man har en Avgiver der Organisasjonsnummer er en av 958935420 (Oslo), 964338531 (Bergen) eller 942110464 (Trondheim)<br/>
+når Bydelsnummer eller Bydelsnavn mangler utfylling<br/>
+så gi feilmeldingen "Bydelsnummer og/eller Bydelsnavn skal være utfylt"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/ReporterUrbanDistrictNumberAndNameSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/ReporterUrbanDistrictNumberAndName.kt)
+
+
+
 
 ## <a name="sak">Sak</a>
 
@@ -114,80 +131,6 @@ Alvorlighetsgrad: ERROR
 
 
 
-### Sak Kontroll 11: Fødselsnummer
-
-Gitt at man har en Sak<br/>
-når fødselsnummer mangler <br/>
-så gi feilmeldingen "Klienten har ufullstendig fødselsnummer. Korriger fødselsnummer."
-
-Alvorlighetsgrad: Warning
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/CaseSocialSecurityIdSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/CaseSocialSecurityId.kt)
-
-
-
-
-
-
-## <a name="virksomhet">Virksomhet</a>
-
-### Virksomhet Kontroll 2a: StartDato er etter SluttDato
-
-Gitt at man har en Virksomhet der StartDato og SluttDato finnes<br/>
-når StartDato er etter SluttDato<br/>
-så gi feilmeldingen "Virksomhetens startdato {StartDato} er etter sluttdato {SluttDato}"
-
-Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/BusinessEndDateAfterStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/BusinessEndDateAfterStartDate.kt)
-
-
-
-### Virksomhet Kontroll 2c: SluttDato er etter sakens SluttDato
-
-Gitt at man har en Sak der SluttDato finnes og virksomhet der SluttDato finnes<br/>
-når virksomhetens SluttDato er etter sakens SluttDato<br/>
-så gi feilmeldingen "Virksomhetens startdato {SluttDato} er etter sakens sluttdato {SluttDato}"
-
-Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/BusinessEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/BusinessEndDateAfterCaseEndDate.kt)
-
-
-
-### Virksomhet Kontroll 2e: StartDato er før sakens StartDato
-
-Gitt at man har en Sak der StartDato finnes og virksomhet der StartDato finnes<br/>
-når virksomhetens StartDato er før sakens StartDato <br/>
-så gi feilmeldingen "Virksomhetens startdato {StartDato} er før sakens startdato {StartDato}"
-
-Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/BusinessStartDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/BusinessStartDateBeforeCaseStartDate.kt)
-
-
-
-### Virksomhet Kontroll 3: Bydelsnummer og bydelsnavn
-
-Gitt at man har en Virksomhet der Organisasjonsnummer er en av 958935420 (Oslo), 964338531 (Bergen), 942110464 (Trondheim) eller 964965226 (Stavanger)<br/>
-når Bydelsnummer eller Bydelsnavn mangler utfylling<br/>
-så gi feilmeldingen "Virksomhetens Bydelsnummer og Bydelsnavn skal være utfylt"
-
-Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/BusinessUrbanDistrictNumberAndNameSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/BusinessUrbanDistrictNumberAndName.kt)
-
-
 
 
 ## <a name="melding">Melding</a> 
@@ -206,29 +149,29 @@ Alvorlighetsgrad: ERROR
 
 
 
-### Melding Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+### Melding Kontroll 2c: SluttDato er etter sakens SluttDato
 
-Gitt at man har en Melding der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
-når meldingens SluttDato er etter virksomhetens SluttDato<br/>
-så gi feilmeldingen "Meldingens sluttdato {Konklusjon/SluttDato} er etter Virksomhetens sluttdato {SluttDato}"
+Gitt at man har en Melding der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
+når meldingens SluttDato er etter sakens SluttDato<br/>
+så gi feilmeldingen "Meldingens sluttdato {Konklusjon/SluttDato} er etter Sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterCaseEndDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterCaseEndDate.kt)
 
 
 
-### Melding Kontroll 2e: StartDato er før virksomhetens StartDato
+### Melding Kontroll 2e: StartDato er før sakens StartDato
 
-Gitt at man har en Melding med StartDato og i virksomhet med StartDato<br/>
-når meldingens StartDato er før virksomhetens StartDato<br/>
-så gi feilmeldingen "Meldingens startdato {StartDato} er før virksomhetens startdato {StartDato}"
+Gitt at man har en Melding med StartDato og i sak med StartDato<br/>
+når meldingens StartDato er før sakens StartDato<br/>
+så gi feilmeldingen "Meldingens startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageStartDateBeforeBusinessStartDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageStartDateBeforeCaseStartDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageStartDateBeforeCaseStartDate.kt)
 
@@ -324,29 +267,29 @@ Alvorlighetsgrad: ERROR
 
 
 
-### Undersøkelse Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+### Undersøkelse Kontroll 2c: SluttDato er etter sakens SluttDato
 
-Gitt at man har en Undersøkelse der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
-når undersøkelsens SluttDato er etter virksomhetens SluttDato<br/>
-så gi feilmeldingen "Undersøkelsens sluttdato {Konklusjon/SluttDato} er etter virksomhetens sluttdato {SluttDato}"
+Gitt at man har en Undersøkelse der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
+når undersøkelsens SluttDato er etter sakens SluttDato<br/>
+så gi feilmeldingen "Undersøkelsens sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationEndDateAfterBusinessEndDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationEndDateAfterCaseEndDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationEndDateAfterCaseEndDate.kt)
 
 
 
-### Undersøkelse Kontroll 2e: StartDato er før virksomhetens StartDato
+### Undersøkelse Kontroll 2e: StartDato er før sakens StartDato
 
-Gitt at man har en Undersøkelse der StartDato finnes og virksomhet der StartDato finnes<br/>
-når undersøkelsens StartDato er før virksomhetens StartDato <br/>
-så gi feilmeldingen "Undersøkelsens startdato {StartDato} er før virksomhetens startdato {StartDato}"
+Gitt at man har en Undersøkelse der StartDato finnes og sak der StartDato finnes<br/>
+når undersøkelsens StartDato er før sakens StartDato <br/>
+så gi feilmeldingen "Undersøkelsens startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationStartDateBeforeBusinessStartDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/InvestigationStartDateBeforeCaseStartDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/InvestigationStartDateBeforeCaseStartDate.kt)
 
@@ -422,9 +365,9 @@ Alvorlighetsgrad: Warning
 
 ### X Vedtak Kontroll 2a: StartDato er etter SluttDato
 
-### X Vedtak Kontroll 2c: SluttDato mot virksomhetens SluttDato
+### X Vedtak Kontroll 2c: SluttDato mot sakens SluttDato
 
-### X Vedtak Kontroll 2e: StartDato mot virksomhetens StartDato
+### X Vedtak Kontroll 2e: StartDato mot sakens StartDato
 
 
 
@@ -444,29 +387,29 @@ Alvorlighetsgrad: ERROR
 
 
 
-### Tiltak Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+### Tiltak Kontroll 2c: SluttDato er etter sakens SluttDato
 
-Gitt at man har et Tiltak der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
-når tiltakets SluttDato er etter virksomhetens SluttDato<br/>
+Gitt at man har et Tiltak der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
+når tiltakets SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Tiltakets sluttdato {Konklusjon/SluttDato} er etter Virksomhetens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterBusinessEndDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MessageEndDateAfterCaseEndDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MessageEndDateAfterCaseEndDate.kt)
 
 
 
-### Tiltak Kontroll 2e: StartDato er før virksomhetens StartDato
+### Tiltak Kontroll 2e: StartDato er før sakens StartDato
 
-Gitt at man har et Tiltak der StartDato finnes og virksomhet der StartDato finnes<br/>
-når tiltakets StartDato er før virksomhetens StartDato <br/>
-så gi feilmeldingen "Tiltakets startdato {StartDato} er før virksomhetens startdato {StartDato}"
+Gitt at man har et Tiltak der StartDato finnes og sak der StartDato finnes<br/>
+når tiltakets StartDato er før sakens StartDato <br/>
+så gi feilmeldingen "Tiltakets startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureStartDateBeforeBusinessStartDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureStartDateBeforeCaseStartDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureStartDateBeforeCaseStartDate.kt)
 
@@ -525,17 +468,13 @@ Alvorlighetsgrad: ERROR
 
 
 
-### X Tiltak Kontroll 9: Kontroll om flere plasseringstiltak er oppgitt i samme tidsperiode
+### Tiltak Kontroll 9: Flere plasseringstiltak er oppgitt i samme tidsperiode
 
 Gitt at man har 2 eller flere Tiltak der Kategori/Kode er en følgende koder:<br/>
 1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2<br/>
-og utled den seneste startDato (PeriodeStartDato) <br/>
-utifra tiltak1 sin StartDato og tiltak2 sin StartDato<br/>
-og utled den tidligste sluttDato (PeriodeSluttDato) <br/>
-utifra tiltak1 sin SluttDato eller DatoUttrekk hvis tiltak1 sin SluttDato er blank og tiltak2 sin SluttDato eller DatoUttrekk hvis tiltak2 sin SluttDato er blank<br/>
-når tiltak1 sin SluttDato er etter tiltak2 sin StartDato og PeriodeSluttDato er mer enn 90 etter PeriodeStartDato<br/>
-så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 3 måneder."
-
+og for de tiltakene der SluttDato mangler så brukes DatoUttrekk i stedet<br/>
+når tiltak1 overlapper tiltak2 med mer enn 90 dager<br/>
+så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 90 dager."
 
 Alvorlighetsgrad: Warning
 
@@ -545,16 +484,7 @@ Alvorlighetsgrad: Warning
 
 
 
-
-### <a name="tiltaklovhjemmel">Lovhjemmel</a> 
-
-#### X Tiltak Kontroll 12: Kontroll av omsorgstiltak med sluttdato, krever årsak til opphevelse
-
-Er denne lik Tiltak Kontroll 4: Omsorgstiltak med sluttdato krever årsak til opphevelse?
-
-
-
-#### X Tiltak Kontroll 13: Kontroll om individ er over 18 år og har omsorgtiltak
+#### Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse
 
 Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder) og<br/>
 tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
@@ -565,20 +495,38 @@ så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureLegalBasisWithEndDateClarificationRequiredSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureLegalBasisWithEndDateClarificationRequired.kt)
 
 
-#### X Tiltak Kontroll 14: Kontroll om lovhjemmel er fylt ut med tallet 0
 
-Gitt at det er en sak med tiltak <br/>
-når Lovhjemmel alder er 18 år eller større
+#### Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak
+
+Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder) og<br/>
+tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
+Paragraf er 12<br/>
+eller Paragraf er 8 og Ledd er 2 eller 3<br/>
+når alder er 18 år eller større
 så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/HERE_Spec.groovy)
+Alvorlighetsgrad: ERROR
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/HERE.kt)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureLegalBasisAgeAboveEighteenNoMeasureSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureLegalBasisAgeAboveEighteenNoMeasure.kt)
+
+
+
+#### X Tiltak Kontroll 14: Lovhjemmel er fyllt ut med tallet 0
+
+Gitt at det er en sak med tiltak <br/>
+når Lovhjemmel sin kapittel, paragraf, ledd eller punktum er utfylt med 0
+så gi feilmelding "Ingen Lovhjemmel sin kapittel, paragraf, ledd eller punktum kan være utfylt med 0"
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/MeasureLegalBasisValidCodeSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/MeasureLegalBasisValidCode.kt)
 
 
 
@@ -598,29 +546,29 @@ Alvorlighetsgrad: ERROR
 
 
 
-### Plan Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+### Plan Kontroll 2c: SluttDato er etter sakens SluttDato
 
-Gitt at man har en Plan der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
-når planens SluttDato er etter virksomhetens SluttDato<br/>
-så gi feilmeldingen "Planens sluttdato {Konklusjon/SluttDato} er etter virksomhetens sluttdato {SluttDato}"
+Gitt at man har en Plan der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
+når planens SluttDato er etter sakens SluttDato<br/>
+så gi feilmeldingen "Planens sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanEndDateAfterBusinessEndDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanEndDateAfterCaseEndDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanEndDateAfterCaseEndDate.kt)
 
 
 
-### Plan Kontroll 2e: StartDato er før virksomhetens StartDato
+### Plan Kontroll 2e: StartDato er før sakens StartDato
 
-Gitt at man har en Plan der StartDato finnes og virksomhet der StartDato finnes<br/>
-når planens StartDato er før virksomhetens StartDato <br/>
-så gi feilmeldingen "Planens startdato {StartDato} er før virksomhetens startdato {StartDato}"
+Gitt at man har en Plan der StartDato finnes og sak der StartDato finnes<br/>
+når planens StartDato er før sakens StartDato <br/>
+så gi feilmeldingen "Planens startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanStartDateBeforeBusinessStartDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanStartDateBeforeCaseStartDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanStartDateBeforeCaseStartDate.kt)
 
@@ -630,20 +578,20 @@ Alvorlighetsgrad: ERROR
 
 ### X Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
 
-### X Ettervern Kontroll 2c: SluttDato mot virksomhetens SluttDato
+### X Ettervern Kontroll 2c: SluttDato mot sakens SluttDato
 
-### X Ettervern Kontroll 2e: StartDato mot virksomhetens StartDato
+### X Ettervern Kontroll 2e: StartDato mot sakens StartDato
 
 
 ## <a name="flytting">Flytting</a> 
 
-### X Plan Kontroll 2c: SluttDato mot virksomhetens SluttDato
+### X Plan Kontroll 2c: SluttDato mot sakens SluttDato
 
-### X Plan Kontroll 2f: SluttDato mot virksomhetens StartDato
+### X Plan Kontroll 2f: SluttDato mot sakens StartDato
 
 
 ## <a name="oversendelse-til-fylkesnemnd">Oversendelse til fylkesnemnd</a> 
 
-### X Plan Kontroll 2c: StartDato mot virksomhetens SluttDato
+### X Plan Kontroll 2c: StartDato mot sakens SluttDato
 
-### X Plan Kontroll 2e: StartDato mot virksomhetens StartDato
+### X Plan Kontroll 2e: StartDato mot sakens StartDato

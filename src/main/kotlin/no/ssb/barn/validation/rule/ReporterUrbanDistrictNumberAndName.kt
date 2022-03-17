@@ -7,9 +7,9 @@ import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.AvgiverType
 import java.util.*
 
-class BusinessUrbanDistrictNumberAndName : AbstractRule(
+class ReporterUrbanDistrictNumberAndName : AbstractRule(
     WarningLevel.ERROR,
-    "Virksomhet Kontroll 3: Bydelsnummer og bydelsnavn",
+    "Avgiver Kontroll 1: Bydelsnummer og bydelsnavn",
     AvgiverType::class.java.simpleName
 ) {
     companion object{
@@ -33,7 +33,7 @@ class BusinessUrbanDistrictNumberAndName : AbstractRule(
         return if (context.rootObject.avgiver.bydelsnummer.isNullOrEmpty()
             || context.rootObject.avgiver.bydelsnavn.isNullOrEmpty())
             createSingleReportEntryList(
-                "Virksomhetens Bydelsnummer og Bydelsnavn skal være utfylt",
+                "Bydelsnummer og/eller Bydelsnavn skal være utfylt",
                 context.rootObject.id as UUID)
         else
             null

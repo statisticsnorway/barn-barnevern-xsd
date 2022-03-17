@@ -7,7 +7,7 @@ import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 import java.util.*
 
-class LegalBasisValidCode : AbstractRule(
+class MeasureLegalBasisValidCode : AbstractRule(
     WarningLevel.ERROR,
     "Lovhjemmel Kontroll 4: Lovhjemmel",
     TiltakType::class.java.simpleName

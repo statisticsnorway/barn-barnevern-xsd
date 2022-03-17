@@ -10,7 +10,7 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
-Virksomhet Kontroll 3: Bydelsnummer og bydelsnavn
+Avgiver Kontroll 1: Bydelsnummer og bydelsnavn
 
 Gitt at man har en virksomhet der Organisasjonsnummer er en av 958935420 (Oslo), 964338531 (Bergen), 942110464 (Trondheim) eller 964965226 (Stavanger)<br/>
 når Bydelsnummer og Bydelsnavn mangler utfylling<br/>
@@ -18,16 +18,16 @@ så gi feilmeldingen "Virksomhetens Bydelsnummer og Bydelsnavn skal være utfylt
 
 Alvorlighetsgrad: ERROR
 """)
-class BusinessUrbanDistrictNumberAndNameSpec extends Specification {
+class ReporterUrbanDistrictNumberAndNameSpec extends Specification {
 
     @Subject
-    BusinessUrbanDistrictNumberAndName sut
+    ReporterUrbanDistrictNumberAndName sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new BusinessUrbanDistrictNumberAndName()
+        sut = new ReporterUrbanDistrictNumberAndName()
         context = getTestContext()
     }
 
@@ -51,25 +51,25 @@ class BusinessUrbanDistrictNumberAndNameSpec extends Specification {
         if (errorExpected) {
             assert 1 == reportEntries.size()
             assert WarningLevel.ERROR == reportEntries[0].warningLevel
-            assert reportEntries[0].errorText.contains("Virksomhetens Bydelsnummer og Bydelsnavn skal være utfylt")
+            assert reportEntries[0].errorText.contains("Bydelsnummer og/eller Bydelsnavn skal være utfylt")
         }
 
         where:
         businessId                                              | urbanDistrictId | urbanDistrictName || errorExpected
         "999999999"                                             | null            | null              || false
 
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | null              || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | ""                || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | ""                || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | "42"              || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | "42"              || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | null              || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "42"            | null              || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "42"            | ""                || true
-        BusinessUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "01"            | "Name"            || false
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | null              || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | ""                || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | ""                || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | null            | "42"              || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | "42"              || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | ""              | null              || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "42"            | null              || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "42"            | ""                || true
+        ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "01"            | "Name"            || false
 
 
-        BusinessUrbanDistrictNumberAndName.BERGEN_COMPANY_ID    | "01"            | "Name"            || false
-        BusinessUrbanDistrictNumberAndName.TRONDHEIM_COMPANY_ID | "01"            | "Name"            || false
+        ReporterUrbanDistrictNumberAndName.BERGEN_COMPANY_ID    | "01"            | "Name"            || false
+        ReporterUrbanDistrictNumberAndName.TRONDHEIM_COMPANY_ID | "01"            | "Name"            || false
     }
 }
