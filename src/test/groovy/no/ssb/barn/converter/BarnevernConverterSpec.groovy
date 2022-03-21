@@ -14,6 +14,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
+import static no.ssb.barn.generator.RandomTypeProvider.generateRandomAvgiverType
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
 class BarnevernConverterSpec extends Specification {
@@ -164,7 +165,7 @@ class BarnevernConverterSpec extends Specification {
                 List<RelasjonType>.of(),
                 List<SlettetType>.of()
         )
-        def avgiver = RandomUtils.generateRandomAvgiverType()
+        def avgiver = generateRandomAvgiverType()
         def fagsystem = new FagsystemType(
                 "SSB", "OJJ's automatiske touch", "0.0.1"
         )
