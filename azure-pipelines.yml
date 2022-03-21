@@ -20,12 +20,15 @@ variables:
   # Azure Pipelines
   - group: Hemmeligheter
   # Variables defined here
-  - name: fullSha
-    value: '$(Build.SourceVersion)'
   - name: MAVEN_CACHE_FOLDER
     value: $(Pipeline.Workspace)/.m2/repository
+  - name: ArtifactRevision
+    ${{ if startsWith(variables['Build.SourceBranch'], 'refs/tags/') }}:
+      value: "$(Build.SourceBranchName)"
+    ${{ else }}:
+      value: "$(Build.SourceBranchName)-SNAPSHOT"
   - name: MAVEN_OPTS
-    value: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+    value: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER) -Drevision=$(ArtifactRevision) -Dsonar.projectKey=statisticsnorway_barn-barnevern-xsd'
 
 resources:
   repositories:
@@ -35,7 +38,7 @@ resources:
       type: github
       name: statisticsnorway/azure-pipelines-templates
       # The version of the repo on GitHub. Change to needed version
-      ref: refs/tags/1.1.22
+      ref: refs/tags/1.1.29
       # Service connection in the barn project on Pipelines
       # with access to the template repository.
       endpoint: 'github-Barnevernsregisteret'
@@ -46,11 +49,11 @@ jobs:
   - job: buildTestDockerBuildDockerPush
     displayName: 'Test/build app'
 
-    # Job condition: Run these jobs on any branch, but not on tags
-    condition: not(startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
-
     # Steps in this Job
     steps:
+      - script: 'echo "Artifact revision: $(ArtifactRevision)"'
+        displayName: 'Print ArtifactRevision'
+
       - script: 'wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz'
         displayName: 'Downloading JDK 17'
 
@@ -80,6 +83,10 @@ jobs:
           organization: 'statisticsnorway'
           scannerMode: 'Other'
 
+      # Authenticate to google artifact registry
+      # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-authenticate-gar.yml
+      - template: maven/task-authenticate-gar.yml@templates
+
       - task: Maven@3
         displayName: Maven verify
         inputs:
@@ -102,28 +109,6 @@ jobs:
         inputs:
           pollingTimeoutSec: '300'
 
-      # Download file with json-key to GCR as a later task needs to
-      # authenticate in a different way than using service connection
-      # File is stored in Pipelines->Library->Secure Files
-      - task: DownloadSecureFile@1
-        name: gcrJsonKey
-        displayName: 'Download gcr credentials'
-        inputs:
-          secureFile: 'gcr-key.json'
-
-      # Set env variable pointing to the file downloaded in previous task
-      # as a library in next task needs this env variable
-      - script: |
-          echo "Setting env variable GOOGLE_APPLICATION_CREDENTIALS"
-          echo "##vso[task.setvariable variable=GOOGLE_APPLICATION_CREDENTIALS]$(gcrJsonKey.secureFilePath)"
-        displayName: 'Setting GOOGLE_APPLICATION_CREDENTIALS env variable'
-
-      # Deploy artifact to Artifact Registry
-      - task: Maven@3
-        displayName: 'Maven install and deploy'
-        inputs:
-          goals: 'deploy'
-          options: '-DskipTests=true -Dmaven.javadoc.skip=true -P ssb-bip --batch-mode'
-          mavenPomFile: 'pom.xml'
-          mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
-          javaHomeOption: 'JDKVersion'
+      # Deploy artifact to Nexus
+      # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-install-and-deploy-to-gar.yml
+      - template: maven/task-install-and-deploy-to-gar.yml@templates
