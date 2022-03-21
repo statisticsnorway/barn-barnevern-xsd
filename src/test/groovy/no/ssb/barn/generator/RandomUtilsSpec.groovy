@@ -74,11 +74,4 @@ class RandomUtilsSpec extends Specification {
         expect:
         UUID.randomUUID() ==~ /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/
     }
-
-    def "generateRandomInt receive int between boundaries"() {
-        expect:
-        RandomUtils.generateRandomInt() >= 1
-        and:
-        RandomUtils.generateRandomInt() <= 100_000
-    }
 }

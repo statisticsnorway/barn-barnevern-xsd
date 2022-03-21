@@ -2,12 +2,7 @@ package no.ssb.barn.util
 
 import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.testutil.TestDataProvider
-import no.ssb.barn.xsd.KategoriType
-import no.ssb.barn.xsd.LovhjemmelType
-import no.ssb.barn.xsd.OpphevelseType
-import no.ssb.barn.xsd.TiltakKonklusjonType
-import no.ssb.barn.xsd.TiltakType
-import org.xml.sax.SAXException
+import no.ssb.barn.xsd.*
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -91,49 +86,6 @@ class ValidationUtilsSpec extends Specification {
         "/test01_file02_changes.xml" || true
         "/invalid.xml"               || true
         "/nonExistentFile"           || false
-    }
-
-    @Unroll
-    def "Should validate valid xml files, xsd = #xsd, xml = #xml, result = #result"() {
-        when:
-        def sourceXSD = getSourceFromClasspath(xsd)
-        def sourceXML = getSourceFromClasspath(xml)
-        def validationResult = ValidationUtils.validateFromSources(sourceXSD, sourceXML)
-
-        then:
-        validationResult == result
-
-        where:
-        xsd              | xml                          || result
-        "/Barnevern.xsd" | "/test00_file01_changes.xml" || true
-        "/Barnevern.xsd" | "/test01_file01_changes.xml" || true
-        "/Barnevern.xsd" | "/test01_file02_changes.xml" || true
-        "/Barnevern.xsd" | "/test01_file03_changes.xml" || true
-
-        "/Barnevern.xsd" | "/test01_file01_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file02_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file03_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file04_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file05_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file06_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file07_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file08_total.xml"   || true
-        "/Barnevern.xsd" | "/test01_file09_total.xml"   || true
-    }
-
-    def "Should produce SAXException for invalid xml files, xsd = #xsd, xml = #xml"() {
-        when:
-        def sourceXSD = getSourceFromClasspath(xsd)
-        def sourceXML = getSourceFromClasspath(xml)
-        ValidationUtils.validateFromSources(sourceXSD, sourceXML)
-
-        then:
-        //noinspection GroovyUnusedAssignment
-        SAXException e = thrown()
-
-        where:
-        xsd              | xml
-        "/Barnevern.xsd" | "/invalid.xml"
     }
 
     def "Should validate norwegian social security numbers (fnr), ssn = #ssn, result = #result"() {
