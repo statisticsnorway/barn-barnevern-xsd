@@ -54,18 +54,11 @@ jobs:
       - script: 'echo "Artifact revision: $(ArtifactRevision)"'
         displayName: 'Print ArtifactRevision'
 
-      - script: 'wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz'
-        displayName: 'Downloading JDK 17'
-
       - task: JavaToolInstaller@0
-        displayName: 'Installing JDK 17'
         inputs:
-          versionSpec: "17"
-          jdkArchitectureOption: x64
-          jdkSourceOption: LocalDirectory
-          jdkFile: "$(System.DefaultWorkingDirectory)/jdk-17_linux-x64_bin.tar.gz"
-          jdkDestinationDirectory: "$(System.DefaultWorkingDirectory)/binaries/externals"
-          cleanDestinationDirectory: true
+          versionSpec: '17'
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'PreInstalled'
 
       # Maven caching to speed up pipeline build time
       - task: Cache@2
