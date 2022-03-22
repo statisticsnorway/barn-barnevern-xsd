@@ -1,6 +1,5 @@
-package no.ssb.barn.generator
+package no.ssb.barn.util
 
-import no.ssb.barn.util.ValidationUtils
 import spock.lang.Specification
 
 import java.time.LocalDate

@@ -1,20 +1,11 @@
 package no.ssb.barn.converter
 
-import no.ssb.barn.generator.InitialMutationProvider
-import no.ssb.barn.generator.RandomUtils
-import no.ssb.barn.testutil.TestDataProvider
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.validation.rule.XsdRule
-import no.ssb.barn.xsd.*
 import spock.lang.Specification
 import spock.lang.Unroll
 
 import javax.xml.bind.UnmarshalException
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZonedDateTime
 
-import static no.ssb.barn.generator.RandomTypeProvider.generateRandomAvgiverType
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
 class BarnevernConverterSpec extends Specification {
@@ -87,6 +78,7 @@ class BarnevernConverterSpec extends Specification {
         null != json
     }
 
+/*
     def "when marshalling instance to XML, xml is valid"() {
         given:
         def instance = InitialMutationProvider.createInitialMutation(ZonedDateTime.now())
@@ -101,6 +93,7 @@ class BarnevernConverterSpec extends Specification {
         and:
         null == xsdRule.validate(new ValidationContext("N/A", xml))
     }
+*/
 
     def "should convert XML to objects, JAXB.unmarshal()"() {
         given:
@@ -127,7 +120,7 @@ class BarnevernConverterSpec extends Specification {
         }
     }
 
-    def "should convert objects to XML, JAXB.marshal()"() {
+/*    def "should convert objects to XML, JAXB.marshal()"() {
         given:
         LocalDateTime datetime = LocalDateTime.of(2020, 2, 2, 10, 10, 10, 0)
         LocalDate date = LocalDate.of(2020, 2, 2)
@@ -185,5 +178,5 @@ class BarnevernConverterSpec extends Specification {
         verifyAll(xmlString) {
             contains("SSB")
         }
-    }
+    }*/
 }

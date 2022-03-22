@@ -1,6 +1,5 @@
 package no.ssb.barn.util
 
-import no.ssb.barn.generator.RandomUtils
 import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.*
 import spock.lang.Specification
