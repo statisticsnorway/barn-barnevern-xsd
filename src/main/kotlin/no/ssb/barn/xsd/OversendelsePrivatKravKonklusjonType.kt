@@ -13,5 +13,5 @@ data class OversendelsePrivatKravKonklusjonType(
     @field:XmlJavaTypeAdapter(
         LocalDateTimeAdapter::class
     )
-    var sluttDato: ZonedDateTime
+    var sluttDato: ZonedDateTime? = null
 )
