@@ -26,9 +26,7 @@ data class FlyttingType(
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "dateTime")
-    @field:XmlJavaTypeAdapter(
-        LocalDateTimeAdapter::class
-    )
+    @field:XmlJavaTypeAdapter(LocalDateTimeAdapter::class)
     var sluttDato: ZonedDateTime? = null,
 
     @field:XmlElement(name = "ArsakFra")

@@ -1,18 +1,12 @@
 package no.ssb.barn.util
 
 import no.ssb.barn.xsd.TiltakType
-import org.xml.sax.SAXException
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.Year
 import java.time.ZonedDateTime
 import java.util.regex.Pattern
-import javax.xml.XMLConstants
-import javax.xml.transform.Source
-import javax.xml.validation.Schema
-import javax.xml.validation.SchemaFactory
-import javax.xml.validation.Validator
 
 
 object ValidationUtils {
@@ -53,24 +47,6 @@ object ValidationUtils {
     @JvmStatic
     fun getMinDate(first: ZonedDateTime, second: ZonedDateTime): ZonedDateTime =
         if (first.isBefore(second)) first else second
-
-    @JvmStatic
-    @Throws(SAXException::class)
-    fun validateFromSources(xsdFile: Source, xmlFile: Source): Boolean {
-        // create a SchemaFactory capable of understanding WXS schemas
-        val factory: SchemaFactory =
-            SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
-
-        // load a WXS schema, represented by a Schema instance
-        val schema: Schema = factory.newSchema(xsdFile)
-
-        // create a Validator instance, which can be used to validate an instance document
-        val validator: Validator = schema.newValidator()
-
-        // validate the DOM tree
-        validator.validate(xmlFile)
-        return true
-    }
 
     val controlSumDigits1 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2, 1)
     val controlSumDigits2 = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1)

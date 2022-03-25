@@ -3,7 +3,6 @@ package no.ssb.barn.xsd
 import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.LocalDateTimeAdapter
 import no.ssb.barn.converter.UuidAdapter
-import no.ssb.barn.generator.RandomUtils
 import java.time.LocalDate
 import java.time.ZonedDateTime
 import java.util.*
@@ -43,7 +42,7 @@ data class SakType(
     var sluttDato: ZonedDateTime? = null,
 
     @field:XmlAttribute(name = "Journalnummer", required = true)
-    var journalnummer: String = RandomUtils.generateRandomString(20),
+    var journalnummer: String? = null,
 
     @field:XmlAttribute(name = "Fodselsnummer")
     var fodselsnummer: String? = null,
