@@ -1,9 +1,9 @@
 package no.ssb.barn.validation.rule
 
-import no.ssb.barn.validation.AbstractRule
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.ReportEntry
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.AbstractRule
+import no.ssb.barn.validation.ValidationContext
 import org.xml.sax.SAXParseException
 import java.io.InputStream
 import java.io.StringReader
@@ -42,10 +42,10 @@ class XsdRule(
         val newInstance = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
         newInstance.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true)
         return newInstance
-            .newSchema(StreamSource(getSourceFromClasspath(xsdResourceName)))
+            .newSchema(StreamSource(getResourceFromClasspath(xsdResourceName)))
             .newValidator()
     }
 
-    private fun getSourceFromClasspath(resourceName: String): InputStream? =
+    private fun getResourceFromClasspath(resourceName: String): InputStream? =
         this::class.java.classLoader.getResource(resourceName)!!.openStream()
 }

@@ -4,6 +4,13 @@ import no.ssb.barn.converter.BarnevernConverter
 import no.ssb.barn.report.ValidationReport
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.rule.*
+import no.ssb.barn.validation.rule.cases.*
+import no.ssb.barn.validation.rule.investigation.*
+import no.ssb.barn.validation.rule.measure.*
+import no.ssb.barn.validation.rule.message.*
+import no.ssb.barn.validation.rule.plan.PlanEndDateAfterCaseEndDate
+import no.ssb.barn.validation.rule.plan.PlanStartDateAfterEndDate
+import no.ssb.barn.validation.rule.plan.PlanStartDateBeforeCaseStartDate
 
 class VersionOneValidator : ValidatorContract {
 
