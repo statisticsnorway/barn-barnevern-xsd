@@ -37,7 +37,7 @@ class TiltakTypeJson(
     constructor(tiltakType: TiltakType) : this(
         tiltakType.id!!,
         tiltakType.migrertId,
-        tiltakType.startDato as ZonedDateTime,
+        tiltakType.startDato!!,
         tiltakType.lovhjemmel,
         tiltakType.jmfrLovhjemmel,
         tiltakType.kategori,

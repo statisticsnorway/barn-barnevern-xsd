@@ -8,7 +8,6 @@ import no.ssb.barn.validation.SharedValidationConstants.MULTIPLE_MEASURES_RULE_N
 import no.ssb.barn.validation.SharedValidationConstants.kodelistePlasseringstiltak
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
@@ -35,7 +34,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                 if (outerIndex == innerIndex || !areOverlappingWithAtLeastThreeMonths(
                         outerMeasure,
                         innerMeasure,
-                        context.rootObject.datoUttrekk as ZonedDateTime
+                        context.rootObject.datoUttrekk!!
                     )
                 ) {
                     return@inner

@@ -26,7 +26,7 @@ class DecisionEndDateAfterCaseEndDate : AbstractRule(
                 }
                 .map {
                     createReportEntry(
-                        "Vedtakets sluttdato (${it.konklusjon?.sluttDato}) er etter sakens sluttdato (${case.sluttDato})",
+                        "Vedtakets sluttdato (${it.konklusjon!!.sluttDato}) er etter sakens sluttdato (${case.sluttDato})",
                         it.id!!
                     )
                 }
