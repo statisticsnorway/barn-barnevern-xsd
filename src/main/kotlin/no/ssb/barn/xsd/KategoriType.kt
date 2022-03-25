@@ -114,8 +114,8 @@ data class KategoriType(
             mapOf(
                 Pair("1", "Barnet tilbakeført til foreldre/ familien jamfør § 4-21"),
                 Pair("2", "Barnet har fylt 18 år"),
-                Pair("3", "Adopsjon § 4-20",),
-                Pair("4", "Annet (krever presisering)",)
+                Pair("3", "Adopsjon § 4-20"),
+                Pair("4", "Annet (krever presisering)")
             )
                 .map {
                     CodeListItem(it.key, it.value, validFrom)

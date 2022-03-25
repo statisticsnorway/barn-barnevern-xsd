@@ -14,7 +14,8 @@ class CaseAgeAboveEighteenAndMeasures : AbstractRule(
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         if (getAge(context.rootObject.sak.fodselsnummer) < 18
-            || context.rootObject.sak.tiltak.any())
+            || context.rootObject.sak.tiltak.any()
+        )
             null
         else
             createSingleReportEntryList(
