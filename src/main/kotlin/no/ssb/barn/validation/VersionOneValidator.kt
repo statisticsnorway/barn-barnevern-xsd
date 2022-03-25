@@ -3,8 +3,10 @@ package no.ssb.barn.validation
 import no.ssb.barn.converter.BarnevernConverter
 import no.ssb.barn.report.ValidationReport
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.validation.rule.*
+import no.ssb.barn.validation.rule.ReporterUrbanDistrictNumberAndName
+import no.ssb.barn.validation.rule.XsdRule
 import no.ssb.barn.validation.rule.cases.*
+import no.ssb.barn.validation.rule.decision.DecisionStartDateAfterEndDate
 import no.ssb.barn.validation.rule.investigation.*
 import no.ssb.barn.validation.rule.measure.*
 import no.ssb.barn.validation.rule.message.*
@@ -26,6 +28,7 @@ class VersionOneValidator : ValidatorContract {
         CaseHasContent(),
         CaseSocialSecurityId(),
         CaseSocialSecurityIdAndDuf(),
+        DecisionStartDateAfterEndDate(),
         InvestigationConcludedMissingDecision(),
         InvestigationDecisionClarificationRequired(),
         InvestigationDecisionMissingClarification(),
@@ -42,7 +45,7 @@ class VersionOneValidator : ValidatorContract {
         MeasureAgeAboveSevenAndInKindergarten(),
         MeasureClarificationRequired(),
         MeasureStartDateAfterEndDate(),
-        MeasureEndDateBeforeIndividEndDate(),
+        MeasureEndDateAfterCaseEndDate(),
         MeasureMultipleAllocationsWithinPeriod(),
         MeasureRepealClarificationRequired(),
         MeasureStartDateAfterIndividStartDate(),

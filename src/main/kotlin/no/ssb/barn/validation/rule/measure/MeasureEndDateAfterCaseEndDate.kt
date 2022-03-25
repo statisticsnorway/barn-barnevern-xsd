@@ -8,7 +8,7 @@ import no.ssb.barn.xsd.TiltakType
 import java.time.ZonedDateTime
 import java.util.*
 
-class MeasureEndDateBeforeIndividEndDate : AbstractRule(
+class MeasureEndDateAfterCaseEndDate : AbstractRule(
     WarningLevel.ERROR,
     "Tiltak Kontroll 2c: Sluttdato mot individets sluttdato",
     TiltakType::class.java.simpleName

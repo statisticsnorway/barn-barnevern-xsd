@@ -51,6 +51,9 @@
             </Lovhjemmel>
             <Status EndretDato="2021-04-09T12:34:56+01:00" Kode="3"/>
             <Konklusjon SluttDato="2021-04-09T12:34:56+01:00"/>
+            <Krav Id="5365c6e6-be78-4a3e-8b28-b7af12085eed"  StartDato="2021-04-09T12:34:56+01:00">
+                <Konklusjon SluttDato="2021-04-19T12:34:56+01:00" />
+            </Krav>
         </Vedtak>
         <Vedtak Id="ab0e61dd-1703-40e9-a6eb-d3cab2dc47ce" StartDato="2021-07-08T12:34:56+01:00">
             <Lovhjemmel>

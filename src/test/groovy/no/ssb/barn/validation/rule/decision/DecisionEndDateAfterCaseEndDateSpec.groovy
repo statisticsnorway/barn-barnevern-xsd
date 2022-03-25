@@ -1,8 +1,7 @@
-package no.ssb.barn.validation.rule.measure
+package no.ssb.barn.validation.rule.decision
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.measure.MeasureEndDateBeforeIndividEndDate
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -13,36 +12,40 @@ import java.time.ZonedDateTime
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
-Tiltak Kontroll 2c: SluttDato er etter virksomhetens SluttDato
+Vedtak Kontroll 2c: SluttDato mot sakens SluttDato
 
-Gitt at man har et Tiltak der Konklusjon/SluttDato finnes og i virksomhet der SluttDato finnes<br/>
-når tiltakets SluttDato er etter virksomhetens SluttDato<br/>
-så gi feilmeldingen "Tiltakets sluttdato {Konklusjon/SluttDato} er etter Virksomhetens sluttdato {SluttDato}"
+Gitt at man har et Vedtak der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
+når vedtakets SluttDato er etter sakens SluttDato<br/>
+så gi feilmeldingen "Vedtakets sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}
 
 Alvorlighetsgrad: ERROR
 """)
-class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
+class DecisionEndDateAfterCaseEndDateSpec extends Specification {
 
     @Subject
-    MeasureEndDateBeforeIndividEndDate sut
+    DecisionEndDateAfterCaseEndDate sut
 
     ValidationContext context
 
     @SuppressWarnings('unused')
     def setup() {
-        sut = new MeasureEndDateBeforeIndividEndDate()
+        sut = new DecisionEndDateAfterCaseEndDate()
         context = getTestContext()
     }
 
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.sak.sluttDato = individEndDate
+        context.rootObject.sak.sluttDato = caseEndDate
         and:
-        context.rootObject.sak.tiltak[0].konklusjon.sluttDato = measureEndDate
+        def decision = context.rootObject.sak.vedtak.first()
         and:
-        if (resetRepeal) {
-            context.rootObject.sak.tiltak[0].konklusjon = null
+        decision.konklusjon.sluttDato = decisionEndDate
+        and:
+        context.rootObject.sak.vedtak = [decision]
+        and:
+        if (resetConclusion) {
+            decision.konklusjon = null
         }
 
         when:
@@ -54,11 +57,11 @@ class MeasureEndDateBeforeIndividEndDateSpec extends Specification {
         if (errorExpected) {
             assert 1 == reportEntries.size()
             assert WarningLevel.ERROR == reportEntries[0].warningLevel
-            assert reportEntries[0].errorText.contains("er etter individets sluttdato")
+            assert reportEntries[0].errorText.contains("er etter sakens sluttdato")
         }
 
         where:
-        resetRepeal | individEndDate | measureEndDate || errorExpected
+        resetConclusion | caseEndDate                       | decisionEndDate                   || errorExpected
         false           | ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || true
         true            | ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || false
         false           | ZonedDateTime.now()               | ZonedDateTime.now().minusHours(1) || false

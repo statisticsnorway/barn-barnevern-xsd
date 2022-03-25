@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.plan
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.plan.PlanStartDateBeforeCaseStartDate
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -37,9 +36,9 @@ class PlanStartDateBeforeCaseStartDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.sak.startDato = businessStartDate
+        context.rootObject.sak.startDato = caseStartDate
         and:
-        context.rootObject.sak.plan[0].startDato = planStartDate
+        context.rootObject.sak.plan.first().startDato = planStartDate
 
         when:
         def reportEntries = sut.validate(context)
@@ -49,12 +48,12 @@ class PlanStartDateBeforeCaseStartDateSpec extends Specification {
         and:
         if (errorExpected) {
             assert 1 == reportEntries.size()
-            assert WarningLevel.ERROR == reportEntries[0].warningLevel
+            assert WarningLevel.ERROR == reportEntries.first().warningLevel
             assert reportEntries[0].errorText.contains("er før sakens startdato")
         }
 
         where:
-        businessStartDate                 | planStartDate                     || errorExpected
+        caseStartDate                     | planStartDate                     || errorExpected
         ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || false
         ZonedDateTime.now()               | ZonedDateTime.now()               || false
         ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) || true

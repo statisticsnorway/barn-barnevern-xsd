@@ -38,7 +38,7 @@ class PlanStartDateAfterEndDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def plan = context.rootObject.sak.plan[0]
+        def plan = context.rootObject.sak.plan.first()
         and:
         plan.startDato = planStartDate
         and:
@@ -56,7 +56,7 @@ class PlanStartDateAfterEndDateSpec extends Specification {
         and:
         if (errorExpected) {
             assert 1 == reportEntries.size()
-            assert WarningLevel.ERROR == reportEntries[0].warningLevel
+            assert WarningLevel.ERROR == reportEntries.first().warningLevel
             assert reportEntries[0].errorText.contains("er etter planens sluttdato ")
         }
 
