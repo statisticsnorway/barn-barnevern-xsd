@@ -15,7 +15,7 @@ class PlanEvaluationDateBeforeCaseStartDate : AbstractRule(
         val sak = context.rootObject.sak
 
         return sak.plan.asSequence()
-            .map { plan ->
+            .flatMap { plan ->
                 plan.evaluering
                     .filter { evaluation ->
                         evaluation.utfortDato!!.isBefore(sak.startDato)
@@ -27,7 +27,6 @@ class PlanEvaluationDateBeforeCaseStartDate : AbstractRule(
                         )
                     }
             }
-            .flatten()
             .toList()
             .ifEmpty { null }
     }

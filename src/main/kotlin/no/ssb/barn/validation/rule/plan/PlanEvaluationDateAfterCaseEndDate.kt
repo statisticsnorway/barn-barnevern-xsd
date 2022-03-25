@@ -18,7 +18,7 @@ class PlanEvaluationDateAfterCaseEndDate : AbstractRule(
             null
         } else {
             sak.plan.asSequence()
-                .map { plan ->
+                .flatMap { plan ->
                     plan.evaluering
                         .filter { evaluation ->
                             evaluation.utfortDato!!.isAfter(sak.sluttDato)
@@ -30,7 +30,6 @@ class PlanEvaluationDateAfterCaseEndDate : AbstractRule(
                             )
                         }
                 }
-                .flatten()
                 .toList()
                 .ifEmpty { null }
         }
