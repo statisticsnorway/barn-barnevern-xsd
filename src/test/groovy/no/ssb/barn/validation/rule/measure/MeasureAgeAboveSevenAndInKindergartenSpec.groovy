@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.measure.MeasureAgeAboveSevenAndInKindergarten
 import no.ssb.barn.xsd.KategoriType
 import spock.lang.Narrative
 import spock.lang.Specification
@@ -41,7 +40,7 @@ class MeasureAgeAboveSevenAndInKindergartenSpec extends Specification {
         and:
         sak.fodselsnummer = getMockSocialSecurityNumber(age)
         and:
-        sak.tiltak = List.of(sak.tiltak[0])
+        sak.tiltak = [sak.tiltak[0]]
         and:
         sak.tiltak[0].kategori = new KategoriType(code, "~presisering~")
 

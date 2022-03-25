@@ -7,7 +7,6 @@ import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.BegrepsType
 import no.ssb.barn.xsd.UndersokelseType
 import java.time.ZonedDateTime
-import java.util.*
 
 class InvestigationProcessingTimePassedDueDate : AbstractRule(
     WarningLevel.WARNING,
@@ -46,14 +45,14 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                 ) {
                     return@map createReportEntry(
                         "Undersøkelse skal konkluderes innen 7 + 90 dager etter melding sin startdato",
-                        relation.tilId as UUID
+                        relation.tilId!!
                     )
                 }
 
                 if (currentDate.isAfter(message.startDato!!.plusDays(7 + 180))) {
                     return@map createReportEntry(
                         "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato",
-                        relation.tilId as UUID
+                        relation.tilId!!
                     )
                 }
 

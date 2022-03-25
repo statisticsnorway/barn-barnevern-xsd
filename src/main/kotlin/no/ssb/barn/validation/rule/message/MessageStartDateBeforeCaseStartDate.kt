@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MeldingType
-import java.util.*
 
 class MessageStartDateBeforeCaseStartDate : AbstractRule(
     WarningLevel.ERROR,
@@ -23,7 +22,7 @@ class MessageStartDateBeforeCaseStartDate : AbstractRule(
                 createReportEntry(
                     "Meldingens startdato (${it.startDato}) er før"
                             + " sakens startdato (${sak.startDato})",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

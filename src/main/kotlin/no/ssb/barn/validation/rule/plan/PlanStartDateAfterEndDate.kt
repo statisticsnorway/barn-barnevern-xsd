@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.PlanType
-import java.util.*
 
 class PlanStartDateAfterEndDate : AbstractRule(
     WarningLevel.ERROR,
@@ -24,7 +23,7 @@ class PlanStartDateAfterEndDate : AbstractRule(
                     "Plan (${it.id}}). Planens startdato (${it.startDato})"
                             + " er etter planens sluttdato"
                             + " (${it.konklusjon!!.sluttDato})",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

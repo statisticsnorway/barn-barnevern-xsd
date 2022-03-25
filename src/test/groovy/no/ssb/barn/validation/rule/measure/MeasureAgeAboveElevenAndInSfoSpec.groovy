@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.validation.rule.measure.MeasureAgeAboveElevenAndInSfo
 import no.ssb.barn.xsd.KategoriType
 import spock.lang.Narrative
 import spock.lang.Specification

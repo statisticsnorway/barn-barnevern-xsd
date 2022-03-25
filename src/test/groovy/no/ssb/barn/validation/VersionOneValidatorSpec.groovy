@@ -1,7 +1,6 @@
 package no.ssb.barn.validation
 
 import no.ssb.barn.report.WarningLevel
-import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Subject
 

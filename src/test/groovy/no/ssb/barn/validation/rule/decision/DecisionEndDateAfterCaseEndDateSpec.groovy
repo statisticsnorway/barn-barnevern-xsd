@@ -62,6 +62,7 @@ class DecisionEndDateAfterCaseEndDateSpec extends Specification {
 
         where:
         resetConclusion | caseEndDate                       | decisionEndDate                   || errorExpected
+        false           | null                              | null                              || false
         false           | ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || true
         true            | ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || false
         false           | ZonedDateTime.now()               | ZonedDateTime.now().minusHours(1) || false

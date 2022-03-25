@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
-import java.util.*
 
 class MeasureLegalBasisValidCode : AbstractRule(
     WarningLevel.ERROR,
@@ -24,7 +23,7 @@ class MeasureLegalBasisValidCode : AbstractRule(
                             + " (${it.lovhjemmel.kapittel}) eller paragraf"
                             + " (${it.lovhjemmel.paragraf}) er rapportert med"
                             + " den ugyldige koden 0",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

@@ -7,7 +7,6 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.SharedValidationConstants
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.SakType
-import java.util.*
 
 class CaseSocialSecurityId : AbstractRule(
     WarningLevel.WARNING,
@@ -20,7 +19,7 @@ class CaseSocialSecurityId : AbstractRule(
         return if (!validateFNR(fodselsnummer)) {
             createSingleReportEntryList(
                 "Saken har ufullstendig fødselsnummer. Korriger fødselsnummer.",
-                context.rootObject.sak.id as UUID
+                context.rootObject.sak.id!!
             )
         } else {
             null

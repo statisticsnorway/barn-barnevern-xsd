@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.UndersokelseType
-import java.util.*
 
 class InvestigationEndDateAfterCaseEndDate : AbstractRule(
     WarningLevel.ERROR,
@@ -27,7 +26,7 @@ class InvestigationEndDateAfterCaseEndDate : AbstractRule(
                     createReportEntry(
                         "Undersøkelsens sluttdato (${it.konklusjon!!.sluttDato})"
                                 + " er etter sakens sluttdato (${sak.sluttDato})",
-                        it.id as UUID
+                        it.id!!
                     )
                 }
                 .toList()

@@ -62,6 +62,7 @@ class PlanEvaluationDateAfterCaseEndDateSpec extends Specification {
 
         where:
         caseEndDate                        | executedDate                    | resetEvaluation || errorExpected
+        null                               | ZonedDateTime.now()             | false           || false
         ZonedDateTime.now().plusSeconds(1) | ZonedDateTime.now()             | false           || false
         ZonedDateTime.now()                | ZonedDateTime.now().plusDays(1) | false           || true
         ZonedDateTime.now()                | ZonedDateTime.now().plusDays(1) | true            || false

@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.investigation
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.investigation.InvestigationProcessingTimePassedDueDate
 import no.ssb.barn.xsd.BegrepsType
 import spock.lang.Specification
 import spock.lang.Subject

@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.AvgiverType
-import java.util.*
 
 class ReporterUrbanDistrictNumberAndName : AbstractRule(
     WarningLevel.ERROR,
@@ -34,7 +33,7 @@ class ReporterUrbanDistrictNumberAndName : AbstractRule(
             || context.rootObject.avgiver.bydelsnavn.isNullOrEmpty())
             createSingleReportEntryList(
                 "Bydelsnummer og/eller Bydelsnavn skal være utfylt",
-                context.rootObject.id as UUID)
+                context.rootObject.id!!)
         else
             null
     }

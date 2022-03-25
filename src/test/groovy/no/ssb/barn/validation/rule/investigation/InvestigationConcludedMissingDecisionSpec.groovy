@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.investigation
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.validation.rule.investigation.InvestigationConcludedMissingDecision
 import no.ssb.barn.xsd.SaksinnholdType
 import spock.lang.Narrative
 import spock.lang.Specification
@@ -41,6 +40,10 @@ class InvestigationConcludedMissingDecisionSpec extends Specification {
         investigation.konklusjon.kode = code
         and:
         investigation.vedtaksgrunnlag = decision as List<SaksinnholdType>
+        and:
+        if (resetConclusion) {
+            investigation.konklusjon = null
+        }
 
         when:
         def reportEntries = sut.validate(context)
@@ -55,11 +58,11 @@ class InvestigationConcludedMissingDecisionSpec extends Specification {
         }
 
         where:
-        code | decision                       || errorExpected
-        "1"  | List.of()                      || true
-        "1"  | List.of(new SaksinnholdType()) || false
-        "2"  | List.of()                      || true
-        "2"  | List.of(new SaksinnholdType()) || false
-        "3"  | List.of()                      || false
+        code | decision                | resetConclusion || errorExpected
+        "1"  | []                      | true            || false
+        "1"  | [new SaksinnholdType()] | false           || false
+        "2"  | []                      | false           || true
+        "2"  | [new SaksinnholdType()] | false           || false
+        "3"  | []                      | false           || false
     }
 }

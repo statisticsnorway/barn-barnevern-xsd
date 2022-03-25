@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MeldingType
-import java.util.*
 
 class MessageReporterMissingClarification : AbstractRule(
     WarningLevel.ERROR,
@@ -24,7 +23,7 @@ class MessageReporterMissingClarification : AbstractRule(
                     .map {
                         createReportEntry(
                             "Melder med kode (${it.kode}) mangler presisering",
-                            melding.id as UUID
+                            melding.id!!
                         )
                     }
             }

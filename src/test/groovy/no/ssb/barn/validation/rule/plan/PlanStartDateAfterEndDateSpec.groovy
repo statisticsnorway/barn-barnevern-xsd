@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.plan
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.plan.PlanStartDateAfterEndDate
 import no.ssb.barn.xsd.PlanKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification

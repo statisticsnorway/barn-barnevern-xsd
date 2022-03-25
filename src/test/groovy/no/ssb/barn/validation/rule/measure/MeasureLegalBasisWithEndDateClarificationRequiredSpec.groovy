@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.measure.MeasureLegalBasisWithEndDateClarificationRequired
 import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.OpphevelseType
 import spock.lang.Narrative
@@ -46,8 +45,8 @@ class MeasureLegalBasisWithEndDateClarificationRequiredSpec extends Specificatio
                 "~lov~",
                 kapittel,
                 paragraf,
-                ledd != null ? List.of(ledd) : List.of() as List<String>,
-                List.of())
+                ledd != null ? [ledd] : [] as List<String>,
+                [])
         and:
         measure.opphevelse = null
         and:

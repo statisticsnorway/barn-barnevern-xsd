@@ -6,7 +6,6 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.BegrepsType
 import no.ssb.barn.xsd.UndersokelseType
-import java.util.*
 
 class InvestigationRelatedFromMessage : AbstractRule(
     WarningLevel.ERROR,
@@ -33,7 +32,7 @@ class InvestigationRelatedFromMessage : AbstractRule(
             .map {
                 createReportEntry(
                     "Undersøkelse mangler en relasjon til melding",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

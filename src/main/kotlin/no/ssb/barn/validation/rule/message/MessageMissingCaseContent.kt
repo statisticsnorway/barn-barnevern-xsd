@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MeldingType
-import java.util.*
 
 class MessageMissingCaseContent : AbstractRule(
     WarningLevel.ERROR,
@@ -22,7 +21,7 @@ class MessageMissingCaseContent : AbstractRule(
             .map {
                 createReportEntry(
                     "Melding (${it.id}). Konkludert melding mangler saksinnhold.",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

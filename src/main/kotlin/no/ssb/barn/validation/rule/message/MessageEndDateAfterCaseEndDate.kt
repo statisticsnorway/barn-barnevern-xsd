@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MeldingType
-import java.util.*
 
 class MessageEndDateAfterCaseEndDate : AbstractRule(
     WarningLevel.ERROR,
@@ -28,7 +27,7 @@ class MessageEndDateAfterCaseEndDate : AbstractRule(
                         "Meldingens sluttdato (${it.konklusjon!!.sluttDato})"
                                 + " er etter sakens"
                                 + " sluttdato (${sak.sluttDato})",
-                        it.id as UUID
+                        it.id!!
                     )
                 }
                 .toList()

@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.UndersokelseType
-import java.util.*
 
 class InvestigationDecisionMissingClarification : AbstractRule(
     WarningLevel.ERROR,
@@ -25,7 +24,7 @@ class InvestigationDecisionMissingClarification : AbstractRule(
                     .map {
                         createReportEntry(
                             "Vedtaksgrunnlag med kode (${it.kode}) mangler Presisering",
-                            undersokelse.id as UUID
+                            undersokelse.id!!
                         )
                     }
             }

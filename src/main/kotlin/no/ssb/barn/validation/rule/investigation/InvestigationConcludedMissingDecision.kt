@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.UndersokelseType
-import java.util.*
 
 class InvestigationConcludedMissingDecision : AbstractRule(
     WarningLevel.ERROR,
@@ -25,7 +24,7 @@ class InvestigationConcludedMissingDecision : AbstractRule(
             .map {
                 createReportEntry(
                     "Undersøkelse konkludert med kode ${it.konklusjon!!.kode} mangler vedtaksgrunnlag",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

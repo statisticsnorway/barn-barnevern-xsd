@@ -3,7 +3,6 @@ package no.ssb.barn.validation.rule.investigation
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.investigation.InvestigationRelatedFromMessage
 import no.ssb.barn.xsd.BegrepsType
 import spock.lang.Narrative
 import spock.lang.Specification

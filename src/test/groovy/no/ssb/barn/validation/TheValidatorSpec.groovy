@@ -84,6 +84,7 @@ class TheValidatorSpec extends Specification {
         and:
         WarningLevel.FATAL == validationReport.severity
     }
+
     def "when validating xml structure and invalid xml, receive fatal validation result"() {
         when:
         def validationReport = sut.validateXmlStructure(

@@ -35,7 +35,7 @@ class TiltakTypeJson(
      * NOTE: This constructor does not clone child instances.
      */
     constructor(tiltakType: TiltakType) : this(
-        tiltakType.id as UUID,
+        tiltakType.id!!,
         tiltakType.migrertId,
         tiltakType.startDato as ZonedDateTime,
         tiltakType.lovhjemmel,

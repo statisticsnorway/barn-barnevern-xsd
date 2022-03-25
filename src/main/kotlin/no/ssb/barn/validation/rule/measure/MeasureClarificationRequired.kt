@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
-import java.util.*
 
 class MeasureClarificationRequired : AbstractRule(
     WarningLevel.ERROR,
@@ -24,7 +23,7 @@ class MeasureClarificationRequired : AbstractRule(
             .map {
                 createReportEntry(
                     "Tiltakskategori (${it.kategori.kode}) mangler presisering.",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

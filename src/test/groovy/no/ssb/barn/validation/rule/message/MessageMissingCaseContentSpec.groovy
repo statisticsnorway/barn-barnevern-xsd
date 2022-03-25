@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.message
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.message.MessageMissingCaseContent
 import no.ssb.barn.xsd.SaksinnholdType
 import spock.lang.Narrative
 import spock.lang.Specification
@@ -70,6 +69,5 @@ class MessageMissingCaseContentSpec extends Specification {
         false         | true           || false
         true          | false          || true
         true          | true           || false
-
     }
 }

@@ -6,7 +6,6 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 import no.ssb.barn.xsd.erOmsorgsTiltak
-import java.util.*
 
 class MeasureLegalBasisWithEndDateClarificationRequired : AbstractRule(
     WarningLevel.WARNING,
@@ -28,7 +27,7 @@ class MeasureLegalBasisWithEndDateClarificationRequired : AbstractRule(
             .map {
                 createReportEntry(
                     "Opphevelse av omsorgstiltak mangler presisering",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

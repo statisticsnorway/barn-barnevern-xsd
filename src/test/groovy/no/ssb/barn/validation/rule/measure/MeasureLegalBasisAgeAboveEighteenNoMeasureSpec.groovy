@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.measure.MeasureLegalBasisAgeAboveEighteenNoMeasure
 import no.ssb.barn.xsd.LovhjemmelType
 import spock.lang.Narrative
 import spock.lang.Specification
@@ -44,16 +43,16 @@ class MeasureLegalBasisAgeAboveEighteenNoMeasureSpec extends Specification {
         and:
         sak.fodselsnummer = getMockSocialSecurityNumber(age)
         and:
-        sak.tiltak = List.of(sak.tiltak[0])
+        sak.tiltak = [sak.tiltak[0]]
         and:
         sak.tiltak[0].lovhjemmel = new LovhjemmelType(
                 "~lov~",
                 kapittel,
                 paragraf,
                 ledd != null
-                        ? List.of(ledd)
-                        : List.of() as List<String>,
-                List.of())
+                        ? [ledd]
+                        : [] as List<String>,
+                [])
 
 
         when:

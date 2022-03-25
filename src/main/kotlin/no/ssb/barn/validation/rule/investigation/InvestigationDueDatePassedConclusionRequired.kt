@@ -6,7 +6,6 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.UndersokelseType
 import java.time.ZonedDateTime
-import java.util.*
 
 class InvestigationDueDatePassedConclusionRequired : AbstractRule(
     WarningLevel.WARNING,
@@ -26,7 +25,7 @@ class InvestigationDueDatePassedConclusionRequired : AbstractRule(
                             + " Undersøkelsen startet ${it.startDato}"
                             + " og skal konkluderes da den har pågått i mer enn"
                             + " 6 måneder",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

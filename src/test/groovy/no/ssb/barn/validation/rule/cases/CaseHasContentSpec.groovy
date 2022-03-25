@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.cases
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.validation.rule.cases.CaseHasContent
 import no.ssb.barn.xsd.MeldingType
 import no.ssb.barn.xsd.PlanType
 import no.ssb.barn.xsd.TiltakType
@@ -63,14 +62,14 @@ class CaseHasContentSpec extends Specification {
         }
 
         where:
-        messages                   | measures                  | plans                         || errorExpected
-        List.of()                  | List.of()                 | List.of()                     || true
-        List.of(new MeldingType()) | List.of()                 | List.of()                     || false
-        List.of()                  | List.of(new TiltakType()) | List.of()                     || false
-        List.of()                  | List.of()                 | List.of(createPlanType()) || false
+        messages            | measures           | plans              || errorExpected
+        []                  | []                 | []                 || true
+        [new MeldingType()] | []                 | []                 || false
+        []                  | [new TiltakType()] | []                 || false
+        []                  | []                 | [createPlanType()] || false
     }
 
     def createPlanType() {
-        new PlanType(UUID.randomUUID(), null, ZonedDateTime.now(), null, List.of(), null)
+        new PlanType(UUID.randomUUID(), null, ZonedDateTime.now(), null, [], null)
     }
 }

@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.cases
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.validation.rule.cases.CaseAgeAboveEighteenAndMeasures
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -39,7 +38,7 @@ class CaseAgeAboveEighteenAndMeasuresSpec extends Specification {
         context.rootObject.sak.fodselsnummer = getMockSocialSecurityNumber(age)
         and:
         if (resetMeasures) {
-            context.rootObject.sak.tiltak = List.of()
+            context.rootObject.sak.tiltak = []
         }
 
         when:

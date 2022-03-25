@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.investigation
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.investigation.InvestigationDecisionMissingClarification
 import no.ssb.barn.xsd.SaksinnholdType
 import spock.lang.Narrative
 import spock.lang.Specification
@@ -42,8 +41,7 @@ class InvestigationDecisionMissingClarificationSpec extends Specification {
         and:
         decision.presisering = clarification
         and:
-        context.rootObject.sak.undersokelse[0].vedtaksgrunnlag =
-                List.of(decision)
+        context.rootObject.sak.undersokelse[0].vedtaksgrunnlag = [decision]
 
         when:
         def reportEntries = sut.validate(context)

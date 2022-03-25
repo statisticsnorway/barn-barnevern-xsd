@@ -6,7 +6,6 @@ import no.ssb.barn.util.ValidationUtils
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
-import java.util.*
 
 class MeasureAgeAboveElevenAndInSfo : AbstractRule(
     WarningLevel.WARNING,
@@ -24,7 +23,7 @@ class MeasureAgeAboveElevenAndInSfo : AbstractRule(
                 .map {
                     createReportEntry(
                         "Barnet er over 11 år og i SFO",
-                        it.id as UUID
+                        it.id!!
                     )
                 }
                 .toList()

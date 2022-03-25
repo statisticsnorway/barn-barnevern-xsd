@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.message
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.message.MessageEndDateAfterCaseEndDate
 import spock.lang.*
 
 import java.time.ZonedDateTime

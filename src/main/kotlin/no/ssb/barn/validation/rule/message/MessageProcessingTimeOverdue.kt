@@ -5,7 +5,6 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MeldingType
-import java.util.*
 
 class MessageProcessingTimeOverdue : AbstractRule(
     WarningLevel.WARNING,
@@ -23,7 +22,7 @@ class MessageProcessingTimeOverdue : AbstractRule(
                 createReportEntry(
                     "Fristoverskridelse på behandlingstid for melding,"
                             + " (${it.startDato} -> ${it.konklusjon!!.sluttDato})",
-                    it.id as UUID
+                    it.id!!
                 )
             }
             .toList()

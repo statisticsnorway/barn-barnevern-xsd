@@ -2,7 +2,6 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.measure.MeasureMultipleAllocationsWithinPeriod
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
