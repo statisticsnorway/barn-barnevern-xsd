@@ -16,6 +16,20 @@
 - [Oversendelse til fylkesnemnd](#oversendelse-til-fylkesnemnd)
 
 
+## <a name="definisjoner">Definisjoner</a>
+
+<a name="omsorgstiltak">Omsorgstiltak</a>
+### Omsorgstiltak
+Et Tiltak er et Omsorgsstiltak dersom en av følgende:
+- Lovhjemmel/Kapittel = 4 og Lovhjemmel/Kapittel = 12
+- Lovhjemmel/Kapittel = 4 og Lovhjemmel/Kapittel = 8 og Lovhjemmel/Ledd er én av 2 eller 3
+- Lovhjemmel/Kapittel = 4 og Lovhjemmel/Kapittel = 8 og én av JmfrLovhjemmel/Kapittel = 4 og JmfrLovhjemmel/Kapittel = 12
+
+<a name="plasseringstiltak">Plasseringstiltak</a>
+### Plasseringstiltak
+Et Tiltak er et plasseringstiltak dersom Kategori/@Kode er en av følgende koder:<br/>
+1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2<br/>
+
 
 
 ## <a name="filbeskrivelse">Filbeskrivelse</a>
@@ -363,11 +377,62 @@ Alvorlighetsgrad: Warning
 
 ## <a name="vedtak">Vedtak</a> 
 
-### X Vedtak Kontroll 2a: StartDato er etter SluttDato
+### [TODO] Vedtak Kontroll 2a: StartDato er etter SluttDato
 
-### X Vedtak Kontroll 2c: SluttDato mot sakens SluttDato
+Gitt at man har et Vedtak der StartDato og Konklusjon/SluttDato finnes<br/>
+når StartDato er etter SluttDato<br/>
+så gi feilmeldingen "Vedtakets startdato {StartDato} er etter sluttdato {Konklusjon/SluttDato}"
 
-### X Vedtak Kontroll 2e: StartDato mot sakens StartDato
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/DecisionStartDateAfterEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/DecisionStartDateAfterEndDate.kt)
+
+
+
+### [TODO] Vedtak Kontroll 2c: SluttDato mot sakens SluttDato
+
+Gitt at man har et Vedtak der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
+når vedtakets SluttDato er etter sakens SluttDato<br/>
+så gi feilmeldingen "Vedtakets sluttdato {Konklusjon/SluttDato} er etter Virksomhetens sluttdato {SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/DecisionEndDateAfterCaseEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/DecisionEndDateAfterCaseEndDate.kt)
+
+
+
+### [TODO] Vedtak Kontroll 2e: StartDato er før sakens StartDato
+
+Gitt at man har et Vedtak der StartDato finnes og sak der StartDato finnes<br/>
+når vedtakets StartDato er før sakens StartDato <br/>
+så gi feilmeldingen "Vedtakets startdato {StartDato} er før sakens startdato {StartDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/DecisionStartDateBeforeCaseStartDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/DecisionStartDateBeforeCaseStartDate.kt)
+
+
+
+
+
+### [TODO] Vedtak Kontroll 2f: Krav sin StartDato er etter SluttDato
+
+Gitt at man har et Vedtak der Krav finnes StartDato og Konklusjon/SluttDato finnes<br/>
+når for hvert krav validér at kravets StartDato er etter SluttDato <br/>
+så gi feilmeldingen "Kravets startdato {StartDato} er etter sluttdato {Krav/Konklusjon/SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/DecisionStartDateBeforeCaseStartDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/DecisionStartDateBeforeCaseStartDate.kt)
+
 
 
 
@@ -442,9 +507,9 @@ Alvorlighetsgrad: Warning
 
 ### Tiltak Kontroll 7: Kontroll om presisering av tiltakskategori
 
-Gitt at man har et Tiltak der Kategori/Kode er en følgende koder:<br/>
-1.99, 2.99, 3.7, 3.99, 4.99, 5.99, 6.99, 7.99 eller 8.99
-når presisering mangler
+Gitt at man har et Tiltak der Kategori/Kode er en følgende koder:
+1.99, 2.99, 3.7, 3.99, 4.99, 5.99, 6.99, 7.99 eller 8.99<br/>
+når presisering mangler<br/>
 så gi feilmelding "Tiltakskategori (kode) mangler presisering."
 
 Alvorlighetsgrad: ERROR
@@ -470,10 +535,9 @@ Alvorlighetsgrad: ERROR
 
 ### Tiltak Kontroll 9: Flere plasseringstiltak er oppgitt i samme tidsperiode
 
-Gitt at man har 2 eller flere Tiltak der Kategori/Kode er en følgende koder:<br/>
-1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99 eller 8.2<br/>
-og for de tiltakene der SluttDato mangler så brukes DatoUttrekk i stedet<br/>
-når tiltak1 overlapper tiltak2 med mer enn 90 dager<br/>
+Gitt at man har 2 eller flere [Plasseringstiltak](#plasseringstiltak)<br/>
+og for de plasseringstiltakene der SluttDato mangler så brukes DatoUttrekk i stedet<br/>
+når plasseringstiltak1 overlapper plasseringstiltak2 med mer enn 90 dager<br/>
 så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 90 dager."
 
 Alvorlighetsgrad: Warning
@@ -486,7 +550,7 @@ Alvorlighetsgrad: Warning
 
 #### Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse
 
-Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder) og<br/>
+Gitt at man har UttrekkDato, en Sak med fødselsdato (slik at man kan utlede alder) og [Omsorgstiltak](#omsorgstiltak) og<br/>
 tiltakets Lovhjemmel eller JmfrLovhjemmel sitt Kapittel er 4 og<br/>
 Paragraf er 12<br/>
 eller Paragraf er 8 og Ledd er 2 eller 3<br/>
@@ -573,25 +637,53 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanStartDateBeforeCaseStartDate.kt)
 
 
+### [TODO] Plan Kontroll 2f: UtfortDato er etter sakens SluttDato
+
+Gitt at man har en Plan der Evaluering/UtfortDato finnes og Konklusjon/SluttDato finnes<br/>
+når UtfortDato er etter SluttDato<br/>
+så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er etter sluttdato {Konklusjon/SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanEvaluationExecutedDateAfterEndDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanEvaluationExecutedDateAfterEndDate.kt)
+
+
+
+### [TODO] Plan Kontroll 2g: UtfortDato er før sakens StartDato
+
+Gitt at man har en Plan der Evaluering/UtfortDato finnes<br/>
+når UtfortDato er før StartDato<br/>
+så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er før startdato {StartDato}"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/PlanEvaluationExecutedDateBeforeStartDateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/PlanEvaluationExecutedDateBeforeStartDate.kt)
+
+
+
 
 ## <a name="ettervern">Ettervern</a> 
 
-### X Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
+### [TODO] Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
 
-### X Ettervern Kontroll 2c: SluttDato mot sakens SluttDato
+### [TODO] Ettervern Kontroll 2c: SluttDato mot sakens SluttDato
 
-### X Ettervern Kontroll 2e: StartDato mot sakens StartDato
+### [TODO] Ettervern Kontroll 2e: StartDato mot sakens StartDato
 
 
 ## <a name="flytting">Flytting</a> 
 
-### X Plan Kontroll 2c: SluttDato mot sakens SluttDato
+### [TODO] Plan Kontroll 2c: SluttDato mot sakens SluttDato
 
-### X Plan Kontroll 2f: SluttDato mot sakens StartDato
+### [TODO] Plan Kontroll 2f: SluttDato mot sakens StartDato
 
 
 ## <a name="oversendelse-til-fylkesnemnd">Oversendelse til fylkesnemnd</a> 
 
-### X Plan Kontroll 2c: StartDato mot sakens SluttDato
+### [TODO] Plan Kontroll 2c: StartDato mot sakens SluttDato
 
-### X Plan Kontroll 2e: StartDato mot sakens StartDato
+### [TODO] Plan Kontroll 2e: StartDato mot sakens StartDato
