@@ -34,73 +34,70 @@ data class KategoriType(
 
         private val codeList =
             mapOf(
-                Pair(
-                    "1.1",
-                    "Barnvernsinstitusjoner <br>" +
-                            "(gjelder alle typer barnevernsinstitusjoner)"
-                ),
-                Pair("1.2", "Plassering i institusjon etter annen lov"),
-                Pair("1.99", otherMeasures),
-                Pair("2.1", "Fosterhjem i familie og nære nettverk"),
-                Pair("2.2", "Fosterhjem utenfor familie og nære nettverk"),
-                Pair("2.3", "Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)"),
-                Pair("2.4", "Fosterhjem etter § 4-27"),
-                Pair("2.5", "Beredskapshjem utenom familie og nære nettverk"),
-                Pair("2.6", "Midlertidig hjem i familie og nære nettverk"),
-                Pair("2.99", otherMeasures),
-                Pair("3.1", "MST"),
-                Pair("3.2", "PMTO"),
-                Pair("3.3", "FFT"),
-                Pair("3.4", "Weber Stratton"),
-                Pair("3.5", "ICDP"),
-                Pair("3.6", "Marte Meo"),
-                Pair("3.7", "Andre hjemmebaserte tiltak <br>" +
-                            "(gjelder andre tiltak i hjemmet som følger en spesiell <br>" +
-                            "metodikk og som gjenomføres på en systematisk måte) <br>" +
-                            "(krever presisering)"),
-                Pair("3.8", "Sentre for foreldre og barn"),
-                Pair("3.9", "Vedtak om råd og veiledning"),
-                Pair("3.10", "Hjemmekonsulent/miljøarbeider"),
-                Pair("3.99", otherMeasures),
-                Pair("4.1", "Barnehage"),
-                Pair("4.2", "SFO/ Aktivitetsskole"),
-                Pair("4.3", "Fritidsaktiviteter"),
-                Pair("4.4", "Økonomisk hjelp for øvrig <br>(gjelder økonomisk hjelp som ikke inngår i 4.1, 4.2 og 4.3)"),
-                Pair("4.5", "Besøkshjem/ avlastningstiltak"),
-                Pair("4.6", "Støttekontakt"),
-                Pair("4.7", "Samtalegrupper/ barnegrupper <br>"
+                "1.1" to "Barnvernsinstitusjoner <br>" +
+                        "(gjelder alle typer barnevernsinstitusjoner)",
+                "1.2" to "Plassering i institusjon etter annen lov",
+                "1.99" to otherMeasures,
+                "2.1" to "Fosterhjem i familie og nære nettverk",
+                "2.2" to "Fosterhjem utenfor familie og nære nettverk",
+                "2.3" to "Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)",
+                "2.4" to "Fosterhjem etter § 4-27",
+                "2.5" to "Beredskapshjem utenom familie og nære nettverk",
+                "2.6" to "Midlertidig hjem i familie og nære nettverk",
+                "2.99" to otherMeasures,
+                "3.1" to "MST",
+                "3.2" to "PMTO",
+                "3.3" to "FFT",
+                "3.4" to "Weber Stratton",
+                "3.5" to "ICDP",
+                "3.6" to "Marte Meo",
+                "3.7" to "Andre hjemmebaserte tiltak <br>" +
+                        "(gjelder andre tiltak i hjemmet som følger en spesiell <br>" +
+                        "metodikk og som gjenomføres på en systematisk måte) <br>" +
+                        "(krever presisering)",
+                "3.8" to "Sentre for foreldre og barn",
+                "3.9" to "Vedtak om råd og veiledning",
+                "3.10" to "Hjemmekonsulent/miljøarbeider",
+                "3.99" to otherMeasures,
+                "4.1" to "Barnehage",
+                "4.2" to "SFO/ Aktivitetsskole",
+                "4.3" to "Fritidsaktiviteter",
+                "4.4" to "Økonomisk hjelp for øvrig <br>(gjelder økonomisk hjelp som ikke inngår i 4.1, 4.2 og 4.3)",
+                "4.5" to "Besøkshjem/ avlastningstiltak",
+                "4.6" to "Støttekontakt",
+                "4.7" to ("Samtalegrupper/ barnegrupper <br>"
                         + "(gjelder strukturerte samtale- og aktivitetstilbud for aldersbestemte grupper)."),
-                Pair("4.8", "Utdanning og arbeid <br>"
-                            + "(gjelder oppfølging og støtte for å styrke barn og <br>"
-                            + "ungdoms tilknytning til skole eller arbeid)"),
-                Pair("4.9", "ART"),
-                Pair("4.99", otherMeasures),
-                Pair("5.1", "Frivillig tilsyn i hjemmet <br>"
-                            + "(gjelder der foreldre har samtykket til tilsyn)"),
-                Pair("5.2", "Pålagt tilsyn i hjemmet <br>(gjelder der tilsyn skjer etter vedtak i fylkesnemnd)"),
-                Pair("5.3", "Tilsyn under samvær"),
-                Pair("5.4", "Ruskontroll"),
-                Pair("5.99", otherMeasures),
-                Pair("6.1", "Familieråd"),
-                Pair("6.2", "Nettverksmøter <br>" +
-                            "(Strukturerte dialogmøter som består av <br>" +
-                            "barneverntjenesten, foreldre og ungdom og andre personer <br>" +
-                            "som er viktige i ungdommens liv. Invitasjon av deltakere <br>" +
-                            "skjer i samråd mellom barneverntjenesten, ungdom og foreldre)"),
-                Pair("6.3", "Individuell plan"),
-                Pair("6.4", "Deltakelse i ansvarsgruppe"),
-                Pair("6.5", "Samarbeid om utdanning og arbeid"),
-                Pair("6.99", otherMeasures),
-                Pair("7.1", "Bvl § 4-10 medisinsk undersøkelse og behandling"),
-                Pair("7.2", "Bvl § 4-11 behandling av barn med særlige opplæringsbehov"),
-                Pair("7.3", "Psykisk helsehjelp for barn og unge <br>" +
-                            "(Gjelder ikke ved henvisninger, men når barn får behandling <br>" +
-                            "av psykolog eller innen psykisk helsevern/BUP)"),
-                Pair("7.99", otherMeasures),
-                Pair("8.1", "Økonomisk hjelp ved etablering i egen bolig/ hybel (Ikke husleie)"),
-                Pair("8.2", "Bolig med oppfølging (inkluderer også bofellesskap)"),
-                Pair("8.3", "Botreningskurs"),
-                Pair("8.99", otherMeasures)
+                "4.8" to ("Utdanning og arbeid <br>"
+                        + "(gjelder oppfølging og støtte for å styrke barn og <br>"
+                        + "ungdoms tilknytning til skole eller arbeid)"),
+                "4.9" to "ART",
+                "4.99" to otherMeasures,
+                "5.1" to ("Frivillig tilsyn i hjemmet <br>"
+                        + "(gjelder der foreldre har samtykket til tilsyn)"),
+                "5.2" to "Pålagt tilsyn i hjemmet <br>(gjelder der tilsyn skjer etter vedtak i fylkesnemnd)",
+                "5.3" to "Tilsyn under samvær",
+                "5.4" to "Ruskontroll",
+                "5.99" to otherMeasures,
+                "6.1" to "Familieråd",
+                "6.2" to "Nettverksmøter <br>" +
+                        "(Strukturerte dialogmøter som består av <br>" +
+                        "barneverntjenesten, foreldre og ungdom og andre personer <br>" +
+                        "som er viktige i ungdommens liv. Invitasjon av deltakere <br>" +
+                        "skjer i samråd mellom barneverntjenesten, ungdom og foreldre)",
+                "6.3" to "Individuell plan",
+                "6.4" to "Deltakelse i ansvarsgruppe",
+                "6.5" to "Samarbeid om utdanning og arbeid",
+                "6.99" to otherMeasures,
+                "7.1" to "Bvl § 4-10 medisinsk undersøkelse og behandling",
+                "7.2" to "Bvl § 4-11 behandling av barn med særlige opplæringsbehov",
+                "7.3" to "Psykisk helsehjelp for barn og unge <br>" +
+                        "(Gjelder ikke ved henvisninger, men når barn får behandling <br>" +
+                        "av psykolog eller innen psykisk helsevern/BUP)",
+                "7.99" to otherMeasures,
+                "8.1" to "Økonomisk hjelp ved etablering i egen bolig/ hybel (Ikke husleie)",
+                "8.2" to "Bolig med oppfølging (inkluderer også bofellesskap)",
+                "8.3" to "Botreningskurs",
+                "8.99" to otherMeasures
             )
                 .map {
                     CodeListItem(
@@ -112,10 +109,10 @@ data class KategoriType(
 
         private val tiltakOpphevelseList =
             mapOf(
-                Pair("1", "Barnet tilbakeført til foreldre/ familien jamfør § 4-21"),
-                Pair("2", "Barnet har fylt 18 år"),
-                Pair("3", "Adopsjon § 4-20"),
-                Pair("4", "Annet (krever presisering)")
+                "1" to "Barnet tilbakeført til foreldre/ familien jamfør § 4-21",
+                "2" to "Barnet har fylt 18 år",
+                "3" to "Adopsjon § 4-20",
+                "4" to "Annet (krever presisering)"
             )
                 .map {
                     CodeListItem(it.key, it.value, validFrom)

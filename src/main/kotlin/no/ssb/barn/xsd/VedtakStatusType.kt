@@ -33,22 +33,10 @@ data class VedtakStatusType(
 
         private val codeList =
             mapOf(
-                Pair(
-                    "1",
-                    "Godkjent"
-                ),
-                Pair(
-                    "2",
-                    "Begjæring oversendt nemnd"
-                ),
-                Pair(
-                    "3",
-                    "Utgår / Bortfalt etter BVL"
-                ),
-                Pair(
-                    "4",
-                    "Avslått / Avsluttet"
-                )
+                "1" to "Godkjent",
+                "2" to "Begjæring oversendt nemnd",
+                "3" to "Utgår / Bortfalt etter BVL",
+                "4" to "Avslått / Avsluttet"
             )
                 .map { CodeListItem(it.key, it.value, validFrom) }
     }

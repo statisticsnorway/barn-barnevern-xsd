@@ -30,18 +30,9 @@ data class EttervernKonklusjonType(
 
         private val codeList =
             mapOf(
-                Pair(
-                    "1",
-                    "Gitt tilbud om tiltak, akseptert"
-                ),
-                Pair(
-                    "2",
-                    "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak"
-                ),
-                Pair(
-                    "3",
-                    "Ikke lenger tiltak etter BVL, etter brukers ønske"
-                )
+                "1" to "Gitt tilbud om tiltak, akseptert",
+                "2" to "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak",
+                "3" to "Ikke lenger tiltak etter BVL, etter brukers ønske"
             )
                 .map {
                     CodeListItem(it.key, it.value, validFrom)

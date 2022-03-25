@@ -45,43 +45,19 @@ data class FlyttingType(
 
         private val codeList =
             mapOf(
-                Pair(
-                    "1.1",
-                    "Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører"
-                ),
-                Pair(
-                    "1.2",
-                    "Barnet blir myndig"
-                ),
-                Pair(
-                    "1.3",
-                    "Fosterforeldre klarer ikke å dekke barnets behov <br>" +
-                            "(forhold ved fosterhjemmet)"
-                ),
-                Pair(
-                    "1.4",
-                    "Barnet har behov for annet plasseringssted <br>" +
-                            "(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)"
-                ),
-                Pair(
-                    "1.5",
-                    "Andre grunner; spesifiser. <br>" +
-                            "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.)."
-                ),
-                Pair(
-                    "2.1",
-                    "Barnet har behov fosterforeldre ikke kan dekke"
-                ),
-                Pair(
-                    "2.2",
-                    "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)"
-                ),
-                Pair(
-                    "2.3",
-                    "Andre grunner; spesifiser <br>" +
-                            "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>" +
-                            "manglende eller lite effektiv veiledning, mv.)."
-                )
+                "1.1" to "Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører",
+                "1.2" to "Barnet blir myndig",
+                "1.3" to "Fosterforeldre klarer ikke å dekke barnets behov <br>" +
+                        "(forhold ved fosterhjemmet)",
+                "1.4" to "Barnet har behov for annet plasseringssted <br>" +
+                        "(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)",
+                "1.5" to "Andre grunner; spesifiser. <br>" +
+                        "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).",
+                "2.1" to "Barnet har behov fosterforeldre ikke kan dekke",
+                "2.2" to "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)",
+                "2.3" to "Andre grunner; spesifiser <br>" +
+                        "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>" +
+                        "manglende eller lite effektiv veiledning, mv.)."
             )
                 .map {
                     CodeListItem(it.key, it.value, validFrom)

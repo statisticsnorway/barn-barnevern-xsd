@@ -35,13 +35,10 @@ data class MeldingKonklusjonType(
         private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
 
         private val codeList = mapOf(
-            Pair("1", "Henlagt"),
-            Pair(
-                "2",
-                "Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse"
-            ),
-            Pair("3", "Henlagt pga. aktive tiltak"),
-            Pair("4", "Melding i pågående undersøkelse")
+            "1" to "Henlagt",
+            "2" to "Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse",
+            "3" to "Henlagt pga. aktive tiltak",
+            "4" to "Melding i pågående undersøkelse"
         )
             .map { CodeListItem(it.key, it.value, validFrom) }
     }
