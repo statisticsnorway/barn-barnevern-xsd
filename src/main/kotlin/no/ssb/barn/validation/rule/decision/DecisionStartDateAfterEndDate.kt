@@ -19,7 +19,7 @@ class DecisionStartDateAfterEndDate : AbstractRule(
             }
             .map {
                 createReportEntry(
-                    "Vedtakets startdato (${it.startDato}) er etter sluttdato (${it.konklusjon?.sluttDato})",
+                    "Vedtakets startdato (${it.startDato}) er etter sluttdato (${it.konklusjon!!.sluttDato})",
                     it.id!!
                 )
             }

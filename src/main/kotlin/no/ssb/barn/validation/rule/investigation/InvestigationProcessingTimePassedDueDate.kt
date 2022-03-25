@@ -6,7 +6,6 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.BegrepsType
 import no.ssb.barn.xsd.UndersokelseType
-import java.time.ZonedDateTime
 
 class InvestigationProcessingTimePassedDueDate : AbstractRule(
     WarningLevel.WARNING,
@@ -35,7 +34,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                 if (investigation.konklusjon != null)
                     return@map null
 
-                val currentDate = context.rootObject.datoUttrekk as ZonedDateTime
+                val currentDate = context.rootObject.datoUttrekk!!
 
                 if (currentDate.isAfter(message.startDato!!.plusDays(7 + 90))
                     && (investigation.utvidetFrist == null
