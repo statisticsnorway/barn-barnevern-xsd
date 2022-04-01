@@ -1,7 +1,7 @@
 package no.ssb.barn.validation.rule.cases
 
-import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MeldingType
 import no.ssb.barn.xsd.PlanType
 import no.ssb.barn.xsd.TiltakType
@@ -10,7 +10,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.ZonedDateTime
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -70,6 +70,6 @@ class CaseHasContentSpec extends Specification {
     }
 
     def createPlanType() {
-        new PlanType(UUID.randomUUID(), null, ZonedDateTime.now(), null, [], null)
+        new PlanType(UUID.randomUUID(), null, LocalDate.now(), null, [], null)
     }
 }

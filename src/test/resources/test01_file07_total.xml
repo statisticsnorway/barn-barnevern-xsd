@@ -3,18 +3,18 @@
            ForrigeId="b8c7cd5a-376b-405c-9f0f-2cf1002752d9">
     <Fagsystem Versjon="1.0" Navn="OJJ's Manuell Touch" Leverandor="SSB"/>
     <Avgiver Kommunenummer="3401" Kommunenavn="Kongsvinger kommune" Organisasjonsnummer="944117784"/>
-    <Sak StartDato="2021-01-01T20:01:01+01:00" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1"
+    <Sak StartDato="2021-01-01" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1"
          Fodselsnummer="02011088123" Fodseldato="2010-01-02" Kjonn="1">
-        <Melding StartDato="2021-01-01T12:34:56+01:00" Id="bb6b82ea-c3da-4882-b591-cccd833c262d">
+        <Melding StartDato="2021-01-01" Id="bb6b82ea-c3da-4882-b591-cccd833c262d">
             <Melder Kode="1"/>
             <Saksinnhold Kode="1"/>
-            <Konklusjon SluttDato="2021-01-08T12:34:56+01:00" Kode="2"/>
+            <Konklusjon SluttDato="2021-01-08" Kode="2"/>
         </Melding>
-        <Undersokelse StartDato="2021-01-08T12:34:56+01:00" Id="7317a453-2d65-465a-9589-519311d66579">
-            <Konklusjon SluttDato="2021-04-08T12:34:56+01:00" Kode="1"/>
+        <Undersokelse StartDato="2021-01-08" Id="7317a453-2d65-465a-9589-519311d66579">
+            <Konklusjon SluttDato="2021-04-08" Kode="1"/>
         </Undersokelse>
-        <Plan Id="7317a453-2d65-465a-9589-519311d66578" StartDato="2021-07-09T12:34:56+01:00" Plantype="1"/>
-        <Tiltak Id="bb6b82ea-c3da-4882-b591-cccd833c262f" StartDato="2021-04-08T12:34:56+01:00">
+        <Plan Id="7317a453-2d65-465a-9589-519311d66578" StartDato="2021-07-09" Plantype="1"/>
+        <Tiltak Id="bb6b82ea-c3da-4882-b591-cccd833c262f" StartDato="2021-04-08">
             <Lovhjemmel>
                 <Lov>BVL</Lov>
                 <Kapittel>4</Kapittel>
@@ -23,27 +23,27 @@
             </Lovhjemmel>
             <Kategori Kode="3.10"/>
             <Opphevelse Kode="1" />
-            <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
+            <Konklusjon SluttDato="2021-07-09"/>
         </Tiltak>
-        <Vedtak Id="bb6b82ea-c3da-4882-b591-cccd833c262b" StartDato="2021-04-08T12:34:56+01:00">
+        <Vedtak Id="bb6b82ea-c3da-4882-b591-cccd833c262b" StartDato="2021-04-08">
             <Lovhjemmel>
                 <Lov>BVL</Lov>
                 <Kapittel>4</Kapittel>
                 <Paragraf>12</Paragraf>
                 <Ledd>1</Ledd>
             </Lovhjemmel>
-            <Status EndretDato="2021-04-09T12:34:56+01:00" Kode="3"/>
-            <Konklusjon SluttDato="2021-04-09T12:34:56+01:00"/>
+            <Status Id="7317a453-2d65-465a-9589-b7af12085eed" EndretDato="2021-04-09" Kode="3"/>
+            <Konklusjon SluttDato="2021-04-09"/>
         </Vedtak>
-        <Vedtak Id="bb6b82ea-c3da-4882-b591-cccd833c262a" StartDato="2021-07-08T12:34:56+01:00">
+        <Vedtak Id="bb6b82ea-c3da-4882-b591-cccd833c262a" StartDato="2021-07-08">
             <Lovhjemmel>
                 <Lov>BVL</Lov>
                 <Kapittel>4</Kapittel>
                 <Paragraf>12</Paragraf>
                 <Ledd>1</Ledd>
             </Lovhjemmel>
-            <Status EndretDato="2021-07-09T12:34:56+01:00" Kode="3"/>
-            <Konklusjon SluttDato="2021-07-09T12:34:56+01:00"/>
+            <Status Id="7317a453-2d65-465a-9589-519311d66579" EndretDato="2021-07-09" Kode="3"/>
+            <Konklusjon SluttDato="2021-07-09"/>
         </Vedtak>
         <Relasjon FraType="Melding" FraId="bb6b82ea-c3da-4882-b591-cccd833c262d"
                   Id="bb6b82ea-c3da-4882-b591-cccd833c262e"

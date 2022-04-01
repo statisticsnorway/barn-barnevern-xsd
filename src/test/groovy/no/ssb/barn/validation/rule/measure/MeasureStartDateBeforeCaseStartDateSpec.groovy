@@ -4,7 +4,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import spock.lang.*
 
-import java.time.ZonedDateTime
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -49,9 +49,9 @@ class MeasureStartDateBeforeCaseStartDateSpec extends Specification {
         }
 
         where:
-        businessStartDate                 | measureStartDate                  || errorExpected
-        ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               || false
-        ZonedDateTime.now()               | ZonedDateTime.now()               || false
-        ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) || true
+        businessStartDate             | measureStartDate              || errorExpected
+        LocalDate.now().minusYears(1) | LocalDate.now()               || false
+        LocalDate.now()               | LocalDate.now()               || false
+        LocalDate.now()               | LocalDate.now().minusYears(1) || true
     }
 }

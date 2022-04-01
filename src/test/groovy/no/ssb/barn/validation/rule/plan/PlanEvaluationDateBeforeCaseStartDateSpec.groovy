@@ -7,7 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.ZonedDateTime
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -65,9 +65,9 @@ class PlanEvaluationDateBeforeCaseStartDateSpec extends Specification {
         }
 
         where:
-        caseStartDate                      | executedDate                    | resetEvaluation || errorExpected
-        ZonedDateTime.now().plusSeconds(1) | ZonedDateTime.now()             | false           || true
-        ZonedDateTime.now()                | ZonedDateTime.now().plusDays(1) | false           || false
-        ZonedDateTime.now()                | ZonedDateTime.now().plusDays(1) | true            || false
+        caseStartDate               | executedDate                | resetEvaluation || errorExpected
+        LocalDate.now().plusDays(1) | LocalDate.now()             | false           || true
+        LocalDate.now()             | LocalDate.now().plusDays(1) | false           || false
+        LocalDate.now()             | LocalDate.now().plusDays(1) | true            || false
     }
 }

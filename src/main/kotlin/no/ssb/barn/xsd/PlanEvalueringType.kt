@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
-import java.time.ZonedDateTime
+import no.ssb.barn.converter.LocalDateAdapter
+import java.time.LocalDate
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "Evaluering", propOrder = ["utfortDato"])
 data class PlanEvalueringType (
         @field:XmlAttribute(name = "UtfortDato", required = true)
-        @field:XmlSchemaType(name = "dateTime")
+        @field:XmlSchemaType(name = "date")
         @field:XmlJavaTypeAdapter(
-                LocalDateTimeAdapter::class
+                LocalDateAdapter::class
         )
-        var utfortDato: ZonedDateTime? = null
+        var utfortDato: LocalDate? = null
 )

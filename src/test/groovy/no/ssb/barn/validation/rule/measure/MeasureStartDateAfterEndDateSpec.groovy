@@ -7,7 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.ZonedDateTime
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -59,10 +59,10 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
         }
 
         where:
-        measureStartDate                  | measureEndDate                    | removeRepeal || errorExpected
-        ZonedDateTime.now().minusYears(1) | ZonedDateTime.now()               | false        || false
-        ZonedDateTime.now()               | ZonedDateTime.now()               | false        || false
-        ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) | false        || true
-        ZonedDateTime.now()               | ZonedDateTime.now().minusYears(1) | true         || false
+        measureStartDate              | measureEndDate                | removeRepeal || errorExpected
+        LocalDate.now().minusYears(1) | LocalDate.now()               | false        || false
+        LocalDate.now()               | LocalDate.now()               | false        || false
+        LocalDate.now()               | LocalDate.now().minusYears(1) | false        || true
+        LocalDate.now()               | LocalDate.now().minusYears(1) | true         || false
     }
 }

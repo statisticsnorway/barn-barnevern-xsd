@@ -34,7 +34,7 @@ class InvestigationProcessingTimePassedDueDate : AbstractRule(
                 if (investigation.konklusjon != null)
                     return@map null
 
-                val currentDate = context.rootObject.datoUttrekk!!
+                val currentDate = context.rootObject.datoUttrekk!!.toLocalDate()
 
                 if (currentDate.isAfter(message.startDato!!.plusDays(7 + 90))
                     && (investigation.utvidetFrist == null

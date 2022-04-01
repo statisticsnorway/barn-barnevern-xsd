@@ -4,7 +4,7 @@ import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import spock.lang.*
 
-import java.time.ZonedDateTime
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -58,9 +58,9 @@ class MessageEndDateAfterCaseEndDateSpec extends Specification {
         }
 
         where:
-        businessEndDate                    | messageEndDate                  | resetConclusion || errorExpected
-        ZonedDateTime.now().plusSeconds(1) | ZonedDateTime.now()             | false           || false
-        ZonedDateTime.now()                | ZonedDateTime.now().plusDays(1) | false           || true
-        ZonedDateTime.now()                | ZonedDateTime.now().plusDays(1) | true            || false
+        businessEndDate | messageEndDate              | resetConclusion || errorExpected
+        LocalDate.now() | LocalDate.now()             | false           || false
+        LocalDate.now() | LocalDate.now().plusDays(1) | false           || true
+        LocalDate.now() | LocalDate.now().plusDays(1) | true            || false
     }
 }

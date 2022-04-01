@@ -1,8 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
-import java.time.ZonedDateTime
+import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -17,10 +17,10 @@ data class EttervernType(
         var id: UUID? = null,
 
         @field:XmlAttribute(name = "TilbudSendtDato", required = true)
-        @field:XmlSchemaType(name = "dateTime")
+        @field:XmlSchemaType(name = "date")
         @field:XmlJavaTypeAdapter(
-                LocalDateTimeAdapter::class)
-        var tilbudSendtDato: ZonedDateTime? = null,
+                LocalDateAdapter::class)
+        var tilbudSendtDato: LocalDate? = null,
 
         @field:XmlElement(name = "Konklusjon")
         var konklusjon: EttervernKonklusjonType? = null

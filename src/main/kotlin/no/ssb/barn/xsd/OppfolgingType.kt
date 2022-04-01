@@ -1,8 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
-import java.time.ZonedDateTime
+import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -17,9 +17,9 @@ data class OppfolgingType(
     var id: UUID? = null,
 
     @field:XmlAttribute(name = "UtfortDato", required = true)
-    @field:XmlSchemaType(name = "dateTime")
+    @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateTimeAdapter::class
+        LocalDateAdapter::class
     )
-    var utfortDato: ZonedDateTime? = null
+    var utfortDato: LocalDate? = null
 )

@@ -3,10 +3,10 @@
 <Barnevern Id="5a210829-3709-4178-b7bf-084362c42d26" DatoUttrekk="2021-03-09T02:00:00" ForrigeId="70d71de9-7b67-4d2d-a31b-9179bc91b790">
 	<Fagsystem Versjon="1.0" Navn="OJJ's Manuell Touch" Leverandor="SSB"/>
 	<Avgiver Kommunenummer="3401" Kommunenavn="Kongsvinger kommune" Organisasjonsnummer="944117784"/>
-	<Sak StartDato="2021-01-01T20:01:01+01:00" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1" Fodselsnummer="02011088123" Fodseldato="2010-01-02" Kjonn="1">
-		<Undersokelse StartDato="2021-01-08T12:34:56+01:00" Id="b6ef9c26-c3b9-4679-8b61-af5437891488">
+	<Sak StartDato="2021-01-01" Id="7317a453-2d65-465a-9589-519311d66579" Journalnummer="test1" Fodselsnummer="02011088123" Fodseldato="2010-01-02" Kjonn="1">
+		<Undersokelse StartDato="2021-01-08" Id="b6ef9c26-c3b9-4679-8b61-af5437891488">
 			<Vedtaksgrunnlag Kode="3"/>
-			<Konklusjon SluttDato="2021-03-08T12:34:56+01:00" Kode="1"/>
+			<Konklusjon SluttDato="2021-03-08" Kode="1"/>
 		</Undersokelse>
 	</Sak>
 </Barnevern>

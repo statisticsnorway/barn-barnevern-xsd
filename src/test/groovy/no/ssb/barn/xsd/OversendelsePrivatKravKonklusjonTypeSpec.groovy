@@ -2,13 +2,13 @@ package no.ssb.barn.xsd
 
 import spock.lang.Specification
 
-import java.time.ZonedDateTime
+import java.time.LocalDate
 
 class OversendelsePrivatKravKonklusjonTypeSpec extends Specification {
 
     def "when constructor no exceptions expected"() {
         given:
-        def date = ZonedDateTime.now()
+        def date = LocalDate.now()
 
         when:
         def sut = new OversendelsePrivatKravKonklusjonType(date)

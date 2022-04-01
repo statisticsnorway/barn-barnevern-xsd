@@ -4,6 +4,7 @@ import no.ssb.barn.xsd.TiltakType
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.Year
 import java.time.ZonedDateTime
 import java.util.regex.Pattern
@@ -17,10 +18,10 @@ object ValidationUtils {
     ): Boolean {
 
         val outerRange =
-            outerMeasure.startDato!!.rangeTo(outerMeasure.konklusjon?.sluttDato ?: datoUttrekk)
+            outerMeasure.startDato!!.rangeTo(outerMeasure.konklusjon?.sluttDato ?: datoUttrekk.toLocalDate())
 
         val innerRange =
-            innerMeasure.startDato!!.rangeTo(innerMeasure.konklusjon?.sluttDato ?: datoUttrekk)
+            innerMeasure.startDato!!.rangeTo(innerMeasure.konklusjon?.sluttDato ?: datoUttrekk.toLocalDate())
 
         return areOverlapping(outerRange, innerRange)
                 && getMaxDate(outerRange.start, innerRange.start)
@@ -35,17 +36,17 @@ object ValidationUtils {
     }
 
     private fun areOverlapping(
-        first: ClosedRange<ZonedDateTime>, second: ClosedRange<ZonedDateTime>
+        first: ClosedRange<LocalDate>, second: ClosedRange<LocalDate>
     ): Boolean =
         first.start.isBefore(second.endInclusive)
                 && second.start.isBefore(first.endInclusive)
 
     @JvmStatic
-    fun getMaxDate(first: ZonedDateTime, second: ZonedDateTime): ZonedDateTime =
+    fun getMaxDate(first: LocalDate, second: LocalDate): LocalDate =
         if (first.isAfter(second)) first else second
 
     @JvmStatic
-    fun getMinDate(first: ZonedDateTime, second: ZonedDateTime): ZonedDateTime =
+    fun getMinDate(first: LocalDate, second: LocalDate): LocalDate =
         if (first.isBefore(second)) first else second
 
     val controlSumDigits1 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2, 1)

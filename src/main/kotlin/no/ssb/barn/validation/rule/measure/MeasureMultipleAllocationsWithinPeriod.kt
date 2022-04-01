@@ -41,7 +41,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                 }
 
                 // if sluttDato is missing, use datoUttrekk as fall-back
-                val endDate = outerMeasure.konklusjon?.sluttDato ?: context.rootObject.datoUttrekk
+                val endDate = outerMeasure.konklusjon?.sluttDato ?: context.rootObject.datoUttrekk!!.toLocalDate()
 
                 val errorMsg =
                     "Plasseringstiltak ${outerMeasure.id} med sluttdato " +

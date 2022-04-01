@@ -4,7 +4,6 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import java.time.LocalDate
-import java.time.ZonedDateTime
 
 class FlyttingTypeSpec extends Specification {
 
@@ -13,7 +12,7 @@ class FlyttingTypeSpec extends Specification {
         def sut = new FlyttingType(
                 UUID.randomUUID(),
                 null,
-                ZonedDateTime.now(),
+                LocalDate.now(),
                 new ArsakFraType("kode", null),
                 new FlyttingTilType("kode", null))
 

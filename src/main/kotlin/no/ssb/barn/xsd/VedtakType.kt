@@ -1,8 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
-import java.time.ZonedDateTime
+import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -20,11 +20,11 @@ data class VedtakType(
     var id: UUID? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "dateTime")
+    @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateTimeAdapter::class
+        LocalDateAdapter::class
     )
-    var startDato: ZonedDateTime? = null,
+    var startDato: LocalDate? = null,
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
     var lovhjemmel: LovhjemmelType = LovhjemmelType(),

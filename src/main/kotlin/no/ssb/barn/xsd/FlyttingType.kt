@@ -1,10 +1,9 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
-import java.time.ZonedDateTime
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -25,9 +24,9 @@ data class FlyttingType(
     var migrertId: String? = null,
 
     @field:XmlAttribute(name = "SluttDato")
-    @field:XmlSchemaType(name = "dateTime")
-    @field:XmlJavaTypeAdapter(LocalDateTimeAdapter::class)
-    var sluttDato: ZonedDateTime? = null,
+    @field:XmlSchemaType(name = "date")
+    @field:XmlJavaTypeAdapter(LocalDateAdapter::class)
+    var sluttDato: LocalDate? = null,
 
     @field:XmlElement(name = "ArsakFra")
     var arsakFra: ArsakFraType = ArsakFraType(),

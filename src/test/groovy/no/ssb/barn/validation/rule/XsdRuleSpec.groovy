@@ -42,7 +42,7 @@ class XsdRuleSpec extends Specification {
         null == reportEntry
 
         where:
-        i << (1..5)
+        i << (1..9)
     }
 
     def "when validate with invalid XML receive reportEntry"() {

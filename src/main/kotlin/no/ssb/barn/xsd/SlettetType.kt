@@ -1,8 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.converter.UuidAdapter
-import java.time.ZonedDateTime
+import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -23,9 +23,9 @@ data class SlettetType(
     var type: BegrepsType? = null,
 
     @field:XmlAttribute(name = "SluttDato", required = true)
-    @field:XmlSchemaType(name = "dateTime")
+    @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateTimeAdapter::class
+        LocalDateAdapter::class
     )
-    var sluttDato: ZonedDateTime? = null
+    var sluttDato: LocalDate? = null
 )

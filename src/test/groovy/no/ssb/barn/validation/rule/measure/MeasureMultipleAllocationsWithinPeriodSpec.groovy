@@ -7,6 +7,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
+import java.time.LocalDate
 import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
@@ -116,6 +117,6 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     }
 
     static def getDate(months) {
-        ZonedDateTime.now().plusMonths(months)
+        LocalDate.now().plusMonths(months)
     }
 }

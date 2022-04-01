@@ -1,6 +1,5 @@
 package no.ssb.barn.util
 
-import no.ssb.barn.testutil.TestDataProvider
 import no.ssb.barn.xsd.*
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -15,31 +14,25 @@ class ValidationUtilsSpec extends Specification {
     @Unroll
     def "minDate receive min date"() {
         expect:
-        ValidationUtils.getMinDate(
-                ZonedDateTime.of(first, TestDataProvider.ZONE_ID),
-                ZonedDateTime.of(second, TestDataProvider.ZONE_ID)
-        ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
+        ValidationUtils.getMinDate(first, second) == (expectFirstToBeReturned ? first : second)
 
         where:
-        first                                    | second                                   || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 2).atStartOfDay() || true
-        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 11, 2).atStartOfDay() || false
-        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 1).atStartOfDay() || false
+        first                     | second                    || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || true
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || false
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
     }
 
     @Unroll
     def "maxDate receive max date"() {
         expect:
-        ValidationUtils.getMaxDate(
-                ZonedDateTime.of(first, TestDataProvider.ZONE_ID),
-                ZonedDateTime.of(second, TestDataProvider.ZONE_ID)
-        ).toLocalDate().atStartOfDay() == (expectFirstToBeReturned ? first : second)
+        ValidationUtils.getMaxDate(first, second) == (expectFirstToBeReturned ? first : second)
 
         where:
-        first                                    | second                                   || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 2).atStartOfDay() || false
-        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 11, 2).atStartOfDay() || true
-        LocalDate.of(2021, 12, 1).atStartOfDay() | LocalDate.of(2021, 12, 1).atStartOfDay() || false
+        first                     | second                    || expectFirstToBeReturned
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || false
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || true
+        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
     }
 
     @Unroll
@@ -48,30 +41,30 @@ class ValidationUtilsSpec extends Specification {
         expectedResult == ValidationUtils.areOverlappingWithAtLeastThreeMonths(first, second, ZonedDateTime.now())
 
         where:
-        first                                              | second                                             || expectedResult
-        createMeasure(createDate(0), createDate(1))        | createMeasure(createDate(2), createDate(3))        || false
-        createMeasure(createDate(2), createDate(3))        | createMeasure(createDate(0), createDate(1))        || false
+        first                                          | second                                         || expectedResult
+        createMeasure(createDate(0), createDate(1))    | createMeasure(createDate(2), createDate(3))    || false
+        createMeasure(createDate(2), createDate(3))    | createMeasure(createDate(0), createDate(1))    || false
 
         // first.start <= second.endInclusive
-        createMeasure(createDate(0), createDate(4))        | createMeasure(createDate(0), createDate(3))        || true
-        createMeasure(createDate(0), createDate(4))        | createMeasure(createDate(-3), createDate(0))       || false
+        createMeasure(createDate(0), createDate(4))    | createMeasure(createDate(0), createDate(3))    || true
+        createMeasure(createDate(0), createDate(4))    | createMeasure(createDate(-3), createDate(0))   || false
 
         // second.start <= first.endInclusive
-        createMeasure(createDate(-2), createDate(1))       | createMeasure(createDate(0), createDate(3))        || false
-        createMeasure(createDate(-3), createDate(0))       | createMeasure(createDate(0), createDate(3))        || false
+        createMeasure(createDate(-2), createDate(1))   | createMeasure(createDate(0), createDate(3))    || false
+        createMeasure(createDate(-3), createDate(0))   | createMeasure(createDate(0), createDate(3))    || false
 
-        createMeasure(createDate(0), createDate(3))        | createMeasure(createDate(0), createDate(3))        || true
-        createMeasure(createDate(0), createDate(4))        | createMeasure(createDate(1), createDate(4))        || true
-        createMeasure(createDate(-1), createDate(3))       | createMeasure(createDate(0), createDate(4))        || true
-        createMeasure(createDate(-2), createDate(2))       | createMeasure(createDate(1), createDate(4))        || false
+        createMeasure(createDate(0), createDate(3))    | createMeasure(createDate(0), createDate(3))    || true
+        createMeasure(createDate(0), createDate(4))    | createMeasure(createDate(1), createDate(4))    || true
+        createMeasure(createDate(-1), createDate(3))   | createMeasure(createDate(0), createDate(4))    || true
+        createMeasure(createDate(-2), createDate(2))   | createMeasure(createDate(1), createDate(4))    || false
 
-        createMeasure(createDate(-4), null)                | createMeasure(createDate(-3), ZonedDateTime.now()) || true
-        createMeasure(createDate(-4), null)                | createMeasure(createDate(-3), null)                || true
-        createMeasure(createDate(-4), ZonedDateTime.now()) | createMeasure(createDate(-3), null)                || true
+        createMeasure(createDate(-4), null)            | createMeasure(createDate(-3), LocalDate.now()) || true
+        createMeasure(createDate(-4), null)            | createMeasure(createDate(-3), null)            || true
+        createMeasure(createDate(-4), LocalDate.now()) | createMeasure(createDate(-3), null)            || true
 
-        createMeasure(createDate(-2), null)                | createMeasure(createDate(-3), ZonedDateTime.now()) || false
-        createMeasure(createDate(-2), null)                | createMeasure(createDate(-3), null)                || false
-        createMeasure(createDate(-2), ZonedDateTime.now()) | createMeasure(createDate(-3), null)                || false
+        createMeasure(createDate(-2), null)            | createMeasure(createDate(-3), LocalDate.now()) || false
+        createMeasure(createDate(-2), null)            | createMeasure(createDate(-3), null)            || false
+        createMeasure(createDate(-2), LocalDate.now()) | createMeasure(createDate(-3), null)            || false
     }
 
     def "Should find sources from classpath, filename = #filename, result = #result"() {
@@ -164,7 +157,7 @@ class ValidationUtilsSpec extends Specification {
 
     // util stuff from here
 
-    static def createMeasure(ZonedDateTime start, ZonedDateTime end) {
+    static def createMeasure(LocalDate start, LocalDate end) {
         new TiltakType(
                 UUID.randomUUID(),
                 null,
@@ -180,7 +173,7 @@ class ValidationUtilsSpec extends Specification {
     }
 
     static def createDate(monthsAhead) {
-        ZonedDateTime.now().plusMonths(monthsAhead)
+        LocalDate.now().plusMonths(monthsAhead)
     }
 
     static def getSsnByAge(int age) {

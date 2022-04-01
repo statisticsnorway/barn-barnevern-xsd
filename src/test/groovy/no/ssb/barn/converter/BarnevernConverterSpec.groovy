@@ -102,7 +102,7 @@ class BarnevernConverterSpec extends Specification {
                     <Fagsystem Versjon=\"1.0\" Navn=\"OJJ's Manuell Touch\" Leverandor=\"SSB\"/>
                     <Avgiver Kommunenummer=\"3401\" Kommunenavn=\"Kongsvinger kommune\" Organisasjonsnummer=\"944117784\"/>
                     <Sak StartDato=\"2021-01-01\" Id=\"1\" Journalnummer=\"test1\" Fodselsnummer=\"02011088123\">
-                        <Melding StartDato=\"2021-01-01T13:22:00+01:00\" Id=\"1\">
+                        <Melding StartDato=\"2021-01-01\" Id=\"1\">
                             <Melder Kode=\"1\"/>
                             <Saksinnhold Kode=\"1\"/>
                         </Melding>

@@ -1,9 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateTimeAdapter
+import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
-import java.time.ZonedDateTime
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
@@ -11,11 +10,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "UtvidetFrist", propOrder = ["startDato", "innvilget"])
 data class UndersokelseUtvidetFristType(
     @field:XmlAttribute(name = "StartDato", required = true)
-    @field:XmlSchemaType(name = "dateTime")
+    @field:XmlSchemaType(name = "date")
     @field:XmlJavaTypeAdapter(
-        LocalDateTimeAdapter::class
+        LocalDateAdapter::class
     )
-    var startDato: ZonedDateTime? = null,
+    var startDato: LocalDate? = null,
 
     @field:XmlAttribute(name = "Innvilget")
     var innvilget: String? = getInnvilget(LocalDate.now())
