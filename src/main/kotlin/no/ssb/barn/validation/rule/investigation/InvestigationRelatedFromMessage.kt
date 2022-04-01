@@ -9,7 +9,7 @@ import no.ssb.barn.xsd.UndersokelseType
 
 class InvestigationRelatedFromMessage : AbstractRule(
     WarningLevel.ERROR,
-    "Undersøkelse Kontroll 10: Undersøkelse skal ha relasjon til melding",
+    "Undersøkelse Kontroll 10: Undersøkelse skal ha relasjon fra melding",
     UndersokelseType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {

@@ -12,11 +12,11 @@ import spock.lang.Unroll
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
 @Narrative("""
-Undersøkelse Kontroll 10: Undersøkelse skal ha relasjon til melding
+Undersøkelse Kontroll 20: Undersøkelse skal ha relasjon fra melding
 
 Gitt at man har en Undersøkelse, en Relasjon og en Melding<br/>
 når en relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType mangler<br/>
-så gi feilmeldingen "Undersøkelse mangler en relasjon til melding"
+så gi feilmeldingen "Undersøkelse mangler en relasjon fra melding"
 
 Alvorlighetsgrad: ERROR
 """)
