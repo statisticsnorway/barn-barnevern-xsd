@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2.0">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -333,7 +333,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="1"/>
-					<xs:enumeration value=""/>
+					<xs:enumeration value="0"/>
 					<xs:enumeration value="1"/>
 					<xs:enumeration value="2"/>
 				</xs:restriction>
@@ -1148,6 +1148,7 @@ Dato tilsynsbesøket faktisk ble utført
 			</xs:element>
 			<xs:element name="Status" maxOccurs="unbounded">
 				<xs:complexType>
+					<xs:attribute ref="Id" use="required"/>
 					<xs:attribute name="EndretDato" type="xs:dateTime" use="required"/>
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
@@ -1262,8 +1263,10 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="Plan"/>
 			<xs:enumeration value="Tiltak"/>
 			<xs:enumeration value="Vedtak"/>
+			<xs:enumeration value="Status"/>
 			<xs:enumeration value="Ettervern"/>
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
+			<xs:enumeration value="Relasjon"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="VirksomhetType">
