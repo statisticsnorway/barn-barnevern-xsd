@@ -32,13 +32,13 @@ Bjorge.Saether@bufdir.no
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
-	<xs:attribute name="StartDato" type="xs:dateTime">
+	<xs:attribute name="StartDato" type="xs:date">
 		<xs:annotation>
 			<xs:appinfo>Startdato</xs:appinfo>
 			<xs:documentation>Globalt attributt for startdato</xs:documentation>
 		</xs:annotation>
 	</xs:attribute>
-	<xs:attribute name="SluttDato" type="xs:dateTime">
+	<xs:attribute name="SluttDato" type="xs:date">
 		<xs:annotation>
 			<xs:appinfo>Sluttdato</xs:appinfo>
 			<xs:documentation>Globalt attributt for sluttdato</xs:documentation>
@@ -1073,7 +1073,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 	<!-- Oppfølging -->
 	<xs:complexType name="OppfolgingType">
 		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute name="UtfortDato" type="xs:dateTime" use="required">
+		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
 				<xs:documentation>
 Dato oppfølgingsbesøket faktisk ble foretatt
@@ -1084,7 +1084,7 @@ Dato oppfølgingsbesøket faktisk ble foretatt
 	<!-- Tilsyn -->
 	<xs:complexType name="TilsynType">
 		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute name="UtfortDato" type="xs:dateTime" use="required">
+		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
 				<xs:documentation>
 Dato tilsynsbesøket faktisk ble utført
@@ -1149,7 +1149,7 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:element name="Status" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:attribute ref="Id" use="required"/>
-					<xs:attribute name="EndretDato" type="xs:dateTime" use="required"/>
+					<xs:attribute name="EndretDato" type="xs:date" use="required"/>
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
 							<xs:documentation>
@@ -1248,7 +1248,7 @@ Dato tilsynsbesøket faktisk ble utført
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute name="TilbudSendtDato" type="xs:dateTime" use="required"/>
+		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="IdType">
 		<xs:restriction base="xs:string">
