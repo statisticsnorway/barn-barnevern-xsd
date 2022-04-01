@@ -18,8 +18,14 @@ enum class BegrepsType(val begrep: String) {
     @field:XmlEnumValue("Vedtak")
     VEDTAK("Vedtak"),
 
+    @field:XmlEnumValue("Status")
+    STATUS("Vedtak"),
+
     @field:XmlEnumValue("Ettervern")
     ETTERVERN("Ettervern"),
+
+    @field:XmlEnumValue("Relasjon")
+    RELASJON("Relasjon"),
 
     @field:XmlEnumValue("OversendelseBarneverntjeneste")
     OVERSENDELSE_BARNEVERNTJENESTE("OversendelseBarneverntjeneste");
