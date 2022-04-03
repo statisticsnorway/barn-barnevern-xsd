@@ -34,7 +34,7 @@ class BarnvernConverterJacksonSpec extends Specification {
 
         and: "there should be one instance om MeldingType"
         verifyAll(barnevernInstance.sak) {
-            it.meldinger.size() == 1
+            it.melding.size() == 1
         }
     }
 

@@ -16,24 +16,24 @@ import javax.xml.bind.annotation.*
 )
 data class MeldingTypeJackson(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: UUID? = null,
+    val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String? = null,
+    val migrertId: String?,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
-    var startDato: LocalDate? = null,
+    val startDato: LocalDate,
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: MeldingKonklusjonType? = null,
+    val konklusjon: MeldingKonklusjonType?,
 
     @JacksonXmlProperty(localName = "Melder")
     @JacksonXmlElementWrapper(useWrapping = false)
-    var melder: List<MelderType>,
+    val melder: Collection<MelderType> = listOf(),
 
     @JacksonXmlProperty(localName = "Saksinnhold")
     @JacksonXmlElementWrapper(useWrapping = false)
-    var saksinnhold: List<SaksinnholdType>
+    val saksinnhold: Collection<SaksinnholdType> = listOf()
 )
 

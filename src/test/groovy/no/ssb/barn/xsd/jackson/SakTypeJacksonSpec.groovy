@@ -1,6 +1,6 @@
 package no.ssb.barn.xsd.jackson
 
-
+import no.ssb.barn.xsd.SlettetType
 import spock.lang.Specification
 
 import java.time.LocalDate
@@ -23,7 +23,8 @@ class SakTypeJacksonSpec extends Specification {
                 dateInTest,
                 "1",
                 true,
-                new ArrayList<MeldingTypeJackson>()
+                new ArrayList<MeldingTypeJackson>(),
+                new ArrayList<SlettetType>()
         )
 
         then: "all fields should have value"
