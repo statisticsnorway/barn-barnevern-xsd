@@ -1,6 +1,8 @@
 package no.ssb.barn.converter
 
 import no.ssb.barn.testutil.TestDataProvider
+import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.validation.rule.XsdRule
 import spock.lang.Specification
 
 import java.time.ZonedDateTime
@@ -34,5 +36,22 @@ class BarnvernConverterJacksonSpec extends Specification {
         verifyAll(barnevernInstance.sak) {
             it.meldinger.size() == 1
         }
+    }
+
+    def "when marshallXml using Jackson, XML is valid"() {
+        given: "a deserialized BarnevernTypeJackson instance"
+        def barnevernInstance = BarnvernConverterJackson.unmarshallXml(
+                TestDataProvider.getResourceAsString("test01_file09_total.xml"))
+        and: "an XSD validator"
+        def xsdValidator = new XsdRule("Barnevern.xsd")
+
+        when: "serializing instance to XML"
+        def xml = BarnvernConverterJackson.marshallInstance(barnevernInstance)
+        and: "validating XML against XSD"
+        def validationResult = xsdValidator.validate(
+                new ValidationContext("~messageId~", xml))
+
+        then: "validation result should be null"
+        null == validationResult
     }
 }

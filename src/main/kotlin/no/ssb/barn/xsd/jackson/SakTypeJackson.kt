@@ -2,7 +2,6 @@ package no.ssb.barn.xsd.jackson
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import no.ssb.barn.xsd.MeldingType
 import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
@@ -51,7 +50,7 @@ data class SakTypeJackson(
 ) {
     @JacksonXmlProperty(localName = "Melding")
     @JacksonXmlElementWrapper(useWrapping = false)
-    var meldinger: List<MeldingType> = mutableListOf()
+    var meldinger: List<MeldingTypeJackson> = mutableListOf()
         set(value) {
             field = meldinger + value
         }
