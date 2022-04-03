@@ -46,12 +46,9 @@ data class SakTypeJackson(
     val kjonn: String?,
 
     @field:XmlAttribute(name = "Avsluttet")
-    val avsluttet: Boolean?
-) {
+    val avsluttet: Boolean?,
+
     @JacksonXmlProperty(localName = "Melding")
     @JacksonXmlElementWrapper(useWrapping = false)
-    var meldinger: List<MeldingTypeJackson> = mutableListOf()
-        set(value) {
-            field = meldinger + value
-        }
-}
+    var meldinger: List<MeldingTypeJackson>
+)

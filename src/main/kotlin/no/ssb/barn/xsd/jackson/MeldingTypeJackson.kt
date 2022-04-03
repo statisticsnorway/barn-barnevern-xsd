@@ -26,19 +26,14 @@ data class MeldingTypeJackson(
     var startDato: LocalDate? = null,
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: MeldingKonklusjonType? = null
-) {
+    var konklusjon: MeldingKonklusjonType? = null,
+
     @JacksonXmlProperty(localName = "Melder")
     @JacksonXmlElementWrapper(useWrapping = false)
-    var melder: List<MelderType> = mutableListOf()
-        set(value) {
-            field = melder + value
-        }
+    var melder: List<MelderType>,
 
     @JacksonXmlProperty(localName = "Saksinnhold")
     @JacksonXmlElementWrapper(useWrapping = false)
-    var saksinnhold: List<SaksinnholdType> = mutableListOf()
-        set(value) {
-            field = saksinnhold + value
-        }
-}
+    var saksinnhold: List<SaksinnholdType>
+)
+
