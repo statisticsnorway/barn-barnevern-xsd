@@ -16,7 +16,7 @@ data class MeldingType(
     var id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String?,
+    val migrertId: String?,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -24,11 +24,11 @@ data class MeldingType(
 
     @field:JacksonXmlProperty(localName = "Melder")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var melder: MutableList<MelderType> = mutableListOf(),
+    val melder: MutableList<MelderType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Saksinnhold")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
+    val saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: MeldingKonklusjonType?

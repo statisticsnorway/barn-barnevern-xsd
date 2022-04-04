@@ -41,7 +41,9 @@ class DecisionEndDateAfterCaseEndDateSpec extends Specification {
         and:
         def decision = context.rootObject.sak.vedtak.first()
         and:
-        context.rootObject.sak.vedtak = [decision]
+        context.rootObject.sak.vedtak.clear()
+        and:
+        context.rootObject.sak.vedtak.add(decision)
         and:
         if (resetConclusion) {
             decision.konklusjon = null

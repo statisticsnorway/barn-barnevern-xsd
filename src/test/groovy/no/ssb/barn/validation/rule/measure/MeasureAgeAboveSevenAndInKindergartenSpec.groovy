@@ -40,9 +40,13 @@ class MeasureAgeAboveSevenAndInKindergartenSpec extends Specification {
         and:
         sak.fodselsnummer = getMockSocialSecurityNumber(age)
         and:
-        sak.tiltak = [sak.tiltak[0]]
+        def tiltak = sak.tiltak[0]
         and:
-        sak.tiltak[0].kategori = new KategoriType(code, "~presisering~")
+        sak.tiltak.clear()
+        and:
+        sak.tiltak.add(tiltak)
+        and:
+        tiltak.kategori = new KategoriType(code, "~presisering~")
 
         when:
         def reportEntries = sut.validate(context)

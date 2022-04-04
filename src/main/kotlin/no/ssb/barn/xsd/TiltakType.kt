@@ -15,10 +15,10 @@ import javax.xml.bind.annotation.*
 )
 open class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: UUID,
+    val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String?,
+    val migrertId: String?,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -29,18 +29,18 @@ open class TiltakType(
 
     @field:JacksonXmlProperty(localName = "JmfrLovhjemmel")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf(),
+    val jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf(),
 
     @field:XmlElement(name = "Kategori", required = true)
     var kategori: KategoriType,
 
     @field:JacksonXmlProperty(localName = "Tilsyn")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var tilsyn: MutableList<TilsynType> = mutableListOf(),
+    val tilsyn: MutableList<TilsynType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Oppfolging")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var oppfolging: MutableList<OppfolgingType> = mutableListOf(),
+    val oppfolging: MutableList<OppfolgingType> = mutableListOf(),
 
     @field:XmlElement(name = "Opphevelse")
     var opphevelse: OpphevelseType?,

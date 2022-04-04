@@ -13,26 +13,26 @@ import javax.xml.bind.annotation.*
 )
 data class VedtakType(
     @field:XmlAttribute(name = "Id", required = true)
-    var id: UUID,
+    val id: UUID,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     var startDato: LocalDate,
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
-    var lovhjemmel: LovhjemmelType,
+    val lovhjemmel: LovhjemmelType,
 
     @field:JacksonXmlProperty(localName = "JmfrLovhjemmel")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var jmfrLovhjemmel: List<LovhjemmelType> = listOf(),
+    val jmfrLovhjemmel: List<LovhjemmelType> = listOf(),
 
     @field:JacksonXmlProperty(localName = "Krav")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var krav: List<OversendelsePrivatKravType> = listOf(),
+    val krav: List<OversendelsePrivatKravType> = listOf(),
 
     @field:JacksonXmlProperty(localName = "Status")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var status: List<VedtakStatusType> = listOf(),
+    val status: List<VedtakStatusType> = listOf(),
 
     @field:XmlElement(name = "Konklusjon")
     var konklusjon: VedtakKonklusjonType?

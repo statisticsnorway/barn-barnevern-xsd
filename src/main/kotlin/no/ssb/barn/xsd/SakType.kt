@@ -19,7 +19,7 @@ data class SakType(
     var id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String?,
+    val migrertId: String?,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -30,7 +30,7 @@ data class SakType(
     var sluttDato: LocalDate?,
 
     @field:XmlAttribute(name = "Journalnummer", required = true)
-    var journalnummer: String,
+    val journalnummer: String,
 
     @field:XmlAttribute(name = "Fodselsnummer", required = true)
     var fodselsnummer: String,
@@ -43,48 +43,48 @@ data class SakType(
     var fodseldato: LocalDate,
 
     @field:XmlAttribute(name = "Kjonn", required = true)
-    var kjonn: String,
+    val kjonn: String,
 
     @field:XmlAttribute(name = "Avsluttet")
-    var avsluttet: Boolean?,
+    val avsluttet: Boolean?,
 
     @field:JacksonXmlProperty(localName = "Melding")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var melding: MutableList<MeldingType> = mutableListOf(),
+    val melding: MutableList<MeldingType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Undersokelse")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var undersokelse: MutableList<UndersokelseType> = mutableListOf(),
+    val undersokelse: MutableList<UndersokelseType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Plan")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var plan: MutableList<PlanType> = mutableListOf(),
+    val plan: MutableList<PlanType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Tiltak")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var tiltak: MutableList<TiltakType> = mutableListOf(),
+    val tiltak: MutableList<TiltakType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Vedtak")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var vedtak: MutableList<VedtakType> = mutableListOf(),
+    val vedtak: MutableList<VedtakType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Ettervern")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var ettervern: MutableList<EttervernType> = mutableListOf(),
+    val ettervern: MutableList<EttervernType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "OversendelseBarneverntjeneste")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var oversendelseBarneverntjeneste: MutableList<OversendelseBarneverntjenesteType> = mutableListOf(),
+    val oversendelseBarneverntjeneste: MutableList<OversendelseBarneverntjenesteType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Flytting")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var flytting: MutableList<FlyttingType> = mutableListOf(),
+    val flytting: MutableList<FlyttingType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Relasjon")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var relasjon: MutableList<RelasjonType> = mutableListOf(),
+    val relasjon: MutableList<RelasjonType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Slettet")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var slettet: MutableList<SlettetType> = mutableListOf()
+    val slettet: MutableList<SlettetType> = mutableListOf()
 )

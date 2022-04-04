@@ -43,11 +43,17 @@ class CaseHasContentSpec extends Specification {
         given:
         def sak = context.rootObject.sak
         and:
-        sak.melding = messages as List<MeldingType>
+        sak.melding.clear()
         and:
-        sak.tiltak = measures as List<TiltakType>
+        sak.melding.addAll(messages)
         and:
-        sak.plan = plans as List<PlanType>
+        sak.tiltak.clear()
+        and:
+        sak.tiltak.addAll(measures)
+        and:
+        sak.plan.clear()
+        and:
+        sak.plan.addAll(plans)
 
         when:
         def reportEntries = sut.validate(context)

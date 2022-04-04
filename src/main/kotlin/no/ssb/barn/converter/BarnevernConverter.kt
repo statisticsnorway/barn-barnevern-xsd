@@ -55,9 +55,10 @@ object BarnevernConverter {
     fun unmarshallXmlToJson(xml: String): String =
         unmarshallXml(xml).apply {
             sak.apply {
-                tiltak = sak.tiltak
+                tiltak.clear()
+                tiltak.addAll(sak.tiltak
                     .map { TiltakTypeJson(it) }
-                    .toMutableList()
+                    .toMutableList())
             }
         }.let { barnevernType ->
             gson.toJson(barnevernType)

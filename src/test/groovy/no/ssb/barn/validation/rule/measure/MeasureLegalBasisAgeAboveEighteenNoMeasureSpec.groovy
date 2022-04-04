@@ -43,9 +43,13 @@ class MeasureLegalBasisAgeAboveEighteenNoMeasureSpec extends Specification {
         and:
         sak.fodselsnummer = getMockSocialSecurityNumber(age)
         and:
-        sak.tiltak = [sak.tiltak[0]]
+        def tiltak = sak.tiltak[0]
         and:
-        sak.tiltak[0].lovhjemmel = new LovhjemmelType(
+        sak.tiltak.clear()
+        and:
+        sak.tiltak.add(tiltak)
+        and:
+        tiltak.lovhjemmel = new LovhjemmelType(
                 "~lov~",
                 kapittel,
                 paragraf,
