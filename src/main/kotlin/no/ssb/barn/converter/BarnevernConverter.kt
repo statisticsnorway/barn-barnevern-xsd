@@ -1,5 +1,6 @@
 package no.ssb.barn.converter
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
@@ -27,6 +28,7 @@ object BarnevernConverter {
 
     private val xmlMapper =
         XmlMapper(JacksonXmlModule())
+            .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
             .registerModule(kotlinModule)
             .registerModule(JavaTimeModule())
             .registerModule(JaxbAnnotationModule())
