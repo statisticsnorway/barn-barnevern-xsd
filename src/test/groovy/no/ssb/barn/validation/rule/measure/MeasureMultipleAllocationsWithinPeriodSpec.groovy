@@ -9,6 +9,7 @@ import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.time.LocalDate
+import java.time.ZoneId
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -39,13 +40,17 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
+        context.rootObject.datoUttrekk = firstEndDate.atStartOfDay(ZoneId.of("Europe/Oslo"))
+        and:
         def sak = context.rootObject.sak
         and:
         sak.tiltak.clear()
         and:
-        sak.tiltak.add(createTiltakType(firstStartDate, firstEndDate, categoryCode, resetConclusion))
+        sak.tiltak.add(createTiltakType(
+                firstStartDate, firstEndDate, categoryCode, resetCancellation, resetConclusion))
         and:
-        sak.tiltak.add(createTiltakType(secondStartDate, secondEndDate, categoryCode, resetConclusion))
+        sak.tiltak.add(createTiltakType(
+                secondStartDate, secondEndDate, categoryCode, resetCancellation, resetConclusion))
 
         when:
         def reportEntries = sut.validate(context)
@@ -60,41 +65,50 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         }
 
         where:
-        resetConclusion | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
+        resetCancellation | resetConclusion | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
         // category.kode !in kodelistePlasseringstiltak
-        false           | getDate(0)     | getDate(0)   | true             | getDate(0)      | getDate(0)    | "~code~"     || false
+        false             | false           | getDate(0)     | getDate(0)   | true             | getDate(0)      | getDate(0)    | "~code~"     || false
         // category.kode in kodelistePlasseringstiltak && tiltak.opphevelse = null
-        true            | getDate(0)     | getDate(0)   | true             | getDate(0)      | getDate(0)    | "1.1"        || false
+        true              | false           | getDate(0)     | getDate(0)   | true             | getDate(0)      | getDate(0)    | "1.1"        || false
 
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
-        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
+        // reset conclusion in order to use context.rootObject.datoUttrekk, error expected
+        false             | true            | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        // reset conclusion in order to use context.rootObject.datoUttrekk, no error expected
+        false             | true            | getDate(-3)    | getDate(-1)  | true             | getDate(-3)     | getDate(0)    | "1.1"        || false
+
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
+        false             | false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
     }
 
     static def getDate(months) {
         LocalDate.now().plusMonths(months)
     }
 
-    def createTiltakType(startDate, endDate, categoryCode, resetConclusion) {
+    def createTiltakType(
+            startDate,
+            endDate,
+            categoryCode,
+            resetCancellation,
+            resetConclusion) {
+
+        def cancellation = resetCancellation
+                ? null
+                : new OpphevelseType("1", "~presisering~")
 
         def conclusion = resetConclusion
                 ? null
                 : new TiltakKonklusjonType(endDate)
-
-        def cancellation = resetConclusion
-                ? null
-                : new OpphevelseType("1", "~presisering~")
 
         new TiltakType(
                 UUID.randomUUID(),
