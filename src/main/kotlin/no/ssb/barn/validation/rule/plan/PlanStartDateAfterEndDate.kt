@@ -16,14 +16,14 @@ class PlanStartDateAfterEndDate : AbstractRule(
             .filter { plan ->
                 val conclusion = plan.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
-                        && plan.startDato!!.isAfter(conclusion.sluttDato)
+                        && plan.startDato.isAfter(conclusion.sluttDato)
             }
             .map {
                 createReportEntry(
                     "Plan (${it.id}}). Planens startdato (${it.startDato})"
                             + " er etter planens sluttdato"
                             + " (${it.konklusjon!!.sluttDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

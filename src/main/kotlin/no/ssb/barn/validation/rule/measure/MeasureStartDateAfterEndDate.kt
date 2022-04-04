@@ -15,14 +15,14 @@ class MeasureStartDateAfterEndDate : AbstractRule(
         context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val repeal = tiltak.konklusjon // when JaCoCo improves, use "?."
-                repeal != null && tiltak.startDato!!.isAfter(repeal.sluttDato)
+                repeal != null && tiltak.startDato.isAfter(repeal.sluttDato)
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}}). Startdato (${it.startDato})"
                             + " for tiltaket er etter sluttdato"
                             + " (${it.konklusjon!!.sluttDato}) for tiltaket",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

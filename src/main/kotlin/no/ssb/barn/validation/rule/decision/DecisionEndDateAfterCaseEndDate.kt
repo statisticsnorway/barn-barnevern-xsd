@@ -22,12 +22,12 @@ class DecisionEndDateAfterCaseEndDate : AbstractRule(
                     val conclusion = decision.konklusjon // when JaCoCo improves, use "?."
 
                     conclusion != null
-                            && conclusion.sluttDato!!.isAfter(case.sluttDato)
+                            && conclusion.sluttDato.isAfter(case.sluttDato)
                 }
                 .map {
                     createReportEntry(
                         "Vedtakets sluttdato (${it.konklusjon!!.sluttDato}) er etter sakens sluttdato (${case.sluttDato})",
-                        it.id!!
+                        it.id
                     )
                 }
                 .toList()

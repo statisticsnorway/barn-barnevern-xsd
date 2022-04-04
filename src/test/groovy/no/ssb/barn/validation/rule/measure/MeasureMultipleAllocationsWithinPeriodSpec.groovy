@@ -2,6 +2,11 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.KategoriType
+import no.ssb.barn.xsd.LovhjemmelType
+import no.ssb.barn.xsd.OpphevelseType
+import no.ssb.barn.xsd.TiltakKonklusjonType
+import no.ssb.barn.xsd.TiltakType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -43,34 +48,9 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         and:
         def sak = context.rootObject.sak
         and:
-        def firstMeasure = sak.tiltak[0]
+        sak.tiltak[0] = createTiltakType(firstStartDate, firstEndDate, categoryCode, resetConclusion)
         and:
-        firstMeasure.startDato = firstStartDate
-        and:
-        firstMeasure.konklusjon.sluttDato = firstEndDate
-        and:
-        firstMeasure.kategori.kode = categoryCode
-        and:
-        if (resetRepeal) {
-            firstMeasure.konklusjon = null
-        }
-        and:
-        if (useSecondContext) {
-            def secondContext = getTestContext()
-            sak.tiltak[1] = secondContext.rootObject.sak.tiltak[0]
-
-            def secondMeasure = sak.tiltak[1]
-
-            secondMeasure.id = UUID.randomUUID()
-            secondMeasure.startDato = secondStartDate
-            secondMeasure.konklusjon.sluttDato = secondEndDate
-
-            secondMeasure.kategori.kode = categoryCode
-
-            if (resetRepeal) {
-                secondMeasure.konklusjon = null
-            }
-        }
+        sak.tiltak[1] = createTiltakType(secondStartDate, secondEndDate, categoryCode, resetConclusion)
 
         when:
         def reportEntries = sut.validate(context)
@@ -85,38 +65,44 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
         }
 
         where:
-        resetRepeal | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
-        true        | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.0"        || false
-        false       | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.0"        || false
-        true        | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
-        false       | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
-
-        false       | getDate(-3)    | getDate(0)   | false            | null            | null          | "1.1"        || false
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
-        false       | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
-
-        // testing that missing conclusion endDate works
-        true        | getDate(-4)    | null         | true             | getDate(-4)     | getDate(0)    | "8.2"        || true
-        true        | getDate(-4)    | null         | true             | getDate(-4)     | null          | "8.2"        || true
-        true        | getDate(-4)    | getDate(0)   | true             | getDate(-4)     | null          | "8.2"        || true
-        true        | getDate(-2)    | null         | true             | getDate(-4)     | getDate(0)    | "8.2"        || false
-        true        | getDate(-2)    | null         | true             | getDate(-4)     | null          | "8.2"        || false
-        true        | getDate(-2)    | getDate(0)   | true             | getDate(-4)     | null          | "8.2"        || false
+        resetConclusion | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.2"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.99"       || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.1"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.2"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.3"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.4"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.5"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.6"        || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "2.99"       || true
+        false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "8.2"        || true
     }
 
     static def getDate(months) {
         LocalDate.now().plusMonths(months)
+    }
+
+    def createTiltakType(startDate, endDate, categoryCode, resetConclusion) {
+
+        def conclusion = resetConclusion
+                ? null
+                : new TiltakKonklusjonType(endDate)
+
+        new TiltakType(
+                UUID.randomUUID(),
+                null,
+                startDate,
+                new LovhjemmelType("BVL", "1", "1", ["1"], []),
+                [new LovhjemmelType("BVL", "1", "1", ["1"], []), new LovhjemmelType("BVL", "1", "1", ["1"], [])],
+                new KategoriType(categoryCode, null),
+                [],
+                [],
+                new OpphevelseType("1", "~presisering~"),
+                conclusion
+        )
     }
 }

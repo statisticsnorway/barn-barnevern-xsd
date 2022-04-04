@@ -1,16 +1,12 @@
 package no.ssb.barn.converter
 
-import no.ssb.barn.validation.rule.XsdRule
+import com.fasterxml.jackson.core.JsonParseException
 import spock.lang.Specification
 import spock.lang.Unroll
-
-import javax.xml.bind.UnmarshalException
 
 import static no.ssb.barn.testutil.TestDataProvider.getResourceAsString
 
 class BarnevernConverterSpec extends Specification {
-
-    def xsdRule = new XsdRule("Barnevern.xsd")
 
     def "when unmarshalling invalid XML, receive exception"(){
         when:
@@ -18,7 +14,7 @@ class BarnevernConverterSpec extends Specification {
 
         then:
         //noinspection GroovyUnusedAssignment
-        UnmarshalException e = thrown()
+        JsonParseException e = thrown()
     }
 
     @Unroll("test01_fil0 #i _total.xml")
@@ -78,31 +74,14 @@ class BarnevernConverterSpec extends Specification {
         null != json
     }
 
-/*
-    def "when marshalling instance to XML, xml is valid"() {
-        given:
-        def instance = InitialMutationProvider.createInitialMutation(ZonedDateTime.now())
-
-        when:
-        def xml = BarnevernConverter.marshallInstance(instance)
-
-        then:
-        noExceptionThrown()
-        and:
-        null != xml
-        and:
-        null == xsdRule.validate(new ValidationContext("N/A", xml))
-    }
-*/
-
     def "should convert XML to objects, JAXB.unmarshal()"() {
         given:
         def xmlString = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
-                <Barnevern xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" DatoUttrekk=\"2021-01-01T13:22:00+01:00\">
+                <Barnevern Id="8ed88ce5-07cc-40ff-8e3d-b8d9a2421de6" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" DatoUttrekk=\"2021-01-01T13:22:00+01:00\">
                     <Fagsystem Versjon=\"1.0\" Navn=\"OJJ's Manuell Touch\" Leverandor=\"SSB\"/>
                     <Avgiver Kommunenummer=\"3401\" Kommunenavn=\"Kongsvinger kommune\" Organisasjonsnummer=\"944117784\"/>
-                    <Sak StartDato=\"2021-01-01\" Id=\"1\" Journalnummer=\"test1\" Fodselsnummer=\"02011088123\">
-                        <Melding StartDato=\"2021-01-01\" Id=\"1\">
+                    <Sak StartDato=\"2021-01-01\" Id=\"7317a453-2d65-465a-9589-519311d66579\" Journalnummer=\"test1\" Fodselsnummer=\"02011088123\" Fodseldato=\"2010-01-02\" Kjonn=\"1\">
+                        <Melding StartDato=\"2021-01-01\" Id=\"7317a453-2d65-465a-9589-519311d66579\">
                             <Melder Kode=\"1\"/>
                             <Saksinnhold Kode=\"1\"/>
                         </Melding>
@@ -119,64 +98,4 @@ class BarnevernConverterSpec extends Specification {
             getAvgiver().getOrganisasjonsnummer().equalsIgnoreCase("944117784")
         }
     }
-
-/*    def "should convert objects to XML, JAXB.marshal()"() {
-        given:
-        LocalDateTime datetime = LocalDateTime.of(2020, 2, 2, 10, 10, 10, 0)
-        LocalDate date = LocalDate.of(2020, 2, 2)
-
-        def melder = new MelderType(MelderType.getRandomCode(date), null)
-        def saksinnhold = new SaksinnholdType(SaksinnholdType.getRandomCode(date), null)
-        def melding = new MeldingType(
-                UUID.randomUUID(),
-                null,
-                ZonedDateTime.of(datetime, TestDataProvider.ZONE_ID),
-                List.of(melder),
-                List.of(saksinnhold),
-                null
-        )
-
-        def sak = new SakType(
-                UUID.randomUUID(),
-                null,
-                ZonedDateTime.of(datetime, TestDataProvider.ZONE_ID),
-                null,
-                RandomUtils.generateRandomString(9),
-                "02011088123",
-                null,
-                LocalDate.now().minusYears(2),
-                "1",
-                null,
-                List.of(melding),
-                List<UndersokelseType>.of(),
-                List<PlanType>.of(),
-                List<TiltakType>.of(),
-                List<VedtakType>.of(),
-                List<EttervernType>.of(),
-                List<OversendelseBarneverntjenesteType>.of(),
-                List<FlyttingType>.of(),
-                List<RelasjonType>.of(),
-                List<SlettetType>.of()
-        )
-        def avgiver = generateRandomAvgiverType()
-        def fagsystem = new FagsystemType(
-                "SSB", "OJJ's automatiske touch", "0.0.1"
-        )
-        def barnevern = new BarnevernType(
-                UUID.randomUUID(),
-                null,
-                ZonedDateTime.of(datetime, TestDataProvider.ZONE_ID),
-                fagsystem,
-                avgiver,
-                sak
-        )
-
-        when:
-        def xmlString = BarnevernConverter.marshallInstance(barnevern)
-
-        then:
-        verifyAll(xmlString) {
-            contains("SSB")
-        }
-    }*/
 }

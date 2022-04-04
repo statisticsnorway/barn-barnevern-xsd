@@ -16,7 +16,7 @@ class InvestigationDueDatePassedConclusionRequired : AbstractRule(
         context.rootObject.sak.undersokelse.asSequence()
             .filter { undersokelse ->
                 undersokelse.konklusjon == null
-                        && undersokelse.startDato!!.plusMonths(6)
+                        && undersokelse.startDato.plusMonths(6)
                     .isBefore(LocalDate.now())
             }
             .map {
@@ -25,7 +25,7 @@ class InvestigationDueDatePassedConclusionRequired : AbstractRule(
                             + " Undersøkelsen startet ${it.startDato}"
                             + " og skal konkluderes da den har pågått i mer enn"
                             + " 6 måneder",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

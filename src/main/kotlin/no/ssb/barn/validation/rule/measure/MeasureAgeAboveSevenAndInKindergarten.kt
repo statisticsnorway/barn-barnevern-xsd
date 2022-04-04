@@ -23,7 +23,7 @@ class MeasureAgeAboveSevenAndInKindergarten : AbstractRule(
                 .map {
                     createReportEntry(
                         "Barnet er over 7 år og i barnehage.",
-                        it.id!!
+                        it.id
                     )
                 }
                 .toList()

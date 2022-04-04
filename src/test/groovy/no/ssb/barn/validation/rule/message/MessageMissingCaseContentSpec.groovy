@@ -2,11 +2,14 @@ package no.ssb.barn.validation.rule.message
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.MeldingKonklusjonType
 import no.ssb.barn.xsd.SaksinnholdType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
+
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -38,13 +41,13 @@ class MessageMissingCaseContentSpec extends Specification {
         def melding = context.rootObject.sak.melding[0]
         and:
         if (setConclusion) {
-            melding.konklusjon.kode = "1"
+            melding.konklusjon = new MeldingKonklusjonType(LocalDate.parse("2021-01-08"), "1")
         } else {
             melding.konklusjon = null
         }
         and:
         if (setCaseContent) {
-            melding.saksinnhold.add(new SaksinnholdType())
+            melding.saksinnhold.add(new SaksinnholdType("1", null))
         } else {
             melding.saksinnhold.clear()
         }

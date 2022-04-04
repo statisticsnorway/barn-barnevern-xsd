@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.TiltakKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -40,10 +41,10 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
         and:
         measure.startDato = measureStartDate
         and:
-        measure.konklusjon.sluttDato = measureEndDate
-        and:
-        if (removeRepeal) {
+        if (resetConclusion) {
             measure.konklusjon = null
+        } else {
+            measure.konklusjon = new TiltakKonklusjonType(measureEndDate)
         }
 
         when:
@@ -59,7 +60,7 @@ class MeasureStartDateAfterEndDateSpec extends Specification {
         }
 
         where:
-        measureStartDate              | measureEndDate                | removeRepeal || errorExpected
+        measureStartDate              | measureEndDate                | resetConclusion || errorExpected
         LocalDate.now().minusYears(1) | LocalDate.now()               | false        || false
         LocalDate.now()               | LocalDate.now()               | false        || false
         LocalDate.now()               | LocalDate.now().minusYears(1) | false        || true

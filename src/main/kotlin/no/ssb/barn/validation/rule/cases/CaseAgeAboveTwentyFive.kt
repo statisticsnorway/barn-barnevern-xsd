@@ -20,7 +20,7 @@ class CaseAgeAboveTwentyFive : AbstractRule(
         } else {
             createSingleReportEntryList(
                 "Klienten er over 25 år og skal avsluttes som klient",
-                context.rootObject.sak.id!!
+                context.rootObject.sak.id
             )
         }
     }

@@ -1,34 +1,22 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Status", propOrder = ["id", "endretDato", "kode"])
 data class VedtakStatusType(
     @field:XmlAttribute(name = "Id", required = true)
-    @field:XmlJavaTypeAdapter(
-        UuidAdapter::class
-    )
-    var id: UUID? = null,
+    val id: UUID,
 
     @field:XmlAttribute(name = "EndretDato", required = true)
     @field:XmlSchemaType(name = "date")
-    @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
-    )
-    var endretDato: LocalDate? = null,
+    val endretDato: LocalDate,
 
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String? = getCodes(LocalDate.of(2022, 1, 1))
-        .take(1)
-        .map { it.code }
-        .firstOrNull()
+    val kode: String
 ) {
     companion object {
 

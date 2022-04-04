@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.message
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.MeldingKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -43,7 +44,7 @@ class MessageStartDateAfterEndDateSpec extends Specification {
         if (resetConclusion) {
             message.konklusjon = null
         } else {
-            message.konklusjon.sluttDato = endDate
+            message.konklusjon = new MeldingKonklusjonType(endDate, "1")
         }
 
         when:

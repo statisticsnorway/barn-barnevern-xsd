@@ -32,7 +32,7 @@ class InvestigationRelatedFromMessage : AbstractRule(
             .map {
                 createReportEntry(
                     "Undersøkelse mangler en relasjon til melding",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

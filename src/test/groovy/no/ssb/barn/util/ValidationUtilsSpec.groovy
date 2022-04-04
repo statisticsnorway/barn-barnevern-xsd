@@ -57,14 +57,6 @@ class ValidationUtilsSpec extends Specification {
         createMeasure(createDate(0), createDate(4))    | createMeasure(createDate(1), createDate(4))    || true
         createMeasure(createDate(-1), createDate(3))   | createMeasure(createDate(0), createDate(4))    || true
         createMeasure(createDate(-2), createDate(2))   | createMeasure(createDate(1), createDate(4))    || false
-
-        createMeasure(createDate(-4), null)            | createMeasure(createDate(-3), LocalDate.now()) || true
-        createMeasure(createDate(-4), null)            | createMeasure(createDate(-3), null)            || true
-        createMeasure(createDate(-4), LocalDate.now()) | createMeasure(createDate(-3), null)            || true
-
-        createMeasure(createDate(-2), null)            | createMeasure(createDate(-3), LocalDate.now()) || false
-        createMeasure(createDate(-2), null)            | createMeasure(createDate(-3), null)            || false
-        createMeasure(createDate(-2), LocalDate.now()) | createMeasure(createDate(-3), null)            || false
     }
 
     def "Should find sources from classpath, filename = #filename, result = #result"() {
@@ -162,9 +154,9 @@ class ValidationUtilsSpec extends Specification {
                 UUID.randomUUID(),
                 null,
                 start,
-                new LovhjemmelType(),
+                new LovhjemmelType("lov", "kapittel", "paragraf", ["ledd"], ["punktum"]),
                 List.of(),
-                new KategoriType(),
+                new KategoriType("1", null),
                 List.of(),
                 List.of(),
                 new OpphevelseType(RandomUtils.generateRandomString(10), null),

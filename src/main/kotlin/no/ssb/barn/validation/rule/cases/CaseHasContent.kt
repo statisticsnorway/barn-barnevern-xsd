@@ -19,6 +19,6 @@ class CaseHasContent : AbstractRule(
         else
             createSingleReportEntryList(
                 "Klienten har ingen meldinger, planer eller tiltak.",
-                context.rootObject.sak.id!!
+                context.rootObject.sak.id
             )
 }

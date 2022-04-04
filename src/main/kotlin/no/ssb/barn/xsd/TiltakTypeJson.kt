@@ -16,6 +16,7 @@ class TiltakTypeJson(
     tilsyn: MutableList<TilsynType>,
     oppfolging: MutableList<OppfolgingType>,
     opphevelse: OpphevelseType?,
+    konklusjon: TiltakKonklusjonType?,
     var erOmsorgsTiltak: Boolean
 ) : TiltakType(
     id = id,
@@ -26,7 +27,8 @@ class TiltakTypeJson(
     kategori = kategori,
     tilsyn = tilsyn,
     oppfolging = oppfolging,
-    opphevelse = opphevelse
+    opphevelse = opphevelse,
+    konklusjon = konklusjon
 ) {
     /**
      * Constructor for use when creating new instances based on
@@ -35,15 +37,16 @@ class TiltakTypeJson(
      * NOTE: This constructor does not clone child instances.
      */
     constructor(tiltakType: TiltakType) : this(
-        tiltakType.id!!,
+        tiltakType.id,
         tiltakType.migrertId,
-        tiltakType.startDato!!,
+        tiltakType.startDato,
         tiltakType.lovhjemmel,
         tiltakType.jmfrLovhjemmel,
         tiltakType.kategori,
         tiltakType.tilsyn,
         tiltakType.oppfolging,
         tiltakType.opphevelse,
+        tiltakType.konklusjon,
         erOmsorgsTiltak = tiltakType.erOmsorgsTiltak()
     )
 }

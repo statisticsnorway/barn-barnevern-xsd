@@ -2,6 +2,8 @@ package no.ssb.barn.validation.rule.decision
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.OversendelsePrivatKravKonklusjonType
+import no.ssb.barn.xsd.OversendelsePrivatKravType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -36,15 +38,8 @@ class DecisionRequirementStartDateAfterEndDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def requirement = context.rootObject.sak.vedtak.first().krav.first()
-        and:
-        requirement.startDato = requirementStartDate
-        and:
-        requirement.konklusjon.sluttDato = requirementEndDate
-        and:
-        if (removeConclusion) {
-            requirement.konklusjon = null
-        }
+        context.rootObject.sak.vedtak.first().krav[0] =
+            createOversendelsePrivatKravType(requirementStartDate, requirementEndDate, resetConclusion)
 
         when:
         def reportEntries = sut.validate(context)
@@ -59,10 +54,23 @@ class DecisionRequirementStartDateAfterEndDateSpec extends Specification {
         }
 
         where:
-        requirementStartDate          | requirementEndDate            | removeConclusion || errorExpected
-        LocalDate.now().minusYears(1) | LocalDate.now()               | false            || false
-        LocalDate.now()               | LocalDate.now()               | false            || false
-        LocalDate.now()               | LocalDate.now().minusYears(1) | false            || true
-        LocalDate.now()               | LocalDate.now().minusYears(1) | true             || false
+        requirementStartDate          | requirementEndDate            | resetConclusion || errorExpected
+        LocalDate.now().minusYears(1) | LocalDate.now()               | false           || false
+        LocalDate.now()               | LocalDate.now()               | false           || false
+        LocalDate.now()               | LocalDate.now().minusYears(1) | false           || true
+        LocalDate.now()               | LocalDate.now().minusYears(1) | true            || false
+    }
+
+    def createOversendelsePrivatKravType(startDate, endDate, resetConclusion) {
+
+        def conclusion = resetConclusion
+                ? null
+                : new OversendelsePrivatKravKonklusjonType(endDate)
+
+        new OversendelsePrivatKravType(
+                UUID.randomUUID(),
+                startDate,
+                conclusion
+        )
     }
 }

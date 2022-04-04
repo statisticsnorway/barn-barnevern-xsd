@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.investigation
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.UndersokelseKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -43,7 +44,10 @@ class InvestigationStartDateAfterEndDateSpec extends Specification {
         if (resetConclusion) {
             undersokelse.konklusjon = null
         } else {
-            undersokelse.konklusjon.sluttDato = endDate
+            undersokelse.konklusjon = new UndersokelseKonklusjonType(
+                    endDate,
+                    undersokelse.konklusjon.kode,
+                    undersokelse.konklusjon.presisering)
         }
 
         when:

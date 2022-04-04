@@ -15,14 +15,14 @@ class InvestigationStartDateAfterEndDate : AbstractRule(
         context.rootObject.sak.undersokelse.asSequence()
             .filter { undersokelse ->
                 with(undersokelse) {
-                    konklusjon != null && startDato!!.isAfter(konklusjon!!.sluttDato)
+                    konklusjon != null && startDato.isAfter(konklusjon!!.sluttDato)
                 }
             }
             .map {
                 createReportEntry(
                     "Undersøkelses startdato (${it.startDato}) "
                             + " er etter sluttdato (${it.konklusjon!!.sluttDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

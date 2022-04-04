@@ -14,12 +14,12 @@ class DecisionStartDateBeforeCaseStartDate : AbstractRule(
     override fun validate(context: ValidationContext): List<ReportEntry>? =
         context.rootObject.sak.vedtak.asSequence()
             .filter { decision ->
-                decision.startDato!!.isBefore(context.rootObject.sak.startDato)
+                decision.startDato.isBefore(context.rootObject.sak.startDato)
             }
             .map {
                 createReportEntry(
                     "Vedtakets startdato (${it.startDato}) er før sakens startdato (${context.rootObject.sak.startDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

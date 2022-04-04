@@ -12,18 +12,17 @@ import javax.xml.bind.annotation.XmlType
 )
 data class AvgiverType(
     @field:XmlAttribute(name = "Organisasjonsnummer", required = true)
-    var organisasjonsnummer: String = "",
+    val organisasjonsnummer: String,
 
     @field:XmlAttribute(name = "Kommunenummer", required = true)
-    var kommunenummer: String = "",
+    val kommunenummer: String,
 
     @field:XmlAttribute(name = "Kommunenavn", required = true)
-    var kommunenavn: String = "",
+    val kommunenavn: String,
 
     @field:XmlAttribute(name = "Bydelsnummer")
-    var bydelsnummer: String? = null,
+    val bydelsnummer: String?,
 
     @field:XmlAttribute(name = "Bydelsnavn")
-    var bydelsnavn: String? = null
-
+    val bydelsnavn: String?
 )

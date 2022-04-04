@@ -25,13 +25,11 @@ class InvestigationDecisionClarificationRequiredSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def decision = new SaksinnholdType()
+        def saksinnholdType = new SaksinnholdType(code, clarification)
         and:
-        decision.kode = code
+        context.rootObject.sak.undersokelse[0].vedtaksgrunnlag.clear()
         and:
-        decision.presisering = clarification
-        and:
-        context.rootObject.sak.undersokelse[0].vedtaksgrunnlag = [decision]
+        context.rootObject.sak.undersokelse[0].vedtaksgrunnlag.add(saksinnholdType)
 
         when:
         def reportEntries = sut.validate(context)
@@ -47,7 +45,6 @@ class InvestigationDecisionClarificationRequiredSpec extends Specification {
 
         where:
         code | clarification   || errorExpected
-        null | "N/A"           || false
         ""   | "N/A"           || false
         "42" | "N/A"           || false
 

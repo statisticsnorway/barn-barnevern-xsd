@@ -33,7 +33,7 @@ class ReporterUrbanDistrictNumberAndName : AbstractRule(
             || context.rootObject.avgiver.bydelsnavn.isNullOrEmpty())
             createSingleReportEntryList(
                 "Bydelsnummer og/eller Bydelsnavn skal være utfylt",
-                context.rootObject.id!!)
+                context.rootObject.id)
         else
             null
     }

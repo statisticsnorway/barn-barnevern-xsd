@@ -1,12 +1,9 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import no.ssb.barn.converter.UuidAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -15,24 +12,20 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 )
 data class FlyttingType(
     @field:XmlAttribute(name = "Id", required = true)
-    @field:XmlJavaTypeAdapter(
-        UuidAdapter::class
-    )
-    var id: UUID? = null,
+    val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String? = null,
+    val migrertId: String?,
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
-    @field:XmlJavaTypeAdapter(LocalDateAdapter::class)
-    var sluttDato: LocalDate? = null,
+    val sluttDato: LocalDate?,
 
     @field:XmlElement(name = "ArsakFra")
-    var arsakFra: ArsakFraType = ArsakFraType(),
+    val arsakFra: ArsakFraType,
 
     @field:XmlElement(name = "FlyttingTil")
-    var flytteTil: FlyttingTilType = FlyttingTilType()
+    val flytteTil: FlyttingTilType
 ) {
     companion object {
 

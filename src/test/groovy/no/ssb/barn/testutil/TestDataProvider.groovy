@@ -2,6 +2,7 @@ package no.ssb.barn.testutil
 
 import no.ssb.barn.converter.BarnevernConverter
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.BarnevernType
 
 import java.time.Year
 import java.time.ZoneId
@@ -31,6 +32,15 @@ class TestDataProvider {
                 UUID.randomUUID().toString(),
                 xmlAsString,
                 BarnevernConverter.unmarshallXml(xmlAsString))
+    }
+
+    static ValidationContext getTestContext(barnevernType) {
+        def xmlAsString = getResourceAsString("test01_file09_total.xml")
+
+        new ValidationContext(
+                UUID.randomUUID().toString(),
+                xmlAsString,
+                barnevernType as BarnevernType)
     }
 
     static String getResourceAsString(String resourceName) {

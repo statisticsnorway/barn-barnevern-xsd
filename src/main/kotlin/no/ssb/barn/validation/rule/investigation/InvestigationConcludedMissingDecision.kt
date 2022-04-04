@@ -24,7 +24,7 @@ class InvestigationConcludedMissingDecision : AbstractRule(
             .map {
                 createReportEntry(
                     "Undersøkelse konkludert med kode ${it.konklusjon!!.kode} mangler vedtaksgrunnlag",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

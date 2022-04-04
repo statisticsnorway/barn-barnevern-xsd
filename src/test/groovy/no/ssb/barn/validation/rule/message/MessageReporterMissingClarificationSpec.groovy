@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.message
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.MelderType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -34,11 +35,9 @@ class MessageReporterMissingClarificationSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def reporter = context.rootObject.sak.melding[0].melder[0]
+        def reporter = createMelderType(code, clarification)
         and:
-        reporter.kode = code
-        and:
-        reporter.presisering = clarification
+        context.rootObject.sak.melding[0].melder[0] = reporter
 
         when:
         def reportEntries = sut.validate(context)
@@ -62,5 +61,9 @@ class MessageReporterMissingClarificationSpec extends Specification {
         "22"  | "~presisering~" || false
         "22"  | ""              || true
         "22"  | null            || true
+    }
+
+    def createMelderType(kode, clarification) {
+        new MelderType(kode, clarification)
     }
 }

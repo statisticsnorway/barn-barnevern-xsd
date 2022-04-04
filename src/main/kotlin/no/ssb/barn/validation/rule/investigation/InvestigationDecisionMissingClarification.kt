@@ -24,7 +24,7 @@ class InvestigationDecisionMissingClarification : AbstractRule(
                     .map {
                         createReportEntry(
                             "Vedtaksgrunnlag med kode (${it.kode}) mangler Presisering",
-                            undersokelse.id!!
+                            undersokelse.id
                         )
                     }
             }

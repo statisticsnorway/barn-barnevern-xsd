@@ -18,12 +18,12 @@ class PlanEvaluationDateBeforeCaseStartDate : AbstractRule(
             .flatMap { plan ->
                 plan.evaluering
                     .filter { evaluation ->
-                        evaluation.utfortDato!!.isBefore(sak.startDato)
+                        evaluation.utfortDato.isBefore(sak.startDato)
                     }
                     .map {
                         createReportEntry(
                             "Utført evaluering (${it.utfortDato}) er før startdato (${sak.startDato})",
-                            plan.id!!
+                            plan.id
                         )
                     }
             }

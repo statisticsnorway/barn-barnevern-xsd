@@ -1,11 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import no.ssb.barn.converter.UuidAdapter
 import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -14,18 +11,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 )
 data class SlettetType(
     @field:XmlAttribute(name = "Id", required = true)
-    @field:XmlJavaTypeAdapter(
-        UuidAdapter::class
-    )
-    var id: UUID? = null,
+    val id: UUID,
 
     @field:XmlAttribute(name = "Type", required = true)
-    var type: BegrepsType? = null,
+    val type: BegrepsType,
 
     @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
-    @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
-    )
-    var sluttDato: LocalDate? = null
+    val sluttDato: LocalDate
 )

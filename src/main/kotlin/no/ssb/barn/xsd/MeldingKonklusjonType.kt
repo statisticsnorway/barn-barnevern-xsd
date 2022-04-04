@@ -1,10 +1,8 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -14,16 +12,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 data class MeldingKonklusjonType(
     @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
-    @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
-    )
-    var sluttDato: LocalDate? = null,
+    val sluttDato: LocalDate,
 
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String? = getCodes(LocalDate.now())
-        .take(1)
-        .map { it.code }
-        .firstOrNull()
+    val kode: String
 ) {
     companion object {
 

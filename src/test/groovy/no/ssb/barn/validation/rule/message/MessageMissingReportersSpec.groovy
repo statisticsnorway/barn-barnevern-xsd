@@ -3,10 +3,13 @@ package no.ssb.barn.validation.rule.message
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.MelderType
+import no.ssb.barn.xsd.MeldingKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
+
+import java.time.LocalDate
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -38,13 +41,13 @@ class MessageMissingReportersSpec extends Specification {
         def melding = context.rootObject.sak.melding[0]
         and:
         if (setConclusion) {
-            melding.konklusjon.kode = "1"
+            melding.konklusjon = new MeldingKonklusjonType(LocalDate.parse("2021-01-08"), "1")
         } else {
             melding.konklusjon = null
         }
         and:
         if (setReporters) {
-            melding.melder.add(new MelderType())
+            melding.melder.add(new MelderType("1", null))
         } else {
             melding.melder.clear()
         }

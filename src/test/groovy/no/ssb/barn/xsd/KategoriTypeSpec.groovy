@@ -9,7 +9,7 @@ class KategoriTypeSpec extends Specification {
 
     def "when constructor is called without values, expect no errors"() {
         when:
-        def sut = new KategoriType()
+        def sut = new KategoriType("1", null)
 
         then:
         noExceptionThrown()

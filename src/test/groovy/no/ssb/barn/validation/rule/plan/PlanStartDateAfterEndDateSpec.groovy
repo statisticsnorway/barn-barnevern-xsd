@@ -3,6 +3,7 @@ package no.ssb.barn.validation.rule.plan
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.PlanKonklusjonType
+import no.ssb.barn.xsd.PlanType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -37,15 +38,7 @@ class PlanStartDateAfterEndDateSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def plan = context.rootObject.sak.plan.first()
-        and:
-        plan.startDato = planStartDate
-        and:
-        plan.konklusjon = new PlanKonklusjonType(planEndDate)
-        and:
-        if (resetConclusion) {
-            plan.konklusjon = null
-        }
+        context.rootObject.sak.plan[0] = createPlanType(planStartDate, planEndDate, resetConclusion)
 
         when:
         def reportEntries = sut.validate(context)
@@ -65,5 +58,15 @@ class PlanStartDateAfterEndDateSpec extends Specification {
         false           | LocalDate.now()               | LocalDate.now()               || false
         false           | LocalDate.now()               | LocalDate.now().minusYears(1) || true
         true            | LocalDate.now()               | LocalDate.now().minusYears(1) || false
+    }
+
+    def createPlanType(planStartDate, planEndDate, resetConclusion) {
+        new PlanType(
+                UUID.randomUUID(),
+                null,
+                planStartDate,
+                "1",
+                [],
+                resetConclusion ? null : new PlanKonklusjonType(planEndDate))
     }
 }

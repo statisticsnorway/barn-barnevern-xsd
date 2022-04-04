@@ -21,7 +21,7 @@ class MessageMissingCaseContent : AbstractRule(
             .map {
                 createReportEntry(
                     "Melding (${it.id}). Konkludert melding mangler saksinnhold.",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

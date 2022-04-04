@@ -1,11 +1,10 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import no.ssb.barn.converter.UuidAdapter
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -14,27 +13,23 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 )
 data class MeldingType(
     @field:XmlAttribute(name = "Id", required = true)
-    @field:XmlJavaTypeAdapter(
-        UuidAdapter::class
-    )
-    var id: UUID? = null,
+    var id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String? = null,
+    var migrertId: String?,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
-    @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
-    )
-    var startDato: LocalDate? = null,
+    var startDato: LocalDate,
 
-    @field:XmlElement(name = "Melder")
+    @field:JacksonXmlProperty(localName = "Melder")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
     var melder: MutableList<MelderType> = mutableListOf(),
 
-    @field:XmlElement(name = "Saksinnhold")
+    @field:JacksonXmlProperty(localName = "Saksinnhold")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
     var saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: MeldingKonklusjonType? = null
+    var konklusjon: MeldingKonklusjonType?
 )

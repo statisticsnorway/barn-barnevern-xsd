@@ -19,14 +19,14 @@ class MeasureEndDateAfterCaseEndDate : AbstractRule(
             .filter { tiltak ->
                 val conclusion = tiltak.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
-                        && conclusion.sluttDato!!.isAfter(individEndDate)
+                        && conclusion.sluttDato.isAfter(individEndDate)
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}). Sluttdato"
                             + " (${it.konklusjon!!.sluttDato}) er etter individets"
                             + " sluttdato ($individEndDate)",
-                    it.id!!
+                    it.id
 
                 )
             }

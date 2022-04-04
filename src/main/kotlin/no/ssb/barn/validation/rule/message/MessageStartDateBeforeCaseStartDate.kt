@@ -16,13 +16,13 @@ class MessageStartDateBeforeCaseStartDate : AbstractRule(
 
         return sak.melding.asSequence()
             .filter { melding ->
-                melding.startDato!!.isBefore(sak.startDato)
+                melding.startDato.isBefore(sak.startDato)
             }
             .map {
                 createReportEntry(
                     "Meldingens startdato (${it.startDato}) er før"
                             + " sakens startdato (${sak.startDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

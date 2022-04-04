@@ -4,6 +4,7 @@ package no.ssb.barn.validation.rule.investigation
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.BegrepsType
+import no.ssb.barn.xsd.RelasjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -40,15 +41,13 @@ class InvestigationRelatedFromMessageSpec extends Specification {
         and:
         message.id = fromId ?: UUID.randomUUID()
         and:
-        def relation = context.rootObject.sak.relasjon[0]
-        and:
-        relation.fraId = fromId ?: UUID.randomUUID()
-        and:
-        relation.fraType = fromType
-        and:
-        relation.tilId = toId ?: UUID.randomUUID()
-        and:
-        relation.tilType = toType
+        context.rootObject.sak.relasjon[0] = new RelasjonType(
+                UUID.randomUUID(),
+                fromId ?: UUID.randomUUID(),
+                fromType,
+                toId ?: UUID.randomUUID(),
+                toType
+        )
         and:
         def investigation = context.rootObject.sak.undersokelse[0]
         and:
