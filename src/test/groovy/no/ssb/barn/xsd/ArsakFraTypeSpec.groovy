@@ -9,7 +9,7 @@ class ArsakFraTypeSpec extends Specification {
 
     def "when constructor is called without values, expect no errors"() {
         when:
-        new ArsakFraType()
+        new ArsakFraType("1.1.1", null)
 
         then:
         noExceptionThrown()

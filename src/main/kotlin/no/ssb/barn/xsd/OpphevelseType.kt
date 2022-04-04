@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "OpphevelseType", propOrder = ["kode", "presisering"])
 data class OpphevelseType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String = "1",
+    val kode: String,
 
     @field:XmlAttribute(name = "Presisering")
-    var presisering: String? = null,
+    val presisering: String?
 )

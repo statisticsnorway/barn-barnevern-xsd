@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.message
 
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
+import no.ssb.barn.xsd.SaksinnholdType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -33,11 +34,8 @@ class MessageCaseContentMissingClarificationSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        def saksinnhold = context.rootObject.sak.melding[0].saksinnhold[0]
-        and:
-        saksinnhold.kode = code
-        and:
-        saksinnhold.presisering = clarification
+        context.rootObject.sak.melding[0].saksinnhold[0] =
+                new SaksinnholdType(code, clarification)
 
         when:
         def reportEntries = sut.validate(context)
@@ -55,7 +53,6 @@ class MessageCaseContentMissingClarificationSpec extends Specification {
 
         where:
         code | clarification   || errorExpected
-        null | "N/A"           || false
         ""   | "N/A"           || false
         "42" | "N/A"           || false
 

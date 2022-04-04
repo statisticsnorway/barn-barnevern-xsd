@@ -2,6 +2,8 @@ package no.ssb.barn.validation.rule.plan
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.PlanEvalueringType
+import no.ssb.barn.xsd.PlanType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -38,17 +40,7 @@ class PlanEvaluationDateBeforeCaseStartDateSpec extends Specification {
         given:
         context.rootObject.sak.startDato = caseStartDate
         and:
-        def plan = context.rootObject.sak.plan.first()
-        and:
-        def evaluation = plan.evaluering.first()
-        and:
-        evaluation.utfortDato = executedDate
-        and:
-        plan.evaluering = [evaluation]
-        and:
-        if (resetEvaluation) {
-            plan.evaluering = []
-        }
+        context.rootObject.sak.plan[0] = createPlanType(caseStartDate, executedDate, resetEvaluation)
 
         when:
         def reportEntries = sut.validate(context)
@@ -69,5 +61,15 @@ class PlanEvaluationDateBeforeCaseStartDateSpec extends Specification {
         LocalDate.now().plusDays(1) | LocalDate.now()             | false           || true
         LocalDate.now()             | LocalDate.now().plusDays(1) | false           || false
         LocalDate.now()             | LocalDate.now().plusDays(1) | true            || false
+    }
+
+    def createPlanType(planStartDate, executedDate, resetEvaluation) {
+        new PlanType(
+                UUID.randomUUID(),
+                null,
+                planStartDate,
+                "1",
+                resetEvaluation ? [] : [new PlanEvalueringType(executedDate)],
+                null)
     }
 }

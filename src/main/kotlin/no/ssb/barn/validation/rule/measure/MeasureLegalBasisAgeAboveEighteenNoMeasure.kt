@@ -25,7 +25,7 @@ class MeasureLegalBasisAgeAboveEighteenNoMeasure : AbstractRule(
                 createReportEntry(
                     "Tiltak (${it.id}). Individet er $age år og skal "
                             + "dermed ikke ha omsorgstiltak",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

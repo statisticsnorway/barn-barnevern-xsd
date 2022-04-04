@@ -16,14 +16,14 @@ class MeasureStartDateAfterIndividStartDate : AbstractRule(
 
         return context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
-                tiltak.startDato!!.isBefore(individStartDate)
+                tiltak.startDato.isBefore(individStartDate)
             }
             .map {
                 createReportEntry(
                     "Tiltak (${it.id}}). Startdato (${it.startDato}) skal"
                             + " være lik eller etter individets startdato"
                             + " ($individStartDate)",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

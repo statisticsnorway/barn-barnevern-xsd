@@ -57,7 +57,6 @@ class CaseSocialSecurityIdSpec extends Specification {
         "02011088123"    || false
         "12345655555"    || true
         "12345612345"    || true
-        null             || true
         ""               || true
         " "              || true
     }

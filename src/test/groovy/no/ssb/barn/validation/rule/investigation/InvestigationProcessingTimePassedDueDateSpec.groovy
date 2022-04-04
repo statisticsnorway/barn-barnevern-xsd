@@ -3,6 +3,9 @@ package no.ssb.barn.validation.rule.investigation
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.BegrepsType
+import no.ssb.barn.xsd.RelasjonType
+import no.ssb.barn.xsd.UndersokelseKonklusjonType
+import no.ssb.barn.xsd.UndersokelseUtvidetFristType
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -34,16 +37,13 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
         and:
         def investigationId = UUID.randomUUID()
         and:
-        def relation = context.rootObject.sak.relasjon[0]
-        and:
-        relation.fraId = messageId
-        and:
-        relation.fraType = relationFromType
-        and:
-        relation.tilId = investigationId
-        and:
-        relation.tilType = relationToType
-        and:
+        context.rootObject.sak.relasjon[0] = new RelasjonType(
+                UUID.randomUUID(),
+                messageId,
+                relationFromType,
+                investigationId,
+                relationToType
+        )
         if (resetMessageId) messageId = UUID.randomUUID()
         and:
         def message = context.rootObject.sak.melding[0]
@@ -57,15 +57,21 @@ class InvestigationProcessingTimePassedDueDateSpec extends Specification {
         def investigation = context.rootObject.sak.undersokelse[0]
         and:
         investigation.id = investigationId
+
         and:
-        investigation.konklusjon.sluttDato = LocalDate.now().minusDays(1)
+        investigation.konklusjon = new UndersokelseKonklusjonType(
+                LocalDate.now().minusDays(1),
+                investigation.konklusjon.kode,
+                investigation.konklusjon.presisering)
         and:
-        investigation.utvidetFrist.innvilget = extendedDueDateGranted
-        and:
-        if (removeExtendedDueDate) investigation.utvidetFrist = null
+        if (removeExtendedDueDate) {
+            investigation.utvidetFrist = null
+        } else {
+            investigation.utvidetFrist =
+                    new UndersokelseUtvidetFristType(LocalDate.now(), extendedDueDateGranted)
+        }
         and:
         if (removeConclusion) investigation.konklusjon = null
-
 
         when:
         def reportEntries = sut.validate(context)

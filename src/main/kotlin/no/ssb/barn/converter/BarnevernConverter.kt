@@ -1,26 +1,42 @@
 package no.ssb.barn.converter
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
+import com.fasterxml.jackson.dataformat.xml.XmlMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule
+import com.fasterxml.jackson.module.kotlin.KotlinFeature
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import no.ssb.barn.xsd.BarnevernType
 import no.ssb.barn.xsd.TiltakTypeJson
-import java.io.StringWriter
 import java.time.LocalDate
 import java.time.ZonedDateTime
-import javax.xml.bind.JAXBContext
 
 
 object BarnevernConverter {
 
-    private val jaxbContext: JAXBContext =
-        JAXBContext.newInstance(BarnevernType::class.java)
+    private val kotlinModule: KotlinModule = KotlinModule.Builder()
+        .configure(KotlinFeature.StrictNullChecks, false)
+        // needed, else it will break for null https://github.com/FasterXML/jackson-module-kotlin/issues/130#issuecomment-546625625
+        .configure(KotlinFeature.NullIsSameAsDefault, true)
+        .build()
+
+    private val xmlMapper =
+        XmlMapper(JacksonXmlModule())
+            .registerModule(kotlinModule)
+            .registerModule(JavaTimeModule())
+            .registerModule(JaxbAnnotationModule())
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
+            .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
 
     @JvmStatic
     fun unmarshallXml(xml: String): BarnevernType =
-        jaxbContext
-            .createUnmarshaller()
-            .unmarshal(xml.byteInputStream()) as BarnevernType
+        xmlMapper.readValue(xml, BarnevernType::class.java)
 
     private const val VALIDATION_REPORT_KEY = "validationReport"
 
@@ -39,9 +55,10 @@ object BarnevernConverter {
     fun unmarshallXmlToJson(xml: String): String =
         unmarshallXml(xml).apply {
             sak.apply {
-                tiltak = sak.tiltak
+                tiltak.clear()
+                tiltak.addAll(sak.tiltak
                     .map { TiltakTypeJson(it) }
-                    .toMutableList()
+                    .toMutableList())
             }
         }.let { barnevernType ->
             gson.toJson(barnevernType)
@@ -49,12 +66,7 @@ object BarnevernConverter {
 
     @JvmStatic
     fun marshallInstance(barnevernType: BarnevernType): String =
-        StringWriter().use {
-            jaxbContext
-                .createMarshaller()
-                .marshal(barnevernType, it)
-            return it.toString()
-        }
+        xmlMapper.writeValueAsString(barnevernType)
 
     @JvmStatic
     val gson: Gson = GsonBuilder()

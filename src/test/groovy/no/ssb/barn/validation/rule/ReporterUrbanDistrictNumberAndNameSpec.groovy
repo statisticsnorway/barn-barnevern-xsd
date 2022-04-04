@@ -1,11 +1,17 @@
 package no.ssb.barn.validation.rule
 
 import no.ssb.barn.report.WarningLevel
-import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.AvgiverType
+import no.ssb.barn.xsd.BarnevernType
+import no.ssb.barn.xsd.FagsystemType
+import no.ssb.barn.xsd.SakType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
+
+import java.time.LocalDate
+import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -23,22 +29,18 @@ class ReporterUrbanDistrictNumberAndNameSpec extends Specification {
     @Subject
     ReporterUrbanDistrictNumberAndName sut
 
-    ValidationContext context
-
     @SuppressWarnings('unused')
     def setup() {
         sut = new ReporterUrbanDistrictNumberAndName()
-        context = getTestContext()
     }
 
     @Unroll("businessId: #businessId, urbanDistrictId: #urbanDistrictId, urbanDistrictName: #urbanDistrictName")
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.avgiver.organisasjonsnummer = businessId
-        and:
-        context.rootObject.avgiver.bydelsnummer = urbanDistrictId
-        and:
-        context.rootObject.avgiver.bydelsnavn = urbanDistrictName
+        def context = getTestContext(createBarnevernType(
+                businessId,
+                urbanDistrictId,
+                urbanDistrictName))
 
         when:
         def reportEntries = sut.validate(context)
@@ -68,8 +70,34 @@ class ReporterUrbanDistrictNumberAndNameSpec extends Specification {
         ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "42"            | ""                || true
         ReporterUrbanDistrictNumberAndName.OSLO_COMPANY_ID      | "01"            | "Name"            || false
 
-
         ReporterUrbanDistrictNumberAndName.BERGEN_COMPANY_ID    | "01"            | "Name"            || false
         ReporterUrbanDistrictNumberAndName.TRONDHEIM_COMPANY_ID | "01"            | "Name"            || false
+    }
+
+    def createBarnevernType(businessId, urbanDistrictId, urbanDistrictName) {
+        new BarnevernType(
+                UUID.randomUUID(),
+                null,
+                ZonedDateTime.now(),
+                new FagsystemType("levarandør", "navn", "versjon"),
+                createAvgiverType(businessId, urbanDistrictId, urbanDistrictName),
+                new SakType(
+                        UUID.randomUUID(),
+                        null,
+                        LocalDate.now(),
+                        null,
+                        "journalnummer",
+                        "12345612345",
+                        null,
+                        LocalDate.now().minusYears(1),
+                        "1",
+                        null,
+                        [], [], [], [], [], [], [], [], [], []
+                )
+        )
+    }
+
+    def createAvgiverType(businessId, urbanDistrictId, urbanDistrictName) {
+        new AvgiverType(businessId, "0301", "OSLO", urbanDistrictId, urbanDistrictName)
     }
 }

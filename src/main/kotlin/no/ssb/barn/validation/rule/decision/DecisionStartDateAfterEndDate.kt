@@ -15,12 +15,12 @@ class DecisionStartDateAfterEndDate : AbstractRule(
         context.rootObject.sak.vedtak.asSequence()
             .filter { decision ->
                 val conclusion = decision.konklusjon // when JaCoCo improves, use "?."
-                conclusion != null && decision.startDato!!.isAfter(conclusion.sluttDato)
+                conclusion != null && decision.startDato.isAfter(conclusion.sluttDato)
             }
             .map {
                 createReportEntry(
                     "Vedtakets startdato (${it.startDato}) er etter sluttdato (${it.konklusjon!!.sluttDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

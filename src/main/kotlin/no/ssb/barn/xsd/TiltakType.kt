@@ -1,11 +1,10 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import no.ssb.barn.converter.UuidAdapter
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -16,38 +15,36 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 )
 open class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
-    @field:XmlJavaTypeAdapter(
-        UuidAdapter::class
-    )
-    var id: UUID? = null,
+    val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String? = null,
+    val migrertId: String?,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
-    @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
-    ) var startDato: LocalDate? = null,
+    var startDato: LocalDate,
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
-    var lovhjemmel: LovhjemmelType = LovhjemmelType(),
+    var lovhjemmel: LovhjemmelType,
 
-    @field:XmlElement(name = "JmfrLovhjemmel")
-    var jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf(),
+    @field:JacksonXmlProperty(localName = "JmfrLovhjemmel")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf(),
 
     @field:XmlElement(name = "Kategori", required = true)
-    var kategori: KategoriType = KategoriType(),
+    var kategori: KategoriType,
 
-    @field:XmlElement(name = "Tilsyn")
-    var tilsyn: MutableList<TilsynType> = mutableListOf(),
+    @field:JacksonXmlProperty(localName = "Tilsyn")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val tilsyn: MutableList<TilsynType> = mutableListOf(),
 
-    @field:XmlElement(name = "Oppfolging")
-    var oppfolging: MutableList<OppfolgingType> = mutableListOf(),
+    @field:JacksonXmlProperty(localName = "Oppfolging")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val oppfolging: MutableList<OppfolgingType> = mutableListOf(),
 
     @field:XmlElement(name = "Opphevelse")
-    var opphevelse: OpphevelseType? = null,
+    var opphevelse: OpphevelseType?,
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: TiltakKonklusjonType? = null,
+    var konklusjon: TiltakKonklusjonType?
 )

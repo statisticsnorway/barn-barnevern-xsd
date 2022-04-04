@@ -34,14 +34,14 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                 if (outerIndex == innerIndex || !areOverlappingWithAtLeastThreeMonths(
                         outerMeasure,
                         innerMeasure,
-                        context.rootObject.datoUttrekk!!
+                        context.rootObject.datoUttrekk
                     )
                 ) {
                     return@inner
                 }
 
                 // if sluttDato is missing, use datoUttrekk as fall-back
-                val endDate = outerMeasure.konklusjon?.sluttDato ?: context.rootObject.datoUttrekk!!.toLocalDate()
+                val endDate = outerMeasure.konklusjon?.sluttDato ?: context.rootObject.datoUttrekk.toLocalDate()
 
                 val errorMsg =
                     "Plasseringstiltak ${outerMeasure.id} med sluttdato " +
@@ -50,7 +50,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                             ) +
                             " er mer enn 3 måneder etter ${innerMeasure.id}"
                 " med startdato " +
-                        innerMeasure.startDato!!.format(
+                        innerMeasure.startDato.format(
                             DateTimeFormatter.ofPattern(
                                 "dd.MM.yyyy"
                             )
@@ -60,7 +60,7 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
                 reportEntries.add(
                     createReportEntry(
                         errorMsg,
-                        outerMeasure.id!!
+                        outerMeasure.id
                     )
                 )
             }

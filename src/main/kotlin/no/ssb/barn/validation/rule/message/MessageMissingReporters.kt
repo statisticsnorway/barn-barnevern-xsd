@@ -21,7 +21,7 @@ class MessageMissingReporters : AbstractRule(
             .map {
                 createReportEntry(
                     "Konkludert melding mangler melder(e)",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

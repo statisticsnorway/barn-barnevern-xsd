@@ -24,7 +24,7 @@ class MeasureRepealClarificationRequired : AbstractRule(
             .map {
                 createReportEntry(
                     "Opphevelse (${it.opphevelse!!.kode}) mangler presisering.",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

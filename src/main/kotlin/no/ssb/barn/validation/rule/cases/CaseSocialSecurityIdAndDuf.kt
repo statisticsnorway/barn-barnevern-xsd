@@ -21,7 +21,7 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
         val fodselsnummer = context.rootObject.sak.fodselsnummer
         val duFnummer = context.rootObject.sak.duFnummer
 
-        if (!fodselsnummer.isNullOrEmpty()) {
+        if (fodselsnummer.isNotEmpty()) {
             return if (
                 fodselsnummer.length == 11
                     && (
@@ -31,7 +31,7 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
             } else {
                 createSingleReportEntryList(
                     "Feil i fødselsnummer. Kan ikke identifisere klienten.",
-                    context.rootObject.sak.id!!
+                    context.rootObject.sak.id
                 )
             }
         }
@@ -40,7 +40,7 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
             return if (!dufPattern.matcher(duFnummer).matches()) {
                 createSingleReportEntryList(
                     "DUFnummer mangler. Kan ikke identifisere klienten.",
-                    context.rootObject.sak.id!!
+                    context.rootObject.sak.id
                 )
             } else {
                 null
@@ -49,7 +49,7 @@ class CaseSocialSecurityIdAndDuf : AbstractRule(
 
         return createSingleReportEntryList(
             "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere klienten.",
-            context.rootObject.sak.id!!
+            context.rootObject.sak.id
         )
     }
 }

@@ -16,13 +16,13 @@ class InvestigationStartDateBeforeCaseStartDate : AbstractRule(
 
         return sak.undersokelse.asSequence()
             .filter { undersokelse ->
-                undersokelse.startDato!!.isBefore(sak.startDato)
+                undersokelse.startDato.isBefore(sak.startDato)
             }
             .map {
                 createReportEntry(
                     "Undersøkelsens startdato (${it.startDato}) "
                             + "er før sakens startdato (${sak.startDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

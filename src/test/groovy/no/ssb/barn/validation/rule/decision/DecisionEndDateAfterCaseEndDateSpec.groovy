@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.decision
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.VedtakKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -40,12 +41,14 @@ class DecisionEndDateAfterCaseEndDateSpec extends Specification {
         and:
         def decision = context.rootObject.sak.vedtak.first()
         and:
-        decision.konklusjon.sluttDato = decisionEndDate
+        context.rootObject.sak.vedtak.clear()
         and:
-        context.rootObject.sak.vedtak = [decision]
+        context.rootObject.sak.vedtak.add(decision)
         and:
         if (resetConclusion) {
             decision.konklusjon = null
+        } else {
+            decision.konklusjon = new VedtakKonklusjonType(decisionEndDate)
         }
 
         when:
@@ -62,7 +65,7 @@ class DecisionEndDateAfterCaseEndDateSpec extends Specification {
 
         where:
         resetConclusion | caseEndDate                   | decisionEndDate               || errorExpected
-        false           | null                          | null                          || false
+        false           | null                          | LocalDate.now()               || false
         false           | LocalDate.now().minusYears(1) | LocalDate.now()               || true
         true            | LocalDate.now().minusYears(1) | LocalDate.now()               || false
         false           | LocalDate.now()               | LocalDate.now()               || false

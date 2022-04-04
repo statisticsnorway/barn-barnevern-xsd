@@ -42,7 +42,9 @@ class DecisionStartDateBeforeCaseStartDateSpec extends Specification {
         and:
         context.rootObject.sak.startDato = caseStartDate
         and:
-        context.rootObject.sak.vedtak = [decision]
+        context.rootObject.sak.vedtak.clear()
+        and:
+        context.rootObject.sak.vedtak.add(decision)
 
         when:
         def reportEntries = sut.validate(context)

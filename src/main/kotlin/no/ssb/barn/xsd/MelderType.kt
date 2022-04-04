@@ -14,13 +14,10 @@ import javax.xml.bind.annotation.XmlType
 )
 data class MelderType(
     @field:XmlAttribute(name = "Kode", required = true)
-    var kode: String? = getCodes(LocalDate.now())
-        .take(1)
-        .map { it.code }
-        .firstOrNull(),
+    val kode: String,
 
     @field:XmlAttribute(name = "Presisering")
-    var presisering: String? = null
+    val presisering: String?
 ) {
     companion object {
 

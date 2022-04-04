@@ -14,12 +14,12 @@ class CaseSocialSecurityId : AbstractRule(
     SakType::class.java.simpleName
 ) {
     override fun validate(context: ValidationContext): List<ReportEntry>? {
-        val fodselsnummer = context.rootObject.sak.fodselsnummer ?: ""
+        val fodselsnummer = context.rootObject.sak.fodselsnummer
 
         return if (!validateFNR(fodselsnummer)) {
             createSingleReportEntryList(
                 "Saken har ufullstendig fødselsnummer. Korriger fødselsnummer.",
-                context.rootObject.sak.id!!
+                context.rootObject.sak.id
             )
         } else {
             null

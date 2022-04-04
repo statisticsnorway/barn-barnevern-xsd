@@ -20,7 +20,7 @@ class CaseEndDateAfterStartDate : AbstractRule(
         else
             createSingleReportEntryList(
                 "Sakens startdato ($startDate) er etter sluttdato ($endDate)",
-                context.rootObject.sak.id!!
+                context.rootObject.sak.id
             )
     }
 }

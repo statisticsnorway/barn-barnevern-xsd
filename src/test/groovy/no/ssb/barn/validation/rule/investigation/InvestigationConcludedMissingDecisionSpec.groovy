@@ -3,6 +3,7 @@ package no.ssb.barn.validation.rule.investigation
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.xsd.SaksinnholdType
+import no.ssb.barn.xsd.UndersokelseKonklusjonType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -37,12 +38,17 @@ class InvestigationConcludedMissingDecisionSpec extends Specification {
         given:
         def investigation = context.rootObject.sak.undersokelse[0]
         and:
-        investigation.konklusjon.kode = code
+        investigation.vedtaksgrunnlag.clear()
         and:
-        investigation.vedtaksgrunnlag = decision as List<SaksinnholdType>
+        investigation.vedtaksgrunnlag.addAll(decision)
         and:
         if (resetConclusion) {
             investigation.konklusjon = null
+        } else {
+            investigation.konklusjon = new UndersokelseKonklusjonType(
+                    investigation.konklusjon.sluttDato,
+                    code,
+                    investigation.konklusjon.presisering)
         }
 
         when:
@@ -58,11 +64,15 @@ class InvestigationConcludedMissingDecisionSpec extends Specification {
         }
 
         where:
-        code | decision                | resetConclusion || errorExpected
-        "1"  | []                      | true            || false
-        "1"  | [new SaksinnholdType()] | false           || false
-        "2"  | []                      | false           || true
-        "2"  | [new SaksinnholdType()] | false           || false
-        "3"  | []                      | false           || false
+        code | decision                  | resetConclusion || errorExpected
+        "1"  | []                        | true            || false
+        "1"  | [createSaksinnholdType()] | false           || false
+        "2"  | []                        | false           || true
+        "2"  | [createSaksinnholdType()] | false           || false
+        "3"  | []                        | false           || false
+    }
+
+    def createSaksinnholdType() {
+        new SaksinnholdType("1", null)
     }
 }

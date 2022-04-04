@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.plan
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.PlanEvalueringType
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -40,10 +41,10 @@ class PlanEvaluationDateAfterCaseEndDateSpec extends Specification {
         and:
         def plan = context.rootObject.sak.plan.first()
         and:
-        plan.evaluering.first().utfortDato = executedDate
-        and:
         if (resetEvaluation) {
-            plan.evaluering = []
+            plan.evaluering.removeAll()
+        } else {
+            plan.evaluering[0] = new PlanEvalueringType(executedDate)
         }
 
         when:

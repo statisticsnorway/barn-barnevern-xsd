@@ -9,7 +9,12 @@ class OversendelseBarneverntjenesteTypeSpec extends Specification {
     def "when constructor no exceptions expected"() {
         when:
         new OversendelseBarneverntjenesteType(
-                UUID.randomUUID(), LocalDate.now(), new LovhjemmelType(), List.of())
+                UUID.randomUUID(),
+                LocalDate.now(),
+                new LovhjemmelType(
+                        "lov", "kapittel", "paragraf", ["ledd"], ["punktum"]
+                ),
+                [])
 
         then:
         noExceptionThrown()

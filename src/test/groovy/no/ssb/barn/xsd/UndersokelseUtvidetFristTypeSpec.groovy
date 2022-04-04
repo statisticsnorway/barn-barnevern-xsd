@@ -7,9 +7,9 @@ import java.time.LocalDate
 
 class UndersokelseUtvidetFristTypeSpec extends Specification {
 
-    def "when constructor is called without values, expect no errors"() {
+    def "when constructor is called with values, expect no errors"() {
         when:
-        new UndersokelseUtvidetFristType()
+        new UndersokelseUtvidetFristType(LocalDate.now(), null)
 
         then:
         noExceptionThrown()

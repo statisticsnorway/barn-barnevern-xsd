@@ -20,13 +20,13 @@ class InvestigationEndDateAfterCaseEndDate : AbstractRule(
             sak.undersokelse.asSequence()
                 .filter { undersokelse ->
                     val conclusion = undersokelse.konklusjon
-                    conclusion != null && undersokelse.konklusjon!!.sluttDato!!.isAfter(sak.sluttDato)
+                    conclusion != null && undersokelse.konklusjon!!.sluttDato.isAfter(sak.sluttDato)
                 }
                 .map {
                     createReportEntry(
                         "Undersøkelsens sluttdato (${it.konklusjon!!.sluttDato})"
                                 + " er etter sakens sluttdato (${sak.sluttDato})",
-                        it.id!!
+                        it.id
                     )
                 }
                 .toList()

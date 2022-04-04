@@ -3,6 +3,7 @@ package no.ssb.barn.validation.rule.plan
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.PlanKonklusjonType
+import no.ssb.barn.xsd.PlanType
 import spock.lang.*
 
 import java.time.LocalDate
@@ -36,13 +37,7 @@ class PlanEndDateAfterCaseEndDateSpec extends Specification {
         given:
         context.rootObject.sak.sluttDato = caseEndDate
         and:
-        def plan = context.rootObject.sak.plan.first()
-        and:
-        if (resetConclusion) {
-            plan.konklusjon = null
-        } else {
-            plan.konklusjon = new PlanKonklusjonType(planEndDate)
-        }
+        context.rootObject.sak.plan[0] = createPlanType(caseEndDate, planEndDate, resetConclusion)
 
         when:
         def reportEntries = sut.validate(context)
@@ -64,4 +59,15 @@ class PlanEndDateAfterCaseEndDateSpec extends Specification {
         LocalDate.now() | LocalDate.now().plusDays(1) | false           || true
         LocalDate.now() | LocalDate.now().plusDays(1) | true            || false
     }
+
+    def createPlanType(planStartDate, planEndDate, resetConclusion) {
+        new PlanType(
+                UUID.randomUUID(),
+                null,
+                planStartDate,
+                "1",
+                [],
+                resetConclusion ? null : new PlanKonklusjonType(planEndDate))
+    }
+
 }

@@ -17,12 +17,12 @@ class DecisionRequirementStartDateAfterEndDate : AbstractRule(
             .filter { requirement ->
                 val conclusion = requirement.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
-                        && requirement.startDato!!.isAfter(conclusion.sluttDato)
+                        && requirement.startDato.isAfter(conclusion.sluttDato)
             }
             .map { requirement ->
                 createReportEntry(
                     "Kravets startdato (${requirement.startDato}) er etter sluttdato (${requirement.konklusjon!!.sluttDato})",
-                    requirement.id!!
+                    requirement.id
                 )
             }
             .toList()

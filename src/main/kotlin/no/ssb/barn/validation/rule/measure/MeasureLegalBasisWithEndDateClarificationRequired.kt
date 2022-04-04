@@ -27,7 +27,7 @@ class MeasureLegalBasisWithEndDateClarificationRequired : AbstractRule(
             .map {
                 createReportEntry(
                     "Opphevelse av omsorgstiltak mangler presisering",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

@@ -20,6 +20,6 @@ class CaseAgeAboveEighteenAndMeasures : AbstractRule(
         else
             createSingleReportEntryList(
                 "Klienten er over 18 år og skal dermed ha tiltak",
-                context.rootObject.sak.id!!
+                context.rootObject.sak.id
             )
 }

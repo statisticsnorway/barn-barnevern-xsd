@@ -23,7 +23,7 @@ class MessageReporterMissingClarification : AbstractRule(
                     .map {
                         createReportEntry(
                             "Melder med kode (${it.kode}) mangler presisering",
-                            melding.id!!
+                            melding.id
                         )
                     }
             }

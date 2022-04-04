@@ -16,13 +16,13 @@ class PlanStartDateBeforeCaseStartDate : AbstractRule(
 
         return sak.plan.asSequence()
             .filter { plan ->
-                plan.startDato!!.isBefore(sak.startDato)
+                plan.startDato.isBefore(sak.startDato)
             }
             .map {
                 createReportEntry(
                     "Planens startdato (${it.startDato}) er før"
                             + " sakens startdato (${sak.startDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

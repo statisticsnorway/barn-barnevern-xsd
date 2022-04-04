@@ -21,12 +21,12 @@ class PlanEvaluationDateAfterCaseEndDate : AbstractRule(
                 .flatMap { plan ->
                     plan.evaluering
                         .filter { evaluation ->
-                            evaluation.utfortDato!!.isAfter(sak.sluttDato)
+                            evaluation.utfortDato.isAfter(sak.sluttDato)
                         }
                         .map {
                             createReportEntry(
                                 "Utført evaluering (${it.utfortDato}) er etter sluttdato (${sak.sluttDato})",
-                                plan.id!!
+                                plan.id
                             )
                         }
                 }

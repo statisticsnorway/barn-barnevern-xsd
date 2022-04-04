@@ -2,6 +2,7 @@ package no.ssb.barn.validation.rule.message
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.MeldingKonklusjonType
 import spock.lang.*
 
 import java.time.LocalDate
@@ -40,7 +41,7 @@ class MessageEndDateAfterCaseEndDateSpec extends Specification {
         if (resetConclusion) {
             message.konklusjon = null
         } else {
-            message.konklusjon.sluttDato = messageEndDate
+            message.konklusjon = new MeldingKonklusjonType(messageEndDate, "2")
         }
 
         when:

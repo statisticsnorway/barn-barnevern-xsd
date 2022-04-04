@@ -16,13 +16,13 @@ class MessageStartDateAfterEndDate : AbstractRule(
             .filter { melding ->
                 val conclusion = melding.konklusjon // when JaCoCo improves, use "?."
                 conclusion != null
-                        && melding.startDato!!.isAfter(conclusion.sluttDato)
+                        && melding.startDato.isAfter(conclusion.sluttDato)
             }
             .map {
                 createReportEntry(
                     "Meldingens startdato (${it.startDato}) er etter"
                             + " meldingens sluttdato (${it.konklusjon!!.sluttDato})",
-                    it.id!!
+                    it.id
                 )
             }
             .toList()

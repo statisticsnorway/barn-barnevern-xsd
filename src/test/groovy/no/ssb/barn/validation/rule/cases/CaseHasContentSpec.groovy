@@ -2,6 +2,8 @@ package no.ssb.barn.validation.rule.cases
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
+import no.ssb.barn.xsd.KategoriType
+import no.ssb.barn.xsd.LovhjemmelType
 import no.ssb.barn.xsd.MeldingType
 import no.ssb.barn.xsd.PlanType
 import no.ssb.barn.xsd.TiltakType
@@ -41,11 +43,17 @@ class CaseHasContentSpec extends Specification {
         given:
         def sak = context.rootObject.sak
         and:
-        sak.melding = messages as List<MeldingType>
+        sak.melding.clear()
         and:
-        sak.tiltak = measures as List<TiltakType>
+        sak.melding.addAll(messages)
         and:
-        sak.plan = plans as List<PlanType>
+        sak.tiltak.clear()
+        and:
+        sak.tiltak.addAll(measures)
+        and:
+        sak.plan.clear()
+        and:
+        sak.plan.addAll(plans)
 
         when:
         def reportEntries = sut.validate(context)
@@ -62,14 +70,48 @@ class CaseHasContentSpec extends Specification {
         }
 
         where:
-        messages            | measures           | plans              || errorExpected
-        []                  | []                 | []                 || true
-        [new MeldingType()] | []                 | []                 || false
-        []                  | [new TiltakType()] | []                 || false
-        []                  | []                 | [createPlanType()] || false
+        messages              | measures             | plans              || errorExpected
+        []                    | []                   | []                 || true
+        [createMeldingType()] | []                   | []                 || false
+        []                    | [createTiltakType()] | []                 || false
+        []                    | []                   | [createPlanType()] || false
+    }
+
+    def createMeldingType() {
+        new MeldingType(
+                UUID.randomUUID(),
+                null,
+                LocalDate.now(),
+                [],
+                [],
+                null
+        )
+    }
+
+    def createTiltakType() {
+        new TiltakType(
+                UUID.randomUUID(),
+                null,
+                LocalDate.now(),
+                new LovhjemmelType(
+                        "lov", "kapittel", "paragraf", ["ledd"], ["punktum"]
+                ),
+                [],
+                new KategoriType("1.1", null),
+                [],
+                [],
+                null,
+                null
+        )
     }
 
     def createPlanType() {
-        new PlanType(UUID.randomUUID(), null, LocalDate.now(), null, [], null)
+        new PlanType(
+                UUID.randomUUID(),
+                null,
+                LocalDate.now(),
+                "1",
+                [],
+                null)
     }
 }

@@ -1,12 +1,11 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.converter.LocalDateAdapter
-import no.ssb.barn.converter.UuidAdapter
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import java.util.*
 import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -15,32 +14,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 )
 data class PlanType(
     @field:XmlAttribute(name = "Id", required = true)
-    @field:XmlJavaTypeAdapter(
-        UuidAdapter::class
-    )
-    var id: UUID? = null,
+    val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    var migrertId: String? = null,
+    val migrertId: String?,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
-    @field:XmlJavaTypeAdapter(
-        LocalDateAdapter::class
-    )
-    var startDato: LocalDate? = null,
+    val startDato: LocalDate,
 
     @field:XmlAttribute(name = "Plantype", required = true)
-    var plantype: String? = getPlantype(LocalDate.now())
-        .take(1)
-        .map { it.code }
-        .firstOrNull(),
+    val plantype: String,
 
-    @field:XmlElement(name = "Evaluering")
-    var evaluering: MutableList<PlanEvalueringType> = mutableListOf(),
+    @field:JacksonXmlProperty(localName = "Evaluering")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val evaluering: MutableList<PlanEvalueringType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: PlanKonklusjonType? = null
+    val konklusjon: PlanKonklusjonType?
 ) {
     companion object {
 
