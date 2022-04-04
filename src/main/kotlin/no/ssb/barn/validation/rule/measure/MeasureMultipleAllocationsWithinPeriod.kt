@@ -19,7 +19,8 @@ class MeasureMultipleAllocationsWithinPeriod : AbstractRule(
         val measures = context.rootObject.sak.tiltak.asSequence()
             .filter { tiltak ->
                 val category = tiltak.kategori  // when JaCoCo improves, use "?."
-                category.kode in kodelistePlasseringstiltak && tiltak.opphevelse != null
+                category.kode in kodelistePlasseringstiltak
+                        && tiltak.opphevelse != null
             }
             .toList()
 

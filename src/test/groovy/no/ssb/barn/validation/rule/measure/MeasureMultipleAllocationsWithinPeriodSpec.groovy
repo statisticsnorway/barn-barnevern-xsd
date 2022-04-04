@@ -2,18 +2,13 @@ package no.ssb.barn.validation.rule.measure
 
 import no.ssb.barn.report.WarningLevel
 import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.xsd.KategoriType
-import no.ssb.barn.xsd.LovhjemmelType
-import no.ssb.barn.xsd.OpphevelseType
-import no.ssb.barn.xsd.TiltakKonklusjonType
-import no.ssb.barn.xsd.TiltakType
+import no.ssb.barn.xsd.*
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
 import java.time.LocalDate
-import java.time.ZonedDateTime
 
 import static no.ssb.barn.testutil.TestDataProvider.getTestContext
 
@@ -44,13 +39,13 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
     @Unroll
     def "Test av alle scenarier"() {
         given:
-        context.rootObject.datoUttrekk = ZonedDateTime.now()
-        and:
         def sak = context.rootObject.sak
         and:
-        sak.tiltak[0] = createTiltakType(firstStartDate, firstEndDate, categoryCode, resetConclusion)
+        sak.tiltak.clear()
         and:
-        sak.tiltak[1] = createTiltakType(secondStartDate, secondEndDate, categoryCode, resetConclusion)
+        sak.tiltak.add(createTiltakType(firstStartDate, firstEndDate, categoryCode, resetConclusion))
+        and:
+        sak.tiltak.add(createTiltakType(secondStartDate, secondEndDate, categoryCode, resetConclusion))
 
         when:
         def reportEntries = sut.validate(context)
@@ -66,6 +61,11 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
 
         where:
         resetConclusion | firstStartDate | firstEndDate | useSecondContext | secondStartDate | secondEndDate | categoryCode || errorExpected
+        // category.kode !in kodelistePlasseringstiltak
+        false           | getDate(0)     | getDate(0)   | true             | getDate(0)      | getDate(0)    | "~code~"     || false
+        // category.kode in kodelistePlasseringstiltak && tiltak.opphevelse = null
+        true            | getDate(0)     | getDate(0)   | true             | getDate(0)      | getDate(0)    | "1.1"        || false
+
         false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "1.1"        || true
         false           | getDate(-3)    | getDate(0)   | true             | getDate(-2)     | getDate(0)    | "1.1"        || false
         false           | getDate(-3)    | getDate(0)   | true             | getDate(-3)     | getDate(0)    | "~code~"     || false
@@ -92,6 +92,10 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
                 ? null
                 : new TiltakKonklusjonType(endDate)
 
+        def cancellation = resetConclusion
+                ? null
+                : new OpphevelseType("1", "~presisering~")
+
         new TiltakType(
                 UUID.randomUUID(),
                 null,
@@ -101,7 +105,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
                 new KategoriType(categoryCode, null),
                 [],
                 [],
-                new OpphevelseType("1", "~presisering~"),
+                cancellation,
                 conclusion
         )
     }
