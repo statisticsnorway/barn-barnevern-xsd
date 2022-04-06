@@ -225,7 +225,6 @@ Brukes på stien /Barnevern/Sak/Virksomhet/Tiltak/Kategori/@Kode
 | 6.2  | Nettverksmøter <br>(Strukturerte dialogmøter som består av <br>barneverntjenesten, foreldre og ungdom og andre personer <br>som er viktige i ungdommens liv. Invitasjon av deltakere <br>skjer i samråd mellom barneverntjenesten, ungdom og foreldre) | 2013-01-01 |
 | 6.3  | Individuell plan                                             | 2013-01-01 |
 | 6.4  | Deltakelse i ansvarsgruppe                                   | 2013-01-01 |
-| 6.5  | Samarbeid om utdanning og arbeid                             | 2013-01-01 |
 | 6.99 | Andre tiltak (krever presisering)                            | 2013-01-01 |
 | 7.1  | Bvl § 4-10 medisinsk undersøkelse og behandling              | 2013-01-01 |
 | 7.2  | Bvl § 4-11 behandling av barn med særlige opplæringsbehov    | 2013-01-01 |

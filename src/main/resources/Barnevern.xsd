@@ -895,7 +895,6 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 6.2 = Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)
 6.3 = Individuell plan
 6.4 = Deltakelse i ansvarsgruppe
-6.5 = Samarbeid om utdanning og arbeid
 6.99 = Andre tiltak (krever presisering)
 7.1 = Bvl § 4-10 medisinsk undersøkelse og behandling
 7.2 = Bvl § 4-11 behandling av barn med særlige opplæringsbehov
@@ -953,7 +952,6 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 	  {"code" : "6.2", "validFrom" : "2013-01-01", "title" : "Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)"},
 	  {"code" : "6.3", "validFrom" : "2013-01-01", "title" : "Individuell plan"},
 	  {"code" : "6.4", "validFrom" : "2013-01-01", "title" : "Deltakelse i ansvarsgruppe"},
-	  {"code" : "6.5", "validFrom" : "2013-01-01", "title" : "Samarbeid om utdanning og arbeid"},
 	  {"code" : "6.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
 	  {"code" : "7.1", "validFrom" : "2013-01-01", "title" : "Bvl § 4-10 medisinsk undersøkelse og behandling"},
 	  {"code" : "7.2", "validFrom" : "2013-01-01", "title" : "Bvl § 4-11 behandling av barn med særlige opplæringsbehov"},
@@ -1011,7 +1009,6 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 					<xs:enumeration value="6.2"/>
 					<xs:enumeration value="6.3"/>
 					<xs:enumeration value="6.4"/>
-					<xs:enumeration value="6.5"/>
 					<xs:enumeration value="6.99"/>
 					<xs:enumeration value="7.1"/>
 					<xs:enumeration value="7.2"/>

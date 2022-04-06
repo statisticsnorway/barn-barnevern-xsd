@@ -83,7 +83,6 @@ data class KategoriType(
                         "skjer i samråd mellom barneverntjenesten, ungdom og foreldre)",
                 "6.3" to "Individuell plan",
                 "6.4" to "Deltakelse i ansvarsgruppe",
-                "6.5" to "Samarbeid om utdanning og arbeid",
                 "6.99" to otherMeasures,
                 "7.1" to "Bvl § 4-10 medisinsk undersøkelse og behandling",
                 "7.2" to "Bvl § 4-11 behandling av barn med særlige opplæringsbehov",
