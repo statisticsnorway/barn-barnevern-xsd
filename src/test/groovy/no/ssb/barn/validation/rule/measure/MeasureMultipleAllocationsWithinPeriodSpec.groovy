@@ -117,7 +117,7 @@ class MeasureMultipleAllocationsWithinPeriodSpec extends Specification {
                 new LovhjemmelType("BVL", "1", "1", ["1"], []),
                 [new LovhjemmelType("BVL", "1", "1", ["1"], []), new LovhjemmelType("BVL", "1", "1", ["1"], [])],
                 new KategoriType(categoryCode, null),
-                [],
+                null,
                 [],
                 cancellation,
                 conclusion

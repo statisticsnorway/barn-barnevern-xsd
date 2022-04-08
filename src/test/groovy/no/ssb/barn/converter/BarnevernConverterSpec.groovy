@@ -53,7 +53,7 @@ class BarnevernConverterSpec extends Specification {
         !barnevernType.sak.ettervern.any()
 
         where:
-        i << (1..9)
+        i << (9..9)
     }
 
     def VALIDATION_REPORT_JSON = '{ "someValue": 1, "myList": [4, 8, 15, 16, 23, 42] }'

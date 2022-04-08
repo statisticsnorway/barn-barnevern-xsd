@@ -98,7 +98,7 @@ class CaseHasContentSpec extends Specification {
                 ),
                 [],
                 new KategoriType("1.1", null),
-                [],
+                null,
                 [],
                 null,
                 null

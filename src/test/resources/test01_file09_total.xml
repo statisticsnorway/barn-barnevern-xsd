@@ -40,7 +40,7 @@
             </JmfrLovhjemmel>
             <Kategori Kode="3.10"/>
             <Tilsyn>
-                <Ansvarlig Id="be6dff10-c654-4a88-8310-a42d3e268e75" StartDato="2021-04-08" Kommumenummer="3401" />
+                <Ansvarlig Id="be6dff10-c654-4a88-8310-a42d3e268e75" StartDato="2021-04-08" Kommunenummer="3401" />
                 <Hyppighet Id="be6dff10-c654-4a88-8310-a42d3e268e15" StartDato="2021-04-08" Kode="4" />
             </Tilsyn>
             <Opphevelse Kode="1" Presisering="~presisering~"/>
