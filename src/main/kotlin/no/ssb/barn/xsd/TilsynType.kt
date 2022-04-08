@@ -1,16 +1,23 @@
 package no.ssb.barn.xsd
 
-import java.time.LocalDate
-import java.util.*
-import javax.xml.bind.annotation.*
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TilsynType", propOrder = ["id", "utfortDato"])
+@XmlType(name = "TilsynType", propOrder = ["ansvarlig", "hyppighet", "utfort"])
 data class TilsynType(
-    @field:XmlAttribute(name = "Id", required = true)
-    val id: UUID,
+    @field:JacksonXmlProperty(localName = "Ansvarlig")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val ansvarlig: MutableList<TilsynAnsvarligType> = mutableListOf(),
 
-    @field:XmlAttribute(name = "UtfortDato", required = true)
-    @field:XmlSchemaType(name = "date")
-    val utfortDato: LocalDate
+    @field:JacksonXmlProperty(localName = "Hyppighet")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val hyppighet: MutableList<TilsynHyppighetType> = mutableListOf(),
+
+    @field:JacksonXmlProperty(localName = "Utfort")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val utfort: MutableList<TilsynUtfortType>? = mutableListOf()
 )

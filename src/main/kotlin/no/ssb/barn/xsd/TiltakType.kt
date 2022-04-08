@@ -34,9 +34,8 @@ open class TiltakType(
     @field:XmlElement(name = "Kategori", required = true)
     var kategori: KategoriType,
 
-    @field:JacksonXmlProperty(localName = "Tilsyn")
-    @field:JacksonXmlElementWrapper(useWrapping = false)
-    val tilsyn: MutableList<TilsynType> = mutableListOf(),
+    @field:XmlElement(name = "Tilsyn", required = false)
+    var tilsyn: TilsynType?,
 
     @field:JacksonXmlProperty(localName = "Oppfolging")
     @field:JacksonXmlElementWrapper(useWrapping = false)

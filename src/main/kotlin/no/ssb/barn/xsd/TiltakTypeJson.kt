@@ -13,7 +13,7 @@ class TiltakTypeJson(
     lovhjemmel: LovhjemmelType,
     jmfrLovhjemmel: MutableList<LovhjemmelType>,
     kategori: KategoriType,
-    tilsyn: MutableList<TilsynType>,
+    tilsyn: TilsynType?,
     oppfolging: MutableList<OppfolgingType>,
     opphevelse: OpphevelseType?,
     konklusjon: TiltakKonklusjonType?,

@@ -27,8 +27,8 @@ class KategoriTypeSpec extends Specification {
         where:
         date                       || expectedNumberOfItems
         LocalDate.of(2012, 12, 31) || 0
-        LocalDate.of(2013, 1, 1)   || 49
-        LocalDate.of(2013, 6, 1)   || 49
+        LocalDate.of(2013, 1, 1)   || 48
+        LocalDate.of(2013, 6, 1)   || 48
         LocalDate.of(2101, 1, 1)   || 0
     }
 

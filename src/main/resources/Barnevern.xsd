@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.0">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -477,13 +477,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 			<xs:element name="Lovhjemmel" type="LovhjemmelType"/>
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
 			<xs:element name="Kategori" type="KategoriType"/>
-			<xs:element name="Tilsynskommune" minOccurs="0" maxOccurs="unbounded">
-				<xs:complexType>
-					<xs:attribute ref="StartDato" use="required"/>
-					<xs:attribute name="Kommunenummer" use="required"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Tilsyn" type="TilsynType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tilsyn i fosterhjem utført av uavhengig part</xs:documentation>
 				</xs:annotation>
@@ -1080,6 +1074,58 @@ Dato oppfølgingsbesøket faktisk ble foretatt
 	</xs:complexType>
 	<!-- Tilsyn -->
 	<xs:complexType name="TilsynType">
+		<xs:sequence>
+			<xs:element name="Ansvarlig" type="TilsynAnsvarligType" maxOccurs="unbounded"/>
+			<xs:element name="Hyppighet" type="TilsynHyppighetType" maxOccurs="unbounded"/>
+			<xs:element name="Utfort" type="TilsynUtfortType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tilsyn i fosterhjem utført av uavhengig part</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TilsynAnsvarligType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required"/>
+		<xs:attribute name="Kommunenummer" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="TilsynHyppighetType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required"/>
+		<xs:attribute name="Kode" use="required">
+			<xs:annotation>
+				<xs:documentation>
+4 = 4 tilsyn pr. år (standard)
+2 = 2 tilsyn pr. år (redusert)
+							</xs:documentation>
+				<xs:appinfo xml:lang="json">
+{
+   "type":"codelist",
+   "term":"TiltakTilsynHyppighet",
+   "title":"Hyppighet",
+   "path":"/Barnevern/Sak/Tiltak/Tilsyn/Hyppighet/@Kode",
+   "items":[
+	  {"code":"4", "validFrom":"2022-01-01", "title":"4 tilsyn pr. år (standard)" },
+	  {"code":"2", "validFrom":"2022-01-01", "title":"2 tilsyn pr. år (redusert)" }
+   ]
+}
+							</xs:appinfo>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:list>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+							<xs:maxLength value="1"/>
+							<xs:enumeration value="4"/>
+							<xs:enumeration value="2"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:list>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="TilsynUtfortType">
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
@@ -1316,6 +1362,7 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:element name="FlyttingTil" type="FlyttingTilType"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId"/>
 		<xs:attribute ref="SluttDato" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="ArsakFraType">
