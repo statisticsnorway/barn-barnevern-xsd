@@ -16,7 +16,7 @@ data class MeldingType(
     var id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    val migrertId: String?,
+    val migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -31,5 +31,5 @@ data class MeldingType(
     val saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: MeldingKonklusjonType?
+    var konklusjon: MeldingKonklusjonType? = null
 )

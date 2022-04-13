@@ -15,5 +15,5 @@ data class EttervernType(
     val tilbudSendtDato: LocalDate,
 
     @field:XmlElement(name = "Konklusjon")
-    val konklusjon: EttervernKonklusjonType?
+    val konklusjon: EttervernKonklusjonType? = null
 )

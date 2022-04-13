@@ -24,16 +24,16 @@ data class VedtakType(
 
     @field:JacksonXmlProperty(localName = "JmfrLovhjemmel")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val jmfrLovhjemmel: List<LovhjemmelType> = listOf(),
+    val jmfrLovhjemmel: MutableList<LovhjemmelType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Krav")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val krav: List<OversendelsePrivatKravType> = listOf(),
+    val krav: MutableList<OversendelsePrivatKravType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Status")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val status: List<VedtakStatusType> = listOf(),
+    val status: MutableList<VedtakStatusType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: VedtakKonklusjonType?
+    var konklusjon: VedtakKonklusjonType? = null
 )

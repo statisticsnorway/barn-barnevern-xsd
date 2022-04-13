@@ -12,5 +12,5 @@ data class OpphevelseType(
     val kode: String,
 
     @field:XmlAttribute(name = "Presisering")
-    val presisering: String?
+    val presisering: String? = null
 )

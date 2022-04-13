@@ -21,8 +21,8 @@ data class AvgiverType(
     val kommunenavn: String,
 
     @field:XmlAttribute(name = "Bydelsnummer")
-    val bydelsnummer: String?,
+    val bydelsnummer: String? = null,
 
     @field:XmlAttribute(name = "Bydelsnavn")
-    val bydelsnavn: String?
+    val bydelsnavn: String? = null
 )

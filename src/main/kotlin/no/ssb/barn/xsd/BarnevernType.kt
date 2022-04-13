@@ -15,7 +15,7 @@ data class BarnevernType(
     val id: UUID,
 
     @field:XmlAttribute(name = "ForrigeId")
-    val forrigeId: String?,
+    val forrigeId: String? = null,
 
     @field:XmlAttribute(name = "DatoUttrekk", required = true)
     @field:XmlSchemaType(name = "dateTime")

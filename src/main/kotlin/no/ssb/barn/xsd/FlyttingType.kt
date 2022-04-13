@@ -15,11 +15,11 @@ data class FlyttingType(
     val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    val migrertId: String?,
+    val migrertId: String? = null,
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
-    val sluttDato: LocalDate?,
+    val sluttDato: LocalDate? = null,
 
     @field:XmlElement(name = "ArsakFra")
     val arsakFra: ArsakFraType,

@@ -19,7 +19,7 @@ data class SakType(
     var id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    val migrertId: String?,
+    val migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -27,7 +27,7 @@ data class SakType(
 
     @field:XmlAttribute(name = "SluttDato")
     @field:XmlSchemaType(name = "date")
-    var sluttDato: LocalDate?,
+    var sluttDato: LocalDate? = null,
 
     @field:XmlAttribute(name = "Journalnummer", required = true)
     val journalnummer: String,
@@ -36,7 +36,7 @@ data class SakType(
     var fodselsnummer: String,
 
     @field:XmlAttribute(name = "DUFnummer")
-    var duFnummer: String?,
+    var duFnummer: String? = null,
 
     @field:XmlAttribute(name = "Fodseldato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -46,7 +46,7 @@ data class SakType(
     val kjonn: String,
 
     @field:XmlAttribute(name = "Avsluttet")
-    val avsluttet: Boolean?,
+    val avsluttet: Boolean? = null,
 
     @field:JacksonXmlProperty(localName = "Melding")
     @field:JacksonXmlElementWrapper(useWrapping = false)

@@ -19,7 +19,7 @@ data class SaksinnholdType(
     val kode: String,
 
     @field:XmlAttribute(name = "Presisering")
-    val presisering: String?
+    val presisering: String? = null
 ) {
     companion object {
 

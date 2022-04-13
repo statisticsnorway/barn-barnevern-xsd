@@ -18,7 +18,7 @@ open class TiltakType(
     val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    val migrertId: String?,
+    val migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -35,15 +35,15 @@ open class TiltakType(
     var kategori: KategoriType,
 
     @field:XmlElement(name = "Tilsyn", required = false)
-    var tilsyn: TilsynType?,
+    var tilsyn: TilsynType? = null,
 
     @field:JacksonXmlProperty(localName = "Oppfolging")
     @field:JacksonXmlElementWrapper(useWrapping = false)
     val oppfolging: MutableList<OppfolgingType> = mutableListOf(),
 
     @field:XmlElement(name = "Opphevelse")
-    var opphevelse: OpphevelseType?,
+    var opphevelse: OpphevelseType? = null,
 
     @field:XmlElement(name = "Konklusjon")
-    var konklusjon: TiltakKonklusjonType?
+    var konklusjon: TiltakKonklusjonType? = null
 )

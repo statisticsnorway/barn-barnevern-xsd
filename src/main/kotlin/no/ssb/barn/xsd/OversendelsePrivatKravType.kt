@@ -15,5 +15,5 @@ data class OversendelsePrivatKravType(
     val startDato: LocalDate,
 
     @field:XmlElement(name = "Konklusjon")
-    val konklusjon: OversendelsePrivatKravKonklusjonType?
+    val konklusjon: OversendelsePrivatKravKonklusjonType? = null
 )

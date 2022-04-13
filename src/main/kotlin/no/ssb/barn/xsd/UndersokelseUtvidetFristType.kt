@@ -12,7 +12,7 @@ data class UndersokelseUtvidetFristType(
     val startDato: LocalDate,
 
     @field:XmlAttribute(name = "Innvilget")
-    val innvilget: String?
+    val innvilget: String? = null
 ) {
     companion object {
 

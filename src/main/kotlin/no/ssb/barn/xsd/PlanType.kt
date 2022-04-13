@@ -17,7 +17,7 @@ data class PlanType(
     val id: UUID,
 
     @field:XmlAttribute(name = "MigrertId")
-    val migrertId: String?,
+    val migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
@@ -31,7 +31,7 @@ data class PlanType(
     val evaluering: MutableList<PlanEvalueringType> = mutableListOf(),
 
     @field:XmlElement(name = "Konklusjon")
-    val konklusjon: PlanKonklusjonType?
+    val konklusjon: PlanKonklusjonType? = null
 ) {
     companion object {
 
