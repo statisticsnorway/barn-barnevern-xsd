@@ -3,7 +3,41 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
-# v.0.13.0
+# v.1.1.0
+## Struktur
+- /Barnevern
+  - Lagt til attributtet @Id, for å kunne identifisere innsendingen
+  - Lagt til attributtet @ForrigeId, for å kunne identifisere forrige innsending og dermed vite at ingen informasjon har gått tapt mellom fagsystemet og SSB den gitt saken/barnet.
+- /Barnevern/Leverandor
+  - /Barnevern/Sak/Virksomhet/@Bydelsnummer er flyttet i struktur til /Barnevern/Leverandor/@Bydelsnummer 
+  - /Barnevern/Sak/Virksomhet/@Bydelsnavn er flyttet i struktur til /Barnevern/Leverandor/@Bydelsnavn
+- /Barnevern/Sak
+  - Attributtet @Journalnummer er endret fra 20 til 36 tegn
+  - Lagt til nyt kode 0 = Ufødt for attributtet @Kjonn
+  - Attributtene @Fodselsnummer, @Fodselsdato og @Kjonn er endret fra valgfri til obligatorisk
+- /Barnevern/Sak/Virksomhet er fjernet. Alle gjenværende underelementer er flyttet i struktur til Barnevern/Sak
+- /Barnevern/Sak/Melding/Saksinnhold
+  - Oppdatert forklaringstekst for kode 8
+  - Lagt til manglende kode 22
+  - Lagt ny kode 28
+- /Barnevern/Sak/Undersokelse/Vedtaksgrunnlag
+  - Sammen endringer som under Barnevern/Sak/Melding/Saksinnhold da de benytter felles kompleks type SaksinnholdType.
+- /Barnevern/Sak/Tiltak/Kategroi/@Kode
+  - Fjernet kode 6.5
+- /Barnevern/Sak/Tiltak/Tilsyn endret fra liste til et samlebegrep
+  - Attributtene @Id og @UtfortDato under Barnevern/Sak/Tiltak/Tilsyn er flyttet i struktur til Barnevern/Sak/Tiltak/Tilsyn/Utfort
+  - Lagt til nytt obligatorisk begrep Barnevern/Sak/Tiltak/Tilsyn/Ansvarlig med attributtene @Id, @StartDato og @Kommunenummer. Brukes til å referere hvilken kommune som har tilsynsansvar.
+  - Lagt til nytt obligatorisk begrep Barnevern/Sak/Tiltak/Tilsyn/Hyppighet med attributtene @Id, @StartDato og @Kode. Brukes for å kunne vite hvor mange tilsyn det skal utføres per år.
+- /Barnevern/Sak/Vedtak
+  - Barnevern/Sak/Vedtak/Status er endret fra 0 til mange -> til 1 til mange
+  - Barnevern/Sak/Vedtak/Status/@EndretDato er endret datatype fra xs:string til xs:date
+  - Lagt til Barnevern/Sak/Vedtak/Status/@Id slik feilregistrerte statuser kan slettes
+- /Barnevern/Sak/Slettet er lagt til med attributtene @Id, @Type (baseres på BegrepsType) og @Sluttdato. Brukes for å informere om sletting av elementer på grunn av for eksempel feilregistrering. Refererer til element ved hjelp av @Id og @Type.
+- BegrepsType
+  - Lagt typene Status og Relasjon
+ 
+---
+# v0.13.0
 ## Struktur
 - Nytt element *Virksomhet* inn som rotelement i *Sak* - for å håndtere når sak overføres mellom ulike bydeler og samme sak med samme id rapporteres fra ulike bydeler
     - Attributt *AvgiverType/@Distriktsnummer*, *AvgiverType/@Bydelsnummer* og *AvgiverType/@Bydelsnavn* er flyttet til *VirksomhetType*
@@ -52,7 +86,7 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 - Nye enumverdier i *BegrepsType*: "OversendelseFylkesnemnd" og "Flytting"
 
 ---
-# v.0.10.1
+# v0.10.1
 XSD er nå strukturert for
 - Innrapportering av én sak eller én avvist melding av gangen
 - Rapporteringer med korte intervaller
@@ -85,7 +119,7 @@ Erstatter tidligere *BasertPaaId*.
 - *Sak/@Avsluttet* erstatter tidligere attributt *Avsluttet3112*
 
 ---
-# v.0.9.1 (presentert i arbeidsgruppe med leverandører 21.06.2021 - ikke publisert)
+# v0.9.1 (presentert i arbeidsgruppe med leverandører 21.06.2021 - ikke publisert)
 Det er foretatt en omstrukturering av XSD’ene (definisjonene er splittet opp til 3 nye filer) samt noen endringer i innhold. Dette i et forsøk på å gjøre spesifikasjonen mer konsistent, forståelig og brukbar. I den nærmeste tiden vil vi søke å få avklart enkelte gjenstående spørsmål med leverandører og barnevernfaglige.
 
 ## Nye filer:
