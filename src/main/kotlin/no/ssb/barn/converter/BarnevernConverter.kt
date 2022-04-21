@@ -22,7 +22,7 @@ object BarnevernConverter {
         .configure(KotlinFeature.NullIsSameAsDefault, true)
         .build()
 
-    private val xmlMapper = XmlMapper(JacksonXmlModule())
+    private val XML_MAPPER = XmlMapper(JacksonXmlModule())
         .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
         .registerModule(kotlinModule)
         .registerModule(JavaTimeModule())
@@ -31,7 +31,8 @@ object BarnevernConverter {
         .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
         .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
 
-    private val objectMapper = ObjectMapper()
+    @JvmStatic
+    val OBJECT_MAPPER: ObjectMapper = ObjectMapper()
         .registerModule(kotlinModule)
         .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
         .registerModule(JavaTimeModule())
@@ -41,15 +42,15 @@ object BarnevernConverter {
 
     @JvmStatic
     fun unmarshallXml(xml: String): BarnevernType =
-        xmlMapper.readValue(xml, BarnevernType::class.java)
+        XML_MAPPER.readValue(xml, BarnevernType::class.java)
 
     @JvmStatic
     fun unmarshallXmlAndValidationReportToMap(
         xml: String,
         validationReportJson: String
-    ): Map<String, Any> = objectMapper.readValue<MutableMap<String, Any>>(unmarshallXmlToJson(xml))
+    ): Map<String, Any> = OBJECT_MAPPER.readValue<MutableMap<String, Any>>(unmarshallXmlToJson(xml))
         .also {
-            it[VALIDATION_REPORT_KEY] = objectMapper.readValue<Map<String, Any>>(validationReportJson)
+            it[VALIDATION_REPORT_KEY] = OBJECT_MAPPER.readValue<Map<String, Any>>(validationReportJson)
         }
 
     @JvmStatic
@@ -61,9 +62,9 @@ object BarnevernConverter {
                     .map { TiltakTypeJson(it) }
                     .toMutableList())
             }
-        }.let { barnevernType -> objectMapper.writeValueAsString(barnevernType) }
+        }.let { barnevernType -> OBJECT_MAPPER.writeValueAsString(barnevernType) }
 
     @JvmStatic
     fun marshallInstance(barnevernType: BarnevernType): String =
-        xmlMapper.writeValueAsString(barnevernType)
+        XML_MAPPER.writeValueAsString(barnevernType)
 }
