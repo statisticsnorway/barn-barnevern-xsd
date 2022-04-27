@@ -1309,6 +1309,7 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="Status"/>
 			<xs:enumeration value="Ettervern"/>
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
+			<xs:enumeration value="Flytting"/>
 			<xs:enumeration value="Relasjon"/>
 		</xs:restriction>
 	</xs:simpleType>
