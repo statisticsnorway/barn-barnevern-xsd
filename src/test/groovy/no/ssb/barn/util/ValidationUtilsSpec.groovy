@@ -112,7 +112,6 @@ class ValidationUtilsSpec extends Specification {
         "41011088188" | "dnr" || true
         "05011300100" | "fnr" || true
         "05011300200" | "fnr" || true
-        "05011355555" | "fnr" || true
         "05011399999" | "fnr" || true
         "24101219220" | "fnr" || true
 
@@ -120,6 +119,7 @@ class ValidationUtilsSpec extends Specification {
         "ABCDEFGHIJK" | "???" || false
         "123456"      | "???" || false
         "01000000040" | "fnr" || false
+        "05011355555" | "fnr" || false
     }
 
     def "Should validate convert the first digit of the dnr to valid date (dnr), dnr = #dnr, result = #result"() {

@@ -1,5 +1,6 @@
 package no.ssb.barn.util
 
+import no.ssb.barn.validation.SharedValidationConstants.kodelistePlasseringstiltak
 import no.ssb.barn.xsd.TiltakType
 import java.text.DateFormat
 import java.text.ParseException
@@ -91,7 +92,6 @@ object ValidationUtils {
                                 && (
                                 fnr.endsWith("00100")
                                         || fnr.endsWith("00200")
-                                        || fnr.endsWith("55555")
                                         || fnr.endsWith("99999")
                                 )
                         )
@@ -141,14 +141,24 @@ object ValidationUtils {
         }
                 ||
                 with(measure) {
-                    jmfrLovhjemmel.any { jmfrlovhjemmel ->
-                        with(jmfrlovhjemmel) {
-                            (kapittel == "4" && paragraf == "12")
-                                    || (kapittel == "4" && paragraf == "8" && ledd.any { it in listOf("2", "3") })
-                        }
-                    }
+                    (lovhjemmel.kapittel == "4" && lovhjemmel.paragraf == "8")
+                            &&
+                            jmfrLovhjemmel.any { jmfrlovhjemmel ->
+                                with(jmfrlovhjemmel) {
+                                    (kapittel == "4" && paragraf == "12")
+                                            || (kapittel == "4" && paragraf == "8" && ledd.any {
+                                        it in listOf(
+                                            "2",
+                                            "3"
+                                        )
+                                    })
+                                }
+                            }
                 }
 
+    @JvmStatic
+    fun isPlacementMeasure(measure: TiltakType): Boolean =
+        measure.kategori.kode in kodelistePlasseringstiltak
 
     private fun isValidDate(dateStr: String): Boolean {
         val sdf: DateFormat = SimpleDateFormat("ddMMyy")

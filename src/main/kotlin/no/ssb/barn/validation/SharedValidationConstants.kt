@@ -3,7 +3,7 @@ package no.ssb.barn.validation
 object SharedValidationConstants {
 
     const val SOCIAL_SECURITY_RULE_NAME =
-        "Sak Kontroll 11: Fødselsnummer"
+        "Sak Kontroll 12: Fødselsnummer"
 
     const val SOCIAL_SECURITY_AND_DUF_RULE_NAME =
         "Sak Kontroll 03: Fødselsnummer og DUFnummer"
