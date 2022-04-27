@@ -338,6 +338,19 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageMissingCaseContent.kt)
 
 
+### [TODO] Melding Kontroll 19: Dublett på innhold, men forskjellige identer
+
+Gitt at man har 2 eller flere Meldinger<br/>
+når sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageDuplicateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageDuplicate.kt)
+
+
 
 ### <a name="melder">Melder</a> 
 
@@ -463,6 +476,19 @@ Alvorlighetsgrad: Warning
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationProcessingTimePassedDueDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationProcessingTimePassedDueDate.kt)
+
+
+### [TODO] Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
+
+Gitt at man har 2 eller flere Undersøkelser<br/>
+når sammenligner Undersøkelsene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+så gi feilmeldingen "Det finnes 2 eller flere Undersøkelser med identisk innhold, men med forskjellige identer"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationDuplicateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationDuplicate.kt)
 
 
 
@@ -805,6 +831,19 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLegalBasisValidCode.kt)
 
 
+### [TODO] Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
+
+Gitt at man har 2 eller flere Tiltak<br/>
+når sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+så gi feilmeldingen "Det finnes 2 eller flere Tiltak med identisk innhold, men med forskjellige identer"
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureDuplicateSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureDuplicate.kt)
+
+
 
 #### [TODO] Tiltak Kontroll 20: Tiltak skal ha relasjon fra Vedtak
 
@@ -814,9 +853,9 @@ så gi feilmelding "Tiltak skal ha relasjon fra Vedtak"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/CHANGE_HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureRelatedFromDecisionSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/CHANGE_HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureRelatedFromDecision.kt)
 
 
 
@@ -831,9 +870,9 @@ så gi feilmelding "Tiltak er basert på annen Lovhjemmel enn det som er definer
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/CHANGE_HERE_Spec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureLawReferenceRelatedFromDecisionLawReferenceSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/CHANGE_HERE.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLawReferenceRelatedFromDecisionLawReference.kt)
 
 
 
