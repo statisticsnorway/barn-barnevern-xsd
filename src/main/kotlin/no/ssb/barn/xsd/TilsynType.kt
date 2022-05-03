@@ -19,5 +19,5 @@ data class TilsynType(
 
     @field:JacksonXmlProperty(localName = "Utfort")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val utfort: MutableList<TilsynUtfortType>? = mutableListOf()
+    val utfort: MutableList<TilsynUtfortType> = mutableListOf()
 )
