@@ -641,7 +641,7 @@ Alvorlighetsgrad: ERROR
 
 Gitt at man har et Vedtak der Status = 3 eller 4<br/>
 når vedtakets status = 3 og Konklusjon/SluttDato mangler<br/>
-så gi feilmeldingen "Vedtak med status 3 = 'Utgår / Bortfalt etter BVL' mangler sluttdato"
+så gi feilmeldingen "Vedtak med status 3 = 'Utgår / Bortfalt etter BVL' mangler sluttdato"<br/>
 
 når vedtakets status = 4 og Konklusjon/SluttDato mangler<br/>
 så gi feilmeldingen "Vedtak med status 4 = 'Avslått / Avsluttet' mangler sluttdato"
@@ -652,6 +652,21 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionRelationToForwardingSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionRelationToForwarding.kt)
+
+
+
+### [TODO] Vedtak Kontroll 4: Lovhjemmel refererer til feil BarneVernLov
+
+Gitt at man har et Vedtak der Vedtak/LovhjemmelType/Lov og eventuelt Vedtak/JmfrLovhjemmelType/Lov er utfylt<br/>
+når Lov er utfylt med noe annet enn BVL1992 eller BVL2021<br/>
+så gir feilmeldingen “Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL1992 eller BVL2021“
+
+
+Alvorlighetsgrad: ERROR
+
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionLawVersionSpec.groovy)
+
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionLawVersion.kt)
 
 
 
