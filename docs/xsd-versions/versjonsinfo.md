@@ -3,8 +3,21 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
-# v.1.1.0
+# v.1.2.0
+Endringsdato: 5. mai 2022
+
 ## Struktur
+- /@versjon oppdatert til 1.2.0 
+- LovhjemmelType
+  - Endret listen med Ledd til å være valgfri
+  - Lagt til liste med Bokstav, satt til å være valgfri
+
+---
+# v.1.1.0
+Endringsdato: 8. april 2022
+
+## Struktur
+- /@versjon oppdatert til 1.1.0
 - /Barnevern
   - Lagt til attributtet @Id, for å kunne identifisere innsendingen
   - Lagt til attributtet @ForrigeId, for å kunne identifisere forrige innsending og dermed vite at ingen informasjon har gått tapt mellom fagsystemet og SSB den gitt saken/barnet.
@@ -22,7 +35,7 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
   - Lagt ny kode 28
 - /Barnevern/Sak/Undersokelse/Vedtaksgrunnlag
   - Sammen endringer som under Barnevern/Sak/Melding/Saksinnhold da de benytter felles kompleks type SaksinnholdType.
-- /Barnevern/Sak/Tiltak/Kategroi/@Kode
+- /Barnevern/Sak/Tiltak/Kategori/@Kode
   - Fjernet kode 6.5
 - /Barnevern/Sak/Tiltak/Tilsyn endret fra liste til et samlebegrep
   - Attributtene @Id og @UtfortDato under Barnevern/Sak/Tiltak/Tilsyn er flyttet i struktur til Barnevern/Sak/Tiltak/Tilsyn/Utfort
@@ -38,6 +51,8 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
  
 ---
 # v0.13.0
+Endringsdato: 10. desember 2021
+
 ## Struktur
 - Nytt element *Virksomhet* inn som rotelement i *Sak* - for å håndtere når sak overføres mellom ulike bydeler og samme sak med samme id rapporteres fra ulike bydeler
     - Attributt *AvgiverType/@Distriktsnummer*, *AvgiverType/@Bydelsnummer* og *AvgiverType/@Bydelsnavn* er flyttet til *VirksomhetType*
