@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2.0">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -515,7 +515,8 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 			<xs:element name="Lov" type="xs:string"/>
 			<xs:element name="Kapittel" type="xs:string"/>
 			<xs:element name="Paragraf" type="xs:string"/>
-			<xs:element name="Ledd" type="xs:string" maxOccurs="unbounded"/>
+			<xs:element name="Ledd" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Bokstav" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="Punktum" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
