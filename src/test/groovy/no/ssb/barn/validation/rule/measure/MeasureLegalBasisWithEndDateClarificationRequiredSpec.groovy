@@ -46,6 +46,7 @@ class MeasureLegalBasisWithEndDateClarificationRequiredSpec extends Specificatio
                 kapittel,
                 paragraf,
                 ledd != null ? [ledd] : [] as List<String>,
+                [],
                 [])
         and:
         measure.opphevelse = null

@@ -154,7 +154,7 @@ class ValidationUtilsSpec extends Specification {
                 UUID.randomUUID(),
                 null,
                 start,
-                new LovhjemmelType("lov", "kapittel", "paragraf", ["ledd"], ["punktum"]),
+                new LovhjemmelType("lov", "kapittel", "paragraf", ["ledd"], ["bokstav"], ["punktum"]),
                 List.of(),
                 new KategoriType("1", null),
                 null,

@@ -12,7 +12,7 @@ class OversendelseBarneverntjenesteTypeSpec extends Specification {
                 UUID.randomUUID(),
                 LocalDate.now(),
                 new LovhjemmelType(
-                        "lov", "kapittel", "paragraf", ["ledd"], ["punktum"]
+                        "lov", "kapittel", "paragraf", ["ledd"], ["bokstav"], ["punktum"]
                 ),
                 [])
 

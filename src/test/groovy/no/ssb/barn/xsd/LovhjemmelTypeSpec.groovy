@@ -6,7 +6,7 @@ class LovhjemmelTypeSpec extends Specification {
 
     def "when constructor no exceptions expected"() {
         when:
-        new LovhjemmelType("lov", "kapittel", "paragraf", ["ledd"], ["punktum"])
+        new LovhjemmelType("lov", "kapittel", "paragraf", ["ledd"], ["bokstav"], ["punktum"])
 
         then:
         noExceptionThrown()

@@ -50,6 +50,7 @@ class MeasureLegalBasisValidCodeSpec extends Specification {
                 kapittel,
                 paragraf,
                 ["~ledd~"],
+                ["~bokstav~"],
                 ["~punktum~"]
         )
 

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LovhjemmelType", propOrder = ["lov", "kapittel", "paragraf", "ledd", "punktum"])
+@XmlType(name = "LovhjemmelType", propOrder = ["lov", "kapittel", "paragraf", "ledd", "bokstav", "punktum"])
 data class LovhjemmelType(
     @field:XmlElement(name = "Lov", required = true)
     val lov: String,
@@ -22,6 +22,10 @@ data class LovhjemmelType(
     @field:JacksonXmlProperty(localName = "Ledd")
     @field:JacksonXmlElementWrapper(useWrapping = false)
     val ledd: MutableList<String> = mutableListOf(),
+
+    @field:JacksonXmlProperty(localName = "Bokstav")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val bokstav: MutableList<String> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Punktum")
     @field:JacksonXmlElementWrapper(useWrapping = false)

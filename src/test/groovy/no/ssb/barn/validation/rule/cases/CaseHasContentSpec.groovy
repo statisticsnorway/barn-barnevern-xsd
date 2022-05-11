@@ -94,7 +94,7 @@ class CaseHasContentSpec extends Specification {
                 null,
                 LocalDate.now(),
                 new LovhjemmelType(
-                        "lov", "kapittel", "paragraf", ["ledd"], ["punktum"]
+                        "lov", "kapittel", "paragraf", ["ledd"], ["bokstav"], ["punktum"]
                 ),
                 [],
                 new KategoriType("1.1", null),
