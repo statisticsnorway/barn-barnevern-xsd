@@ -17,15 +17,15 @@ data class FlyttingType(
     @field:XmlAttribute(name = "MigrertId")
     val migrertId: String? = null,
 
-    @field:XmlAttribute(name = "SluttDato")
+    @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
-    val sluttDato: LocalDate? = null,
+    val sluttDato: LocalDate,
 
     @field:XmlElement(name = "ArsakFra")
     val arsakFra: ArsakFraType,
 
     @field:XmlElement(name = "FlyttingTil")
-    val flytteTil: FlyttingTilType
+    val flyttingTil: FlyttingTilType
 ) {
     companion object {
 
