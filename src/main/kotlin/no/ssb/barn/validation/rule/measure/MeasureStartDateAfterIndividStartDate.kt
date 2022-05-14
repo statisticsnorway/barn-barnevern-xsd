@@ -6,6 +6,8 @@ import no.ssb.barn.validation.AbstractRule
 import no.ssb.barn.validation.ValidationContext
 import no.ssb.barn.xsd.TiltakType
 
+/** NOTE: This is a duplicate check compared to MeasureStartDateBeforeCaseStartDate */
+
 class MeasureStartDateAfterIndividStartDate : AbstractRule(
     WarningLevel.ERROR,
     "Tiltak Kontroll 2e: Startdato mot individets startdato",
