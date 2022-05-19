@@ -152,7 +152,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Sak Kontroll 12: Kontroll av Fødselsnummer
+### Sak kontroll 12: Fødselsnummer
 
 Gitt at man har en Sak med fødselsnummer<br/>
 når fødselsnummer ikke oppfyller noen følgende definisjoner:<br/>
