@@ -7,57 +7,8 @@ import spock.lang.Unroll
 import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
 import java.time.Year
-import java.time.ZonedDateTime
 
 class ValidationUtilsSpec extends Specification {
-
-    @Unroll
-    def "minDate receive min date"() {
-        expect:
-        ValidationUtils.getMinDate(first, second) == (expectFirstToBeReturned ? first : second)
-
-        where:
-        first                     | second                    || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || true
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || false
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
-    }
-
-    @Unroll
-    def "maxDate receive max date"() {
-        expect:
-        ValidationUtils.getMaxDate(first, second) == (expectFirstToBeReturned ? first : second)
-
-        where:
-        first                     | second                    || expectFirstToBeReturned
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 2) || false
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 11, 2) || true
-        LocalDate.of(2021, 12, 1) | LocalDate.of(2021, 12, 1) || false
-    }
-
-    @Unroll
-    def "areOverlappingWithAtLeastThreeMonths all scenarios"() {
-        expect:
-        expectedResult == ValidationUtils.areOverlappingWithAtLeastThreeMonths(first, second, ZonedDateTime.now())
-
-        where:
-        first                                        | second                                       || expectedResult
-        createMeasure(createDate(0), createDate(1))  | createMeasure(createDate(2), createDate(3))  || false
-        createMeasure(createDate(2), createDate(3))  | createMeasure(createDate(0), createDate(1))  || false
-
-        // first.start <= second.endInclusive
-        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(0), createDate(3))  || true
-        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(-3), createDate(0)) || false
-
-        // second.start <= first.endInclusive
-        createMeasure(createDate(-2), createDate(1)) | createMeasure(createDate(0), createDate(3))  || false
-        createMeasure(createDate(-3), createDate(0)) | createMeasure(createDate(0), createDate(3))  || false
-
-        createMeasure(createDate(0), createDate(3))  | createMeasure(createDate(0), createDate(3))  || true
-        createMeasure(createDate(0), createDate(4))  | createMeasure(createDate(1), createDate(4))  || true
-        createMeasure(createDate(-1), createDate(3)) | createMeasure(createDate(0), createDate(4))  || true
-        createMeasure(createDate(-2), createDate(2)) | createMeasure(createDate(1), createDate(4))  || false
-    }
 
     def "Should find sources from classpath, filename = #filename, result = #result"() {
         expect:

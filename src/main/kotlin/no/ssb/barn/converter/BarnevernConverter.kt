@@ -10,9 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.fasterxml.jackson.module.kotlin.readValue
 import no.ssb.barn.xsd.BarnevernType
-import no.ssb.barn.xsd.TiltakTypeJson
 
 object BarnevernConverter {
 
@@ -43,26 +41,6 @@ object BarnevernConverter {
     @JvmStatic
     fun unmarshallXml(xml: String): BarnevernType =
         XML_MAPPER.readValue(xml, BarnevernType::class.java)
-
-    @JvmStatic
-    fun unmarshallXmlAndValidationReportToMap(
-        xml: String,
-        validationReportJson: String
-    ): Map<String, Any> = OBJECT_MAPPER.readValue<MutableMap<String, Any>>(unmarshallXmlToJson(xml))
-        .also {
-            it[VALIDATION_REPORT_KEY] = OBJECT_MAPPER.readValue<Map<String, Any>>(validationReportJson)
-        }
-
-    @JvmStatic
-    fun unmarshallXmlToJson(xml: String): String =
-        unmarshallXml(xml).apply {
-            sak.apply {
-                tiltak.clear()
-                tiltak.addAll(sak.tiltak
-                    .map { TiltakTypeJson(it) }
-                    .toMutableList())
-            }
-        }.let { barnevernType -> OBJECT_MAPPER.writeValueAsString(barnevernType) }
 
     @JvmStatic
     fun marshallInstance(barnevernType: BarnevernType): String =

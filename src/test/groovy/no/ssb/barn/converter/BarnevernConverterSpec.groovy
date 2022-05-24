@@ -2,8 +2,6 @@ package no.ssb.barn.converter
 
 import com.fasterxml.jackson.core.JsonParseException
 import no.ssb.barn.util.RandomUtils
-import no.ssb.barn.validation.ValidationContext
-import no.ssb.barn.validation.rule.XsdRule
 import no.ssb.barn.xsd.*
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -56,34 +54,6 @@ class BarnevernConverterSpec extends Specification {
         i << (9..9)
     }
 
-    def VALIDATION_REPORT_JSON = '{ "someValue": 1, "myList": [4, 8, 15, 16, 23, 42] }'
-
-    def "when unmarshallXmlAndValidationReportToMap, map is not null"() {
-        given:
-        def xml = getResourceAsString("test01_file09_total.xml")
-
-        when:
-        def map = BarnevernConverter.unmarshallXmlAndValidationReportToMap(xml, VALIDATION_REPORT_JSON)
-
-        then:
-        noExceptionThrown()
-        and:
-        null != map
-    }
-
-    def "when unmarshallXmlToJson, json is not null"() {
-        given:
-        def xml = getResourceAsString("test01_file09_total.xml")
-
-        when:
-        def json = BarnevernConverter.unmarshallXmlToJson(xml)
-
-        then:
-        noExceptionThrown()
-        and:
-        null != json
-    }
-
     def "when unmarshallXml, expect valid instance"() {
         given:
         def xmlString = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -107,21 +77,6 @@ class BarnevernConverterSpec extends Specification {
             it.fagsystem.leverandor == "SSB"
             it.avgiver.organisasjonsnummer == "944117784"
         }
-    }
-
-    def "when marshalling with MeldingType instance without MeldingKonklusjonType, XML is valid"() {
-        given: "XML generated from a programmatically created BarnevernType"
-        def xml = BarnevernConverter.marshallInstance(createBarnevernType())
-        and: "a validation context"
-        def context = new ValidationContext(UUID.randomUUID().toString(), xml)
-        and: "a validation rule for performing the XML validation"
-        def xsdRule = new XsdRule("Barnevern.xsd")
-
-        when: "validating the XML"
-        def result = xsdRule.validate(context)
-
-        then: "there should be no errors"
-        result == null
     }
 
     def createBarnevernType() {

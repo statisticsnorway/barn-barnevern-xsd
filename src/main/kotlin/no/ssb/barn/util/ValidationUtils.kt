@@ -1,54 +1,25 @@
 package no.ssb.barn.util
 
-import no.ssb.barn.validation.SharedValidationConstants.kodelistePlasseringstiltak
-import no.ssb.barn.xsd.TiltakType
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.Year
-import java.time.ZonedDateTime
 import java.util.regex.Pattern
+import javax.xml.XMLConstants
+import javax.xml.transform.stream.StreamSource
+import javax.xml.validation.SchemaFactory
 
 
 object ValidationUtils {
 
-    @JvmStatic
-    fun areOverlappingWithAtLeastThreeMonths(
-        outerMeasure: TiltakType, innerMeasure: TiltakType, datoUttrekk: ZonedDateTime
-    ): Boolean {
+    private val xsdAsText = this::class.java.getResource("/Barnevern.xsd")!!.readText()
 
-        val outerRange =
-            outerMeasure.startDato.rangeTo(outerMeasure.konklusjon?.sluttDato ?: datoUttrekk.toLocalDate())
-
-        val innerRange =
-            innerMeasure.startDato.rangeTo(innerMeasure.konklusjon?.sluttDato ?: datoUttrekk.toLocalDate())
-
-        return areOverlapping(outerRange, innerRange)
-                && getMaxDate(outerRange.start, innerRange.start)
-            .plusMonths(3)
-            .minusDays(1) // in case both intervals are equal
-            .isBefore(
-                getMinDate(
-                    outerRange.endInclusive,
-                    innerRange.endInclusive
-                )
-            )
-    }
-
-    private fun areOverlapping(
-        first: ClosedRange<LocalDate>, second: ClosedRange<LocalDate>
-    ): Boolean =
-        first.start.isBefore(second.endInclusive)
-                && second.start.isBefore(first.endInclusive)
-
-    @JvmStatic
-    fun getMaxDate(first: LocalDate, second: LocalDate): LocalDate =
-        if (first.isAfter(second)) first else second
-
-    @JvmStatic
-    fun getMinDate(first: LocalDate, second: LocalDate): LocalDate =
-        if (first.isBefore(second)) first else second
+    fun getSchemaValidator() = SchemaFactory
+        .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+        .apply {
+            setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
+        }.newSchema(StreamSource(xsdAsText.byteInputStream()))
+        .newValidator()
 
     val controlSumDigits1 = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2, 1)
     val controlSumDigits2 = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
@@ -132,33 +103,6 @@ object ValidationUtils {
         } else {
             -1
         }
-
-    @JvmStatic
-    fun isCareMeasure(measure: TiltakType): Boolean =
-        with(measure.lovhjemmel) {
-            (kapittel == "4" && paragraf == "12")
-                    || (kapittel == "4" && paragraf == "8" && ledd.any { it in listOf("2", "3") })
-        }
-                ||
-                with(measure) {
-                    (lovhjemmel.kapittel == "4" && lovhjemmel.paragraf == "8")
-                            &&
-                            jmfrLovhjemmel.any { jmfrlovhjemmel ->
-                                with(jmfrlovhjemmel) {
-                                    (kapittel == "4" && paragraf == "12")
-                                            || (kapittel == "4" && paragraf == "8" && ledd.any {
-                                        it in listOf(
-                                            "2",
-                                            "3"
-                                        )
-                                    })
-                                }
-                            }
-                }
-
-    @JvmStatic
-    fun isPlacementMeasure(measure: TiltakType): Boolean =
-        measure.kategori.kode in kodelistePlasseringstiltak
 
     private fun isValidDate(dateStr: String): Boolean {
         val sdf: DateFormat = SimpleDateFormat("ddMMyy")
