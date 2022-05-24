@@ -8,6 +8,7 @@ import java.util.regex.Pattern
 import javax.xml.XMLConstants
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
+import javax.xml.validation.Validator
 
 
 object ValidationUtils {
@@ -15,7 +16,7 @@ object ValidationUtils {
     private val xsdAsText = this::class.java.getResource("/Barnevern.xsd")!!.readText()
 
     @JvmStatic
-    fun getSchemaValidator() = SchemaFactory
+    fun getSchemaValidator(): Validator = SchemaFactory
         .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
         .apply {
             setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)

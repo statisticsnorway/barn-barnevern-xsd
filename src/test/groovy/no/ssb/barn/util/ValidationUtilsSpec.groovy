@@ -8,7 +8,19 @@ import javax.xml.transform.stream.StreamSource
 import java.time.LocalDate
 import java.time.Year
 
+import static no.ssb.barn.util.ValidationUtils.getSchemaValidator
+
 class ValidationUtilsSpec extends Specification {
+
+    def "Should return schema validator for current XSD"() {
+        when:
+        def schemaValidator =getSchemaValidator()
+
+        then:
+        noExceptionThrown()
+        and:
+        null != schemaValidator
+    }
 
     def "Should find sources from classpath, filename = #filename, result = #result"() {
         expect:
