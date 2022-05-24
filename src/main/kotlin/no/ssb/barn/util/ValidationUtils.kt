@@ -14,6 +14,7 @@ object ValidationUtils {
 
     private val xsdAsText = this::class.java.getResource("/Barnevern.xsd")!!.readText()
 
+    @JvmStatic
     fun getSchemaValidator() = SchemaFactory
         .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
         .apply {
