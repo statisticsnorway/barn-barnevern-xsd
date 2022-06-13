@@ -14,7 +14,7 @@ class ValidationUtilsSpec extends Specification {
 
     def "Should return schema validator for current XSD"() {
         when:
-        def schemaValidator =getSchemaValidator()
+        def schemaValidator = getSchemaValidator()
 
         then:
         noExceptionThrown()

@@ -20,14 +20,16 @@ object BarnevernConverter {
         .configure(KotlinFeature.NullIsSameAsDefault, true)
         .build()
 
-    private val XML_MAPPER = XmlMapper(JacksonXmlModule())
-        .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
-        .registerModule(kotlinModule)
-        .registerModule(JavaTimeModule())
-        .registerModule(JaxbAnnotationModule())
-        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
-        .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
-        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+    @JvmStatic
+    val XML_MAPPER = XmlMapper(JacksonXmlModule()).apply {
+        this.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
+            .registerModule(kotlinModule)
+            .registerModule(JavaTimeModule())
+            .registerModule(JaxbAnnotationModule())
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
+            .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+    }
 
     @JvmStatic
     val OBJECT_MAPPER: ObjectMapper = ObjectMapper()
@@ -35,8 +37,6 @@ object BarnevernConverter {
         .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
         .registerModule(JavaTimeModule())
         .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
-
-    private const val VALIDATION_REPORT_KEY = "validationReport"
 
     @JvmStatic
     fun unmarshallXml(xml: String): BarnevernType =
