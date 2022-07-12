@@ -567,7 +567,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Vedtak Kontroll 2f: Krav sin StartDato er etter SluttDato
+### Vedtak Kontroll 2f: Krav sin StartDato er etter SluttDato
 
 Gitt at man har et Vedtak der Krav finnes StartDato og Konklusjon/SluttDato finnes<br/>
 når for hvert krav validér at kravets StartDato er etter SluttDato <br/>
@@ -581,9 +581,9 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Vedtak Kontroll 2g: Krav sin SluttDato er etter vedtakets SluttDato
+### Vedtak Kontroll 2g: Krav sin SluttDato er etter vedtakets SluttDato
 
-Gitt at man har et Vedtak der SluttDato finnes og Vedtaket har Krav der Krav sin Konklusjon/SluttDato finnes<br/>
+Gitt at man har et Vedtak der [SluttDato]() finnes og Vedtaket har Krav der Krav sin Konklusjon/SluttDato finnes<br/>
 når kravets SluttDato er etter vedtakets SluttDato<br/>
 så gi feilmeldingen "Kravets sluttdato {Krav/Konklusjon/SluttDato} er etter Vedtakets sluttdato {Konklusjon/SluttDato}"
 
