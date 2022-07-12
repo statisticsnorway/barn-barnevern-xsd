@@ -172,10 +172,10 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Sak Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
+### Sak Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
 
 Gitt at man har en Sak med fødselsnummer og fødselsdato<br/>
-når datodelen i fødselsnummer (de 6 første karakterene) viser til en annen dato en fødselsdato<br/>
+når datodelen i fødselsnummer (de 6 første karakterene) viser til en annen dato enn fødselsdato<br/>
 så gi feilmeldingen "Fødselsnummer og Fødselsdato viser til forskjellige datoer"
 
 Alvorlighetsgrad: ERROR
@@ -186,7 +186,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Sak Kontroll 14: Kontroll av Fødselsnummer og Kjønn
+### Sak Kontroll 14: Kontroll av Fødselsnummer og Kjønn
 
 Gitt at man har en Sak med fødselsnummer og kjønn<br/>
 når de 5 siste karakterene i fødselsnummer er ulik 99999 og den 9. karakteren i fødselsnummer modulus 2 er lik 0 er forskjellig fra koden for kjønn<br/>
@@ -200,7 +200,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Sak Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
+### Sak Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
 
 Gitt at man har en Sak med fødselsnummer, fødselsdato og startdato<br/>
 når startdato er før fødselsdato og de 5 siste karakterene i fødselsnummer er ulik 99999<br/>
@@ -219,7 +219,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Sak Kontroll 16: Kontroll av Fødselsdato og StartDato
+### Sak Kontroll 16: Kontroll av Fødselsdato og StartDato
 
 Gitt at man har en Sak med fødselsdato og startdato<br/>
 når startdato er mer enn 9 måneder før fødselsdato<br/>
@@ -235,7 +235,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Sak Kontroll 1x: Kontroll av DUF-nummer
+### Sak Kontroll 1x: Kontroll av DUF-nummer
 
 Gitt at man har en Sak med utfylt DUF-nummer<br/>
 når DUF-nummer ikke oppfyller noen følgende definisjoner:<br/>
