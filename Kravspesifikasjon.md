@@ -575,9 +575,9 @@ så gi feilmeldingen "Kravets startdato {StartDato} er etter sluttdato {Krav/Kon
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateBeforeDecisionStartDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateAfterEndDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateBeforeDecisionStartDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateAfterEndDate.kt)
 
 
 
