@@ -595,7 +595,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Vedtak Kontroll 2h: Krav sin StartDato er før vedtakets StartDato
+### Vedtak Kontroll 2h: Krav sin StartDato er før vedtakets StartDato
 
 Gitt at man har et Vedtak der StartDato finnes og Vedtaket har Krav der StartDato finnes<br/>
 når kravets StartDato er før vedtakets StartDato <br/>
@@ -609,7 +609,7 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato
+### Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato
 
 Gitt at man har et Vedtak der SluttDato finnes og Vedtaket har Status der Status sin EndretDato finnes<br/>
 når statusens EndretDato er etter vedtakets SluttDato<br/>
@@ -623,17 +623,17 @@ Alvorlighetsgrad: ERROR
 
 
 
-### [TODO] Vedtak Kontroll 2j: Status sin StartDato er før vedtakets StartDato
+### Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato
 
 Gitt at man har et Vedtak der StartDato finnes og Vedtaket har Status der Status sin EndretDato finnes<br/>
 når statusens EndretDato er før vedtakets StartDato <br/>
-så gi feilmeldingen "Kravets startdato {Krav/StartDato} er før vedtakets startdato {StartDato}"
+så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er før vedtakets startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionStatusChangeStartDateBeforeDecisionStartDateSpec.groovy)
+[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateBeforeDecisionStartDateSpec.groovy)
 
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStatusChangeStartDateBeforeDecisionStartDate.kt)
+[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateBeforeDecisionStartDate.kt)
 
 
 
