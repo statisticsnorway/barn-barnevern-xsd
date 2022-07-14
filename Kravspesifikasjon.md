@@ -937,7 +937,6 @@ Alvorlighetsgrad: ERROR
 
 
 
-
 ## <a name="ettervern">Ettervern</a> 
 
 ### [TODO] Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
@@ -953,7 +952,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateAfterEndDate.kt)
 
 
-
 ### [TODO] Ettervern Kontroll 2c: SluttDato er etter sakens SluttDato
 
 Gitt at man har et Ettervern der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
@@ -965,7 +963,6 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/aftercare/AftercareEndDateAfterCaseEndDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareEndDateAfterCaseEndDate.kt)
-
 
 
 ### [TODO] Ettervern Kontroll 2e: TilbudSendtDato er før sakens StartDato
@@ -981,7 +978,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateBeforeCaseStartDate.kt)
 
 
-
 ### [TODO] Ettervern Kontroll 3: Alder er mindre enn 18 år
 
 Gitt at man har et Ettervern der TilbudSendtDato finnes og sak der Fodselsdato finnes<br/>
@@ -993,7 +989,6 @@ Alvorlighetsgrad: Warning
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/aftercare/AftercareForMinorsSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareForMinors.kt)
-
 
 
 
@@ -1012,7 +1007,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/relocation/RelocationEndDateAfterCaseEndDate.kt)
 
 
-
 ### [TODO] Flytting Kontroll 2f: SluttDato mot sakens StartDato
 
 Gitt at man har en Flytting der SluttDato finnes og en sak der StartDato finnes<br/>
@@ -1029,7 +1023,7 @@ Alvorlighetsgrad: ERROR
 
 ## <a name="oversendelse-til-fylkesnemnd">Oversendelse til fylkesnemnd</a> 
 
-### [TODO] Oversendelse til fylkesnemnd Kontroll 2e: StartDato er før sakens StartDato
+### Oversendelse til fylkesnemnd Kontroll 2e: StartDato er før sakens StartDato
 
 Gitt at man har en Oversendelse til fylkesnemnd der StartDato finnes og en sak der StartDato finnes<br/>
 når Oversendelse til fylkesnemndens StartDato er før sakens StartDato <br/>
@@ -1042,8 +1036,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/caseforwarding/CaseForwardingStartDateBeforeCaseStartDate.kt)
 
 
-
-### [TODO] Oversendelse til fylkesnemnd Kontroll 2f: StartDato er etter sakens SluttDato
+### Oversendelse til fylkesnemnd Kontroll 2f: StartDato er etter sakens SluttDato
 
 Gitt at man har en Oversendelse til fylkesnemnd der StartDato finnes og en sak der SluttDato finnes<br/>
 når Oversendelse til fylkesnemndens StartDato er etter sakens SluttDato <br/>
