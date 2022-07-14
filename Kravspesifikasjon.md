@@ -939,7 +939,7 @@ Alvorlighetsgrad: ERROR
 
 ## <a name="ettervern">Ettervern</a> 
 
-### [TODO] Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
+### Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
 
 Gitt at man har et Ettervern der StartDato og Konklusjon/SluttDato finnes<br/>
 når StartDato er etter SluttDato<br/>
@@ -952,10 +952,10 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateAfterEndDate.kt)
 
 
-### [TODO] Ettervern Kontroll 2c: SluttDato er etter sakens SluttDato
+### Ettervern Kontroll 2c: SluttDato er etter sakens SluttDato
 
 Gitt at man har et Ettervern der Konklusjon/SluttDato finnes og i sak der SluttDato finnes<br/>
-når planens SluttDato er etter sakens SluttDato<br/>
+når SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Ettervern sin sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
@@ -965,7 +965,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareEndDateAfterCaseEndDate.kt)
 
 
-### [TODO] Ettervern Kontroll 2e: TilbudSendtDato er før sakens StartDato
+### Ettervern Kontroll 2e: TilbudSendtDato er før sakens StartDato
 
 Gitt at man har et Ettervern der TilbudSendtDato finnes og sak der StartDato finnes<br/>
 når ettervernets TilbudSendtDato er før sakens StartDato <br/>
@@ -978,7 +978,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateBeforeCaseStartDate.kt)
 
 
-### [TODO] Ettervern Kontroll 3: Alder er mindre enn 18 år
+### Ettervern Kontroll 3: Alder er mindre enn 18 år
 
 Gitt at man har et Ettervern der TilbudSendtDato finnes og sak der Fodselsdato finnes<br/>
 når ettervernets TilbudSendtDato minus sakens Fodselsdato er mindre enn 18 år<br/>
@@ -1007,7 +1007,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/relocation/RelocationEndDateAfterCaseEndDate.kt)
 
 
-### [TODO] Flytting Kontroll 2f: SluttDato mot sakens StartDato
+### Flytting Kontroll 2f: SluttDato mot sakens StartDato
 
 Gitt at man har en Flytting der SluttDato finnes og en sak der StartDato finnes<br/>
 når flyttingens SluttDato er før sakens StartDato<br/>
