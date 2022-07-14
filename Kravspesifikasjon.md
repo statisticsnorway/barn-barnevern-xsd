@@ -505,7 +505,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationRelatedFromMessage.kt)
 
 
-
 ### [TODO] Undersøkelse Kontroll 21: Konkludert Undersøkelse skal ha relasjon til Vedtak
 
 Gitt at man har en Undersøkelse, en Relasjon og et Vedtak<br/>
@@ -518,9 +517,6 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationRelatedToDecisionSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationRelatedToDecision.kt)
-
-
-
 
 
 ## <a name="vedtak">Vedtak</a> 
@@ -538,7 +534,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStartDateAfterEndDate.kt)
 
 
-
 ### Vedtak Kontroll 2c: SluttDato er etter sakens SluttDato
 
 Gitt at man har et Vedtak der Konklusjon/SluttDato finnes og i en Sak der SluttDato finnes<br/>
@@ -550,7 +545,6 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionEndDateAfterCaseEndDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionEndDateAfterCaseEndDate.kt)
-
 
 
 ### Vedtak Kontroll 2e: StartDato er før sakens StartDato
@@ -566,7 +560,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStartDateBeforeCaseStartDate.kt)
 
 
-
 ### Vedtak Kontroll 2f: Krav sin StartDato er etter SluttDato
 
 Gitt at man har et Vedtak der Krav finnes StartDato og Konklusjon/SluttDato finnes<br/>
@@ -578,7 +571,6 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateAfterEndDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateAfterEndDate.kt)
-
 
 
 ### Vedtak Kontroll 2g: Krav sin SluttDato er etter vedtakets SluttDato
@@ -594,7 +586,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandEndDateAfterDecisionEndDate.kt)
 
 
-
 ### Vedtak Kontroll 2h: Krav sin StartDato er før vedtakets StartDato
 
 Gitt at man har et Vedtak der StartDato finnes og Vedtaket har Krav der StartDato finnes<br/>
@@ -606,7 +597,6 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateBeforeDecisionStartDateSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateBeforeDecisionStartDate.kt)
-
 
 
 ### Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato
@@ -622,7 +612,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateAfterDecisionEndDate.kt)
 
 
-
 ### Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato
 
 Gitt at man har et Vedtak der StartDato finnes og Vedtaket har Status der Status sin EndretDato finnes<br/>
@@ -636,7 +625,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateBeforeDecisionStartDate.kt)
 
 
-
 ### Vedtak Kontroll 3: Avsluttet vedtak skal ha SluttDato
 
 Gitt at man har et Vedtak der Status = 3 eller 4<br/>
@@ -646,13 +634,11 @@ så gi feilmeldingen "Vedtak med status 3 = 'Utgår / Bortfalt etter BVL' mangle
 når vedtakets status = 4 og Konklusjon/SluttDato mangler<br/>
 så gi feilmeldingen "Vedtak med status 4 = 'Avslått / Avsluttet' mangler sluttdato"
 
-
 Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionEndDateMissingSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionEndDateMissing.kt)
-
 
 
 ### Vedtak Kontroll 4: Lovhjemmel refererer til feil BarneVernLov
@@ -661,7 +647,6 @@ Gitt at man har et Vedtak der Vedtak/LovhjemmelType/Lov og eventuelt Vedtak/Jmfr
 når Lov er utfylt med noe annet enn BVL1992 eller BVL2021<br/>
 så gir feilmeldingen “Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL1992 eller BVL2021“
 
-
 Alvorlighetsgrad: ERROR
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionLawVersionSpec.groovy)
@@ -669,8 +654,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionLawVersion.kt)
 
 
-
-### [TODO] Vedtak Kontroll 20: Vedtak med status 2 = 'Begjæring oversendt nemnd' skal ha relasjon til OversendelseFylkesnemnd
+### Vedtak Kontroll 20: Vedtak med status 2 = 'Begjæring_ oversendt nemnd' skal ha relasjon til OversendelseFylkesnemnd
 
 Gitt at man har et Vedtak der Status = 2<br/>
 når Relasjon mellom Vedtak og OversendelseFylkesnemnd mangler <br/>
@@ -679,18 +663,11 @@ så gi feilmeldingen "Vedtak med status 2 = 'Begjæring oversendt nemnd' skal ha
 når Relasjon mellom Vedtak og OversendelseFylkesnemnd finnes, men OversendelseFylkesnemnd mangler <br/>
 så gi feilmeldingen "OversendelseFylkesnemndVedtak skal finnes for Vedtak med status 2 = 'Begjæring oversendt nemnd'"
 
-
 Alvorlighetsgrad: Warning
 
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionRelationToForwardingSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionRelationToForwarding.kt)
-
-
-
-
-
-
 
 
 ## <a name="tiltak">Tiltak</a> 
@@ -859,7 +836,6 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureDuplicate.kt)
 
 
-
 #### [TODO] Tiltak Kontroll 20: Tiltak skal ha relasjon fra Vedtak
 
 Gitt at det er et Tiltak, en Relasjon og et Vedtak <br/>
@@ -871,7 +847,6 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureRelatedFromDecisionSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureRelatedFromDecision.kt)
-
 
 
 #### [TODO] Tiltak Kontroll 21: Tiltak sin Lovhjemmel skal ha baseres på det relaterte Vedtak sin Lovhjemmel
@@ -888,8 +863,6 @@ Alvorlighetsgrad: ERROR
 [Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureLawReferenceRelatedFromDecisionLawReferenceSpec.groovy)
 
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLawReferenceRelatedFromDecisionLawReference.kt)
-
-
 
 
 ## <a name="plan">Plan</a> 
