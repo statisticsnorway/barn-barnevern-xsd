@@ -994,7 +994,7 @@ Alvorlighetsgrad: Warning
 
 ## <a name="flytting">Flytting</a> 
 
-### [TODO] Flytting Kontroll 2c: SluttDato mot sakens SluttDato
+### Flytting Kontroll 2c: SluttDato mot sakens SluttDato
 
 Gitt at man har en Flytting der SluttDato finnes og en sak der SluttDato finnes<br/>
 når flyttingens SluttDato er etter sakens SluttDato<br/>
@@ -1010,8 +1010,8 @@ Alvorlighetsgrad: ERROR
 ### [TODO] Flytting Kontroll 2f: SluttDato mot sakens StartDato
 
 Gitt at man har en Flytting der SluttDato finnes og en sak der StartDato finnes<br/>
-når flyttingens SluttDato er etter sakens StartDato<br/>
-så gi feilmeldingen "Flyttingens sluttdato {SluttDato} er etter sakens startdato {StartDato}"
+når flyttingens SluttDato er før sakens StartDato<br/>
+så gi feilmeldingen "Flyttingens sluttdato {SluttDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
 
