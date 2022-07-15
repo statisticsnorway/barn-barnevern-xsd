@@ -836,7 +836,9 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureDuplicate.kt)
 
 
-#### [TODO] Tiltak Kontroll 20: Tiltak skal ha relasjon fra Vedtak
+#### Tiltak Kontroll 20: Tiltak skal ha relasjon fra Vedtak
+
+KOMMENTAR TIL JON OLE: Denne regelen er litt søkt ved at TilType ikke er nullable. Er impl., men bør sees over.
 
 Gitt at det er et Tiltak, en Relasjon og et Vedtak <br/>
 når en relasjon som inneholder vedtak/Id i sin FraId, "Vedtak" i sin FraType, tiltak/Id i sin TilId og "Tiltak" i sin TilType mangler<br/>
@@ -849,9 +851,9 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureRelatedFromDecision.kt)
 
 
-#### [TODO] Tiltak Kontroll 21: Tiltak sin Lovhjemmel skal ha baseres på det relaterte Vedtak sin Lovhjemmel
+#### Tiltak Kontroll 21: Tiltak sin Lovhjemmel skal baseres på det relaterte Vedtak sin Lovhjemmel
 
-Gitt at det er et Tiltak, en Relasjon og et Vedtak <br/>
+Gitt at det er et Tiltak, en Relasjon og et Vedtak<br/>
 når en [Relasjon](#relasjon) fra Vedtak til Tiltak finnes,<br/>
 men Vedtak/Lovhjemmel/Lov er ulik Tiltak/Lovhjemmel/Lov<br/>
 eller Vedtak/Lovhjemmel/Kapittel er ulik Tiltak/Lovhjemmel/Kapittel<br/>
