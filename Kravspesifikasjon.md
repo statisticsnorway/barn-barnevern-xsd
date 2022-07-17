@@ -823,7 +823,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLegalBasisValidCode.kt)
 
 
-### [TODO] Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
+### Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Tiltak<br/>
 når sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
