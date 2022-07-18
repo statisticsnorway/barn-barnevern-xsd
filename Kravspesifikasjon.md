@@ -478,7 +478,7 @@ Alvorlighetsgrad: Warning
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationProcessingTimePassedDueDate.kt)
 
 
-### [TODO] Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
+### Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Undersøkelser<br/>
 når sammenligner Undersøkelsene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
@@ -505,7 +505,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationRelatedFromMessage.kt)
 
 
-### [TODO] Undersøkelse Kontroll 21: Konkludert Undersøkelse skal ha relasjon til Vedtak
+### Undersøkelse Kontroll 21: Konkludert Undersøkelse skal ha relasjon til Vedtak
 
 Gitt at man har en Undersøkelse, en Relasjon og et Vedtak<br/>
 når Undersøkelse sin Konklusjon finnes og Konklusjon sin Kode er 1 eller 2 <br/>
