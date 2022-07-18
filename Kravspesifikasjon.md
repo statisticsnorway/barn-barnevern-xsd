@@ -338,7 +338,7 @@ Alvorlighetsgrad: ERROR
 [Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageMissingCaseContent.kt)
 
 
-### [TODO] Melding Kontroll 19: Dublett på innhold, men forskjellige identer
+### Melding Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Meldinger<br/>
 når sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
