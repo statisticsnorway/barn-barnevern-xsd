@@ -14,7 +14,6 @@ class PersonaliaTypeSpec extends Specification {
                 null,
                 null,
                 null,
-                null,
                 null
         )
 
@@ -30,7 +29,6 @@ class PersonaliaTypeSpec extends Specification {
                 ssn,
                 birthDate,
                 gender,
-                municipalityOfResidens,
                 dufNumber
         )
 
@@ -47,13 +45,11 @@ class PersonaliaTypeSpec extends Specification {
         and:
         personalia.kjonn == gender
         and:
-        personalia.bostedskommunenummer == municipalityOfResidens
-        and:
         personalia.duFnummer == dufNumber
 
         where:
-        id                | startDate       | ssn           | birthDate                | gender | municipalityOfResidens | dufNumber
-        UUID.randomUUID() | LocalDate.now() | "01012012345" | LocalDate.of(2020, 1, 1) | "1"    | null                   | null
-        UUID.randomUUID() | LocalDate.now() | "01012012345" | LocalDate.of(2020, 1, 1) | "1"    | "3401"                 | "202012345684"
+        id                | startDate       | ssn           | birthDate                | gender | dufNumber
+        UUID.randomUUID() | LocalDate.now() | "01012012345" | LocalDate.of(2020, 1, 1) | "1"    | null
+        UUID.randomUUID() | LocalDate.now() | "01012012345" | LocalDate.of(2020, 1, 1) | "1"    | "202012345684"
     }
 }

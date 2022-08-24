@@ -838,10 +838,8 @@ Alvorlighetsgrad: ERROR
 
 #### Tiltak Kontroll 20: Tiltak skal ha relasjon fra Vedtak
 
-KOMMENTAR TIL JON OLE: Denne regelen er litt søkt ved at TilType ikke er nullable. Er impl., men bør sees over.
-
 Gitt at det er et Tiltak, en Relasjon og et Vedtak <br/>
-når en relasjon som inneholder vedtak/Id i sin FraId, "Vedtak" i sin FraType, tiltak/Id i sin TilId og "Tiltak" i sin TilType mangler<br/>
+når det mangler en relasjon som inneholder vedtak/Id i sin FraId, "Vedtak" i sin FraType, tiltak/Id i sin TilId og "Tiltak" i sin TilType<br/>
 så gi feilmelding "Tiltak skal ha relasjon fra Vedtak"
 
 Alvorlighetsgrad: ERROR

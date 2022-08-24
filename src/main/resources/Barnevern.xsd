@@ -273,19 +273,6 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>
-					<xs:attribute name="Bostedskommunenummer">
-						<xs:annotation>
-							<xs:documentation>Kommunenummer til den kommunen hvor barnet/klienten er bosatt</xs:documentation>
-						</xs:annotation>
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-								<xs:minLength value="4"/>
-								<xs:maxLength value="4"/>
-								<xs:pattern value="\d{4}
-"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
 					<xs:attribute name="DUFnummer" use="optional">
 						<xs:annotation>
 							<xs:documentation>DUF-nummer (https://www.udi.no/ord-og-begreper/duf-nummer/)</xs:documentation>
@@ -531,7 +518,14 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 	<!-- Lovhjemmel -->
 	<xs:complexType name="LovhjemmelType">
 		<xs:sequence>
-			<xs:element name="Lov" type="xs:string"/>
+			<xs:element name="Lov">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="BVL"/>
+						<xs:enumeration value="BVL2021"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="Kapittel" type="xs:string"/>
 			<xs:element name="Paragraf" type="xs:string"/>
 			<xs:element name="Ledd" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>

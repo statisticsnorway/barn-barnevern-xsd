@@ -10,8 +10,10 @@ Endringsdato: 26. august 2022
 - /@versjon oppdatert til 2.0.0 
 - Lagt til /Barnevern/Sak/Personalia
 - /Barnevern/Sak/Personalia
-  - Lagt til attributtene @Id, @StartDato og @Bostedskommunenummer
+  - Lagt til attributtene @Id og @StartDato
   - Attributtene @Fodselsnummer, @Fodselsdato, @Kjonn og @DUFnummer er flyttet fra /Barnevern/Sak til /Barnevern/Sak/Personalia
+- LovhjemmelType
+  - Kun kodene BVL og BVL2021 er nå tilatt i bruk
 
 ---
 # v.1.2.0
