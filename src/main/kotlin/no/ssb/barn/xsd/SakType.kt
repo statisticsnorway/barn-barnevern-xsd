@@ -9,10 +9,9 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "SakType",
-    propOrder = ["id", "migrertId", "startDato", "sluttDato",
-        "journalnummer", "fodselsnummer", "duFnummer", "fodseldato", "kjonn",
-        "avsluttet", "melding", "undersokelse", "plan", "tiltak", "vedtak", "ettervern", "oversendelseBarneverntjeneste",
-        "flytting", "relasjon", "slettet"]
+    propOrder = ["id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet",
+        "personalia", "melding", "undersokelse", "plan", "tiltak",
+        "vedtak", "ettervern", "oversendelseBarneverntjeneste", "flytting", "relasjon", "slettet"]
 )
 data class SakType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -32,21 +31,12 @@ data class SakType(
     @field:XmlAttribute(name = "Journalnummer", required = true)
     val journalnummer: String,
 
-    @field:XmlAttribute(name = "Fodselsnummer", required = true)
-    var fodselsnummer: String,
-
-    @field:XmlAttribute(name = "DUFnummer")
-    var duFnummer: String? = null,
-
-    @field:XmlAttribute(name = "Fodseldato", required = true)
-    @field:XmlSchemaType(name = "date")
-    var fodseldato: LocalDate,
-
-    @field:XmlAttribute(name = "Kjonn", required = true)
-    val kjonn: String,
-
     @field:XmlAttribute(name = "Avsluttet")
     val avsluttet: Boolean? = null,
+
+    @field:JacksonXmlProperty(localName = "Personalia")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val personalia: MutableList<PersonaliaType> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Melding")
     @field:JacksonXmlElementWrapper(useWrapping = false)
