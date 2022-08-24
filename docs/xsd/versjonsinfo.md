@@ -1,7 +1,18 @@
 # kostra-barnevern-xsd
-Filbeskrivelse basert på xml schema definition brukt til å rapportere barnevernsdata fra kommuner til Nasjonalt barnevernregister. Erstatter tidligere KOSTRA barnevern-rapportering til Statistisk sentralbyrå og Kommunal halvårsrapportering til Bufdir.
+Filbeskrivelse basert på xml schema definition brukt til å rapportere barnevernsdata direkte fra kommunenes fagsystemer til Nasjonalt barnevernregister. Erstatter tidligere KOSTRA barnevern-rapportering til Statistisk sentralbyrå og Kommunal halvårsrapportering til Bufdir.
 
 # Versjonshistorikk
+---
+# v.2.0.0
+Endringsdato: 26. august 2022
+
+## Struktur
+- /@versjon oppdatert til 2.0.0 
+- Lagt til /Barnevern/Sak/Personalia
+- /Barnevern/Sak/Personalia
+  - Lagt til attributtene @Id, @StartDato og @Bostedskommunenummer
+  - Attributtene @Fodselsnummer, @Fodselsdato, @Kjonn og @DUFnummer er flyttet fra /Barnevern/Sak til /Barnevern/Sak/Personalia
+
 ---
 # v.1.2.0
 Endringsdato: 5. mai 2022
