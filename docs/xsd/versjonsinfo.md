@@ -13,7 +13,7 @@ Endringsdato: 26. august 2022
   - Lagt til attributtene @Id og @StartDato
   - Attributtene @Fodselsnummer, @Fodselsdato, @Kjonn og @DUFnummer er flyttet fra /Barnevern/Sak til /Barnevern/Sak/Personalia
 - LovhjemmelType
-  - Kun kodene BVL og BVL2021 er nå tilatt i bruk
+  - Kun kodene BVL (som refererer til Barnevernsloven fra 1992) og BVL2021 (som refererer til Barnevernsloven fra 2021) er nå tilatt i bruk
 
 ---
 # v.1.2.0
