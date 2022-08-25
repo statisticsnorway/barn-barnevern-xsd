@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.*
 @XmlType(
     name = "SakType",
     propOrder = ["id", "startDato",
-        "fodselsnummer", "fodseldato", "kjonn", "bostedskommunenummer", "duFnummer"
+        "fodselsnummer", "fodseldato", "kjonn", "duFnummer"
     ]
 )data class PersonaliaType (
     @field:XmlAttribute(name = "Id", required = true)
@@ -27,9 +27,6 @@ import javax.xml.bind.annotation.*
 
     @field:XmlAttribute(name = "Kjonn", required = true)
     val kjonn: String,
-
-    @field:XmlAttribute(name = "Bostedskommunenummer")
-    var bostedskommunenummer: String? = null,
 
     @field:XmlAttribute(name = "DUFnummer")
     var duFnummer: String? = null
