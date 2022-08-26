@@ -2,7 +2,11 @@ package no.ssb.barn.xsd
 
 import java.time.LocalDate
 import java.util.*
-import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlAttribute
+import javax.xml.bind.annotation.XmlSchemaType
+import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -10,7 +14,8 @@ import javax.xml.bind.annotation.*
     propOrder = ["id", "startDato",
         "fodselsnummer", "fodseldato", "kjonn", "duFnummer"
     ]
-)data class PersonaliaType (
+)
+data class PersonaliaType(
     @field:XmlAttribute(name = "Id", required = true)
     var id: UUID,
 
