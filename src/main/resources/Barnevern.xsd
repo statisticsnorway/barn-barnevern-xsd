@@ -1315,6 +1315,7 @@ Dato tilsynsbesøket faktisk ble utført
 	</xs:simpleType>
 	<xs:simpleType name="BegrepsType">
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="Personalia"/>
 			<xs:enumeration value="Melding"/>
 			<xs:enumeration value="Undersokelse"/>
 			<xs:enumeration value="Plan"/>
@@ -1325,7 +1326,6 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
 			<xs:enumeration value="Flytting"/>
 			<xs:enumeration value="Relasjon"/>
-			<xs:enumeration value="Personalia"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="VirksomhetType">
