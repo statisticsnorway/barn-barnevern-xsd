@@ -1325,6 +1325,7 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
 			<xs:enumeration value="Flytting"/>
 			<xs:enumeration value="Relasjon"/>
+			<xs:enumeration value="Personalia"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="VirksomhetType">
