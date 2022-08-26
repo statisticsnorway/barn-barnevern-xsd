@@ -32,7 +32,10 @@ enum class BegrepsType(val begrep: String) {
     UNDERSOKELSE("Undersokelse"),
 
     @field:XmlEnumValue("Vedtak")
-    VEDTAK("Vedtak");
+    VEDTAK("Vedtak"),
+
+    @field:XmlEnumValue("Personalia")
+    PERSONALIA("Personalia");
 
     private var value: String? = null
 
