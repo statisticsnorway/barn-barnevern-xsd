@@ -16,9 +16,6 @@ enum class BegrepsType(val begrep: String) {
     @field:XmlEnumValue("OversendelseBarneverntjeneste")
     OVERSENDELSE_BARNEVERNTJENESTE("OversendelseBarneverntjeneste"),
 
-    @field:XmlEnumValue("Personalia")
-    PERSONALIA("Personalia"),
-
     @field:XmlEnumValue("Plan")
     PLAN("Plan"),
 
