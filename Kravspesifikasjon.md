@@ -1,11 +1,14 @@
 # Kravspesifikasjon for validering
 
 ## Innhold
+- [Endringslogg](#endringslogg)
+  - [2.0.0](2_0_0)
 - [Definisjoner](#definisjoner)
 - Validéringer
   - [Filbeskrivelse](#filbeskrivelse)
   - [Avgiver](#avgiver)
   - [Sak](#sak)
+  - [Personalia](#personalia)
   - [Melding](#melding)
     - [Melder](#melder)
     - [Saksinnhold](#saksinnhold)
@@ -16,6 +19,28 @@
   - [Ettervern](#ettervern)
   - [Flytting](#flytting)
   - [Oversendelse til fylkesnemnd](#oversendelse-til-fylkesnemnd)
+ 
+
+
+## <a name="endringslogg">Endringslogg</a>
+
+### <a name="2_0_0">2.0.0</a>
+
+Lagt til
+- Personalia Kontroll 2e: StartDato er før sakens StartDato
+- Personalia Kontroll 2f: StartDato er etter sakens SluttDato
+
+Flyttet og tilpasset
+- Sak kontroll 12: Fødselsnummer -> Personalia kontroll 12: Fødselsnummer
+- Sak Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato -> Personalia Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
+- Sak Kontroll 14: Kontroll av Fødselsnummer og Kjønn -> Personalia Kontroll 14: Kontroll av Fødselsnummer og Kjønn
+- Sak Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato -> Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
+- Sak Kontroll 16: Kontroll av Fødselsdato og StartDato -> Personalia Kontroll 16: Kontroll av Fødselsdato og StartDato
+- Sak Kontroll 1x: Kontroll av DUF-nummer -> Personalia Kontroll 17: Kontroll av DUF-nummer
+
+Slettet
+- Sak Kontroll 3: Fødselsnummer og DUFnummer
+
 
 
 ## <a name="definisjoner">Definisjoner</a>
@@ -49,9 +74,6 @@ så gi feilmeldingen "Innholdet er feil i forhold til filbeskrivelsen / XSD"
 
 Alvorlighetsgrad: FATAL
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/XsdRuleSpec.groovy) 
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/XsdRule.kt)
 
 
 ## <a name="avgiver">Avgiver</a>
@@ -63,11 +85,6 @@ når Bydelsnummer eller Bydelsnavn mangler utfylling<br/>
 så gi feilmeldingen "Bydelsnummer og/eller Bydelsnavn skal være utfylt"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/ReporterUrbanDistrictNumberAndNameSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/ReporterUrbanDistrictNumberAndName.kt)
-
 
 
 
@@ -81,32 +98,6 @@ så gi feilmeldingen "Sakens startdato {StartDato} er etter sluttdato {SluttDato
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/CaseEndDateAfterStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/CaseEndDateAfterStartDate.kt)
-
-
-
-### Sak Kontroll 3: Fødselsnummer og DUFnummer
-
-Gitt at man har en Sak<br/>
-når fødselsnummer mangler <br/>
-så gi feilmeldingen "Feil i fødselsnummer. Kan ikke identifisere klienten."
-
-Gitt at man har en Sak<br/>
-når fødselsnummer mangler og DUF-nummer mangler <br/>
-så gi feilmeldingen "DUFnummer mangler. Kan ikke identifisere klienten."
-
-Gitt at man har en Sak<br/>
-når fødselsnummer og DUF-nummer mangler <br/>
-så gi feilmeldingen "Fødselsnummer og DUFnummer mangler. Kan ikke identifisere klienten."
-
-Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/CaseSocialSecurityIdAndDufSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/CaseSocialSecurityIdAndDuf.kt)
-
 
 
 ### Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
@@ -116,10 +107,6 @@ når saken mangler melding, plan og tiltak<br/>
 så gi feilmeldingen "Klienten har ingen meldinger, planer eller tiltak"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/CaseHasContentSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/CaseHasContent.kt)
 
 
 
@@ -131,11 +118,6 @@ så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/CaseAgeAboveTwentyFiveSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/CaseAgeAboveTwentyFive.kt)
-
-
 
 
 ### Sak Kontroll 8: Klient over 18 år skal ha tiltak
@@ -146,15 +128,31 @@ så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/CaseAgeAboveEighteenAndMeasuresSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/CaseAgeAboveEighteenAndMeasures.kt)
 
 
+## <a name="personalia">Personalia</a>
 
-### Sak kontroll 12: Fødselsnummer
+### Personalia Kontroll 2e: StartDato er før sakens StartDato
 
-Gitt at man har en Sak med fødselsnummer<br/>
+Når Personalia sin StartDato er før sakens StartDato<br/>
+så gi feilmeldingen "Personalia sin startdato {StartDato} er før sakens startdato {StartDato}"
+
+Alvorlighetsgrad: ERROR
+
+
+
+### Personalia Kontroll 2f: StartDato er etter sakens SluttDato
+
+Når Personalia sin StartDato er etter sakens SluttDato <br/>
+så gi feilmeldingen "Personalia sin startdato {StartDato} er etter sakens sluttdato {SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+
+
+### Personalia kontroll 12: Fødselsnummer
+
+Gitt at man har Personalia med fødselsnummer<br/>
 når fødselsnummer ikke oppfyller noen følgende definisjoner:<br/>
 * Fødselsnummer på [https://www.udi.no/ord-og-begreper/fodselsnummer/](https://www.udi.no/ord-og-begreper/fodselsnummer/),
 * D-nummer på [https://www.udi.no/ord-og-begreper/d-nummer/](https://www.udi.no/ord-og-begreper/d-nummer/),
@@ -166,88 +164,61 @@ så gi feilmeldingen "Ugyldig Fødselsnummer"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/Case12SocialSecurityIdSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/Case12SocialSecurityId.kt)
 
 
+### Personalia Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
 
-### Sak Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
-
-Gitt at man har en Sak med fødselsnummer og fødselsdato<br/>
-når datodelen i fødselsnummer (de 6 første karakterene) viser til en annen dato enn fødselsdato<br/>
+Gitt at man har Personalia med fødselsnummer og fødselsdato<br/>
+når datodelen fødselsnummer (de 6 første karakterene) viser til en annen dato enn fødselsdato<br/>
 så gi feilmeldingen "Fødselsnummer og Fødselsdato viser til forskjellige datoer"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/Case13SocialSecurityIdVsBirthdateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/Case13SocialSecurityIdVsBirthdate.kt)
 
 
+### Personalia Kontroll 14: Kontroll av Fødselsnummer og Kjønn
 
-### Sak Kontroll 14: Kontroll av Fødselsnummer og Kjønn
-
-Gitt at man har en Sak med fødselsnummer og kjønn<br/>
-når de 5 siste karakterene i fødselsnummer er ulik 99999 og den 9. karakteren i fødselsnummer modulus 2 er lik 0 er forskjellig fra koden for kjønn<br/>
+Gitt at man har Personalia med fødselsnummer og kjønn<br/>
+når de 5 siste karakterene i Personlia sitt fødselsnummer er ulik 99999 og den 9. karakteren i fødselsnummer modulus 2 er lik 0 er forskjellig fra koden for kjønn<br/>
 så gi feilmeldingen "Fødselsnummer og Kjønn viser til forskjellige kjønn"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/Case14SocialSecurityIdVsGenderSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/Case14SocialSecurityIdVsGender.kt)
 
 
+### Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
 
-### Sak Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
-
-Gitt at man har en Sak med fødselsnummer, fødselsdato og startdato<br/>
+Gitt at man har Personalia med fødselsnummer, fødselsdato og startdato<br/>
 når startdato er før fødselsdato og de 5 siste karakterene i fødselsnummer er ulik 99999<br/>
 så gi feilmeldingen "Feil i Fødselsnummer for ufødt barn"
 
-Gitt at man har en Sak med fødselsnummer, startdato og datouttrekk<br/>
+Gitt at man har Personalia med fødselsnummer, startdato og datouttrekk<br/>
 når startdato er etter fødselsdato og de 5 siste karakterene i fødselsnummer er lik 99999<br/>
 så gi feilmeldingen "Feil i Fødselsnummer for født barn"
 
-
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/Case15SocialSecurityIdAndBirthDateAndStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/Case15SocialSecurityIdAndBirthDateAndStartDate.kt)
 
 
+### Personalia Kontroll 16: Kontroll av Fødselsdato og StartDato
 
-### Sak Kontroll 16: Kontroll av Fødselsdato og StartDato
-
-Gitt at man har en Sak med fødselsdato og startdato<br/>
+Gitt at man har Personalia med fødselsdato og startdato<br/>
 når startdato er mer enn 9 måneder før fødselsdato<br/>
-så gi feilmeldingen "Sakens startdato {StartDato} er mer enn 9 måneder før sakens fødselsdato"
-
-
+så gi feilmeldingen "Personalia sin startdato {StartDato} er mer enn 9 måneder før barnets fødselsdato"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/Case16BirthDateAndStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/Case16BirthDateAndStartDate.kt)
 
 
+### Personalia Kontroll 17: Kontroll av DUF-nummer
 
-### Sak Kontroll 1x: Kontroll av DUF-nummer
-
-Gitt at man har en Sak med utfylt DUF-nummer<br/>
+Gitt at man har Peronalia med utfylt DUF-nummer<br/>
 når DUF-nummer ikke oppfyller noen følgende definisjoner:<br/>
 * DUF-nummer [https://www.udi.no/ord-og-begreper/duf-nummer/](https://www.udi.no/ord-og-begreper/duf-nummer/)
 
 så gi feilmeldingen "Ugyldig DUF-nummer"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/cases/CaseSocialSecurityIdSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/cases/CaseSocialSecurityId.kt)
 
 
 
@@ -263,10 +234,6 @@ så gi feilmeldingen "Meldingens startdato {StartDato} er etter sluttdato {Konkl
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageStartDateAfterEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageStartDateAfterEndDate.kt)
-
 
 
 ### Melding Kontroll 2c: SluttDato er etter sakens SluttDato
@@ -276,10 +243,6 @@ når meldingens SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Meldingens sluttdato {Konklusjon/SluttDato} er etter Sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageEndDateAfterCaseEndDate.kt)
 
 
 
@@ -291,10 +254,6 @@ så gi feilmeldingen "Meldingens startdato {StartDato} er før sakens startdato 
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageStartDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageStartDateBeforeCaseStartDate.kt)
-
 
 
 ### Melding Kontroll 3: Fristoverskridelse på behandlingstid
@@ -304,10 +263,6 @@ når Konklusjon/SluttDato er mer enn 7 dager etter StartDato<br/>
 så gi feilmeldingen "Fristoverskridelse på behandlingstid for melding, ({StartDato} -> {Konklusjon/SluttDato})"
 
 Alvorlighetsgrad: Warning
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageProcessingTimeOverdueSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageProcessingTimeOverdue.kt)
 
 
 
@@ -319,10 +274,6 @@ så gi feilmeldingen "Konkludert melding mangler melder(e)"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageMissingReportersSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageMissingReporters.kt)
-
 
 
 ### Melding Kontroll 5: Konkludert melding mangler saksinnhold
@@ -333,10 +284,6 @@ så gi feilmeldingen "Konkludert melding mangler saksinnhold"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageMissingCaseContentSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageMissingCaseContent.kt)
-
 
 ### Melding Kontroll 19: Dublett på innhold, men forskjellige identer
 
@@ -345,10 +292,6 @@ når sammenligner meldingene med hverandre og finner helt identisk innhold, men 
 så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageDuplicateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageDuplicate.kt)
 
 
 
@@ -362,10 +305,6 @@ så gi feilmeldingen "Melder med kode ({Kode}) mangler presisering"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageReporterMissingClarificationSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageReporterMissingClarification.kt)
-
 
 
 ### <a name="saksinnhold">Saksinnhold</a> 
@@ -377,10 +316,6 @@ når Saksinnhold mangler Presisering<br/>
 så gi feilmeldingen "Saksinnhold med kode ({Kode}) mangler presisering"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageReporterMissingClarificationSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageReporterMissingClarification.kt)
 
 
 
@@ -394,10 +329,6 @@ så gi feilmeldingen "Undersøkelsens startdato {StartDato} er etter sluttdato {
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationStartDateAfterEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationStartDateAfterEndDate.kt)
-
 
 
 ### Undersøkelse Kontroll 2c: SluttDato er etter sakens SluttDato
@@ -407,10 +338,6 @@ når undersøkelsens SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Undersøkelsens sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationEndDateAfterCaseEndDate.kt)
 
 
 
@@ -422,10 +349,6 @@ så gi feilmeldingen "Undersøkelsens startdato {StartDato} er før sakens start
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationStartDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationStartDateBeforeCaseStartDate.kt)
-
 
 
 ### Undersøkelse Kontroll 3: Vedtaksgrunnlag mangler presisering
@@ -436,10 +359,6 @@ så gi feilmeldingen "Vedtaksgrunnlag med kode ({Kode}) mangler presisering"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationDecisionMissingClarificationSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationDecisionMissingClarification.kt)
-
 
 
 ### Undersøkelse Kontroll 7: Konkludert undersøkelse mangler vedtaksgrunnlag
@@ -449,10 +368,6 @@ når Vedtaksgrunnlag mangler<br/>
 så gi feilmeldingen "Undersøkelse konkludert med kode {Konklusjon/Kode} mangler vedtaksgrunnlag"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationConcludedMissingDecisionSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationConcludedMissingDecision.kt)
 
 
 
@@ -473,9 +388,6 @@ så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 180 dager etter m
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationProcessingTimePassedDueDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationProcessingTimePassedDueDate.kt)
 
 
 ### Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
@@ -485,10 +397,6 @@ når sammenligner Undersøkelsene med hverandre og finner helt identisk innhold,
 så gi feilmeldingen "Det finnes 2 eller flere Undersøkelser med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationDuplicateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationDuplicate.kt)
 
 
 
@@ -500,10 +408,6 @@ så gi feilmeldingen "Undersøkelse mangler en relasjon fra melding"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationRelatedFromMessageSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationRelatedFromMessage.kt)
-
 
 ### Undersøkelse Kontroll 21: Konkludert Undersøkelse skal ha relasjon til Vedtak
 
@@ -514,9 +418,6 @@ så gi feilmeldingen "Konkludert Undersøkelse mangler en relasjon til vedtak"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/investigation/InvestigationRelatedToDecisionSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/investigation/InvestigationRelatedToDecision.kt)
 
 
 ## <a name="vedtak">Vedtak</a> 
@@ -529,9 +430,6 @@ så gi feilmeldingen "Vedtakets startdato {StartDato} er etter sluttdato {Konklu
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionStartDateAfterEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStartDateAfterEndDate.kt)
 
 
 ### Vedtak Kontroll 2c: SluttDato er etter sakens SluttDato
@@ -542,9 +440,6 @@ så gi feilmeldingen "Vedtakets sluttdato {Konklusjon/SluttDato} er etter Sakens
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionEndDateAfterCaseEndDate.kt)
 
 
 ### Vedtak Kontroll 2e: StartDato er før sakens StartDato
@@ -555,9 +450,6 @@ så gi feilmeldingen "Vedtakets startdato {StartDato} er før sakens startdato {
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionStartDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStartDateBeforeCaseStartDate.kt)
 
 
 ### Vedtak Kontroll 2f: Krav sin StartDato er etter SluttDato
@@ -568,9 +460,6 @@ så gi feilmeldingen "Kravets startdato {StartDato} er etter sluttdato {Krav/Kon
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateAfterEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateAfterEndDate.kt)
 
 
 ### Vedtak Kontroll 2g: Krav sin SluttDato er etter vedtakets SluttDato
@@ -581,9 +470,6 @@ så gi feilmeldingen "Kravets sluttdato {Krav/Konklusjon/SluttDato} er etter Ved
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionDemandEndDateAfterDecisionEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandEndDateAfterDecisionEndDate.kt)
 
 
 ### Vedtak Kontroll 2h: Krav sin StartDato er før vedtakets StartDato
@@ -594,9 +480,6 @@ så gi feilmeldingen "Kravets startdato {Krav/StartDato} er før vedtakets start
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateBeforeDecisionStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionDemandStartDateBeforeDecisionStartDate.kt)
 
 
 ### Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato
@@ -607,9 +490,6 @@ så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er etter Vedtake
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateAfterDecisionEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateAfterDecisionEndDate.kt)
 
 
 ### Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato
@@ -620,9 +500,6 @@ så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er før vedtaket
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateBeforeDecisionStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionStatusChangeDateBeforeDecisionStartDate.kt)
 
 
 ### Vedtak Kontroll 3: Avsluttet vedtak skal ha SluttDato
@@ -636,9 +513,6 @@ så gi feilmeldingen "Vedtak med status 4 = 'Avslått / Avsluttet' mangler slutt
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionEndDateMissingSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionEndDateMissing.kt)
 
 
 ### Vedtak Kontroll 4: Lovhjemmel refererer til feil BarneVernLov
@@ -649,9 +523,6 @@ så gir feilmeldingen “Lovhjemlene under Vedtak innholder annen verdi for Lov 
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionLawVersionSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionLawVersion.kt)
 
 
 ### Vedtak Kontroll 20: Vedtak med status 2 = 'Begjæring_ oversendt nemnd' skal ha relasjon til OversendelseFylkesnemnd
@@ -665,9 +536,6 @@ så gi feilmeldingen "OversendelseFylkesnemndVedtak skal finnes for Vedtak med s
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/decision/DecisionRelationToForwardingSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/decision/DecisionRelationToForwarding.kt)
 
 
 ## <a name="tiltak">Tiltak</a> 
@@ -680,10 +548,6 @@ så gi feilmeldingen "Tiltakets startdato {StartDato} er etter sluttdato {Konklu
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureStartDateAfterEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureStartDateAfterEndDate.kt)
-
 
 
 ### Tiltak Kontroll 2c: SluttDato er etter sakens SluttDato
@@ -693,10 +557,6 @@ når tiltakets SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Tiltakets sluttdato {Konklusjon/SluttDato} er etter Sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/message/MessageEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/message/MessageEndDateAfterCaseEndDate.kt)
 
 
 
@@ -708,9 +568,6 @@ så gi feilmeldingen "Tiltakets startdato {StartDato} er før sakens startdato {
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureStartDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureStartDateBeforeCaseStartDate.kt)
 
 
 ### Tiltak Kontroll 5: Barnet er over 7 år og er i barnehage
@@ -721,9 +578,6 @@ så gi feilmelding "Barnet er over 7 år og i barnehage."
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureAgeAboveSevenAndInKindergartenSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureAgeAboveSevenAndInKindergarten.kt)
 
 
 ### Tiltak Kontroll 6: Barnet er over 11 år og i SFO
@@ -734,9 +588,6 @@ så gi feilmelding "Barnet er over 11 år og i SFO"
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureAgeAboveElevenAndInSfoSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureAgeAboveElevenAndInSfo.kt)
 
 
 ### Tiltak Kontroll 7: Kontroll om presisering av tiltakskategori
@@ -748,9 +599,6 @@ så gi feilmelding "Tiltakskategori (kode) mangler presisering."
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureClarificationRequiredSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureClarificationRequired.kt)
 
 
 ### Tiltak Kontroll 8: Kontroll av kode og presisering av opphevelse
@@ -760,10 +608,6 @@ når presisering mangler<br/>
 så gi feilmelding "Opphevelse (kode) mangler presisering."
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureRepealClarificationRequiredSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureRepealClarificationRequired.kt)
 
 
 
@@ -776,10 +620,6 @@ så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - 
 
 Alvorlighetsgrad: Warning
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureMultipleAllocationsWithinPeriodSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureMultipleAllocationsWithinPeriod.kt)
-
 
 
 #### Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse
@@ -789,10 +629,6 @@ når Opphevelse/Kode mangler
 så gi feilmelding "Omsorgstiltak med sluttdato krever årsak til opphevelse"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureLegalBasisWithEndDateClarificationRequiredSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLegalBasisWithEndDateClarificationRequired.kt)
 
 
 
@@ -804,10 +640,6 @@ så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureLegalBasisAgeAboveEighteenNoMeasureSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLegalBasisAgeAboveEighteenNoMeasure.kt)
-
 
 
 #### Tiltak Kontroll 14: Lovhjemmel er fylt ut med tallet 0
@@ -818,9 +650,6 @@ så gi feilmelding "Ingen Lovhjemmel sin kapittel, paragraf, ledd eller punktum 
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureLegalBasisValidCodeSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLegalBasisValidCode.kt)
 
 
 ### Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
@@ -831,9 +660,6 @@ så gi feilmeldingen "Det finnes 2 eller flere Tiltak med identisk innhold, men 
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureDuplicateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureDuplicate.kt)
 
 
 #### Tiltak Kontroll 20: Tiltak skal ha relasjon fra Vedtak
@@ -844,9 +670,6 @@ så gi feilmelding "Tiltak skal ha relasjon fra Vedtak"
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureRelatedFromDecisionSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureRelatedFromDecision.kt)
 
 
 #### Tiltak Kontroll 21: Tiltak sin Lovhjemmel skal baseres på det relaterte Vedtak sin Lovhjemmel
@@ -860,9 +683,6 @@ så gi feilmelding "Tiltak er basert på annen Lovhjemmel enn det som er definer
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/measure/MeasureLawReferenceRelatedFromDecisionLawReferenceSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/measure/MeasureLawReferenceRelatedFromDecisionLawReference.kt)
 
 
 ## <a name="plan">Plan</a> 
@@ -875,9 +695,6 @@ så gi feilmeldingen "Planens startdato {StartDato} er etter sluttdato {Konklusj
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/plan/PlanStartDateAfterEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/plan/PlanStartDateAfterEndDate.kt)
 
 
 
@@ -889,9 +706,6 @@ så gi feilmeldingen "Planens sluttdato {Konklusjon/SluttDato} er etter sakens s
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/plan/PlanEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/plan/PlanEndDateAfterCaseEndDate.kt)
 
 
 
@@ -903,9 +717,6 @@ så gi feilmeldingen "Planens startdato {StartDato} er før sakens startdato {St
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/plan/PlanStartDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/plan/PlanStartDateBeforeCaseStartDate.kt)
 
 
 
@@ -917,10 +728,6 @@ så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er etter sluttd
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/plan/PlanEvaluationDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/plan/PlanEvaluationDateAfterCaseEndDate.kt)
-
 
 
 ### Plan Kontroll 2g: UtfortDato er før sakens StartDato
@@ -930,10 +737,6 @@ når UtfortDato er før StartDato<br/>
 så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er før startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/plan/PlanEvaluationDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/plan/PlanEvaluationDateBeforeCaseStartDate.kt)
 
 
 
@@ -947,9 +750,6 @@ så gi feilmeldingen "Ettervernets tilbudSendtDato {TilbudSendtDato} er etter sl
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateAfterEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateAfterEndDate.kt)
 
 
 ### Ettervern Kontroll 2c: SluttDato er etter sakens SluttDato
@@ -960,9 +760,6 @@ så gi feilmeldingen "Ettervern sin sluttdato {Konklusjon/SluttDato} er etter sa
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/aftercare/AftercareEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareEndDateAfterCaseEndDate.kt)
 
 
 ### Ettervern Kontroll 2e: TilbudSendtDato er før sakens StartDato
@@ -973,9 +770,6 @@ så gi feilmeldingen "Ettervern sin tilbud-sendt-dato {TilbudSendtDato} er før 
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareOfferSentDateBeforeCaseStartDate.kt)
 
 
 ### Ettervern Kontroll 3: Alder er mindre enn 18 år
@@ -985,10 +779,6 @@ når ettervernets TilbudSendtDato minus sakens Fodselsdato er mindre enn 18 år<
 så gi feilmeldingen "Barn under 18 år skal ikke ha ettervern"
 
 Alvorlighetsgrad: Warning
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/aftercare/AftercareForMinorsSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/aftercare/AftercareForMinors.kt)
 
 
 
@@ -1002,9 +792,6 @@ så gi feilmeldingen "Flyttingens sluttdato {SluttDato} er etter sakens sluttdat
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/relocation/RelocationEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/relocation/RelocationEndDateAfterCaseEndDate.kt)
 
 
 ### Flytting Kontroll 2f: SluttDato mot sakens StartDato
@@ -1014,10 +801,6 @@ når flyttingens SluttDato er før sakens StartDato<br/>
 så gi feilmeldingen "Flyttingens sluttdato {SluttDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/relocation/RelocationEndDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/relocation/RelocationEndDateBeforeCaseStartDateSpec.kt)
 
 
 
@@ -1031,9 +814,6 @@ så gi feilmeldingen "Oversendelse til fylkesnemndens startdato {StartDato} er f
 
 Alvorlighetsgrad: ERROR
 
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/caseforwarding/CaseForwardingStartDateBeforeCaseStartDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/caseforwarding/CaseForwardingStartDateBeforeCaseStartDate.kt)
 
 
 ### Oversendelse til fylkesnemnd Kontroll 2f: StartDato er etter sakens SluttDato
@@ -1043,9 +823,3 @@ når Oversendelse til fylkesnemndens StartDato er etter sakens SluttDato <br/>
 så gi feilmeldingen "Oversendelse til fylkesnemndens startdato {StartDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
-
-[Akseptanse kriterie](src/test/groovy/no/ssb/barn/validation/rule/caseforwarding/CaseForwardingEndDateAfterCaseEndDateSpec.groovy)
-
-[Kildekode](src/main/kotlin/no/ssb/barn/validation/rule/caseforwarding/CaseForwardingStartDateAfterCaseEndDate.kt)
-
-
