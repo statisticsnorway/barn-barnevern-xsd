@@ -223,7 +223,7 @@ Alvorlighetsgrad: ERROR
 
 ### Personalia Kontroll 17: Kontroll av DUF-nummer
 
-Gitt at man har Peronalia med utfylt DUF-nummer<br/>
+Gitt at man har Personalia med utfylt DUF-nummer<br/>
 når DUF-nummer ikke oppfyller noen følgende definisjoner:<br/>
 * DUF-nummer [https://www.udi.no/ord-og-begreper/duf-nummer/](https://www.udi.no/ord-og-begreper/duf-nummer/)
 
