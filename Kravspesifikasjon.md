@@ -29,6 +29,7 @@
 Lagt til
 - Personalia Kontroll 2e: StartDato er før sakens StartDato
 - Personalia Kontroll 2f: StartDato er etter sakens SluttDato
+- Personalia kontroll 11: Klienten skal ha personalia
 
 Flyttet og tilpasset
 - Sak kontroll 12: Fødselsnummer -> Personalia kontroll 12: Fødselsnummer
@@ -145,6 +146,16 @@ Alvorlighetsgrad: ERROR
 
 Når Personalia sin StartDato er etter sakens SluttDato <br/>
 så gi feilmeldingen "Personalia sin startdato {StartDato} er etter sakens sluttdato {SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+
+
+### ### Personalia kontroll 11: Klienten skal ha personalia
+
+Gitt at man har en Sak <br/>
+når saken mangler Personalia<br/>
+så gi feilmeldingen "Klienten mangler personaliainformasjon"
 
 Alvorlighetsgrad: ERROR
 
