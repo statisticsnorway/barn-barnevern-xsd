@@ -13,8 +13,8 @@ enum class BegrepsType(val begrep: String) {
     @field:XmlEnumValue("Melding")
     MELDING("Melding"),
 
-    @field:XmlEnumValue("OversendelseBarneverntjeneste")
-    OVERSENDELSE_BARNEVERNTJENESTE("OversendelseBarneverntjeneste"),
+    @field:XmlEnumValue("OversendelseFylkesnemnd")
+    OVERSENDELSE_FYLKESNEMD("OversendelseFylkesnemnd"),
 
     @field:XmlEnumValue("Plan")
     PLAN("Plan"),
