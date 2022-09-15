@@ -4,11 +4,11 @@ import spock.lang.Specification
 
 import java.time.LocalDate
 
-class OversendelseBarneverntjenesteTypeSpec extends Specification {
+class OversendelseFylkesnemndTypeSpec extends Specification {
 
     def "when constructor no exceptions expected"() {
         when:
-        new OversendelseBarneverntjenesteType(
+        new OversendelseFylkesnemndType(
                 UUID.randomUUID(),
                 LocalDate.now(),
                 new LovhjemmelType(
