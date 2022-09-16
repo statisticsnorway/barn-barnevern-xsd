@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType
     name = "SakType",
     propOrder = ["id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet",
         "personalia", "melding", "undersokelse", "plan", "tiltak",
-        "vedtak", "ettervern", "oversendelseFylkesnemd", "flytting", "relasjon", "slettet"]
+        "vedtak", "ettervern", "oversendelseFylkesnemnd", "flytting", "relasjon", "slettet"]
 )
 data class SakType(
     @field:XmlAttribute(name = "Id", required = true)
