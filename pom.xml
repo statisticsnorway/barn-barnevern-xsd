@@ -15,11 +15,11 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <kotlinVersion>1.7.0</kotlinVersion>
-        <jackson.version>2.13.3</jackson.version>
+        <kotlinVersion>1.7.10</kotlinVersion>
+        <jackson.version>2.13.4</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spock.version>2.1-groovy-3.0</spock.version>
+        <spock.version>2.2-groovy-4.0</spock.version>
 
         <jacoco.version>0.8.7</jacoco.version>
         <sonar.version>3.9.1.2184</sonar.version>
@@ -99,6 +99,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlinVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.version}</version>
@@ -119,11 +124,6 @@
             <version>${jackson.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-reflect</artifactId>
-            <version>${kotlinVersion}</version>
-        </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
