@@ -23,6 +23,9 @@ class BarnevernConverterSpec extends Specification {
         then:
         //noinspection GroovyUnusedAssignment
         JsonParseException e = thrown()
+
+        and:
+        e.message.contains("Unexpected character")
     }
 
     @Unroll("test01_fil0 #i _total.xml")

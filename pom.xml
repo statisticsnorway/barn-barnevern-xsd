@@ -7,7 +7,7 @@
     <artifactId>barn-xsd</artifactId>
     <version>${revision}</version>
     <name>barn-barnevern-xsd</name>
-    <description>XSD prosjekt for innrapportering til Barnevernsregister
+    <description>XSD-prosjekt for innrapportering til Barnevernsregister
     </description>
     <properties>
         <revision>LOCAL-SNAPSHOT</revision>
