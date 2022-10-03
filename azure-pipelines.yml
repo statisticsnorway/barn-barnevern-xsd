@@ -38,7 +38,7 @@ resources:
       type: github
       name: statisticsnorway/azure-pipelines-templates
       # The version of the repo on GitHub. Change to needed version
-      ref: refs/tags/1.1.29
+      ref: refs/tags/1.1.31
       # Service connection in the barn project on Pipelines
       # with access to the template repository.
       endpoint: 'github-Barnevernsregisteret'
@@ -61,14 +61,7 @@ jobs:
           jdkSourceOption: 'PreInstalled'
 
       # Maven caching to speed up pipeline build time
-      - task: Cache@2
-        displayName: Cache Maven local repo
-        inputs:
-          key: 'maven | "$(Agent.OS)" | **/pom.xml'
-          restoreKeys: |
-            maven | "$(Agent.OS)"
-            maven
-          path: $(MAVEN_CACHE_FOLDER)
+      - template: maven/task-cache.yml@templates
 
       - task: SonarCloudPrepare@1
         inputs:
