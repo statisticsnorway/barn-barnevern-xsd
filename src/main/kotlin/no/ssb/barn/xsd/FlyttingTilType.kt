@@ -1,7 +1,5 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.util.TypeUtils
-import java.time.LocalDate
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAttribute
@@ -18,26 +16,4 @@ data class FlyttingTilType(
 
     @field:XmlAttribute(name = "Presisering")
     val presisering: String? = null
-) {
-    companion object {
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
-
-        private val validFrom = LocalDate.of(2022, 1, 1)
-
-        private val codeList = listOf(
-            CodeListItem("1", "Fosterhjem i familie og nære nettverk", validFrom),
-            CodeListItem("2", "Fosterhjem utenfor familie og nære nettverk", validFrom),
-            CodeListItem("3", "Beredskapshjem", validFrom),
-            CodeListItem("4", "Barnevernsinstitusjon", validFrom),
-            CodeListItem("5", "Bolig med oppfølging", validFrom),
-            CodeListItem("6", "Foreldre", validFrom),
-            CodeListItem("7", "Egen bolig uten oppfølging", validFrom),
-            CodeListItem("8", "Annet bosted (spesifiser)", validFrom),
-            CodeListItem("9", "Adresseendring", validFrom)
-        )
-    }
-}
-
-
+)

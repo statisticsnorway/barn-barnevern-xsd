@@ -1,13 +1,10 @@
 package no.ssb.barn.xsd
 
 import spock.lang.Specification
-import spock.lang.Unroll
-
-import java.time.LocalDate
 
 class ArsakFraTypeSpec extends Specification {
 
-    def "when constructor is called without values, expect no errors"() {
+    def "when constructor is called without presisering, expect no errors"() {
         when:
         new ArsakFraType("1.1.1", null)
 
@@ -15,30 +12,13 @@ class ArsakFraTypeSpec extends Specification {
         noExceptionThrown()
     }
 
-    def "when constructor is called with values, expect props to be populated"() {
+    def "when constructor is called with presisering, expect props to be populated"() {
         given:
-        def code = ArsakFraType.getCodes(
-                LocalDate.of(2022, 1, 1))[0].code
-        and:
-        def sut = new ArsakFraType(code, "~Presisering~")
+        def sut = new ArsakFraType("1.1.1", "~Presisering~")
 
         expect:
-        code == sut.kode
+        "1.1.1" == sut.kode
         and:
         "~Presisering~" == sut.presisering
-    }
-
-    @Unroll
-    def "getCodes receive number of expected items"() {
-        expect:
-        expectedNumberOfItems == ArsakFraType.getCodes(date).size()
-
-        where:
-        date                       || expectedNumberOfItems
-        LocalDate.of(2021, 1, 1)   || 0
-        LocalDate.of(2021, 12, 31) || 0
-        LocalDate.of(2022, 1, 1)   || 18
-        LocalDate.of(2022, 6, 1)   || 18
-        LocalDate.of(2101, 1, 1)   || 0
     }
 }

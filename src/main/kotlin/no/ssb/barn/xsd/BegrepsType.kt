@@ -36,23 +36,4 @@ enum class BegrepsType(val begrep: String) {
 
     @field:XmlEnumValue("Personalia")
     PERSONALIA("Personalia");
-
-    private var value: String? = null
-
-    open fun begrepsType(v: String) {
-        value = v
-    }
-
-    open fun value(): String? {
-        return value
-    }
-
-    open fun fromValue(v: String): BegrepsType? {
-        for (c in values()) {
-            if (c.value == v) {
-                return c
-            }
-        }
-        throw IllegalArgumentException(v)
-    }
 }

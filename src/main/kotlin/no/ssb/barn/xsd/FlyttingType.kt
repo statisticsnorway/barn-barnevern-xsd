@@ -1,9 +1,13 @@
 package no.ssb.barn.xsd
 
-import no.ssb.barn.util.TypeUtils
 import java.time.LocalDate
 import java.util.*
-import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlAttribute
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSchemaType
+import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -26,33 +30,4 @@ data class FlyttingType(
 
     @field:XmlElement(name = "FlyttingTil")
     val flyttingTil: FlyttingTilType
-) {
-    companion object {
-
-        @JvmStatic
-        fun getCodes(date: LocalDate): List<CodeListItem> =
-            TypeUtils.getCodes(date, codeList)
-
-        private val validFrom: LocalDate = LocalDate.parse("2013-01-01")
-
-        private val codeList =
-            mapOf(
-                "1.1" to "Barnet tilbakeføres til foreldre/ omsorgsplasseringen opphører",
-                "1.2" to "Barnet blir myndig",
-                "1.3" to "Fosterforeldre klarer ikke å dekke barnets behov <br>" +
-                        "(forhold ved fosterhjemmet)",
-                "1.4" to "Barnet har behov for annet plasseringssted <br>" +
-                        "(institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. =forhold ved barnet)",
-                "1.5" to "Andre grunner; spesifiser. <br>" +
-                        "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.).",
-                "2.1" to "Barnet har behov fosterforeldre ikke kan dekke",
-                "2.2" to "Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)",
-                "2.3" to "Andre grunner; spesifiser <br>" +
-                        "(f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, <br>" +
-                        "manglende eller lite effektiv veiledning, mv.)."
-            )
-                .map {
-                    CodeListItem(it.key, it.value, validFrom)
-                }
-    }
-}
+)
