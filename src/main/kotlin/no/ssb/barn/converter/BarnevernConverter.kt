@@ -16,7 +16,10 @@ object BarnevernConverter {
 
     private val kotlinModule: KotlinModule = KotlinModule.Builder()
         .configure(KotlinFeature.StrictNullChecks, false)
-        // needed, else it will break for null https://github.com/FasterXML/jackson-module-kotlin/issues/130#issuecomment-546625625
+        /**
+         * required, else it will break for null
+         * https://github.com/FasterXML/jackson-module-kotlin/issues/130#issuecomment-546625625
+         */
         .configure(KotlinFeature.NullIsSameAsDefault, true)
         .build()
 
@@ -26,7 +29,8 @@ object BarnevernConverter {
             .registerModule(kotlinModule)
             .registerModule(JavaTimeModule())
             .registerModule(JaxbAnnotationModule())
-            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
+            /** required to parse dates as LocalDate, else parsing error */
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
     }

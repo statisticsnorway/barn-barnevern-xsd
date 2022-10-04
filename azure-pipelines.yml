@@ -63,11 +63,11 @@ jobs:
       # Maven caching to speed up pipeline build time
       - template: maven/task-cache.yml@templates
 
-      - task: SonarCloudPrepare@1
-        inputs:
-          SonarCloud: 'bipSonarCloud-Barnevernsregisteret'
-          organization: 'statisticsnorway'
-          scannerMode: 'Other'
+      #- task: SonarCloudPrepare@1
+      #  inputs:
+      #    SonarCloud: 'bipSonarCloud-Barnevernsregisteret'
+      #    organization: 'statisticsnorway'
+      #    scannerMode: 'Other'
 
       # Authenticate to google artifact registry
       # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-authenticate-gar.yml
@@ -89,11 +89,11 @@ jobs:
           isJacocoCoverageReportXML: true
           checkStyleRunAnalysis: true
           pmdRunAnalysis: true
-          sonarQubeRunAnalysis: true
+          sonarQubeRunAnalysis: false # TODO
 
-      - task: SonarCloudPublish@1
-        inputs:
-          pollingTimeoutSec: '300'
+      #- task: SonarCloudPublish@1
+      #  inputs:
+      #    pollingTimeoutSec: '300'
 
       # Deploy artifact to Nexus
       # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-install-and-deploy-to-gar.yml
