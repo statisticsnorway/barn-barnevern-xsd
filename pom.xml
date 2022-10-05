@@ -22,7 +22,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jacoco.version>0.8.7</jacoco.version>
-        <sonar.version>3.9.1.2184</sonar.version>
         <checkstyle.version>8.45.1</checkstyle.version>
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -174,6 +173,7 @@
                     <plugin>
                         <groupId>org.sonarsource.scanner.maven</groupId>
                         <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.9.1.2184</version>
                     </plugin>
                     <plugin>
                         <groupId>org.jacoco</groupId>
