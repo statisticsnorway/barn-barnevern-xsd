@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import no.ssb.barn.util.Shared.DATE_TIME_FORMATTER
 import no.ssb.barn.util.SocialSecurityIdUtils.FEMALE
 import no.ssb.barn.util.SocialSecurityIdUtils.MALE
 import no.ssb.barn.util.SocialSecurityIdUtils.getDateOfBirthFromSsn
@@ -32,9 +33,12 @@ class SocialSecurityIdUtilsTest : BehaviorSpec({
 
     given("getDateOfBirthFromSsn") {
 
+        val tomorrow = LocalDate.now().plusDays(1)
+
         forAll(
             row("01010112345", LocalDate.of(2001, 1, 1)),
-            row("31121012345", LocalDate.of(2010, 12, 31))
+            row("31121012345", LocalDate.of(2010, 12, 31)),
+            row("${DATE_TIME_FORMATTER.format(tomorrow)}12345", tomorrow.minusYears(100))
         ) { ssn, expectedBirthDate ->
 
             `when`("getDateOfBirthFromSsn $ssn") {
