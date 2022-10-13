@@ -526,11 +526,11 @@ Alvorlighetsgrad: ERROR
 
 
 
-### Vedtak Kontroll 4: Lovhjemmel refererer til feil BarneVernLov
+### Vedtak Kontroll 4: Lovhjemmel refererer til feil barnevernlov
 
 Gitt at man har et Vedtak der Vedtak/LovhjemmelType/Lov og eventuelt Vedtak/JmfrLovhjemmelType/Lov er utfylt<br/>
-når Lov er utfylt med noe annet enn BVL1992 eller BVL2021<br/>
-så gir feilmeldingen “Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL1992 eller BVL2021“
+når Lov er utfylt med noe annet enn BVL eller BVL2021<br/>
+så gir feilmeldingen “Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL eller BVL2021“
 
 Alvorlighetsgrad: ERROR
 
