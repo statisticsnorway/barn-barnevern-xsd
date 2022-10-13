@@ -63,38 +63,16 @@ jobs:
       # Maven caching to speed up pipeline build time
       - template: maven/task-cache.yml@templates
 
-      - task: SonarCloudPrepare@1
-        inputs:
-          SonarCloud: 'bipSonarCloud-Barnevernsregisteret'
-          organization: 'statisticsnorway'
-          scannerMode: 'Other'
-
       # Authenticate to google artifact registry
       # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-authenticate-gar.yml
       - template: maven/task-authenticate-gar.yml@templates
 
-      - task: Maven@3
-        displayName: Maven verify
-        inputs:
-          goals: 'verify'
-          options: '-X -P ssb-bip,coverage --batch-mode $(MAVEN_OPTS)'
-          publishJUnitResults: true
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          mavenAuthenticateFeed: false
-          mavenVersionOption: 'Default'
-          mavenPomFile: 'pom.xml'
-          testRunTitle: 'Tests'
-          javaHomeOption: 'JDKVersion'
-          effectivePomSkip: false
-          isJacocoCoverageReportXML: true
-          checkStyleRunAnalysis: true
-          pmdRunAnalysis: true
-          sonarQubeRunAnalysis: false
+      # Verify and run sonarcloud, for non-tag-builds
+      # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-verify.yml
+      - template: maven/task-verify.yml@templates
+        parameters:
+          sonarCloud: 'bipSonarCloud-Barnevernsregisteret'
 
-      - task: SonarCloudPublish@1
-        inputs:
-          pollingTimeoutSec: '300'
-
-      # Deploy artifact to Nexus
+      # Deploy artifact to Artifact Registry
       # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-install-and-deploy-to-gar.yml
       - template: maven/task-install-and-deploy-to-gar.yml@templates
