@@ -32,12 +32,14 @@ class RandomUtilsTest : BehaviorSpec({
         val startInclusive = LocalDate.of(2000, 1, 1)
         val endExclusive = LocalDate.of(2021, 1, 1)
 
-        `when`("generateRandomSSN") {
+        (1..100).forEach {
+            `when`("generateRandomSSN $it") {
 
-            val socialSecurityId = generateRandomSSN(startInclusive, endExclusive)
+                val socialSecurityId = generateRandomSSN(startInclusive, endExclusive)
 
-            then("socialSecurityId should be valid") {
-                modulo11(socialSecurityId, controlSumDigits2) shouldBe 0
+                then("socialSecurityId should be valid") {
+                    modulo11(socialSecurityId, controlSumDigits2) shouldBe 0
+                }
             }
         }
     }
