@@ -13,6 +13,9 @@ class SharedTest : BehaviorSpec({
 
     given("modulo11") {
         forAll(
+            row("123", controlSumDigits1, -1),
+            row("a".repeat(10), controlSumDigits1, -1),
+
             row("0501139929", controlSumDigits1, 0),
             row("4101108818", controlSumDigits1, 0),
             row("0102030405", controlSumDigits1, 6),
