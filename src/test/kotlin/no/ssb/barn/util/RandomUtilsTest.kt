@@ -5,7 +5,8 @@ import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.util.RandomUtils.generateRandomSSN
 import no.ssb.barn.util.RandomUtils.generateRandomString
-import no.ssb.barn.util.ValidationUtils.validateSSN
+import no.ssb.barn.util.Shared.controlSumDigits2
+import no.ssb.barn.util.Shared.modulo11
 import java.time.LocalDate
 
 class RandomUtilsTest : BehaviorSpec({
@@ -36,7 +37,7 @@ class RandomUtilsTest : BehaviorSpec({
             val socialSecurityId = generateRandomSSN(startInclusive, endExclusive)
 
             then("socialSecurityId should be valid") {
-                validateSSN(socialSecurityId).shouldBeTrue()
+                modulo11(socialSecurityId, controlSumDigits2) shouldBe 0
             }
         }
     }

@@ -3,7 +3,7 @@ package no.ssb.barn.util
 import no.ssb.barn.util.Shared.DATE_TIME_FORMATTER
 import no.ssb.barn.util.Shared.controlSumDigits1
 import no.ssb.barn.util.Shared.controlSumDigits2
-import no.ssb.barn.util.ValidationUtils.modulo11
+import no.ssb.barn.util.Shared.modulo11
 import java.time.LocalDate
 
 object RandomUtils {
