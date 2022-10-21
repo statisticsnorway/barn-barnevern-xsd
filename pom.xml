@@ -16,7 +16,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <kotlinVersion>1.7.20</kotlinVersion>
-        <kotestVersion>5.5.0</kotestVersion>
+        <kotestVersion>5.5.1</kotestVersion>
         <jackson.version>2.13.4</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
