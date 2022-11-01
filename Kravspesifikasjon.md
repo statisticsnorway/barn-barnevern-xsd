@@ -2,8 +2,8 @@
 
 ## Innhold
 - [Endringslogg](#endringslogg)
-  - [2022-10-31](2022-10-31)
-  - [2.0.0](2_0_0)
+  - [2022-10-31](#2022-10-31)
+  - [2.0.0](#2_0_0)
 - [Definisjoner](#definisjoner)
 - Validéringer
   - [Filbeskrivelse](#filbeskrivelse)
