@@ -89,6 +89,10 @@
     </dependencies>
 
     <build>
+        <!-- required for coverage in SonarCloud -->
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+
         <extensions>
             <extension>
                 <groupId>com.google.cloud.artifactregistry</groupId>
