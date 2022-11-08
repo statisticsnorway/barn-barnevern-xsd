@@ -2,7 +2,8 @@
 
 ## Innhold
 - [Endringslogg](#endringslogg)
-  - [2.0.0](2_0_0)
+  - [2022-10-31](#2022-10-31)
+  - [2.0.0](#2_0_0)
 - [Definisjoner](#definisjoner)
 - Validéringer
   - [Filbeskrivelse](#filbeskrivelse)
@@ -23,6 +24,16 @@
 
 
 ## <a name="endringslogg">Endringslogg</a>
+
+### <a name="2022-10-31">2022-10-31</a>
+
+Endret
+- Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet, endret alvorlighetsgrad fra ERROR til Warning.
+- Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak, endring i kravet.
+
+Slettet
+- Personalia Kontroll 2e: StartDato er før sakens StartDato
+- Ettervern Kontroll 3: Alder er mindre enn 18 år- 
 
 ### <a name="2_0_0">2.0.0</a>
 
@@ -117,7 +128,7 @@ Gitt at man har en Sak med datoUttrekk og fødselsdato<br/>
 når datoUttrekk minus fødselsdato er lik 25 år eller større<br/>
 så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient"
 
-Alvorlighetsgrad: ERROR
+Alvorlighetsgrad: Warning
 
 
 
@@ -132,15 +143,6 @@ Alvorlighetsgrad: ERROR
 
 
 ## <a name="personalia">Personalia</a>
-
-### Personalia Kontroll 2e: StartDato er før sakens StartDato
-
-Når Personalia sin StartDato er før sakens StartDato<br/>
-så gi feilmeldingen "Personalia sin startdato {StartDato} er før sakens startdato {StartDato}"
-
-Alvorlighetsgrad: ERROR
-
-
 
 ### Personalia Kontroll 2f: StartDato er etter sakens SluttDato
 
@@ -646,7 +648,7 @@ Alvorlighetsgrad: ERROR
 #### Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak
 
 Gitt at man har UttrekkDato, en Sak med fødselsdato og et [Omsorgstiltak](#omsorgstiltak)<br/>
-når UttrekkDato er 18 år eller mer etter fødselsdato<br/>
+når UttrekkDato er 18 år eller mer etter fødselsdato og sluttdato mangler<br/>
 så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
 
 Alvorlighetsgrad: ERROR
@@ -780,16 +782,6 @@ når ettervernets TilbudSendtDato er før sakens StartDato <br/>
 så gi feilmeldingen "Ettervern sin tilbud-sendt-dato {TilbudSendtDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR
-
-
-
-### Ettervern Kontroll 3: Alder er mindre enn 18 år
-
-Gitt at man har et Ettervern der TilbudSendtDato finnes og sak der Fodselsdato finnes<br/>
-når ettervernets TilbudSendtDato minus sakens Fodselsdato er mindre enn 18 år<br/>
-så gi feilmeldingen "Barn under 18 år skal ikke ha ettervern"
-
-Alvorlighetsgrad: Warning
 
 
 
