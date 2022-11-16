@@ -163,10 +163,10 @@ class PersonaliaTypeTest : BehaviorSpec({
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern '\\d{12}' for type " +
                         "'#AnonType_DUFnummerPersonaliaSakType'."
             )
-        ) { description, avgiverXml, expectedError ->
+        ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(avgiverXml).toStreamSource())
+                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {

@@ -116,10 +116,10 @@ class AvgiverTypeTest : BehaviorSpec({
                 "cvc-maxLength-valid: Value '${"b".repeat(251)}' with length = '251' is not " +
                         "facet-valid with respect to maxLength '250' for type '#AnonType_BydelsnavnAvgiverType'."
             )
-        ) { description, avgiverXml, expectedError ->
+        ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(avgiverXml).toStreamSource())
+                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {

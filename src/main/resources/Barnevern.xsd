@@ -541,11 +541,47 @@ Bjorge.Saether@bufdir.no
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="Kapittel" type="xs:string"/>
-            <xs:element name="Paragraf" type="xs:string"/>
-            <xs:element name="Ledd" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Bokstav" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Punktum" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Kapittel">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Paragraf">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="Ledd" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Bokstav" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <!-- Melder -->

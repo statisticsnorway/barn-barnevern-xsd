@@ -18,8 +18,8 @@ class MeldingTypeTest : BehaviorSpec({
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(buildXmlInTest(
-                    "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                            "StartDato=\"2022-11-14\" Plantype=\"1\"/>").toStreamSource())
+                    "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
+                            "StartDato=\"2022-11-14\"/>").toStreamSource())
             }
         }
 
@@ -76,10 +76,10 @@ class MeldingTypeTest : BehaviorSpec({
                 "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\"/>",
                 "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
             )
-        ) { description, avgiverXml, expectedError ->
+        ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(avgiverXml).toStreamSource())
+                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
