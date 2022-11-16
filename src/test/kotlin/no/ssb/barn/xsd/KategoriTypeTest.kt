@@ -10,16 +10,16 @@ import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
 
-class SaksinnholdTypeTest : BehaviorSpec({
+class KategoriTypeTest : BehaviorSpec({
 
-    given("misc SaksinnholdType XML") {
+    given("misc KategoriType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
-                        "<Saksinnhold Kode=\"1\" Presisering=\"~Presisering~\"/>"
+                        "<Kategori Kode=\"1.1\" Presisering=\"~Presisering~\"/>"
                     ).toStreamSource()
                 )
             }
@@ -29,33 +29,35 @@ class SaksinnholdTypeTest : BehaviorSpec({
             /** Kode */
             row(
                 "missing Kode",
-                "<Saksinnhold />",
-                "cvc-complex-type.4: Attribute 'Kode' must appear on element 'Saksinnhold'."
+                "<Kategori />",
+                "cvc-complex-type.4: Attribute 'Kode' must appear on element 'Kategori'."
             ),
             row(
                 "empty Kode",
-                "<Saksinnhold Kode=\"\" />",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
-                        "minLength '1' for type '#AnonType_KodeSaksinnholdType'."
+                "<Melder Kode=\"\" />",
+                "cvc-complex-type.2.4.a: Invalid content was found starting with element 'Melder'. " +
+                        "One of '{JmfrLovhjemmel, Kategori}' is expected."
             ),
             row(
                 "invalid Kode",
-                "<Saksinnhold Kode=\"42\" />",
-                "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration " +
-                        "'[1, 2, 3, 4, 20, 21, 22, 23, 24, 28, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, " +
-                        "25, 26, 27, 18, 19]'. It must be a value from the enumeration."
+                "<Kategori Kode=\"42.42\" />",
+                "cvc-enumeration-valid: Value '42.42' is not facet-valid with respect to enumeration " +
+                        "'[1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, " +
+                        "3.7, 3.8, 3.9, 3.10, 3.99, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.99, 5.1, 5.2, " +
+                        "5.3, 5.4, 5.99, 6.1, 6.2, 6.3, 6.4, 6.99, 7.1, 7.2, 7.3, 7.99, 8.1, 8.2, 8.3, 8.99]'. " +
+                        "It must be a value from the enumeration."
             ),
 
             /** Presisering */
             row(
                 "empty Presisering",
-                "<Saksinnhold Kode=\"1\" Presisering=\"\"/>",
+                "<Kategori Kode=\"1.1\" Presisering=\"\"/>",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect " +
                         "to minLength '1' for type '#AnonType_Presisering'."
             ),
             row(
                 "too long Presisering",
-                "<Saksinnhold Kode=\"1\" Presisering=\"${"a".repeat(301)}\"/>",
+                "<Kategori Kode=\"1.1\" Presisering=\"${"a".repeat(301)}\"/>",
                 "cvc-maxLength-valid: Value '${"a".repeat(301)}' with length = '301' is not facet-valid " +
                         "with respect to maxLength '300' for type '#AnonType_Presisering'."
             )
@@ -73,13 +75,15 @@ class SaksinnholdTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        private fun buildXmlInTest(saksinnholdXml: String): String =
+        private fun buildXmlInTest(kategoriXml: String): String =
             "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33.1077852+01:00\">" +
                     "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"1\"/>" +
                     "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" Kommunenavn=\"~Kommunenavn~\"/>" +
                     "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">" +
-                    "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
-                    saksinnholdXml +
-                    "</Melding></Sak></Barnevern>"
+                    "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                    "StartDato=\"2022-11-14\">" +
+                    "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                    kategoriXml +
+                    "</Tiltak></Sak></Barnevern>"
     }
 }

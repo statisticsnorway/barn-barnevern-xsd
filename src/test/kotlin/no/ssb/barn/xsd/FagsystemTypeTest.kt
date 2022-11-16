@@ -102,7 +102,7 @@ class FagsystemTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildXmlInTest(fagsystemXml: String): String =
+        private fun buildXmlInTest(fagsystemXml: String): String =
             "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33.1077852+01:00\">" +
                     fagsystemXml +
                     "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" />" +
