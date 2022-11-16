@@ -12,7 +12,7 @@ import org.xml.sax.SAXException
 
 class PersonaliaTypeTest : BehaviorSpec({
 
-    given("misc Avgiver XML") {
+    given("misc PersonaliaType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, no exceptions are expected") {
@@ -162,8 +162,7 @@ class PersonaliaTypeTest : BehaviorSpec({
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\" DUFnummer=\"42\" />",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern '\\d{12}' for type " +
                         "'#AnonType_DUFnummerPersonaliaSakType'."
-            ),
-
+            )
         ) { description, avgiverXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
