@@ -97,7 +97,8 @@ Bjorge.Saether@bufdir.no
         <xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
             <xs:annotation>
                 <xs:appinfo>
-                    Dato og tid for uttrekk med tidssone. Eksempler gyldige formater: '2022-06-23T09:30:10Z' (UTC-tid), eller
+                    Dato og tid for uttrekk med tidssone. Eksempler gyldige formater: '2022-06-23T09:30:10Z' (UTC-tid),
+                    eller
                     '2022-06-23T11:30:10+02:00' (dato/tid med offset).
                 </xs:appinfo>
             </xs:annotation>
@@ -935,7 +936,8 @@ Bjorge.Saether@bufdir.no
             <xs:annotation>
                 <xs:documentation>
                     Dato undersøkelse startet.
-                    Samme verdi som for SluttDato i koplet MeldingType hvis konklusjon (i MeldingType) har kode = '2': 'Ikke
+                    Samme verdi som for SluttDato i koplet MeldingType hvis konklusjon (i MeldingType) har kode = '2':
+                    'Ikke
                     henlagt'.
                 </xs:documentation>
             </xs:annotation>
@@ -1208,7 +1210,13 @@ Bjorge.Saether@bufdir.no
     <xs:complexType name="TilsynAnsvarligType">
         <xs:attribute ref="Id" use="required"/>
         <xs:attribute ref="StartDato" use="required"/>
-        <xs:attribute name="Kommunenummer" use="required"/>
+        <xs:attribute name="Kommunenummer" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="\d{4}"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
     <xs:complexType name="TilsynHyppighetType">
         <xs:attribute ref="Id" use="required"/>
