@@ -15,7 +15,7 @@ class SakTypeTest : BehaviorSpec({
     given("misc SakType XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, no exceptions are expected") {
+        `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
