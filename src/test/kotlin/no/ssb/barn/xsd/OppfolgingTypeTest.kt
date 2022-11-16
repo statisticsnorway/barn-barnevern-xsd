@@ -11,17 +11,16 @@ import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
 
-class MeldingTypeTest : BehaviorSpec({
+class OppfolgingTypeTest : BehaviorSpec({
 
-    given("misc MeldingType XML") {
+    given("misc OppfolgingType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildBarnevernXml(
-                        "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                                "StartDato=\"2022-11-14\"/>"
+                    buildXmlInTest(
+                        "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022-11-14\"/>"
                     ).toStreamSource()
                 )
             }
@@ -31,59 +30,44 @@ class MeldingTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Melding StartDato=\"2022-11-14\"/>",
-                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Melding'."
+                "<Oppfolging UtfortDato=\"2022-11-14\"/>",
+                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Oppfolging'."
             ),
             row(
                 "empty Id",
-                "<Melding Id=\"\" StartDato=\"2022-11-14\"/>",
+                "<Oppfolging Id=\"\" UtfortDato=\"2022-11-14\"/>",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
                         "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
                         "for type '#AnonType_Id'."
             ),
             row(
                 "invalid Id",
-                "<Melding Id=\"42\" StartDato=\"2022-11-14\"/>",
+                "<Oppfolging Id=\"42\" UtfortDato=\"2022-11-14\"/>",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
                         "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
                         "for type '#AnonType_Id'."
             ),
 
-            /** MigrertId */
+            /** UtfortDato */
             row(
-                "empty MigrertId",
-                "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" StartDato=\"2022-11-14\"/>",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
-                        "for type '#AnonType_MigrertId'."
+                "missing UtfortDato",
+                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" />",
+                "cvc-complex-type.4: Attribute 'UtfortDato' must appear on element 'Oppfolging'."
             ),
             row(
-                "too long MigrertId",
-                "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"${"a".repeat(37)}\" " +
-                        "StartDato=\"2022-11-14\"/>",
-                "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
-                        "respect to maxLength '36' for type '#AnonType_MigrertId'."
-            ),
-
-            /** StartDato */
-            row(
-                "missing StartDato",
-                "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\"/>",
-                "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'Melding'."
-            ),
-            row(
-                "empty StartDato",
-                "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\"/>",
+                "empty UtfortDato",
+                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"\"/>",
                 "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
             ),
             row(
-                "invalid StartDato",
-                "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\"/>",
+                "invalid UtfortDato",
+                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022\"/>",
                 "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
             )
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -92,4 +76,14 @@ class MeldingTypeTest : BehaviorSpec({
             }
         }
     }
-})
+}) {
+    companion object {
+        private fun buildXmlInTest(oppfolgingXml: String): String = buildBarnevernXml(
+            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+                    "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                    "<Kategori Kode=\"1.1\" />" +
+                    oppfolgingXml +
+                    "</Tiltak>"
+        )
+    }
+}

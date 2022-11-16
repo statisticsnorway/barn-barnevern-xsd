@@ -6,6 +6,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
@@ -17,7 +18,7 @@ class PlanTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidator().validate(buildXmlInTest(
+                getSchemaValidator().validate(buildBarnevernXml(
                     "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
                             "StartDato=\"2022-11-14\" Plantype=\"1\"/>").toStreamSource())
             }
@@ -106,7 +107,7 @@ class PlanTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -115,14 +116,4 @@ class PlanTypeTest : BehaviorSpec({
             }
         }
     }
-}) {
-    companion object {
-        private fun buildXmlInTest(planXml: String): String =
-            "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33.1077852+01:00\">" +
-                    "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"1\"/>" +
-                    "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" Kommunenavn=\"~Kommunenavn~\"/>" +
-                    "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">" +
-                    planXml +
-                    "</Sak></Barnevern>"
-    }
-}
+})
