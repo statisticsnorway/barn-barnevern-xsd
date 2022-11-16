@@ -5,7 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
-import io.kotest.matchers.string.shouldStartWith
+import io.kotest.matchers.shouldBe
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
@@ -26,56 +26,76 @@ class FagsystemTypeTest : BehaviorSpec({
         }
 
         forAll(
+            /** Leverandor */
             row(
                 "missing Leverandor",
-                "<Fagsystem Navn=\"Modulus Barn\" Versjon=\"1\" />"
+                "<Fagsystem Navn=\"Modulus Barn\" Versjon=\"1\" />",
+                "cvc-complex-type.4: Attribute 'Leverandor' must appear on element 'Fagsystem'."
             ),
             row(
                 "empty Leverandor",
-                "<Fagsystem Leverandor=\"\" Navn=\"Modulus Barn\" Versjon=\"1\" />"
+                "<Fagsystem Leverandor=\"\" Navn=\"Modulus Barn\" Versjon=\"1\" />",
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
+                        "minLength '3' for type '#AnonType_LeverandorFagsystemType'."
             ),
             row(
                 "too short Leverandor",
-                "<Fagsystem Leverandor=\"a\" Navn=\"Modulus Barn\" Versjon=\"1\" />"
+                "<Fagsystem Leverandor=\"a\" Navn=\"Modulus Barn\" Versjon=\"1\" />",
+                "cvc-minLength-valid: Value 'a' with length = '1' is not facet-valid with respect to " +
+                        "minLength '3' for type '#AnonType_LeverandorFagsystemType'."
             ),
             row(
                 "too long Leverandor",
-                "<Fagsystem Leverandor=\"${"a".repeat(301)}\" Navn=\"Modulus Barn\" Versjon=\"1\" />"
+                "<Fagsystem Leverandor=\"${"a".repeat(301)}\" Navn=\"Modulus Barn\" Versjon=\"1\" />",
+                "cvc-maxLength-valid: Value '${"a".repeat(301)}' with length = '301' is not facet-valid " +
+                        "with respect to maxLength '300' for type '#AnonType_LeverandorFagsystemType'."
             ),
 
+            /** Navn */
             row(
                 "missing Navn",
-                "<Fagsystem Leverandor=\"Netcompany\" Versjon=\"1\" />"
+                "<Fagsystem Leverandor=\"Netcompany\" Versjon=\"1\" />",
+                "cvc-complex-type.4: Attribute 'Navn' must appear on element 'Fagsystem'."
             ),
             row(
                 "empty Navn",
-                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"\" Versjon=\"1\" />"
+                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"\" Versjon=\"1\" />",
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
+                        "minLength '1' for type '#AnonType_NavnFagsystemType'."
             ),
             row(
                 "too long Navn",
-                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"${"a".repeat(301)}\" Versjon=\"1\" />"
+                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"${"a".repeat(301)}\" Versjon=\"1\" />",
+                "cvc-maxLength-valid: Value '${"a".repeat(301)}' with length = '301' is not facet-valid " +
+                        "with respect to maxLength '300' for type '#AnonType_NavnFagsystemType'."
             ),
 
+            /** Versjon */
             row(
                 "missing Versjon",
-                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" />"
+                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" />",
+                "cvc-complex-type.4: Attribute 'Versjon' must appear on element 'Fagsystem'."
             ),
             row(
                 "empty Versjon",
-                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"\" />"
+                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"\" />",
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
+                        "minLength '1' for type '#AnonType_VersjonFagsystemType'."
             ),
             row(
                 "too long Versjon",
-                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"${"a".repeat(101)}\" />"
+                "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"${"a".repeat(101)}\" />",
+                "cvc-maxLength-valid: Value '${"a".repeat(101)}' with length = '101' is not " +
+                        "facet-valid with respect to maxLength '100' for type '#AnonType_VersjonFagsystemType'."
             )
-        ) { description, fagsystemXml ->
+        ) { description, fagsystemXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildXmlInTest(fagsystemXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
-                    thrown.message shouldStartWith "cvc-"
+                    thrown.message shouldBe expectedError
                 }
             }
         }

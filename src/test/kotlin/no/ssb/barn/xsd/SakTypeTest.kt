@@ -5,7 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
-import io.kotest.matchers.string.shouldStartWith
+import io.kotest.matchers.shouldBe
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
@@ -20,59 +20,146 @@ class SakTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildXmlInTest(
                         "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">"
+                                "MigrertId=\"~MigrertId~\" " +
+                                "StartDato=\"2022-11-14\" " +
+                                "SluttDato=\"2022-11-15\" " +
+                                "Avsluttet=\"true\" " +
+                                "Journalnummer=\"2022-00004\"" +
+                                "/>"
                     ).toStreamSource()
                 )
             }
         }
 
         forAll(
+            /** Id */
             row(
                 "missing Id",
-                "<Sak StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">"
+                "<Sak StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Sak'."
             ),
             row(
                 "empty Id",
-                "<Sak Id=\"\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">"
+                "<Sak Id=\"\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
+                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
+                        "for type '#AnonType_Id'."
             ),
             row(
                 "invalid Id",
-                "<Sak Id=\"42\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">"
+                "<Sak Id=\"42\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
+                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
+                        "for type '#AnonType_Id'."
             ),
             row(
                 "too long Id",
-                "<Sak Id=\"${"a".repeat(37)}\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">"
+                "<Sak Id=\"${"a".repeat(37)}\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "cvc-pattern-valid: Value '${"a".repeat(37)}' is not facet-valid with respect to pattern " +
+                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
+                        "for type '#AnonType_Id'."
             ),
 
+            /** MigrertId */
             row(
                 "empty MigrertId",
                 "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" StartDato=\"2022-11-14\" " +
-                        "Journalnummer=\"2022-00004\">"
+                        "Journalnummer=\"2022-00004\"/>",
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
+                        "for type '#AnonType_MigrertId'."
             ),
             row(
                 "too long MigrertId",
                 "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"${"a".repeat(37)}\" " +
-                        "StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\">"
-            )
-        ) { description, sakStartTag ->
+                        "StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
+                        "respect to maxLength '36' for type '#AnonType_MigrertId'."
+            ),
+
+            /** StartDato */
+            row(
+                "missing StartDato",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" Journalnummer=\"2022-00004\"/>",
+                "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'Sak'."
+            ),
+            row(
+                "empty StartDato",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\" Journalnummer=\"2022-00004\"/>",
+                "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
+            ),
+            row(
+                "invalid StartDato",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\" Journalnummer=\"2022-00004\"/>",
+                "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
+            ),
+
+            /** SluttDato */
+            row(
+                "empty SluttDato",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" SluttDato=\"\" " +
+                        "Journalnummer=\"2022-00004\"/>",
+                "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
+            ),
+            row(
+                "invalid SluttDato",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" SluttDato=\"2022\" " +
+                        "Journalnummer=\"2022-00004\"/>",
+                "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
+            ),
+
+            /** Avsluttet */
+            row(
+                "empty Avsluttet",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Avsluttet=\"\" " +
+                        "Journalnummer=\"2022-00004\"/>",
+                "cvc-datatype-valid.1.2.1: '' is not a valid value for 'boolean'."
+            ),
+            row(
+                "invalid Avsluttet",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Avsluttet=\"True\" " +
+                        "Journalnummer=\"2022-00004\"/>",
+                "cvc-datatype-valid.1.2.1: 'True' is not a valid value for 'boolean'."
+            ),
+
+            /** Journalnummer */
+            row(
+                "missing Journalnummer",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\"/>",
+                "cvc-complex-type.4: Attribute 'Journalnummer' must appear on element 'Sak'."
+            ),
+            row(
+                "empty Journalnummer",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                        "Journalnummer=\"\"/>",
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
+                        "for type '#AnonType_JournalnummerSakType'."
+            ),
+            row(
+                "too long Journalnummer",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                        "Journalnummer=\"${"a".repeat(37)}\"/>",
+                "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
+                        "respect to maxLength '36' for type '#AnonType_JournalnummerSakType'."
+            ),
+        ) { description, sakElement, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(sakStartTag).toStreamSource())
+                    getSchemaValidator().validate(buildXmlInTest(sakElement).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
-                    thrown.message shouldStartWith "cvc-"
+                    thrown.message shouldBe expectedError
                 }
             }
         }
     }
 }) {
     companion object {
-        fun buildXmlInTest(sakStartTag: String): String =
+        fun buildXmlInTest(sakElement: String): String =
             "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33.1077852+01:00\">" +
                     "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"1\" />" +
                     "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" />" +
-                    sakStartTag +
-                    "</Sak></Barnevern>"
+                    sakElement +
+                    "</Barnevern>"
     }
 }
