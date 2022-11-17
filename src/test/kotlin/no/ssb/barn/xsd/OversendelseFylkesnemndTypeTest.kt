@@ -12,16 +12,16 @@ import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
 
-class OppfolgingTypeTest : BehaviorSpec({
+class OversendelseFylkesnemndTypeTest : BehaviorSpec({
 
-    given("misc OppfolgingType XML") {
+    given("misc OversendelseFylkesnemndType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildXmlInTest(
-                        "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022-11-14\"/>"
+                    buildOversendelseFylkesnemndTypeXml(
+                        "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"
                     ).toStreamSource()
                 )
             }
@@ -31,44 +31,44 @@ class OppfolgingTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Oppfolging UtfortDato=\"2022-11-14\"/>",
-                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Oppfolging'."
+                "<OversendelseFylkesnemnd StartDato=\"2022-11-14\">",
+                "cvc-complex-type.4: Attribute 'Id' must appear on element 'OversendelseFylkesnemnd'."
             ),
             row(
                 "empty Id",
-                "<Oppfolging Id=\"\" UtfortDato=\"2022-11-14\"/>",
+                "<OversendelseFylkesnemnd Id=\"\" StartDato=\"2022-11-14\">",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
                         "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
                         "for type '#AnonType_Id'."
             ),
             row(
                 "invalid Id",
-                "<Oppfolging Id=\"42\" UtfortDato=\"2022-11-14\"/>",
+                "<OversendelseFylkesnemnd Id=\"42\" StartDato=\"2022-11-14\">",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
                         "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
                         "for type '#AnonType_Id'."
             ),
 
-            /** UtfortDato */
+            /** StartDato */
             row(
-                "missing UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" />",
-                "cvc-complex-type.4: Attribute 'UtfortDato' must appear on element 'Oppfolging'."
+                "missing StartDato",
+                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\">",
+                "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'OversendelseFylkesnemnd'."
             ),
             row(
-                "empty UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"\"/>",
+                "empty StartDato",
+                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\">",
                 "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
             ),
             row(
-                "invalid UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022\"/>",
+                "invalid StartDato",
+                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\">",
                 "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
-            )
+            ),
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildOversendelseFylkesnemndTypeXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -79,12 +79,8 @@ class OppfolgingTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        private fun buildXmlInTest(oppfolgingXml: String): String = buildBarnevernXml(
-            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
-                    LOVHJEMMEL_XML +
-                    "<Kategori Kode=\"1.1\" />" +
-                    oppfolgingXml +
-                    "</Tiltak>"
+        fun buildOversendelseFylkesnemndTypeXml(elementStart: String): String = buildBarnevernXml(
+            "$elementStart$LOVHJEMMEL_XML</OversendelseFylkesnemnd>"
         )
     }
 }

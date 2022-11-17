@@ -12,16 +12,16 @@ import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
 
-class OppfolgingTypeTest : BehaviorSpec({
+class OversendelsePrivatKravTypeTest : BehaviorSpec({
 
-    given("misc OppfolgingType XML") {
+    given("misc OversendelsePrivatKravType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildXmlInTest(
-                        "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022-11-14\"/>"
+                    buildOversendelsePrivatKravTypeXml(
+                        "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" />"
                     ).toStreamSource()
                 )
             }
@@ -31,44 +31,44 @@ class OppfolgingTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Oppfolging UtfortDato=\"2022-11-14\"/>",
-                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Oppfolging'."
+                "<Krav StartDato=\"2022-11-14\" />",
+                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Krav'."
             ),
             row(
                 "empty Id",
-                "<Oppfolging Id=\"\" UtfortDato=\"2022-11-14\"/>",
+                "<Krav Id=\"\" StartDato=\"2022-11-14\" />",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
                         "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
                         "for type '#AnonType_Id'."
             ),
             row(
                 "invalid Id",
-                "<Oppfolging Id=\"42\" UtfortDato=\"2022-11-14\"/>",
+                "<Krav Id=\"42\" StartDato=\"2022-11-14\" />",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
                         "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
                         "for type '#AnonType_Id'."
             ),
 
-            /** UtfortDato */
+            /** StartDato */
             row(
-                "missing UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" />",
-                "cvc-complex-type.4: Attribute 'UtfortDato' must appear on element 'Oppfolging'."
+                "missing StartDato",
+                "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" />",
+                "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'Krav'."
             ),
             row(
-                "empty UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"\"/>",
+                "empty StartDato",
+                "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\" />",
                 "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
             ),
             row(
-                "invalid UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022\"/>",
+                "invalid StartDato",
+                "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\" />",
                 "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
-            )
+            ),
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildOversendelsePrivatKravTypeXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -79,12 +79,12 @@ class OppfolgingTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        private fun buildXmlInTest(oppfolgingXml: String): String = buildBarnevernXml(
-            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+        fun buildOversendelsePrivatKravTypeXml(innerXml: String): String = buildBarnevernXml(
+            "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
                     LOVHJEMMEL_XML +
-                    "<Kategori Kode=\"1.1\" />" +
-                    oppfolgingXml +
-                    "</Tiltak>"
+                    innerXml +
+                    "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                    "EndretDato=\"2022-11-14\" Kode=\"1\" /></Vedtak>"
         )
     }
 }

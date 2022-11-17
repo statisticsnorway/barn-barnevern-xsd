@@ -10,6 +10,8 @@ fun String.toStreamSource() = StreamSource(StringReader(this))
 object TestUtils {
     fun getResourceAsString(resourceName: String) = this.javaClass.getResource("/$resourceName")!!.readText()
 
+    const val LOVHJEMMEL_XML = "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>"
+
     fun buildBarnevernXml(innerXml: String) =
         "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33.1077852+01:00\">" +
                 "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"1\"/>" +

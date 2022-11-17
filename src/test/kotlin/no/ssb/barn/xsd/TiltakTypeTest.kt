@@ -6,6 +6,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -21,7 +22,7 @@ class TiltakTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(buildBarnevernXml(
                     "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
                             "StartDato=\"2022-11-14\">" +
-                            "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                            LOVHJEMMEL_XML +
                             "<Kategori Kode=\"1.1\"/>" +
                             "</Tiltak>").toStreamSource())
             }
@@ -33,7 +34,7 @@ class TiltakTypeTest : BehaviorSpec({
                 "missing Id",
                 "<Tiltak " +
                         "StartDato=\"2022-11-14\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Tiltak'."
@@ -42,7 +43,7 @@ class TiltakTypeTest : BehaviorSpec({
                 "empty Id",
                 "<Tiltak Id=\"\" " +
                         "StartDato=\"2022-11-14\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
@@ -53,7 +54,7 @@ class TiltakTypeTest : BehaviorSpec({
                 "invalid Id",
                 "<Tiltak Id=\"42\" " +
                         "StartDato=\"2022-11-14\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
@@ -66,7 +67,7 @@ class TiltakTypeTest : BehaviorSpec({
                 "empty MigrertId",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" " +
                         "StartDato=\"2022-11-14\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
@@ -76,7 +77,7 @@ class TiltakTypeTest : BehaviorSpec({
                 "too long MigrertId",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"${"a".repeat(37)}\" " +
                         "StartDato=\"2022-11-14\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
@@ -87,7 +88,7 @@ class TiltakTypeTest : BehaviorSpec({
             row(
                 "missing StartDato",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'Tiltak'."
@@ -96,7 +97,7 @@ class TiltakTypeTest : BehaviorSpec({
                 "empty StartDato",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
                         "StartDato=\"\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
@@ -105,7 +106,7 @@ class TiltakTypeTest : BehaviorSpec({
                 "invalid StartDato",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
                         "StartDato=\"2022\">" +
-                        "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>" +
+                        LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
                 "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
