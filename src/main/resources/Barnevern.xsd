@@ -369,7 +369,7 @@ Bjorge.Saether@bufdir.no
         <xs:sequence>
             <xs:element name="Evaluering" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
-                    <xs:attribute name="UtfortDato" use="required"/>
+                    <xs:attribute name="UtfortDato" type="xs:date" use="required"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="Konklusjon" minOccurs="0">
