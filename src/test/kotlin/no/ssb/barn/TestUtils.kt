@@ -12,6 +12,16 @@ object TestUtils {
 
     const val LOVHJEMMEL_XML = "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>"
 
+    const val EMPTY_DATE_ERROR = "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
+    const val INVALID_DATE_ERROR = "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
+
+    const val EMPTY_ID_ERROR = "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
+            "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
+            "for type '#AnonType_Id'."
+    const val INVALID_ID_ERROR = "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
+            "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
+            "for type '#AnonType_Id'."
+
     fun buildBarnevernXml(innerXml: String) =
         "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33.1077852+01:00\">" +
                 "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"1\"/>" +

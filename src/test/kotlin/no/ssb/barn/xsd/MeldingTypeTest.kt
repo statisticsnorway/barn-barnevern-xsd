@@ -6,6 +6,10 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
+import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -37,16 +41,12 @@ class MeldingTypeTest : BehaviorSpec({
             row(
                 "empty Id",
                 "<Melding Id=\"\" StartDato=\"2022-11-14\"/>",
-                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
-                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
-                        "for type '#AnonType_Id'."
+                EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
                 "<Melding Id=\"42\" StartDato=\"2022-11-14\"/>",
-                "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
-                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
-                        "for type '#AnonType_Id'."
+                INVALID_ID_ERROR
             ),
 
             /** MigrertId */
@@ -73,12 +73,12 @@ class MeldingTypeTest : BehaviorSpec({
             row(
                 "empty StartDato",
                 "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\"/>",
-                "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
+                EMPTY_DATE_ERROR
             ),
             row(
                 "invalid StartDato",
                 "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\"/>",
-                "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
+                INVALID_DATE_ERROR
             )
         ) { description, partialXml, expectedError ->
             `when`(description) {

@@ -16,16 +16,16 @@ import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
 
-class OversendelseFylkesnemndTypeTest : BehaviorSpec({
+class VedtakTypeTest : BehaviorSpec({
 
-    given("misc OversendelseFylkesnemndType XML") {
+    given("misc VedtakType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildOversendelseFylkesnemndTypeXml(
-                        "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"
+                    buildVedtakTypeXml(
+                        "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"
                     ).toStreamSource()
                 )
             }
@@ -35,40 +35,40 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<OversendelseFylkesnemnd StartDato=\"2022-11-14\">",
-                "cvc-complex-type.4: Attribute 'Id' must appear on element 'OversendelseFylkesnemnd'."
+                "<Vedtak StartDato=\"2022-11-14\">",
+                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Vedtak'."
             ),
             row(
                 "empty Id",
-                "<OversendelseFylkesnemnd Id=\"\" StartDato=\"2022-11-14\">",
+                "<Vedtak Id=\"\" StartDato=\"2022-11-14\">",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<OversendelseFylkesnemnd Id=\"42\" StartDato=\"2022-11-14\">",
+                "<Vedtak Id=\"42\" StartDato=\"2022-11-14\">",
                 INVALID_ID_ERROR
             ),
 
             /** StartDato */
             row(
                 "missing StartDato",
-                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\">",
-                "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'OversendelseFylkesnemnd'."
+                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\">",
+                "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'Vedtak'."
             ),
             row(
                 "empty StartDato",
-                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\">",
+                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\">",
                 EMPTY_DATE_ERROR
             ),
             row(
                 "invalid StartDato",
-                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\">",
+                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\">",
                 INVALID_DATE_ERROR
             ),
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildOversendelseFylkesnemndTypeXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildVedtakTypeXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -79,8 +79,11 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildOversendelseFylkesnemndTypeXml(elementStart: String): String = buildBarnevernXml(
-            "$elementStart$LOVHJEMMEL_XML</OversendelseFylkesnemnd>"
+        fun buildVedtakTypeXml(vedtakStartTag: String): String = buildBarnevernXml(
+            vedtakStartTag +
+                    LOVHJEMMEL_XML +
+                    "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                    "EndretDato=\"2022-11-14\" Kode=\"1\" /></Vedtak>"
         )
     }
 }
