@@ -95,7 +95,7 @@ class TiltakTypeTest : BehaviorSpec({
             ),
             row(
                 "empty StartDato",
-                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
+                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "StartDato=\"\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
@@ -104,7 +104,7 @@ class TiltakTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid StartDato",
-                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
+                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "StartDato=\"2022\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
