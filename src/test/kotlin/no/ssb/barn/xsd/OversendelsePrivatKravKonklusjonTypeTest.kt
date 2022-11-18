@@ -14,15 +14,15 @@ import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
 
-class VedtakKonklusjonTypeTest : BehaviorSpec({
+class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc VedtakKonklusjonType XML") {
+    given("misc OversendelsePrivatKravKonklusjonType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expected no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildVedtakKonklusjonXml(
+                    buildKonklusjonXml(
                         "<Konklusjon SluttDato=\"2022-11-14\" />"
                     ).toStreamSource()
                 )
@@ -49,7 +49,7 @@ class VedtakKonklusjonTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildVedtakKonklusjonXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildKonklusjonXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -60,12 +60,14 @@ class VedtakKonklusjonTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildVedtakKonklusjonXml(vedtakKonklusjonXml: String): String = buildBarnevernXml(
+        fun buildKonklusjonXml(innerXml: String): String = buildBarnevernXml(
             "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
                     LOVHJEMMEL_XML +
-                    "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" Kode=\"1\" />" +
-                    vedtakKonklusjonXml +
-                    "</Vedtak>"
+                    "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+                    innerXml +
+                    "</Krav>" +
+                    "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                    "EndretDato=\"2022-11-14\" Kode=\"1\" /></Vedtak>"
         )
     }
 }

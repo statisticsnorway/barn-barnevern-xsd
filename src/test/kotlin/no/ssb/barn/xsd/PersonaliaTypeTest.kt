@@ -56,14 +56,6 @@ class PersonaliaTypeTest : BehaviorSpec({
                         "Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 INVALID_ID_ERROR
             ),
-            row(
-                "too long Id",
-                "<Personalia Id=\"${"a".repeat(37)}\" StartDato=\"2022-11-14\" Fodselsnummer=\"01012199999\" " +
-                        "Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
-                "cvc-pattern-valid: Value '${"a".repeat(37)}' is not facet-valid with respect to pattern " +
-                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
-                        "for type '#AnonType_Id'."
-            ),
 
             /** StartDato */
             row(
