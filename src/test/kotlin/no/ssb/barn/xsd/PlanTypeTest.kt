@@ -20,7 +20,7 @@ class PlanTypeTest : BehaviorSpec({
     given("misc PlanType XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expected no exceptions") {
+        `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(buildBarnevernXml(
                     "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +

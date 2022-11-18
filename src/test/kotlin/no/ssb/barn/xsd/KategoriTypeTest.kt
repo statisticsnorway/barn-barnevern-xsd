@@ -17,7 +17,7 @@ class KategoriTypeTest : BehaviorSpec({
     given("misc KategoriType XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expected no exceptions") {
+        `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(

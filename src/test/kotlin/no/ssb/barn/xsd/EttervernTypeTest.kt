@@ -20,7 +20,7 @@ class EttervernTypeTest : BehaviorSpec({
     given("misc EttervernType XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expected no exceptions") {
+        `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildBarnevernXml(
