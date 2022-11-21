@@ -19,7 +19,7 @@ class AvgiverTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
-                        "<Avgiver Organisasjonsnummer=\"111111111\" " +
+                        "<Avgiver Organisasjonsnummer=\"999999999\" " +
                                 "Kommunenummer=\"1234\" Kommunenavn=\"~Kommunenavn~\" />"
                     ).toStreamSource()
                 )
@@ -49,18 +49,18 @@ class AvgiverTypeTest : BehaviorSpec({
             /** Kommunenummer */
             row(
                 "missing Kommunenummer",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenavn=\"En kommune\" />",
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenavn=\"En kommune\" />",
                 "cvc-complex-type.4: Attribute 'Kommunenummer' must appear on element 'Avgiver'."
             ),
             row(
                 "empty Kommunenummer",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"\" Kommunenavn=\"En kommune\" />",
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"\" Kommunenavn=\"En kommune\" />",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d{4}' for " +
                         "type '#AnonType_KommunenummerAvgiverType'."
             ),
             row(
                 "invalid Kommunenummer",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"42\" Kommunenavn=\"En kommune\" />",
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"42\" Kommunenavn=\"En kommune\" />",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern '\\d{4}' for " +
                         "type '#AnonType_KommunenummerAvgiverType'."
             ),
@@ -68,18 +68,18 @@ class AvgiverTypeTest : BehaviorSpec({
             /** Kommunenavn */
             row(
                 "missing Kommunenavn",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" />",
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" />",
                 "cvc-complex-type.4: Attribute 'Kommunenavn' must appear on element 'Avgiver'."
             ),
             row(
                 "empty Kommunenavn",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" Kommunenavn=\"\" />",
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"\" />",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
                         "minLength '1' for type '#AnonType_KommunenavnAvgiverType'."
             ),
             row(
                 "too long Kommunenavn",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" " +
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" " +
                         "Kommunenavn=\"${"a".repeat(251)}\" />",
                 "cvc-maxLength-valid: Value '${"a".repeat(251)}' with length = '251' is not facet-valid " +
                         "with respect to maxLength '250' for type '#AnonType_KommunenavnAvgiverType'."
@@ -88,30 +88,30 @@ class AvgiverTypeTest : BehaviorSpec({
             /** Bydelsnummer */
             row(
                 "empty Bydelsnummer",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
                         "Bydelsnummer=\"\" Bydelsnavn=\"Bydel\" />",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d{2}' for " +
                         "type '#AnonType_BydelsnummerAvgiverType'."
             ),
             row(
                 "too long Bydelsnummer",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
-                        "Bydelsnummer=\"${"b".repeat(5)}\" Bydelsnavn=\"Bydel\" />",
-                "cvc-pattern-valid: Value 'bbbbb' is not facet-valid with respect to pattern '\\d{2}' for " +
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
+                        "Bydelsnummer=\"11111\" Bydelsnavn=\"Bydel\" />",
+                "cvc-pattern-valid: Value '11111' is not facet-valid with respect to pattern '\\d{2}' for " +
                         "type '#AnonType_BydelsnummerAvgiverType'."
             ),
 
             /** Bydelsnavn */
             row(
                 "empty Bydelsnavn",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
                         "Bydelsnummer=\"11\" Bydelsnavn=\"\" />",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
                         "minLength '1' for type '#AnonType_BydelsnavnAvgiverType'."
             ),
             row(
                 "too long Bydelsnavn",
-                "<Avgiver Organisasjonsnummer=\"111111111\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
+                "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\" " +
                         "Bydelsnummer=\"11\" Bydelsnavn=\"${"b".repeat(251)}\" />",
                 "cvc-maxLength-valid: Value '${"b".repeat(251)}' with length = '251' is not " +
                         "facet-valid with respect to maxLength '250' for type '#AnonType_BydelsnavnAvgiverType'."

@@ -24,7 +24,7 @@ class OversendelsePrivatKravTypeTest : BehaviorSpec({
         `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildOversendelsePrivatKravTypeXml(
+                    buildOversendelsePrivatKravXml(
                         "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" />"
                     ).toStreamSource()
                 )
@@ -68,7 +68,7 @@ class OversendelsePrivatKravTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildOversendelsePrivatKravTypeXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildOversendelsePrivatKravXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -79,7 +79,7 @@ class OversendelsePrivatKravTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildOversendelsePrivatKravTypeXml(innerXml: String): String = buildBarnevernXml(
+        private fun buildOversendelsePrivatKravXml(innerXml: String): String = buildBarnevernXml(
             "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
                     LOVHJEMMEL_XML +
                     innerXml +

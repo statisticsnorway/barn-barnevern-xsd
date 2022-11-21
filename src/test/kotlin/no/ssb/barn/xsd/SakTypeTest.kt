@@ -52,13 +52,6 @@ class SakTypeTest : BehaviorSpec({
                 "<Sak Id=\"42\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
                 INVALID_ID_ERROR
             ),
-            row(
-                "too long Id",
-                "<Sak Id=\"${"a".repeat(37)}\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
-                "cvc-pattern-valid: Value '${"a".repeat(37)}' is not facet-valid with respect to pattern " +
-                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
-                        "for type '#AnonType_Id'."
-            ),
 
             /** MigrertId */
             row(

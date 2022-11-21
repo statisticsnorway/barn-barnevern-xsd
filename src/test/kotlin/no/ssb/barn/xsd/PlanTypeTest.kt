@@ -45,13 +45,6 @@ class PlanTypeTest : BehaviorSpec({
                 "<Plan Id=\"42\" StartDato=\"2022-11-14\" Plantype=\"1\" />",
                 INVALID_ID_ERROR
             ),
-            row(
-                "too long Id",
-                "<Plan Id=\"${"a".repeat(37)}\" StartDato=\"2022-11-14\" Plantype=\"1\" />",
-                "cvc-pattern-valid: Value '${"a".repeat(37)}' is not facet-valid with respect to pattern " +
-                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
-                        "for type '#AnonType_Id'."
-            ),
 
             /** MigrertId */
             row(

@@ -60,7 +60,7 @@ class TiltakKonklusjonTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildKonklusjonXml(innerXml: String): String = buildBarnevernXml(
+        private fun buildKonklusjonXml(innerXml: String): String = buildBarnevernXml(
             "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                     "StartDato=\"2022-11-14\">" +
                     LOVHJEMMEL_XML +

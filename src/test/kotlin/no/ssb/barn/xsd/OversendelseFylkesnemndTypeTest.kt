@@ -24,8 +24,9 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
         `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildOversendelseFylkesnemndTypeXml(
-                        "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"
+                    buildOversendelseFylkesnemndXml(
+                        "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                                "StartDato=\"2022-11-14\">"
                     ).toStreamSource()
                 )
             }
@@ -68,7 +69,7 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildOversendelseFylkesnemndTypeXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildOversendelseFylkesnemndXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -79,7 +80,7 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildOversendelseFylkesnemndTypeXml(elementStart: String): String = buildBarnevernXml(
+        private fun buildOversendelseFylkesnemndXml(elementStart: String): String = buildBarnevernXml(
             "$elementStart$LOVHJEMMEL_XML</OversendelseFylkesnemnd>"
         )
     }

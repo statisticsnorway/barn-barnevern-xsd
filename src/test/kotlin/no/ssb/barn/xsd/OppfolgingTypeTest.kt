@@ -25,7 +25,8 @@ class OppfolgingTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
-                        "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022-11-14\"/>"
+                        "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                                "UtfortDato=\"2022-11-14\"/>"
                     ).toStreamSource()
                 )
             }

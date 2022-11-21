@@ -23,9 +23,13 @@ class FlyttingTypeTest : BehaviorSpec({
         `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildFlyttingXml(
+                    buildBarnevernXml(
                         "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                                "SluttDato=\"2022-11-14\">"
+                                "SluttDato=\"2022-11-14\">" +
+                                "<ArsakFra Kode=\"1.1.1\" />" +
+                                "<FlyttingTil Kode=\"1\" />" +
+                                "</Flytting>"
+
                     ).toStreamSource()
                 )
             }
@@ -92,13 +96,4 @@ class FlyttingTypeTest : BehaviorSpec({
             }
         }
     }
-}) {
-    companion object {
-        fun buildFlyttingXml(flyttingStartTag: String): String = buildBarnevernXml(
-            flyttingStartTag +
-                    "<ArsakFra Kode=\"1.1.1\" />" +
-                    "<FlyttingTil Kode=\"1\" />" +
-                    "</Flytting>"
-        )
-    }
-}
+})

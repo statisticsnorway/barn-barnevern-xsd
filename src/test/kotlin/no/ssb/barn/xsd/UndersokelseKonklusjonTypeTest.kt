@@ -13,16 +13,17 @@ import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
 
-class EttervernKonklusjonTypeTest : BehaviorSpec({
+class UndersokelseKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc EttervernKonklusjonType XML") {
+    given("misc UndersokelseKonklusjonType XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildEttervernKonklusjonTypeXml(
-                        "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" />"
+                    buildUndersokelseXml(
+                        "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" " +
+                                "Presisering=\"~Presisering~\" />"
                     ).toStreamSource()
                 )
             }
@@ -32,7 +33,7 @@ class EttervernKonklusjonTypeTest : BehaviorSpec({
             /** SluttDato */
             row(
                 "missing SluttDato",
-                "<Konklusjon Kode=\"1\" />",
+                "<Konklusjon  Kode=\"1\" />",
                 "cvc-complex-type.4: Attribute 'SluttDato' must appear on element 'Konklusjon'."
             ),
             row(
@@ -55,19 +56,33 @@ class EttervernKonklusjonTypeTest : BehaviorSpec({
             row(
                 "empty Kode",
                 "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"\" />",
-                "cvc-length-valid: Value '' with length = '0' is not facet-valid with respect to length '1' " +
-                        "for type '#AnonType_KodeKonklusjonEttervernType'."
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
+                        "minLength '1' for type '#AnonType_KodeKonklusjonUndersokelseType'."
             ),
             row(
                 "invalid Kode",
                 "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"42\" />",
-                "cvc-length-valid: Value '42' with length = '2' is not facet-valid with respect to length '1' " +
-                        "for type '#AnonType_KodeKonklusjonEttervernType'."
+                "cvc-maxLength-valid: Value '42' with length = '2' is not facet-valid with respect to " +
+                        "maxLength '1' for type '#AnonType_KodeKonklusjonUndersokelseType'."
+            ),
+
+            /** Presisering */
+            row(
+                "empty Presisering",
+                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" Presisering=\"\" />",
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
+                        "minLength '1' for type '#AnonType_Presisering'."
+            ),
+            row(
+                "too long Presisering",
+                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" Presisering=\"${"a".repeat(301)}\" />",
+                "cvc-maxLength-valid: Value '${"a".repeat(301)}' with length = '301' is not facet-valid " +
+                        "with respect to maxLength '300' for type '#AnonType_Presisering'."
             )
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildEttervernKonklusjonTypeXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildUndersokelseXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -78,9 +93,10 @@ class EttervernKonklusjonTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        private fun buildEttervernKonklusjonTypeXml(konklusjonXml: String): String = buildBarnevernXml(
-            "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"2022-11-14\">" +
-                    konklusjonXml + "</Ettervern>"
+        private fun buildUndersokelseXml(undersokelseKonklusjonXml: String): String = buildBarnevernXml(
+            "<Undersokelse Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+                    undersokelseKonklusjonXml +
+                    "</Undersokelse>"
         )
     }
 }

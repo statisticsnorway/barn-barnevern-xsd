@@ -24,8 +24,9 @@ class VedtakStatusTypeTest : BehaviorSpec({
         `when`("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
-                    buildVedtakStatusTypeXml(
-                        "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" Kode=\"1\" />"
+                    buildVedtakXml(
+                        "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                                "EndretDato=\"2022-11-14\" Kode=\"1\" />"
                     ).toStreamSource()
                 )
             }
@@ -87,7 +88,7 @@ class VedtakStatusTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             `when`(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildVedtakStatusTypeXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildVedtakXml(partialXml).toStreamSource())
                 }
 
                 then("thrown should be as expected") {
@@ -98,7 +99,7 @@ class VedtakStatusTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildVedtakStatusTypeXml(vedtakStatusXml: String): String = buildBarnevernXml(
+        private fun buildVedtakXml(vedtakStatusXml: String): String = buildBarnevernXml(
             "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
                     LOVHJEMMEL_XML + vedtakStatusXml + "</Vedtak>"
         )

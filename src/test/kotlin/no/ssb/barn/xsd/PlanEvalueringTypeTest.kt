@@ -59,7 +59,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        fun buildEvalueringXml(innerXml: String): String = buildBarnevernXml(
+        private fun buildEvalueringXml(innerXml: String): String = buildBarnevernXml(
             "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                     "StartDato=\"2022-11-14\" Plantype=\"1\">" +
                     innerXml +
