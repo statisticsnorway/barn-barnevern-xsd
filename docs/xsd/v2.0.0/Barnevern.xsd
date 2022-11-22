@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2.0.0">
     <!-- ATTRIBUTTER -->
     <xs:attribute name="Id">
         <xs:annotation>
@@ -184,7 +184,7 @@ Bjorge.Saether@bufdir.no
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="Bydelsnummer" use="optional">
+        <xs:attribute name="Bydelsnummer">
             <xs:annotation>
                 <xs:documentation>2-sifret bydelsnummer for bydelen, brukes av f.eks. Oslo</xs:documentation>
             </xs:annotation>
@@ -273,7 +273,7 @@ Bjorge.Saether@bufdir.no
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
-                    <xs:attribute name="DUFnummer" use="optional">
+                    <xs:attribute name="DUFnummer">
                         <xs:annotation>
                             <xs:documentation>DUF-nummer (https://www.udi.no/ord-og-begreper/duf-nummer/)</xs:documentation>
                         </xs:annotation>
@@ -329,7 +329,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute ref="MigrertId" use="optional"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required"/>
         <xs:attribute ref="SluttDato"/>
         <xs:attribute name="Journalnummer" use="required">
@@ -368,7 +368,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute ref="MigrertId" use="optional"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
                 <xs:documentation>
@@ -468,7 +468,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute ref="MigrertId" use="optional"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
                 <xs:documentation>
@@ -506,7 +506,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute ref="MigrertId" use="optional"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
                 <xs:documentation>
@@ -847,7 +847,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute ref="MigrertId" use="optional"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
                 <xs:documentation>
@@ -1328,40 +1328,6 @@ Bjorge.Saether@bufdir.no
             <xs:enumeration value="Relasjon"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:complexType name="VirksomhetType">
-        <xs:annotation>
-            <xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
-        </xs:annotation>
-        <xs:sequence/>
-        <xs:attribute ref="StartDato" use="required"/>
-        <xs:attribute ref="SluttDato" use="optional">
-            <xs:annotation>
-                <xs:documentation>
-                    Konklusjonsdato for saken hos barnevernstjenesten i enten en bydel eller kommune (hvis man ikke har bydeler)
-                </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name="Organisasjonsnummer" use="required">
-            <xs:annotation>
-                <xs:documentation>Orgnr til den virksomheten som er utførende. For kommuner som  har bydeler er det bydelens orgnr, ellers benytte kommunens orgnr.</xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:minLength value="9"/>
-                    <xs:maxLength value="9"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="Distriktsnummer">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:minLength value="2"/>
-                    <xs:maxLength value="3"/>
-                    <xs:pattern value="\d{2,3}"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-    </xs:complexType>
     <xs:complexType name="RelasjonType">
         <xs:annotation>
             <xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
