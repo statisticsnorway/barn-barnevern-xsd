@@ -12,7 +12,7 @@ import org.xml.sax.SAXException
 
 class FagsystemTypeTest : BehaviorSpec({
 
-    given("misc FagsystemType XML") {
+    given("misc Fagsystem XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

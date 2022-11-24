@@ -13,7 +13,7 @@ import org.xml.sax.SAXException
 
 class FlyttingTilTypeTest : BehaviorSpec({
 
-    given("misc FlyttingTilType XML") {
+    given("misc FlyttingTil XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

@@ -15,7 +15,7 @@ import org.xml.sax.SAXException
 
 class RelasjonTypeTest : BehaviorSpec({
 
-    given("misc RelasjonType XML") {
+    given("misc Relasjon XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

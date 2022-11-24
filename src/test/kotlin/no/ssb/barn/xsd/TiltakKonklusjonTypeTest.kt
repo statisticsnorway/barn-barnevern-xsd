@@ -16,7 +16,7 @@ import org.xml.sax.SAXException
 
 class TiltakKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc TiltakKonklusjonType XML") {
+    given("misc TiltakKonklusjon XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

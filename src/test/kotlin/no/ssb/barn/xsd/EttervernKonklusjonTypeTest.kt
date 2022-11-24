@@ -15,7 +15,7 @@ import org.xml.sax.SAXException
 
 class EttervernKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc EttervernKonklusjonType XML") {
+    given("misc EttervernKonklusjon XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

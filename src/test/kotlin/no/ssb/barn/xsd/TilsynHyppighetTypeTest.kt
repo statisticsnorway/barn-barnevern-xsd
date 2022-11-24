@@ -18,7 +18,7 @@ import org.xml.sax.SAXException
 
 class TilsynHyppighetTypeTest : BehaviorSpec({
 
-    given("misc TilsynHyppighetType XML") {
+    given("misc TilsynHyppighet XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

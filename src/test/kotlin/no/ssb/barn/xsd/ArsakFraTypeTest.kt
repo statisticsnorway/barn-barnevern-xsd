@@ -13,7 +13,7 @@ import org.xml.sax.SAXException
 
 class ArsakFraTypeTest : BehaviorSpec({
 
-    given("misc ArsakFraType XML") {
+    given("misc ArsakFra XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

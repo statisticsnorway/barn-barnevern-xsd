@@ -14,7 +14,7 @@ import org.xml.sax.SAXException
 
 class KategoriTypeTest : BehaviorSpec({
 
-    given("misc KategoriType XML") {
+    given("misc Kategori XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

@@ -15,7 +15,7 @@ import org.xml.sax.SAXException
 
 class MeldingKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc MeldingKonklusjonType XML") {
+    given("misc MeldingKonklusjon XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

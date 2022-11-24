@@ -17,7 +17,7 @@ import org.xml.sax.SAXException
 
 class PersonaliaTypeTest : BehaviorSpec({
 
-    given("misc PersonaliaType XML") {
+    given("misc Personalia XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

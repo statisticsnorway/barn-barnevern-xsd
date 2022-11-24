@@ -18,7 +18,7 @@ import org.xml.sax.SAXException
 
 class OppfolgingTypeTest : BehaviorSpec({
 
-    given("misc OppfolgingType XML") {
+    given("misc Oppfolging XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

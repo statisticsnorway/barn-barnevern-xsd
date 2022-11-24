@@ -18,7 +18,7 @@ import org.xml.sax.SAXException
 
 class OversendelsePrivatKravTypeTest : BehaviorSpec({
 
-    given("misc OversendelsePrivatKravType XML") {
+    given("misc OversendelsePrivatKrav XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

@@ -12,7 +12,7 @@ import org.xml.sax.SAXException
 
 class AvgiverTypeTest : BehaviorSpec({
 
-    given("misc AvgiverType XML") {
+    given("misc Avgiver XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

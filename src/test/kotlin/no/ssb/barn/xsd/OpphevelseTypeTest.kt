@@ -14,7 +14,7 @@ import org.xml.sax.SAXException
 
 class OpphevelseTypeTest : BehaviorSpec({
 
-    given("misc OpphevelseType XML") {
+    given("misc Opphevelse XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

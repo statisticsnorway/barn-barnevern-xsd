@@ -18,7 +18,7 @@ import org.xml.sax.SAXException
 
 class VedtakStatusTypeTest : BehaviorSpec({
 
-    given("misc VedtakStatusType XML") {
+    given("misc VedtakStatus XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

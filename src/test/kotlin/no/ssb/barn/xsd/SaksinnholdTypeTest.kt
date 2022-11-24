@@ -13,7 +13,7 @@ import org.xml.sax.SAXException
 
 class SaksinnholdTypeTest : BehaviorSpec({
 
-    given("misc SaksinnholdType XML") {
+    given("misc Saksinnhold XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

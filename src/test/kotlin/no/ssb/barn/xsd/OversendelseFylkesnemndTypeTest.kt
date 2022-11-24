@@ -18,7 +18,7 @@ import org.xml.sax.SAXException
 
 class OversendelseFylkesnemndTypeTest : BehaviorSpec({
 
-    given("misc OversendelseFylkesnemndType XML") {
+    given("misc OversendelseFylkesnemnd XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

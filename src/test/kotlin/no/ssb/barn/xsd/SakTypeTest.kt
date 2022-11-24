@@ -16,7 +16,7 @@ import org.xml.sax.SAXException
 
 class SakTypeTest : BehaviorSpec({
 
-    given("misc SakType XML") {
+    given("misc Sak XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {

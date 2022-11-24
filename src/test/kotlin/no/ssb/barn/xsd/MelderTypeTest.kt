@@ -13,7 +13,7 @@ import org.xml.sax.SAXException
 
 class MelderTypeTest : BehaviorSpec({
 
-    given("misc MelderType XML") {
+    given("misc Melder XML") {
 
         /** make sure it's possible to make a valid test XML */
         `when`("valid XML, expect no exceptions") {
