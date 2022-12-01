@@ -104,7 +104,7 @@ Bjorge.Saether@bufdir.no
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:dateTime">
-                    <xs:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,8})?(Z|[+-]\d{2}:\d{2})" />
+                    <xs:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,9})?(Z|[+-]\d{2}:\d{2})" />
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
