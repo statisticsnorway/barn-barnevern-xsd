@@ -21,8 +21,8 @@ class BarnevernTypeTest : BehaviorSpec({
         forAll(
             row("zone offset = +01:00", "2022-11-14T15:13:33+01:00"),
             row("zone offset = Z", "2022-11-14T15:13:33Z"),
-            row("decimals and zone offset = +01:00", "2022-11-14T15:13:33.12345678+01:00"),
-            row("decimals and zone offset = Z", "2022-11-14T15:13:33.12345678Z"),
+            row("decimals and zone offset = +01:00", "2022-11-14T15:13:33.123456789+01:00"),
+            row("decimals and zone offset = Z", "2022-11-14T15:13:33.123456789Z"),
         ) { description, dateTimeString ->
             `when`(description) {
                 shouldNotThrowAny {
@@ -83,21 +83,21 @@ class BarnevernTypeTest : BehaviorSpec({
                 "empty DatoUttrekk",
                 "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"\">",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
-                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,8})?(Z|[+-]\\d{2}:\\d{2})' " +
+                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,9})?(Z|[+-]\\d{2}:\\d{2})' " +
                         "for type '#AnonType_DatoUttrekkBarnevernType'."
             ),
             row(
                 "invalid DatoUttrekk",
                 "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022\">",
                 "cvc-pattern-valid: Value '2022' is not facet-valid with respect to pattern " +
-                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,8})?(Z|[+-]\\d{2}:\\d{2})' " +
+                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,9})?(Z|[+-]\\d{2}:\\d{2})' " +
                         "for type '#AnonType_DatoUttrekkBarnevernType'."
             ),
             row(
                 "invalid DatoUttrekk, zone is missing",
                 "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33\">",
                 "cvc-pattern-valid: Value '2022-11-14T15:13:33' is not facet-valid with respect to pattern " +
-                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,8})?(Z|[+-]\\d{2}:\\d{2})' " +
+                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,9})?(Z|[+-]\\d{2}:\\d{2})' " +
                         "for type '#AnonType_DatoUttrekkBarnevernType'."
             )
         ) { description, sakElement, expectedError ->
