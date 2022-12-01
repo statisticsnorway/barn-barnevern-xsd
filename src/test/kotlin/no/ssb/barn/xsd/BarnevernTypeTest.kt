@@ -17,15 +17,23 @@ class BarnevernTypeTest : BehaviorSpec({
     given("misc Barnevern XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
-            shouldNotThrowAny {
-                getSchemaValidator().validate(
-                    buildXmlInTest(
-                        "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" " +
-                                "ForrigeId=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" " +
-                                "DatoUttrekk=\"2022-11-14T15:13:33+01:00\">"
-                    ).toStreamSource()
-                )
+
+        forAll(
+            row("zone offset = +01:00", "2022-11-14T15:13:33+01:00"),
+            row("zone offset = Z", "2022-11-14T15:13:33Z"),
+            row("decimals and zone offset = +01:00", "2022-11-14T15:13:33.12345678+01:00"),
+            row("decimals and zone offset = Z", "2022-11-14T15:13:33.12345678Z"),
+        ) { description, dateTimeString ->
+            `when`(description) {
+                shouldNotThrowAny {
+                    getSchemaValidator().validate(
+                        buildXmlInTest(
+                            "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" " +
+                                    "ForrigeId=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" " +
+                                    "DatoUttrekk=\"$dateTimeString\">"
+                        ).toStreamSource()
+                    )
+                }
             }
         }
 
@@ -74,12 +82,23 @@ class BarnevernTypeTest : BehaviorSpec({
             row(
                 "empty DatoUttrekk",
                 "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"\">",
-                "cvc-datatype-valid.1.2.1: '' is not a valid value for 'dateTime'."
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
+                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,8})?(Z|[+-]\\d{2}:\\d{2})' " +
+                        "for type '#AnonType_DatoUttrekkBarnevernType'."
             ),
             row(
                 "invalid DatoUttrekk",
                 "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022\">",
-                "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'dateTime'."
+                "cvc-pattern-valid: Value '2022' is not facet-valid with respect to pattern " +
+                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,8})?(Z|[+-]\\d{2}:\\d{2})' " +
+                        "for type '#AnonType_DatoUttrekkBarnevernType'."
+            ),
+            row(
+                "invalid DatoUttrekk, zone is missing",
+                "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33\">",
+                "cvc-pattern-valid: Value '2022-11-14T15:13:33' is not facet-valid with respect to pattern " +
+                        "'\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,8})?(Z|[+-]\\d{2}:\\d{2})' " +
+                        "for type '#AnonType_DatoUttrekkBarnevernType'."
             )
         ) { description, sakElement, expectedError ->
             `when`(description) {

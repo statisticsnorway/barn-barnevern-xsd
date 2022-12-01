@@ -94,7 +94,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
+        <xs:attribute name="DatoUttrekk" use="required">
             <xs:annotation>
                 <xs:appinfo>
                     Dato og tid for uttrekk med tidssone. Eksempler gyldige formater: '2022-06-23T09:30:10Z' (UTC-tid),
@@ -102,6 +102,11 @@ Bjorge.Saether@bufdir.no
                     '2022-06-23T11:30:10+02:00' (dato/tid med offset).
                 </xs:appinfo>
             </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:dateTime">
+                    <xs:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,8})?(Z|[+-]\d{2}:\d{2})" />
+                </xs:restriction>
+            </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="ForrigeId">
             <xs:annotation>
