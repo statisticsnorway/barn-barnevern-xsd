@@ -3,6 +3,20 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.2.1.0
+Endringsdato: 02. desember 2022
+
+## Struktur
+- /@versjon oppdatert til 2.1.0
+- /Barnevern/Sak/Vedtak
+  - Lagt til attributten @MigrertId
+- /Barnevern/Sak/Vedtak/Krav
+  - Lagt til attributtene @Kode og @Presisering
+- /Barnevern/Sak/Ettervern
+  - Lagt til attributten @MigrertId
+- /Barnevern/Sak/OversendelseFylkesnemnd
+  - Lagt til attributten @MigrertId
+---
 # v.2.0.0
 Endringsdato: 26. august 2022
 
