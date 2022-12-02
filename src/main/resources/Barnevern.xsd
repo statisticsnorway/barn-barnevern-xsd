@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1.0">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -47,8 +47,8 @@ Bjorge.Saether@bufdir.no
 	<xs:attribute name="Presisering">
 		<xs:annotation>
 			<xs:documentation>
-		Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
-	  </xs:documentation>
+Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
+			</xs:documentation>
 		</xs:annotation>
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
@@ -60,9 +60,7 @@ Bjorge.Saether@bufdir.no
 	<!-- ELEMENTER -->
 	<xs:element name="Barnevern" type="BarnevernType">
 		<xs:annotation>
-			<xs:documentation>
-For innsending av barnevernsdata
-			</xs:documentation>
+			<xs:documentation>For innsending av barnevernsdata</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<!-- TYPEDEFINISJONER -->
@@ -146,9 +144,7 @@ For innsending av barnevernsdata
 	<xs:complexType name="AvgiverType">
 		<xs:attribute name="Organisasjonsnummer" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Organisasjonsnummeret til kommunen som er avgiver for dataene
-		</xs:documentation>
+				<xs:documentation>Organisasjonsnummeret til kommunen som er avgiver for dataene</xs:documentation>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -160,9 +156,7 @@ For innsending av barnevernsdata
 		</xs:attribute>
 		<xs:attribute name="Kommunenummer" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  4-sifret kommunenummer
-		</xs:documentation>
+				<xs:documentation>4-sifret kommunenummer</xs:documentation>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -174,8 +168,7 @@ For innsending av barnevernsdata
 		</xs:attribute>
 		<xs:attribute name="Kommunenavn" use="required">
 			<xs:annotation>
-				<xs:documentation>Kommunens navn
-		</xs:documentation>
+				<xs:documentation>Kommunens navn</xs:documentation>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -210,9 +203,7 @@ For innsending av barnevernsdata
 	</xs:complexType>
 	<xs:complexType name="SakType">
 		<xs:annotation>
-			<xs:documentation>
-		Typedefinisjon for Sak (tidl. Individ)
-	  </xs:documentation>
+			<xs:documentation>Typedefinisjon for Sak (tidl. Individ)</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Personalia" minOccurs="0" maxOccurs="unbounded">
@@ -221,12 +212,13 @@ For innsending av barnevernsdata
 					<xs:attribute ref="StartDato" use="required"/>
 					<xs:attribute name="Fodselsnummer" use="required">
 						<xs:annotation>
-							<xs:documentation>Fødselsnummer (https://www.udi.no/ord-og-begreper/fodselsnummer/), 
-				D-nummer (https://www.udi.no/ord-og-begreper/d-nummer/), 
-				fødselsdato (DDMMÅÅ) + 00100, 
-				fødselsdato (DDMMÅÅ) + 00200, 
-				fødselsdato (DDMMÅÅ) + 55555, 
-				fødselsdato (DDMMÅÅ) + 99999</xs:documentation>
+							<xs:documentation>
+Fødselsnummer (https://www.udi.no/ord-og-begreper/fodselsnummer/), 
+D-nummer (https://www.udi.no/ord-og-begreper/d-nummer/), 
+fødselsdato (DDMMÅÅ) + 00100, 
+fødselsdato (DDMMÅÅ) + 00200, 
+fødselsdato (DDMMÅÅ) + 55555, 
+fødselsdato (DDMMÅÅ) + 99999</xs:documentation>
 						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
@@ -238,9 +230,7 @@ For innsending av barnevernsdata
 					</xs:attribute>
 					<xs:attribute name="Fodseldato" type="xs:date" use="required">
 						<xs:annotation>
-							<xs:documentation xml:lang="no">
-Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
-				</xs:documentation>
+							<xs:documentation xml:lang="no">Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 					<xs:attribute name="Kjonn" use="required">
@@ -334,9 +324,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 		<xs:attribute ref="SluttDato"/>
 		<xs:attribute name="Journalnummer" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Journal-, registrerings-, saks- eller klientnummer
-		</xs:documentation>
+				<xs:documentation>Journal-, registrerings-, saks- eller klientnummer</xs:documentation>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -359,9 +347,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 				<xs:complexType>
 					<xs:attribute ref="SluttDato" use="required">
 						<xs:annotation>
-							<xs:documentation>
-		  Dato for avslutning av planen
-		</xs:documentation>
+							<xs:documentation>Dato for avslutning av planen</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 				</xs:complexType>
@@ -371,9 +357,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Dato hvor planen regnes som aktiv
-		</xs:documentation>
+				<xs:documentation>Dato hvor planen regnes som aktiv</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Plantype" use="required">
@@ -421,9 +405,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 				<xs:complexType>
 					<xs:attribute ref="SluttDato" use="required">
 						<xs:annotation>
-							<xs:documentation>
-		  Konklusjonsdato
-		</xs:documentation>
+							<xs:documentation>Konklusjonsdato</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 					<xs:attribute name="Kode" use="required">
@@ -471,9 +453,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Mottaksdato for meldingen
-		</xs:documentation>
+				<xs:documentation>Mottaksdato for meldingen</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -498,8 +478,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 				<xs:complexType>
 					<xs:attribute ref="SluttDato" use="required">
 						<xs:annotation>
-							<xs:documentation>Avslutningsdato for tiltaket
-		</xs:documentation>
+							<xs:documentation>Avslutningsdato for tiltaket</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 				</xs:complexType>
@@ -509,9 +488,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Iverksatt dato for tiltaket
-		</xs:documentation>
+				<xs:documentation>Iverksatt dato for tiltaket</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -668,7 +645,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 27 = Barnet utsatt for menneskehandel
 18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
 19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
-					</xs:documentation>
+				</xs:documentation>
 				<xs:appinfo xml:lang="json">
 {
    "type":"codelist",
@@ -756,8 +733,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 				<xs:complexType>
 					<xs:attribute ref="StartDato" use="required">
 						<xs:annotation>
-							<xs:documentation>
-		  Datoen det ble søkt om utvidet frist.		</xs:documentation>
+							<xs:documentation>Datoen det ble søkt om utvidet frist.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 					<xs:attribute name="Innvilget">
@@ -765,7 +741,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 							<xs:documentation>
 1 = Ja
 2 = Nei
-				 </xs:documentation>
+							</xs:documentation>
 							<xs:appinfo xml:lang="json">
 {
    "type":"codelist",
@@ -807,7 +783,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 4 = Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)
 5 = Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)
 6 = Undersøkelsen henlagt etter henvisning til annen instans
-				 </xs:documentation>
+							</xs:documentation>
 							<xs:appinfo xml:lang="json">
 {
    "type":"codelist",
@@ -850,11 +826,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 		<xs:attribute ref="MigrertId" use="optional"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Dato for undersøkelsens start.
-		  
-		  Denne er lik SluttDato for meldingen hvis meldingen har konklusjonskode = 2: «Ikke henlagt»
-		</xs:documentation>
+				<xs:documentation>Dato for undersøkelsens start. Denne er lik SluttDato for meldingen hvis meldingen har konklusjonskode = 2: «Ikke henlagt»</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -1031,9 +1003,7 @@ Fødselsdato til barnet. Hvis barnet er ufødt oppgis termindato.
 		</xs:attribute>
 		<xs:attribute ref="Presisering">
 			<xs:annotation>
-				<xs:documentation>
-Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
-	  </xs:documentation>
+				<xs:documentation>Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -1080,9 +1050,7 @@ Globalt attributt for presisering, brukes i forbindelse der en overliggende kode
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
-				<xs:documentation>
-Dato oppfølgingsbesøket faktisk ble foretatt
-		</xs:documentation>
+				<xs:documentation>Dato oppfølgingsbesøket faktisk ble foretatt</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -1111,7 +1079,7 @@ Dato oppfølgingsbesøket faktisk ble foretatt
 				<xs:documentation>
 4 = 4 tilsyn pr. år (standard)
 2 = 2 tilsyn pr. år (redusert)
-							</xs:documentation>
+				</xs:documentation>
 				<xs:appinfo xml:lang="json">
 {
    "type":"codelist",
@@ -1123,7 +1091,7 @@ Dato oppfølgingsbesøket faktisk ble foretatt
 	  {"code":"2", "validFrom":"2022-01-01", "title":"2 tilsyn pr. år (redusert)" }
    ]
 }
-							</xs:appinfo>
+				</xs:appinfo>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:list>
@@ -1143,9 +1111,7 @@ Dato oppfølgingsbesøket faktisk ble foretatt
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
-				<xs:documentation>
-Dato tilsynsbesøket faktisk ble utført
-		</xs:documentation>
+				<xs:documentation>Dato tilsynsbesøket faktisk ble utført</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -1156,20 +1122,47 @@ Dato tilsynsbesøket faktisk ble utført
 				<xs:complexType>
 					<xs:attribute ref="SluttDato" use="required">
 						<xs:annotation>
-							<xs:documentation>
-		  Datoen hvor kravet oversendes fylkesnemnda
-		</xs:documentation>
+							<xs:documentation>Datoen hvor kravet oversendes fylkesnemnda</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
+					<xs:attribute name="Kode" use="required">
+						<xs:annotation>
+							<xs:documentation>
+1 = Sendt til fylkesnemnd 
+2 = Krav bortfalt 
+9 = Annet (krever presisering)
+							</xs:documentation>
+							<xs:appinfo xml:lang="json">
+{
+   "type":"codelist",
+   "term":"Vedtak",
+   "title":"Status",
+   "path":"/Barnevern/Sak/Vedtak/Krav/@Kode",
+   "items":[
+	  {"code" : "1", "validFrom" : "2023-01-01", "title" : "Sendt til fylkesnemnd"},
+	  {"code" : "2", "validFrom" : "2023-01-01", "title" : "Krav bortfalt"},
+	  {"code" : "9", "validFrom" : "2023-01-01", "title" : "Annet (krever presisering)"}
+   ]
+}
+							</xs:appinfo>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length value="1"/>
+								<xs:enumeration value="1"/>
+								<xs:enumeration value="2"/>
+								<xs:enumeration value="9"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute ref="Presisering"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Mottaksdato for kravet
-		</xs:documentation>
+				<xs:documentation>Mottaksdato for kravet</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -1182,11 +1175,10 @@ Dato tilsynsbesøket faktisk ble utført
 			<xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Datoen hvor kravet oversendes fylkesnemnda
-		</xs:documentation>
+				<xs:documentation>Datoen hvor kravet oversendes fylkesnemnda</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -1214,7 +1206,7 @@ Dato tilsynsbesøket faktisk ble utført
 2 = Begjæring oversendt nemnd  
 3 = Utgår / Bortfalt etter BVL 
 4 = Avslått / Avsluttet 
-				 </xs:documentation>
+							</xs:documentation>
 							<xs:appinfo xml:lang="json">
 {
    "type":"codelist",
@@ -1245,20 +1237,17 @@ Dato tilsynsbesøket faktisk ble utført
 				<xs:complexType>
 					<xs:attribute ref="SluttDato" use="required">
 						<xs:annotation>
-							<xs:documentation>
-		  Vedtakets bortfallsdato
-		</xs:documentation>
+							<xs:documentation>Vedtakets bortfallsdato</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId"/>
 		<xs:attribute ref="StartDato" use="required">
 			<xs:annotation>
-				<xs:documentation>
-		  Datoen vedtaket ble avgjort
-		</xs:documentation>
+				<xs:documentation>Datoen vedtaket ble avgjort</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -1277,7 +1266,7 @@ Dato tilsynsbesøket faktisk ble utført
 1 = Gitt tilbud om tiltak, akseptert 
 2 = Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak 
 3 = Ikke lenger tiltak etter BVL, etter brukers ønske
-				 </xs:documentation>
+							</xs:documentation>
 							<xs:appinfo xml:lang="json">
 {
    "type":"codelist",
@@ -1305,6 +1294,7 @@ Dato tilsynsbesøket faktisk ble utført
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="MigrertId"/>
 		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="IdType">
@@ -1442,7 +1432,7 @@ Dato tilsynsbesøket faktisk ble utført
 	  { "code":"2.9", "validFrom":"2022-01-01", "title":"Andre grunner (krever presisering)" } 
    ]
 }
-							</xs:appinfo>
+				</xs:appinfo>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
@@ -1504,7 +1494,7 @@ Barnet/ungdommen flytter til:
 	  {"code" : "9", "validFrom" : "2022-01-01", "title" : "Adresseendring"}
    ]
 }
-							</xs:appinfo>
+				</xs:appinfo>
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
