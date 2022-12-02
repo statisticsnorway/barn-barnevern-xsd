@@ -27,6 +27,6 @@ data class BarnevernType(
     @field:XmlElement(name = "Avgiver", required = true)
     val avgiver: AvgiverType,
 
-    @field:XmlElement(name = "Sak", type = SakType::class, required = true)
+    @field:XmlElement(name = "Sak", required = true)
     val sak: SakType
 )

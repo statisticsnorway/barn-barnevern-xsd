@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EttervernKonklusjon", propOrder = ["sluttDato", "kode"])
 data class EttervernKonklusjonType(
-    @field:XmlAttribute(name = "SluttDato", required = true)
 
+    @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
     val sluttDato: LocalDate,
 

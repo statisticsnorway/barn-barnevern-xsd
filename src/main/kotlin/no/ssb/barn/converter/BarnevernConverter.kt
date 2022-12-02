@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.readValue
 import no.ssb.barn.xsd.BarnevernType
 
 object BarnevernConverter {
@@ -43,10 +44,10 @@ object BarnevernConverter {
         .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
 
     @JvmStatic
-    fun unmarshallXml(xml: String): BarnevernType =
-        XML_MAPPER.readValue(xml, BarnevernType::class.java)
+    fun unmarshallXml(xml: String): BarnevernType = unmarshallXml<BarnevernType>(xml)
+
+    inline fun <reified T : Any> unmarshallXml(xml: String): T = XML_MAPPER.readValue(xml)
 
     @JvmStatic
-    fun marshallInstance(barnevernType: BarnevernType): String =
-        XML_MAPPER.writeValueAsString(barnevernType)
+    fun marshallInstance(instanceToSerialize: Any): String = XML_MAPPER.writeValueAsString(instanceToSerialize)
 }
