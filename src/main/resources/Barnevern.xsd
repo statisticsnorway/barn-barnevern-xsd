@@ -11,7 +11,7 @@ Bjorge.Saether@bufdir.no
     <xs:attribute name="Id">
         <xs:annotation>
             <xs:appinfo>UUID</xs:appinfo>
-            <xs:documentation>Globalt attributt for UUID, f.eks databaseID/surrogatnøkkel i fagsystemet
+            <xs:documentation>Globalt attributt for UUID. Database-id/surrogatnøkkel i fagsystem.
             </xs:documentation>
         </xs:annotation>
         <xs:simpleType>
@@ -25,8 +25,8 @@ Bjorge.Saether@bufdir.no
     <xs:attribute name="MigrertId">
         <xs:annotation>
             <xs:appinfo>Database-ID</xs:appinfo>
-            <xs:documentation>Globalt attributt for ID for system det er migrert fra, og som er benyttet i tidligere
-                KOSTRA-rapportering
+            <xs:documentation>Globalt attributt for ID i system det er migrert fra, og som er benyttet i tidligere
+                KOSTRA-rapportering(er).
             </xs:documentation>
         </xs:annotation>
         <xs:simpleType>
@@ -39,19 +39,19 @@ Bjorge.Saether@bufdir.no
     <xs:attribute name="StartDato" type="xs:date">
         <xs:annotation>
             <xs:appinfo>Startdato</xs:appinfo>
-            <xs:documentation>Globalt attributt for startdato</xs:documentation>
+            <xs:documentation>Globalt attributt for startdato.</xs:documentation>
         </xs:annotation>
     </xs:attribute>
     <xs:attribute name="SluttDato" type="xs:date">
         <xs:annotation>
             <xs:appinfo>Sluttdato</xs:appinfo>
-            <xs:documentation>Globalt attributt for sluttdato</xs:documentation>
+            <xs:documentation>Globalt attributt for sluttdato.</xs:documentation>
         </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Presisering">
         <xs:annotation>
             <xs:documentation>
-                Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må presiseres
+                Globalt attributt for presisering. Benyttes hvis tilhørende kode krever presisering.
             </xs:documentation>
         </xs:annotation>
         <xs:simpleType>
@@ -64,7 +64,9 @@ Bjorge.Saether@bufdir.no
     <!-- ELEMENTER -->
     <xs:element name="Barnevern" type="BarnevernType">
         <xs:annotation>
-            <xs:documentation>For innsending av barnevernsdata</xs:documentation>
+            <xs:documentation>
+                Omsluttende element for rapportering av barnevernsdata.
+            </xs:documentation>
         </xs:annotation>
     </xs:element>
     <!-- TYPEDEFINISJONER -->
@@ -75,34 +77,41 @@ Bjorge.Saether@bufdir.no
         <xs:sequence>
             <xs:element name="Fagsystem" type="FagsystemType">
                 <xs:annotation>
-                    <xs:documentation>Informasjon om fagsystem det rapporteres fra</xs:documentation>
+                    <xs:documentation>Informasjon om fagsystem for innrapportering.</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Avgiver" type="AvgiverType">
                 <xs:annotation>
-                    <xs:documentation>Kommune som rapporterer</xs:documentation>
+                    <xs:documentation>Informasjon om kommune for innrapportering.</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Sak" type="SakType">
                 <xs:annotation>
-                    <xs:documentation>Saksmappe for et barn. Komplett innhold av mappe rapporteres når innhold er endret
-                        siden siste innsending
+                    <xs:documentation>Saksmappe for et barn. Komplett saksmappe innrapporteres når innhold er
+                        endret etter forrige innrapportering.
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute name="DatoUttrekk" type="xs:dateTime" use="required">
+        <xs:attribute name="DatoUttrekk" use="required">
             <xs:annotation>
                 <xs:appinfo>
-                    Dato og klokkeslett for uttrekket
+                    Dato og tid for uttrekk med tidssone. Eksempler gyldige formater: '2022-06-23T09:30:10Z' (UTC-tid),
+                    eller
+                    '2022-06-23T11:30:10+02:00' (dato/tid med offset).
                 </xs:appinfo>
             </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:dateTime">
+                    <xs:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,9})?(Z|[+-]\d{2}:\d{2})" />
+                </xs:restriction>
+            </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="ForrigeId">
             <xs:annotation>
                 <xs:appinfo>UUID</xs:appinfo>
-                <xs:documentation>Globalt attributt for UUID, f.eks databaseID/surrogatnøkkel i fagsystemet
+                <xs:documentation>Globalt attributt for UUID. Database-id/surrogatnøkkel fra fagsystem.
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
@@ -117,7 +126,7 @@ Bjorge.Saether@bufdir.no
     <xs:complexType name="FagsystemType">
         <xs:attribute name="Leverandor" use="required">
             <xs:annotation>
-                <xs:appinfo>Leverandøren til fagsystemer, f.eks. Visma, Acos eller NetCompany</xs:appinfo>
+                <xs:appinfo>Leverandørnavn fagsystem. Eksempler: 'Visma', 'Acos' eller 'Netcompany'.</xs:appinfo>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -128,7 +137,7 @@ Bjorge.Saether@bufdir.no
         </xs:attribute>
         <xs:attribute name="Navn" use="required">
             <xs:annotation>
-                <xs:appinfo>Navnet til fagsystemet, f.eks. Familia</xs:appinfo>
+                <xs:appinfo>Navn fagsystem. Eksempel: 'Familia'.</xs:appinfo>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -139,7 +148,7 @@ Bjorge.Saether@bufdir.no
         </xs:attribute>
         <xs:attribute name="Versjon" use="required">
             <xs:annotation>
-                <xs:appinfo>Versjonen til fagsystemet, f.eks. v1.2.3</xs:appinfo>
+                <xs:appinfo>Versjonsnavn fagsystem. Eksempel: 'v1.2.3'.</xs:appinfo>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -152,7 +161,9 @@ Bjorge.Saether@bufdir.no
     <xs:complexType name="AvgiverType">
         <xs:attribute name="Organisasjonsnummer" use="required">
             <xs:annotation>
-                <xs:documentation>Organisasjonsnummeret til kommunen som er avgiver for dataene</xs:documentation>
+                <xs:documentation>
+                    Organisasjonsnummer, avgiverkommune.
+                </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -164,7 +175,9 @@ Bjorge.Saether@bufdir.no
         </xs:attribute>
         <xs:attribute name="Kommunenummer" use="required">
             <xs:annotation>
-                <xs:documentation>4-sifret kommunenummer</xs:documentation>
+                <xs:documentation>
+                    4-sifret kommunenummer, avgiverkommune.
+                </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -176,7 +189,7 @@ Bjorge.Saether@bufdir.no
         </xs:attribute>
         <xs:attribute name="Kommunenavn" use="required">
             <xs:annotation>
-                <xs:documentation>Kommunens navn</xs:documentation>
+                <xs:documentation>Navn, avgiverkommune.</xs:documentation>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -187,7 +200,7 @@ Bjorge.Saether@bufdir.no
         </xs:attribute>
         <xs:attribute name="Bydelsnummer">
             <xs:annotation>
-                <xs:documentation>2-sifret bydelsnummer for bydelen, brukes av f.eks. Oslo</xs:documentation>
+                <xs:documentation>2-sifret bydelsnummer. Benyttes kun for kommuner med bydeler.</xs:documentation>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -199,7 +212,7 @@ Bjorge.Saether@bufdir.no
         </xs:attribute>
         <xs:attribute name="Bydelsnavn">
             <xs:annotation>
-                <xs:documentation>Bydelsnavn for bydelen, f.eks. Gamle Oslo ved rapportering av bydel fra Oslo
+                <xs:documentation>Bydelsnavn. Eksempel: 'Gamle Oslo'. Benyttes kun for kommuner med bydeler.
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
@@ -212,7 +225,9 @@ Bjorge.Saether@bufdir.no
     </xs:complexType>
     <xs:complexType name="SakType">
         <xs:annotation>
-            <xs:documentation>Typedefinisjon for Sak (tidl. Individ)</xs:documentation>
+            <xs:documentation>
+                Typedefinisjon for Sak (tidligere Individ).
+            </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="Personalia" minOccurs="0" maxOccurs="unbounded">
@@ -221,8 +236,7 @@ Bjorge.Saether@bufdir.no
                     <xs:attribute ref="StartDato" use="required"/>
                     <xs:attribute name="Fodselsnummer" use="required">
                         <xs:annotation>
-                            <xs:documentation>
-                                Fødselsnummer (https://www.udi.no/ord-og-begreper/fodselsnummer/),
+                            <xs:documentation>Fødselsnummer (https://www.udi.no/ord-og-begreper/fodselsnummer/),
                                 D-nummer (https://www.udi.no/ord-og-begreper/d-nummer/),
                                 fødselsdato (DDMMÅÅ) + 00100,
                                 fødselsdato (DDMMÅÅ) + 00200,
@@ -240,8 +254,8 @@ Bjorge.Saether@bufdir.no
                     </xs:attribute>
                     <xs:attribute name="Fodseldato" type="xs:date" use="required">
                         <xs:annotation>
-                            <xs:documentation xml:lang="no">Fødselsdato til barnet. Hvis barnet er ufødt oppgis
-                                termindato.
+                            <xs:documentation xml:lang="no">
+                                Barnets fødselsdato. For ufødte barn oppgis termindato.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
@@ -304,26 +318,27 @@ Bjorge.Saether@bufdir.no
             <xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Alle typer vedtak som fattes i en barnevernsak, også av fylkesnemnda
+                    <xs:documentation>Alle typer vedtak som kan fattes i barnevernssaker, også av fylkesnemnda.
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Tilbud om ettervern. Eventuelt ettervernstiltak registreres som Tiltak
+                    <xs:documentation>Tilbud om ettervern. Evt. ettervernstiltak registreres som tiltak.
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="OversendelseFylkesnemnd" type="OversendelseBarneverntjenesteType" minOccurs="0"
                         maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Begjæring fra barneverntjeneste til fylkesnemnd om tvangsvedtak</xs:documentation>
+                    <xs:documentation>Begjæring om tvangsvedtak fra barneverntjeneste til fylkesnemnd.
+                    </xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Flytting" type="FlyttingType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Relasjon" type="RelasjonType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Kobling mellom ulike element, som melding/undersøkelse, tiltak/vedtak
+                    <xs:documentation>Kopling av elementer, f.eks. melding/undersøkelse, tiltak/vedtak.
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
@@ -341,7 +356,9 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="SluttDato"/>
         <xs:attribute name="Journalnummer" use="required">
             <xs:annotation>
-                <xs:documentation>Journal-, registrerings-, saks- eller klientnummer</xs:documentation>
+                <xs:documentation>
+                    Journal-, registrerings-, saks- eller klientnummer.
+                </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -357,14 +374,16 @@ Bjorge.Saether@bufdir.no
         <xs:sequence>
             <xs:element name="Evaluering" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
-                    <xs:attribute name="UtfortDato" use="required"/>
+                    <xs:attribute name="UtfortDato" type="xs:date" use="required"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="Konklusjon" minOccurs="0">
                 <xs:complexType>
                     <xs:attribute ref="SluttDato" use="required">
                         <xs:annotation>
-                            <xs:documentation>Dato for avslutning av planen</xs:documentation>
+                            <xs:documentation>
+                                Dato avslutning plan.
+                            </xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
                 </xs:complexType>
@@ -374,7 +393,9 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
-                <xs:documentation>Dato hvor planen regnes som aktiv</xs:documentation>
+                <xs:documentation>
+                    Dato for tidspunkt planen regnes som aktiv.
+                </xs:documentation>
             </xs:annotation>
         </xs:attribute>
         <xs:attribute name="Plantype" use="required">
@@ -422,14 +443,16 @@ Bjorge.Saether@bufdir.no
                 <xs:complexType>
                     <xs:attribute ref="SluttDato" use="required">
                         <xs:annotation>
-                            <xs:documentation>Konklusjonsdato</xs:documentation>
+                            <xs:documentation>
+                                Konklusjonsdato
+                            </xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
                     <xs:attribute name="Kode" use="required">
                         <xs:annotation>
                             <xs:documentation>
                                 1 = Henlagt
-                                2 = Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er
+                                2 = Ikke henlagt – konklusjonsdato melding (evt. 7 dager etter mottatt melding) er
                                 startdato undersøkelse
                                 3 = Henlagt pga. aktive tiltak
                                 4 = Melding i pågående undersøkelse
@@ -451,18 +474,14 @@ Bjorge.Saether@bufdir.no
                             </xs:appinfo>
                         </xs:annotation>
                         <xs:simpleType>
-                            <xs:list>
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:minLength value="1"/>
-                                        <xs:maxLength value="3"/>
-                                        <xs:enumeration value="1"/>
-                                        <xs:enumeration value="2"/>
-                                        <xs:enumeration value="3"/>
-                                        <xs:enumeration value="4"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:list>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                                <xs:maxLength value="3"/>
+                                <xs:enumeration value="1"/>
+                                <xs:enumeration value="2"/>
+                                <xs:enumeration value="3"/>
+                                <xs:enumeration value="4"/>
+                            </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
                 </xs:complexType>
@@ -472,7 +491,9 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
-                <xs:documentation>Mottaksdato for meldingen</xs:documentation>
+                <xs:documentation>
+                    Dato melding mottatt.
+                </xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -484,12 +505,13 @@ Bjorge.Saether@bufdir.no
             <xs:element name="Kategori" type="KategoriType"/>
             <xs:element name="Tilsyn" type="TilsynType" minOccurs="0">
                 <xs:annotation>
-                    <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part</xs:documentation>
+                    <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part.</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Ansvarlig barneverntjenes oppfølgingsbesøk i fosterhjem</xs:documentation>
+                    <xs:documentation>Oppfølgingsbesøk i fosterhjem utført av ansvarlig barneverntjeneste.
+                    </xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Opphevelse" type="OpphevelseType" minOccurs="0"/>
@@ -497,7 +519,8 @@ Bjorge.Saether@bufdir.no
                 <xs:complexType>
                     <xs:attribute ref="SluttDato" use="required">
                         <xs:annotation>
-                            <xs:documentation>Avslutningsdato for tiltaket</xs:documentation>
+                            <xs:documentation>Dato tiltak avsluttet.
+                            </xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
                 </xs:complexType>
@@ -507,7 +530,9 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
-                <xs:documentation>Iverksatt dato for tiltaket</xs:documentation>
+                <xs:documentation>
+                    Dato iverksettelse tiltak.
+                </xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -522,11 +547,47 @@ Bjorge.Saether@bufdir.no
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="Kapittel" type="xs:string"/>
-            <xs:element name="Paragraf" type="xs:string"/>
-            <xs:element name="Ledd" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Bokstav" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Punktum" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Kapittel">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Paragraf">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="Ledd" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Bokstav" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Punktum" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <!-- Melder -->
@@ -596,37 +657,33 @@ Bjorge.Saether@bufdir.no
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleType>
-                <xs:list>
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:minLength value="1"/>
-                            <xs:maxLength value="2"/>
-                            <xs:enumeration value="1"/>
-                            <xs:enumeration value="2"/>
-                            <xs:enumeration value="3"/>
-                            <xs:enumeration value="4"/>
-                            <xs:enumeration value="5"/>
-                            <xs:enumeration value="6"/>
-                            <xs:enumeration value="7"/>
-                            <xs:enumeration value="8"/>
-                            <xs:enumeration value="9"/>
-                            <xs:enumeration value="10"/>
-                            <xs:enumeration value="11"/>
-                            <xs:enumeration value="12"/>
-                            <xs:enumeration value="13"/>
-                            <xs:enumeration value="14"/>
-                            <xs:enumeration value="15"/>
-                            <xs:enumeration value="16"/>
-                            <xs:enumeration value="17"/>
-                            <xs:enumeration value="18"/>
-                            <xs:enumeration value="19"/>
-                            <xs:enumeration value="20"/>
-                            <xs:enumeration value="21"/>
-                            <xs:enumeration value="22"/>
-                            <xs:enumeration value="23"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:list>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="6"/>
+                    <xs:enumeration value="7"/>
+                    <xs:enumeration value="8"/>
+                    <xs:enumeration value="9"/>
+                    <xs:enumeration value="10"/>
+                    <xs:enumeration value="11"/>
+                    <xs:enumeration value="12"/>
+                    <xs:enumeration value="13"/>
+                    <xs:enumeration value="14"/>
+                    <xs:enumeration value="15"/>
+                    <xs:enumeration value="16"/>
+                    <xs:enumeration value="17"/>
+                    <xs:enumeration value="18"/>
+                    <xs:enumeration value="19"/>
+                    <xs:enumeration value="20"/>
+                    <xs:enumeration value="21"/>
+                    <xs:enumeration value="22"/>
+                    <xs:enumeration value="23"/>
+                </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute ref="Presisering"/>
@@ -763,7 +820,7 @@ Bjorge.Saether@bufdir.no
     <!-- Undersøkelse -->
     <xs:complexType name="UndersokelseType">
         <xs:annotation>
-            <xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
+            <xs:documentation>TODO: Forklaring av begrep mangler</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
@@ -771,7 +828,9 @@ Bjorge.Saether@bufdir.no
                 <xs:complexType>
                     <xs:attribute ref="StartDato" use="required">
                         <xs:annotation>
-                            <xs:documentation>Datoen det ble søkt om utvidet frist.</xs:documentation>
+                            <xs:documentation>
+                                Dato mottak søknad om utvidet frist.
+                            </xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
                     <xs:attribute name="Innvilget">
@@ -808,7 +867,7 @@ Bjorge.Saether@bufdir.no
                     <xs:attribute ref="SluttDato" use="required">
                         <xs:annotation>
                             <xs:documentation>
-                                Konklusjonsdato for undersøkelsen
+                                Dato undersøkelse konkludert.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
@@ -860,20 +919,16 @@ Bjorge.Saether@bufdir.no
                             </xs:appinfo>
                         </xs:annotation>
                         <xs:simpleType>
-                            <xs:list>
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:minLength value="1"/>
-                                        <xs:maxLength value="1"/>
-                                        <xs:enumeration value="1"/>
-                                        <xs:enumeration value="2"/>
-                                        <xs:enumeration value="3"/>
-                                        <xs:enumeration value="4"/>
-                                        <xs:enumeration value="5"/>
-                                        <xs:enumeration value="6"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:list>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                                <xs:maxLength value="1"/>
+                                <xs:enumeration value="1"/>
+                                <xs:enumeration value="2"/>
+                                <xs:enumeration value="3"/>
+                                <xs:enumeration value="4"/>
+                                <xs:enumeration value="5"/>
+                                <xs:enumeration value="6"/>
+                            </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
                     <xs:attribute ref="Presisering"/>
@@ -884,8 +939,11 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
-                <xs:documentation>Dato for undersøkelsens start. Denne er lik SluttDato for meldingen hvis meldingen har
-                    konklusjonskode = 2: «Ikke henlagt»
+                <xs:documentation>
+                    Dato undersøkelse startet.
+                    Samme verdi som for SluttDato i koplet MeldingType hvis konklusjon (i MeldingType) har kode = '2':
+                    'Ikke
+                    henlagt'.
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
@@ -1088,8 +1146,8 @@ Bjorge.Saether@bufdir.no
         </xs:attribute>
         <xs:attribute ref="Presisering">
             <xs:annotation>
-                <xs:documentation>Globalt attributt for presisering, brukes i forbindelse der en overliggende kode må
-                    presiseres
+                <xs:documentation>
+                    Globalt attributt for presisering. Benyttes hvis tilhørende kode krever presisering.
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
@@ -1138,7 +1196,7 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="Id" use="required"/>
         <xs:attribute name="UtfortDato" type="xs:date" use="required">
             <xs:annotation>
-                <xs:documentation>Dato oppfølgingsbesøket faktisk ble foretatt</xs:documentation>
+                <xs:documentation>Dato tilsynsbesøk utført.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -1149,7 +1207,7 @@ Bjorge.Saether@bufdir.no
             <xs:element name="Hyppighet" type="TilsynHyppighetType" maxOccurs="unbounded"/>
             <xs:element name="Utfort" type="TilsynUtfortType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part</xs:documentation>
+                    <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part.</xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
@@ -1157,7 +1215,13 @@ Bjorge.Saether@bufdir.no
     <xs:complexType name="TilsynAnsvarligType">
         <xs:attribute ref="Id" use="required"/>
         <xs:attribute ref="StartDato" use="required"/>
-        <xs:attribute name="Kommunenummer" use="required"/>
+        <xs:attribute name="Kommunenummer" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="\d{4}"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
     <xs:complexType name="TilsynHyppighetType">
         <xs:attribute ref="Id" use="required"/>
@@ -1182,16 +1246,12 @@ Bjorge.Saether@bufdir.no
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleType>
-                <xs:list>
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:minLength value="1"/>
-                            <xs:maxLength value="1"/>
-                            <xs:enumeration value="4"/>
-                            <xs:enumeration value="2"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:list>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="1"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="2"/>
+                </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
@@ -1199,7 +1259,7 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="Id" use="required"/>
         <xs:attribute name="UtfortDato" type="xs:date" use="required">
             <xs:annotation>
-                <xs:documentation>Dato tilsynsbesøket faktisk ble utført</xs:documentation>
+                <xs:documentation>Dato tilsynsbesøk utført.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -1210,7 +1270,7 @@ Bjorge.Saether@bufdir.no
                 <xs:complexType>
                     <xs:attribute ref="SluttDato" use="required">
                         <xs:annotation>
-                            <xs:documentation>Datoen hvor kravet oversendes fylkesnemnda</xs:documentation>
+                            <xs:documentation>Dato oversendt fylkesnemnd.</xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
                     <xs:attribute name="Kode" use="required">
@@ -1250,7 +1310,7 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="Id" use="required"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
-                <xs:documentation>Mottaksdato for kravet</xs:documentation>
+                <xs:documentation>Dato mottak av krav.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -1266,7 +1326,7 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
-                <xs:documentation>Datoen hvor kravet oversendes fylkesnemnda</xs:documentation>
+                <xs:documentation>Dato oversendt fylkesnemnd.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -1280,7 +1340,7 @@ Bjorge.Saether@bufdir.no
             <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
             <xs:element name="Krav" type="OversendelsePrivatKravType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Krav fra privat part om endring av tidligere vedtak fattet av fylkesnemnda
+                    <xs:documentation>Krav fra privat part om endring av tidligere vedtak fattet av fylkesnemnd.
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
@@ -1326,7 +1386,9 @@ Bjorge.Saether@bufdir.no
                 <xs:complexType>
                     <xs:attribute ref="SluttDato" use="required">
                         <xs:annotation>
-                            <xs:documentation>Vedtakets bortfallsdato</xs:documentation>
+                            <xs:documentation>
+                                Bortfallsdato vedtak.
+                            </xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
                 </xs:complexType>
@@ -1336,7 +1398,9 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
-                <xs:documentation>Datoen vedtaket ble avgjort</xs:documentation>
+                <xs:documentation>
+                    Dato vedtak fattet.
+                </xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -1410,43 +1474,6 @@ Bjorge.Saether@bufdir.no
             <xs:enumeration value="Relasjon"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:complexType name="VirksomhetType">
-        <xs:annotation>
-            <xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
-        </xs:annotation>
-        <xs:sequence/>
-        <xs:attribute ref="StartDato" use="required"/>
-        <xs:attribute ref="SluttDato">
-            <xs:annotation>
-                <xs:documentation>
-                    Konklusjonsdato for saken hos barnevernstjenesten i enten en bydel eller kommune (hvis man ikke har
-                    bydeler)
-                </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name="Organisasjonsnummer" use="required">
-            <xs:annotation>
-                <xs:documentation>Orgnr til den virksomheten som er utførende. For kommuner som har bydeler er det
-                    bydelens orgnr, ellers benytte kommunens orgnr.
-                </xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:minLength value="9"/>
-                    <xs:maxLength value="9"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="Distriktsnummer">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:minLength value="2"/>
-                    <xs:maxLength value="3"/>
-                    <xs:pattern value="\d{2,3}"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-    </xs:complexType>
     <xs:complexType name="RelasjonType">
         <xs:annotation>
             <xs:documentation>TODO: Forklaring for begrep mangler</xs:documentation>
