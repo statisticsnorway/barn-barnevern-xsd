@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2.0.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2.1.0">
     <!-- ATTRIBUTTER -->
     <xs:attribute name="Id">
         <xs:annotation>
@@ -1273,6 +1273,37 @@ Bjorge.Saether@bufdir.no
                             <xs:documentation>Dato oversendt fylkesnemnd.</xs:documentation>
                         </xs:annotation>
                     </xs:attribute>
+                    <xs:attribute name="Kode" use="required">
+                        <xs:annotation>
+                            <xs:documentation>
+                                1 = Sendt til fylkesnemnd
+                                2 = Krav bortfalt
+                                9 = Annet (krever presisering)
+                            </xs:documentation>
+                            <xs:appinfo xml:lang="json">
+                                {
+                                "type":"codelist",
+                                "term":"Vedtak",
+                                "title":"Status",
+                                "path":"/Barnevern/Sak/Vedtak/Krav/@Kode",
+                                "items":[
+                                {"code" : "1", "validFrom" : "2023-01-01", "title" : "Sendt til fylkesnemnd"},
+                                {"code" : "2", "validFrom" : "2023-01-01", "title" : "Krav bortfalt"},
+                                {"code" : "9", "validFrom" : "2023-01-01", "title" : "Annet (krever presisering)"}
+                                ]
+                                }
+                            </xs:appinfo>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:length value="1"/>
+                                <xs:enumeration value="1"/>
+                                <xs:enumeration value="2"/>
+                                <xs:enumeration value="9"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute ref="Presisering"/>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
@@ -1292,6 +1323,7 @@ Bjorge.Saether@bufdir.no
             <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
                 <xs:documentation>Dato oversendt fylkesnemnd.</xs:documentation>
@@ -1363,6 +1395,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute ref="StartDato" use="required">
             <xs:annotation>
                 <xs:documentation>
@@ -1417,6 +1450,7 @@ Bjorge.Saether@bufdir.no
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
+        <xs:attribute ref="MigrertId"/>
         <xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
     </xs:complexType>
     <xs:simpleType name="IdType">

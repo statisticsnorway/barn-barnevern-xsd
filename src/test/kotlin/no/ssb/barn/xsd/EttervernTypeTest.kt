@@ -25,7 +25,7 @@ class EttervernTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildBarnevernXml(
                         "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "TilbudSendtDato=\"2022-11-14\"/>"
+                                "MigrertId=\"4242\" TilbudSendtDato=\"2022-11-14\"/>"
                     ).toStreamSource()
                 )
             }
@@ -47,6 +47,22 @@ class EttervernTypeTest : BehaviorSpec({
                 "invalid Id",
                 "<Ettervern Id=\"42\" TilbudSendtDato=\"2022-11-14\"/>",
                 INVALID_ID_ERROR
+            ),
+
+            /** MigrertId */
+            row(
+                "empty MigrertId",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "MigrertId=\"\" TilbudSendtDato=\"2022-11-14\"/>",
+                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
+                        "for type '#AnonType_MigrertId'."
+            ),
+            row(
+                "too long MigrertId",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "MigrertId=\"${"a".repeat(37)}\" TilbudSendtDato=\"2022-11-14\"/>",
+                "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
+                        "respect to maxLength '36' for type '#AnonType_MigrertId'."
             ),
 
             /** TilbudSendtDato */
