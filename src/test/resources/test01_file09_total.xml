@@ -54,7 +54,7 @@
                 <Ledd>1</Ledd>
             </Lovhjemmel>
             <Krav Id="5365c6e6-be78-4a3e-8b28-b7af12085eed" StartDato="2021-04-09">
-                <Konklusjon SluttDato="2021-04-19"/>
+                <Konklusjon Kode="1" SluttDato="2021-04-19"/>
             </Krav>
             <Status Id="7317a453-2d65-465a-9589-b7af12085eed" EndretDato="2021-04-09" Kode="3"/>
             <Konklusjon SluttDato="2021-04-09"/>
