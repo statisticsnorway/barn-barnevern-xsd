@@ -12,10 +12,16 @@ import javax.xml.bind.annotation.XmlSchemaType
 import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OversendelseBarneverntjenesteType", propOrder = ["id", "startDato", "lovhjemmel", "jmfrLovhjemmel"])
+@XmlType(
+    name = "OversendelseBarneverntjenesteType",
+    propOrder = ["id", "migrertId", "startDato", "lovhjemmel", "jmfrLovhjemmel"]
+)
 data class OversendelseFylkesnemndType(
     @field:XmlAttribute(name = "Id", required = true)
     val id: UUID,
+
+    @field:XmlAttribute(name = "MigrertId")
+    val migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")

@@ -4,16 +4,24 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import java.time.LocalDate
 import java.util.*
-import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlAttribute
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSchemaType
+import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "VedtakType",
-    propOrder = ["id", "startDato", "lovhjemmel", "jmfrLovhjemmel", "krav", "status", "konklusjon"]
+    propOrder = ["id", "migrertId", "startDato", "lovhjemmel", "jmfrLovhjemmel", "krav", "status", "konklusjon"]
 )
 data class VedtakType(
     @field:XmlAttribute(name = "Id", required = true)
     val id: UUID,
+
+    @field:XmlAttribute(name = "MigrertId")
+    val migrertId: String? = null,
 
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
