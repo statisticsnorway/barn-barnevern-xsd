@@ -267,6 +267,16 @@ Brukes på stien /Barnevern/Sak/Vedtak/Status/@Kode
 | 3    | Utgår / Bortfalt etter BVL      | 2022-01-01 |
 | 4    | Avslått / Avsluttet             | 2022-01-01 |
 
+#### Konklusjon/Kode
+
+Brukes på stien /Barnevern/Sak/Vedtak/Krav/Konklusjon/@Kode
+
+| Kode | Betydning                  | Gyldig fra  |
+|:-----|----------------------------|-------------|
+| 1    | Sendt til fylkesnemnd      | 2023-01-01  |
+| 2    | Krav bortfalt              | 2023-01-01  |
+| 9    | Annet (krever presisering) | 2023-01-01 |
+
 <a name="#/Barnevern/Sak/Ettervern"></a>
 
 ## Ettervern
