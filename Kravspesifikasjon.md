@@ -1,9 +1,6 @@
 # Kravspesifikasjon for validering
 
 ## Innhold
-- [Endringslogg](#endringslogg)
-  - [2022-10-31](#2022-10-31)
-  - [2.0.0](#2_0_0)
 - [Definisjoner](#definisjoner)
 - Validéringer
   - [Filbeskrivelse](#filbeskrivelse)
@@ -20,38 +17,9 @@
   - [Ettervern](#ettervern)
   - [Flytting](#flytting)
   - [Oversendelse til fylkesnemnd](#oversendelse-til-fylkesnemnd)
- 
-
-
-## <a name="endringslogg">Endringslogg</a>
-
-### <a name="2022-10-31">2022-10-31</a>
-
-Endret
-- Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet, endret alvorlighetsgrad fra ERROR til Warning.
-- Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak, endring i kravet.
-
-Slettet
-- Personalia Kontroll 2e: StartDato er før sakens StartDato
-- Ettervern Kontroll 3: Alder er mindre enn 18 år- 
-
-### <a name="2_0_0">2.0.0</a>
-
-Lagt til
-- Personalia Kontroll 2e: StartDato er før sakens StartDato
-- Personalia Kontroll 2f: StartDato er etter sakens SluttDato
-- Personalia kontroll 11: Klienten skal ha personalia
-
-Flyttet og tilpasset
-- Sak kontroll 12: Fødselsnummer -> Personalia kontroll 12: Fødselsnummer
-- Sak Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato -> Personalia Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
-- Sak Kontroll 14: Kontroll av Fødselsnummer og Kjønn -> Personalia Kontroll 14: Kontroll av Fødselsnummer og Kjønn
-- Sak Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato -> Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
-- Sak Kontroll 16: Kontroll av Fødselsdato og StartDato -> Personalia Kontroll 16: Kontroll av Fødselsdato og StartDato
-- Sak Kontroll 1x: Kontroll av DUF-nummer -> Personalia Kontroll 17: Kontroll av DUF-nummer
-
-Slettet
-- Sak Kontroll 3: Fødselsnummer og DUFnummer
+- [Endringslogg](#endringslogg)
+  - [2022-10-31](#2022-10-31)
+  - [2.0.0](#2_0_0)
 
 
 
@@ -826,3 +794,35 @@ når Oversendelse til fylkesnemndens StartDato er etter sakens SluttDato <br/>
 så gi feilmeldingen "Oversendelse til fylkesnemndens startdato {StartDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR
+
+
+
+## <a name="endringslogg">Endringslogg</a>
+
+### <a name="2022-10-31">2022-10-31</a>
+
+Endret
+- Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet, endret alvorlighetsgrad fra ERROR til Warning.
+- Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak, endring i kravet.
+
+Slettet
+- Personalia Kontroll 2e: StartDato er før sakens StartDato
+- Ettervern Kontroll 3: Alder er mindre enn 18 år-
+
+### <a name="2_0_0">2.0.0</a>
+
+Lagt til
+- Personalia Kontroll 2e: StartDato er før sakens StartDato
+- Personalia Kontroll 2f: StartDato er etter sakens SluttDato
+- Personalia kontroll 11: Klienten skal ha personalia
+
+Flyttet og tilpasset
+- Sak kontroll 12: Fødselsnummer -> Personalia kontroll 12: Fødselsnummer
+- Sak Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato -> Personalia Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
+- Sak Kontroll 14: Kontroll av Fødselsnummer og Kjønn -> Personalia Kontroll 14: Kontroll av Fødselsnummer og Kjønn
+- Sak Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato -> Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
+- Sak Kontroll 16: Kontroll av Fødselsdato og StartDato -> Personalia Kontroll 16: Kontroll av Fødselsdato og StartDato
+- Sak Kontroll 1x: Kontroll av DUF-nummer -> Personalia Kontroll 17: Kontroll av DUF-nummer
+
+Slettet
+- Sak Kontroll 3: Fødselsnummer og DUFnummer
