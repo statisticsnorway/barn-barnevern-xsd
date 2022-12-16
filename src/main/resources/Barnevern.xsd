@@ -706,6 +706,8 @@ Bjorge.Saether@bufdir.no
                     23 = Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester
                     24 = Konflikt mellom foreldre som ikke bor sammen
                     28 = Foreldres manglende oppfølging av barnets behov for helsetjenester
+                    29 = Foreldres kognitive vansker
+                    31 = Foreldre har vedvarende økonomiske problemer/vedvarende lavinntekt
                     5 = Foreldres kriminalitet
                     6 = Høy grad av konflikt hjemme
                     7 = Vold i hjemmet/ barnet vitne til vold i nære relasjoner
@@ -723,6 +725,7 @@ Bjorge.Saether@bufdir.no
                     25 = Barnets atferd
                     26 = Barnets kriminelle handlinger
                     27 = Barnet utsatt for menneskehandel
+                    30 = Barnets kognitive vansker
                     18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes
                     dersom ingen av kategoriene 1-27 passer.)
                     19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes
@@ -750,6 +753,8 @@ Bjorge.Saether@bufdir.no
                     { "code":"24", "validFrom":"2021-01-01", "title":"Konflikt mellom foreldre som ikke bor sammen" },
                     { "code":"28", "validFrom":"2021-01-01", "title":"Foreldres manglende oppfølging av barnets behov
                     for helsetjenester" },
+                    { "code":"29", "validFrom":"2023-01-01", "title":"Foreldres kognitive vansker" },
+                    { "code":"31", "validFrom":"2023-01-01", "title":"Foreldre har vedvarende økonomiske problemer/vedvarende lavinntekt" },
                     { "code":"5", "validFrom":"2013-01-01", "title":"Foreldres kriminalitet" },
                     { "code":"6", "validFrom":"2013-01-01", "title":"Høy grad av konflikt hjemme" },
                     { "code":"7", "validFrom":"2013-01-01", "title":"Vold i hjemmet/ barnet vitne til vold i nære
@@ -772,6 +777,7 @@ Bjorge.Saether@bufdir.no
                     { "code":"25", "validFrom":"2021-01-01", "title":"Barnets atferd" },
                     { "code":"26", "validFrom":"2021-01-01", "title":"Barnets kriminelle handlinger" },
                     { "code":"27", "validFrom":"2021-01-01", "title":"Barnet utsatt for menneskehandel" },
+                    { "code":"30", "validFrom":"2023-01-01", "title":"Barnets kognitive vansker" },
                     { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever
                     presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
                     { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnets situasjon (krever
@@ -794,6 +800,8 @@ Bjorge.Saether@bufdir.no
                     <xs:enumeration value="23"/>
                     <xs:enumeration value="24"/>
                     <xs:enumeration value="28"/>
+                    <xs:enumeration value="29"/>
+                    <xs:enumeration value="31"/>
                     <xs:enumeration value="5"/>
                     <xs:enumeration value="6"/>
                     <xs:enumeration value="7"/>
@@ -810,6 +818,7 @@ Bjorge.Saether@bufdir.no
                     <xs:enumeration value="25"/>
                     <xs:enumeration value="26"/>
                     <xs:enumeration value="27"/>
+                    <xs:enumeration value="30"/>
                     <xs:enumeration value="18"/>
                     <xs:enumeration value="19"/>
                 </xs:restriction>
