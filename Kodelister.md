@@ -79,7 +79,9 @@ Brukes på stien /Barnevern/Sak/Melding/Saksinnhold/@Kode
 | 22   | Foreldres manglende sensitivitet og følelsesmessige <br>tilgjengelighet for barnet                                                                        | 2021-01-01 |            |                                |
 | 23   | Foreldres manglende oppfølging av barnets behov <br>for barnehage, skole og pedagogiske tjenester                                                         | 2021-01-01 |            |                                |
 | 24   | Konflikt mellom foreldre som ikke bor sammen                                                                                                              | 2021-01-01 |            |                                |
-| 28   | Foreldres manglende oppfølging av barnets behov for helsetjenester                                                                                        | 2021-01-01 |            |                                |
+| 28   | Foreldres manglende oppfølging av barnets behov for helsetjenester                                                                                        | 2022-01-01 |            |                                |
+| 29   | Foreldres kognitive vansker                                                                                                                               | 2023-01-01 |            |                                |
+| 31   | Foreldre har vedvarende økonomiske problemer/vedvarende lavinntekt                                                                                        | 2023-01-01 |            |                                |
 | 5    | Foreldres kriminalitet                                                                                                                                    | 2013-01-01 |            |                                |
 | 6    | Høy grad av konflikt hjemme                                                                                                                               | 2013-01-01 |            |                                |
 | 7    | Vold i hjemmet/ barnet vitne til vold i nære <br>relasjoner                                                                                               | 2013-01-01 |            |                                |
@@ -96,6 +98,7 @@ Brukes på stien /Barnevern/Sak/Melding/Saksinnhold/@Kode
 | 25   | Barnets atferd                                                                                                                                            | 2021-01-01 |            |                                |
 | 26   | Barnets kriminelle handlinger                                                                                                                             | 2021-01-01 |            |                                |
 | 27   | Barnet utsatt for menneskehandel                                                                                                                          | 2021-01-01 |            |                                |
+| 30   | Barnets kognitive vansker                                                                                                                                 | 2023-01-01 |            |                                |
 | 18   | Andre forhold ved foreldre/ familien (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)          | 2013-01-01 |            |                                |
 | 19   | Andre forhold ved barnets situasjon (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)           | 2013-01-01 |            |                                |
 
