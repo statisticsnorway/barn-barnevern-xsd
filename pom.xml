@@ -16,7 +16,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <kotlinVersion>1.7.22</kotlinVersion>
+        <kotlinVersion>1.8.0</kotlinVersion>
         <kotestVersion>5.5.4</kotestVersion>
         <jackson.version>2.14.1</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
