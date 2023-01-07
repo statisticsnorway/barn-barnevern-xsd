@@ -53,11 +53,12 @@ Barnevernloven brukes i to forskjellige versjoner.<br/>
 Versjonen fra 1992 refereres som **BVL** av historiske årsaker og gjelder til 31. desember 2022.<br/>
 Versjonen fra 2021 refereres som **BVL2021** og gjelder fra 1. januar 2023.
 
-### <a name="omsorgstiltak">Omsorgstiltak</a>
-Et Tiltak er et Omsorgsstiltak dersom en av følgende:
-- Lovhjemmel/Lov = BVL og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 12
-- Lovhjemmel/Lov = BVL og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og Lovhjemmel/Ledd er én av 2 eller 3
-- Lovhjemmel/Lov = BVL og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og én av JmfrLovhjemmel/Kapittel = 4 og JmfrLovhjemmel/Paragraf = 12
+### <a name="omsorgsovertakelse">Omsorgsovertakelse</a>
+Et Tiltak er en Omsorgsovertakelse dersom en av følgende:
+- Lovhjemmel/Lov = **[BVL](#barnevernloven)** og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 12
+- Lovhjemmel/Lov = **[BVL](#barnevernloven)** og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og Lovhjemmel/Ledd er én av 2 eller 3
+- Lovhjemmel/Lov = **[BVL](#barnevernloven)** og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og én av JmfrLovhjemmel/Kapittel = 4 og JmfrLovhjemmel/Paragraf = 12
+- Lovhjemmel/Lov = **[BVL2021](#barnevernloven)** og Lovhjemmel/Kapittel = 5 og Lovhjemmel/Paragraf = 1
 
 
 ### <a name="plasseringstiltak">Plasseringstiltak</a>
@@ -421,7 +422,7 @@ Alvorlighetsgrad: ERROR
 
 Gitt at man har en Undersøkelse, en Relasjon og et Vedtak<br/>
 når Undersøkelse sin Konklusjon finnes og Konklusjon sin Kode er 1 eller 2 <br/>
-og en relasjon som inneholder undersøkelse/Id i sin FraId, "Undersokelse" i sin FraType, vedtak/Id i sin TilId og "Vedtak" i sin TilType mangler<br/>
+og en relasjon fra undersøkelsen til vedtaket mangler, der relasjonen skal inneholde undersøkelse/Id i sin FraId, "Undersokelse" i sin FraType, vedtak/Id i sin TilId og "Vedtak" i sin TilType<br/>
 så gi feilmeldingen "Konkludert Undersøkelse mangler en relasjon til vedtak"
 
 Alvorlighetsgrad: ERROR
