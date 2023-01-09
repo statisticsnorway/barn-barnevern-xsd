@@ -1,6 +1,7 @@
 # Kravspesifikasjon for validering
 
 ## Innhold
+- [Oversettelser / Translations]()
 - [Definisjoner](#definisjoner)
 - Validéringer
   - [Filbeskrivelse](#filbeskrivelse)
@@ -22,15 +23,42 @@
   - [2.0.0](#2_0_0)
 
 
+## <a name="Oversettelser_Translations">Oversettelser / Translations</a>
+
+| Norsk                        | English                             |
+|------------------------------|-------------------------------------|
+| Barnevernloven               | Child Care Act                      |
+| Endringslogg                 | Changelog                           |
+| Ettervern                    | Aftercare                           |
+| Filbeskrivelse               | File description                    |
+| Flytting                     | Relocation                          |
+| Melder                       | Reporter                            |
+| Melding (bekymringsmelding)  | Message (message of worry)          |
+| Oversendelse til fylkesnemnd | Case forwarding to the county board |
+| Omsorgstiltak                | Care measure                        |
+| Personalia                   | Personalia                          |
+| Plan (tiltaksplan)           | Plan (plan of measures)             |
+| Relasjon                     | Relation                            |
+| Sak                          | Case                                |
+| Saksinnhold                  | Case content                        |
+| Tiltak                       | Measure                             |
+| Undersøkelse                 | Investigation                       |
+| Vedtak                       | Desicion                            |
+
 
 ## <a name="definisjoner">Definisjoner</a>
 
+### <a name="barnevernloven">Barnevernloven</a>
+Barnevernloven brukes i to forskjellige versjoner.<br/>
+Versjonen fra 1992 refereres som **BVL** av historiske årsaker og gjelder til 31. desember 2022.<br/>
+Versjonen fra 2021 refereres som **BVL2021** og gjelder fra 1. januar 2023.
 
-### <a name="omsorgstiltak">Omsorgstiltak</a>
-Et Tiltak er et Omsorgsstiltak dersom en av følgende:
-- Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 12
-- Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og Lovhjemmel/Ledd er én av 2 eller 3
-- Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og én av JmfrLovhjemmel/Kapittel = 4 og JmfrLovhjemmel/Paragraf = 12
+### <a name="omsorgsovertakelse">Omsorgsovertakelse</a>
+Et Tiltak er en Omsorgsovertakelse dersom en av følgende:
+- Lovhjemmel/Lov = **[BVL](#barnevernloven)** og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 12
+- Lovhjemmel/Lov = **[BVL](#barnevernloven)** og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og Lovhjemmel/Ledd er én av 2 eller 3
+- Lovhjemmel/Lov = **[BVL](#barnevernloven)** og Lovhjemmel/Kapittel = 4 og Lovhjemmel/Paragraf = 8 og én av JmfrLovhjemmel/Kapittel = 4 og JmfrLovhjemmel/Paragraf = 12
+- Lovhjemmel/Lov = **[BVL2021](#barnevernloven)** og Lovhjemmel/Kapittel = 5 og Lovhjemmel/Paragraf = 1
 
 
 ### <a name="plasseringstiltak">Plasseringstiltak</a>
@@ -394,7 +422,7 @@ Alvorlighetsgrad: ERROR
 
 Gitt at man har en Undersøkelse, en Relasjon og et Vedtak<br/>
 når Undersøkelse sin Konklusjon finnes og Konklusjon sin Kode er 1 eller 2 <br/>
-og en relasjon som inneholder undersøkelse/Id i sin FraId, "Undersokelse" i sin FraType, vedtak/Id i sin TilId og "Vedtak" i sin TilType mangler<br/>
+og en relasjon fra undersøkelsen til vedtaket mangler, der relasjonen skal inneholde undersøkelse/Id i sin FraId, "Undersokelse" i sin FraType, vedtak/Id i sin TilId og "Vedtak" i sin TilType<br/>
 så gi feilmeldingen "Konkludert Undersøkelse mangler en relasjon til vedtak"
 
 Alvorlighetsgrad: ERROR
@@ -445,7 +473,7 @@ Alvorlighetsgrad: ERROR
 
 ### Vedtak Kontroll 2g: Krav sin SluttDato er etter vedtakets SluttDato
 
-Gitt at man har et Vedtak der [SluttDato]() finnes og Vedtaket har Krav der Krav sin Konklusjon/SluttDato finnes<br/>
+Gitt at man har et Vedtak der SluttDato finnes og Vedtaket har Krav der Krav sin Konklusjon/SluttDato finnes<br/>
 når kravets SluttDato er etter vedtakets SluttDato<br/>
 så gi feilmeldingen "Kravets sluttdato {Krav/Konklusjon/SluttDato} er etter Vedtakets sluttdato {Konklusjon/SluttDato}"
 
@@ -500,9 +528,24 @@ Alvorlighetsgrad: ERROR
 
 Gitt at man har et Vedtak der Vedtak/LovhjemmelType/Lov og eventuelt Vedtak/JmfrLovhjemmelType/Lov er utfylt<br/>
 når Lov er utfylt med noe annet enn BVL eller BVL2021<br/>
-så gir feilmeldingen “Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL eller BVL2021“
+så gir feilmeldingen "Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL eller BVL2021"
 
 Alvorlighetsgrad: ERROR
+
+
+
+### Vedtak kontroll 5: Lovhjemmel refererer til feil barnevernlov
+
+Gitt att man har et Vedtak
+
+når Vedtak sin StartDato er før 01. januar 2023 og Vedtak/Lovhjemmel/Lov ikke er BVL
+så gi feilmeldingen "Lovhjemmel opprettet før 01. januar 2023 krever lov = '**[BVL](#barnevernloven)**'"
+
+når Vedtak sin StartDato er 01. januar 2023 eller senere og Vedtak/Lovhjemmel/Lov ikke er BVL2021
+så gi feilmeldingen "Lovhjemmel opprettet på 01. januar 2023 eller senere krever lov = '**[BVL2021](#barnevernloven)**'"
+
+Alvorlighetsgrad: ERROR
+
 
 
 
@@ -796,8 +839,27 @@ så gi feilmeldingen "Oversendelse til fylkesnemndens startdato {StartDato} er e
 Alvorlighetsgrad: ERROR
 
 
+### Oversendelse til fylkesnemnd Kontroll 5: Lovhjemmel refererer til feil barnevernlov
+
+Gitt at man har et Oversendelse til fylkesnemnd<br/>
+
+når OversendelseFylkesnemnd sin StartDato er før 01. januar 2023 og OversendelseFylkesnemnd/Lovhjemmel/Lov ikke er BVL<br/>
+så gi feilmeldingen "Lovhjemmel opprettet før 01. januar 2023 krever lov = '**[BVL](#barnevernloven)**'"
+
+når OversendelseFylkesnemnd sin StartDato er 01. januar 2023 eller senere og OversendelseFylkesnemnd/Lovhjemmel/Lov ikke er BVL2021<br/>
+så gi feilmeldingen "Lovhjemmel opprettet på 01. januar 2023 eller senere krever lov = '**[BVL2021](#barnevernloven)**'"
+
+Alvorlighetsgrad: ERROR
+
+
 
 ## <a name="endringslogg">Endringslogg</a>
+
+### <a name="2023-01-06">2023-01-06</a>
+
+Lagt til
+- Vedtak kontroll 5: Lovhjemmel refererer til feil barnevernlov
+- Oversendelse til fylkesnemnd kontroll 5: Lovhjemmel refererer til feil barnevernlov
 
 ### <a name="2022-10-31">2022-10-31</a>
 
