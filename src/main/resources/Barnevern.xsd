@@ -504,7 +504,7 @@ Bjorge.Saether@bufdir.no
             <xs:element name="Lovhjemmel" type="LovhjemmelType"/>
             <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
             <xs:element name="Kategori" type="KategoriType"/>
-            <xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="Tilsyn" type="TilsynType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part.</xs:documentation>
