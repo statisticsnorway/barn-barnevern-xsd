@@ -937,6 +937,13 @@ Gyldig fra 2022-01-01
 
 ## <a name="endringslogg">Endringslogg</a>
 
+### <a name="2023-01-06">2023-01-13</a>
+
+Lagt til
+- Punkt om "Migrering av data innrapportert via Kostra"
+- Punkt om "Innrapporteringskanaler"
+- Gyldig fra dato for alle valideringsregler
+
 ### <a name="2023-01-06">2023-01-06</a>
 
 Lagt til
