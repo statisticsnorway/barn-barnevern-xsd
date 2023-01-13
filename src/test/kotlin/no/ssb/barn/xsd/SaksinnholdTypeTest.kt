@@ -43,8 +43,8 @@ class SaksinnholdTypeTest : BehaviorSpec({
                 "invalid Kode",
                 "<Saksinnhold Kode=\"42\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration " +
-                        "'[1, 2, 3, 4, 20, 21, 22, 23, 24, 28, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, " +
-                        "25, 26, 27, 18, 19]'. It must be a value from the enumeration."
+                        "'[1, 2, 3, 4, 20, 21, 22, 23, 24, 28, 29, 31, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, " +
+                        "17, 25, 26, 27, 30, 18, 19]'. It must be a value from the enumeration."
             ),
 
             /** Presisering */
