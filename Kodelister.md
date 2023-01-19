@@ -167,13 +167,16 @@ Definert på stien /Barnevern/Sak/Plan
 
 Brukes på stien /Barnevern/Sak/Plan/@Plantype
 
-| Kode | Betydning                                                                                | Gyldig fra |
-|:-----|------------------------------------------------------------------------------------------|------------|
-| 1    | Tiltaksplan etter BVL2021 § 8-1 *(tidligere BVL1992 § 4-5)*                              | 2013-01-01 |
-| 2    | Tiltaksplan etter BVL2021 § 8-4 *(tidligere BVL1992 § 4-28)*                             | 2013-01-01 |
-| 3    | Foreløpig omsorgsplan etter BVL2021 § 8-3, 4. ledd *(tidligere BVL1992 § 4-15, 3. ledd)* | 2013-01-01 |
-| 4    | Omsorgsplan etter BVL2021 § 8-3, 4. ledd *(tidligere BVL1992 § 4-15, 3. ledd)*           | 2013-01-01 |
-| 5    | Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2. ledd                                    | 2023-01-01 |
+| Kode | Betydning                                                                      | Gyldig fra | Gyldig til |
+|:-----|--------------------------------------------------------------------------------|------------|------------|
+| 1    | Tiltaksplan etter BVL2021 § 8-1 *(tidligere BVL1992 § 4-5)*                    | 2013-01-01 |            |
+| 2    | Tiltaksplan etter BVL2021 § 8-4 *(tidligere BVL1992 § 4-28)*                   | 2013-01-01 |            |
+| 3    | Foreløpig omsorgsplan etter BVL1992 § 4-15, 3. ledd                            | 2013-01-01 | 2022-12-31 |
+| 4    | Omsorgsplan etter BVL2021 § 8-3, 4. ledd *(tidligere BVL1992 § 4-15, 3. ledd)* | 2013-01-01 |            |
+| 5    | Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2. ledd                          | 2023-01-01 |            |
+| 6    | Samværsplan etter BVL 2021 § 7-6                                               | 2023-01-01 |            |
+| 7    | Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd                                | 2023-01-01 |            |
+| 8    | Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd              | 2023-01-01 |            |
 
 <a name="#/Barnevern/Sak/Tiltak"></a>
 

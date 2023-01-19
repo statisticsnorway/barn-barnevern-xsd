@@ -17,8 +17,7 @@ Bjorge.Saether@bufdir.no
         <xs:simpleType>
             <xs:restriction base="xs:string">
                 <xs:length value="36"/>
-                <xs:pattern
-                        value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
+                <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
             </xs:restriction>
         </xs:simpleType>
     </xs:attribute>
@@ -117,8 +116,7 @@ Bjorge.Saether@bufdir.no
             <xs:simpleType>
                 <xs:restriction base="xs:string">
                     <xs:length value="36"/>
-                    <xs:pattern
-                            value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
+                    <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -328,8 +326,7 @@ Bjorge.Saether@bufdir.no
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="OversendelseFylkesnemnd" type="OversendelseBarneverntjenesteType" minOccurs="0"
-                        maxOccurs="unbounded">
+            <xs:element name="OversendelseFylkesnemnd" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation>Begjæring om tvangsvedtak fra barneverntjeneste til fylkesnemnd.
                     </xs:documentation>
@@ -403,9 +400,12 @@ Bjorge.Saether@bufdir.no
                 <xs:documentation>
                     1 = Tiltaksplan etter BVL2021 § 8-1 (tidligere BVL1992 § 4-5)
                     2 = Tiltaksplan etter BVL2021 § 8-4 (tidligere BVL1992 § 4-28)
-                    3 = Foreløpig omsorgsplan etter BVL2021 § 8-3, 4. ledd (tidligere BVL1992 § 4-15, 3. ledd)
+                    3 = Foreløpig omsorgsplan etter BVL1992 § 4-15, 3. ledd
                     4 = Omsorgsplan etter BVL2021 § 8-3, 4. ledd (tidligere BVL1992 § 4-15, 3. ledd)
                     5 = Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2. ledd
+                    6 = Samværsplan etter BVL 2021 § 7-6
+                    7 = Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd
+                    8 = Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd
                 </xs:documentation>
                 <xs:appinfo xml:lang="json">
                     {
@@ -417,9 +417,12 @@ Bjorge.Saether@bufdir.no
                     "items":[
                     { "code":"1", "validFrom":"2013-01-01", "title":"Tiltaksplan etter BVL2021 § 8-1 (tidligere BVL1992 § 4-5)" },
                     { "code":"2", "validFrom":"2013-01-01", "title":"Tiltaksplan etter BVL2021 § 8-4 (tidligere BVL1992 § 4-28)" },
-                    { "code":"3", "validFrom":"2013-01-01", "title":"Foreløpig omsorgsplan etter BVL2021 § 8-3, 4. ledd (tidligere BVL1992 § 4-15, 3. ledd)" },
+                    { "code":"3", "validFrom":"2013-01-01", "validTo":"2022-12-31" "title":"Foreløpig omsorgsplan etter BVL1992 § 4-15, 3. ledd" },
                     { "code":"4", "validFrom":"2013-01-01", "title":"Omsorgsplan etter BVL2021 § 8-3, 4. ledd (tidligere BVL1992 § 4-15, 3. ledd)" }
                     { "code":"5", "validFrom":"2023-01-01", "title":"Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2. ledd" }
+                    { "code":"6", "validFrom":"2023-01-01", "title":"Samværsplan etter BVL 2021 § 7-6" }
+                    { "code":"7", "validFrom":"2023-01-01", "title":"Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd" }
+                    { "code":"8", "validFrom":"2023-01-01", "title":"Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd" }
                     ]
                     }
                 </xs:appinfo>
@@ -433,6 +436,9 @@ Bjorge.Saether@bufdir.no
                     <xs:enumeration value="3"/>
                     <xs:enumeration value="4"/>
                     <xs:enumeration value="5"/>
+                    <xs:enumeration value="6"/>
+                    <xs:enumeration value="7"/>
+                    <xs:enumeration value="8"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -504,7 +510,7 @@ Bjorge.Saether@bufdir.no
             <xs:element name="Lovhjemmel" type="LovhjemmelType"/>
             <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
             <xs:element name="Kategori" type="KategoriType"/>
-            <xs:element name="Saksinnhold" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Tiltaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Tilsyn" type="TilsynType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part.</xs:documentation>
