@@ -3,6 +3,30 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.2.2.0
+Endringsdato: 10. januar 2023
+
+## Struktur
+- /@versjon oppdatert til 2.2.0
+- PlanType
+  - Lagt til ny kode:
+    - 5 = Plan for ettervern etter BVL2021 § 8-5, 2. ledd / BVL1992 § 4-15, 4. ledd
+- /Barnevern/Sak/Tiltak
+  - Lagt til underelement SaksinnholdType
+
+---
+# v.2.1.1
+Endringsdato: 16. desember 2022
+
+## Struktur
+- /@versjon oppdatert til 2.1.1
+- SaksinnholdType
+  - Lagt til nye koder: 
+    - 29 = Foreldres kognitive vansker
+    - 30 = Barnets kognitive vansker
+    - 31 = Foreldre har vedvarende økonomiske problemer/vedvarende lavinntekt 
+
+---
 # v.2.1.0
 Endringsdato: 02. desember 2022
 

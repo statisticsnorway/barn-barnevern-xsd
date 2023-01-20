@@ -68,39 +68,39 @@ Brukes på stien /Barnevern/Sak/Melding/Melder/@Kode
 
 Brukes på stien /Barnevern/Sak/Melding/Saksinnhold/@Kode
 
-| Kode | Betydning                                                                                                                                                 | Gyldig fra | Gyldig til | Endring                        |
-|:-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------|------------|------------|--------------------------------|
-| 1    | Foreldres somatiske sykdom                                                                                                                                | 2013-01-01 |            |                                |
-| 2    | Foreldres psykiske problem/ lidelse                                                                                                                       | 2013-01-01 |            |                                |
-| 3    | Foreldres rusmisbruk                                                                                                                                      | 2013-01-01 |            |                                |
-| 4    | Foreldres manglende foreldreferdigheter                                                                                                                   | 2013-01-01 | 2020-12-31 | 4 deles i 20, 21, 22, 23 og 24 |
-| 20   | Foreldres manglende beskyttelse av barnet                                                                                                                 | 2021-01-01 |            |                                |
-| 21   | Foreldres manglende stimulering og regulering av barnet                                                                                                   | 2021-01-01 |            |                                |
-| 22   | Foreldres manglende sensitivitet og følelsesmessige <br>tilgjengelighet for barnet                                                                        | 2021-01-01 |            |                                |
-| 23   | Foreldres manglende oppfølging av barnets behov <br>for barnehage, skole og pedagogiske tjenester                                                         | 2021-01-01 |            |                                |
-| 24   | Konflikt mellom foreldre som ikke bor sammen                                                                                                              | 2021-01-01 |            |                                |
-| 28   | Foreldres manglende oppfølging av barnets behov for helsetjenester                                                                                        | 2022-01-01 |            |                                |
-| 29   | Foreldres kognitive vansker                                                                                                                               | 2023-01-01 |            |                                |
-| 31   | Foreldre har vedvarende økonomiske problemer/vedvarende lavinntekt                                                                                        | 2023-01-01 |            |                                |
-| 5    | Foreldres kriminalitet                                                                                                                                    | 2013-01-01 |            |                                |
-| 6    | Høy grad av konflikt hjemme                                                                                                                               | 2013-01-01 |            |                                |
-| 7    | Vold i hjemmet/ barnet vitne til vold i nære <br>relasjoner                                                                                               | 2013-01-01 |            |                                |
-| 8    | Foreldres manglende ivaretakelse av grunnleggende<br/> og hverdagslig omsorg for barnet                                                                   | 2013-01-01 |            |                                |
-| 9    | Barnet utsatt for fysisk vold                                                                                                                             | 2013-01-01 |            |                                |
-| 10   | Barnet utsatt for psykisk vold                                                                                                                            | 2013-01-01 |            |                                |
-| 11   | Barnet utsatt for seksuelle overgrep                                                                                                                      | 2013-01-01 |            |                                |
-| 12   | Barnet mangler omsorgsperson                                                                                                                              | 2013-01-01 |            |                                |
-| 13   | Barnet har nedsatt funksjonsevne                                                                                                                          | 2013-01-01 | 2020-12-31 |                                |
-| 14   | Barnets psykiske problem/lidelse                                                                                                                          | 2013-01-01 |            |                                |
-| 15   | Barnets rusmisbruk                                                                                                                                        | 2013-01-01 |            |                                |
-| 16   | Barnets atferd/ kriminalitet                                                                                                                              | 2013-01-01 | 2020-12-31 | 16 deles i 25 og 26            |
-| 17   | Barnets relasjonsvansker<br>(mistanke om eller diagnostiserte tilknytningsvansker,<br>problematikk knyttet til samspillet mellom barn og omsorgspersoner) | 2013-01-01 |            |                                |
-| 25   | Barnets atferd                                                                                                                                            | 2021-01-01 |            |                                |
-| 26   | Barnets kriminelle handlinger                                                                                                                             | 2021-01-01 |            |                                |
-| 27   | Barnet utsatt for menneskehandel                                                                                                                          | 2021-01-01 |            |                                |
-| 30   | Barnets kognitive vansker                                                                                                                                 | 2023-01-01 |            |                                |
-| 18   | Andre forhold ved foreldre/ familien (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)          | 2013-01-01 |            |                                |
-| 19   | Andre forhold ved barnets situasjon (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)           | 2013-01-01 |            |                                |
+| Kode | Betydning                                                                                                                                                 | Gyldig fra | Gyldig til | Endring                            |
+|:-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------|------------|------------|------------------------------------|
+| 1    | Foreldres somatiske sykdom                                                                                                                                | 2013-01-01 |            |                                    |
+| 2    | Foreldres psykiske problem/ lidelse                                                                                                                       | 2013-01-01 |            |                                    |
+| 3    | Foreldres rusmisbruk                                                                                                                                      | 2013-01-01 |            |                                    |
+| 4    | Foreldres manglende foreldreferdigheter                                                                                                                   | 2013-01-01 | 2020-12-31 | 4 deles i 20, 21, 22, 23, 24 og 28 |
+| 20   | Foreldres manglende beskyttelse av barnet                                                                                                                 | 2021-01-01 |            |                                    |
+| 21   | Foreldres manglende stimulering og regulering av barnet                                                                                                   | 2021-01-01 |            |                                    |
+| 22   | Foreldres manglende sensitivitet og følelsesmessige <br>tilgjengelighet for barnet                                                                        | 2021-01-01 |            |                                    |
+| 23   | Foreldres manglende oppfølging av barnets behov <br>for barnehage, skole og pedagogiske tjenester                                                         | 2021-01-01 |            |                                    |
+| 24   | Konflikt mellom foreldre som ikke bor sammen                                                                                                              | 2021-01-01 |            |                                    |
+| 28   | Foreldres manglende oppfølging av barnets behov for helsetjenester                                                                                        | 2022-01-01 |            |                                    |
+| 29   | Foreldres kognitive vansker                                                                                                                               | 2023-01-01 |            |                                    |
+| 31   | Foreldre har vedvarende økonomiske problemer/vedvarende lavinntekt                                                                                        | 2023-01-01 |            |                                    |
+| 5    | Foreldres kriminalitet                                                                                                                                    | 2013-01-01 |            |                                    |
+| 6    | Høy grad av konflikt hjemme                                                                                                                               | 2013-01-01 |            |                                    |
+| 7    | Vold i hjemmet/ barnet vitne til vold i nære <br>relasjoner                                                                                               | 2013-01-01 |            |                                    |
+| 8    | Foreldres manglende ivaretakelse av grunnleggende<br/> og hverdagslig omsorg for barnet                                                                   | 2013-01-01 |            |                                    |
+| 9    | Barnet utsatt for fysisk vold                                                                                                                             | 2013-01-01 |            |                                    |
+| 10   | Barnet utsatt for psykisk vold                                                                                                                            | 2013-01-01 |            |                                    |
+| 11   | Barnet utsatt for seksuelle overgrep                                                                                                                      | 2013-01-01 |            |                                    |
+| 12   | Barnet mangler omsorgsperson                                                                                                                              | 2013-01-01 |            |                                    |
+| 13   | Barnet har nedsatt funksjonsevne                                                                                                                          | 2013-01-01 | 2020-12-31 |                                    |
+| 14   | Barnets psykiske problem/lidelse                                                                                                                          | 2013-01-01 |            |                                    |
+| 15   | Barnets rusmisbruk                                                                                                                                        | 2013-01-01 |            |                                    |
+| 16   | Barnets atferd/ kriminalitet                                                                                                                              | 2013-01-01 | 2020-12-31 | 16 deles i 25 og 26                |
+| 17   | Barnets relasjonsvansker<br>(mistanke om eller diagnostiserte tilknytningsvansker,<br>problematikk knyttet til samspillet mellom barn og omsorgspersoner) | 2013-01-01 |            |                                    |
+| 25   | Barnets atferd                                                                                                                                            | 2021-01-01 |            |                                    |
+| 26   | Barnets kriminelle handlinger                                                                                                                             | 2021-01-01 |            |                                    |
+| 27   | Barnet utsatt for menneskehandel                                                                                                                          | 2021-01-01 |            |                                    |
+| 30   | Barnets kognitive vansker                                                                                                                                 | 2023-01-01 |            |                                    |
+| 18   | Andre forhold ved foreldre/ familien (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)          | 2013-01-01 |            |                                    |
+| 19   | Andre forhold ved barnets situasjon (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)           | 2013-01-01 |            |                                    |
 
 <a name="#/Barnevern/Sak/Melding/Konklusjon/@Kode"></a>
 
@@ -146,14 +146,14 @@ Brukes på stien /Barnevern/Sak/Undersokelse/UtvidetFrist/@Innvilget
 
 Brukes på stien /Barnevern/Sak/Undersokelse/Konklusjon/@Kode
 
-| Kode | Betydning                                                                                                                                                                                                                                                                                                                        | Gyldig fra |
-|:---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------- |
-|    1 | Barneverntjenesten fatter vedtak om tiltak                                                                                                                                                                                                                                                                                       | 2013-01-01 |
-|    2 | Begjæring om tiltak for fylkesnemnda                                                                                                                                                                                                                                                                                             | 2013-01-01 |
-|    3 | Undersøkelsen henlagt etter barnverntjenestens vurdering <br>(kategorien gjelder når barneverntjenesten vurderer at vilkår <br>for å sette inn tiltak ikke er oppfylt)                                                                                                                                                           | 2013-01-01 |
-|    4 | Undersøkelsen henlagt etter partens ønske <br>(kategorien gjelder når barneverntjenesten vurderer at vilkår for<br> å sette inn tiltak etter § 4-4 er tilstede, men saken henlegges fordi <br>foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er <br>snakk om hjelpetiltak som foreldre/barn kan takke nei til.) | 2013-01-01 |
-|    5 | Undersøkelsen henlagt som følge av flytting <br>kategorien gjelder når undersøkelsessak henlegges fordi barnet <br>flytter til en ny kommune. Bør også innebære et underpunkt der <br>barneverntjenesten må oppgi om saken er meldt videre til barnets nye <br>oppholdskommune, obligatorisk ja/nei svar) (krever presisering)   | 2013-01-01 |
-|    6 | Undersøkelsen henlagt etter henvisning til annen instans                                                                                                                                                                                                                                                                         | 2022-01-01 |
+| Kode | Betydning                                                                                                                                                                                                                                                                                                                                                      | Gyldig fra |
+|:---- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------- |
+|    1 | Barneverntjenesten fatter vedtak om tiltak                                                                                                                                                                                                                                                                                                                     | 2013-01-01 |
+|    2 | Begjæring om tiltak for fylkesnemnda                                                                                                                                                                                                                                                                                                                           | 2013-01-01 |
+|    3 | Undersøkelsen henlagt etter barnverntjenestens vurdering <br>(kategorien gjelder når barneverntjenesten vurderer at vilkår <br>for å sette inn tiltak ikke er oppfylt)                                                                                                                                                                                         | 2013-01-01 |
+|    4 | Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter BVL2021 §§ 3-1 til 3-5 *(tidligere BVL1992 § 4-4)* er til stede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.) | 2013-01-01 |
+|    5 | Undersøkelsen henlagt som følge av flytting <br>kategorien gjelder når undersøkelsessak henlegges fordi barnet <br>flytter til en ny kommune. Bør også innebære et underpunkt der <br>barneverntjenesten må oppgi om saken er meldt videre til barnets nye <br>oppholdskommune, obligatorisk ja/nei svar) (krever presisering)                                 | 2013-01-01 |
+|    6 | Undersøkelsen henlagt etter henvisning til annen instans                                                                                                                                                                                                                                                                                                       | 2022-01-01 |
 
 <a name="#/Barnevern/Sak/Plan"></a>
 
@@ -167,12 +167,16 @@ Definert på stien /Barnevern/Sak/Plan
 
 Brukes på stien /Barnevern/Sak/Plan/@Plantype
 
-| Kode | Betydning                                   | Gyldig fra |
-|:-----|---------------------------------------------|------------|
-| 1    | Tiltaksplan etter § 4-5                     | 2013-01-01 |
-| 2    | Tiltaksplan etter § 4-28                    | 2013-01-01 |
-| 3    | Foreløpig omsorgsplan etter § 4-15, 3. ledd | 2013-01-01 |
-| 4    | Omsorgsplan etter § 4-15, 3. ledd           | 2013-01-01 |
+| Kode | Betydning                                                                      | Gyldig fra | Gyldig til |
+|:-----|--------------------------------------------------------------------------------|------------|------------|
+| 1    | Tiltaksplan etter BVL2021 § 8-1 *(tidligere BVL1992 § 4-5)*                    | 2013-01-01 |            |
+| 2    | Tiltaksplan etter BVL2021 § 8-4 *(tidligere BVL1992 § 4-28)*                   | 2013-01-01 |            |
+| 3    | Foreløpig omsorgsplan etter BVL1992 § 4-15, 3. ledd                            | 2013-01-01 | 2022-12-31 |
+| 4    | Omsorgsplan etter BVL2021 § 8-3, 4. ledd *(tidligere BVL1992 § 4-15, 3. ledd)* | 2013-01-01 |            |
+| 5    | Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2. ledd                          | 2023-01-01 |            |
+| 6    | Samværsplan etter BVL 2021 § 7-6                                               | 2023-01-01 |            |
+| 7    | Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd                                | 2023-01-01 |            |
+| 8    | Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd              | 2023-01-01 |            |
 
 <a name="#/Barnevern/Sak/Tiltak"></a>
 
@@ -194,7 +198,7 @@ Brukes på stien /Barnevern/Sak/Tiltak/Kategori/@Kode
 | 2.1  | Fosterhjem i familie og nære nettverk                                                                                                                                                                                                                  | 2013-01-01 |
 | 2.2  | Fosterhjem utenfor familie og nære nettverk                                                                                                                                                                                                            | 2013-01-01 |
 | 2.3  | Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)                                                                                                                                                                                    | 2013-01-01 |
-| 2.4  | Fosterhjem etter § 4-27                                                                                                                                                                                                                                | 2013-01-01 |
+| 2.4  | Fosterhjem etter BVL2021 § 6-3 *(tidligere BVL1992 § 4-27)*                                                                                                                                                                                            | 2013-01-01 |
 | 2.5  | Beredskapshjem utenom familie og nære nettverk                                                                                                                                                                                                         | 2013-01-01 |
 | 2.6  | Midlertidig hjem i familie og nære nettverk                                                                                                                                                                                                            | 2021-01-01 |
 | 2.99 | Andre tiltak (krever presisering)                                                                                                                                                                                                                      | 2013-01-01 |
@@ -229,8 +233,8 @@ Brukes på stien /Barnevern/Sak/Tiltak/Kategori/@Kode
 | 6.3  | Individuell plan                                                                                                                                                                                                                                       | 2013-01-01 |
 | 6.4  | Deltakelse i ansvarsgruppe                                                                                                                                                                                                                             | 2013-01-01 |
 | 6.99 | Andre tiltak (krever presisering)                                                                                                                                                                                                                      | 2013-01-01 |
-| 7.1  | Bvl § 4-10 medisinsk undersøkelse og behandling                                                                                                                                                                                                        | 2013-01-01 |
-| 7.2  | Bvl § 4-11 behandling av barn med særlige opplæringsbehov                                                                                                                                                                                              | 2013-01-01 |
+| 7.1  | BVL2021 § 3-7 *(tidligere BVL1992 § 4-10)* medisinsk undersøkelse og behandling                                                                                                                                                                        | 2013-01-01 |
+| 7.2  | BVL2021 § 3-8 *(tidligere BVL1992 § 4-11)* behandling av barn med særlige opplæringsbehov                                                                                                                                                              | 2013-01-01 |
 | 7.3  | Psykisk helsehjelp for barn og unge <br>(Gjelder ikke ved henvisninger, men når barn får behandling <br>av psykolog eller innen psykisk helsevern/BUP)                                                                                                 | 2013-01-01 |
 | 7.99 | Andre tiltak (krever presisering)                                                                                                                                                                                                                      | 2013-01-01 |
 | 8.1  | Økonomisk hjelp ved etablering i egen bolig/ hybel (Ikke husleie)                                                                                                                                                                                      | 2013-01-01 |
@@ -244,12 +248,12 @@ Brukes på stien /Barnevern/Sak/Tiltak/Kategori/@Kode
 
 Brukes på stien /Barnevern/Sak/Tiltak/Opphevelse/@Kode
 
-| Kode | Betydning                                               | Gyldig fra |
-|:---- |---------------------------------------------------------| ---------- |
-|    1 | Barnet tilbakeført til foreldre/ familien jamfør § 4-21 | 2013-01-01 |
-|    2 | Barnet har fylt 18 år                                   | 2013-01-01 |
-|    3 | Adopsjon § 4-20                                         | 2013-01-01 |
-|    4 | Annet (krever presisering)                              | 2013-01-01 |
+| Kode | Betydning                                                                                   | Gyldig fra |
+|:---- |---------------------------------------------------------------------------------------------| ---------- |
+|    1 | Barnet tilbakeført til foreldre/ familien jamfør BVL2021 § 5-7 *(tidligere BVL1992 § 4-21)* | 2013-01-01 |
+|    2 | Barnet har fylt 18 år                                                                       | 2013-01-01 |
+|    3 | Adopsjon BVL2021 § 5-10 *(tidligere BVL1992 § 4-20)*                                        | 2013-01-01 |
+|    4 | Annet (krever presisering)                                                                  | 2013-01-01 |
 
 <a name="#/Barnevern/Sak/Vedtak"></a>
 
