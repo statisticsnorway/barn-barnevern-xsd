@@ -11,6 +11,11 @@ Endringsdato: 10. januar 2023
 - PlanType
   - Lagt til ny kode:
     - 5 = Plan for ettervern etter BVL2021 § 8-5, 2. ledd / BVL1992 § 4-15, 4. ledd
+    - 6 = Samværsplan etter BVL 2021 § 7-6
+    - 7 = Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd
+    - 8 = Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd
+  - Kode som utgår og blir ugyldig fra 1. januar 2023
+    - 3 = Foreløpig omsorgsplan etter BVL1992 § 4-15, 3. ledd
 - /Barnevern/Sak/Tiltak
   - Lagt til underelement SaksinnholdType
 
