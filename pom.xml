@@ -18,12 +18,13 @@
 
         <kotlin.version>1.8.0</kotlin.version>
         <kotestVersion>5.5.4</kotestVersion>
-        <jackson.version>2.14.1</jackson.version>
+        <jackson.version>2.14.2</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jacoco.version>0.8.8</jacoco.version>
         <checkstyle.version>10.4</checkstyle.version>
+        <bytebuddy.version>1.12.22</bytebuddy.version>
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>statisticsnorway</sonar.organization>
@@ -38,12 +39,12 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.12.21</version>
+                <version>${bytebuddy.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy-agent</artifactId>
-                <version>1.12.21</version>
+                <version>${bytebuddy.version}</version>
             </dependency>
 
             <dependency>
@@ -70,7 +71,7 @@
             <dependency>
                 <groupId>io.mockk</groupId>
                 <artifactId>mockk-jvm</artifactId>
-                <version>1.13.3</version>
+                <version>1.13.4</version>
             </dependency>
 
             <dependency>
