@@ -16,15 +16,15 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <kotlin.version>1.8.0</kotlin.version>
-        <kotestVersion>5.5.4</kotestVersion>
+        <kotlin.version>1.8.10</kotlin.version>
+        <kotestVersion>5.5.5</kotestVersion>
         <jackson.version>2.14.2</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jacoco.version>0.8.8</jacoco.version>
         <checkstyle.version>10.4</checkstyle.version>
-        <bytebuddy.version>1.12.22</bytebuddy.version>
+        <bytebuddy.version>1.12.23</bytebuddy.version>
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>statisticsnorway</sonar.organization>
