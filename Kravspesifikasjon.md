@@ -795,9 +795,9 @@ Gyldig fra 2023-01-01
 
 Gitt at man har et Tiltak<br/>
 når Kategori/Kode = 2.99<br/>
-så gi advarsel "Dette er er en advarsel. Kun plasseringstiltak skal ha kode 1.99. <br/>
+så gi advarsel "Dette er er en advarsel. Kun plasseringstiltak skal ha kode 2.99. <br/>
 Dersom dette ikke er et plasseringstiltak (fosterhjem) må tiltakskode endres. <br/>
-Er det et administrative vedtak som er gitt kode 1.99 skal tiltaket slettes."
+Er det et administrative vedtak som er gitt kode 2.99 skal tiltaket slettes."
 
 Alvorlighetsgrad: Warning<br/>
 Gyldig fra 2023-01-01
