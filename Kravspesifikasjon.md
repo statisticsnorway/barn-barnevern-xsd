@@ -778,30 +778,16 @@ Gyldig fra 2022-01-01
 
 
 
-### Tiltak Kontroll 22: Tiltak med kode 1.99 Andre tiltak
+### Tiltak Kontroll 22: Tiltak med kode 1.99, 2.99 Andre tiltak
 
 Gitt at man har et Tiltak<br/>
-når Kategori/Kode = 1.99<br/>
-så gi advarsel "Dette er er en advarsel. Kun plasseringstiltak skal ha kode 1.99. <br/>
-Dersom dette ikke er et plasseringstiltak (institusjon) må tiltakskode endres. <br/>
-Er det et administrative vedtak som er gitt kode 1.99 skal tiltaket slettes."
+når Kategori/Kode = 1.99 eller 2.99<br/>
+så gi advarsel "Dette er er en advarsel. Kun plasseringstiltak skal ha kode [kategorikode]. <br/>
+Dersom dette ikke er et plasseringstiltak (institusjon) må tiltakskode endres.<br/>
+Er det et administrative vedtak som er gitt kode [kategorikode] skal tiltaket slettes."
 
 Alvorlighetsgrad: Warning<br/>
 Gyldig fra 2023-01-01
-
-
-
-### Tiltak Kontroll 23: Tiltak med kode 2.99 Andre tiltak
-
-Gitt at man har et Tiltak<br/>
-når Kategori/Kode = 2.99<br/>
-så gi advarsel "Dette er er en advarsel. Kun plasseringstiltak skal ha kode 2.99. <br/>
-Dersom dette ikke er et plasseringstiltak (fosterhjem) må tiltakskode endres. <br/>
-Er det et administrative vedtak som er gitt kode 2.99 skal tiltaket slettes."
-
-Alvorlighetsgrad: Warning<br/>
-Gyldig fra 2023-01-01
-
 
 
 ## <a name="plan">Plan</a>
