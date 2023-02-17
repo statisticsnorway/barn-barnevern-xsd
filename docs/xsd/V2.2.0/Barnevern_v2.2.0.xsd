@@ -973,7 +973,7 @@ Bjorge.Saether@bufdir.no
                     7.2 = BVL2021 § 3-8 (tidligere BVL1992 § 4-11) behandling av barn med særlige opplæringsbehov
                     7.3 = Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)
                     7.99 = Andre tiltak (krever presisering)
-                    8.1 = Økonomisk hjelp ved etablering i egen bolig/ hybel (Ikke husleie)
+                    8.1 = Økonomisk hjelp til egen bolig/hybel
                     8.2 = Bolig med oppfølging (inkluderer også bofellesskap)
                     8.3 = Botreningskurs
                     8.99 = Andre tiltak (krever presisering)
@@ -1030,7 +1030,7 @@ Bjorge.Saether@bufdir.no
                     {"code" : "7.2", "validFrom" : "2013-01-01", "title" : "BVL2021 § 3-8 (tidligere BVL1992 § 4-11) behandling av barn med særlige opplæringsbehov"},
                     {"code" : "7.3", "validFrom" : "2013-01-01", "title" : "Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)"},
                     {"code" : "7.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
-                    {"code" : "8.1", "validFrom" : "2013-01-01", "title" : "Økonomisk hjelp ved etablering i egen bolig/hybel (Ikke husleie)"},
+                    {"code" : "8.1", "validFrom" : "2013-01-01", "title" : "Økonomisk hjelp til egen bolig/hybel"},
                     {"code" : "8.2", "validFrom" : "2013-01-01", "title" : "Bolig med oppfølging (inkluderer også bofellesskap)"},
                     {"code" : "8.3", "validFrom" : "2013-01-01", "title" : "Botreningskurs"},
                     {"code" : "8.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"}
