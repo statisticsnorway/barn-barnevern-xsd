@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2.2.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2.2.1">
     <!-- ATTRIBUTTER -->
     <xs:attribute name="Id">
         <xs:annotation>
@@ -729,8 +729,8 @@ Bjorge.Saether@bufdir.no
                     26 = Barnets kriminelle handlinger
                     27 = Barnet utsatt for menneskehandel
                     30 = Barnets kognitive vansker
-                    18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
-                    19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
+                    18 = Andre forhold ved foreldre/ familien (krever presisering)(Denne kategorien skal kun registreres dersom ingen av de øvrige kategoriene kan benyttes.)
+                    19 = Andre forhold ved barnet og barnets situasjon (krever presisering)<br/>(Denne kategorien skal kun registreres dersom ingen av de øvrige kategoriene kan benyttes.)
                 </xs:documentation>
                 <xs:appinfo xml:lang="json">
                     {
@@ -768,8 +768,8 @@ Bjorge.Saether@bufdir.no
                     { "code":"26", "validFrom":"2021-01-01", "title":"Barnets kriminelle handlinger" },
                     { "code":"27", "validFrom":"2021-01-01", "title":"Barnet utsatt for menneskehandel" },
                     { "code":"30", "validFrom":"2023-01-01", "title":"Barnets kognitive vansker" },
-                    { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
-                    { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" }
+                    { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever presisering)(Denne kategorien skal kun registreres dersom ingen av de øvrige kategoriene kan benyttes.)" },
+                    { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnet og barnets situasjon (krever presisering)<br/>(Denne kategorien skal kun registreres dersom ingen av de øvrige kategoriene kan benyttes.)" }
                     ]
                     }
                 </xs:appinfo>
@@ -930,14 +930,14 @@ Bjorge.Saether@bufdir.no
                 <xs:documentation>
                     1.1 = Barnvernsinstitusjoner (gjelder alle typer barnevernsinstitusjoner)
                     1.2 = Plassering i institusjon etter annen lov
-                    1.99 = Andre tiltak (krever presisering)
+                    1.99 = Andre institusjonstiltak (krever presisering) (For eksempel TFCO.)
                     2.1 = Fosterhjem i familie og nære nettverk
                     2.2 = Fosterhjem utenfor familie og nære nettverk
-                    2.3 = Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)
+                    2.3 = Familiehjem (Statlige og private)
                     2.4 = Fosterhjem etter BVL2021 § 6-3 (tidligere BVL1992 § 4-27)
                     2.5 = Beredskapshjem utenom familie og nære nettverk
                     2.6 = Midlertidig hjem i familie og nære nettverk
-                    2.99 = Andre tiltak (krever presisering)
+                    2.99 = Andre fosterhjemstiltak (krever presisering)
                     3.1 = MST
                     3.2 = PMTO
                     3.3 = FFT
@@ -948,7 +948,7 @@ Bjorge.Saether@bufdir.no
                     3.8 = Sentre for foreldre og barn
                     3.9 = Vedtak om råd og veiledning
                     3.10 = Hjemmekonsulent/miljøarbeider
-                    3.99 = Andre tiltak (krever presisering)
+                    3.99 = Andre tiltak for å styrke foreldreferdigheter (krever presisering) (For eksempel COS.)
                     4.1 = Barnehage
                     4.2 = SFO/ Aktivitetsskole
                     4.3 = Fritidsaktiviteter
@@ -958,21 +958,21 @@ Bjorge.Saether@bufdir.no
                     4.7 = Samtalegrupper/ barnegrupper (gjelder strukturerte samtale- og aktivitetstilbud for aldersbestemte grupper).
                     4.8 = Utdanning og arbeid (gjelder oppfølging og støtte for å styrke barn og ungdoms tilknytning til skole eller arbeid)
                     4.9 = ART
-                    4.99 = Andre tiltak (krever presisering)
+                    4.99 = Andre tiltak for å styrke barnets utvikling (krever presisering)
                     5.1 = Frivillig tilsyn i hjemmet (gjelder der foreldre har samtykket til tilsyn)
-                    5.2 = Pålagt tilsyn i hjemmet (gjelder der tilsyn skjer etter vedtak i fylkesnemnd)
+                    5.2 = Pålagt tilsyn i hjemmet (gjelder der tilsyn skjer etter vedtak i barnevernsnemnd) 
                     5.3 = Tilsyn under samvær
                     5.4 = Ruskontroll
-                    5.99 = Andre tiltak (krever presisering)
+                    5.99 = Andre tiltak av tilsyn og kontroll (krever presisering)
                     6.1 = Familieråd
                     6.2 = Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)
                     6.3 = Individuell plan
-                    6.4 = Deltakelse i ansvarsgruppe
-                    6.99 = Andre tiltak (krever presisering)
+                    6.4 = Deltakelse i ansvarsgruppe/ samarbeidsteam
+                    6.99 = Andre tiltak av nettverksarbeid/samarbeid med andre tjenester (krever presisering) 
                     7.1 = BVL2021 § 3-7 (tidligere BVL1992 § 4-10) medisinsk undersøkelse og behandling
                     7.2 = BVL2021 § 3-8 (tidligere BVL1992 § 4-11) behandling av barn med særlige opplæringsbehov
                     7.3 = Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)
-                    7.99 = Andre tiltak (krever presisering)
+                    7.99 = Andre tiltak av undersøkelse og behandling fra andre tjenester (krever presisering)
                     8.1 = Økonomisk hjelp til egen bolig/hybel
                     8.2 = Bolig med oppfølging (inkluderer også bofellesskap)
                     8.3 = Botreningskurs
@@ -987,14 +987,14 @@ Bjorge.Saether@bufdir.no
                     "items":[
                     {"code" : "1.1", "validFrom" : "2013-01-01", "title" : "Barnvernsinstitusjoner (gjelder alle typer barnevernsinstitusjoner)"},
                     {"code" : "1.2", "validFrom" : "2013-01-01", "title" : "Plassering i institusjon etter annen lov"},
-                    {"code" : "1.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
+                    {"code" : "1.99", "validFrom" : "2013-01-01", "title" : "Andre institusjonstiltak (krever presisering) (For eksempel TFCO.)"},
                     {"code" : "2.1", "validFrom" : "2013-01-01", "title" : "Fosterhjem i familie og nære nettverk"},
                     {"code" : "2.2", "validFrom" : "2013-01-01", "title" : "Fosterhjem utenfor familie og nære nettverk"},
-                    {"code" : "2.3", "validFrom" : "2013-01-01", "title" : "Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)"},
+                    {"code" : "2.3", "validFrom" : "2013-01-01", "title" : "Familiehjem (Statlige og private)"},
                     {"code" : "2.4", "validFrom" : "2013-01-01", "title" : "Fosterhjem etter BVL2021 § 6-3 (tidligere BVL1992 § 4-27)"},
                     {"code" : "2.5", "validFrom" : "2013-01-01", "title" : "Beredskapshjem utenom familie og nære nettverk"},
                     {"code" : "2.6", "validFrom" : "2021-01-01", "title" : "Midlertidig hjem i familie og nære nettverk"},
-                    {"code" : "2.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
+                    {"code" : "2.99", "validFrom" : "2013-01-01", "title" : "Andre fosterhjemstiltak (krever presisering)"},
                     {"code" : "3.1", "validFrom" : "2013-01-01", "title" : "MST"},
                     {"code" : "3.2", "validFrom" : "2013-01-01", "title" : "PMTO"},
                     {"code" : "3.3", "validFrom" : "2013-01-01", "title" : "FFT"},
@@ -1005,7 +1005,7 @@ Bjorge.Saether@bufdir.no
                     {"code" : "3.8", "validFrom" : "2013-01-01", "title" : "Sentre for foreldre og barn"},
                     {"code" : "3.9", "validFrom" : "2013-01-01", "title" : "Vedtak om råd og veiledning"},
                     {"code" : "3.10", "validFrom" : "2013-01-01", "title" : "Hjemmekonsulent/miljøarbeider"},
-                    {"code" : "3.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
+                    {"code" : "3.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak for å styrke foreldreferdigheter (krever presisering) (For eksempel COS.)"},
                     {"code" : "4.1", "validFrom" : "2013-01-01", "title" : "Barnehage"},
                     {"code" : "4.2", "validFrom" : "2013-01-01", "title" : "SFO/ Aktivitetsskole"},
                     {"code" : "4.3", "validFrom" : "2013-01-01", "title" : "Fritidsaktiviteter"},
@@ -1015,21 +1015,21 @@ Bjorge.Saether@bufdir.no
                     {"code" : "4.7", "validFrom" : "2013-01-01", "title" : "Samtalegrupper/ barnegrupper (gjelderstrukturerte samtale- og aktivitetstilbud for aldersbestemte grupper)."},
                     {"code" : "4.8", "validFrom" : "2013-01-01", "title" : "Utdanning og arbeid (gjelder oppfølging og støtte for å styrke barn og ungdoms tilknytning til skole eller arbeid)"},
                     {"code" : "4.9", "validFrom" : "2013-01-01", "title" : "ART"},
-                    {"code" : "4.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
+                    {"code" : "4.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak for å styrke barnets utvikling (krever presisering)"},
                     {"code" : "5.1", "validFrom" : "2013-01-01", "title" : "Frivillig tilsyn i hjemmet (gjelder der foreldre har samtykket til tilsyn)"},
-                    {"code" : "5.2", "validFrom" : "2013-01-01", "title" : "Pålagt tilsyn i hjemmet (gjelder der tilsyn skjer etter vedtak i fylkesnemnd)"},
+                    {"code" : "5.2", "validFrom" : "2013-01-01", "title" : "Pålagt tilsyn i hjemmet (gjelder der tilsyn skjer etter vedtak i barnevernsnemnd) "},
                     {"code" : "5.3", "validFrom" : "2013-01-01", "title" : "Tilsyn under samvær"},
                     {"code" : "5.4", "validFrom" : "2013-01-01", "title" : "Ruskontroll"},
-                    {"code" : "5.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
+                    {"code" : "5.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak av tilsyn og kontroll (krever presisering)"},
                     {"code" : "6.1", "validFrom" : "2013-01-01", "title" : "Familieråd"},
                     {"code" : "6.2", "validFrom" : "2013-01-01", "title" : "Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)"},
                     {"code" : "6.3", "validFrom" : "2013-01-01", "title" : "Individuell plan"},
-                    {"code" : "6.4", "validFrom" : "2013-01-01", "title" : "Deltakelse i ansvarsgruppe"},
-                    {"code" : "6.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
+                    {"code" : "6.4", "validFrom" : "2013-01-01", "title" : "Deltakelse i ansvarsgruppe/ samarbeidsteam"},
+                    {"code" : "6.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak av nettverksarbeid/samarbeid med andre tjenester (krever presisering) "},
                     {"code" : "7.1", "validFrom" : "2013-01-01", "title" : "BVL2021 § 3-7 (tidligere BVL1992 § 4-10) medisinsk undersøkelse og behandling"},
                     {"code" : "7.2", "validFrom" : "2013-01-01", "title" : "BVL2021 § 3-8 (tidligere BVL1992 § 4-11) behandling av barn med særlige opplæringsbehov"},
                     {"code" : "7.3", "validFrom" : "2013-01-01", "title" : "Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)"},
-                    {"code" : "7.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
+                    {"code" : "7.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak av undersøkelse og behandling fra andre tjenester (krever presisering)"},
                     {"code" : "8.1", "validFrom" : "2013-01-01", "title" : "Økonomisk hjelp til egen bolig/hybel"},
                     {"code" : "8.2", "validFrom" : "2013-01-01", "title" : "Bolig med oppfølging (inkluderer også bofellesskap)"},
                     {"code" : "8.3", "validFrom" : "2013-01-01", "title" : "Botreningskurs"},
