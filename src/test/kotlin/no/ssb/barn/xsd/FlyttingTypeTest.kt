@@ -83,6 +83,23 @@ class FlyttingTypeTest : BehaviorSpec({
                 "invalid SluttDato",
                 "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"2022\">",
                 INVALID_DATE_ERROR
+            ),
+
+            /** ArsakFra */
+            row(
+                "missing ArsakFra",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"2022-11-14\" />",
+                "cvc-complex-type.2.4.b: The content of element 'Flytting' is not complete. One of '{ArsakFra}' is expected."
+            ),
+
+            /** FlyttingTil */
+            row(
+                "missing FlyttingTil",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
+                        "SluttDato=\"2022-11-14\">" +
+                        "<ArsakFra Kode=\"1.1.1\" />" +
+                        "</Flytting>",
+                "cvc-complex-type.2.4.b: The content of element 'Flytting' is not complete. One of '{FlyttingTil}' is expected."
             )
         ) { description, partialXml, expectedError ->
             `when`(description) {
