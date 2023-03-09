@@ -74,5 +74,12 @@ jobs:
           sonarCloud: 'bipSonarCloud-Barnevernsregisteret'
 
       # Deploy artifact to Artifact Registry
-      # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-install-and-deploy-to-gar.yml
-      - template: maven/task-install-and-deploy-to-gar.yml@templates
+      - task: Maven@3
+        displayName: 'Maven install and deploy'
+        inputs:
+          goals: 'deploy'
+          mavenOptions: '-Xmx3072m'
+          options: '$(MAVEN_OPTS) -DskipTests=true -Dmaven.javadoc.skip=true -U -P ssb-bip --batch-mode -Djdk.tls.client.protocols="TLSv1.2"'
+          mavenPomFile: 'pom.xml'
+          javaHomeOption: 'JDKVersion'
+          jdkArchitectureOption: 'x64'
