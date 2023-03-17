@@ -11,23 +11,20 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import no.ssb.barn.xsd.BarnevernType
 
 object BarnevernConverter {
 
-    private val kotlinModule: KotlinModule = KotlinModule.Builder()
-        .configure(KotlinFeature.StrictNullChecks, false)
-        /**
-         * required, else it will break for null
-         * https://github.com/FasterXML/jackson-module-kotlin/issues/130#issuecomment-546625625
-         */
-        .configure(KotlinFeature.NullIsSameAsDefault, true)
-        .build()
-
     @JvmStatic
     val XML_MAPPER = XmlMapper(JacksonXmlModule()).apply {
         this.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
-            .registerModule(kotlinModule)
+            .registerKotlinModule()
+            .registerModules(
+                KotlinModule.Builder()
+                    .enable(KotlinFeature.NullIsSameAsDefault)
+                    .build()
+            )
             .registerModule(JavaTimeModule())
             .registerModule(JaxbAnnotationModule())
             /** required to parse dates as LocalDate, else parsing error */
@@ -38,7 +35,12 @@ object BarnevernConverter {
 
     @JvmStatic
     val OBJECT_MAPPER: ObjectMapper = ObjectMapper()
-        .registerModule(kotlinModule)
+        .registerKotlinModule()
+        .registerModules(
+            KotlinModule.Builder()
+                .enable(KotlinFeature.NullIsSameAsDefault)
+                .build()
+        )
         .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
         .registerModule(JavaTimeModule())
         .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
