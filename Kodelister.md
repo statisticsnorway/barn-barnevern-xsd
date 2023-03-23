@@ -244,6 +244,12 @@ Brukes på stien /Barnevern/Sak/Tiltak/Kategori/@Kode
 
 <a name="#/Barnevern/Sak/Tiltak/Opphevelse/@Kode"></a>
 
+#### Tiltaksgrunnlag
+
+Brukes på stien /Barnevern/Sak/Tiltak/Tiltakssgrunnlag/@Kode
+
+Bruker samme kodeliste som [Saksinnhold](#/Barnevern/Sak/Melding/Saksinnhold/@Kode)
+
 #### Opphevelse
 
 Brukes på stien /Barnevern/Sak/Tiltak/Opphevelse/@Kode
