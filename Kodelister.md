@@ -14,6 +14,7 @@
     - [Plantype](#/Barnevern/Sak/Plan/@Plantype)
 - [Tiltak](#/Barnevern/Sak/Tiltak)
     - [Kategori](#/Barnevern/Sak/Tiltak/Kategori/@Kode)
+    - [Tiltaksgrunnlag](#/Barnevern/Sak/Tiltak/Tiltaksgrunnlag/@Kode)
     - [Opphevelse](#/Barnevern/Sak/Tiltak/Opphevelse/@Kode)
     - [Flytting](#/Barnevern/Sak/Tiltak/Konklusjon/@Flytting)
 - [Vedtak](#/Barnevern/Sak/Vedtak)
@@ -242,13 +243,15 @@ Brukes på stien /Barnevern/Sak/Tiltak/Kategori/@Kode
 | 8.3  | Botreningskurs                                                                                                                                                                                                                                         | 2013-01-01 |
 | 8.99 | Andre tiltak (krever presisering)                                                                                                                                                                                                                      | 2013-01-01 |
 
-<a name="#/Barnevern/Sak/Tiltak/Opphevelse/@Kode"></a>
+<a name="#/Barnevern/Sak/Tiltak/Tiltaksgrunnlag/@Kode"></a>
 
 #### Tiltaksgrunnlag
 
-Brukes på stien /Barnevern/Sak/Tiltak/Tiltakssgrunnlag/@Kode
+Brukes på stien /Barnevern/Sak/Tiltak/Tiltaksgrunnlag/@Kode
 
 Bruker samme kodeliste som [Saksinnhold](#/Barnevern/Sak/Melding/Saksinnhold/@Kode)
+
+<a name="#/Barnevern/Sak/Tiltak/Opphevelse/@Kode"></a>
 
 #### Opphevelse
 
