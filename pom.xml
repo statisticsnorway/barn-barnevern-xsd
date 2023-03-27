@@ -23,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jacoco.version>0.8.8</jacoco.version>
-        <checkstyle.version>10.9.2</checkstyle.version>
+        <checkstyle.version>10.9.3</checkstyle.version>
         <bytebuddy.version>1.14.2</bytebuddy.version>
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
