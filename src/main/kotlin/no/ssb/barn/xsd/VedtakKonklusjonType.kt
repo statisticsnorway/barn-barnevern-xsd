@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
 import java.time.LocalDate
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VedtakKonklusjon", propOrder = ["sluttDato"])

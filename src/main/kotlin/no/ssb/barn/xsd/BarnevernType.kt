@@ -2,7 +2,7 @@ package no.ssb.barn.xsd
 
 import java.time.ZonedDateTime
 import java.util.*
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 @XmlRootElement(name = "Barnevern")
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -29,7 +29,7 @@ object BarnevernConverter {
         this.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
             .registerModule(kotlinModule)
             .registerModule(JavaTimeModule())
-            .registerModule(JaxbAnnotationModule())
+            .registerModule(JakartaXmlBindAnnotationModule())
             /** required to parse dates as LocalDate, else parsing error */
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)

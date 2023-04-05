@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
-import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Evaluering", propOrder = ["utfortDato"])
