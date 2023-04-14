@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
 import java.time.LocalDate
-import java.util.*
+import java.util.UUID
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlAttribute

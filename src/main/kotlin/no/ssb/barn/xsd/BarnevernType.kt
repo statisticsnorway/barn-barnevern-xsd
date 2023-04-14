@@ -1,7 +1,7 @@
 package no.ssb.barn.xsd
 
 import java.time.ZonedDateTime
-import java.util.*
+import java.util.UUID
 import jakarta.xml.bind.annotation.*
 
 @XmlRootElement(name = "Barnevern")

@@ -14,6 +14,26 @@ object RandomUtils {
             .map(CHAR_POOL::get)
             .joinToString("")
 
+    fun generateRandomDuf(
+        startYearInclusive: Int,
+        endYearInclusive: Int
+    ): String {
+        val year = (startYearInclusive..endYearInclusive).random()
+        val sixDigits = (100000..999999).random()
+
+        return "$year$sixDigits".let { tenDigits ->
+            tenDigits.plus(tenDigits
+                .map { it.toString().toInt() }
+                .zip(dufControlDigits) { digit, weight -> digit * weight }
+                .sum()
+                .mod(11)
+                .toString()
+                .padStart(2, '0'))
+        }
+    }
+
+    private val dufControlDigits = listOf(4, 6, 3, 2, 4, 6, 3, 2, 7, 5)
+
     fun generateRandomSSN(
         startInclusive: LocalDate,
         endExclusive: LocalDate
