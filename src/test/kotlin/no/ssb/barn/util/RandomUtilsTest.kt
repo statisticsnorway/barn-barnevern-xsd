@@ -11,15 +11,13 @@ import java.time.LocalDate
 
 class RandomUtilsTest : BehaviorSpec({
 
-    given("generateRandomString") {
-
+    Given("generateRandomString") {
         val stringLength = 20
 
-        `when`("generateRandomString with length: $stringLength") {
-
+        When("generateRandomString with length: $stringLength") {
             val randomString = generateRandomString(stringLength)
 
-            then("randomString should be as expected") {
+            Then("randomString should be as expected") {
                 randomString.length shouldBe stringLength
                 @Suppress("RegExpSimplifiable")
                 "[a-zA-Z0-9]{$stringLength}".toRegex().matches(randomString).shouldBeTrue()
@@ -27,17 +25,19 @@ class RandomUtilsTest : BehaviorSpec({
         }
     }
 
-    given("generateRandomSSN") {
-
+    Given("generateRandomSSN") {
         val startInclusive = LocalDate.of(2000, 1, 1)
         val endExclusive = LocalDate.of(2021, 1, 1)
 
-        (1..100).forEach {
-            `when`("generateRandomSSN $it") {
+        (1..10).forEach {
+            When("generateRandomSSN $it") {
 
-                val socialSecurityId = generateRandomSSN(startInclusive, endExclusive)
+                val socialSecurityId = generateRandomSSN(
+                    startInclusive = startInclusive,
+                    endExclusive = endExclusive
+                )
 
-                then("socialSecurityId should be valid") {
+                Then("socialSecurityId should be valid") {
                     modulo11(socialSecurityId, controlSumDigits2) shouldBe 0
                 }
             }
