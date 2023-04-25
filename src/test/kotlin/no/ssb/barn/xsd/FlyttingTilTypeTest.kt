@@ -13,10 +13,10 @@ import org.xml.sax.SAXException
 
 class FlyttingTilTypeTest : BehaviorSpec({
 
-    given("misc FlyttingTil XML") {
+    Given("misc FlyttingTil XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildFlyttingTilXml(
@@ -60,12 +60,12 @@ class FlyttingTilTypeTest : BehaviorSpec({
                         "with respect to maxLength '300' for type '#AnonType_Presisering'."
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildFlyttingTilXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

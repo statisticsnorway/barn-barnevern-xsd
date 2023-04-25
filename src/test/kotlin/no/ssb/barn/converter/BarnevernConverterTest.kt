@@ -14,26 +14,24 @@ import no.ssb.barn.converter.BarnevernConverter.unmarshallXml
 
 class BarnevernConverterTest : BehaviorSpec({
 
-    given("unmarshallXml") {
+    Given("unmarshallXml") {
 
-        `when`("invalid XML") {
-
+        When("invalid XML") {
             val exception = shouldThrow<JsonParseException> {
                 unmarshallXml("~someXml~")
             }
 
-            then("exception is as expected") {
+            Then("exception is as expected") {
                 exception.message shouldContain "Unexpected character"
             }
         }
 
-        `when`("valid XML") {
-
+        When("valid XML") {
             val barnevernType = shouldNotThrowAny {
                 unmarshallXml(getResourceAsString("test01_file09_total.xml"))
             }
 
-            then("result should be non-null") {
+            Then("result should be non-null") {
                 barnevernType.shouldNotBeNull()
 
                 assertSoftly(barnevernType) {
@@ -47,17 +45,15 @@ class BarnevernConverterTest : BehaviorSpec({
         }
     }
 
-    given("marshallXml") {
-
+    Given("marshallXml") {
         val barnevernType = unmarshallXml(getResourceAsString("test01_file09_total.xml"))
 
-        `when`("marshallXml") {
-
+        When("marshallXml") {
             val xml = shouldNotThrowAny {
                 marshallInstance(barnevernType)
             }
 
-            then("result should be non-null") {
+            Then("result should be non-null") {
                 xml.shouldNotBeNull()
             }
         }

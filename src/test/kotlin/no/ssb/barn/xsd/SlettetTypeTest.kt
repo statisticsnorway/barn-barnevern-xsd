@@ -17,10 +17,10 @@ import org.xml.sax.SAXException
 
 class SlettetTypeTest : BehaviorSpec({
 
-    given("misc Slettet XML") {
+    Given("misc Slettet XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildBarnevernXml(
@@ -88,12 +88,12 @@ class SlettetTypeTest : BehaviorSpec({
                 INVALID_DATE_ERROR
             )
         ) { description, fagsystemXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildBarnevernXml(fagsystemXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

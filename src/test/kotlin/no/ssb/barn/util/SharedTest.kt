@@ -11,7 +11,7 @@ import no.ssb.barn.util.Shared.modulo11
 
 class SharedTest : BehaviorSpec({
 
-    given("modulo11") {
+    Given("modulo11") {
         forAll(
             row("123", controlSumDigits1, -1),
             row("a".repeat(10), controlSumDigits1, -1),
@@ -25,13 +25,12 @@ class SharedTest : BehaviorSpec({
             row("01020304050", controlSumDigits2, 8)
         ) { ssn, controlDigits, expectedResidue ->
 
-            `when`("modulo11 $ssn $controlDigits $expectedResidue") {
-
+            When("modulo11 $ssn $controlDigits $expectedResidue") {
                 val residue = shouldNotThrowAny {
                     modulo11(ssn, controlDigits)
                 }
 
-                then("isValid should be as expected") {
+                Then("isValid should be as expected") {
                     residue shouldBe expectedResidue
                 }
             }

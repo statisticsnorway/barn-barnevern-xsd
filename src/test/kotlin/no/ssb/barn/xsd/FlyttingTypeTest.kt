@@ -17,10 +17,10 @@ import org.xml.sax.SAXException
 
 class FlyttingTypeTest : BehaviorSpec({
 
-    given("misc Flytting XML") {
+    Given("misc Flytting XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildBarnevernXml(
@@ -102,12 +102,12 @@ class FlyttingTypeTest : BehaviorSpec({
                 "cvc-complex-type.2.4.b: The content of element 'Flytting' is not complete. One of '{FlyttingTil}' is expected."
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

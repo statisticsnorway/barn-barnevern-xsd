@@ -16,10 +16,10 @@ import org.xml.sax.SAXException
 
 class SakTypeTest : BehaviorSpec({
 
-    given("misc Sak XML") {
+    Given("misc Sak XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
@@ -135,12 +135,12 @@ class SakTypeTest : BehaviorSpec({
                         "respect to maxLength '36' for type '#AnonType_JournalnummerSakType'."
             ),
         ) { description, sakElement, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildXmlInTest(sakElement).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

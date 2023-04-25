@@ -15,10 +15,10 @@ import org.xml.sax.SAXException
 
 class EttervernKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc EttervernKonklusjon XML") {
+    Given("misc EttervernKonklusjon XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildEttervernKonklusjonTypeXml(
@@ -65,12 +65,12 @@ class EttervernKonklusjonTypeTest : BehaviorSpec({
                         "for type '#AnonType_KodeKonklusjonEttervernType'."
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildEttervernKonklusjonTypeXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

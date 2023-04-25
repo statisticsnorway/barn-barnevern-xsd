@@ -18,10 +18,10 @@ import org.xml.sax.SAXException
 
 class TilsynUtfortTypeTest : BehaviorSpec({
 
-    given("misc TilsynUtfort XML") {
+    Given("misc TilsynUtfort XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
@@ -67,12 +67,12 @@ class TilsynUtfortTypeTest : BehaviorSpec({
                 INVALID_DATE_ERROR
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

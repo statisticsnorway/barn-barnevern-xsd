@@ -15,10 +15,10 @@ import org.xml.sax.SAXException
 
 class UndersokelseKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc UndersokelseKonklusjon XML") {
+    Given("misc UndersokelseKonklusjon XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildUndersokelseXml(
@@ -80,12 +80,12 @@ class UndersokelseKonklusjonTypeTest : BehaviorSpec({
                         "with respect to maxLength '300' for type '#AnonType_Presisering'."
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildUndersokelseXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

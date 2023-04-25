@@ -16,10 +16,10 @@ import org.xml.sax.SAXException
 
 class TiltakKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc TiltakKonklusjon XML") {
+    Given("misc TiltakKonklusjon XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildKonklusjonXml(
@@ -47,12 +47,12 @@ class TiltakKonklusjonTypeTest : BehaviorSpec({
                 INVALID_DATE_ERROR
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildKonklusjonXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

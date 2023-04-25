@@ -14,7 +14,7 @@ import org.xml.sax.SAXException
 
 class BarnevernTypeTest : BehaviorSpec({
 
-    given("misc Barnevern XML") {
+    Given("misc Barnevern XML") {
 
         /** make sure it's possible to make a valid test XML */
 
@@ -24,7 +24,7 @@ class BarnevernTypeTest : BehaviorSpec({
             row("decimals and zone offset = +01:00", "2022-11-14T15:13:33.123456789+01:00"),
             row("decimals and zone offset = Z", "2022-11-14T15:13:33.123456789Z"),
         ) { description, dateTimeString ->
-            `when`(description) {
+            When(description) {
                 shouldNotThrowAny {
                     getSchemaValidator().validate(
                         buildXmlInTest(
@@ -101,12 +101,12 @@ class BarnevernTypeTest : BehaviorSpec({
                         "for type '#AnonType_DatoUttrekkBarnevernType'."
             )
         ) { description, sakElement, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildXmlInTest(sakElement).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

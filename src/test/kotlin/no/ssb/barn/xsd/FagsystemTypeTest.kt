@@ -12,10 +12,10 @@ import org.xml.sax.SAXException
 
 class FagsystemTypeTest : BehaviorSpec({
 
-    given("misc Fagsystem XML") {
+    Given("misc Fagsystem XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
@@ -89,12 +89,12 @@ class FagsystemTypeTest : BehaviorSpec({
                         "facet-valid with respect to maxLength '100' for type '#AnonType_VersjonFagsystemType'."
             )
         ) { description, fagsystemXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildXmlInTest(fagsystemXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

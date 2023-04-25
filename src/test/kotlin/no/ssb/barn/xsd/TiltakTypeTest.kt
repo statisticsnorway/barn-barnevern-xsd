@@ -18,10 +18,10 @@ import org.xml.sax.SAXException
 
 class TiltakTypeTest : BehaviorSpec({
 
-    given("misc TiltakType XML") {
+    Given("misc TiltakType XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(buildBarnevernXml(
                     "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
@@ -112,12 +112,12 @@ class TiltakTypeTest : BehaviorSpec({
                 INVALID_DATE_ERROR
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

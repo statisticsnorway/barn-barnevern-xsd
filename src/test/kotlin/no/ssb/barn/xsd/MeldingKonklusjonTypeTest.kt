@@ -15,10 +15,10 @@ import org.xml.sax.SAXException
 
 class MeldingKonklusjonTypeTest : BehaviorSpec({
 
-    given("misc MeldingKonklusjon XML") {
+    Given("misc MeldingKonklusjon XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildMeldingKonklusjonXml(
@@ -65,12 +65,12 @@ class MeldingKonklusjonTypeTest : BehaviorSpec({
                         "'[1, 2, 3, 4]'. It must be a value from the enumeration."
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildMeldingKonklusjonXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

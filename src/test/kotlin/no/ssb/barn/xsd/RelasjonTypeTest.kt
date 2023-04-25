@@ -15,10 +15,10 @@ import org.xml.sax.SAXException
 
 class RelasjonTypeTest : BehaviorSpec({
 
-    given("misc Relasjon XML") {
+    Given("misc Relasjon XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildBarnevernXml(
@@ -186,12 +186,12 @@ class RelasjonTypeTest : BehaviorSpec({
                         "Flytting, Relasjon]'. It must be a value from the enumeration."
             ),
         ) { description, fagsystemXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildBarnevernXml(fagsystemXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

@@ -17,10 +17,10 @@ import org.xml.sax.SAXException
 
 class PlanTypeTest : BehaviorSpec({
 
-    given("misc Plan XML") {
+    Given("misc Plan XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(buildBarnevernXml(
                     "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
@@ -98,12 +98,12 @@ class PlanTypeTest : BehaviorSpec({
                         "enumeration '[1, 2, 3, 4, 5, 6, 7, 8]'. It must be a value from the enumeration."
             ),
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

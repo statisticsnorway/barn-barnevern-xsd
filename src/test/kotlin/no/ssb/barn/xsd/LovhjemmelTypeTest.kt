@@ -13,10 +13,10 @@ import org.xml.sax.SAXException
 
 class LovhjemmelTypeTest : BehaviorSpec({
 
-    given("misc Lovhjemmel XML") {
+    Given("misc Lovhjemmel XML") {
 
         /** make sure it's possible to make a valid test XML */
-        `when`("valid XML, expect no exceptions") {
+        When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildXmlInTest(
@@ -199,12 +199,12 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "maxLength '3' for type '#AnonType_PunktumLovhjemmelType'."
             )
         ) { description, partialXml, expectedError ->
-            `when`(description) {
+            When(description) {
                 val thrown = shouldThrow<SAXException> {
                     getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
-                then("thrown should be as expected") {
+                Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }

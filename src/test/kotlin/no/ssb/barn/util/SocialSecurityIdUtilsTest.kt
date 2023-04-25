@@ -13,26 +13,24 @@ import java.time.LocalDate
 
 class SocialSecurityIdUtilsTest : BehaviorSpec({
 
-    given("getGenderFromSsn") {
+    Given("getGenderFromSsn") {
 
         forAll(
             row("digit #9 is even, female", "01010112245", FEMALE),
             row("digit #9 is odd, male", "01010112345", MALE)
         ) { description, ssn, expectedGender ->
 
-            `when`(description) {
-
+            When(description) {
                 val gender = getGenderFromSsn(ssn)
 
-                then("gender should be as expected") {
+                Then("gender should be as expected") {
                     gender shouldBe expectedGender
                 }
             }
         }
     }
 
-    given("getDateOfBirthFromSsn") {
-
+    Given("getDateOfBirthFromSsn") {
         val tomorrow = LocalDate.now().plusDays(1)
 
         forAll(
@@ -41,11 +39,10 @@ class SocialSecurityIdUtilsTest : BehaviorSpec({
             row("${DATE_TIME_FORMATTER.format(tomorrow)}12345", tomorrow.minusYears(100))
         ) { ssn, expectedBirthDate ->
 
-            `when`("getDateOfBirthFromSsn $ssn") {
-
+            When("getDateOfBirthFromSsn $ssn") {
                 val birthDate = getDateOfBirthFromSsn(ssn)
 
-                then("birthDate should be as expected") {
+                Then("birthDate should be as expected") {
                     birthDate shouldBe expectedBirthDate
                 }
             }
