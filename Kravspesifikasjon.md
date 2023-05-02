@@ -545,7 +545,7 @@ Gitt at man har et Vedtak der SluttDato finnes og Vedtaket har Status der Status
 når statusens EndretDato er etter vedtakets SluttDato<br/>
 så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er etter Vedtakets sluttdato {Konklusjon/SluttDato}"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad: Info<br/>
 Gyldig fra 2022-01-01
 
 
