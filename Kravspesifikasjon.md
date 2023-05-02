@@ -556,7 +556,7 @@ Gitt at man har et Vedtak der StartDato finnes og Vedtaket har Status der Status
 når statusens EndretDato er før vedtakets StartDato <br/>
 så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er før vedtakets startdato {StartDato}"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad: Info<br/>
 Gyldig fra 2022-01-01
 
 
