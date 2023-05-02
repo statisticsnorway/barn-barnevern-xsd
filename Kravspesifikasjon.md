@@ -959,6 +959,13 @@ Gyldig fra 2022-01-01
 
 ## <a name="endringslogg">Endringslogg</a>
 
+### <a name="2023-05-02">2023-05-12</a>
+
+Endret
+- Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato, endret alvorlighetsgrad fra ERROR til Info.
+- Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato, endret alvorlighetsgrad fra ERROR til Info.
+- Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato, fjernet første del av kravet.
+
 ### <a name="2023-01-06">2023-01-13</a>
 
 Lagt til
