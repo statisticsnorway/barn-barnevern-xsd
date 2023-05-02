@@ -218,10 +218,6 @@ Gyldig fra 2022-01-01
 
 ### Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
 
-Gitt at man har Personalia med fødselsnummer, fødselsdato og startdato<br/>
-når startdato er før fødselsdato og de 5 siste karakterene i fødselsnummer er ulik 99999<br/>
-så gi feilmeldingen "Feil i Fødselsnummer for ufødt barn"
-
 Gitt at man har Personalia med fødselsnummer, startdato og datouttrekk<br/>
 når startdato er etter fødselsdato og de 5 siste karakterene i fødselsnummer er lik 99999<br/>
 så gi feilmeldingen "Feil i Fødselsnummer for født barn"
