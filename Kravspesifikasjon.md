@@ -959,7 +959,14 @@ Gyldig fra 2022-01-01
 
 ## <a name="endringslogg">Endringslogg</a>
 
-### <a name="2023-05-02">2023-05-12</a>
+### <a name="2023-05-05">2023-05-05</a>
+
+Endret
+- Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse, endring i kravet.
+- Plan Kontroll 2f: UtfortDato er etter sakens SluttDato, tydeligjort kravet.
+- Plan Kontroll 2g: UtfortDato er før sakens StartDato, tydeligjort kravet.
+
+### <a name="2023-05-02">2023-05-02</a>
 
 Endret
 - Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato, endret alvorlighetsgrad fra ERROR til Info.
