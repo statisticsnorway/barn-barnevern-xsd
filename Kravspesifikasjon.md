@@ -840,9 +840,9 @@ Gyldig fra 2013-01-01
 
 ### Plan Kontroll 2f: UtfortDato er etter sakens SluttDato
 
-Gitt at man har en Plan der Evaluering/UtfortDato finnes og Konklusjon/SluttDato finnes<br/>
-når UtfortDato er etter SluttDato<br/>
-så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er etter sluttdato {Konklusjon/SluttDato}"
+Gitt at man har en Plan der Plan/Evaluering/UtfortDato finnes og Plan/Konklusjon/SluttDato finnes<br/>
+når UtfortDato er etter sakens SluttDato<br/>
+så gi feilmeldingen "Utført evaluering {Plan/Evaluering/UtfortDato} er etter sakens sluttdato {Sak/SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
