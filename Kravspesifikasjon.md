@@ -707,7 +707,7 @@ Gyldig fra 2013-01-01
 
 ### Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse
 
-Gitt at man har et [Omsorgstiltak](#omsorgstiltak) med Konklusjon/SluttDato<br/>
+Gitt at man har et [Omsorgstiltak](#omsorgstiltak) der Kategori/@Kode er 1, 2 eller 8.2 og Konklusjon/SluttDato er satt<br/>
 når Opphevelse/Kode mangler
 så gi feilmelding "Omsorgstiltak med sluttdato krever årsak til opphevelse"
 
@@ -840,9 +840,9 @@ Gyldig fra 2013-01-01
 
 ### Plan Kontroll 2f: UtfortDato er etter sakens SluttDato
 
-Gitt at man har en Plan der Evaluering/UtfortDato finnes og Konklusjon/SluttDato finnes<br/>
-når UtfortDato er etter SluttDato<br/>
-så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er etter sluttdato {Konklusjon/SluttDato}"
+Gitt at man har en Plan der Plan/Evaluering/UtfortDato finnes og Plan/Konklusjon/SluttDato finnes<br/>
+når UtfortDato er etter sakens SluttDato<br/>
+så gi feilmeldingen "Utført evaluering {Plan/Evaluering/UtfortDato} er etter sakens sluttdato {Sak/SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
@@ -851,9 +851,9 @@ Gyldig fra 2013-01-01
 
 ### Plan Kontroll 2g: UtfortDato er før sakens StartDato
 
-Gitt at man har en Plan der Evaluering/UtfortDato finnes<br/>
-når UtfortDato er før StartDato<br/>
-så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er før startdato {StartDato}"
+Gitt at man har en Plan der Plan/Evaluering/UtfortDato finnes<br/>
+når UtfortDato er før sakens StartDato<br/>
+så gi feilmeldingen "Utført evaluering {Plan/Evaluering/UtfortDato} er før sakens startdato {Sak/StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
@@ -959,7 +959,14 @@ Gyldig fra 2022-01-01
 
 ## <a name="endringslogg">Endringslogg</a>
 
-### <a name="2023-05-02">2023-05-12</a>
+### <a name="2023-05-05">2023-05-05</a>
+
+Endret
+- Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse, endring i kravet.
+- Plan Kontroll 2f: UtfortDato er etter sakens SluttDato, tydeligjort kravet.
+- Plan Kontroll 2g: UtfortDato er før sakens StartDato, tydeligjort kravet.
+
+### <a name="2023-05-02">2023-05-02</a>
 
 Endret
 - Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato, endret alvorlighetsgrad fra ERROR til INFO.
