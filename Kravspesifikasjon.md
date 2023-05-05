@@ -853,7 +853,7 @@ Gyldig fra 2013-01-01
 
 Gitt at man har en Plan der Evaluering/UtfortDato finnes<br/>
 når UtfortDato er før StartDato<br/>
-så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er før startdato {StartDato}"
+så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
