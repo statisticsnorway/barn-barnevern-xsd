@@ -851,9 +851,9 @@ Gyldig fra 2013-01-01
 
 ### Plan Kontroll 2g: UtfortDato er før sakens StartDato
 
-Gitt at man har en Plan der Evaluering/UtfortDato finnes<br/>
-når UtfortDato er før StartDato<br/>
-så gi feilmeldingen "Utført evaluering {Evaluering/UtfortDato} er før sakens startdato {StartDato}"
+Gitt at man har en Plan der Plan/Evaluering/UtfortDato finnes<br/>
+når UtfortDato er før sakens StartDato<br/>
+så gi feilmeldingen "Utført evaluering {Plan/Evaluering/UtfortDato} er før sakens startdato {Sak/StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
