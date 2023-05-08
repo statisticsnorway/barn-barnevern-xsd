@@ -541,7 +541,7 @@ Gitt at man har et Vedtak der SluttDato finnes og Vedtaket har Status der Status
 når statusens EndretDato er etter vedtakets SluttDato<br/>
 så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er etter Vedtakets sluttdato {Konklusjon/SluttDato}"
 
-Alvorlighetsgrad: Info<br/>
+Alvorlighetsgrad: INFO<br/>
 Gyldig fra 2022-01-01
 
 
@@ -552,7 +552,7 @@ Gitt at man har et Vedtak der StartDato finnes og Vedtaket har Status der Status
 når statusens EndretDato er før vedtakets StartDato <br/>
 så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er før vedtakets startdato {StartDato}"
 
-Alvorlighetsgrad: Info<br/>
+Alvorlighetsgrad: INFO<br/>
 Gyldig fra 2022-01-01
 
 
@@ -969,8 +969,8 @@ Endret
 ### <a name="2023-05-02">2023-05-02</a>
 
 Endret
-- Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato, endret alvorlighetsgrad fra ERROR til Info.
-- Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato, endret alvorlighetsgrad fra ERROR til Info.
+- Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato, endret alvorlighetsgrad fra ERROR til INFO.
+- Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato, endret alvorlighetsgrad fra ERROR til INFO.
 - Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato, fjernet første del av kravet.
 
 ### <a name="2023-01-06">2023-01-13</a>
