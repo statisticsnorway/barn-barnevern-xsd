@@ -707,7 +707,7 @@ Gyldig fra 2013-01-01
 
 ### Tiltak Kontroll 12: Omsorgstiltak med sluttdato krever årsak til opphevelse
 
-Gitt at man har et [Omsorgstiltak](#omsorgstiltak) der Kategori/@Kode er 1.&ast;, 2.&ast; eller 8.2 og Konklusjon/SluttDato er satt<br/>
+Gitt at man har et [Omsorgstiltak](#omsorgstiltak) som også er et [Plasseringstiltak](#plasseringstiltak) der Konklusjon/SluttDato er satt<br/>
 når Opphevelse/Kode mangler
 så gi feilmelding "Omsorgstiltak med sluttdato krever årsak til opphevelse"
 
