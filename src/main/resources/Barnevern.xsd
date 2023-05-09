@@ -1405,6 +1405,14 @@ Bjorge.Saether@bufdir.no
             <xs:maxLength value="50"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:simpleType name="UuidIdType">
+        <xs:restriction base="xs:string">
+            <xs:length value="36"/>
+            <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="BegrepsType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Personalia"/>
@@ -1427,7 +1435,7 @@ Bjorge.Saether@bufdir.no
         <xs:attribute ref="Id" use="required"/>
         <xs:attribute name="FraId" type="IdType" use="required"/>
         <xs:attribute name="FraType" type="BegrepsType" use="required"/>
-        <xs:attribute name="TilId" type="IdType" use="required"/>
+        <xs:attribute name="TilId" type="UuidIdType" use="required"/>
         <xs:attribute name="TilType" type="BegrepsType" use="required"/>
     </xs:complexType>
     <xs:complexType name="FlyttingType">
