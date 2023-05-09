@@ -23,7 +23,7 @@ class RelasjonTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildBarnevernXml(
                         "<Relasjon Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "FraId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                                "FraId=\"~fraId~\" " +
                                 "FraType=\"Melding\" " +
                                 "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                                 "TilType=\"Undersokelse\" />"
@@ -140,18 +140,20 @@ class RelasjonTypeTest : BehaviorSpec({
                         "FraType=\"Melding\" " +
                         "TilId=\"\" " +
                         "TilType=\"Undersokelse\" />",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect " +
-                        "to minLength '1' for type 'IdType'."
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
+                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
+                        "for type 'UuidIdType'."
             ),
             row(
-                "too long TilId",
+                "invalid TilId",
                 "<Relasjon Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "FraId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "FraType=\"Melding\" " +
-                        "TilId=\"${"a".repeat(51)}\" " +
+                        "TilId=\"~not-a-uuid\" " +
                         "TilType=\"Undersokelse\" />",
-                "cvc-maxLength-valid: Value '${"a".repeat(51)}' with length = '51' is not " +
-                        "facet-valid with respect to maxLength '50' for type 'IdType'."
+                "cvc-pattern-valid: Value '~not-a-uuid' is not facet-valid with respect to pattern " +
+                        "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
+                        "for type 'UuidIdType'."
             ),
 
             /** TilType */
