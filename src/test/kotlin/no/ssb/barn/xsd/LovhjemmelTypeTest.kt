@@ -23,7 +23,7 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Lovhjemmel>" +
                                 "<Lov>BVL</Lov>" +
                                 "<Kapittel>1</Kapittel>" +
-                                "<Paragraf>2</Paragraf>" +
+                                "<Paragraf>4-2a</Paragraf>" +
                                 "<Ledd>3</Ledd>" +
                                 "<Bokstav>a</Bokstav>" +
                                 "<Punktum>4</Punktum>" +
@@ -121,10 +121,10 @@ class LovhjemmelTypeTest : BehaviorSpec({
                 "<Lovhjemmel>" +
                         "<Lov>BVL</Lov>" +
                         "<Kapittel>1</Kapittel>" +
-                        "<Paragraf>1234</Paragraf>" +
+                        "<Paragraf>12345</Paragraf>" +
                         "</Lovhjemmel>",
-                "cvc-maxLength-valid: Value '1234' with length = '4' is not facet-valid with " +
-                        "respect to maxLength '3' for type '#AnonType_ParagrafLovhjemmelType'."
+                "cvc-maxLength-valid: Value '12345' with length = '5' is not facet-valid with " +
+                        "respect to maxLength '4' for type '#AnonType_ParagrafLovhjemmelType'."
             ),
 
             /** Ledd */
