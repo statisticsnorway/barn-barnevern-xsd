@@ -273,6 +273,7 @@ når meldingens SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Meldingens sluttdato {Konklusjon/SluttDato} er etter Sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -284,6 +285,7 @@ når meldingens StartDato er før sakens StartDato<br/>
 så gi feilmeldingen "Meldingens startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -377,6 +379,7 @@ når undersøkelsens SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Undersøkelsens sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -388,6 +391,7 @@ når undersøkelsens StartDato er før sakens StartDato <br/>
 så gi feilmeldingen "Undersøkelsens startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -487,6 +491,7 @@ når vedtakets SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Vedtakets sluttdato {Konklusjon/SluttDato} er etter Sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
@@ -498,6 +503,7 @@ når vedtakets StartDato er før sakens StartDato <br/>
 så gi feilmeldingen "Vedtakets startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
@@ -633,6 +639,7 @@ når tiltakets SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Tiltakets sluttdato {Konklusjon/SluttDato} er etter Sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -644,6 +651,7 @@ når tiltakets StartDato er før sakens StartDato <br/>
 så gi feilmeldingen "Tiltakets startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -767,7 +775,7 @@ når en [Relasjon](#relasjon) fra Vedtak til Tiltak finnes,<br/>
 men Vedtak/Lovhjemmel/Lov er ulik Tiltak/Lovhjemmel/Lov<br/>
 eller Vedtak/Lovhjemmel/Kapittel er ulik Tiltak/Lovhjemmel/Kapittel<br/>
 eller Vedtak/Lovhjemmel/Paragraf er ulik Tiltak/Lovhjemmel/Paragraf<br/>
-så gi feilmelding "Tiltak er basert på annen Lovhjemmel enn det som er definert i Vedtak"
+så gi feilmelding "Tiltak er registrert med annen lovhjemmel enn det som er registrert i vedtak"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2022-01-01
@@ -821,6 +829,7 @@ når planens SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Planens sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -833,6 +842,7 @@ når planens StartDato er før sakens StartDato <br/>
 så gi feilmeldingen "Planens startdato {StartDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -903,6 +913,7 @@ når flyttingens SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Flyttingens sluttdato {SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
@@ -914,6 +925,7 @@ når flyttingens SluttDato er før sakens StartDato<br/>
 så gi feilmeldingen "Flyttingens sluttdato {SluttDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad med migrert-id: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
