@@ -231,7 +231,7 @@ Gyldig fra 2022-01-01
 
 Gitt at man har Personalia med fødselsdato og startdato<br/>
 når startdato er mer enn 9 måneder før fødselsdato<br/>
-så gi feilmeldingen "Personalia sin startdato {StartDato} er mer enn 9 måneder før barnets fødselsdato"
+så gi feilmeldingen "Personalia sin startdato {StartDato} er mer enn 9 måneder før barnets fødselsdato {Fødselsdato}"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2022-01-01
@@ -706,7 +706,7 @@ Gyldig fra 2013-01-01
 Gitt at man har 2 eller flere [Plasseringstiltak](#plasseringstiltak)<br/>
 og for de plasseringstiltakene der SluttDato mangler så brukes DatoUttrekk i stedet<br/>
 når plasseringstiltak1 overlapper plasseringstiltak2 med mer enn 90 dager<br/>
-så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 90 dager."
+så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 90 dager. Antall dager overlapp: `antallDager` dager. Overlapper med tiltak-id `tiltak-id`.
 
 Alvorlighetsgrad: Warning<br/>
 Gyldig fra 2013-01-01
