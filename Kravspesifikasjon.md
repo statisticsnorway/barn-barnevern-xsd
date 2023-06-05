@@ -990,6 +990,12 @@ Gyldig fra 2022-01-01
 
 ## <a name="endringslogg">Endringslogg</a>
 
+### <a name="2023-06-05">2023-06-05</a>
+
+Lagt til
+- Vedtak Kontroll 19: Dublett på innhold, men forskjellige identer
+- Plan Kontroll 19: Dublett på innhold, men forskjellige identer
+
 ### <a name="2023-05-05">2023-05-05</a>
 
 Endret
