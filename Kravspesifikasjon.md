@@ -603,6 +603,15 @@ Gyldig fra 2022-01-01
 
 
 
+### Vedtak Kontroll 19: Dublett på innhold, men forskjellige identer
+
+Gitt at man har 2 eller flere Vedtak<br/>
+når man sammenligner Vedtakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+så gi feilmeldingen "Det finnes 2 eller flere Vedtak med identisk innhold, men med forskjellige identer"
+
+Alvorlighetsgrad: INFO<br/>
+Gyldig fra 2013-01-01
+
 
 
 ### Vedtak Kontroll 20: Vedtak med status 2 = 'Begjæring_ oversendt nemnd' skal ha relasjon til OversendelseFylkesnemnd
@@ -868,6 +877,16 @@ så gi feilmeldingen "Utført evaluering {Plan/Evaluering/UtfortDato} er før sa
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
+
+
+### Plan Kontroll 19: Dublett på innhold, men forskjellige identer
+
+Gitt at man har 2 eller flere Planer<br/>
+når man sammenligner Planene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+så gi feilmeldingen "Det finnes 2 eller flere Planer med identisk innhold, men med forskjellige identer"
+
+Alvorlighetsgrad: INFO<br/>
+Gyldig fra 2013-01-01
 
 
 ## <a name="ettervern">Ettervern</a>
