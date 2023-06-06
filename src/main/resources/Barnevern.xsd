@@ -56,7 +56,7 @@ Bjorge.Saether@bufdir.no
         <xs:simpleType>
             <xs:restriction base="xs:string">
                 <xs:minLength value="1"/>
-                <xs:maxLength value="300"/>
+                <xs:maxLength value="10000"/>
             </xs:restriction>
         </xs:simpleType>
     </xs:attribute>

@@ -8,6 +8,9 @@ fun String.toStreamSource() = StreamSource(StringReader(this))
 
 
 object TestUtils {
+
+    const val CLARIFICATION_MAX_LEN = 10_000
+
     fun getResourceAsString(resourceName: String) = this.javaClass.getResource("/$resourceName")!!.readText()
 
     const val LOVHJEMMEL_XML = "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>"
@@ -18,9 +21,14 @@ object TestUtils {
     const val EMPTY_ID_ERROR = "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
             "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
             "for type '#AnonType_Id'."
+
     const val INVALID_ID_ERROR = "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern " +
             "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +
             "for type '#AnonType_Id'."
+
+    val INVALID_CLARIFICATION_ERROR = "cvc-maxLength-valid: Value '${"a".repeat(CLARIFICATION_MAX_LEN + 1)}' " +
+            "with length = '${CLARIFICATION_MAX_LEN + 1}' is not facet-valid with respect to maxLength " +
+            "'$CLARIFICATION_MAX_LEN' for type '#AnonType_Presisering'."
 
     fun buildBarnevernXml(innerXml: String) =
         "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33+01:00\">" +

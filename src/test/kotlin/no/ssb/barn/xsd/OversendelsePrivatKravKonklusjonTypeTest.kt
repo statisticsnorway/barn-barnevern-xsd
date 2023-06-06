@@ -6,7 +6,9 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
 import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.buildBarnevernXml
@@ -75,9 +77,8 @@ class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
             ),
             row(
                 "too long Presisering",
-                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" Presisering=\"${"a".repeat(301)}\" />",
-                "cvc-maxLength-valid: Value '${"a".repeat(301)}' with length = '301' is not facet-valid " +
-                        "with respect to maxLength '300' for type '#AnonType_Presisering'."
+                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" Presisering=\"${"a".repeat(CLARIFICATION_MAX_LEN + 1)}\" />",
+                INVALID_CLARIFICATION_ERROR
             ),
 
             ) { description, partialXml, expectedError ->

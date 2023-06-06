@@ -6,6 +6,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
+import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -59,9 +61,8 @@ class KategoriTypeTest : BehaviorSpec({
             ),
             row(
                 "too long Presisering",
-                "<Kategori Kode=\"1.1\" Presisering=\"${"a".repeat(301)}\"/>",
-                "cvc-maxLength-valid: Value '${"a".repeat(301)}' with length = '301' is not facet-valid " +
-                        "with respect to maxLength '300' for type '#AnonType_Presisering'."
+                "<Kategori Kode=\"1.1\" Presisering=\"${"a".repeat(CLARIFICATION_MAX_LEN + 1)}\"/>",
+                INVALID_CLARIFICATION_ERROR
             )
         ) { description, partialXml, expectedError ->
             When(description) {
