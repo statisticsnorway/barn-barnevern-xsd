@@ -325,7 +325,7 @@ Gyldig fra 2013-01-01
 ### Melding Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Meldinger<br/>
-når man sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+når en sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR<br/>
@@ -441,7 +441,7 @@ Gyldig fra 2013-01-01
 ### Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Undersøkelser<br/>
-når man sammenligner Undersøkelsene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+når en sammenligner Undersøkelsene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere Undersøkelser med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR<br/>
@@ -606,7 +606,7 @@ Gyldig fra 2022-01-01
 ### Vedtak Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Vedtak<br/>
-når man sammenligner Vedtakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+når en sammenligner Vedtakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere Vedtak med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: INFO<br/>
@@ -758,7 +758,7 @@ Gyldig fra 2013-01-01
 ### Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Tiltak<br/>
-når man sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+når en sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere Tiltak med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR<br/>
@@ -881,8 +881,8 @@ Gyldig fra 2013-01-01
 
 ### Plan Kontroll 19: Dublett på innhold, men forskjellige identer
 
-Gitt at man har 2 eller flere Planer<br/>
-når man sammenligner Planene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+Gitt at en har 2 eller flere Planer<br/>
+når en sammenligner Planene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere Planer med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: INFO<br/>
