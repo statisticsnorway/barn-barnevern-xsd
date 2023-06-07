@@ -325,7 +325,7 @@ Gyldig fra 2013-01-01
 ### Melding Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Meldinger<br/>
-når sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+når en sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR<br/>
@@ -441,7 +441,7 @@ Gyldig fra 2013-01-01
 ### Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Undersøkelser<br/>
-når sammenligner Undersøkelsene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+når en sammenligner Undersøkelsene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere Undersøkelser med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR<br/>
@@ -603,6 +603,15 @@ Gyldig fra 2022-01-01
 
 
 
+### Vedtak Kontroll 19: Dublett på innhold, men forskjellige identer
+
+Gitt at man har 2 eller flere Vedtak<br/>
+når en sammenligner Vedtakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+så gi feilmeldingen "Det finnes 2 eller flere Vedtak med identisk innhold, men med forskjellige identer"
+
+Alvorlighetsgrad: INFO<br/>
+Gyldig fra 2013-01-01
+
 
 
 ### Vedtak Kontroll 20: Vedtak med status 2 = 'Begjæring_ oversendt nemnd' skal ha relasjon til OversendelseFylkesnemnd
@@ -749,7 +758,7 @@ Gyldig fra 2013-01-01
 ### Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
 
 Gitt at man har 2 eller flere Tiltak<br/>
-når sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+når en sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere Tiltak med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR<br/>
@@ -870,6 +879,16 @@ Gyldig fra 2013-01-01
 
 
 
+### Plan Kontroll 19: Dublett på innhold, men forskjellige identer
+
+Gitt at en har 2 eller flere Planer<br/>
+når en sammenligner Planene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
+så gi feilmeldingen "Det finnes 2 eller flere Planer med identisk innhold, men med forskjellige identer"
+
+Alvorlighetsgrad: INFO<br/>
+Gyldig fra 2013-01-01
+
+
 ## <a name="ettervern">Ettervern</a>
 
 ### Ettervern Kontroll 2a: TilbudSendtDato er etter SluttDato
@@ -970,6 +989,12 @@ Gyldig fra 2022-01-01
 
 
 ## <a name="endringslogg">Endringslogg</a>
+
+### <a name="2023-06-05">2023-06-05</a>
+
+Lagt til
+- Vedtak Kontroll 19: Dublett på innhold, men forskjellige identer
+- Plan Kontroll 19: Dublett på innhold, men forskjellige identer
 
 ### <a name="2023-05-05">2023-05-05</a>
 
