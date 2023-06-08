@@ -309,7 +309,7 @@ Bjorge.Saether@bufdir.no
                     <xs:documentation>Bekymringsmelding</xs:documentation>
                 </xs:annotation>
                 <xs:unique name="MeldingIdUnique">
-                    <xs:selector xpath="./Melding"/>
+                    <xs:selector xpath="Melding"/>
                     <xs:field xpath="@Id"/>
                 </xs:unique>
             </xs:element>
