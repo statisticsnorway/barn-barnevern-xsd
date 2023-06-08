@@ -35,6 +35,13 @@ class SlettetTypeTest : BehaviorSpec({
         forAll(
             /** Id */
             row(
+                "duplicate Id",
+                "<Slettet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" Type=\"Melding\" SluttDato=\"2022-11-14\" />" +
+                        "<Slettet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" Type=\"Melding\" SluttDato=\"2022-11-14\" />",
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e,Melding] " +
+                        "declared for identity constraint \"SlettetIdUnique\" of element \"Sak\"."
+            ),
+            row(
                 "missing Id",
                 "<Slettet Type=\"Melding\" SluttDato=\"2022-11-14\" />",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Slettet'."
