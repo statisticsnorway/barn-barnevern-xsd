@@ -30,6 +30,17 @@ class PlanTypeTest : BehaviorSpec({
 
         forAll(
             /** Id */
+
+            row(
+                "duplicate Id",
+                "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "StartDato=\"2022-11-14\" Plantype=\"1\"/> " +
+                        "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "StartDato=\"2022-11-14\" Plantype=\"1\"/>",
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] " +
+                        "declared for identity constraint \"PlanIdUnique\" of element \"Sak\"."
+            ),
+
             row(
                 "missing Id",
                 "<Plan StartDato=\"2022-11-14\" Plantype=\"1\" />",
