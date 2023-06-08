@@ -100,8 +100,8 @@ Bjorge.Saether@bufdir.no
                     <xs:selector xpath="Ettervern"/>
                     <xs:field xpath="@Id"/>
                 </xs:unique>
-                <xs:unique name="OversendelseFylkesnenmdIdUnique">
-                    <xs:selector xpath="OversendelseFylkesnenmd"/>
+                <xs:unique name="OversendelseFylkesnemndIdUnique">
+                    <xs:selector xpath="OversendelseFylkesnemnd"/>
                     <xs:field xpath="@Id"/>
                 </xs:unique>
                 <xs:unique name="VedtakIdUnique">
