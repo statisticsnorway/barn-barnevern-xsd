@@ -84,7 +84,27 @@ class VedtakTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildVedtakXml(partialXml).toStreamSource())
+                    getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
+                }
+
+                Then("thrown should be as expected") {
+                    thrown.message shouldBe expectedError
+                }
+            }
+        }
+
+        forAll(
+            /** Id */
+            row(
+                "duplicate Id",
+                buildVedtakPartialXml("<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">")
+                        + buildVedtakPartialXml("<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"),
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] declared for identity constraint \"VedtakIdUnique\" of element \"Sak\"."
+            )
+        ) { description, partialXml, expectedError ->
+            When(description) {
+                val thrown = shouldThrow<SAXException> {
+                    getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {
@@ -96,10 +116,12 @@ class VedtakTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildVedtakXml(vedtakStartTag: String): String = buildBarnevernXml(
-            vedtakStartTag +
-                    LOVHJEMMEL_XML +
-                    "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" Kode=\"1\" />" +
-                    "</Vedtak>"
+            buildVedtakPartialXml(vedtakStartTag)
         )
+
+        private fun buildVedtakPartialXml(vedtakStartTag: String) = vedtakStartTag +
+                LOVHJEMMEL_XML +
+                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" Kode=\"1\" />" +
+                "</Vedtak>"
     }
 }

@@ -93,11 +93,34 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
                 }
             }
         }
+
+        forAll(
+            /** Id */
+            row(
+                "duplicate Id",
+                buildOversendelseFylkesnemndPartialXml("<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">") +
+                        buildOversendelseFylkesnemndPartialXml("<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"),
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] declared for identity constraint \"OversendelseFylkesnemndIdUnique\" of element \"Sak\"."
+            ),
+        ) { description, oversendelseFylkesnemndXml, expectedError ->
+            When(description) {
+                val thrown = shouldThrow<SAXException> {
+                    getSchemaValidator().validate(buildBarnevernXml(oversendelseFylkesnemndXml).toStreamSource())
+                }
+
+                Then("thrown should be as expected") {
+                    thrown.message shouldBe expectedError
+                }
+            }
+        }
     }
 }) {
     companion object {
         private fun buildOversendelseFylkesnemndXml(elementStart: String): String = buildBarnevernXml(
-            "$elementStart$LOVHJEMMEL_XML</OversendelseFylkesnemnd>"
+            buildOversendelseFylkesnemndPartialXml(elementStart)
         )
+
+        private fun buildOversendelseFylkesnemndPartialXml(elementStart: String): String =
+            "$elementStart$LOVHJEMMEL_XML</OversendelseFylkesnemnd>"
     }
 }

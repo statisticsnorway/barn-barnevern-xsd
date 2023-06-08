@@ -35,6 +35,23 @@ class RelasjonTypeTest : BehaviorSpec({
         forAll(
             /** Id */
             row(
+                "duplicate Id",
+                "<Relasjon " +
+                        "Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "FraId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "FraType=\"Melding\" " +
+                        "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "TilType=\"Undersokelse\" />" +
+                        "<Relasjon " +
+                        "Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "FraId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "FraType=\"Melding\" " +
+                        "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "TilType=\"Undersokelse\" />",
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] " +
+                        "declared for identity constraint \"RelasjonIdUnique\" of element \"Sak\"."
+            ),
+            row(
                 "missing Id",
                 "<Relasjon " +
                         "FraId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +

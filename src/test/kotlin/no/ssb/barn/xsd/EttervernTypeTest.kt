@@ -33,6 +33,15 @@ class EttervernTypeTest : BehaviorSpec({
 
         forAll(
             /** Id */
+
+            row(
+                "duplicate Id",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"2022-11-14\"/>" +
+                        "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"2022-11-14\"/>",
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] " +
+                        "declared for identity constraint \"EttervernIdUnique\" of element \"Sak\"."
+            ),
+
             row(
                 "missing Id",
                 "<Ettervern TilbudSendtDato=\"2022-11-14\"/>",
