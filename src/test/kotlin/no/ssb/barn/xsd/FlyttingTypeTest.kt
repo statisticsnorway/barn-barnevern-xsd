@@ -37,6 +37,23 @@ class FlyttingTypeTest : BehaviorSpec({
 
         forAll(
             /** Id */
+
+            row(
+                "duplicate Id",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "SluttDato=\"2022-11-14\">" +
+                        "<ArsakFra Kode=\"1.1.1\" />" +
+                        "<FlyttingTil Kode=\"1\" />" +
+                        "</Flytting> " +
+                        "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "SluttDato=\"2022-11-14\">" +
+                        "<ArsakFra Kode=\"1.1.1\" />" +
+                        "<FlyttingTil Kode=\"1\" />" +
+                        "</Flytting>",
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] " +
+                        "declared for identity constraint \"FlyttingIdUnique\" of element \"Sak\"."
+            ),
+
             row(
                 "missing Id",
                 "<Flytting SluttDato=\"2022-11-14\">",
