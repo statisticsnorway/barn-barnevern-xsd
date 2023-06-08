@@ -91,6 +91,10 @@ Bjorge.Saether@bufdir.no
                         endret etter forrige innrapportering.
                     </xs:documentation>
                 </xs:annotation>
+                <xs:unique name="MeldingIdUnique">
+                    <xs:selector xpath="Melding"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
             </xs:element>
         </xs:sequence>
         <xs:attribute ref="Id" use="required"/>
@@ -308,10 +312,6 @@ Bjorge.Saether@bufdir.no
                 <xs:annotation>
                     <xs:documentation>Bekymringsmelding</xs:documentation>
                 </xs:annotation>
-                <xs:unique name="MeldingIdUnique">
-                    <xs:selector xpath="Melding"/>
-                    <xs:field xpath="@Id"/>
-                </xs:unique>
             </xs:element>
             <xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded">

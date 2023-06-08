@@ -33,14 +33,14 @@ class MeldingTypeTest : BehaviorSpec({
 
         forAll(
             /** Id */
-/*
+
             row(
                 "duplicate Id",
                 "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\"/>" +
                         "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\"/>",
-                "cvc-complex-type.4: TODO"
+                "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] declared for identity constraint \"MeldingIdUnique\" of element \"Sak\"."
             ),
-*/
+
             row(
                 "missing Id",
                 "<Melding StartDato=\"2022-11-14\"/>",
