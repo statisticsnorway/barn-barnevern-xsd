@@ -91,8 +91,41 @@ Bjorge.Saether@bufdir.no
                         endret etter forrige innrapportering.
                     </xs:documentation>
                 </xs:annotation>
+                <!-- unique-checks-->
                 <xs:unique name="MeldingIdUnique">
                     <xs:selector xpath="Melding"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="EttervernIdUnique">
+                    <xs:selector xpath="Ettervern"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="OversendelseFylkesnenmdIdUnique">
+                    <xs:selector xpath="OversendelseFylkesnenmd"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="VedtakIdUnique">
+                    <xs:selector xpath="Vedtak"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="UndersokelseIdUnique">
+                    <xs:selector xpath="Undersokelse"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="TiltakIdUnique">
+                    <xs:selector xpath="Tiltak"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="PersonaliaIdUnique">
+                    <xs:selector xpath="Personalia"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="PlanIdUnique">
+                    <xs:selector xpath="Plan"/>
+                    <xs:field xpath="@Id"/>
+                </xs:unique>
+                <xs:unique name="FlyttingIdUnique">
+                    <xs:selector xpath="Flytting"/>
                     <xs:field xpath="@Id"/>
                 </xs:unique>
             </xs:element>
