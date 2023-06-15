@@ -3,6 +3,27 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.2.2.1
+Endringsdato: 15. juni 2023
+
+## Struktur
+- /@versjon oppdatert til 2.2.
+- Presisering
+  - Endret lengde fra 300 til 10000
+- Lagt til krav/begrensning på unik Id for:
+  - Ettervern
+  - Flytting
+  - Melding
+  - OversendelseFylkesnemnd
+  - Personalia
+  - Plan
+  - Relasjon
+  - Slettet
+  - Tiltak
+  - Undersøkelse
+  - Vedtak
+
+---
 # v.2.2.0
 Endringsdato: 10. januar 2023
 
