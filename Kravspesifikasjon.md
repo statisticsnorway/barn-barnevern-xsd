@@ -324,7 +324,7 @@ Gyldig fra 2013-01-01
 
 ### Melding Kontroll 19: Dublett på innhold, men forskjellige identer
 
-Gitt at man har 2 eller flere Meldinger<br/>
+Gitt at man har 2 eller flere Meldinger med konklusjon<br/>
 når en sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
 
@@ -759,9 +759,9 @@ Gyldig fra 2013-01-01
 
 Gitt at man har 2 eller flere Tiltak<br/>
 når en sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
-så gi feilmeldingen "Det finnes 2 eller flere Tiltak med identisk innhold, men med forskjellige identer"
+så gi feilmeldingen "Det finnes 2 eller flere tiltak med identisk innhold, men med forskjellige identer"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
