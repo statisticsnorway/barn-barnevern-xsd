@@ -46,7 +46,7 @@
 
 
 ## <a name="migrering">Migrering av data innrapportert via Kostra</a>
-I forbindelse med at data stammer i fra rapportering via **[KOSTRA](#kostra_kanal)** og inneholder MigrertId så vil alle valideringsregler sette alvorlighetsgrad til Warning, ikke ERROR slik det står i spesifikasjonen. 
+I forbindelse med at data stammer i fra rapportering via **[KOSTRA](#kostra_kanal)** og inneholder MigrertId så vil alle valideringsregler sette alvorlighetsgrad til WARNING, ikke ERROR slik det står i spesifikasjonen. 
 
 
 ## <a name="definisjoner">Definisjoner</a>
@@ -136,9 +136,9 @@ Gyldig fra 2013-01-01
 
 Gitt at man har en Sak med datoUttrekk og fødselsdato<br/>
 når datoUttrekk minus fødselsdato er lik 25 år eller større<br/>
-så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient"
+så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient. Alder: {alder} år."
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -147,7 +147,7 @@ Gyldig fra 2013-01-01
 
 Gitt at man har en Sak og utleder alder ved hjelp av fødselsnummer<br/>
 når alder er 18 eller større og tiltak mangler <br/>
-så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak"
+så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak. Alder: {alder} år."
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
@@ -296,7 +296,7 @@ Gitt at man har en Melding der StartDato og Konklusjon/SluttDato finnes<br/>
 når Konklusjon/SluttDato er mer enn 7 dager etter StartDato<br/>
 så gi feilmeldingen "Fristoverskridelse på behandlingstid for melding, ({StartDato} -> {Konklusjon/SluttDato})"
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -433,7 +433,7 @@ så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 90 dager etter me
 når Datouttrekk er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
 så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato"
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -581,7 +581,7 @@ Gyldig fra 2022-01-01
 
 Gitt at man har et Vedtak der Vedtak/LovhjemmelType/Lov og eventuelt Vedtak/JmfrLovhjemmelType/Lov er utfylt<br/>
 når Lov er utfylt med noe annet enn BVL eller BVL2021<br/>
-så gir feilmeldingen "Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL eller BVL2021"
+så gir feilmeldingen "Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL eller BVL2021. Lov: {lov}."
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2022-01-01
@@ -623,7 +623,7 @@ så gi feilmeldingen "Vedtak med status 2 = 'Begjæring oversendt nemnd' skal ha
 når Relasjon mellom Vedtak og OversendelseFylkesnemnd finnes, men OversendelseFylkesnemnd mangler <br/>
 så gi feilmeldingen "OversendelseFylkesnemndVedtak skal finnes for Vedtak med status 2 = 'Begjæring oversendt nemnd'"
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
@@ -669,9 +669,9 @@ Gyldig fra 2013-01-01
 
 Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
 når barnets alder er større enn 7 år og tiltakets kategori er '4.1' Barnehage<br/>
-så gi feilmelding "Barnet er over 7 år og i barnehage."
+så gi feilmelding "Barnet er over 7 år og i barnehage. Alder: {alder} år."
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -680,9 +680,9 @@ Gyldig fra 2013-01-01
 
 Gitt at det er en sak med tiltak og fødseldato (slik at man kan utlede alder)<br/>
 når barnets alder er større enn 11 år og tiltakets kategori er '4.2' SFO/AKS<br/>
-så gi feilmelding "Barnet er over 11 år og i SFO"
+så gi feilmelding "Barnet er over 11 år og i SFO. Alder: {alder} år."
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -717,7 +717,7 @@ og for de plasseringstiltakene der SluttDato mangler så brukes DatoUttrekk i st
 når plasseringstiltak1 overlapper plasseringstiltak2 med mer enn 90 dager<br/>
 så gi feilmelding "Flere plasseringstiltak i samme periode (PeriodeStartDato - PeriodeSluttDato). Plasseringstiltak kan ikke overlappe med mer enn 90 dager. Antall dager overlapp: `antallDager` dager. Overlapper med tiltak-id `tiltak-id`.
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -737,7 +737,7 @@ Gyldig fra 2013-01-01
 
 Gitt at man har UttrekkDato, en Sak med fødselsdato og et [Omsorgstiltak](#omsorgstiltak)<br/>
 når UttrekkDato er 18 år eller mer etter fødselsdato og sluttdato mangler<br/>
-så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak"
+så gi feilmelding "Individet er over 18 år skal dermed ikke ha omsorgstiltak. Alder: {alder} år."
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
@@ -799,7 +799,7 @@ så gi advarsel "Dette er er en advarsel. Kun plasseringstiltak skal ha kode 1.9
 Dersom dette ikke er et plasseringstiltak (institusjon) må tiltakskode endres. <br/>
 Er det et administrative vedtak som er gitt kode 1.99 skal tiltaket slettes."
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2023-01-01
 
 
@@ -812,7 +812,7 @@ så gi advarsel "Dette er er en advarsel. Kun plasseringstiltak skal ha kode 2.9
 Dersom dette ikke er et plasseringstiltak (fosterhjem) må tiltakskode endres. <br/>
 Er det et administrative vedtak som er gitt kode 2.99 skal tiltaket slettes."
 
-Alvorlighetsgrad: Warning<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2023-01-01
 
 
@@ -1026,7 +1026,7 @@ Lagt til
 ### <a name="2022-10-31">2022-10-31</a>
 
 Endret
-- Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet, endret alvorlighetsgrad fra ERROR til Warning.
+- Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet, endret alvorlighetsgrad fra ERROR til WARNING.
 - Tiltak Kontroll 13: Individ er over 18 år og har omsorgtiltak, endring i kravet.
 
 Slettet
