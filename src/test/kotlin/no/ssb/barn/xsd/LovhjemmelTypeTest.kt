@@ -22,8 +22,8 @@ class LovhjemmelTypeTest : BehaviorSpec({
                     buildXmlInTest(
                         "<Lovhjemmel>" +
                                 "<Lov>BVL</Lov>" +
-                                "<Kapittel>1</Kapittel>" +
-                                "<Paragraf>4-2a</Paragraf>" +
+                                "<Kapittel>1b</Kapittel>" +
+                                "<Paragraf>4a</Paragraf>" +
                                 "<Ledd>3</Ledd>" +
                                 "<Bokstav>a</Bokstav>" +
                                 "<Punktum>4</Punktum>" +
@@ -82,8 +82,8 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Kapittel></Kapittel>" +
                         "<Paragraf>2</Paragraf>" +
                         "</Lovhjemmel>",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
-                        "minLength '1' for type '#AnonType_KapittelLovhjemmelType'."
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d+[a-z]*' for " +
+                        "type '#AnonType_KapittelLovhjemmelType'."
             ),
             row(
                 "too long Kapittel",
@@ -113,8 +113,8 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Kapittel>1</Kapittel>" +
                         "<Paragraf></Paragraf>" +
                         "</Lovhjemmel>",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
-                        "minLength '1' for type '#AnonType_ParagrafLovhjemmelType'."
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d+[a-z]*' for type " +
+                        "'#AnonType_ParagrafLovhjemmelType'."
             ),
             row(
                 "too long Paragraf",
@@ -126,6 +126,16 @@ class LovhjemmelTypeTest : BehaviorSpec({
                 "cvc-maxLength-valid: Value '12345' with length = '5' is not facet-valid with " +
                         "respect to maxLength '4' for type '#AnonType_ParagrafLovhjemmelType'."
             ),
+            row(
+                "Paragraf with digit, space and letter",
+                "<Lovhjemmel>" +
+                        "<Lov>BVL</Lov>" +
+                        "<Kapittel>1</Kapittel>" +
+                        "<Paragraf>4 a</Paragraf>" +
+                        "</Lovhjemmel>",
+                "cvc-pattern-valid: Value '4 a' is not facet-valid with respect to pattern '\\d+[a-z]*' for " +
+                        "type '#AnonType_ParagrafLovhjemmelType'."
+            ),
 
             /** Ledd */
             row(
@@ -136,8 +146,8 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Paragraf>2</Paragraf>" +
                         "<Ledd></Ledd>" +
                         "</Lovhjemmel>",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
-                        "minLength '1' for type '#AnonType_LeddLovhjemmelType'."
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d+' for type " +
+                        "'#AnonType_LeddLovhjemmelType'."
             ),
             row(
                 "too long Ledd",
@@ -160,8 +170,8 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Paragraf>2</Paragraf>" +
                         "<Bokstav></Bokstav>" +
                         "</Lovhjemmel>",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
-                        "minLength '1' for type '#AnonType_BokstavLovhjemmelType'."
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '[a-z]' for type " +
+                        "'#AnonType_BokstavLovhjemmelType'."
             ),
             row(
                 "too long Bokstav",
@@ -171,8 +181,8 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Paragraf>2</Paragraf>" +
                         "<Bokstav>ab</Bokstav>" +
                         "</Lovhjemmel>",
-                "cvc-maxLength-valid: Value 'ab' with length = '2' is not facet-valid with respect to " +
-                        "maxLength '1' for type '#AnonType_BokstavLovhjemmelType'."
+                "cvc-pattern-valid: Value 'ab' is not facet-valid with respect to pattern '[a-z]' for type " +
+                        "'#AnonType_BokstavLovhjemmelType'."
             ),
 
             /** Punktum */
@@ -184,8 +194,8 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Paragraf>2</Paragraf>" +
                         "<Punktum></Punktum>" +
                         "</Lovhjemmel>",
-                "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
-                        "minLength '1' for type '#AnonType_PunktumLovhjemmelType'."
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d+' for type " +
+                        "'#AnonType_PunktumLovhjemmelType'."
             ),
             row(
                 "too long Punktum",

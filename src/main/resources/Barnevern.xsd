@@ -618,6 +618,7 @@ Bjorge.Saether@bufdir.no
                     <xs:restriction base="xs:string">
                         <xs:minLength value="1"/>
                         <xs:maxLength value="3"/>
+                        <xs:pattern value="\d+[a-z]*"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
@@ -626,6 +627,7 @@ Bjorge.Saether@bufdir.no
                     <xs:restriction base="xs:string">
                         <xs:minLength value="1"/>
                         <xs:maxLength value="4"/>
+                        <xs:pattern value="\d+[a-z]*"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
@@ -634,6 +636,7 @@ Bjorge.Saether@bufdir.no
                     <xs:restriction base="xs:string">
                         <xs:minLength value="1"/>
                         <xs:maxLength value="3"/>
+                        <xs:pattern value="\d+"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
@@ -642,6 +645,7 @@ Bjorge.Saether@bufdir.no
                     <xs:restriction base="xs:string">
                         <xs:minLength value="1"/>
                         <xs:maxLength value="1"/>
+                        <xs:pattern value="[a-z]"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
@@ -650,6 +654,7 @@ Bjorge.Saether@bufdir.no
                     <xs:restriction base="xs:string">
                         <xs:minLength value="1"/>
                         <xs:maxLength value="3"/>
+                        <xs:pattern value="\d+"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
