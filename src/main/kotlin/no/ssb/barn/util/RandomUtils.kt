@@ -14,12 +14,16 @@ object RandomUtils {
      * @return a random string of [length]
      * @throws [IllegalArgumentException] if [length] is less than 1
      */
-    fun generateRandomString(length: Int): String = length.takeIf { it > 0 }?.let {
-        (1..it)
-            .map { charPool.indices.random() }
-            .map(charPool::get)
-            .joinToString(EMPTY_STRING)
-    } ?: throw IllegalArgumentException(INVALID_LEN_MESSAGE)
+    fun generateRandomString(length: Int): String = when {
+        length > 0 -> {
+            (1..length)
+                .map { charPool.indices.random() }
+                .map(charPool::get)
+                .joinToString(EMPTY_STRING)
+        }
+
+        else -> throw IllegalArgumentException(INVALID_LEN_MESSAGE)
+    }
 
     /**
      * Generates a random social security id (fødselsnummer) with date of birth in the
@@ -33,9 +37,9 @@ object RandomUtils {
     fun generateRandomSocialSecurityId(
         startInclusive: LocalDate,
         endExclusive: LocalDate
-    ): String = (startInclusive to endExclusive)
-        .takeIf { (start, end) -> start.isBefore(end) }?.let { (start, end) ->
-            (start.toEpochDay() until end.toEpochDay()).random()
+    ): String = when {
+        startInclusive.isBefore(endExclusive) -> {
+            (startInclusive.toEpochDay() until endExclusive.toEpochDay()).random()
                 .let { randomDay -> LocalDate.ofEpochDay(randomDay).format(TWO_DIGIT_YEAR_DATE_TIME_FORMATTER) }
                 .let { sixDigitBirthDate ->
                     generateSequence { sixDigitBirthDate.plus((100 until 499).random().toString()) }
@@ -49,7 +53,10 @@ object RandomUtils {
                             )
                         }.filter { candidate -> candidate.length == SOCIAL_SECURITY_ID_LENGTH }.first()
                 }
-        } ?: throw IllegalArgumentException(INVALID_DATE_RANGE_MESSAGE)
+        }
+
+        else -> throw IllegalArgumentException(INVALID_DATE_RANGE_MESSAGE)
+    }
 
     private fun buildSocialSecurityIdRecursive(
         seed: String,

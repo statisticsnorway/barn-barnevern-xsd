@@ -16,7 +16,7 @@ object SocialSecurityIdUtils {
      */
     fun extractGenderFromSocialSecurityId(socialSecurityId: String): String = socialSecurityId
         .takeIf { socialSecurityIdPattern.matcher(it).matches() }?.let {
-            if (socialSecurityId.substring(8, 9).toInt() % 2 == 0) FEMALE
+            if (it.substring(8, 9).toInt() % 2 == 0) FEMALE
             else MALE
         } ?: throw IllegalArgumentException(INVALID_SSN_FORMAT_MSG)
 
@@ -31,7 +31,7 @@ object SocialSecurityIdUtils {
      */
     fun extractDateOfBirthFromSocialSecurityId(socialSecurityId: String): LocalDate = socialSecurityId
         .takeIf { socialSecurityIdPattern.matcher(it).matches() }?.let {
-            LocalDate.parse(socialSecurityId.substring(0, DATE_OF_BIRTH_LEN), TWO_DIGIT_YEAR_DATE_TIME_FORMATTER)
+            LocalDate.parse(it.substring(0, DATE_OF_BIRTH_LEN), TWO_DIGIT_YEAR_DATE_TIME_FORMATTER)
                 .let { parsedDate ->
                     if (parsedDate.isAfter(LocalDate.now())) parsedDate.minusYears(100)
                     else parsedDate
