@@ -1,7 +1,7 @@
 package no.ssb.barn.util
 
-import no.ssb.barn.util.Shared.TWO_DIGIT_YEAR_DATE_TIME_FORMATTER
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.util.regex.Pattern
 
@@ -45,4 +45,6 @@ object SocialSecurityIdUtils {
 
     private val socialSecurityIdPattern = Pattern.compile("^\\d{11}$")
     private const val DATE_OF_BIRTH_LEN = 6
+
+    internal val TWO_DIGIT_YEAR_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyy")
 }

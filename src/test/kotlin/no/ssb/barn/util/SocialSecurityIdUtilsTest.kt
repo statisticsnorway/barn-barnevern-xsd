@@ -5,10 +5,10 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import no.ssb.barn.util.Shared.TWO_DIGIT_YEAR_DATE_TIME_FORMATTER
 import no.ssb.barn.util.SocialSecurityIdUtils.FEMALE
 import no.ssb.barn.util.SocialSecurityIdUtils.INVALID_SSN_FORMAT_MSG
 import no.ssb.barn.util.SocialSecurityIdUtils.MALE
+import no.ssb.barn.util.SocialSecurityIdUtils.TWO_DIGIT_YEAR_DATE_TIME_FORMATTER
 import no.ssb.barn.util.SocialSecurityIdUtils.extractDateOfBirthFromSocialSecurityId
 import no.ssb.barn.util.SocialSecurityIdUtils.extractGenderFromSocialSecurityId
 import java.time.LocalDate
