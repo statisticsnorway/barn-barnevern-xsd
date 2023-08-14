@@ -32,13 +32,11 @@ variables:
 
 resources:
   repositories:
-    # See https://github.com/statisticsnorway/ssb-developer-guide/blob/master/docs/azure_pipeline_doc.md#templating
-    # for info on how to use the templates repo
     - repository: templates
       type: github
       name: statisticsnorway/azure-pipelines-templates
       # The version of the repo on GitHub. Change to needed version
-      ref: refs/tags/1.1.39
+      ref: refs/tags/1.1.43
       # Service connection in the barn project on Pipelines
       # with access to the template repository.
       endpoint: 'github-Barnevernsregisteret'
