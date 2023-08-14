@@ -8,6 +8,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
 import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -75,7 +76,7 @@ class FlyttingTilTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildFlyttingTilXml(innerXml: String): String = buildBarnevernXml(
-            "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"2022-11-14\">" +
+            "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"$VALID_DATE\">" +
                     "<ArsakFra Kode=\"1.1.1\" Presisering=\"~Presisering~\" />" +
                     innerXml +
                     "</Flytting>"

@@ -7,7 +7,13 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -22,7 +28,7 @@ class UndersokelseUtvidetFristTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildUndersokelseXml(
-                        "<UtvidetFrist StartDato=\"2022-11-14\" Innvilget=\"1\" />"
+                        "<UtvidetFrist StartDato=\"$VALID_DATE\" Innvilget=\"1\" />"
                     ).toStreamSource()
                 )
             }
@@ -42,20 +48,30 @@ class UndersokelseUtvidetFristTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid StartDato",
-                "<UtvidetFrist StartDato=\"2022\" Innvilget=\"1\" />",
-                INVALID_DATE_ERROR
+                "<UtvidetFrist StartDato=\"$INVALID_DATE\" Innvilget=\"1\" />",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "StartDato too early",
+                "<UtvidetFrist StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Innvilget=\"1\" />",
+                START_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "StartDato too late",
+                "<UtvidetFrist StartDato=\"$INVALID_MAX_DATE_TOO_LATE\" Innvilget=\"1\" />",
+                START_DATE_TOO_LATE_ERROR
             ),
 
             /** Innvilget */
             row(
                 "empty Innvilget",
-                "<UtvidetFrist StartDato=\"2022-11-14\" Innvilget=\"\" />",
+                "<UtvidetFrist StartDato=\"$VALID_DATE\" Innvilget=\"\" />",
                 "cvc-length-valid: Value '' with length = '0' is not facet-valid with respect to length '1' " +
                         "for type '#AnonType_InnvilgetUtvidetFristUndersokelseType'."
             ),
             row(
                 "too long Innvilget",
-                "<UtvidetFrist StartDato=\"2022-11-14\" Innvilget=\"42\" />",
+                "<UtvidetFrist StartDato=\"$VALID_DATE\" Innvilget=\"42\" />",
                 "cvc-length-valid: Value '42' with length = '2' is not facet-valid with respect to length '1' " +
                         "for type '#AnonType_InnvilgetUtvidetFristUndersokelseType'."
             )
@@ -74,7 +90,7 @@ class UndersokelseUtvidetFristTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildUndersokelseXml(utvidetFristXml: String): String = buildBarnevernXml(
-            "<Undersokelse Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Undersokelse Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     utvidetFristXml +
                     "</Undersokelse>"
         )

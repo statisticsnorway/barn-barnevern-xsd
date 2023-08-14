@@ -7,7 +7,13 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.MAX_DATE
+import no.ssb.barn.TestUtils.MIN_DATE
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -22,7 +28,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildEvalueringXml(
-                        "<Evaluering UtfortDato=\"2022-11-14\" />"
+                        "<Evaluering UtfortDato=\"$VALID_DATE\" />"
                     ).toStreamSource()
                 )
             }
@@ -42,8 +48,20 @@ class PlanEvalueringTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid UtfortDato",
-                "<Evaluering UtfortDato=\"2022\" />",
-                INVALID_DATE_ERROR
+                "<Evaluering UtfortDato=\"$INVALID_DATE\" />",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "UtfortDato too early",
+                "<Evaluering UtfortDato=\"$INVALID_MIN_DATE_TOO_EARLY\" />",
+               "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not facet-valid with respect to " +
+                        "minInclusive '$MIN_DATE' for type '#AnonType_UtfortDatoEvalueringPlanType'."
+            ),
+            row(
+                "UtfortDato too late",
+                "<Evaluering UtfortDato=\"$INVALID_MAX_DATE_TOO_LATE\" />",
+                "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not facet-valid with respect to " +
+                        "maxInclusive '$MAX_DATE' for type '#AnonType_UtfortDatoEvalueringPlanType'."
             )
         ) { description, partialXml, expectedError ->
             When(description) {
@@ -61,7 +79,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
     companion object {
         private fun buildEvalueringXml(innerXml: String): String = buildBarnevernXml(
             "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "StartDato=\"2022-11-14\" Plantype=\"1\">" +
+                    "StartDato=\"$VALID_DATE\" Plantype=\"1\">" +
                     innerXml +
                     "</Plan>"
         )

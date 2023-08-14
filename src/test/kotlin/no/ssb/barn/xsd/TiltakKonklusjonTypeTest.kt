@@ -7,8 +7,14 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -23,7 +29,7 @@ class TiltakKonklusjonTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildKonklusjonXml(
-                        "<Konklusjon SluttDato=\"2022-11-14\" />"
+                        "<Konklusjon SluttDato=\"$VALID_DATE\" />"
                     ).toStreamSource()
                 )
             }
@@ -43,8 +49,18 @@ class TiltakKonklusjonTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid SluttDato",
-                "<Konklusjon SluttDato=\"2022\" />",
-                INVALID_DATE_ERROR
+                "<Konklusjon SluttDato=\"$INVALID_DATE\" />",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "SluttDato too early",
+                "<Konklusjon SluttDato=\"$INVALID_MIN_DATE_TOO_EARLY\" />",
+                END_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "SluttDato too late",
+                "<Konklusjon SluttDato=\"$INVALID_MAX_DATE_TOO_LATE\" />",
+                END_DATE_TOO_LATE_ERROR
             )
         ) { description, partialXml, expectedError ->
             When(description) {
@@ -62,7 +78,7 @@ class TiltakKonklusjonTypeTest : BehaviorSpec({
     companion object {
         private fun buildKonklusjonXml(innerXml: String): String = buildBarnevernXml(
             "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "StartDato=\"2022-11-14\">" +
+                    "StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
                     "<Kategori Kode=\"1.1\"/>" +
                     innerXml +

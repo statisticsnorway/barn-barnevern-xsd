@@ -8,9 +8,15 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
 import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -25,7 +31,7 @@ class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildKonklusjonXml(
-                        "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" Presisering=\"~Presisering~\" />"
+                        "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" Presisering=\"~Presisering~\" />"
                     ).toStreamSource()
                 )
             }
@@ -45,25 +51,35 @@ class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid SluttDato",
-                "<Konklusjon SluttDato=\"2022\" Kode=\"1\" />",
-                INVALID_DATE_ERROR
+                "<Konklusjon SluttDato=\"$INVALID_DATE\" Kode=\"1\" />",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "SluttDato too early",
+                "<Konklusjon SluttDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kode=\"1\" />",
+                END_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "SluttDato too late",
+                "<Konklusjon SluttDato=\"$INVALID_MAX_DATE_TOO_LATE\" Kode=\"1\" />",
+                END_DATE_TOO_LATE_ERROR
             ),
 
             /** Kode */
             row(
                 "missing Kode",
-                "<Konklusjon SluttDato=\"2022-11-14\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" />",
                 "cvc-complex-type.4: Attribute 'Kode' must appear on element 'Konklusjon'."
             ),
             row(
                 "empty Kode",
-                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"\" />",
                 "cvc-length-valid: Value '' with length = '0' is not facet-valid with respect to length '1' " +
                         "for type '#AnonType_KodeKonklusjonOversendelsePrivatKravType'."
             ),
             row(
                 "invalid Kode",
-                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"4\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"4\" />",
                 "cvc-enumeration-valid: Value '4' is not facet-valid with respect to enumeration '[1, 2, 9]'. " +
                         "It must be a value from the enumeration."
             ),
@@ -71,13 +87,13 @@ class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
             /** Presisering */
             row(
                 "empty Presisering",
-                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" Presisering=\"\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" Presisering=\"\" />",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
                         "minLength '1' for type '#AnonType_Presisering'."
             ),
             row(
                 "too long Presisering",
-                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" Presisering=\"${"a".repeat(CLARIFICATION_MAX_LEN + 1)}\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" Presisering=\"${"a".repeat(CLARIFICATION_MAX_LEN + 1)}\" />",
                 INVALID_CLARIFICATION_ERROR
             ),
 
@@ -96,13 +112,13 @@ class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildKonklusjonXml(innerXml: String): String = buildBarnevernXml(
-            "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
-                    "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+                    "<Krav Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     innerXml +
                     "</Krav>" +
                     "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "EndretDato=\"2022-11-14\" Kode=\"1\" /></Vedtak>"
+                    "EndretDato=\"$VALID_DATE\" Kode=\"1\" /></Vedtak>"
         )
     }
 }

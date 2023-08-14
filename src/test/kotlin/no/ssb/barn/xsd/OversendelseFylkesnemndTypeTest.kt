@@ -8,9 +8,15 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -26,7 +32,7 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildOversendelseFylkesnemndXml(
                         "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "MigrertId=\"4242\" StartDato=\"2022-11-14\">"
+                                "MigrertId=\"4242\" StartDato=\"$VALID_DATE\">"
                     ).toStreamSource()
                 )
             }
@@ -36,17 +42,17 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<OversendelseFylkesnemnd StartDato=\"2022-11-14\">",
+                "<OversendelseFylkesnemnd StartDato=\"$VALID_DATE\">",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'OversendelseFylkesnemnd'."
             ),
             row(
                 "empty Id",
-                "<OversendelseFylkesnemnd Id=\"\" StartDato=\"2022-11-14\">",
+                "<OversendelseFylkesnemnd Id=\"\" StartDato=\"$VALID_DATE\">",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<OversendelseFylkesnemnd Id=\"42\" StartDato=\"2022-11-14\">",
+                "<OversendelseFylkesnemnd Id=\"42\" StartDato=\"$VALID_DATE\">",
                 INVALID_ID_ERROR
             ),
 
@@ -54,14 +60,14 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
             row(
                 "empty MigrertId",
                 "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "MigrertId=\"\" StartDato=\"2022-11-14\">",
+                        "MigrertId=\"\" StartDato=\"$VALID_DATE\">",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
                         "for type '#AnonType_MigrertId'."
             ),
             row(
                 "too long MigrertId",
                 "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "MigrertId=\"${"a".repeat(37)}\" StartDato=\"2022-11-14\">",
+                        "MigrertId=\"${"a".repeat(37)}\" StartDato=\"$VALID_DATE\">",
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
                         "respect to maxLength '36' for type '#AnonType_MigrertId'."
             ),
@@ -79,9 +85,19 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid StartDato",
-                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\">",
-                INVALID_DATE_ERROR
+                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_DATE\">",
+                INVALID_DATE_FORMAT_ERROR
             ),
+            row(
+                "StartDato too early",
+                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\">",
+                START_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "StartDato too late",
+                "<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MAX_DATE_TOO_LATE\">",
+                START_DATE_TOO_LATE_ERROR
+            )
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
@@ -98,8 +114,8 @@ class OversendelseFylkesnemndTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "duplicate Id",
-                buildOversendelseFylkesnemndPartialXml("<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">") +
-                        buildOversendelseFylkesnemndPartialXml("<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"),
+                buildOversendelseFylkesnemndPartialXml("<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">") +
+                        buildOversendelseFylkesnemndPartialXml("<OversendelseFylkesnemnd Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">"),
                 "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] declared for identity constraint \"OversendelseFylkesnemndIdUnique\" of element \"Sak\"."
             ),
         ) { description, oversendelseFylkesnemndXml, expectedError ->

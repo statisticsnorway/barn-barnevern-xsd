@@ -8,9 +8,15 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.MAX_DATE
+import no.ssb.barn.TestUtils.MIN_DATE
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -26,7 +32,7 @@ class TilsynUtfortTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildXmlInTest(
                         "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "UtfortDato=\"2022-11-14\" />"
+                                "UtfortDato=\"$VALID_DATE\" />"
                     ).toStreamSource()
                 )
             }
@@ -36,17 +42,17 @@ class TilsynUtfortTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Utfort UtfortDato=\"2022-11-14\" />",
+                "<Utfort UtfortDato=\"$VALID_DATE\" />",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Utfort'."
             ),
             row(
                 "empty Id",
-                "<Utfort Id=\"\" UtfortDato=\"2022-11-14\" />",
+                "<Utfort Id=\"\" UtfortDato=\"$VALID_DATE\" />",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Utfort Id=\"42\" UtfortDato=\"2022-11-14\" />",
+                "<Utfort Id=\"42\" UtfortDato=\"$VALID_DATE\" />",
                 INVALID_ID_ERROR
             ),
 
@@ -63,8 +69,20 @@ class TilsynUtfortTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid UtfortDato",
-                "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022\" />",
-                INVALID_DATE_ERROR
+                "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"$INVALID_DATE\" />",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "UtfortDato too early",
+                "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"$INVALID_MIN_DATE_TOO_EARLY\" />",
+                "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not facet-valid with respect to " +
+                        "minInclusive '$MIN_DATE' for type '#AnonType_UtfortDatoTilsynUtfortType'."
+            ),
+            row(
+                "UtfortDato too late",
+                "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"$INVALID_MAX_DATE_TOO_LATE\" />",
+                "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not facet-valid with respect to " +
+                        "maxInclusive '$MAX_DATE' for type '#AnonType_UtfortDatoTilsynUtfortType'."
             )
         ) { description, partialXml, expectedError ->
             When(description) {
@@ -81,13 +99,13 @@ class TilsynUtfortTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(tilsynUtfortXml: String): String = buildBarnevernXml(
-            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
                     "<Kategori Kode=\"1.1\" /><Tilsyn>" +
                     "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "StartDato=\"2022-11-14\" Kommunenummer=\"1234\"/>" +
+                    "StartDato=\"$VALID_DATE\" Kommunenummer=\"1234\"/>" +
                     "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "StartDato=\"2022-11-14\" Kode=\"2\"/>" +
+                    "StartDato=\"$VALID_DATE\" Kode=\"2\"/>" +
                     tilsynUtfortXml +
                     "</Tilsyn></Tiltak>"
         )

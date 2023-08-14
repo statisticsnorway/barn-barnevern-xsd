@@ -8,9 +8,15 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -26,7 +32,7 @@ class TilsynAnsvarligTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildXmlInTest(
                         "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "StartDato=\"2022-11-14\" Kommunenummer=\"1234\"/>"
+                                "StartDato=\"$VALID_DATE\" Kommunenummer=\"1234\"/>"
                     ).toStreamSource()
                 )
             }
@@ -36,17 +42,17 @@ class TilsynAnsvarligTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Ansvarlig StartDato=\"2022-11-14\" Kommunenummer=\"1234\"/>",
+                "<Ansvarlig StartDato=\"$VALID_DATE\" Kommunenummer=\"1234\"/>",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Ansvarlig'."
             ),
             row(
                 "empty Id",
-                "<Ansvarlig Id=\"\" StartDato=\"2022-11-14\" Kommunenummer=\"1234\"/>",
+                "<Ansvarlig Id=\"\" StartDato=\"$VALID_DATE\" Kommunenummer=\"1234\"/>",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Ansvarlig Id=\"42\" StartDato=\"2022-11-14\" Kommunenummer=\"1234\"/>",
+                "<Ansvarlig Id=\"42\" StartDato=\"$VALID_DATE\" Kommunenummer=\"1234\"/>",
                 INVALID_ID_ERROR
             ),
 
@@ -63,31 +69,41 @@ class TilsynAnsvarligTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid StartDato",
-                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\" Kommunenummer=\"1234\"/>",
-                INVALID_DATE_ERROR
+                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_DATE\" Kommunenummer=\"1234\"/>",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "StartDato too early",
+                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kommunenummer=\"1234\"/>",
+                START_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "StartDato too late",
+                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MAX_DATE_TOO_LATE\" Kommunenummer=\"1234\"/>",
+                START_DATE_TOO_LATE_ERROR
             ),
 
             /** Kommunenummer */
             row(
                 "missing Kommunenummer",
-                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\"/>",
+                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\"/>",
                 "cvc-complex-type.4: Attribute 'Kommunenummer' must appear on element 'Ansvarlig'."
             ),
             row(
                 "empty Kommunenummer",
-                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Kommunenummer=\"\"/>",
+                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Kommunenummer=\"\"/>",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d{4}' for " +
                         "type '#AnonType_KommunenummerTilsynAnsvarligType'."
             ),
             row(
                 "too short Kommunenummer",
-                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Kommunenummer=\"12\"/>",
+                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Kommunenummer=\"12\"/>",
                 "cvc-pattern-valid: Value '12' is not facet-valid with respect to pattern '\\d{4}' for " +
                         "type '#AnonType_KommunenummerTilsynAnsvarligType'."
             ),
             row(
                 "too long Kommunenummer",
-                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Kommunenummer=\"12345\"/>",
+                "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Kommunenummer=\"12345\"/>",
                 "cvc-pattern-valid: Value '12345' is not facet-valid with respect to pattern '\\d{4}' for " +
                         "type '#AnonType_KommunenummerTilsynAnsvarligType'."
             )
@@ -106,11 +122,11 @@ class TilsynAnsvarligTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(tilsynAnsvarligXml: String): String = buildBarnevernXml(
-            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
                     "<Kategori Kode=\"1.1\" /><Tilsyn>" +
                     tilsynAnsvarligXml +
-                    "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Kode=\"2\"/>" +
+                    "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Kode=\"2\"/>" +
                     "</Tilsyn></Tiltak>"
         )
     }

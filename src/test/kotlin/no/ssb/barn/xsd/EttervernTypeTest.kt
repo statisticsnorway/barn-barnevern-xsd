@@ -8,8 +8,14 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.MAX_DATE
+import no.ssb.barn.TestUtils.MIN_DATE
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -25,7 +31,7 @@ class EttervernTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildBarnevernXml(
                         "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "MigrertId=\"4242\" TilbudSendtDato=\"2022-11-14\"/>"
+                                "MigrertId=\"4242\" TilbudSendtDato=\"$VALID_DATE\"/>"
                     ).toStreamSource()
                 )
             }
@@ -36,25 +42,25 @@ class EttervernTypeTest : BehaviorSpec({
 
             row(
                 "duplicate Id",
-                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"2022-11-14\"/>" +
-                        "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"2022-11-14\"/>",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$VALID_DATE\"/>" +
+                        "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$VALID_DATE\"/>",
                 "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] " +
                         "declared for identity constraint \"EttervernIdUnique\" of element \"Sak\"."
             ),
 
             row(
                 "missing Id",
-                "<Ettervern TilbudSendtDato=\"2022-11-14\"/>",
+                "<Ettervern TilbudSendtDato=\"$VALID_DATE\"/>",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Ettervern'."
             ),
             row(
                 "empty Id",
-                "<Ettervern Id=\"\" TilbudSendtDato=\"2022-11-14\"/>",
+                "<Ettervern Id=\"\" TilbudSendtDato=\"$VALID_DATE\"/>",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Ettervern Id=\"42\" TilbudSendtDato=\"2022-11-14\"/>",
+                "<Ettervern Id=\"42\" TilbudSendtDato=\"$VALID_DATE\"/>",
                 INVALID_ID_ERROR
             ),
 
@@ -62,14 +68,14 @@ class EttervernTypeTest : BehaviorSpec({
             row(
                 "empty MigrertId",
                 "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "MigrertId=\"\" TilbudSendtDato=\"2022-11-14\"/>",
+                        "MigrertId=\"\" TilbudSendtDato=\"$VALID_DATE\"/>",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
                         "for type '#AnonType_MigrertId'."
             ),
             row(
                 "too long MigrertId",
                 "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "MigrertId=\"${"a".repeat(37)}\" TilbudSendtDato=\"2022-11-14\"/>",
+                        "MigrertId=\"${"a".repeat(37)}\" TilbudSendtDato=\"$VALID_DATE\"/>",
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
                         "respect to maxLength '36' for type '#AnonType_MigrertId'."
             ),
@@ -87,8 +93,20 @@ class EttervernTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid TilbudSendtDato",
-                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"2022\"/>",
-                INVALID_DATE_ERROR
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$INVALID_DATE\"/>",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "TilbudSendtDato too early",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$INVALID_MIN_DATE_TOO_EARLY\"/>",
+                "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not facet-valid with respect to " +
+                        "minInclusive '$MIN_DATE' for type '#AnonType_TilbudSendtDatoEttervernType'."
+            ),
+            row(
+                "TilbudSendtDato too late",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$INVALID_MAX_DATE_TOO_LATE\"/>",
+                "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not facet-valid with respect to " +
+                        "maxInclusive '$MAX_DATE' for type '#AnonType_TilbudSendtDatoEttervernType'."
             )
         ) { description, partialXml, expectedError ->
             When(description) {

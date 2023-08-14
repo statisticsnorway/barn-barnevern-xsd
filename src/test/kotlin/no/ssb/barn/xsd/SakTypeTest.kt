@@ -8,8 +8,17 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
+import no.ssb.barn.TestUtils.VALID_DATO_UTTREKK
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
@@ -25,10 +34,10 @@ class SakTypeTest : BehaviorSpec({
                     buildXmlInTest(
                         "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                                 "MigrertId=\"~MigrertId~\" " +
-                                "StartDato=\"2022-11-14\" " +
-                                "SluttDato=\"2022-11-15\" " +
+                                "StartDato=\"$VALID_DATE\" " +
+                                "SluttDato=\"$VALID_DATE\" " +
                                 "Avsluttet=\"true\" " +
-                                "Journalnummer=\"2022-00004\"" +
+                                "Journalnummer=\"00004\"" +
                                 "/>"
                     ).toStreamSource()
                 )
@@ -39,32 +48,32 @@ class SakTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Sak StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "<Sak StartDato=\"$VALID_DATE\" Journalnummer=\"00004\"/>",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Sak'."
             ),
             row(
                 "empty Id",
-                "<Sak Id=\"\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"\" StartDato=\"$VALID_DATE\" Journalnummer=\"00004\"/>",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Sak Id=\"42\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"42\" StartDato=\"$VALID_DATE\" Journalnummer=\"00004\"/>",
                 INVALID_ID_ERROR
             ),
 
             /** MigrertId */
             row(
                 "empty MigrertId",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" StartDato=\"2022-11-14\" " +
-                        "Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" StartDato=\"$VALID_DATE\" " +
+                        "Journalnummer=\"00004\"/>",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
                         "for type '#AnonType_MigrertId'."
             ),
             row(
                 "too long MigrertId",
                 "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"${"a".repeat(37)}\" " +
-                        "StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>",
+                        "StartDato=\"$VALID_DATE\" Journalnummer=\"00004\"/>",
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
                         "respect to maxLength '36' for type '#AnonType_MigrertId'."
             ),
@@ -72,64 +81,86 @@ class SakTypeTest : BehaviorSpec({
             /** StartDato */
             row(
                 "missing StartDato",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" Journalnummer=\"00004\"/>",
                 "cvc-complex-type.4: Attribute 'StartDato' must appear on element 'Sak'."
             ),
             row(
                 "empty StartDato",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\" Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"\" Journalnummer=\"00004\"/>",
                 EMPTY_DATE_ERROR
             ),
             row(
                 "invalid StartDato",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\" Journalnummer=\"2022-00004\"/>",
-                INVALID_DATE_ERROR
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_DATE\" Journalnummer=\"00004\"/>",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "StartDato too early",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Journalnummer=\"00004\"/>",
+                START_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "StartDato too late",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MAX_DATE_TOO_LATE\" Journalnummer=\"00004\"/>",
+                START_DATE_TOO_LATE_ERROR
             ),
 
             /** SluttDato */
             row(
                 "empty SluttDato",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" SluttDato=\"\" " +
-                        "Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" SluttDato=\"\" " +
+                        "Journalnummer=\"00004\"/>",
                 EMPTY_DATE_ERROR
             ),
             row(
                 "invalid SluttDato",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" SluttDato=\"2022\" " +
-                        "Journalnummer=\"2022-00004\"/>",
-                INVALID_DATE_ERROR
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" SluttDato=\"$INVALID_DATE\" " +
+                        "Journalnummer=\"00004\"/>",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "SluttDato too early",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" SluttDato=\"$INVALID_MIN_DATE_TOO_EARLY\" " +
+                        "Journalnummer=\"00004\"/>",
+                END_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "SluttDato too late",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" SluttDato=\"$INVALID_MAX_DATE_TOO_LATE\" " +
+                        "Journalnummer=\"00004\"/>",
+                END_DATE_TOO_LATE_ERROR
             ),
 
             /** Avsluttet */
             row(
                 "empty Avsluttet",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Avsluttet=\"\" " +
-                        "Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Avsluttet=\"\" " +
+                        "Journalnummer=\"00004\"/>",
                 "cvc-datatype-valid.1.2.1: '' is not a valid value for 'boolean'."
             ),
             row(
                 "invalid Avsluttet",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Avsluttet=\"True\" " +
-                        "Journalnummer=\"2022-00004\"/>",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Avsluttet=\"True\" " +
+                        "Journalnummer=\"00004\"/>",
                 "cvc-datatype-valid.1.2.1: 'True' is not a valid value for 'boolean'."
             ),
 
             /** Journalnummer */
             row(
                 "missing Journalnummer",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\"/>",
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\"/>",
                 "cvc-complex-type.4: Attribute 'Journalnummer' must appear on element 'Sak'."
             ),
             row(
                 "empty Journalnummer",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Journalnummer=\"\"/>",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
                         "for type '#AnonType_JournalnummerSakType'."
             ),
             row(
                 "too long Journalnummer",
-                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Journalnummer=\"${"a".repeat(37)}\"/>",
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
                         "respect to maxLength '36' for type '#AnonType_JournalnummerSakType'."
@@ -149,7 +180,7 @@ class SakTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(sakElement: String): String =
-            "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33+01:00\">" +
+            "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"$VALID_DATO_UTTREKK\">" +
                     "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"1\" />" +
                     "<Avgiver Organisasjonsnummer=\"999999999\" Kommunenummer=\"1234\" Kommunenavn=\"En kommune\"/>" +
                     sakElement +

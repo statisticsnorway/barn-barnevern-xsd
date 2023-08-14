@@ -8,8 +8,16 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.MAX_DATE
+import no.ssb.barn.TestUtils.MIN_DATE
+import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -25,7 +33,7 @@ class PersonaliaTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildBarnevernXml(
                         "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "StartDato=\"2022-11-14\" " +
+                                "StartDato=\"$VALID_DATE\" " +
                                 "Fodselsnummer=\"01012199999\" " +
                                 "Fodseldato=\"2021-01-01\" " +
                                 "Kjonn=\"1\" " +
@@ -41,9 +49,9 @@ class PersonaliaTypeTest : BehaviorSpec({
 
             row(
                 "duplicate Id",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" "+
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" "+
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\" />" +
-                        "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" "+
+                        "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" "+
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] " +
                         "declared for identity constraint \"PersonaliaIdUnique\" of element \"Sak\"."
@@ -51,19 +59,19 @@ class PersonaliaTypeTest : BehaviorSpec({
 
             row(
                 "missing Id",
-                "<Personalia StartDato=\"2022-11-14\" Fodselsnummer=\"01012199999\" " +
+                "<Personalia StartDato=\"$VALID_DATE\" Fodselsnummer=\"01012199999\" " +
                         "Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Personalia'."
             ),
             row(
                 "empty Id",
-                "<Personalia Id=\"\" StartDato=\"2022-11-14\" Fodselsnummer=\"01012199999\" " +
+                "<Personalia Id=\"\" StartDato=\"$VALID_DATE\" Fodselsnummer=\"01012199999\" " +
                         "Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Personalia Id=\"42\" StartDato=\"2022-11-14\" Fodselsnummer=\"01012199999\" " +
+                "<Personalia Id=\"42\" StartDato=\"$VALID_DATE\" Fodselsnummer=\"01012199999\" " +
                         "Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 INVALID_ID_ERROR
             ),
@@ -83,28 +91,40 @@ class PersonaliaTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid StartDato",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\"/>",
-                INVALID_DATE_ERROR
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "StartDato too early",
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\" " +
+                        "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\"/>",
+                START_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "StartDato too late",
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MAX_DATE_TOO_LATE\" " +
+                        "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\"/>",
+                START_DATE_TOO_LATE_ERROR
             ),
 
             /** Fodselsnummer */
             row(
                 "missing Fodselsnummer",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 "cvc-complex-type.4: Attribute 'Fodselsnummer' must appear on element 'Personalia'."
             ),
             row(
                 "empty Fodselsnummer",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"\" Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d{11}' for " +
                         "type '#AnonType_FodselsnummerPersonaliaSakType'."
             ),
             row(
                 "invalid Fodselsnummer",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"42\" Fodseldato=\"2021-01-01\" Kjonn=\"1\" />",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern '\\d{11}' for " +
                         "type '#AnonType_FodselsnummerPersonaliaSakType'."
@@ -113,40 +133,54 @@ class PersonaliaTypeTest : BehaviorSpec({
             /** Fodseldato */
             row(
                 "missing Fodseldato",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Kjonn=\"1\" />",
                 "cvc-complex-type.4: Attribute 'Fodseldato' must appear on element 'Personalia'."
             ),
             row(
                 "empty Fodseldato",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"\" Kjonn=\"1\" />",
                 EMPTY_DATE_ERROR
             ),
             row(
                 "invalid Fodseldato",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021\" Kjonn=\"1\" />",
                 "cvc-datatype-valid.1.2.1: '2021' is not a valid value for 'date'."
+            ),
+            row(
+                "Fodseldato too early",
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
+                        "Fodselsnummer=\"01012199999\" Fodseldato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kjonn=\"1\"/>",
+                "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not facet-valid with respect to " +
+                        "minInclusive '$MIN_DATE' for type '#AnonType_FodseldatoPersonaliaSakType'."
+            ),
+            row(
+                "Fodseldato too late",
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
+                        "Fodselsnummer=\"01012199999\" Fodseldato=\"$INVALID_MAX_DATE_TOO_LATE\" Kjonn=\"1\"/>",
+                "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not facet-valid with respect to " +
+                        "maxInclusive '$MAX_DATE' for type '#AnonType_FodseldatoPersonaliaSakType'."
             ),
 
             /** Kjonn */
             row(
                 "missing Kjonn",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" />",
                 "cvc-complex-type.4: Attribute 'Kjonn' must appear on element 'Personalia'."
             ),
             row(
                 "empty Kjonn",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"\" />",
                 "cvc-length-valid: Value '' with length = '0' is not facet-valid with respect to length '1' for " +
                         "type '#AnonType_KjonnPersonaliaSakType'."
             ),
             row(
                 "invalid Kjonn",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"4\" />",
                 "cvc-enumeration-valid: Value '4' is not facet-valid with respect to enumeration '[0, 1, 2]'. " +
                         "It must be a value from the enumeration."
@@ -155,14 +189,14 @@ class PersonaliaTypeTest : BehaviorSpec({
             /** DUFnummer */
             row(
                 "empty DUFnummer",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\" DUFnummer=\"\" />",
                 "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern '\\d{12}' for type " +
                         "'#AnonType_DUFnummerPersonaliaSakType'."
             ),
             row(
                 "invalid DUFnummer",
-                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" " +
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021-01-01\" Kjonn=\"1\" DUFnummer=\"42\" />",
                 "cvc-pattern-valid: Value '42' is not facet-valid with respect to pattern '\\d{12}' for type " +
                         "'#AnonType_DUFnummerPersonaliaSakType'."

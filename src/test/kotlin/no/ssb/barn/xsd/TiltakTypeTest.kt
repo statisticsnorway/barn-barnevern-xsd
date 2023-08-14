@@ -8,9 +8,15 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -23,12 +29,15 @@ class TiltakTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidator().validate(buildBarnevernXml(
-                    "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                            "StartDato=\"2022-11-14\">" +
-                            LOVHJEMMEL_XML +
-                            "<Kategori Kode=\"1.1\"/>" +
-                            "</Tiltak>").toStreamSource())
+                getSchemaValidator().validate(
+                    buildBarnevernXml(
+                        "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
+                                "StartDato=\"$VALID_DATE\">" +
+                                LOVHJEMMEL_XML +
+                                "<Kategori Kode=\"1.1\"/>" +
+                                "</Tiltak>"
+                    ).toStreamSource()
+                )
             }
         }
 
@@ -37,11 +46,11 @@ class TiltakTypeTest : BehaviorSpec({
 
             row(
                 "duplicate Id",
-                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>" +
-                        "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+                        "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
@@ -52,7 +61,7 @@ class TiltakTypeTest : BehaviorSpec({
             row(
                 "missing Id",
                 "<Tiltak " +
-                        "StartDato=\"2022-11-14\">" +
+                        "StartDato=\"$VALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
@@ -61,7 +70,7 @@ class TiltakTypeTest : BehaviorSpec({
             row(
                 "empty Id",
                 "<Tiltak Id=\"\" " +
-                        "StartDato=\"2022-11-14\">" +
+                        "StartDato=\"$VALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
@@ -70,7 +79,7 @@ class TiltakTypeTest : BehaviorSpec({
             row(
                 "invalid Id",
                 "<Tiltak Id=\"42\" " +
-                        "StartDato=\"2022-11-14\">" +
+                        "StartDato=\"$VALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
@@ -81,7 +90,7 @@ class TiltakTypeTest : BehaviorSpec({
             row(
                 "empty MigrertId",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" " +
-                        "StartDato=\"2022-11-14\">" +
+                        "StartDato=\"$VALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
@@ -91,7 +100,7 @@ class TiltakTypeTest : BehaviorSpec({
             row(
                 "too long MigrertId",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"${"a".repeat(37)}\" " +
-                        "StartDato=\"2022-11-14\">" +
+                        "StartDato=\"$VALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
@@ -120,11 +129,29 @@ class TiltakTypeTest : BehaviorSpec({
             row(
                 "invalid StartDato",
                 "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "StartDato=\"2022\">" +
+                        "StartDato=\"$INVALID_DATE\">" +
                         LOVHJEMMEL_XML +
                         "<Kategori Kode=\"1.1\"/>" +
                         "</Tiltak>",
-                INVALID_DATE_ERROR
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "StartDato too early",
+                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\">" +
+                        LOVHJEMMEL_XML +
+                        "<Kategori Kode=\"1.1\"/>" +
+                        "</Tiltak>",
+                START_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "StartDato too late",
+                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "StartDato=\"$INVALID_MAX_DATE_TOO_LATE\">" +
+                        LOVHJEMMEL_XML +
+                        "<Kategori Kode=\"1.1\"/>" +
+                        "</Tiltak>",
+                START_DATE_TOO_LATE_ERROR
             )
         ) { description, partialXml, expectedError ->
             When(description) {

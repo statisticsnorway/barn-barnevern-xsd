@@ -8,8 +8,14 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -25,7 +31,7 @@ class FlyttingTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildBarnevernXml(
                         "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                                "SluttDato=\"2022-11-14\">" +
+                                "SluttDato=\"$VALID_DATE\">" +
                                 "<ArsakFra Kode=\"1.1.1\" />" +
                                 "<FlyttingTil Kode=\"1\" />" +
                                 "</Flytting>"
@@ -41,12 +47,12 @@ class FlyttingTypeTest : BehaviorSpec({
             row(
                 "duplicate Id",
                 "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "SluttDato=\"2022-11-14\">" +
+                        "SluttDato=\"$VALID_DATE\">" +
                         "<ArsakFra Kode=\"1.1.1\" />" +
                         "<FlyttingTil Kode=\"1\" />" +
                         "</Flytting> " +
                         "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "SluttDato=\"2022-11-14\">" +
+                        "SluttDato=\"$VALID_DATE\">" +
                         "<ArsakFra Kode=\"1.1.1\" />" +
                         "<FlyttingTil Kode=\"1\" />" +
                         "</Flytting>",
@@ -56,31 +62,31 @@ class FlyttingTypeTest : BehaviorSpec({
 
             row(
                 "missing Id",
-                "<Flytting SluttDato=\"2022-11-14\">",
+                "<Flytting SluttDato=\"$VALID_DATE\">",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Flytting'."
             ),
             row(
                 "empty Id",
-                "<Flytting Id=\"\" SluttDato=\"2022-11-14\">",
+                "<Flytting Id=\"\" SluttDato=\"$VALID_DATE\">",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Flytting Id=\"42\" SluttDato=\"2022-11-14\">",
+                "<Flytting Id=\"42\" SluttDato=\"$VALID_DATE\">",
                 INVALID_ID_ERROR
             ),
 
             /** MigrertId */
             row(
                 "empty MigrertId",
-                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" SluttDato=\"2022-11-14\">",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" SluttDato=\"$VALID_DATE\">",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
                         "for type '#AnonType_MigrertId'."
             ),
             row(
                 "too long MigrertId",
                 "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"${"a".repeat(37)}\" " +
-                        "SluttDato=\"2022-11-14\">",
+                        "SluttDato=\"$VALID_DATE\">",
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
                         "respect to maxLength '36' for type '#AnonType_MigrertId'."
             ),
@@ -98,14 +104,24 @@ class FlyttingTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid SluttDato",
-                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"2022\">",
-                INVALID_DATE_ERROR
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"$INVALID_DATE\">",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "SluttDato too early",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"$INVALID_MIN_DATE_TOO_EARLY\">",
+                END_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "SluttDato too late",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"$INVALID_MAX_DATE_TOO_LATE\">",
+                END_DATE_TOO_LATE_ERROR
             ),
 
             /** ArsakFra */
             row(
                 "missing ArsakFra",
-                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"2022-11-14\" />",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"$VALID_DATE\" />",
                 "cvc-complex-type.2.4.b: The content of element 'Flytting' is not complete. One of '{ArsakFra}' is expected."
             ),
 
@@ -113,7 +129,7 @@ class FlyttingTypeTest : BehaviorSpec({
             row(
                 "missing FlyttingTil",
                 "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                        "SluttDato=\"2022-11-14\">" +
+                        "SluttDato=\"$VALID_DATE\">" +
                         "<ArsakFra Kode=\"1.1.1\" />" +
                         "</Flytting>",
                 "cvc-complex-type.2.4.b: The content of element 'Flytting' is not complete. One of '{FlyttingTil}' is expected."

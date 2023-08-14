@@ -8,9 +8,15 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -26,7 +32,7 @@ class TilsynHyppighetTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildXmlInTest(
                         "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "StartDato=\"2022-11-14\" Kode=\"2\"/>"
+                                "StartDato=\"$VALID_DATE\" Kode=\"2\"/>"
                     ).toStreamSource()
                 )
             }
@@ -36,17 +42,17 @@ class TilsynHyppighetTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Hyppighet StartDato=\"2022-11-14\" Kode=\"2\"/>",
+                "<Hyppighet StartDato=\"$VALID_DATE\" Kode=\"2\"/>",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Hyppighet'."
             ),
             row(
                 "empty Id",
-                "<Hyppighet Id=\"\" StartDato=\"2022-11-14\" Kode=\"2\"/>",
+                "<Hyppighet Id=\"\" StartDato=\"$VALID_DATE\" Kode=\"2\"/>",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Hyppighet Id=\"42\" StartDato=\"2022-11-14\" Kode=\"2\"/>",
+                "<Hyppighet Id=\"42\" StartDato=\"$VALID_DATE\" Kode=\"2\"/>",
                 INVALID_ID_ERROR
             ),
 
@@ -63,25 +69,35 @@ class TilsynHyppighetTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid StartDato",
-                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\" Kode=\"2\"/>",
-                INVALID_DATE_ERROR
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_DATE\" Kode=\"2\"/>",
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "StartDato too early",
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kode=\"2\"/>",
+                START_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "StartDato too late",
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MAX_DATE_TOO_LATE\" Kode=\"2\"/>",
+                START_DATE_TOO_LATE_ERROR
             ),
 
             /** Kode */
             row(
                 "missing Kode",
-                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" />",
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" />",
                 "cvc-complex-type.4: Attribute 'Kode' must appear on element 'Hyppighet'."
             ),
             row(
                 "empty Kode",
-                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Kode=\"\"/>",
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Kode=\"\"/>",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to " +
                         "minLength '1' for type '#AnonType_KodeTilsynHyppighetType'."
             ),
             row(
                 "too long Kode",
-                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Kode=\"42\"/>",
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Kode=\"42\"/>",
                 "cvc-maxLength-valid: Value '42' with length = '2' is not facet-valid with respect to " +
                         "maxLength '1' for type '#AnonType_KodeTilsynHyppighetType'."
             )
@@ -100,11 +116,11 @@ class TilsynHyppighetTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(tilsynHyppighetXml: String): String = buildBarnevernXml(
-            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
                     "<Kategori Kode=\"1.1\" /><Tilsyn>" +
                     "<Ansvarlig Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "StartDato=\"2022-11-14\" Kommunenummer=\"1234\"/>" +
+                    "StartDato=\"$VALID_DATE\" Kommunenummer=\"1234\"/>" +
                     tilsynHyppighetXml +
                     "</Tilsyn></Tiltak>"
         )
