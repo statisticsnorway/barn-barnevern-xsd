@@ -9,6 +9,10 @@ import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.MAX_DATE
+import no.ssb.barn.TestUtils.MIN_DATE
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -46,6 +50,18 @@ class PlanEvalueringTypeTest : BehaviorSpec({
                 "invalid UtfortDato",
                 "<Evaluering UtfortDato=\"$INVALID_DATE\" />",
                 INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "UtfortDato too early",
+                "<Evaluering UtfortDato=\"$INVALID_MIN_DATE_TOO_EARLY\" />",
+               "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not facet-valid with respect to " +
+                        "minInclusive '$MIN_DATE' for type '#AnonType_UtfortDatoEvalueringPlanType'."
+            ),
+            row(
+                "UtfortDato too late",
+                "<Evaluering UtfortDato=\"$INVALID_MAX_DATE_TOO_LATE\" />",
+                "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not facet-valid with respect to " +
+                        "maxInclusive '$MAX_DATE' for type '#AnonType_UtfortDatoEvalueringPlanType'."
             )
         ) { description, partialXml, expectedError ->
             When(description) {

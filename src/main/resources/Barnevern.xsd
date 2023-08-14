@@ -439,7 +439,14 @@ Bjorge.Saether@bufdir.no
         <xs:sequence>
             <xs:element name="Evaluering" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
-                    <xs:attribute name="UtfortDato" type="xs:date" use="required"/>
+                    <xs:attribute name="UtfortDato" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:date">
+                                <xs:minInclusive value="1998-01-01"/>
+                                <xs:maxInclusive value="2029-12-31"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
                 </xs:complexType>
             </xs:element>
             <xs:element name="Konklusjon" minOccurs="0">
@@ -1291,10 +1298,16 @@ Bjorge.Saether@bufdir.no
     <!-- Oppfølging -->
     <xs:complexType name="OppfolgingType">
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute name="UtfortDato" type="xs:date" use="required">
+        <xs:attribute name="UtfortDato" use="required">
             <xs:annotation>
                 <xs:documentation>Dato tilsynsbesøk utført.</xs:documentation>
             </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:date">
+                    <xs:minInclusive value="1998-01-01"/>
+                    <xs:maxInclusive value="2029-12-31"/>
+                </xs:restriction>
+            </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
     <!-- Tilsyn -->
@@ -1354,10 +1367,16 @@ Bjorge.Saether@bufdir.no
     </xs:complexType>
     <xs:complexType name="TilsynUtfortType">
         <xs:attribute ref="Id" use="required"/>
-        <xs:attribute name="UtfortDato" type="xs:date" use="required">
+        <xs:attribute name="UtfortDato" use="required">
             <xs:annotation>
                 <xs:documentation>Dato tilsynsbesøk utført.</xs:documentation>
             </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:date">
+                    <xs:minInclusive value="1998-01-01"/>
+                    <xs:maxInclusive value="2029-12-31"/>
+                </xs:restriction>
+            </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
     <!-- Oversendelse -->
