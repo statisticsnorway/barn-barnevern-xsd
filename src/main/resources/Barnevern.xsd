@@ -1444,7 +1444,14 @@ Bjorge.Saether@bufdir.no
             <xs:element name="Status" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:attribute ref="Id" use="required"/>
-                    <xs:attribute name="EndretDato" type="xs:date" use="required"/>
+                    <xs:attribute name="EndretDato" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:date">
+                                <xs:minInclusive value="1998-01-01"/>
+                                <xs:maxInclusive value="2029-12-31"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
                     <xs:attribute name="Kode" use="required">
                         <xs:annotation>
                             <xs:documentation>
