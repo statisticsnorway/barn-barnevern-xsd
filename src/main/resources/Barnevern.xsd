@@ -311,12 +311,18 @@ Bjorge.Saether@bufdir.no
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
-                    <xs:attribute name="Fodseldato" type="xs:date" use="required">
+                    <xs:attribute name="Fodseldato" use="required">
                         <xs:annotation>
                             <xs:documentation xml:lang="no">
                                 Barnets fødselsdato. For ufødte barn oppgis termindato.
                             </xs:documentation>
                         </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:date">
+                                <xs:minInclusive value="1998-01-01"/>
+                                <xs:maxInclusive value="2029-12-31"/>
+                            </xs:restriction>
+                        </xs:simpleType>
                     </xs:attribute>
                     <xs:attribute name="Kjonn" use="required">
                         <xs:annotation>

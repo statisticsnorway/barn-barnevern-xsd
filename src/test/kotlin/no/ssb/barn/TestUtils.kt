@@ -11,10 +11,10 @@ object TestUtils {
 
     const val CLARIFICATION_MAX_LEN = 10_000
 
-    private const val MIN_DATE = "1998-01-01"
+    const val MIN_DATE = "1998-01-01" // needs to be in sync with XSD
     const val INVALID_MIN_DATE_TOO_EARLY = "1997-12-31"
 
-    private const val MAX_DATE = "2029-12-31"
+    const val MAX_DATE = "2029-12-31" // needs to be in sync with XSD
     const val INVALID_MAX_DATE_TOO_LATE = "2030-01-01"
 
     const val VALID_DATE = "2023-11-14"

@@ -13,6 +13,8 @@ import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
 import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.MAX_DATE
+import no.ssb.barn.TestUtils.MIN_DATE
 import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
 import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
@@ -146,6 +148,20 @@ class PersonaliaTypeTest : BehaviorSpec({
                 "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                         "Fodselsnummer=\"01012199999\" Fodseldato=\"2021\" Kjonn=\"1\" />",
                 "cvc-datatype-valid.1.2.1: '2021' is not a valid value for 'date'."
+            ),
+            row(
+                "Fodseldato too early",
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
+                        "Fodselsnummer=\"01012199999\" Fodseldato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kjonn=\"1\"/>",
+                "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not facet-valid with respect to " +
+                        "minInclusive '$MIN_DATE' for type '#AnonType_FodseldatoPersonaliaSakType'."
+            ),
+            row(
+                "Fodseldato too late",
+                "<Personalia Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
+                        "Fodselsnummer=\"01012199999\" Fodseldato=\"$INVALID_MAX_DATE_TOO_LATE\" Kjonn=\"1\"/>",
+                "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not facet-valid with respect to " +
+                        "maxInclusive '$MAX_DATE' for type '#AnonType_FodseldatoPersonaliaSakType'."
             ),
 
             /** Kjonn */
