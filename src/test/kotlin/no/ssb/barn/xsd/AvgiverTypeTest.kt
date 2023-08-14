@@ -6,6 +6,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import no.ssb.barn.TestUtils.VALID_DATE
+import no.ssb.barn.TestUtils.VALID_DATO_UTTREKK
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
 import org.xml.sax.SAXException
@@ -131,10 +133,10 @@ class AvgiverTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(avgiverXml: String): String =
-            "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"2022-11-14T15:13:33+01:00\">" +
+            "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" DatoUttrekk=\"$VALID_DATO_UTTREKK\">" +
                     "<Fagsystem Leverandor=\"Netcompany\" Navn=\"Modulus Barn\" Versjon=\"1\" />" +
                     avgiverXml +
-                    "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\" Journalnummer=\"2022-00004\"/>" +
+                    "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" Journalnummer=\"00004\"/>" +
                     "</Barnevern>"
     }
 }

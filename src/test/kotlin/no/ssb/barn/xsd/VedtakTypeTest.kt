@@ -8,11 +8,15 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
 import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -28,7 +32,7 @@ class VedtakTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildVedtakXml(
                         "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "MigrertId=\"4242\" StartDato=\"2022-11-14\">"
+                                "MigrertId=\"4242\" StartDato=\"$VALID_DATE\">"
                     ).toStreamSource()
                 )
             }
@@ -38,31 +42,31 @@ class VedtakTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Vedtak StartDato=\"2022-11-14\">",
+                "<Vedtak StartDato=\"$VALID_DATE\">",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Vedtak'."
             ),
             row(
                 "empty Id",
-                "<Vedtak Id=\"\" StartDato=\"2022-11-14\">",
+                "<Vedtak Id=\"\" StartDato=\"$VALID_DATE\">",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Vedtak Id=\"42\" StartDato=\"2022-11-14\">",
+                "<Vedtak Id=\"42\" StartDato=\"$VALID_DATE\">",
                 INVALID_ID_ERROR
             ),
 
             /** MigrertId */
             row(
                 "empty MigrertId",
-                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" StartDato=\"2022-11-14\">",
+                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"\" StartDato=\"$VALID_DATE\">",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect to minLength '1' " +
                         "for type '#AnonType_MigrertId'."
             ),
             row(
                 "too long MigrertId",
                 "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                        "MigrertId=\"${"a".repeat(37)}\" StartDato=\"2022-11-14\">",
+                        "MigrertId=\"${"a".repeat(37)}\" StartDato=\"$VALID_DATE\">",
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
                         "respect to maxLength '36' for type '#AnonType_MigrertId'."
             ),
@@ -80,17 +84,17 @@ class VedtakTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid StartDato",
-                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022\">",
+                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_DATE\">",
                 INVALID_DATE_FORMAT_ERROR
             ),
             row(
                 "StartDato too early",
-                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"1997-12-31\">",
+                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\">",
                 START_DATE_TOO_EARLY_ERROR
             ),
             row(
                 "StartDato too late",
-                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2030-01-01\">",
+                "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MAX_DATE_TOO_LATE\">",
                 START_DATE_TOO_LATE_ERROR
             )
         ) { description, partialXml, expectedError ->
@@ -109,8 +113,8 @@ class VedtakTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "duplicate Id",
-                buildVedtakPartialXml("<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">")
-                        + buildVedtakPartialXml("<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">"),
+                buildVedtakPartialXml("<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">")
+                        + buildVedtakPartialXml("<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">"),
                 "cvc-identity-constraint.4.1: Duplicate unique value [6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e] declared for identity constraint \"VedtakIdUnique\" of element \"Sak\"."
             )
         ) { description, partialXml, expectedError ->
@@ -133,7 +137,7 @@ class VedtakTypeTest : BehaviorSpec({
 
         private fun buildVedtakPartialXml(vedtakStartTag: String) = vedtakStartTag +
                 LOVHJEMMEL_XML +
-                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" Kode=\"1\" />" +
+                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"$VALID_DATE\" Kode=\"1\" />" +
                 "</Vedtak>"
     }
 }

@@ -8,6 +8,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
 import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -76,7 +77,7 @@ class MelderTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(melderXml: String): String = buildBarnevernXml(
-            "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     melderXml +
                     "</Melding>"
         )

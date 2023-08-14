@@ -8,9 +8,11 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -26,7 +28,7 @@ class OppfolgingTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildXmlInTest(
                         "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "UtfortDato=\"2022-11-14\"/>"
+                                "UtfortDato=\"$VALID_DATE\"/>"
                     ).toStreamSource()
                 )
             }
@@ -36,17 +38,17 @@ class OppfolgingTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Oppfolging UtfortDato=\"2022-11-14\"/>",
+                "<Oppfolging UtfortDato=\"$VALID_DATE\"/>",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Oppfolging'."
             ),
             row(
                 "empty Id",
-                "<Oppfolging Id=\"\" UtfortDato=\"2022-11-14\"/>",
+                "<Oppfolging Id=\"\" UtfortDato=\"$VALID_DATE\"/>",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Oppfolging Id=\"42\" UtfortDato=\"2022-11-14\"/>",
+                "<Oppfolging Id=\"42\" UtfortDato=\"$VALID_DATE\"/>",
                 INVALID_ID_ERROR
             ),
 
@@ -63,7 +65,7 @@ class OppfolgingTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"2022\"/>",
+                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"$INVALID_DATE\"/>",
                 INVALID_DATE_FORMAT_ERROR
             )
         ) { description, partialXml, expectedError ->
@@ -81,7 +83,7 @@ class OppfolgingTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(oppfolgingXml: String): String = buildBarnevernXml(
-            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
                     "<Kategori Kode=\"1.1\" />" +
                     oppfolgingXml +

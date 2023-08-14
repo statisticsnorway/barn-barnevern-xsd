@@ -9,6 +9,7 @@ import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
 import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -76,7 +77,7 @@ class OpphevelseTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildXmlInTest(opphevelseXml: String): String = buildBarnevernXml(
-            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
                     "<Kategori Kode=\"1.1\" />" +
                     opphevelseXml +

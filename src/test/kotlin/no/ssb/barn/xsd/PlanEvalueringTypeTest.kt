@@ -7,7 +7,9 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -22,7 +24,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildEvalueringXml(
-                        "<Evaluering UtfortDato=\"2022-11-14\" />"
+                        "<Evaluering UtfortDato=\"$VALID_DATE\" />"
                     ).toStreamSource()
                 )
             }
@@ -42,7 +44,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid UtfortDato",
-                "<Evaluering UtfortDato=\"2022\" />",
+                "<Evaluering UtfortDato=\"$INVALID_DATE\" />",
                 INVALID_DATE_FORMAT_ERROR
             )
         ) { description, partialXml, expectedError ->
@@ -61,7 +63,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
     companion object {
         private fun buildEvalueringXml(innerXml: String): String = buildBarnevernXml(
             "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "StartDato=\"2022-11-14\" Plantype=\"1\">" +
+                    "StartDato=\"$VALID_DATE\" Plantype=\"1\">" +
                     innerXml +
                     "</Plan>"
         )

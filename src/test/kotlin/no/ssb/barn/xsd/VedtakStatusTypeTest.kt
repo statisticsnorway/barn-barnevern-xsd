@@ -8,9 +8,11 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -26,7 +28,7 @@ class VedtakStatusTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildVedtakXml(
                         "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "EndretDato=\"2022-11-14\" Kode=\"1\" />"
+                                "EndretDato=\"$VALID_DATE\" Kode=\"1\" />"
                     ).toStreamSource()
                 )
             }
@@ -36,17 +38,17 @@ class VedtakStatusTypeTest : BehaviorSpec({
             /** Id */
             row(
                 "missing Id",
-                "<Status EndretDato=\"2022-11-14\" Kode=\"1\" />",
+                "<Status EndretDato=\"$VALID_DATE\" Kode=\"1\" />",
                 "cvc-complex-type.4: Attribute 'Id' must appear on element 'Status'."
             ),
             row(
                 "empty Id",
-                "<Status Id=\"\" EndretDato=\"2022-11-14\" Kode=\"1\" />",
+                "<Status Id=\"\" EndretDato=\"$VALID_DATE\" Kode=\"1\" />",
                 EMPTY_ID_ERROR
             ),
             row(
                 "invalid Id",
-                "<Status Id=\"42\" EndretDato=\"2022-11-14\" Kode=\"1\" />",
+                "<Status Id=\"42\" EndretDato=\"$VALID_DATE\" Kode=\"1\" />",
                 INVALID_ID_ERROR
             ),
 
@@ -63,25 +65,25 @@ class VedtakStatusTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid EndretDato",
-                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022\" Kode=\"1\" />",
+                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"$INVALID_DATE\" Kode=\"1\" />",
                 INVALID_DATE_FORMAT_ERROR
             ),
 
             /** Kode */
             row(
                 "missing Kode",
-                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" />",
+                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"$VALID_DATE\" />",
                 "cvc-complex-type.4: Attribute 'Kode' must appear on element 'Status'."
             ),
             row(
                 "empty Kode",
-                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" Kode=\"\" />",
+                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"$VALID_DATE\" Kode=\"\" />",
                 "cvc-enumeration-valid: Value '' is not facet-valid with respect to enumeration " +
                         "'[1, 2, 3, 4]'. It must be a value from the enumeration."
             ),
             row(
                 "invalid Kode",
-                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022-11-14\" Kode=\"42\" />",
+                "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"$VALID_DATE\" Kode=\"42\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration " +
                         "'[1, 2, 3, 4]'. It must be a value from the enumeration."
             ),
@@ -100,7 +102,7 @@ class VedtakStatusTypeTest : BehaviorSpec({
 }) {
     companion object {
         private fun buildVedtakXml(vedtakStatusXml: String): String = buildBarnevernXml(
-            "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"2022-11-14\">" +
+            "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML + vedtakStatusXml + "</Vedtak>"
         )
     }

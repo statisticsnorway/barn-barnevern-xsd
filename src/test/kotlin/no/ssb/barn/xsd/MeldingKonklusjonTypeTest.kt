@@ -9,7 +9,11 @@ import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
 import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -24,7 +28,7 @@ class MeldingKonklusjonTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(
                     buildMeldingKonklusjonXml(
-                        "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"1\" />"
+                        "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" />"
                     ).toStreamSource()
                 )
             }
@@ -44,35 +48,35 @@ class MeldingKonklusjonTypeTest : BehaviorSpec({
             ),
             row(
                 "invalid SluttDato",
-                "<Konklusjon SluttDato=\"2022\" Kode=\"1\" />",
+                "<Konklusjon SluttDato=\"$INVALID_DATE\" Kode=\"1\" />",
                 INVALID_DATE_FORMAT_ERROR
             ),
             row(
                 "SluttDato too early",
-                "<Konklusjon SluttDato=\"1997-12-31\" Kode=\"1\" />",
+                "<Konklusjon SluttDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kode=\"1\" />",
                 END_DATE_TOO_EARLY_ERROR
             ),
             row(
                 "SluttDato too late",
-                "<Konklusjon SluttDato=\"2030-01-01\" Kode=\"1\" />",
+                "<Konklusjon SluttDato=\"$INVALID_MAX_DATE_TOO_LATE\" Kode=\"1\" />",
                 END_DATE_TOO_LATE_ERROR
             ),
 
             /** Kode */
             row(
                 "missing Kode",
-                "<Konklusjon SluttDato=\"2022-11-14\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" />",
                 "cvc-complex-type.4: Attribute 'Kode' must appear on element 'Konklusjon'."
             ),
             row(
                 "empty Kode",
-                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"\" />",
                 "cvc-minLength-valid: Value '' with length = '0' is not facet-valid with respect " +
                         "to minLength '1' for type '#AnonType_KodeKonklusjonMeldingType'."
             ),
             row(
                 "invalid Kode",
-                "<Konklusjon SluttDato=\"2022-11-14\" Kode=\"42\" />",
+                "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"42\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration " +
                         "'[1, 2, 3, 4]'. It must be a value from the enumeration."
             )
@@ -92,7 +96,7 @@ class MeldingKonklusjonTypeTest : BehaviorSpec({
     companion object {
         private fun buildMeldingKonklusjonXml(meldingKonklusjonXml: String): String = buildBarnevernXml(
             "<Melding Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                    "StartDato=\"2022-11-14\">" +
+                    "StartDato=\"$VALID_DATE\">" +
                     meldingKonklusjonXml +
                     "</Melding>"
         )
