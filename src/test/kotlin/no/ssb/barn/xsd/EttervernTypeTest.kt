@@ -11,6 +11,10 @@ import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
 import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
+import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
+import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
+import no.ssb.barn.TestUtils.MAX_DATE
+import no.ssb.barn.TestUtils.MIN_DATE
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -91,6 +95,18 @@ class EttervernTypeTest : BehaviorSpec({
                 "invalid TilbudSendtDato",
                 "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$INVALID_DATE\"/>",
                 INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "TilbudSendtDato too early",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$INVALID_MIN_DATE_TOO_EARLY\"/>",
+                "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not facet-valid with respect to " +
+                        "minInclusive '$MIN_DATE' for type '#AnonType_TilbudSendtDatoEttervernType'."
+            ),
+            row(
+                "TilbudSendtDato too late",
+                "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" TilbudSendtDato=\"$INVALID_MAX_DATE_TOO_LATE\"/>",
+                "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not facet-valid with respect to " +
+                        "maxInclusive '$MAX_DATE' for type '#AnonType_TilbudSendtDatoEttervernType'."
             )
         ) { description, partialXml, expectedError ->
             When(description) {
