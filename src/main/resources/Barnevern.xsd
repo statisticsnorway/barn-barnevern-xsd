@@ -36,17 +36,29 @@ Bjorge.Saether@bufdir.no
             </xs:restriction>
         </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="StartDato" type="xs:date">
+    <xs:attribute name="StartDato">
         <xs:annotation>
             <xs:appinfo>Startdato</xs:appinfo>
             <xs:documentation>Globalt attributt for startdato.</xs:documentation>
         </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:date">
+                <xs:minInclusive value="1998-01-01"/>
+                <xs:maxInclusive value="2029-12-31"/>
+            </xs:restriction>
+        </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="SluttDato" type="xs:date">
+    <xs:attribute name="SluttDato">
         <xs:annotation>
             <xs:appinfo>Sluttdato</xs:appinfo>
             <xs:documentation>Globalt attributt for sluttdato.</xs:documentation>
         </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:date">
+                <xs:minInclusive value="1998-01-01"/>
+                <xs:maxInclusive value="2029-12-31"/>
+            </xs:restriction>
+        </xs:simpleType>
     </xs:attribute>
     <xs:attribute name="Presisering">
         <xs:annotation>

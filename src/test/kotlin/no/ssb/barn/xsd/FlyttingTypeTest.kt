@@ -8,7 +8,9 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -99,7 +101,17 @@ class FlyttingTypeTest : BehaviorSpec({
             row(
                 "invalid SluttDato",
                 "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"2022\">",
-                INVALID_DATE_ERROR
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "SluttDato too early",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"1997-12-31\">",
+                END_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "SluttDato too late",
+                "<Flytting Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" SluttDato=\"2030-01-01\">",
+                END_DATE_TOO_LATE_ERROR
             ),
 
             /** ArsakFra */

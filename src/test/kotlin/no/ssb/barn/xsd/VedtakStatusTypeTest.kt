@@ -8,7 +8,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.buildBarnevernXml
@@ -64,7 +64,7 @@ class VedtakStatusTypeTest : BehaviorSpec({
             row(
                 "invalid EndretDato",
                 "<Status Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" EndretDato=\"2022\" Kode=\"1\" />",
-                INVALID_DATE_ERROR
+                INVALID_DATE_FORMAT_ERROR
             ),
 
             /** Kode */

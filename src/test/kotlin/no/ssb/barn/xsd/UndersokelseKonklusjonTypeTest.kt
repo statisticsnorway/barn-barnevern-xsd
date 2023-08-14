@@ -8,8 +8,10 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
+import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
 import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -46,7 +48,17 @@ class UndersokelseKonklusjonTypeTest : BehaviorSpec({
             row(
                 "invalid SluttDato",
                 "<Konklusjon SluttDato=\"2022\" Kode=\"1\" />",
-                INVALID_DATE_ERROR
+                INVALID_DATE_FORMAT_ERROR
+            ),
+            row(
+                "SluttDato too early",
+                "<Konklusjon SluttDato=\"1997-12-31\" Kode=\"1\" />",
+                END_DATE_TOO_EARLY_ERROR
+            ),
+            row(
+                "SluttDato too late",
+                "<Konklusjon SluttDato=\"2030-01-01\" Kode=\"1\" />",
+                END_DATE_TOO_LATE_ERROR
             ),
 
             /** Kode */

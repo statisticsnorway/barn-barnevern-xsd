@@ -16,7 +16,17 @@ object TestUtils {
     const val LOVHJEMMEL_XML = "<Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel>"
 
     const val EMPTY_DATE_ERROR = "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
-    const val INVALID_DATE_ERROR = "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
+    const val INVALID_DATE_FORMAT_ERROR = "cvc-datatype-valid.1.2.1: '2022' is not a valid value for 'date'."
+
+    const val START_DATE_TOO_EARLY_ERROR = "cvc-minInclusive-valid: Value '1997-12-31' is not facet-valid with " +
+            "respect to minInclusive '1998-01-01' for type '#AnonType_StartDato'."
+    const val START_DATE_TOO_LATE_ERROR = "cvc-maxInclusive-valid: Value '2030-01-01' is not facet-valid with " +
+            "respect to maxInclusive '2029-12-31' for type '#AnonType_StartDato'."
+
+    const val END_DATE_TOO_EARLY_ERROR = "cvc-minInclusive-valid: Value '1997-12-31' is not facet-valid with " +
+            "respect to minInclusive '1998-01-01' for type '#AnonType_SluttDato'."
+    const val END_DATE_TOO_LATE_ERROR = "cvc-maxInclusive-valid: Value '2030-01-01' is not facet-valid with " +
+            "respect to maxInclusive '2029-12-31' for type '#AnonType_SluttDato'."
 
     const val EMPTY_ID_ERROR = "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
             "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +

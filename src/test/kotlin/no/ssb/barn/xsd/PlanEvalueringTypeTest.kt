@@ -7,7 +7,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
@@ -43,7 +43,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
             row(
                 "invalid UtfortDato",
                 "<Evaluering UtfortDato=\"2022\" />",
-                INVALID_DATE_ERROR
+                INVALID_DATE_FORMAT_ERROR
             )
         ) { description, partialXml, expectedError ->
             When(description) {
