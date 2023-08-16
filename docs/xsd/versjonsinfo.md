@@ -3,11 +3,20 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.2.2.2
+Endringsdato: 16. august 2023
+
+## Struktur
+- /@versjon oppdatert til 2.2.2
+- Lagt til begrensning for alle dato-attributter, som for eksempel @Fodseldato, @StartDato og @SluttDato med flere. De må være i tidsrommet 01. januar 1998 til 31. desember 2029.
+- Lagt til begrensning i form av regulære uttrykk for formatering av elementene Kapittel, Paragraf, Ledd, Bokstav og Punktum under LovhjemmelType
+
+---
 # v.2.2.1
 Endringsdato: 15. juni 2023
 
 ## Struktur
-- /@versjon oppdatert til 2.2.
+- /@versjon oppdatert til 2.2.1
 - Presisering
   - Endret lengde fra 300 til 10000
 - Lagt til krav/begrensning på unik Id for:
