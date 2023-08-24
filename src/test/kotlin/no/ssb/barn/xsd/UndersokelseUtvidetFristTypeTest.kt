@@ -9,10 +9,6 @@ import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
 import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
-import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
-import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
-import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
-import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -50,16 +46,6 @@ class UndersokelseUtvidetFristTypeTest : BehaviorSpec({
                 "invalid StartDato",
                 "<UtvidetFrist StartDato=\"$INVALID_DATE\" Innvilget=\"1\" />",
                 INVALID_DATE_FORMAT_ERROR
-            ),
-            row(
-                "StartDato too early",
-                "<UtvidetFrist StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Innvilget=\"1\" />",
-                START_DATE_TOO_EARLY_ERROR
-            ),
-            row(
-                "StartDato too late",
-                "<UtvidetFrist StartDato=\"$INVALID_MAX_DATE_TOO_LATE\" Innvilget=\"1\" />",
-                START_DATE_TOO_LATE_ERROR
             ),
 
             /** Innvilget */

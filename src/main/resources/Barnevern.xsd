@@ -35,29 +35,17 @@ Bjorge.Saether@bufdir.no
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
-	<xs:attribute name="StartDato">
+	<xs:attribute name="StartDato" type="xs:date">
 		<xs:annotation>
 			<xs:appinfo>Startdato</xs:appinfo>
 			<xs:documentation>Globalt attributt for startdato.</xs:documentation>
 		</xs:annotation>
-		<xs:simpleType>
-			<xs:restriction base="xs:date">
-				<xs:minInclusive value="1998-01-01"/>
-				<xs:maxInclusive value="2029-12-31"/>
-			</xs:restriction>
-		</xs:simpleType>
 	</xs:attribute>
-	<xs:attribute name="SluttDato">
+	<xs:attribute name="SluttDato" type="xs:date">
 		<xs:annotation>
 			<xs:appinfo>Sluttdato</xs:appinfo>
 			<xs:documentation>Globalt attributt for sluttdato.</xs:documentation>
 		</xs:annotation>
-		<xs:simpleType>
-			<xs:restriction base="xs:date">
-				<xs:minInclusive value="1998-01-01"/>
-				<xs:maxInclusive value="2029-12-31"/>
-			</xs:restriction>
-		</xs:simpleType>
 	</xs:attribute>
 	<xs:attribute name="Presisering">
 		<xs:annotation>
@@ -308,18 +296,12 @@ Bjorge.Saether@bufdir.no
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>
-					<xs:attribute name="Fodseldato" use="required">
+					<xs:attribute name="Fodseldato" type="xs:date" use="required">
 						<xs:annotation>
 							<xs:documentation xml:lang="no">
                                 Barnets fødselsdato. For ufødte barn oppgis termindato.
                             </xs:documentation>
 						</xs:annotation>
-						<xs:simpleType>
-							<xs:restriction base="xs:date">
-								<xs:minInclusive value="1998-01-01"/>
-								<xs:maxInclusive value="2029-12-31"/>
-							</xs:restriction>
-						</xs:simpleType>
 					</xs:attribute>
 					<xs:attribute name="Kjonn" use="required">
 						<xs:annotation>
@@ -435,14 +417,7 @@ Bjorge.Saether@bufdir.no
 		<xs:sequence>
 			<xs:element name="Evaluering" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
-					<xs:attribute name="UtfortDato" use="required">
-						<xs:simpleType>
-							<xs:restriction base="xs:date">
-								<xs:minInclusive value="1998-01-01"/>
-								<xs:maxInclusive value="2029-12-31"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
+					<xs:attribute name="UtfortDato" type="xs:date" use="required"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="Konklusjon" minOccurs="0">
@@ -1294,16 +1269,10 @@ Bjorge.Saether@bufdir.no
 	<!-- Oppfølging -->
 	<xs:complexType name="OppfolgingType">
 		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute name="UtfortDato" use="required">
+		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
 				<xs:documentation>Dato tilsynsbesøk utført.</xs:documentation>
 			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:date">
-					<xs:minInclusive value="1998-01-01"/>
-					<xs:maxInclusive value="2029-12-31"/>
-				</xs:restriction>
-			</xs:simpleType>
 		</xs:attribute>
 	</xs:complexType>
 	<!-- Tilsyn -->
@@ -1363,16 +1332,10 @@ Bjorge.Saether@bufdir.no
 	</xs:complexType>
 	<xs:complexType name="TilsynUtfortType">
 		<xs:attribute ref="Id" use="required"/>
-		<xs:attribute name="UtfortDato" use="required">
+		<xs:attribute name="UtfortDato" type="xs:date" use="required">
 			<xs:annotation>
 				<xs:documentation>Dato tilsynsbesøk utført.</xs:documentation>
 			</xs:annotation>
-			<xs:simpleType>
-				<xs:restriction base="xs:date">
-					<xs:minInclusive value="1998-01-01"/>
-					<xs:maxInclusive value="2029-12-31"/>
-				</xs:restriction>
-			</xs:simpleType>
 		</xs:attribute>
 	</xs:complexType>
 	<!-- Oversendelse -->
@@ -1459,14 +1422,7 @@ Bjorge.Saether@bufdir.no
 			<xs:element name="Status" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:attribute ref="Id" use="required"/>
-					<xs:attribute name="EndretDato" use="required">
-						<xs:simpleType>
-							<xs:restriction base="xs:date">
-								<xs:minInclusive value="1998-01-01"/>
-								<xs:maxInclusive value="2029-12-31"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
+					<xs:attribute name="EndretDato" type="xs:date" use="required"/>
 					<xs:attribute name="Kode" use="required">
 						<xs:annotation>
 							<xs:documentation>
@@ -1570,14 +1526,7 @@ Bjorge.Saether@bufdir.no
 		</xs:sequence>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId"/>
-		<xs:attribute name="TilbudSendtDato" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:date">
-					<xs:minInclusive value="1998-01-01"/>
-					<xs:maxInclusive value="2029-12-31"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
+		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="IdType">
 		<xs:restriction base="xs:string">

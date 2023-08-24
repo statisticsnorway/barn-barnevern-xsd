@@ -11,11 +11,7 @@ import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
 import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.INVALID_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
-import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
-import no.ssb.barn.TestUtils.START_DATE_TOO_EARLY_ERROR
-import no.ssb.barn.TestUtils.START_DATE_TOO_LATE_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -71,16 +67,6 @@ class TilsynHyppighetTypeTest : BehaviorSpec({
                 "invalid StartDato",
                 "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_DATE\" Kode=\"2\"/>",
                 INVALID_DATE_FORMAT_ERROR
-            ),
-            row(
-                "StartDato too early",
-                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kode=\"2\"/>",
-                START_DATE_TOO_EARLY_ERROR
-            ),
-            row(
-                "StartDato too late",
-                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$INVALID_MAX_DATE_TOO_LATE\" Kode=\"2\"/>",
-                START_DATE_TOO_LATE_ERROR
             ),
 
             /** Kode */

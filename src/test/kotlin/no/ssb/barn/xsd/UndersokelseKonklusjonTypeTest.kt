@@ -8,13 +8,9 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.CLARIFICATION_MAX_LEN
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
-import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
-import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
 import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
 import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
-import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
-import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -53,16 +49,6 @@ class UndersokelseKonklusjonTypeTest : BehaviorSpec({
                 "invalid SluttDato",
                 "<Konklusjon SluttDato=\"$INVALID_DATE\" Kode=\"1\" />",
                 INVALID_DATE_FORMAT_ERROR
-            ),
-            row(
-                "SluttDato too early",
-                "<Konklusjon SluttDato=\"$INVALID_MIN_DATE_TOO_EARLY\" Kode=\"1\" />",
-                END_DATE_TOO_EARLY_ERROR
-            ),
-            row(
-                "SluttDato too late",
-                "<Konklusjon SluttDato=\"$INVALID_MAX_DATE_TOO_LATE\" Kode=\"1\" />",
-                END_DATE_TOO_LATE_ERROR
             ),
 
             /** Kode */
