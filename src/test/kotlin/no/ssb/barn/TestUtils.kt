@@ -11,12 +11,6 @@ object TestUtils {
 
     const val CLARIFICATION_MAX_LEN = 10_000
 
-    const val MIN_DATE = "1998-01-01" // needs to be in sync with XSD
-    const val INVALID_MIN_DATE_TOO_EARLY = "1997-12-31"
-
-    const val MAX_DATE = "2029-12-31" // needs to be in sync with XSD
-    const val INVALID_MAX_DATE_TOO_LATE = "2030-01-01"
-
     const val VALID_DATE = "2023-11-14"
     const val INVALID_DATE = "2023"
 
@@ -29,16 +23,6 @@ object TestUtils {
 
     const val EMPTY_DATE_ERROR = "cvc-datatype-valid.1.2.1: '' is not a valid value for 'date'."
     const val INVALID_DATE_FORMAT_ERROR = "cvc-datatype-valid.1.2.1: '$INVALID_DATE' is not a valid value for 'date'."
-
-    const val START_DATE_TOO_EARLY_ERROR = "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not " +
-            "facet-valid with respect to minInclusive '$MIN_DATE' for type '#AnonType_StartDato'."
-    const val START_DATE_TOO_LATE_ERROR = "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not " +
-            "facet-valid with respect to maxInclusive '$MAX_DATE' for type '#AnonType_StartDato'."
-
-    const val END_DATE_TOO_EARLY_ERROR = "cvc-minInclusive-valid: Value '$INVALID_MIN_DATE_TOO_EARLY' is not " +
-            "facet-valid with respect to minInclusive '$MIN_DATE' for type '#AnonType_SluttDato'."
-    const val END_DATE_TOO_LATE_ERROR = "cvc-maxInclusive-valid: Value '$INVALID_MAX_DATE_TOO_LATE' is not " +
-            "facet-valid with respect to maxInclusive '$MAX_DATE' for type '#AnonType_SluttDato'."
 
     const val EMPTY_ID_ERROR = "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern " +
             "'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}' " +

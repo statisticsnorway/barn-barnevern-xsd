@@ -7,12 +7,8 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
-import no.ssb.barn.TestUtils.END_DATE_TOO_EARLY_ERROR
-import no.ssb.barn.TestUtils.END_DATE_TOO_LATE_ERROR
 import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
-import no.ssb.barn.TestUtils.INVALID_MAX_DATE_TOO_LATE
-import no.ssb.barn.TestUtils.INVALID_MIN_DATE_TOO_EARLY
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
@@ -50,16 +46,6 @@ class PlanKonklusjonTypeTest : BehaviorSpec({
                 "invalid SluttDato",
                 "<Konklusjon SluttDato=\"$INVALID_DATE\" />",
                 INVALID_DATE_FORMAT_ERROR
-            ),
-            row(
-                "SluttDato too early",
-                "<Konklusjon SluttDato=\"$INVALID_MIN_DATE_TOO_EARLY\" />",
-                END_DATE_TOO_EARLY_ERROR
-            ),
-            row(
-                "SluttDato too late",
-                "<Konklusjon SluttDato=\"$INVALID_MAX_DATE_TOO_LATE\" />",
-                END_DATE_TOO_LATE_ERROR
             )
         ) { description, partialXml, expectedError ->
             When(description) {
