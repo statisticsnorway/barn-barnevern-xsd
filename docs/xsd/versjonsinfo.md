@@ -3,6 +3,14 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.2.2.3
+Endringsdato: 25. august 2023
+
+## Struktur
+- /@versjon oppdatert til 2.2.3
+- Fjernet begrensning for alle dato-attributter, som for eksempel @Fodseldato, @StartDato og @SluttDato med flere som ble lagt til i versjon 2.2.2. Begrensningene blir i stedet implementert som valideringsregler. 
+
+---
 # v.2.2.2
 Endringsdato: 16. august 2023
 
