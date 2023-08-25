@@ -224,4 +224,3 @@ Erstatter tidligere *BasertPaaId*.
 Det er foretatt en omstrukturering av XSD’ene (definisjonene er splittet opp til 3 nye filer) samt noen endringer i innhold. Dette i et forsøk på å gjøre spesifikasjonen mer konsistent, forståelig og brukbar. I den nærmeste tiden vil vi søke å få avklart enkelte gjenstående spørsmål med leverandører og barnevernfaglige.
 
 ## Nye filer:
-
