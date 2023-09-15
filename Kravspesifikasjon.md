@@ -110,6 +110,15 @@ Gyldig fra 2013-01-01
 
 ## <a name="sak">Sak</a>
 
+### Sak kontroll 01: Dato innenfor lovlige verdier
+
+Gitt at en har en Sak
+når en dato i saken er før 01.01.<i år - 26 år> eller etter 31.12.<i år + 26 år>
+så gi feilmeldingen "<Feltnavn>: Dato ($dateToCheck) må være mellom 01.01.<min. år> og 31.12.<maks. år>"
+
+Alvorlighetsgrad: ERROR
+Gyldig fra 2013-01-01
+
 ### Sak Kontroll 2a: StartDato er etter SluttDato
 
 Gitt at man har en Sak der StartDato og SluttDato finnes<br/>
@@ -118,7 +127,6 @@ så gi feilmeldingen "Sakens startdato {StartDato} er etter sluttdato {SluttDato
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
-
 
 
 ### Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
