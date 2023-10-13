@@ -158,15 +158,15 @@ class SakTypeTest : BehaviorSpec({
                 "empty verb",
                 "<Sak Verb=\"\" Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                 "Journalnummer=\"00004\"/>",
-                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern 'POST|PATCH|PUT|DELETE' " +
-                    "for type '#AnonType_VerbSakType'."
+                "cvc-enumeration-valid: Value '' is not facet-valid with respect to enumeration " +
+                    "'[POST, PATCH, PUT, DELETE]'. It must be a value from the enumeration."
             ),
             row(
                 "invalid verb",
                 "<Sak Verb=\"PPOST\" Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
                     "Journalnummer=\"00004\"/>",
-                "cvc-pattern-valid: Value 'PPOST' is not facet-valid with respect to pattern " +
-                    "'POST|PATCH|PUT|DELETE' for type '#AnonType_VerbSakType'."
+                "cvc-enumeration-valid: Value 'PPOST' is not facet-valid with respect to enumeration " +
+                    "'[POST, PATCH, PUT, DELETE]'. It must be a value from the enumeration."
             )
         ) { description, sakElement, expectedError ->
             When(description) {
