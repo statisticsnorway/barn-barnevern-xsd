@@ -21,20 +21,35 @@ class SakTypeTest : BehaviorSpec({
 
     Given("misc Sak XML") {
 
-        /** make sure it's possible to make a valid test XML */
-        When("valid XML, expect no exceptions") {
-            shouldNotThrowAny {
-                getSchemaValidator().validate(
-                    buildXmlInTest(
-                        "<Sak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+        forAll(
+            row("POST"),
+            row("PATCH"),
+            row("PUT"),
+            row("DELETE"),
+            row("no verb")
+        ) { verb ->
+            /** make sure it's possible to make a valid test XML */
+            When("valid XML with $verb, expect no exceptions") {
+
+                val verbAttribute = when (verb) {
+                    "no verb" -> ""
+                    else -> "Verb=\"$verb\""
+                }
+
+                shouldNotThrowAny {
+                    getSchemaValidator().validate(
+                        buildXmlInTest(
+                            "<Sak $verbAttribute " +
+                                "Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                                 "MigrertId=\"~MigrertId~\" " +
                                 "StartDato=\"$VALID_DATE\" " +
                                 "SluttDato=\"$VALID_DATE\" " +
                                 "Avsluttet=\"true\" " +
                                 "Journalnummer=\"00004\"" +
                                 "/>"
-                    ).toStreamSource()
-                )
+                        ).toStreamSource()
+                    )
+                }
             }
         }
 
@@ -137,6 +152,22 @@ class SakTypeTest : BehaviorSpec({
                 "cvc-maxLength-valid: Value '${"a".repeat(37)}' with length = '37' is not facet-valid with " +
                         "respect to maxLength '36' for type '#AnonType_JournalnummerSakType'."
             ),
+
+            /** Verb */
+            row(
+                "empty verb",
+                "<Sak Verb=\"\" Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
+                "Journalnummer=\"00004\"/>",
+                "cvc-pattern-valid: Value '' is not facet-valid with respect to pattern 'POST|PATCH|PUT|DELETE' " +
+                    "for type '#AnonType_VerbSakType'."
+            ),
+            row(
+                "invalid verb",
+                "<Sak Verb=\"PPOST\" Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\" " +
+                    "Journalnummer=\"00004\"/>",
+                "cvc-pattern-valid: Value 'PPOST' is not facet-valid with respect to pattern " +
+                    "'POST|PATCH|PUT|DELETE' for type '#AnonType_VerbSakType'."
+            )
         ) { description, sakElement, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {

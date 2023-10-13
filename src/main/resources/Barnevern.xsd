@@ -393,6 +393,20 @@ Bjorge.Saether@bufdir.no
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
+		<xs:attribute name="Verb">
+			<xs:annotation>
+				<xs:appinfo>Verb</xs:appinfo>
+				<xs:documentation>HTTP-aktig verb POST, PATCH, PUT eller DELETE dikterer hvordan innsendingen håndteres.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="3"/>
+					<xs:maxLength value="6"/>
+					<xs:pattern value="POST|PATCH|PUT|DELETE"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId"/>
 		<xs:attribute ref="StartDato" use="required"/>
