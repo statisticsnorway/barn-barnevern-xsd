@@ -10,7 +10,7 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "TiltakType",
-    propOrder = ["id", "migrertId", "startDato",
+    propOrder = ["id", "migrertId", "startDato", "erSlettet",
         "lovhjemmel", "jmfrLovhjemmel", "kategori", "saksinnhold", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
 )
 open class TiltakType(
@@ -23,6 +23,9 @@ open class TiltakType(
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     var startDato: LocalDate,
+
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false,
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
     var lovhjemmel: LovhjemmelType,

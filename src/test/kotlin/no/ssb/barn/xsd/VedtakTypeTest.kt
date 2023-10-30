@@ -28,7 +28,7 @@ class VedtakTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildVedtakXml(
                         "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "MigrertId=\"4242\" StartDato=\"$VALID_DATE\">"
+                                "MigrertId=\"4242\" StartDato=\"$VALID_DATE\" ErSlettet=\"true\">"
                     ).toStreamSource()
                 )
             }

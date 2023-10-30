@@ -2,14 +2,14 @@ package no.ssb.barn.xsd
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
 import java.util.UUID
-import jakarta.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "MeldingType",
-    propOrder = ["id", "migrertId", "startDato", "melder", "saksinnhold", "konklusjon"]
+    propOrder = ["id", "migrertId", "startDato", "erSlettet", "melder", "saksinnhold", "konklusjon"]
 )
 data class MeldingType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -21,6 +21,9 @@ data class MeldingType(
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     var startDato: LocalDate,
+
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false,
 
     @field:JacksonXmlProperty(localName = "Melder")
     @field:JacksonXmlElementWrapper(useWrapping = false)

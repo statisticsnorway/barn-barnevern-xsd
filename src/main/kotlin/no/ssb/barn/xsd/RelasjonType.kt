@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlType
 import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RelasjonType", propOrder = ["id", "fraId", "fraType", "tilId", "tilType"])
+@XmlType(name = "RelasjonType", propOrder = ["id", "fraId", "fraType", "tilId", "tilType", "erSlettet"])
 data class RelasjonType(
     @field:XmlAttribute(name = "Id", required = true)
     val id: UUID,
@@ -23,5 +23,8 @@ data class RelasjonType(
     val tilId: UUID,
 
     @field:XmlAttribute(name = "TilType", required = true)
-    val tilType: BegrepsType
+    val tilType: BegrepsType,
+
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false
 )
