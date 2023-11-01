@@ -129,7 +129,7 @@ Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
-### Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
+### UTGÅR: Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
 
 Gitt at en har en Sak uten SluttDato<br/>
 når saken mangler melding, plan og tiltak<br/>
@@ -158,6 +158,14 @@ så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak. Alder: {
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
+### Sak Kontroll 21: Klienten skal ha melding, undersøkelse, vedtak, tiltak, plan, ettervern eller oversendelse fylkesnemnd
+
+Gitt at en har en sak uten sluttdato<br/>
+når saken mangler melding, undersøkelse, vedtak, tiltak, plan, ettervern eller oversendelse fylkesnemnd<br/>
+så gi feilmeldingen "Klienten har ingen meldinger, undersøkelser, vedtak, tiltak, planer, ettervern eller oversendelse fylkesnemnd. Saken bør avsluttes."
+
+Alvorlighetsgrad: ERROR<br/>
+Gyldig fra 2013-01-01
 
 ## <a name="personalia">Personalia</a>
 
