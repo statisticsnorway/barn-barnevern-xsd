@@ -210,10 +210,10 @@ Gyldig fra 2022-01-01
 ### Personalia Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
 
 Gitt at en har Personalia med fødselsnummer og fødselsdato<br/>
-når datodelen fødselsnummer (de 6 første karakterene) viser til en annen dato enn fødselsdato<br/>
+når datodelen av fødselsnummer (de 6 første karakterene) viser til en annen dato enn fødselsdato<br/>
 så gi feilmeldingen "Fødselsnummer og Fødselsdato viser til forskjellige datoer"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
