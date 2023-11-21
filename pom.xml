@@ -24,7 +24,7 @@
 
         <jacoco.version>0.8.11</jacoco.version>
         <checkstyle.version>10.12.5</checkstyle.version>
-        <bytebuddy.version>1.14.9</bytebuddy.version>
+        <bytebuddy.version>1.14.10</bytebuddy.version>
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>statisticsnorway</sonar.organization>
