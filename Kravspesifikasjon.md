@@ -152,7 +152,8 @@ Gyldig fra 2013-01-01
 ### Sak Kontroll 8: Klient over 18 år skal ha tiltak
 
 Gitt at en har en Sak og utleder alder ved hjelp av fødselsnummer<br/>
-når alder er 18 eller større og tiltak mangler <br/>
+når alder er 18 eller større og tiltak mangler og saken ikke har sluttdato<br/>
+eller saken har underelementer uten sluttdato (unntak: vedtak)<br/>
 så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak. Alder: {alder} år."
 
 Alvorlighetsgrad: ERROR<br/>
