@@ -273,6 +273,47 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>ssb-bip</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <version>1.5.0</version>
+                        <configuration>
+                            <updatePomFile>true</updatePomFile>
+                            <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>flatten</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>artifact-registry-snapshots</id>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots
+                    </url>
+                </snapshotRepository>
+                <repository>
+                    <id>artifact-registry-releases</id>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases
+                    </url>
+                </repository>
+            </distributionManagement>
+        </profile>
+
         <profile>
             <id>ssb-ga</id>
             <build>
