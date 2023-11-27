@@ -45,7 +45,7 @@ jobs:
         run: mvn -X -P ssb-ga --batch-mode -Drevision=${{ env.ARTIFACT_REVISION }} verify
 
       - name: Deploy artifact to Google artifact registry
-        # if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: |
           mvn -DskipTests=true -Dmaven.javadoc.skip=true -U -P ssb-ga --batch-mode \
            -Djdk.tls.client.protocols="TLSv1.2" -Drevision=${{ env.ARTIFACT_REVISION }} deploy
