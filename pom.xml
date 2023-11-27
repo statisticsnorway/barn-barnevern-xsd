@@ -274,7 +274,7 @@
             </build>
         </profile>
         <profile>
-            <id>ssb-bip</id>
+            <id>ssb-ga</id>
             <build>
                 <plugins>
                     <plugin>
@@ -298,13 +298,11 @@
                 </plugins>
             </build>
             <distributionManagement>
-                <snapshotRepository>
-                    <id>artifact-registry</id>
-                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots</url>
-                </snapshotRepository>
                 <repository>
                     <id>artifact-registry</id>
-                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases</url>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-5n/barnevern-maven
+                    </url>
                 </repository>
             </distributionManagement>
         </profile>
