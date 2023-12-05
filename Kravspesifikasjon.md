@@ -480,9 +480,9 @@ når Undersøkelse sin Konklusjon finnes og Konklusjon sin Kode er 1 eller 2 <br
 og en relasjon fra undersøkelsen til vedtaket mangler, der relasjonen skal inneholde undersøkelse/Id i sin FraId, "Undersokelse" i sin FraType, vedtak/Id i sin TilId og "Vedtak" i sin TilType<br/>
 så gi feilmeldingen "Konkludert Undersøkelse mangler en relasjon til vedtak"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad, konklusjon kode 1: ERROR<br/>
+Alvorlighetsgrad, konklusjon kode 2: WARNING<br/>
 Gyldig fra 2013-01-01
-
 
 
 ## <a name="vedtak">Vedtak</a>
