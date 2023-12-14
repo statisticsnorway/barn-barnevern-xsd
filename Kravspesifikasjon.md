@@ -168,6 +168,14 @@ så gi feilmeldingen "Klienten har ingen meldinger, undersøkelser, vedtak, tilt
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
+### Sak Kontroll 22: SlettetType peker til eksisterende element
+
+Gitt at en har en sak med slettetType som peker til et ikke-eksisterende element<br/>
+så gi feilmeldingen "SlettetType peker til et ikke-eksisterende element"
+
+Alvorlighetsgrad: WARNING<br/>
+Gyldig fra 2013-01-01
+
 ## <a name="personalia">Personalia</a>
 
 ### Personalia Kontroll 2f: StartDato er etter sakens SluttDato
