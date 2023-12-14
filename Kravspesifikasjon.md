@@ -168,6 +168,15 @@ så gi feilmeldingen "Klienten har ingen meldinger, undersøkelser, vedtak, tilt
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
+### Sak kontroll 23: Underelementer er lukket når sak har sluttdato
+
+Gitt at en har en sak med sluttdato
+når ett eller flere underelementer mangler sluttdato<br/>
+så gi feilmeldingen "Underelement mangler sluttdato"
+
+Alvorlighetsgrad: ERROR<br/>
+Gyldig fra 2013-01-01
+
 ## <a name="personalia">Personalia</a>
 
 ### Personalia Kontroll 2f: StartDato er etter sakens SluttDato
