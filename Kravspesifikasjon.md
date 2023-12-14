@@ -174,7 +174,7 @@ Gitt at en har en sak med sluttdato
 når ett eller flere underelementer mangler sluttdato<br/>
 så gi feilmeldingen "Underelement mangler sluttdato"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad: INFO<br/>
 Gyldig fra 2013-01-01
 
 ## <a name="personalia">Personalia</a>
