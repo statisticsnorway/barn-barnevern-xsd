@@ -168,11 +168,11 @@ så gi feilmeldingen "Klienten har ingen meldinger, undersøkelser, vedtak, tilt
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
-### Sak kontroll 23: Underelementer er lukket når sak har sluttdato
+### Sak kontroll 23: Dersom saken er lukket bør alle underelementer være lukket
 
 Gitt at en har en sak med sluttdato
 når ett eller flere underelementer mangler sluttdato<br/>
-så gi feilmeldingen "Underelement mangler sluttdato"
+så gi feilmeldingen "Underelement i lukket sak mangler sluttdato"
 
 Alvorlighetsgrad: INFO<br/>
 Gyldig fra 2013-01-01
