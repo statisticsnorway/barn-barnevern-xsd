@@ -176,6 +176,15 @@ så gi feilmeldingen "SlettetType peker til et ikke-eksisterende element"
 Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
+### Sak kontroll 23: Dersom saken er lukket bør alle underelementer være lukket
+
+Gitt at en har en sak med sluttdato<br/>
+når ett eller flere underelementer mangler sluttdato<br/>
+så gi feilmeldingen "Underelement i lukket sak mangler sluttdato"
+
+Alvorlighetsgrad: INFO<br/>
+Gyldig fra 2013-01-01
+
 ## <a name="personalia">Personalia</a>
 
 ### Personalia Kontroll 2f: StartDato er etter sakens SluttDato
