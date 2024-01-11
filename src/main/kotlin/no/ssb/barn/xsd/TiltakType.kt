@@ -34,9 +34,9 @@ open class TiltakType(
     @field:XmlElement(name = "Kategori", required = true)
     var kategori: KategoriType,
 
-    @field:JacksonXmlProperty(localName = "Saksinnhold")
+    @field:JacksonXmlProperty(localName = "Tiltaksgrunnlag")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
+    val tiltaksgrunnlag: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Tilsyn", required = false)
     var tilsyn: TilsynType? = null,
