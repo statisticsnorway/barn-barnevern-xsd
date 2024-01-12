@@ -26,7 +26,7 @@ class RelasjonTypeTest : BehaviorSpec({
                                 "FraId=\"~fraId~\" " +
                                 "FraType=\"Melding\" " +
                                 "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "TilType=\"Undersokelse\" />"
+                                "TilType=\"Undersokelse\" ErSlettet=\"true\"/>"
                     ).toStreamSource()
                 )
             }

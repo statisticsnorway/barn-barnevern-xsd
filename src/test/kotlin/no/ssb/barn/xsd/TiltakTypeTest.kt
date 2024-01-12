@@ -28,7 +28,7 @@ class TiltakTypeTest : BehaviorSpec({
                 getSchemaValidator().validate(
                     buildBarnevernXml(
                         "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                                "StartDato=\"$VALID_DATE\">" +
+                                "StartDato=\"$VALID_DATE\" ErSlettet=\"true\">" +
                                 LOVHJEMMEL_XML +
                                 "<Kategori Kode=\"1.1\"/>" +
                                 "</Tiltak>"

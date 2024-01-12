@@ -1,18 +1,13 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
 import java.util.UUID
-import jakarta.xml.bind.annotation.XmlAccessType
-import jakarta.xml.bind.annotation.XmlAccessorType
-import jakarta.xml.bind.annotation.XmlAttribute
-import jakarta.xml.bind.annotation.XmlElement
-import jakarta.xml.bind.annotation.XmlSchemaType
-import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "FlyttingType",
-    propOrder = ["id", "migrertId", "sluttDato", "arsakFra", "flytteTil"]
+    propOrder = ["id", "migrertId", "sluttDato", "erSlettet", "arsakFra", "flytteTil"]
 )
 data class FlyttingType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -24,6 +19,9 @@ data class FlyttingType(
     @field:XmlAttribute(name = "SluttDato", required = true)
     @field:XmlSchemaType(name = "date")
     val sluttDato: LocalDate,
+
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false,
 
     @field:XmlElement(name = "ArsakFra")
     val arsakFra: ArsakFraType,

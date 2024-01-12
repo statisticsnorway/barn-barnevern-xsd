@@ -1,19 +1,13 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
 import java.util.UUID
-import jakarta.xml.bind.annotation.XmlAccessType
-import jakarta.xml.bind.annotation.XmlAccessorType
-import jakarta.xml.bind.annotation.XmlAttribute
-import jakarta.xml.bind.annotation.XmlSchemaType
-import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "SakType",
-    propOrder = ["id", "startDato",
-        "fodselsnummer", "fodseldato", "kjonn", "duFnummer"
-    ]
+    propOrder = ["id", "startDato", "fodselsnummer", "fodseldato", "kjonn", "duFnummer", "erSlettet"]
 )
 data class PersonaliaType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -34,5 +28,8 @@ data class PersonaliaType(
     val kjonn: String,
 
     @field:XmlAttribute(name = "DUFnummer")
-    var duFnummer: String? = null
+    var duFnummer: String? = null,
+
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false,
 )

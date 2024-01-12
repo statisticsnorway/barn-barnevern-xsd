@@ -32,6 +32,7 @@ class PersonaliaTypeTest : BehaviorSpec({
                                 "Fodseldato=\"2021-01-01\" " +
                                 "Kjonn=\"1\" " +
                                 "DUFnummer=\"${"1".repeat(12)}\" " +
+                                "ErSlettet=\"true\"" +
                                 "/>"
                     ).toStreamSource()
                 )

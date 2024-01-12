@@ -31,7 +31,8 @@ class SakTypeTest : BehaviorSpec({
                                 "StartDato=\"$VALID_DATE\" " +
                                 "SluttDato=\"$VALID_DATE\" " +
                                 "Avsluttet=\"true\" " +
-                                "Journalnummer=\"00004\"" +
+                                "Journalnummer=\"00004\" " +
+                                "ErSlettet=\"true\"" +
                                 "/>"
                     ).toStreamSource()
                 )
