@@ -393,6 +393,13 @@ Bjorge.Saether@bufdir.no
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
+		<xs:attribute name="Verb" type="VerbType">
+			<xs:annotation>
+				<xs:appinfo>Verb</xs:appinfo>
+				<xs:documentation>HTTP-aktig verb POST, PATCH, PUT eller DELETE dikterer hvordan innsendingen håndteres.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId"/>
 		<xs:attribute ref="StartDato" use="required"/>
@@ -1553,6 +1560,14 @@ Bjorge.Saether@bufdir.no
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
 			<xs:enumeration value="Flytting"/>
 			<xs:enumeration value="Relasjon"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VerbType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="POST"/>
+			<xs:enumeration value="PATCH"/>
+			<xs:enumeration value="PUT"/>
+			<xs:enumeration value="DELETE"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="RelasjonType">

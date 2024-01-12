@@ -13,11 +13,14 @@ import jakarta.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "SakType",
-    propOrder = ["id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet",
+    propOrder = ["verb", "id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet",
         "personalia", "melding", "undersokelse", "plan", "tiltak",
         "vedtak", "ettervern", "oversendelseFylkesnemnd", "flytting", "relasjon", "slettet"]
 )
 data class SakType(
+    @field:XmlAttribute(name = "Verb")
+    var verb: VerbType? = null,
+
     @field:XmlAttribute(name = "Id", required = true)
     var id: UUID,
 
