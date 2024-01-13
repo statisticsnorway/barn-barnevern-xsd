@@ -46,7 +46,7 @@ class TiltakTypeTest : BehaviorSpec({
                                 "StartDato=\"$VALID_DATE\">" +
                                 LOVHJEMMEL_XML +
                                 "<Kategori Kode=\"1.1\"/>" +
-                                "<Tiltaksgrunnlag Kode=\"19\"><Presisering>~presisering~</Presisering></Tiltaksgrunnlag>" +
+                                "<Tiltaksgrunnlag Kode=\"19\" Presisering=\"~presisering~\"/>" +
                                 "</Tiltak>"
                     ).toStreamSource()
                 )
