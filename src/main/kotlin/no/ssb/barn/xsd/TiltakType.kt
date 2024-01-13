@@ -11,7 +11,7 @@ import java.util.UUID
 @XmlType(
     name = "TiltakType",
     propOrder = ["id", "migrertId", "startDato",
-        "lovhjemmel", "jmfrLovhjemmel", "kategori", "saksinnhold", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
+        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tiltaksgrunnlag", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
 )
 open class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
