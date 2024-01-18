@@ -143,6 +143,7 @@ Gyldig fra 2013-01-01
 
 Gitt at en har en Sak med datoUttrekk og fødselsdato<br/>
 når datoUttrekk minus fødselsdato er lik 25 år eller større<br/>
+og saken ikke har sluttdato eller saken har underelementer uten sluttdato (unntak: vedtak)<br/>
 så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient. Alder: {alder} år."
 
 Alvorlighetsgrad: WARNING<br/>
