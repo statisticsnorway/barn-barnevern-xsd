@@ -11,7 +11,7 @@ import java.util.UUID
 @XmlType(
     name = "TiltakType",
     propOrder = ["id", "migrertId", "startDato",
-        "lovhjemmel", "jmfrLovhjemmel", "kategori", "saksinnhold", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
+        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tiltaksgrunnlag", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
 )
 open class TiltakType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -34,9 +34,9 @@ open class TiltakType(
     @field:XmlElement(name = "Kategori", required = true)
     var kategori: KategoriType,
 
-    @field:JacksonXmlProperty(localName = "Saksinnhold")
+    @field:JacksonXmlProperty(localName = "Tiltaksgrunnlag")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
+    val tiltaksgrunnlag: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Tilsyn", required = false)
     var tilsyn: TilsynType? = null,

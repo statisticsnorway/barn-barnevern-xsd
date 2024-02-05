@@ -37,6 +37,22 @@ class TiltakTypeTest : BehaviorSpec({
             }
         }
 
+        /** make sure it's possible to make a valid test XML */
+        When("valid XML, some values set, expect no exceptions") {
+            shouldNotThrowAny {
+                getSchemaValidator().validate(
+                    buildBarnevernXml(
+                        "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
+                                "StartDato=\"$VALID_DATE\">" +
+                                LOVHJEMMEL_XML +
+                                "<Kategori Kode=\"1.1\"/>" +
+                                "<Tiltaksgrunnlag Kode=\"19\" Presisering=\"~presisering~\"/>" +
+                                "</Tiltak>"
+                    ).toStreamSource()
+                )
+            }
+        }
+
         forAll(
             /** Id */
 
