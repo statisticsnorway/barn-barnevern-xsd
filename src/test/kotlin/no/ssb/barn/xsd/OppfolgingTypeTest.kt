@@ -6,11 +6,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import no.ssb.barn.TestUtils.EMPTY_DATE_ERROR
-import no.ssb.barn.TestUtils.EMPTY_ID_ERROR
-import no.ssb.barn.TestUtils.INVALID_DATE
-import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
-import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
@@ -20,54 +15,39 @@ import org.xml.sax.SAXException
 
 class OppfolgingTypeTest : BehaviorSpec({
 
-    Given("misc Oppfolging XML") {
+    Given("valid XML, expect no exceptions") {
+        forAll(
+            row(
+                "Full XML",
 
-        /** make sure it's possible to make a valid test XML */
-        When("valid XML, expect no exceptions") {
-            shouldNotThrowAny {
-                getSchemaValidator().validate(
-                    buildXmlInTest(
-                        "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "UtfortDato=\"$VALID_DATE\"/>"
-                    ).toStreamSource()
-                )
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "StartDato=\"$VALID_DATE\" Kode=\"2\"/>" +
+                        "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2f\" " +
+                        "UtfortDato=\"$VALID_DATE\"/>"
+            ),
+            row(
+                "Hyppighet only",
+                "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "StartDato=\"$VALID_DATE\" Kode=\"2\"/>"
+            )
+        ) { description, partialXml ->
+            /** make sure it's possible to make a valid test XML */
+            When(description) {
+                shouldNotThrowAny {
+                    getSchemaValidator().validate(
+                        buildXmlInTest(partialXml).toStreamSource()
+                    )
+                }
             }
         }
 
         forAll(
-            /** Id */
             row(
-                "missing Id",
-                "<Oppfolging UtfortDato=\"$VALID_DATE\"/>",
-                "cvc-complex-type.4: Attribute 'Id' must appear on element 'Oppfolging'."
+                "Missing Hyppighet",
+                "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2f\" UtfortDato=\"$VALID_DATE\"/>",
+                "cvc-complex-type.2.4.a: Invalid content was found starting with element 'Utfort'. " +
+                        "One of '{Hyppighet}' is expected."
             ),
-            row(
-                "empty Id",
-                "<Oppfolging Id=\"\" UtfortDato=\"$VALID_DATE\"/>",
-                EMPTY_ID_ERROR
-            ),
-            row(
-                "invalid Id",
-                "<Oppfolging Id=\"42\" UtfortDato=\"$VALID_DATE\"/>",
-                INVALID_ID_ERROR
-            ),
-
-            /** UtfortDato */
-            row(
-                "missing UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" />",
-                "cvc-complex-type.4: Attribute 'UtfortDato' must appear on element 'Oppfolging'."
-            ),
-            row(
-                "empty UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"\"/>",
-                EMPTY_DATE_ERROR
-            ),
-            row(
-                "invalid UtfortDato",
-                "<Oppfolging Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" UtfortDato=\"$INVALID_DATE\"/>",
-                INVALID_DATE_FORMAT_ERROR
-            )
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
@@ -86,7 +66,9 @@ class OppfolgingTypeTest : BehaviorSpec({
             "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
                     LOVHJEMMEL_XML +
                     "<Kategori Kode=\"1.1\" />" +
+                    "<Oppfolging>" +
                     oppfolgingXml +
+                    "</Oppfolging>" +
                     "</Tiltak>"
         )
     }
