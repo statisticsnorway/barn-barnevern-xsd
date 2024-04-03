@@ -16,15 +16,15 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <kotlin.version>1.9.20</kotlin.version>
-        <kotestVersion>5.7.2</kotestVersion>
-        <jackson.version>2.15.3</jackson.version>
+        <kotlin.version>1.9.23</kotlin.version>
+        <kotestVersion>5.8.1</kotestVersion>
+        <jackson.version>2.17.0</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jacoco.version>0.8.11</jacoco.version>
-        <checkstyle.version>10.12.4</checkstyle.version>
-        <bytebuddy.version>1.14.9</bytebuddy.version>
+        <checkstyle.version>10.15.0</checkstyle.version>
+        <bytebuddy.version>1.14.13</bytebuddy.version>
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>statisticsnorway</sonar.organization>
@@ -71,13 +71,13 @@
             <dependency>
                 <groupId>io.mockk</groupId>
                 <artifactId>mockk-jvm</artifactId>
-                <version>1.13.8</version>
+                <version>1.13.10</version>
             </dependency>
 
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.0</version>
+                <version>5.10.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -88,7 +88,7 @@
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.jakarta.rs</groupId>
@@ -143,7 +143,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.5</version>
                 <configuration>
                     <includes>
                         <include>**/*Spec.*</include>
@@ -249,7 +249,7 @@
                     <plugin>
                         <groupId>org.sonarsource.scanner.maven</groupId>
                         <artifactId>sonar-maven-plugin</artifactId>
-                        <version>3.10.0.2594</version>
+                        <version>3.11.0.3922</version>
                     </plugin>
                     <plugin>
                         <groupId>org.jacoco</groupId>
@@ -273,6 +273,7 @@
                 </plugins>
             </build>
         </profile>
+
         <profile>
             <id>ssb-bip</id>
             <build>
@@ -280,7 +281,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>flatten-maven-plugin</artifactId>
-                        <version>1.5.0</version>
+                        <version>1.6.0</version>
                         <configuration>
                             <updatePomFile>true</updatePomFile>
                             <flattenMode>resolveCiFriendliesOnly</flattenMode>
@@ -299,12 +300,50 @@
             </build>
             <distributionManagement>
                 <snapshotRepository>
-                    <id>artifact-registry</id>
-                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots</url>
+                    <id>artifact-registry-snapshots</id>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-snapshots
+                    </url>
                 </snapshotRepository>
                 <repository>
+                    <id>artifact-registry-releases</id>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases
+                    </url>
+                </repository>
+            </distributionManagement>
+        </profile>
+
+        <profile>
+            <id>ssb-ga</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <updatePomFile>true</updatePomFile>
+                            <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>flatten</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <repository>
                     <id>artifact-registry</id>
-                    <url>artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases</url>
+                    <url>
+                        artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-5n/barnevern-maven
+                    </url>
                 </repository>
             </distributionManagement>
         </profile>

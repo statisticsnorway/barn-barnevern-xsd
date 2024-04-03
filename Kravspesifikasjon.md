@@ -129,7 +129,7 @@ Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
-### Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
+### UTGÅR: Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
 
 Gitt at en har en Sak uten SluttDato<br/>
 når saken mangler melding, plan og tiltak<br/>
@@ -143,6 +143,7 @@ Gyldig fra 2013-01-01
 
 Gitt at en har en Sak med datoUttrekk og fødselsdato<br/>
 når datoUttrekk minus fødselsdato er lik 25 år eller større<br/>
+og saken ikke har sluttdato eller saken har underelementer uten sluttdato (unntak: vedtak)<br/>
 så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient. Alder: {alder} år."
 
 Alvorlighetsgrad: WARNING<br/>
@@ -152,12 +153,38 @@ Gyldig fra 2013-01-01
 ### Sak Kontroll 8: Klient over 18 år skal ha tiltak
 
 Gitt at en har en Sak og utleder alder ved hjelp av fødselsnummer<br/>
-når alder er 18 eller større og tiltak mangler <br/>
+når alder er 18 eller større og tiltak mangler og saken ikke har sluttdato<br/>
+eller saken har underelementer uten sluttdato (unntak: vedtak)<br/>
 så gi feilmeldingen "Klienten er over 18 år og skal dermed ha tiltak. Alder: {alder} år."
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
+### Sak Kontroll 21: Klienten skal ha melding, undersøkelse, vedtak, tiltak, plan, ettervern eller oversendelse fylkesnemnd
+
+Gitt at en har en sak uten sluttdato<br/>
+når saken mangler melding, undersøkelse, vedtak, tiltak, plan, ettervern eller oversendelse fylkesnemnd<br/>
+så gi feilmeldingen "Klienten har ingen meldinger, undersøkelser, vedtak, tiltak, planer, ettervern eller oversendelse fylkesnemnd. Saken bør avsluttes."
+
+Alvorlighetsgrad: ERROR<br/>
+Gyldig fra 2013-01-01
+
+### Sak Kontroll 22: SlettetType peker til eksisterende element
+
+Gitt at en har en sak med slettetType som peker til et ikke-eksisterende element<br/>
+så gi feilmeldingen "SlettetType peker til et ikke-eksisterende element"
+
+Alvorlighetsgrad: WARNING<br/>
+Gyldig fra 2013-01-01
+
+### Sak kontroll 23: Dersom saken er lukket bør alle underelementer være lukket
+
+Gitt at en har en sak med sluttdato<br/>
+når ett eller flere underelementer mangler sluttdato<br/>
+så gi feilmeldingen "Underelement i lukket sak mangler sluttdato"
+
+Alvorlighetsgrad: INFO<br/>
+Gyldig fra 2013-01-01
 
 ## <a name="personalia">Personalia</a>
 
@@ -202,10 +229,10 @@ Gyldig fra 2022-01-01
 ### Personalia Kontroll 13: Kontroll av Fødselsnummer og Fødselsdato
 
 Gitt at en har Personalia med fødselsnummer og fødselsdato<br/>
-når datodelen fødselsnummer (de 6 første karakterene) viser til en annen dato enn fødselsdato<br/>
+når datodelen av fødselsnummer (de 6 første karakterene) viser til en annen dato enn fødselsdato<br/>
 så gi feilmeldingen "Fødselsnummer og Fødselsdato viser til forskjellige datoer"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2022-01-01
 
 
@@ -333,7 +360,7 @@ Gitt at en har 2 eller flere Meldinger med konklusjon<br/>
 når en sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
 så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
 
-Alvorlighetsgrad: Hvis konklusjon.kode = 2: ERROR. Hvis konklusjon.kode != 2: WARNING<br/>
+Alvorlighetsgrad: INFO<br/>
 Gyldig fra 2013-01-01
 
 
@@ -471,9 +498,9 @@ når Undersøkelse sin Konklusjon finnes og Konklusjon sin Kode er 1 eller 2 <br
 og en relasjon fra undersøkelsen til vedtaket mangler, der relasjonen skal inneholde undersøkelse/Id i sin FraId, "Undersokelse" i sin FraType, vedtak/Id i sin TilId og "Vedtak" i sin TilType<br/>
 så gi feilmeldingen "Konkludert Undersøkelse mangler en relasjon til vedtak"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad, konklusjon kode 1: ERROR<br/>
+Alvorlighetsgrad, konklusjon kode 2: WARNING<br/>
 Gyldig fra 2013-01-01
-
 
 
 ## <a name="vedtak">Vedtak</a>
