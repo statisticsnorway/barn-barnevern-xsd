@@ -60,6 +60,13 @@ Bjorge.Saether@bufdir.no
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:attribute>
+	<xs:attribute name="ErSlettet" type="xs:boolean">
+		<xs:annotation>
+			<xs:appinfo>ErSlettet</xs:appinfo>
+			<xs:documentation>Globalt attributt for slettet.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
 	<!-- ELEMENTER -->
 	<xs:element name="Barnevern" type="BarnevernType">
 		<xs:annotation>
@@ -346,6 +353,7 @@ Bjorge.Saether@bufdir.no
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>
+					<xs:attribute ref="ErSlettet"/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="Melding" type="MeldingType" minOccurs="0" maxOccurs="unbounded">
@@ -411,6 +419,7 @@ Bjorge.Saether@bufdir.no
 			</xs:simpleType>
 		</xs:attribute>
 		<xs:attribute name="Avsluttet" type="xs:boolean"/>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<!-- Plan -->
 	<xs:complexType name="PlanType">
@@ -494,6 +503,7 @@ Bjorge.Saether@bufdir.no
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<!-- Melding -->
 	<xs:complexType name="MeldingType">
@@ -545,6 +555,7 @@ Bjorge.Saether@bufdir.no
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>
+					<xs:attribute ref="ErSlettet"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -557,6 +568,7 @@ Bjorge.Saether@bufdir.no
                 </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<!-- Tiltak -->
 	<xs:complexType name="TiltakType">
@@ -597,6 +609,7 @@ Bjorge.Saether@bufdir.no
                 </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<!-- Lovhjemmel -->
 	<xs:complexType name="LovhjemmelType">
@@ -1021,6 +1034,7 @@ Bjorge.Saether@bufdir.no
                 </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<!-- Kategori -->
 	<xs:complexType name="KategoriType">
@@ -1446,6 +1460,7 @@ Bjorge.Saether@bufdir.no
 				<xs:documentation>Dato oversendt fylkesnemnd.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<!-- Vedtak -->
 	<xs:complexType name="VedtakType">
@@ -1520,6 +1535,7 @@ Bjorge.Saether@bufdir.no
                 </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<!-- Ettervern -->
 	<xs:complexType name="EttervernType">
@@ -1569,6 +1585,7 @@ Bjorge.Saether@bufdir.no
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId"/>
 		<xs:attribute name="TilbudSendtDato" type="xs:date" use="required"/>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<xs:simpleType name="IdType">
 		<xs:restriction base="xs:string">
@@ -1606,6 +1623,7 @@ Bjorge.Saether@bufdir.no
 		<xs:attribute name="FraType" type="BegrepsType" use="required"/>
 		<xs:attribute name="TilId" type="UuidIdType" use="required"/>
 		<xs:attribute name="TilType" type="BegrepsType" use="required"/>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<xs:complexType name="FlyttingType">
 		<xs:sequence>
@@ -1615,6 +1633,7 @@ Bjorge.Saether@bufdir.no
 		<xs:attribute ref="Id" use="required"/>
 		<xs:attribute ref="MigrertId"/>
 		<xs:attribute ref="SluttDato" use="required"/>
+		<xs:attribute ref="ErSlettet"/>
 	</xs:complexType>
 	<xs:complexType name="ArsakFraType">
 		<xs:attribute name="Kode" use="required">
