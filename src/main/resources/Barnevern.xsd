@@ -688,7 +688,8 @@ Bjorge.Saether@bufdir.no
                     12 = Pedagogisk-psykologisk tjeneste (PPT)
                     13 = Psykisk helsevern for barn og unge (kommune og stat)
                     14 = Psykisk helsevern for voksne (kommune og stat)
-                    15 = Lege/ sykehus/ tannlege
+                    24 = Tannlege
+                    15 = Lege/ sykehus
                     16 = Familievernkontor
                     17 = Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)
                     18 = Krisesenter
@@ -720,7 +721,8 @@ Bjorge.Saether@bufdir.no
                     { "code":"13", "validFrom":"2013-01-01", "title":"Psykisk helsevern for barn og unge (kommune og
                     stat)" },
                     { "code":"14", "validFrom":"2013-01-01", "title":"Psykisk helsevern for voksne (kommune og stat)" },
-                    { "code":"15", "validFrom":"2013-01-01", "title":"Lege/ sykehus/ tannlege" },
+                    { "code":"24", "validFrom":"2025-01-01", "title":"Tannlege" },
+                    { "code":"15", "validFrom":"2013-01-01", "title":"Lege/ sykehus" },
                     { "code":"16", "validFrom":"2013-01-01", "title":"Familievernkontor" },
                     { "code":"17", "validFrom":"2013-01-01", "title":"Tjenester og instanser med ansvar for oppfølging
                     av personers rusproblemer (kommune og stat)" },
@@ -804,6 +806,11 @@ Bjorge.Saether@bufdir.no
                     26 = Barnets kriminelle handlinger
                     27 = Barnet utsatt for menneskehandel
                     30 = Barnets kognitive vansker
+                    31 = Barnet er utsatt for negativ sosial kontroll
+                    32 = Den unge voksne mangler dagaktivitet/utdanning /arbeid
+                    33 = Den unge voksne mangler støtte og oppfølging fra egen familie
+                    34 = Den unge voksne mangler nettverk og/eller nære relasjoner
+                    35 = Behov for bistand i kontakt med andre deler av hjelpeapparatet
                     18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes
                     dersom ingen av kategoriene 1-27 passer.)
                     19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes
@@ -857,6 +864,11 @@ Bjorge.Saether@bufdir.no
                     { "code":"26", "validFrom":"2021-01-01", "title":"Barnets kriminelle handlinger" },
                     { "code":"27", "validFrom":"2021-01-01", "title":"Barnet utsatt for menneskehandel" },
                     { "code":"30", "validFrom":"2023-01-01", "title":"Barnets kognitive vansker" },
+                    { "code":"31", "validFrom":"2025-01-01", "title":"Barnet er utsatt for negativ sosial kontroll" },
+                    { "code":"32", "validFrom":"2025-01-01", "title":"Den unge voksne mangler dagaktivitet/utdanning /arbeid" },
+                    { "code":"33", "validFrom":"2025-01-01", "title":"Den unge voksne mangler støtte og oppfølging fra egen familie" },
+                    { "code":"34", "validFrom":"2025-01-01", "title":"Den unge voksne mangler nettverk og/el. nære relasjoner" },
+                    { "code":"35", "validFrom":"2025-01-01", "title":"Behov for bistand i kontakt med andre deler av hjelpeapparatet" },
                     { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever
                     presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
                     { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnets situasjon (krever
@@ -1282,25 +1294,25 @@ Bjorge.Saether@bufdir.no
 	</xs:complexType>
 	<!-- Oppfølging -->
 	<xs:complexType name="OppfolgingType">
-        <xs:sequence>
-            <xs:element name="Hyppighet" type="OppfolgingHyppighetType" maxOccurs="unbounded"/>
-            <xs:element name="Utfort" type="OppfolgingUtfortType" minOccurs="0" maxOccurs="unbounded">
-                <xs:annotation>
-                    <xs:documentation>Oppfolging i fosterhjem utført av uavhengig part.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="OppfolgingHyppighetType">
-        <xs:attribute ref="Id" use="required"/>
-        <xs:attribute ref="StartDato" use="required"/>
-        <xs:attribute name="Kode" use="required">
-            <xs:annotation>
-                <xs:documentation>
+		<xs:sequence>
+			<xs:element name="Hyppighet" type="OppfolgingHyppighetType" maxOccurs="unbounded"/>
+			<xs:element name="Utfort" type="OppfolgingUtfortType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Oppfolging i fosterhjem utført av uavhengig part.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OppfolgingHyppighetType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute ref="StartDato" use="required"/>
+		<xs:attribute name="Kode" use="required">
+			<xs:annotation>
+				<xs:documentation>
                     4 = 4 Oppfolging pr. år (standard)
                     2 = 2 Oppfolging pr. år (redusert)
                 </xs:documentation>
-                <xs:appinfo xml:lang="json">
+				<xs:appinfo xml:lang="json">
                     {
                     "type":"codelist",
                     "term":"TiltakOppfolgingHyppighet",
@@ -1312,25 +1324,25 @@ Bjorge.Saether@bufdir.no
                     ]
                     }
                 </xs:appinfo>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:minLength value="1"/>
-                    <xs:maxLength value="1"/>
-                    <xs:enumeration value="4"/>
-                    <xs:enumeration value="2"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-    </xs:complexType>
-    <xs:complexType name="OppfolgingUtfortType">
-        <xs:attribute ref="Id" use="required"/>
-        <xs:attribute name="UtfortDato" type="xs:date" use="required">
-            <xs:annotation>
-                <xs:documentation>Dato oppfølgingsbesøk utført.</xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-    </xs:complexType>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="1"/>
+					<xs:enumeration value="4"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="OppfolgingUtfortType">
+		<xs:attribute ref="Id" use="required"/>
+		<xs:attribute name="UtfortDato" type="xs:date" use="required">
+			<xs:annotation>
+				<xs:documentation>Dato oppfølgingsbesøk utført.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
 	<!-- Tilsyn -->
 	<xs:complexType name="TilsynType">
 		<xs:sequence>
