@@ -3,6 +3,27 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.3.0.0
+Endringsdato: 4. april 2024
+
+## Struktur
+- /@versjon oppdatert til 3.0.0
+- Opprettet globalt attributt @ErSlettet
+- Lagt til globalt attributt @ErSlettet i SakType, Personalia, MeldingType, UndersokelseType, PlanType, TiltakType, VedtakType, EttervernType, OversendelseBarneverntjenesteType, FlyttingType og RelasjonType
+- Fjernet gammel definisjon av TiltakType/Oppfolging
+- Opprettet ny definisjon av TiltakType/Oppfolging der man har:
+  - Lagt til OppfolgingHyppighetType med attributtene @Id, @StartDato og @Kode
+  - Lagt til OppfolgingUtfortType med attributtene @Id og @UtfortDato
+- MelderType/@Kode: Lagt til ny kode som gjelder fra 1. januar 2025
+  - 24 = Tannlege
+- SaksinnholdType/@Kode: Lagt til nye koder som gjelder fra 1. januar 2025
+  - 31 = Barnet er utsatt for negativ sosial kontroll
+  - 32 = Den unge voksne mangler dagaktivitet/utdanning /arbeid
+  - 33 = Den unge voksne mangler støtte og oppfølging fra egen familie
+  - 34 = Den unge voksne mangler nettverk og/eller nære relasjoner
+  - 35 = Behov for bistand i kontakt med andre deler av hjelpeapparatet
+
+---
 # v.2.2.3
 Endringsdato: 25. august 2023
 
