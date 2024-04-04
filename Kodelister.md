@@ -53,7 +53,8 @@ Brukes på stien /Barnevern/Sak/Melding/Melder/@Kode
 |    12 | Pedagogisk-psykologisk tjeneste (PPT)                        | 2013-01-01 |
 |    13 | Psykisk helsevern for barn og unge (kommune og stat)         | 2013-01-01 |
 |    14 | Psykisk helsevern for voksne (kommune og stat)               | 2013-01-01 |
-|    15 | Lege/ sykehus/ tannlege                                      | 2013-01-01 |
+|    24 | Tannlege                                                     | 2025-01-01 |
+|    15 | Lege/ sykehus                                                | 2013-01-01 |
 |    16 | Familievernkontor                                            | 2013-01-01 |
 |    17 | Tjenester og instanser med ansvar for oppfølging av <br>personers rusproblemer (kommune og stat) | 2013-01-01 |
 |    18 | Krisesenter                                                  | 2013-01-01 |
@@ -100,6 +101,11 @@ Brukes på stien /Barnevern/Sak/Melding/Saksinnhold/@Kode
 | 26   | Barnets kriminelle handlinger                                                                                                                             | 2021-01-01 |            |                                    |
 | 27   | Barnet utsatt for menneskehandel                                                                                                                          | 2021-01-01 |            |                                    |
 | 30   | Barnets kognitive vansker                                                                                                                                 | 2023-01-01 |            |                                    |
+| 31   | Barnet er utsatt for negativ sosial kontroll                                                                                                              | 2025-01-01 |            |                                    |
+| 32   | Den unge voksne mangler dagaktivitet/utdanning /arbeid                                                                                                    | 2025-01-01 |            |                                    |
+| 33   | Den unge voksne mangler støtte og oppfølging fra egen familie                                                                                             | 2025-01-01 |            |                                    |
+| 34   | Den unge voksne mangler nettverk og/eller nære relasjoner                                                                                                 | 2025-01-01 |            |                                    |
+| 35   | Behov for bistand i kontakt med andre deler av hjelpeapparatet                                                                                            | 2025-01-01 |            |                                    |
 | 18   | Andre forhold ved foreldre/ familien (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)          | 2013-01-01 |            |                                    |
 | 19   | Andre forhold ved barnets situasjon (krever presisering)<br>(Denne kategorien skal kunne benyttes <br>dersom ingen av kategoriene 1-27 passer.)           | 2013-01-01 |            |                                    |
 
