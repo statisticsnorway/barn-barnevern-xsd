@@ -14,8 +14,11 @@ Endringsdato: 4. april 2024
 - Opprettet ny definisjon av TiltakType/Oppfolging der man har:
   - Lagt til OppfolgingHyppighetType med attributtene @Id, @StartDato og @Kode
   - Lagt til OppfolgingUtfortType med attributtene @Id og @UtfortDato
+- MelderType/@Kode: Utgående kode som gjelder til og med 31. desember 2024
+  - 15 = Lege / Sykehus / Tannlege
 - MelderType/@Kode: Lagt til ny kode som gjelder fra 1. januar 2025
-  - 24 = Tannlege
+  - 24 = Lege / Sykehus
+  - 25 = Tannlege
 - SaksinnholdType/@Kode: Lagt til nye koder som gjelder fra 1. januar 2025
   - 31 = Barnet er utsatt for negativ sosial kontroll
   - 32 = Den unge voksne mangler dagaktivitet/utdanning /arbeid

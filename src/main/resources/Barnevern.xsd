@@ -691,8 +691,8 @@ Bjorge.Saether@bufdir.no
                     12 = Pedagogisk-psykologisk tjeneste (PPT)
                     13 = Psykisk helsevern for barn og unge (kommune og stat)
                     14 = Psykisk helsevern for voksne (kommune og stat)
-                    24 = Tannlege
-                    15 = Lege/ sykehus
+                    24 = Lege/ sykehus
+                    25 = Tannlege
                     16 = Familievernkontor
                     17 = Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)
                     18 = Krisesenter
@@ -724,8 +724,8 @@ Bjorge.Saether@bufdir.no
                     { "code":"13", "validFrom":"2013-01-01", "title":"Psykisk helsevern for barn og unge (kommune og
                     stat)" },
                     { "code":"14", "validFrom":"2013-01-01", "title":"Psykisk helsevern for voksne (kommune og stat)" },
-                    { "code":"24", "validFrom":"2025-01-01", "title":"Tannlege" },
-                    { "code":"15", "validFrom":"2013-01-01", "title":"Lege/ sykehus" },
+                    { "code":"24", "validFrom":"2025-01-01", "title":"Lege/ sykehus" },
+                    { "code":"25", "validFrom":"2013-01-01", "title":"Tannlege" },
                     { "code":"16", "validFrom":"2013-01-01", "title":"Familievernkontor" },
                     { "code":"17", "validFrom":"2013-01-01", "title":"Tjenester og instanser med ansvar for oppfølging
                     av personers rusproblemer (kommune og stat)" },
@@ -766,6 +766,8 @@ Bjorge.Saether@bufdir.no
                     <xs:enumeration value="21"/>
                     <xs:enumeration value="22"/>
                     <xs:enumeration value="23"/>
+                    <xs:enumeration value="24"/>
+                    <xs:enumeration value="25"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>

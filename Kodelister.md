@@ -37,32 +37,33 @@ Definert på stien /Barnevern/Sak/Melding
 
 Brukes på stien /Barnevern/Sak/Melding/Melder/@Kode
 
-|  Kode | Betydning                                                    | Gyldig fra |
-|------:| ------------------------------------------------------------ | ---------- |
-|     1 | Barnet selv                                                  | 2013-01-01 |
-|     2 | Mor/ far/ foresatte                                          | 2013-01-01 |
-|     3 | Familie for øvrig                                            | 2013-01-01 |
-|     4 | Andre privatpersoner                                         | 2013-01-01 |
-|     5 | Barnvernstjenesten                                           | 2013-01-01 |
-|     6 | NAV (kommune og stat)                                        | 2013-01-01 |
-|     7 | Barnevernsvakt                                               | 2013-01-01 |
-|     8 | Politi                                                       | 2013-01-01 |
-|     9 | Barnehage                                                    | 2013-01-01 |
-|    10 | Helsestasjon/skolehelsetjenesten                             | 2013-01-01 |
-|    11 | Skole                                                        | 2013-01-01 |
-|    12 | Pedagogisk-psykologisk tjeneste (PPT)                        | 2013-01-01 |
-|    13 | Psykisk helsevern for barn og unge (kommune og stat)         | 2013-01-01 |
-|    14 | Psykisk helsevern for voksne (kommune og stat)               | 2013-01-01 |
-|    24 | Tannlege                                                     | 2025-01-01 |
-|    15 | Lege/ sykehus                                                | 2013-01-01 |
-|    16 | Familievernkontor                                            | 2013-01-01 |
-|    17 | Tjenester og instanser med ansvar for oppfølging av <br>personers rusproblemer (kommune og stat) | 2013-01-01 |
-|    18 | Krisesenter                                                  | 2013-01-01 |
-|    19 | Asylmottak/ UDI/ innvandringsmyndighet                       | 2013-01-01 |
-|    20 | Utekontakt/ fritidsklubb                                     | 2013-01-01 |
-|    21 | Frivillige organisasjoner/ idrettslag                        | 2013-01-01 |
-|    22 | Andre offentlige instanser (krever presisering)              | 2013-01-01 |
-|    23 | Anonym                                                       | 2013-01-01 |
+|  Kode | Betydning                                                                                        | Gyldig fra | Gyldig til | Endring               |
+|------:| ------------------------------------------------------------------------------------------------ | ---------- | ---------- | --------------------- |
+|     1 | Barnet selv                                                                                      | 2013-01-01 |            |                       |
+|     2 | Mor/ far/ foresatte                                                                              | 2013-01-01 |            |                       |
+|     3 | Familie for øvrig                                                                                | 2013-01-01 |            |                       |
+|     4 | Andre privatpersoner                                                                             | 2013-01-01 |            |                       |
+|     5 | Barnvernstjenesten                                                                               | 2013-01-01 |            |                       |
+|     6 | NAV (kommune og stat)                                                                            | 2013-01-01 |            |                       |
+|     7 | Barnevernsvakt                                                                                   | 2013-01-01 |            |                       |
+|     8 | Politi                                                                                           | 2013-01-01 |            |                       |
+|     9 | Barnehage                                                                                        | 2013-01-01 |            |                       |
+|    10 | Helsestasjon/skolehelsetjenesten                                                                 | 2013-01-01 |            |                       |
+|    11 | Skole                                                                                            | 2013-01-01 |            |                       |
+|    12 | Pedagogisk-psykologisk tjeneste (PPT)                                                            | 2013-01-01 |            |                       |
+|    13 | Psykisk helsevern for barn og unge (kommune og stat)                                             | 2013-01-01 |            |                       |
+|    14 | Psykisk helsevern for voksne (kommune og stat)                                                   | 2013-01-01 |            |                       |
+|    15 | Lege / Sykehus / Tannlege                                                                        | 2013-01-01 | 2024-12-31 | 15 deles i 24 og 25   |
+|    24 | Lege / Sykehus                                                                                   | 2025-01-01 |            |                       |
+|    25 | Tannlege                                                                                         | 2025-01-01 |            |                       |
+|    16 | Familievernkontor                                                                                | 2013-01-01 |            |                       |
+|    17 | Tjenester og instanser med ansvar for oppfølging av <br>personers rusproblemer (kommune og stat) | 2013-01-01 |            |                       |
+|    18 | Krisesenter                                                                                      | 2013-01-01 |            |                       |
+|    19 | Asylmottak/ UDI/ innvandringsmyndighet                                                           | 2013-01-01 |            |                       |
+|    20 | Utekontakt/ fritidsklubb                                                                         | 2013-01-01 |            |                       |
+|    21 | Frivillige organisasjoner/ idrettslag                                                            | 2013-01-01 |            |                       |
+|    22 | Andre offentlige instanser (krever presisering)                                                  | 2013-01-01 |            |                       |
+|    23 | Anonym                                                                                           | 2013-01-01 |            |                       |
 
 <a name="#/Barnevern/Sak/Melding/Saksinnhold/@Kode"></a>
 
