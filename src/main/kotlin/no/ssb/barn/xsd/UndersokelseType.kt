@@ -9,7 +9,7 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "UndersokelseType",
-    propOrder = ["id", "migrertId", "startDato", "vedtaksgrunnlag", "utvidetFrist", "konklusjon"]
+    propOrder = ["id", "migrertId", "startDato", "erSlettet", "vedtaksgrunnlag", "utvidetFrist", "konklusjon"]
 )
 data class UndersokelseType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -21,6 +21,9 @@ data class UndersokelseType(
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     var startDato: LocalDate,
+
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false,
 
     @field:JacksonXmlProperty(localName = "Vedtaksgrunnlag")
     @field:JacksonXmlElementWrapper(useWrapping = false)

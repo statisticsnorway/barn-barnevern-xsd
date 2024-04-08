@@ -26,7 +26,7 @@ class PlanTypeTest : BehaviorSpec({
             shouldNotThrowAny {
                 getSchemaValidator().validate(buildBarnevernXml(
                     "<Plan Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" MigrertId=\"1234\" " +
-                            "StartDato=\"$VALID_DATE\" Plantype=\"1\"/>").toStreamSource())
+                            "StartDato=\"$VALID_DATE\" Plantype=\"1\" ErSlettet=\"true\"/>").toStreamSource())
             }
         }
 
