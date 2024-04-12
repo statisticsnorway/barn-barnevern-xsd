@@ -1,1 +1,1 @@
-rootProject.name = "barn-barnevern-xsd"
+rootProject.name = "barn-xsd"
