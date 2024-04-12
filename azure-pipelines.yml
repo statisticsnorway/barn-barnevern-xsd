@@ -20,15 +20,15 @@ variables:
   # Azure Pipelines
   - group: Hemmeligheter
   # Variables defined here
-  - name: MAVEN_CACHE_FOLDER
-    value: $(Pipeline.Workspace)/.m2/repository
+  - name: GRADLE_USER_HOME
+    value: $(Pipeline.Workspace)/.gradle
+  - name: sonarCloud
+    value: 'bipSonarCloud-Barnevernsregisteret'
   - name: ArtifactRevision
     ${{ if startsWith(variables['Build.SourceBranch'], 'refs/tags/') }}:
       value: "$(Build.SourceBranchName)"
     ${{ else }}:
       value: "$(Build.SourceBranchName)-SNAPSHOT"
-  - name: MAVEN_OPTS
-    value: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER) -Drevision=$(ArtifactRevision)'
 
 resources:
   repositories:
@@ -36,7 +36,7 @@ resources:
       type: github
       name: statisticsnorway/azure-pipelines-templates
       # The version of the repo on GitHub. Change to needed version
-      ref: refs/tags/1.1.44
+      ref: refs/tags/1.1.45
       # Service connection in the barn project on Pipelines
       # with access to the template repository.
       endpoint: 'github-Barnevernsregisteret'
@@ -44,40 +44,55 @@ resources:
 # Job which runs mvn test and verify, Sonar Analysis (if branch is master), mvn install,
 # builds Docker image, pushes this to GCR and checks for any image vulnerabilities
 jobs:
-  - job: buildTestDockerBuildDockerPush
-    displayName: 'Test/build app'
+  - job: buildTestAndDeploySnapshot
+    displayName: 'Test/build app and deploy artifact'
+
+    # Job condition: Run these jobs on any branch, also tags
+    condition: not(startsWith(variables['Build.SourceBranch'], 'refs/pull/'))
 
     # Steps in this Job
     steps:
       - script: 'echo "Artifact revision: $(ArtifactRevision)"'
         displayName: 'Print ArtifactRevision'
 
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '17'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
-
-      # Maven caching to speed up pipeline build time
-      - template: maven/task-cache.yml@templates
-
       # Authenticate to google artifact registry
       # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-authenticate-gar.yml
       - template: maven/task-authenticate-gar.yml@templates
 
-      # Verify and run sonarcloud, for non-tag-builds
-      # See https://github.com/statisticsnorway/azure-pipelines-templates/blob/master/maven/task-verify.yml
-      - template: maven/task-verify.yml@templates
-        parameters:
-          sonarCloud: 'bipSonarCloud-Barnevernsregisteret'
-
-      # Deploy artifact to Artifact Registry
-      - task: Maven@3
-        displayName: 'Maven install and deploy'
+      - task: SonarCloudPrepare@1
         inputs:
-          goals: 'deploy'
-          mavenOptions: '-Xmx3072m'
-          options: '$(MAVEN_OPTS) -DskipTests=true -Dmaven.javadoc.skip=true -U -P ssb-bip --batch-mode -Djdk.tls.client.protocols="TLSv1.2"'
-          mavenPomFile: 'pom.xml'
+          SonarCloud: $(sonarCloud)
+          organization: 'statisticsnorway'
+          scannerMode: 'Other'
+
+      - task: Cache@2
+        displayName: 'Configure Gradle caching'
+        inputs:
+          key: 'gradle | "$(Agent.OS)" | **/build.gradle.kts'
+          restoreKeys: |
+            gradle | "$(Agent.OS)" | **/build.gradle.kts
+            gradle | "$(Agent.OS)"
+            gradle
+          path: $(GRADLE_USER_HOME)
+
+      - task: Gradle@3
+        displayName: 'Gradle build'
+        inputs:
+          tasks: 'check jacocoTestReport sonar'
+          options: '--build-cache --info'
+          gradleWrapperFile: 'gradlew'
           javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '17'
           jdkArchitectureOption: 'x64'
+
+      - task: Gradle@3
+        displayName: 'Publish to Artifact Registry'
+        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+        inputs:
+          tasks: 'publishMavenPublicationToMavenRepository -Pversion=$(ArtifactRevision)'
+          options: '--info'
+          gradleWrapperFile: 'gradlew'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '17'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
