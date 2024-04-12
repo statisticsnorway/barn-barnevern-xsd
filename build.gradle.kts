@@ -11,9 +11,9 @@ plugins {
 kotlin { jvmToolchain(17) }
 
 dependencies {
-    implementation(libs.jackson.module.kotlin)
-    implementation(libs.jackson.jakarta.rs.xml.provider)
-    implementation(libs.jackson.datatype.jsr310)
+    api(libs.jackson.module.kotlin)
+    api(libs.jackson.jakarta.rs.xml.provider)
+    api(libs.jackson.datatype.jsr310)
     api(libs.jackson.dataformat.xml)
     api(libs.jakarta.xml.bind.api)
 
