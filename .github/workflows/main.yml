@@ -3,12 +3,10 @@ name: Main
 on:
   push:
     branches:
-      - '*'
+      - main
     tags:
       - '*'
 
-    #paths-ignore:
-    #  - '.github/**'
   pull_request:
 
 env:
