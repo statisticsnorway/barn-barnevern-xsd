@@ -14,8 +14,8 @@ dependencies {
     api(libs.jackson.module.kotlin)
     api(libs.jackson.jakarta.rs.xml.provider)
     api(libs.jackson.datatype.jsr310)
-    api(libs.jackson.dataformat.xml)
-    api(libs.jakarta.xml.bind.api)
+//    api(libs.jackson.dataformat.xml)
+//    api(libs.jakarta.xml.bind.api)
 
     testImplementation(libs.kotest.runner.junit5.jvm)
 }
