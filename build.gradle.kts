@@ -1,3 +1,5 @@
+description = "XSD-prosjekt for innrapportering til Barnevernsregister"
+
 repositories { mavenCentral() }
 
 plugins {
