@@ -1,23 +1,22 @@
 description = "XSD-prosjekt for innrapportering til Barnevernsregister"
+val barnevernMaven = "artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-5n/barnevern-maven"
 
 repositories { mavenCentral() }
 
 plugins {
-    kotlin("jvm") version libs.versions.kotlin
+    kotlin("jvm") version libs.versions.kotlin.get()
     `maven-publish`
     id("com.google.cloud.artifactregistry.gradle-plugin") version "2.2.1"
     id("org.sonarqube") version "5.0.0.4638"
     jacoco
 }
 
-kotlin { jvmToolchain(17) }
+kotlin { jvmToolchain(21) }
 
 dependencies {
     api(libs.jackson.module.kotlin)
     api(libs.jackson.jakarta.rs.xml.provider)
     api(libs.jackson.datatype.jsr310)
-//    api(libs.jackson.dataformat.xml)
-//    api(libs.jakarta.xml.bind.api)
 
     testImplementation(libs.kotest.runner.junit5.jvm)
 }
@@ -31,9 +30,7 @@ publishing {
             from(components["java"])
         }
     }
-    repositories {
-        maven("artifactregistry://europe-north1-maven.pkg.dev/artifact-registry-14da/maven-releases")
-    }
+    repositories { maven(barnevernMaven) }
 }
 
 tasks.withType<Test> { useJUnitPlatform() }
