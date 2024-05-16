@@ -3,6 +3,20 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.3.0.1
+Endringsdato: 14. mai 2024
+
+## Struktur
+- SaksinnholdType/@Kode: endret koder som gjelder fra 1. januar 2025
+  - 32 = Barnet er utsatt for negativ sosial kontroll
+  - 33 = Den unge voksne mangler dagaktivitet/utdanning /arbeid
+  - 34 = Den unge voksne mangler støtte og oppfølging fra egen familie
+  - 35 = Den unge voksne mangler nettverk og/eller nære relasjoner
+  - 36 = Behov for bistand i kontakt med andre deler av hjelpeapparatet
+- Tiltak/Kategori/@Kode: endret tittel for kode 2.3
+  - 2.3 = Spesialiserte fosterhjem
+
+---
 # v.3.0.0
 Endringsdato: 4. april 2024
 

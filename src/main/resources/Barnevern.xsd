@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.0.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.0.1">
     <!-- ATTRIBUTTER -->
     <xs:attribute name="Id">
         <xs:annotation>
@@ -811,11 +811,11 @@ Bjorge.Saether@bufdir.no
                     26 = Barnets kriminelle handlinger
                     27 = Barnet utsatt for menneskehandel
                     30 = Barnets kognitive vansker
-                    31 = Barnet er utsatt for negativ sosial kontroll
-                    32 = Den unge voksne mangler dagaktivitet/utdanning /arbeid
-                    33 = Den unge voksne mangler støtte og oppfølging fra egen familie
-                    34 = Den unge voksne mangler nettverk og/eller nære relasjoner
-                    35 = Behov for bistand i kontakt med andre deler av hjelpeapparatet
+                    32 = Barnet er utsatt for negativ sosial kontroll
+                    33 = Den unge voksne mangler dagaktivitet/utdanning /arbeid
+                    34 = Den unge voksne mangler støtte og oppfølging fra egen familie
+                    35 = Den unge voksne mangler nettverk og/eller nære relasjoner
+                    36 = Behov for bistand i kontakt med andre deler av hjelpeapparatet
                     18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes
                     dersom ingen av kategoriene 1-27 passer.)
                     19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes
@@ -869,14 +869,14 @@ Bjorge.Saether@bufdir.no
                     { "code":"26", "validFrom":"2021-01-01", "title":"Barnets kriminelle handlinger" },
                     { "code":"27", "validFrom":"2021-01-01", "title":"Barnet utsatt for menneskehandel" },
                     { "code":"30", "validFrom":"2023-01-01", "title":"Barnets kognitive vansker" },
-                    { "code":"31", "validFrom":"2025-01-01", "title":"Barnet er utsatt for negativ sosial kontroll" },
-                    { "code":"32", "validFrom":"2025-01-01", "title":"Den unge voksne mangler dagaktivitet/utdanning
+                    { "code":"32", "validFrom":"2025-01-01", "title":"Barnet er utsatt for negativ sosial kontroll" },
+                    { "code":"33", "validFrom":"2025-01-01", "title":"Den unge voksne mangler dagaktivitet/utdanning
                     /arbeid" },
-                    { "code":"33", "validFrom":"2025-01-01", "title":"Den unge voksne mangler støtte og oppfølging fra
+                    { "code":"34", "validFrom":"2025-01-01", "title":"Den unge voksne mangler støtte og oppfølging fra
                     egen familie" },
-                    { "code":"34", "validFrom":"2025-01-01", "title":"Den unge voksne mangler nettverk og/el. nære
+                    { "code":"35", "validFrom":"2025-01-01", "title":"Den unge voksne mangler nettverk og/el. nære
                     relasjoner" },
-                    { "code":"35", "validFrom":"2025-01-01", "title":"Behov for bistand i kontakt med andre deler av
+                    { "code":"36", "validFrom":"2025-01-01", "title":"Behov for bistand i kontakt med andre deler av
                     hjelpeapparatet" },
                     { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever
                     presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
@@ -919,6 +919,11 @@ Bjorge.Saether@bufdir.no
                     <xs:enumeration value="26"/>
                     <xs:enumeration value="27"/>
                     <xs:enumeration value="30"/>
+                    <xs:enumeration value="32"/>
+                    <xs:enumeration value="33"/>
+                    <xs:enumeration value="34"/>
+                    <xs:enumeration value="35"/>
+                    <xs:enumeration value="36"/>
                     <xs:enumeration value="18"/>
                     <xs:enumeration value="19"/>
                 </xs:restriction>
@@ -1067,7 +1072,7 @@ Bjorge.Saether@bufdir.no
                     1.99 = Andre tiltak (krever presisering)
                     2.1 = Fosterhjem i familie og nære nettverk
                     2.2 = Fosterhjem utenfor familie og nære nettverk
-                    2.3 = Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)
+                    2.3 = Spesialiserte fosterhjem
                     2.4 = Fosterhjem etter BVL2021 § 6-3 (tidligere BVL1992 § 4-27)
                     2.5 = Beredskapshjem utenom familie og nære nettverk
                     2.6 = Midlertidig hjem i familie og nære nettverk
@@ -1132,8 +1137,7 @@ Bjorge.Saether@bufdir.no
                     {"code" : "2.1", "validFrom" : "2013-01-01", "title" : "Fosterhjem i familie og nære nettverk"},
                     {"code" : "2.2", "validFrom" : "2013-01-01", "title" : "Fosterhjem utenfor familie og nære
                     nettverk"},
-                    {"code" : "2.3", "validFrom" : "2013-01-01", "title" : "Statlige familiehjem (gjelder fosterhjem som
-                    staten har ansvar for)"},
+                    {"code" : "2.3", "validFrom" : "2013-01-01", "title" : "Spesialiserte fosterhjem"},
                     {"code" : "2.4", "validFrom" : "2013-01-01", "title" : "Fosterhjem etter BVL2021 § 6-3 (tidligere
                     BVL1992 § 4-27)"},
                     {"code" : "2.5", "validFrom" : "2013-01-01", "title" : "Beredskapshjem utenom familie og nære
