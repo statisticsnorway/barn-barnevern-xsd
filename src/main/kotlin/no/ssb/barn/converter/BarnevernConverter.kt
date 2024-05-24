@@ -12,6 +12,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.ssb.barn.xsd.BarnevernType
+import no.ssb.barn.xsd.BarnevernTypeV3
 
 object BarnevernConverter {
 
@@ -45,6 +46,9 @@ object BarnevernConverter {
 
     @JvmStatic
     fun unmarshallXml(xml: String): BarnevernType = unmarshallXml<BarnevernType>(xml)
+
+    @JvmStatic
+    fun unmarshallXmlV3(xml: String): BarnevernTypeV3 = unmarshallXml<BarnevernTypeV3>(xml)
 
     inline fun <reified T : Any> unmarshallXml(xml: String): T = XML_MAPPER.readValue(xml)
 

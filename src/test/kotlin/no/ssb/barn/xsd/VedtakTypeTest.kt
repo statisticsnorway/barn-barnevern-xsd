@@ -15,7 +15,7 @@ import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidator
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
 import org.xml.sax.SAXException
 
 class VedtakTypeTest : BehaviorSpec({
@@ -25,7 +25,7 @@ class VedtakTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidator().validate(
+                getSchemaValidatorV3().validate(
                     buildVedtakXml(
                         "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                                 "MigrertId=\"4242\" StartDato=\"$VALID_DATE\" ErSlettet=\"true\">"
@@ -86,7 +86,7 @@ class VedtakTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
+                    getSchemaValidatorV3().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {
@@ -106,7 +106,7 @@ class VedtakTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
+                    getSchemaValidatorV3().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

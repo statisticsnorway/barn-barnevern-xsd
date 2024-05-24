@@ -15,7 +15,7 @@ import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidator
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
 import org.xml.sax.SAXException
 
 class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
@@ -25,7 +25,7 @@ class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidator().validate(
+                getSchemaValidatorV3().validate(
                     buildKonklusjonXml(
                         "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" Presisering=\"~Presisering~\" />"
                     ).toStreamSource()
@@ -86,7 +86,7 @@ class OversendelsePrivatKravKonklusjonTypeTest : BehaviorSpec({
             ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildKonklusjonXml(partialXml).toStreamSource())
+                    getSchemaValidatorV3().validate(buildKonklusjonXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

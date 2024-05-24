@@ -25,7 +25,7 @@ class OppfolgingUtfortTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                ValidationUtils.getSchemaValidator().validate(
+                ValidationUtils.getSchemaValidatorV3().validate(
                     buildXmlInTest(
                         "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2f\" " +
                                 "UtfortDato=\"$VALID_DATE\"/>"
@@ -71,7 +71,7 @@ class OppfolgingUtfortTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    ValidationUtils.getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
+                    ValidationUtils.getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

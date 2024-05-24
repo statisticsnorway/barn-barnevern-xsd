@@ -10,10 +10,10 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "TiltakType",
-    propOrder = ["id", "migrertId", "startDato",
-        "lovhjemmel", "jmfrLovhjemmel", "kategori", "saksinnhold", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
+    propOrder = ["id", "migrertId", "startDato", "erSlettet",
+        "lovhjemmel", "jmfrLovhjemmel", "kategori", "tiltaksgrunnlag", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
 )
-open class TiltakType(
+open class TiltakTypeV3(
     @field:XmlAttribute(name = "Id", required = true)
     val id: UUID,
 
@@ -23,6 +23,9 @@ open class TiltakType(
     @field:XmlAttribute(name = "StartDato", required = true)
     @field:XmlSchemaType(name = "date")
     var startDato: LocalDate,
+
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false,
 
     @field:XmlElement(name = "Lovhjemmel", required = true)
     var lovhjemmel: LovhjemmelType,
@@ -34,16 +37,16 @@ open class TiltakType(
     @field:XmlElement(name = "Kategori", required = true)
     var kategori: KategoriType,
 
-    @field:JacksonXmlProperty(localName = "Saksinnhold")
+    @field:JacksonXmlProperty(localName = "Tiltaksgrunnlag")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val saksinnhold: MutableList<SaksinnholdType> = mutableListOf(),
+    val tiltaksgrunnlag: MutableList<SaksinnholdType> = mutableListOf(),
 
     @field:XmlElement(name = "Tilsyn", required = false)
     var tilsyn: TilsynType? = null,
 
     @field:JacksonXmlProperty(localName = "Oppfolging")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val oppfolging: MutableList<OppfolgingType> = mutableListOf(),
+    val oppfolging: MutableList<OppfolgingTypeV3> = mutableListOf(),
 
     @field:XmlElement(name = "Opphevelse")
     var opphevelse: OpphevelseType? = null,
