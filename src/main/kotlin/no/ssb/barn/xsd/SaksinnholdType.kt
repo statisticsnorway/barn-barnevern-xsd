@@ -1,5 +1,3 @@
-@file:Suppress("SpellCheckingInspection")
-
 package no.ssb.barn.xsd
 
 import jakarta.xml.bind.annotation.XmlAccessType

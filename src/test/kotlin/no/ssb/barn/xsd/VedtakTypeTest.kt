@@ -25,12 +25,7 @@ class VedtakTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
-                    buildVedtakXml(
-                        "<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
-                                "MigrertId=\"4242\" StartDato=\"$VALID_DATE\" ErSlettet=\"true\">"
-                    ).toStreamSource()
-                )
+                getSchemaValidatorV3().validate(validVedtakXml.toStreamSource())
             }
         }
 
@@ -117,8 +112,9 @@ class VedtakTypeTest : BehaviorSpec({
     }
 }) {
     companion object {
-        private fun buildVedtakXml(vedtakStartTag: String): String = buildBarnevernXml(
-            buildVedtakPartialXml(vedtakStartTag)
+        private val validVedtakXml = buildBarnevernXml(
+            buildVedtakPartialXml("<Vedtak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                    "MigrertId=\"4242\" StartDato=\"$VALID_DATE\" ErSlettet=\"true\">")
         )
 
         private fun buildVedtakPartialXml(vedtakStartTag: String) = vedtakStartTag +
