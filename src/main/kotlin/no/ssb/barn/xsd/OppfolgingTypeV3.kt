@@ -16,4 +16,4 @@ data class OppfolgingTypeV3(
     @field:JacksonXmlProperty(localName = "Utfort")
     @field:JacksonXmlElementWrapper(useWrapping = false)
     val utfort: MutableList<OppfolgingUtfortType> = mutableListOf()
-)
+) : OppfolgingTypeContract

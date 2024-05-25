@@ -9,11 +9,11 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "SakType",
-    propOrder = ["id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet",
-        "personalia", "melding", "undersokelse", "plan", "tiltak",
-        "vedtak", "ettervern", "oversendelseFylkesnemnd", "flytting", "relasjon", "slettet"]
+    propOrder = ["id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet", "erSlettet",
+        "personalia", "melding", "undersokelse", "plan", "tiltak", "vedtak", "ettervern",
+        "oversendelseFylkesnemnd", "flytting", "relasjon", "slettet"]
 )
-data class SakType(
+data class SakType<T : OppfolgingTypeContract>(
     @field:XmlAttribute(name = "Id", required = true)
     var id: UUID,
 
@@ -34,6 +34,9 @@ data class SakType(
     @field:XmlAttribute(name = "Avsluttet")
     val avsluttet: Boolean? = null,
 
+    @field:XmlAttribute(name = "ErSlettet")
+    val erSlettet: Boolean = false,
+
     @field:JacksonXmlProperty(localName = "Personalia")
     @field:JacksonXmlElementWrapper(useWrapping = false)
     val personalia: MutableList<PersonaliaType> = mutableListOf(),
@@ -52,7 +55,7 @@ data class SakType(
 
     @field:JacksonXmlProperty(localName = "Tiltak")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val tiltak: MutableList<TiltakType> = mutableListOf(),
+    val tiltak: MutableList<TiltakType<T>> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Vedtak")
     @field:JacksonXmlElementWrapper(useWrapping = false)

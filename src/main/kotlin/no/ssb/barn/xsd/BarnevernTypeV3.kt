@@ -28,5 +28,5 @@ data class BarnevernTypeV3(
     val avgiver: AvgiverType,
 
     @field:XmlElement(name = "Sak", required = true)
-    val sak: SakTypeV3
+    val sak: SakType<OppfolgingTypeV3>
 )

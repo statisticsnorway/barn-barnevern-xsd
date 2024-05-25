@@ -13,4 +13,4 @@ data class OppfolgingType(
     @field:XmlAttribute(name = "UtfortDato", required = true)
     @field:XmlSchemaType(name = "date")
     val utfortDato: LocalDate
-)
+) : OppfolgingTypeContract
