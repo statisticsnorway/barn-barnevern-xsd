@@ -10,7 +10,7 @@ import java.util.UUID
     name = "BarnevernType",
     propOrder = ["id", "datoUttrekk", "forrigeId", "fagsystem", "avgiver", "sak"]
 )
-data class BarnevernType(
+data class BarnevernType<T : OppfolgingTypeContract>(
     @field:XmlAttribute(name = "Id", required = true)
     val id: UUID,
 
@@ -28,5 +28,5 @@ data class BarnevernType(
     val avgiver: AvgiverType,
 
     @field:XmlElement(name = "Sak", required = true)
-    val sak: SakType<OppfolgingType>
+    val sak: SakType<T>
 )
