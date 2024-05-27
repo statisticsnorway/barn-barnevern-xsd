@@ -8,7 +8,18 @@ import javax.xml.validation.Validator
 object ValidationUtils {
 
     @JvmStatic
-    val VERSION_ONE_XSD = "Barnevern.xsd"
+    val VERSION_ONE_XSD = "Barnevern_v1.xsd"
+
+    @JvmStatic
+    val VERSION_THREE_XSD = "Barnevern_v3.xsd"
+
+    /**
+     * Returns a [Validator] that validates XML against the [VERSION_THREE_XSD] schema.
+     *
+     * @return a [Validator] that validates against the [VERSION_THREE_XSD] schema
+     */
+    @JvmStatic
+    fun getSchemaValidatorV3(): Validator = getSchemaValidator(VERSION_THREE_XSD)
 
     /**
      * Returns a [Validator] that validates XML against the [VERSION_ONE_XSD] schema.
@@ -16,7 +27,7 @@ object ValidationUtils {
      * @return a [Validator] that validates against the [VERSION_ONE_XSD] schema
      */
     @JvmStatic
-    fun getSchemaValidator(): Validator = getSchemaValidator(VERSION_ONE_XSD)
+    fun getSchemaValidatorV1(): Validator = getSchemaValidator(VERSION_ONE_XSD)
 
     /**
      * Returns a [Validator] that validates XML against the given XSD resource.

@@ -1,8 +1,8 @@
 package no.ssb.barn.xsd
 
+import jakarta.xml.bind.annotation.*
 import java.time.ZonedDateTime
 import java.util.UUID
-import jakarta.xml.bind.annotation.*
 
 @XmlRootElement(name = "Barnevern")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.*
     name = "BarnevernType",
     propOrder = ["id", "datoUttrekk", "forrigeId", "fagsystem", "avgiver", "sak"]
 )
-data class BarnevernType(
+data class BarnevernType<T : OppfolgingTypeContract>(
     @field:XmlAttribute(name = "Id", required = true)
     val id: UUID,
 
@@ -28,5 +28,5 @@ data class BarnevernType(
     val avgiver: AvgiverType,
 
     @field:XmlElement(name = "Sak", required = true)
-    val sak: SakType
+    val sak: SakType<T>
 )

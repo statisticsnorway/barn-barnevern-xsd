@@ -12,7 +12,7 @@ import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidator
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
 import org.xml.sax.SAXException
 
 class PlanEvalueringTypeTest : BehaviorSpec({
@@ -22,7 +22,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidator().validate(
+                getSchemaValidatorV3().validate(
                     buildEvalueringXml(
                         "<Evaluering UtfortDato=\"$VALID_DATE\" />"
                     ).toStreamSource()
@@ -50,7 +50,7 @@ class PlanEvalueringTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildEvalueringXml(partialXml).toStreamSource())
+                    getSchemaValidatorV3().validate(buildEvalueringXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

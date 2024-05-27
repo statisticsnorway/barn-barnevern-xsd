@@ -14,7 +14,7 @@ import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidator
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
 import org.xml.sax.SAXException
 
 class EttervernTypeTest : BehaviorSpec({
@@ -24,7 +24,7 @@ class EttervernTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidator().validate(
+                getSchemaValidatorV3().validate(
                     buildBarnevernXml(
                         "<Ettervern Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                                 "MigrertId=\"4242\" TilbudSendtDato=\"$VALID_DATE\" ErSlettet=\"true\"/>"
@@ -95,7 +95,7 @@ class EttervernTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildBarnevernXml(partialXml).toStreamSource())
+                    getSchemaValidatorV3().validate(buildBarnevernXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

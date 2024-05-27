@@ -10,7 +10,7 @@ import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidator
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
 import org.xml.sax.SAXException
 
 class OppfolgingTypeTest : BehaviorSpec({
@@ -34,7 +34,7 @@ class OppfolgingTypeTest : BehaviorSpec({
             /** make sure it's possible to make a valid test XML */
             When(description) {
                 shouldNotThrowAny {
-                    getSchemaValidator().validate(
+                    getSchemaValidatorV3().validate(
                         buildXmlInTest(partialXml).toStreamSource()
                     )
                 }
@@ -51,13 +51,39 @@ class OppfolgingTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {
                     thrown.message shouldBe expectedError
                 }
             }
+        }
+
+        When("two Oppfolging instances") {
+            val xml = buildBarnevernXml(
+                "<Tiltak Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" StartDato=\"$VALID_DATE\">" +
+                        LOVHJEMMEL_XML +
+                        "<Kategori Kode=\"1.1\" />" +
+                        "<Oppfolging>" +
+                        "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
+                        "StartDato=\"$VALID_DATE\" Kode=\"2\" />" +
+                        "</Oppfolging>" +
+                        "<Oppfolging>" +
+                        "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2f\" " +
+                        "StartDato=\"$VALID_DATE\" Kode=\"2\" />" +
+                        "</Oppfolging>" +
+                        "</Tiltak>"
+            )
+
+            val thrown = shouldThrow<SAXException> {
+                getSchemaValidatorV3().validate(xml.toStreamSource())
+            }
+
+            Then("thrown should be as expected") {
+                thrown.message shouldBe "cvc-complex-type.2.4.a: Invalid content was found starting with element 'Oppfolging'. One of '{Opphevelse, Konklusjon}' is expected."
+            }
+
         }
     }
 }) {

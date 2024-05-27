@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.0.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.0.2">
     <!-- ATTRIBUTTER -->
     <xs:attribute name="Id">
         <xs:annotation>
@@ -585,7 +585,7 @@ Bjorge.Saether@bufdir.no
                     <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Oppfølgingsbesøk i fosterhjem utført av ansvarlig barneverntjeneste.
                     </xs:documentation>

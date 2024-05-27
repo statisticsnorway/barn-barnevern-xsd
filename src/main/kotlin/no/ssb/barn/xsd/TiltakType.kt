@@ -13,7 +13,7 @@ import java.util.UUID
     propOrder = ["id", "migrertId", "startDato", "erSlettet",
         "lovhjemmel", "jmfrLovhjemmel", "kategori", "tiltaksgrunnlag", "tilsyn", "oppfolging", "opphevelse", "konklusjon"]
 )
-open class TiltakType(
+open class TiltakType<T : OppfolgingTypeContract>(
     @field:XmlAttribute(name = "Id", required = true)
     val id: UUID,
 
@@ -46,7 +46,7 @@ open class TiltakType(
 
     @field:JacksonXmlProperty(localName = "Oppfolging")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val oppfolging: MutableList<OppfolgingType> = mutableListOf(),
+    val oppfolging: MutableList<T> = mutableListOf(),
 
     @field:XmlElement(name = "Opphevelse")
     var opphevelse: OpphevelseType? = null,

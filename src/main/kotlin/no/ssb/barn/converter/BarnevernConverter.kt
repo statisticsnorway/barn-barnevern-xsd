@@ -12,6 +12,8 @@ import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.ssb.barn.xsd.BarnevernType
+import no.ssb.barn.xsd.OppfolgingType
+import no.ssb.barn.xsd.OppfolgingTypeV3
 
 object BarnevernConverter {
 
@@ -44,7 +46,11 @@ object BarnevernConverter {
         .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // to parse the dates as LocalDate, else parsing error
 
     @JvmStatic
-    fun unmarshallXml(xml: String): BarnevernType = unmarshallXml<BarnevernType>(xml)
+    fun unmarshallXml(xml: String): BarnevernType<OppfolgingType> = unmarshallXml<BarnevernType<OppfolgingType>>(xml)
+
+    @JvmStatic
+    fun unmarshallXmlV3(xml: String): BarnevernType<OppfolgingTypeV3> =
+        unmarshallXml<BarnevernType<OppfolgingTypeV3>>(xml)
 
     inline fun <reified T : Any> unmarshallXml(xml: String): T = XML_MAPPER.readValue(xml)
 

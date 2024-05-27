@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.VALID_DATO_UTTREKK
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidator
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
 import org.xml.sax.SAXException
 
 class AvgiverTypeTest : BehaviorSpec({
@@ -19,7 +19,7 @@ class AvgiverTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidator().validate(
+                getSchemaValidatorV3().validate(
                     buildXmlInTest(
                         "<Avgiver Organisasjonsnummer=\"999999999\" " +
                                 "Kommunenummer=\"1234\" Kommunenavn=\"~Kommunenavn~\" />"
@@ -121,7 +121,7 @@ class AvgiverTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidator().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

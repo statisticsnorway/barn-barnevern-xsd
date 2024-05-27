@@ -13,7 +13,7 @@ import java.util.UUID
         "personalia", "melding", "undersokelse", "plan", "tiltak", "vedtak", "ettervern",
         "oversendelseFylkesnemnd", "flytting", "relasjon", "slettet"]
 )
-data class SakType(
+data class SakType<T : OppfolgingTypeContract>(
     @field:XmlAttribute(name = "Id", required = true)
     var id: UUID,
 
@@ -55,7 +55,7 @@ data class SakType(
 
     @field:JacksonXmlProperty(localName = "Tiltak")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    val tiltak: MutableList<TiltakType> = mutableListOf(),
+    val tiltak: MutableList<TiltakType<T>> = mutableListOf(),
 
     @field:JacksonXmlProperty(localName = "Vedtak")
     @field:JacksonXmlElementWrapper(useWrapping = false)
