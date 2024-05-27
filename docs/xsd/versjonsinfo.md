@@ -3,6 +3,13 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.3.0.2
+Endringsdato: 27. mai 2024
+
+## Struktur
+- TiltakType/Oppfolging har blitt endret fra 0 til mange til 0 til 1 
+
+---
 # v.3.0.1
 Endringsdato: 14. mai 2024
 
