@@ -585,7 +585,7 @@ Bjorge.Saether@bufdir.no
                     <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Oppfolging" type="OppfolgingType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Oppfølgingsbesøk i fosterhjem utført av ansvarlig barneverntjeneste.
                     </xs:documentation>
