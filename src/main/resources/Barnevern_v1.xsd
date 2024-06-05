@@ -461,20 +461,14 @@ Bjorge.Saether@bufdir.no
                     "description":"Kjønn",
                     "path":"/Barnevern/Sak/Plan/@Plantype",
                     "items":[
-                    { "code":"1", "validFrom":"2013-01-01", "title":"Tiltaksplan etter BVL2021 § 8-1 (tidligere BVL1992
-                    § 4-5)" },
-                    { "code":"2", "validFrom":"2013-01-01", "title":"Tiltaksplan etter BVL2021 § 8-4 (tidligere BVL1992
-                    § 4-28)" },
-                    { "code":"3", "validFrom":"2013-01-01", "validTo":"2022-12-31" "title":"Foreløpig omsorgsplan etter
-                    BVL1992 § 4-15, 3. ledd" },
-                    { "code":"4", "validFrom":"2013-01-01", "title":"Omsorgsplan etter BVL2021 § 8-3, 4. ledd (tidligere
-                    BVL1992 § 4-15, 3. ledd)" }
-                    { "code":"5", "validFrom":"2023-01-01", "title":"Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2.
-                    ledd" }
+                    { "code":"1", "validFrom":"2013-01-01", "title":"Tiltaksplan etter BVL2021 § 8-1 (tidligere BVL1992 § 4-5)" },
+                    { "code":"2", "validFrom":"2013-01-01", "title":"Tiltaksplan etter BVL2021 § 8-4 (tidligere BVL1992 § 4-28)" },
+                    { "code":"3", "validFrom":"2013-01-01", "validTo":"2022-12-31", "title":"Foreløpig omsorgsplan etter BVL1992 § 4-15, 3. ledd" },
+                    { "code":"4", "validFrom":"2013-01-01", "title":"Omsorgsplan etter BVL2021 § 8-3, 4. ledd (tidligere BVL1992 § 4-15, 3. ledd)" }
+                    { "code":"5", "validFrom":"2023-01-01", "title":"Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2. ledd" }
                     { "code":"6", "validFrom":"2023-01-01", "title":"Samværsplan etter BVL 2021 § 7-6" }
                     { "code":"7", "validFrom":"2023-01-01", "title":"Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd" }
-                    { "code":"8", "validFrom":"2023-01-01", "title":"Undersøkelsesplan etter akuttvedtak etter BVL 2021
-                    § 8-2, 3. ledd" }
+                    { "code":"8", "validFrom":"2023-01-01", "title":"Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd" }
                     ]
                     }
                 </xs:appinfo>
@@ -513,8 +507,7 @@ Bjorge.Saether@bufdir.no
 						<xs:annotation>
 							<xs:documentation>
                                 1 = Henlagt
-                                2 = Ikke henlagt – konklusjonsdato melding (evt. 7 dager etter mottatt melding) er
-                                startdato undersøkelse
+                                2 = Ikke henlagt – konklusjonsdato melding (evt. 7 dager etter mottatt melding) er startdato undersøkelse
                                 3 = Henlagt pga. aktive tiltak
                                 4 = Melding i pågående undersøkelse
                             </xs:documentation>
@@ -526,8 +519,7 @@ Bjorge.Saether@bufdir.no
                                 "path":"/Barnevern/Sak/Melding/Konklusjon/@Kode",
                                 "items":[
                                 {"code":"1", "validFrom":"2013-01-01", "title":"Henlagt " },
-                                {"code":"2", "validFrom":"2013-01-01", "title":"Ikke henlagt – konklusjonsdato melding
-                                (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse" },
+                                {"code":"2", "validFrom":"2013-01-01", "title":"Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse" },
                                 {"code":"3", "validFrom":"2020-01-01", "title":"Henlagt pga. aktive tiltak" },
                                 {"code":"4", "validFrom":"2020-01-01", "title":"Melding i pågående undersøkelse" }
                                 ]
@@ -704,13 +696,11 @@ Bjorge.Saether@bufdir.no
                     { "code":"10", "validFrom":"2013-01-01", "title":"Helsestasjon/skolehelsetjenesten" },
                     { "code":"11", "validFrom":"2013-01-01", "title":"Skole" },
                     { "code":"12", "validFrom":"2013-01-01", "title":"Pedagogisk-psykologisk tjeneste (PPT)" },
-                    { "code":"13", "validFrom":"2013-01-01", "title":"Psykisk helsevern for barn og unge (kommune og
-                    stat)" },
+                    { "code":"13", "validFrom":"2013-01-01", "title":"Psykisk helsevern for barn og unge (kommune og stat)" },
                     { "code":"14", "validFrom":"2013-01-01", "title":"Psykisk helsevern for voksne (kommune og stat)" },
                     { "code":"15", "validFrom":"2013-01-01", "title":"Lege/ sykehus/ tannlege" },
                     { "code":"16", "validFrom":"2013-01-01", "title":"Familievernkontor" },
-                    { "code":"17", "validFrom":"2013-01-01", "title":"Tjenester og instanser med ansvar for oppfølging
-                    av personers rusproblemer (kommune og stat)" },
+                    { "code":"17", "validFrom":"2013-01-01", "title":"Tjenester og instanser med ansvar for oppfølging av personers rusproblemer (kommune og stat)" },
                     { "code":"18", "validFrom":"2013-01-01", "title":"Krisesenter" },
                     { "code":"19", "validFrom":"2013-01-01", "title":"Asylmottak/ UDI/ innvandringsmyndighet" },
                     { "code":"20", "validFrom":"2013-01-01", "title":"Utekontakt/ fritidsklubb" },
@@ -785,16 +775,13 @@ Bjorge.Saether@bufdir.no
                     14 = Barnets psykiske problem/lidelse
                     15 = Barnets rusmisbruk
                     16 = Barnets atferd/ kriminalitet
-                    17 = Barnets relasjonsvansker (mistanke om eller diagnostiserte tilknytningsvansker, problematikk
-                    knyttet til samspillet mellom barn og omsorgspersoner)
+                    17 = Barnets relasjonsvansker (mistanke om eller diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner)
                     25 = Barnets atferd
                     26 = Barnets kriminelle handlinger
                     27 = Barnet utsatt for menneskehandel
                     30 = Barnets kognitive vansker
-                    18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes
-                    dersom ingen av kategoriene 1-27 passer.)
-                    19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes
-                    dersom ingen av kategoriene 1-27 passer.)
+                    18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
+                    19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
                 </xs:documentation>
 				<xs:appinfo xml:lang="json">
                     {
@@ -806,48 +793,34 @@ Bjorge.Saether@bufdir.no
                     { "code":"1", "validFrom":"2013-01-01", "title":"Foreldres somatiske sykdom" },
                     { "code":"2", "validFrom":"2013-01-01", "title":"Foreldres psykiske problem/ lidelse" },
                     { "code":"3", "validFrom":"2013-01-01", "title":"Foreldres rusmisbruk" },
-                    { "code":"4", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Foreldres manglende
-                    foreldreferdigheter", "changeDescription":"4 deles i 20, 21, 22, 23 og 24" },
+                    { "code":"4", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Foreldres manglende foreldreferdigheter", "changeDescription":"4 deles i 20, 21, 22, 23 og 24" },
                     { "code":"20", "validFrom":"2021-01-01", "title":"Foreldres manglende beskyttelse av barnet" },
-                    { "code":"21", "validFrom":"2021-01-01", "title":"Foreldres manglende stimulering og regulering av
-                    barnet" },
-                    { "code":"22", "validFrom":"2021-01-01", "title":"Foreldres manglende sensitivitet og
-                    følelsesmessige tilgjengelighet for barnet" },
-                    { "code":"23", "validFrom":"2021-01-01", "title":"Foreldres manglende oppfølging av barnets behov
-                    for barnehage, skole og pedagogiske tjenester" },
+                    { "code":"21", "validFrom":"2021-01-01", "title":"Foreldres manglende stimulering og regulering av barnet" },
+                    { "code":"22", "validFrom":"2021-01-01", "title":"Foreldres manglende sensitivitet og følelsesmessige tilgjengelighet for barnet" },
+                    { "code":"23", "validFrom":"2021-01-01", "title":"Foreldres manglende oppfølging av barnets behov for barnehage, skole og pedagogiske tjenester" },
                     { "code":"24", "validFrom":"2021-01-01", "title":"Konflikt mellom foreldre som ikke bor sammen" },
-                    { "code":"28", "validFrom":"2021-01-01", "title":"Foreldres manglende oppfølging av barnets behov
-                    for helsetjenester" },
+                    { "code":"28", "validFrom":"2021-01-01", "title":"Foreldres manglende oppfølging av barnets behov for helsetjenester" },
                     { "code":"29", "validFrom":"2023-01-01", "title":"Foreldres kognitive vansker" },
-                    { "code":"31", "validFrom":"2023-01-01", "title":"Foreldre har vedvarende økonomiske
-                    problemer/vedvarende lavinntekt" },
+                    { "code":"31", "validFrom":"2023-01-01", "title":"Foreldre har vedvarende økonomiske problemer/vedvarende lavinntekt" },
                     { "code":"5", "validFrom":"2013-01-01", "title":"Foreldres kriminalitet" },
                     { "code":"6", "validFrom":"2013-01-01", "title":"Høy grad av konflikt hjemme" },
-                    { "code":"7", "validFrom":"2013-01-01", "title":"Vold i hjemmet/ barnet vitne til vold i
-                    nærerelasjoner" },
-                    { "code":"8", "validFrom":"2013-01-01", "title":"Foreldres manglende ivaretakelse av grunnleggendeog
-                    hverdagslig omsorg for barnet" },
+                    { "code":"7", "validFrom":"2013-01-01", "title":"Vold i hjemmet/ barnet vitne til vold i nærerelasjoner" },
+                    { "code":"8", "validFrom":"2013-01-01", "title":"Foreldres manglende ivaretakelse av grunnleggende og hverdagslig omsorg for barnet" },
                     { "code":"9", "validFrom":"2013-01-01", "title":"Barnet utsatt for fysisk vold" },
                     { "code":"10", "validFrom":"2013-01-01", "title":"Barnet utsatt for psykisk vold" },
                     { "code":"11", "validFrom":"2013-01-01", "title":"Barnet utsatt for seksuelle overgrep" },
                     { "code":"12", "validFrom":"2013-01-01", "title":"Barnet mangler omsorgsperson" },
-                    { "code":"13", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Barnet har nedsatt
-                    funksjonsevne" },
+                    { "code":"13", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Barnet har nedsatt funksjonsevne" },
                     { "code":"14", "validFrom":"2013-01-01", "title":"Barnets psykiske problem/lidelse" },
                     { "code":"15", "validFrom":"2013-01-01", "title":"Barnets rusmisbruk" },
-                    { "code":"16", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Barnets atferd/
-                    kriminalitet", "changeDescription":"16 deles i 25 og 26" },
-                    { "code":"17", "validFrom":"2013-01-01", "title":"Barnets relasjonsvansker (mistanke om eller
-                    diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og
-                    omsorgspersoner) " },
+                    { "code":"16", "validFrom":"2013-01-01", "validTo":"2020-12-31", "title":"Barnets atferd/kriminalitet", "changeDescription":"16 deles i 25 og 26" },
+                    { "code":"17", "validFrom":"2013-01-01", "title":"Barnets relasjonsvansker (mistanke om eller diagnostiserte tilknytningsvansker, problematikk knyttet til samspillet mellom barn og omsorgspersoner) " },
                     { "code":"25", "validFrom":"2021-01-01", "title":"Barnets atferd" },
                     { "code":"26", "validFrom":"2021-01-01", "title":"Barnets kriminelle handlinger" },
                     { "code":"27", "validFrom":"2021-01-01", "title":"Barnet utsatt for menneskehandel" },
                     { "code":"30", "validFrom":"2023-01-01", "title":"Barnets kognitive vansker" },
-                    { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever
-                    presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
-                    { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnets situasjon (krever
-                    presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" }
+                    { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
+                    { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" }
                     ]
                     }
                 </xs:appinfo>
@@ -951,17 +924,9 @@ Bjorge.Saether@bufdir.no
 							<xs:documentation>
                                 1 = Barneverntjenesten fatter vedtak om tiltak
                                 2 = Begjæring om tiltak for fylkesnemnda
-                                3 = Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når
-                                barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)
-                                4 = Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten
-                                vurderer at vilkår for å sette inn tiltak etter BVL2021 §§ 3-1 til 3-5 (tidligere
-                                BVL1992 § 4-4) er til stede, men saken henlegges fordi foreldre/barnet ikke samtykker
-                                til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke
-                                nei til.)
-                                5 = Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak
-                                henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der
-                                barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune,
-                                obligatorisk ja/nei svar) (krever presisering)
+                                3 = Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)
+                                4 = Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter BVL2021 §§ 3-1 til 3-5 (tidligere BVL1992 § 4-4) er til stede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)
+                                5 = Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)
                                 6 = Undersøkelsen henlagt etter henvisning til annen instans
                             </xs:documentation>
 							<xs:appinfo xml:lang="json">
@@ -971,24 +936,12 @@ Bjorge.Saether@bufdir.no
                                 "title":"Konklusjon",
                                 "path":"/Barnevern/Sak/Undersokelse/Konklusjon/@Kode",
                                 "items":[
-                                { "code":"1", "validFrom":"2013-01-01", "title":"Barneverntjenesten fatter vedtak om
-                                tiltak"},
+                                { "code":"1", "validFrom":"2013-01-01", "title":"Barneverntjenesten fatter vedtak om tiltak"},
                                 { "code":"2", "validFrom":"2013-01-01", "title":"Begjæring om tiltak for fylkesnemnda"},
-                                { "code":"3", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter
-                                barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at
-                                vilkår for å sette inn tiltak ikke er oppfylt)" },
-                                { "code":"4", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter partens
-                                ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn
-                                tiltak etter BVL2021 §§ 3-1 til 3-5 (tidligere BVL1992 § 4-4) er til stede, men saken
-                                henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk
-                                om hjelpetiltak som foreldre/barn kan takke nei til.)" },
-                                { "code":"5", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt som følge av
-                                flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en
-                                ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er
-                                meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever
-                                presisering)" },
-                                { "code":"6", "validFrom":"2022-01-01", "title":"Undersøkelsen henlagt etter henvisning
-                                til annen instans" }
+                                { "code":"3", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)" },
+                                { "code":"4", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter BVL2021 §§ 3-1 til 3-5 (tidligere BVL1992 § 4-4) er til stede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)" },
+                                { "code":"5", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)" },
+                                { "code":"6", "validFrom":"2022-01-01", "title":"Undersøkelsen henlagt etter henvisning til annen instans" }
                                 ]
                                 }
                             </xs:appinfo>
@@ -1043,8 +996,7 @@ Bjorge.Saether@bufdir.no
                     3.4 = Weber Stratton
                     3.5 = ICDP
                     3.6 = Marte Meo
-                    3.7 = Andre hjemmebaserte tiltak (gjelder andre tiltak i hjemmet som følger en spesiell metodikk og
-                    som gjenomføres på en systematisk måte) (krever presisering)
+                    3.7 = Andre hjemmebaserte tiltak (gjelder andre tiltak i hjemmet som følger en spesiell metodikk og som gjenomføres på en systematisk måte) (krever presisering)
                     3.8 = Sentre for foreldre og barn
                     3.9 = Vedtak om råd og veiledning
                     3.10 = Hjemmekonsulent/miljøarbeider
@@ -1055,10 +1007,8 @@ Bjorge.Saether@bufdir.no
                     4.4 = Økonomisk hjelp for øvrig (gjelder økonomisk hjelp som ikke inngår i 4.1, 4.2 og 4.3)
                     4.5 = Besøkshjem/ avlastningstiltak
                     4.6 = Støttekontakt
-                    4.7 = Samtalegrupper/ barnegrupper (gjelder strukturerte samtale- og aktivitetstilbud for
-                    aldersbestemte grupper).
-                    4.8 = Utdanning og arbeid (gjelder oppfølging og støtte for å styrke barn og ungdoms tilknytning til
-                    skole eller arbeid)
+                    4.7 = Samtalegrupper/ barnegrupper (gjelder strukturerte samtale- og aktivitetstilbud for aldersbestemte grupper).
+                    4.8 = Utdanning og arbeid (gjelder oppfølging og støtte for å styrke barn og ungdoms tilknytning til skole eller arbeid)
                     4.9 = ART
                     4.99 = Andre tiltak (krever presisering)
                     5.1 = Frivillig tilsyn i hjemmet (gjelder der foreldre har samtykket til tilsyn)
@@ -1067,16 +1017,13 @@ Bjorge.Saether@bufdir.no
                     5.4 = Ruskontroll
                     5.99 = Andre tiltak (krever presisering)
                     6.1 = Familieråd
-                    6.2 = Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom
-                    og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom
-                    barneverntjenesten, ungdom og foreldre)
+                    6.2 = Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)
                     6.3 = Individuell plan
                     6.4 = Deltakelse i ansvarsgruppe
                     6.99 = Andre tiltak (krever presisering)
                     7.1 = BVL2021 § 3-7 (tidligere BVL1992 § 4-10) medisinsk undersøkelse og behandling
                     7.2 = BVL2021 § 3-8 (tidligere BVL1992 § 4-11) behandling av barn med særlige opplæringsbehov
-                    7.3 = Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får
-                    behandling av psykolog eller innen psykisk helsevern/BUP)
+                    7.3 = Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)
                     7.99 = Andre tiltak (krever presisering)
                     8.1 = Økonomisk hjelp til egen bolig/hybel
                     8.2 = Bolig med oppfølging (inkluderer også bofellesskap)
@@ -1090,21 +1037,15 @@ Bjorge.Saether@bufdir.no
                     "title":"Kategori",
                     "path":"/Barnevern/Sak/Tiltak/Kategori/@Kode",
                     "items":[
-                    {"code" : "1.1", "validFrom" : "2013-01-01", "title" : "Barnvernsinstitusjoner (gjelder alle typer
-                    barnevernsinstitusjoner)"},
+                    {"code" : "1.1", "validFrom" : "2013-01-01", "title" : "Barnvernsinstitusjoner (gjelder alle typer barnevernsinstitusjoner)"},
                     {"code" : "1.2", "validFrom" : "2013-01-01", "title" : "Plassering i institusjon etter annen lov"},
                     {"code" : "1.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
                     {"code" : "2.1", "validFrom" : "2013-01-01", "title" : "Fosterhjem i familie og nære nettverk"},
-                    {"code" : "2.2", "validFrom" : "2013-01-01", "title" : "Fosterhjem utenfor familie og nære
-                    nettverk"},
-                    {"code" : "2.3", "validFrom" : "2013-01-01", "title" : "Statlige familiehjem (gjelder fosterhjem som
-                    staten har ansvar for)"},
-                    {"code" : "2.4", "validFrom" : "2013-01-01", "title" : "Fosterhjem etter BVL2021 § 6-3 (tidligere
-                    BVL1992 § 4-27)"},
-                    {"code" : "2.5", "validFrom" : "2013-01-01", "title" : "Beredskapshjem utenom familie og nære
-                    nettverk"},
-                    {"code" : "2.6", "validFrom" : "2021-01-01", "title" : "Midlertidig hjem i familie og nære
-                    nettverk"},
+                    {"code" : "2.2", "validFrom" : "2013-01-01", "title" : "Fosterhjem utenfor familie og nære nettverk"},
+                    {"code" : "2.3", "validFrom" : "2013-01-01", "title" : "Statlige familiehjem (gjelder fosterhjem som staten har ansvar for)"},
+                    {"code" : "2.4", "validFrom" : "2013-01-01", "title" : "Fosterhjem etter BVL2021 § 6-3 (tidligere BVL1992 § 4-27)"},
+                    {"code" : "2.5", "validFrom" : "2013-01-01", "title" : "Beredskapshjem utenom familie og nære nettverk"},
+                    {"code" : "2.6", "validFrom" : "2021-01-01", "title" : "Midlertidig hjem i familie og nære nettverk"},
                     {"code" : "2.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
                     {"code" : "3.1", "validFrom" : "2013-01-01", "title" : "MST"},
                     {"code" : "3.2", "validFrom" : "2013-01-01", "title" : "PMTO"},
@@ -1112,9 +1053,7 @@ Bjorge.Saether@bufdir.no
                     {"code" : "3.4", "validFrom" : "2013-01-01", "title" : "Weber Stratton"},
                     {"code" : "3.5", "validFrom" : "2013-01-01", "title" : "ICDP"},
                     {"code" : "3.6", "validFrom" : "2013-01-01", "title" : "Marte Meo"},
-                    {"code" : "3.7", "validFrom" : "2013-01-01", "title" : "Andre hjemmebaserte tiltak (gjelder andre
-                    tiltak i hjemmet som følger en spesiell metodikk og som gjenomføres på en systematisk måte) (krever
-                    presisering)"},
+                    {"code" : "3.7", "validFrom" : "2013-01-01", "title" : "Andre hjemmebaserte tiltak (gjelder andre tiltak i hjemmet som følger en spesiell metodikk og som gjenomføres på en systematisk måte) (krever presisering)"},
                     {"code" : "3.8", "validFrom" : "2013-01-01", "title" : "Sentre for foreldre og barn"},
                     {"code" : "3.9", "validFrom" : "2013-01-01", "title" : "Vedtak om råd og veiledning"},
                     {"code" : "3.10", "validFrom" : "2013-01-01", "title" : "Hjemmekonsulent/miljøarbeider"},
@@ -1122,40 +1061,29 @@ Bjorge.Saether@bufdir.no
                     {"code" : "4.1", "validFrom" : "2013-01-01", "title" : "Barnehage"},
                     {"code" : "4.2", "validFrom" : "2013-01-01", "title" : "SFO/ Aktivitetsskole"},
                     {"code" : "4.3", "validFrom" : "2013-01-01", "title" : "Fritidsaktiviteter"},
-                    {"code" : "4.4", "validFrom" : "2013-01-01", "title" : "Økonomisk hjelp for øvrig (gjelder økonomisk
-                    hjelp som ikke inngår i 4.1, 4.2 og 4.3)"},
+                    {"code" : "4.4", "validFrom" : "2013-01-01", "title" : "Økonomisk hjelp for øvrig (gjelder økonomisk hjelp som ikke inngår i 4.1, 4.2 og 4.3)"},
                     {"code" : "4.5", "validFrom" : "2013-01-01", "title" : "Besøkshjem/ avlastningstiltak"},
                     {"code" : "4.6", "validFrom" : "2013-01-01", "title" : "Støttekontakt"},
-                    {"code" : "4.7", "validFrom" : "2013-01-01", "title" : "Samtalegrupper/ barnegrupper
-                    (gjelderstrukturerte samtale- og aktivitetstilbud for aldersbestemte grupper)."},
-                    {"code" : "4.8", "validFrom" : "2013-01-01", "title" : "Utdanning og arbeid (gjelder oppfølging og
-                    støtte for å styrke barn og ungdoms tilknytning til skole eller arbeid)"},
+                    {"code" : "4.7", "validFrom" : "2013-01-01", "title" : "Samtalegrupper/ barnegrupper (gjelderstrukturerte samtale- og aktivitetstilbud for aldersbestemte grupper)."},
+                    {"code" : "4.8", "validFrom" : "2013-01-01", "title" : "Utdanning og arbeid (gjelder oppfølging og støtte for å styrke barn og ungdoms tilknytning til skole eller arbeid)"},
                     {"code" : "4.9", "validFrom" : "2013-01-01", "title" : "ART"},
                     {"code" : "4.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
-                    {"code" : "5.1", "validFrom" : "2013-01-01", "title" : "Frivillig tilsyn i hjemmet (gjelder der
-                    foreldre har samtykket til tilsyn)"},
-                    {"code" : "5.2", "validFrom" : "2013-01-01", "title" : "Pålagt tilsyn i hjemmet (gjelder der tilsyn
-                    skjer etter vedtak i fylkesnemnd)"},
+                    {"code" : "5.1", "validFrom" : "2013-01-01", "title" : "Frivillig tilsyn i hjemmet (gjelder der foreldre har samtykket til tilsyn)"},
+                    {"code" : "5.2", "validFrom" : "2013-01-01", "title" : "Pålagt tilsyn i hjemmet (gjelder der tilsyn skjer etter vedtak i fylkesnemnd)"},
                     {"code" : "5.3", "validFrom" : "2013-01-01", "title" : "Tilsyn under samvær"},
                     {"code" : "5.4", "validFrom" : "2013-01-01", "title" : "Ruskontroll"},
                     {"code" : "5.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
                     {"code" : "6.1", "validFrom" : "2013-01-01", "title" : "Familieråd"},
-                    {"code" : "6.2", "validFrom" : "2013-01-01", "title" : "Nettverksmøter (Strukturerte dialogmøter som
-                    består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv.
-                    Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)"},
+                    {"code" : "6.2", "validFrom" : "2013-01-01", "title" : "Nettverksmøter (Strukturerte dialogmøter som består av barneverntjenesten, foreldre og ungdom og andre personer som er viktige i ungdommens liv. Invitasjon av deltakere skjer i samråd mellom barneverntjenesten, ungdom og foreldre)"},
                     {"code" : "6.3", "validFrom" : "2013-01-01", "title" : "Individuell plan"},
                     {"code" : "6.4", "validFrom" : "2013-01-01", "title" : "Deltakelse i ansvarsgruppe"},
                     {"code" : "6.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
-                    {"code" : "7.1", "validFrom" : "2013-01-01", "title" : "BVL2021 § 3-7 (tidligere BVL1992 § 4-10)
-                    medisinsk undersøkelse og behandling"},
-                    {"code" : "7.2", "validFrom" : "2013-01-01", "title" : "BVL2021 § 3-8 (tidligere BVL1992 § 4-11)
-                    behandling av barn med særlige opplæringsbehov"},
-                    {"code" : "7.3", "validFrom" : "2013-01-01", "title" : "Psykisk helsehjelp for barn og unge (Gjelder
-                    ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)"},
+                    {"code" : "7.1", "validFrom" : "2013-01-01", "title" : "BVL2021 § 3-7 (tidligere BVL1992 § 4-10) medisinsk undersøkelse og behandling"},
+                    {"code" : "7.2", "validFrom" : "2013-01-01", "title" : "BVL2021 § 3-8 (tidligere BVL1992 § 4-11) behandling av barn med særlige opplæringsbehov"},
+                    {"code" : "7.3", "validFrom" : "2013-01-01", "title" : "Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)"},
                     {"code" : "7.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"},
                     {"code" : "8.1", "validFrom" : "2013-01-01", "title" : "Økonomisk hjelp til egen bolig/hybel"},
-                    {"code" : "8.2", "validFrom" : "2013-01-01", "title" : "Bolig med oppfølging (inkluderer også
-                    bofellesskap)"},
+                    {"code" : "8.2", "validFrom" : "2013-01-01", "title" : "Bolig med oppfølging (inkluderer også bofellesskap)"},
                     {"code" : "8.3", "validFrom" : "2013-01-01", "title" : "Botreningskurs"},
                     {"code" : "8.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak (krever presisering)"}
                     ]
@@ -1243,11 +1171,9 @@ Bjorge.Saether@bufdir.no
                     "title":"Opphevelse",
                     "path":"/Barnevern/Sak/Tiltak/Opphevelse/@Kode",
                     "items":[
-                    {"code" : "1", "validFrom" : "2013-01-01", "title" : "Barnet tilbakeført til foreldre/ familien
-                    jamfør BVL2021 § 5-7 (tidligere BVL1992 § 4-21)"},
+                    {"code" : "1", "validFrom" : "2013-01-01", "title" : "Barnet tilbakeført til foreldre/ familien jamfør BVL2021 § 5-7 (tidligere BVL1992 § 4-21)"},
                     {"code" : "2", "validFrom" : "2013-01-01", "title" : "Barnet har fylt 18 år"},
-                    {"code" : "3", "validFrom" : "2013-01-01", "title" : "Adopsjon BVL2021 § 5-10 (tidligere BVL1992
-                    §4-20)"},
+                    {"code" : "3", "validFrom" : "2013-01-01", "title" : "Adopsjon BVL2021 § 5-10 (tidligere BVL1992 §4-20)"},
                     {"code" : "4", "validFrom" : "2013-01-01", "title" : "Annet (krever presisering)"}
                     ]
                     }
@@ -1502,12 +1428,9 @@ Bjorge.Saether@bufdir.no
                                 "title":"Konklusjon",
                                 "path":"/Barnevern/Sak/Ettervern/Konklusjon/@Kode",
                                 "items":[
-                                {"code" : "1", "validFrom" : "2022-01-01", "title" : "Gitt tilbud om tiltak,
-                                akseptert"},
-                                {"code" : "2", "validFrom" : "2022-01-01", "title" : "Gitt tilbud om tiltak, avslått av
-                                bruker grunnet ønske om annet tiltak "},
-                                {"code" : "3", "validFrom" : "2022-01-01", "title" : "Ikke lenger tiltak etter BVL,
-                                etter brukers ønske"}
+                                {"code" : "1", "validFrom" : "2022-01-01", "title" : "Gitt tilbud om tiltak, akseptert"},
+                                {"code" : "2", "validFrom" : "2022-01-01", "title" : "Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak "},
+                                {"code" : "3", "validFrom" : "2022-01-01", "title" : "Ikke lenger tiltak etter BVL, etter brukers ønske"}
                                 ]
                                 }
                             </xs:appinfo>
@@ -1585,27 +1508,22 @@ Bjorge.Saether@bufdir.no
                     1.1.1 = Omsorgsplasseringen opphører
                     1.1.2 = Barnet blir myndig
                     1.1.3 = Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet)
-                    1.1.4 = Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket
-                    fosterhjem, osv.
-                    1.1.5 = Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.)
-                    (krever presisering)
+                    1.1.4 = Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv.
+                    1.1.5 = Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.) (krever presisering)
 
                     1.2 Fosterforeldre avslutter kontrakten med barnevernet:
 
                     1.2.1 = Barnet har behov fosterforeldre ikke kan dekke
                     1.2.2 = Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.)
-                    1.2.3 = Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak,
-                    manglende eller lite effektiv veiledning, mv.) (krever presisering)
+                    1.2.3 = Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.) (krever presisering)
 
                     1.3 = Barnet flytter sammen med fosterforeldre til nytt bosted
 
                     2 Årsaker til flytting fra institusjon:
 
                     2.1 = Avsluttet i henhold til plan ved oppstart av institusjonsoppholdet
-                    2.2 = Institusjonen barnet bor i klarer ikke å dekke barnets behov (manglende kompetanse hos
-                    ansatte, beboersammensetning, fysiske forhold ved institusjonen osv)
-                    2.3 = Barnet har behov for annen type plasseringstiltak (annen type institusjon, TFCO-fosterhjem,
-                    forsterket fosterhjem, osv.
+                    2.2 = Institusjonen barnet bor i klarer ikke å dekke barnets behov (manglende kompetanse hos ansatte, beboersammensetning, fysiske forhold ved institusjonen osv)
+                    2.3 = Barnet har behov for annen type plasseringstiltak (annen type institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv.
                     2.4 = Barnet blir myndig og velger selv å flytte ut
                     2.5 = Barnet trekker samtykke
                     2.6 = Foreldre trekker samtykke
@@ -1622,34 +1540,21 @@ Bjorge.Saether@bufdir.no
                     "items":[
                     { "code":"1.1.1", "validFrom":"2022-01-01", "title":"Omsorgsplasseringen opphører " },
                     { "code":"1.1.2", "validFrom":"2022-01-01", "title":"Barnet blir myndig " },
-                    { "code":"1.1.3", "validFrom":"2022-01-01", "title":"Fosterforeldre klarer ikke å dekke barnets
-                    behov (forhold ved fosterhjemmet) " },
-                    { "code":"1.1.4", "validFrom":"2022-01-01", "title":"Barnet har behov for annet plasseringssted
-                    (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. " },
-                    { "code":"1.1.5", "validFrom":"2022-01-01", "title":"Andre grunner; (f.eks. uenighet om oppdragets
-                    omfang, økonomi, forsterkningstiltak mv.) (krever presisering)" },
-                    { "code":"1.2.1", "validFrom":"2022-01-01", "title":"Barnet har behov fosterforeldre ikke kan dekke"
-                    },
-                    { "code":"1.2.2", "validFrom":"2022-01-01", "title":"Endring i fosterforeldres livssituasjon
-                    (skilsmisse, død, osv.) " },
-                    { "code":"1.2.3", "validFrom":"2022-01-01", "title":"Andre grunner; (f.eks. uenighet om oppdragets
-                    omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.) (krever
-                    presisering) " },
-                    { "code":"1.3", "validFrom":"2022-01-01", "title":"Barnet flytter sammen med fosterforeldre til nytt
-                    bosted" },
-                    { "code":"2.1", "validFrom":"2022-01-01", "title":"Avsluttet i henhold til plan ved oppstart av
-                    institusjonsoppholdet" },
-                    { "code":"2.2", "validFrom":"2022-01-01", "title":"Institusjonen barnet bor i klarer ikke å dekke
-                    barnets behov (manglende kompetanse hos ansatte, beboersammensetning, fysiske forhold ved
-                    institusjonen osv)" },
-                    { "code":"2.3", "validFrom":"2022-01-01", "title":"Barnet har behov for annen type plasseringstiltak
-                    (annen type institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. " },
+                    { "code":"1.1.3", "validFrom":"2022-01-01", "title":"Fosterforeldre klarer ikke å dekke barnets behov (forhold ved fosterhjemmet) " },
+                    { "code":"1.1.4", "validFrom":"2022-01-01", "title":"Barnet har behov for annet plasseringssted (institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. " },
+                    { "code":"1.1.5", "validFrom":"2022-01-01", "title":"Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak mv.) (krever presisering)" },
+                    { "code":"1.2.1", "validFrom":"2022-01-01", "title":"Barnet har behov fosterforeldre ikke kan dekke" },
+                    { "code":"1.2.2", "validFrom":"2022-01-01", "title":"Endring i fosterforeldres livssituasjon (skilsmisse, død, osv.) " },
+                    { "code":"1.2.3", "validFrom":"2022-01-01", "title":"Andre grunner; (f.eks. uenighet om oppdragets omfang, økonomi, forsterkningstiltak, manglende eller lite effektiv veiledning, mv.) (krever presisering) " },
+                    { "code":"1.3", "validFrom":"2022-01-01", "title":"Barnet flytter sammen med fosterforeldre til nytt bosted" },
+                    { "code":"2.1", "validFrom":"2022-01-01", "title":"Avsluttet i henhold til plan ved oppstart av institusjonsoppholdet" },
+                    { "code":"2.2", "validFrom":"2022-01-01", "title":"Institusjonen barnet bor i klarer ikke å dekke barnets behov (manglende kompetanse hos ansatte, beboersammensetning, fysiske forhold ved institusjonen osv)" },
+                    { "code":"2.3", "validFrom":"2022-01-01", "title":"Barnet har behov for annen type plasseringstiltak (annen type institusjon, TFCO-fosterhjem, forsterket fosterhjem, osv. " },
                     { "code":"2.4", "validFrom":"2022-01-01", "title":"Barnet blir myndig og velger selv å flytte ut" },
                     { "code":"2.5", "validFrom":"2022-01-01", "title":"Barnet trekker samtykke" },
                     { "code":"2.6", "validFrom":"2022-01-01", "title":"Foreldre trekker samtykke" },
                     { "code":"2.7", "validFrom":"2022-01-01", "title":"Ikke medhold i fylkesnemnda" },
-                    { "code":"2.8", "validFrom":"2022-01-01", "title":"Uenighet mellom barnevernstjenesten og Bufetat om
-                    oppdragets omfang og/eller økonomi," },
+                    { "code":"2.8", "validFrom":"2022-01-01", "title":"Uenighet mellom barnevernstjenesten og Bufetat om oppdragets omfang og/eller økonomi," },
                     { "code":"2.9", "validFrom":"2022-01-01", "title":"Andre grunner (krever presisering)" }
                     ]
                     }
