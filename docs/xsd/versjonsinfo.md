@@ -3,6 +3,13 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.3.0.3
+Endringsdato: 6. juni 2024
+
+## Struktur
+- Fjernet Status fra BegrepsType
+
+---
 # v.3.0.2
 Endringsdato: 27. mai 2024
 

@@ -6,7 +6,7 @@
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.0.2">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.0.3">
 	<!-- ATTRIBUTTER -->
 	<xs:attribute name="Id">
 		<xs:annotation>
@@ -1548,7 +1548,6 @@ Bjorge.Saether@bufdir.no
 			<xs:enumeration value="Plan"/>
 			<xs:enumeration value="Tiltak"/>
 			<xs:enumeration value="Vedtak"/>
-			<xs:enumeration value="Status"/>
 			<xs:enumeration value="Ettervern"/>
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
 			<xs:enumeration value="Flytting"/>

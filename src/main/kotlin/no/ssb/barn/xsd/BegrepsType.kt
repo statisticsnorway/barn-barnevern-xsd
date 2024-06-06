@@ -22,9 +22,6 @@ enum class BegrepsType(val begrep: String) {
     @field:XmlEnumValue("Relasjon")
     RELASJON("Relasjon"),
 
-    @field:XmlEnumValue("Status")
-    STATUS("Vedtak"),
-
     @field:XmlEnumValue("Tiltak")
     TILTAK("Tiltak"),
 

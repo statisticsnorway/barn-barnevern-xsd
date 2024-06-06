@@ -126,7 +126,7 @@ class RelasjonTypeTest : BehaviorSpec({
                         "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "TilType=\"Undersokelse\" />",
                 "cvc-enumeration-valid: Value '' is not facet-valid with respect to enumeration '[Personalia, " +
-                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Status, Ettervern, OversendelseFylkesnemnd, " +
+                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Ettervern, OversendelseFylkesnemnd, " +
                         "Flytting, Relasjon]'. It must be a value from the enumeration."
             ),
             row(
@@ -137,7 +137,7 @@ class RelasjonTypeTest : BehaviorSpec({
                         "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "TilType=\"Undersokelse\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration '[Personalia, " +
-                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Status, Ettervern, OversendelseFylkesnemnd, " +
+                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Ettervern, OversendelseFylkesnemnd, " +
                         "Flytting, Relasjon]'. It must be a value from the enumeration."
             ),
 
@@ -190,7 +190,7 @@ class RelasjonTypeTest : BehaviorSpec({
                         "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "TilType=\"\" />",
                 "cvc-enumeration-valid: Value '' is not facet-valid with respect to enumeration '[Personalia, " +
-                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Status, Ettervern, OversendelseFylkesnemnd, " +
+                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Ettervern, OversendelseFylkesnemnd, " +
                         "Flytting, Relasjon]'. It must be a value from the enumeration."
             ),
             row(
@@ -201,7 +201,7 @@ class RelasjonTypeTest : BehaviorSpec({
                         "TilId=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                         "TilType=\"42\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration '[Personalia, " +
-                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Status, Ettervern, OversendelseFylkesnemnd, " +
+                        "Melding, Undersokelse, Plan, Tiltak, Vedtak, Ettervern, OversendelseFylkesnemnd, " +
                         "Flytting, Relasjon]'. It must be a value from the enumeration."
             ),
         ) { description, fagsystemXml, expectedError ->

@@ -69,14 +69,14 @@ class SlettetTypeTest : BehaviorSpec({
                 "empty Type",
                 "<Slettet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" Type=\"\" SluttDato=\"$VALID_DATE\" />",
                 "cvc-enumeration-valid: Value '' is not facet-valid with respect to enumeration " +
-                        "'[Personalia, Melding, Undersokelse, Plan, Tiltak, Vedtak, Status, Ettervern, " +
+                        "'[Personalia, Melding, Undersokelse, Plan, Tiltak, Vedtak, Ettervern, " +
                         "OversendelseFylkesnemnd, Flytting, Relasjon]'. It must be a value from the enumeration."
             ),
             row(
                 "invalid Type",
                 "<Slettet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" Type=\"42\" SluttDato=\"$VALID_DATE\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration " +
-                        "'[Personalia, Melding, Undersokelse, Plan, Tiltak, Vedtak, Status, Ettervern, " +
+                        "'[Personalia, Melding, Undersokelse, Plan, Tiltak, Vedtak, Ettervern, " +
                         "OversendelseFylkesnemnd, Flytting, Relasjon]'. It must be a value from the enumeration."
             ),
 
