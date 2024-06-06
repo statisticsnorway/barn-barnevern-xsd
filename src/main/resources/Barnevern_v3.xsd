@@ -1548,7 +1548,6 @@ Bjorge.Saether@bufdir.no
 			<xs:enumeration value="Plan"/>
 			<xs:enumeration value="Tiltak"/>
 			<xs:enumeration value="Vedtak"/>
-			<xs:enumeration value="Status"/>
 			<xs:enumeration value="Ettervern"/>
 			<xs:enumeration value="OversendelseFylkesnemnd"/>
 			<xs:enumeration value="Flytting"/>
