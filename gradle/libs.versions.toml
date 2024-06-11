@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.0.0"
 jackson = "2.17.1"
-kotest = "5.9.0" # kotest:5.7.x hangs the build for all apps
+kotest = "5.9.1" # kotest:5.7.x hangs the build for all apps
 
 [libraries]
 # NOTE: This is required for bumping the Kotlin version above
