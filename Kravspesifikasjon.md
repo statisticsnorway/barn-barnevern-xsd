@@ -269,7 +269,6 @@ Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2022-01-01
 
 
-
 ### Personalia Kontroll 17: Kontroll av DUF-nummer
 
 Gitt at en har Personalia med utfylt DUF-nummer<br/>
@@ -282,6 +281,23 @@ Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2022-01-01
 
 
+### Personalia Kontroll 18: Ufullstendig fødselsnummer og D-nummer.
+
+Gitt at en har Personalia med en av følgende:
+fødselsdato (DDMMÅÅ) + 00100,
+fødselsdato (DDMMÅÅ) + 00200,
+termindato (DDMMÅÅ) + 99999
+
+så gi feilmeldingen: 
+"Ufullstendig fødselsnummer skal erstattes med fødselsnummer, DUF- eller D-nummer fra folkeregisteret. Gjelder saksnummer: <journalnummer>"
+
+Gitt at en har Personalia med en av følgende:
+D-nummer på [https://www.udi.no/ord-og-begreper/d-nummer/](https://www.udi.no/ord-og-begreper/d-nummer/),
+
+så gi feilmeldingen:
+"Om DUF- eller fødselsnummer foreligger i folkeregisteret, skal dette benyttes fremfor D-nummer. Gjelder saksnummer: <journalnummer>"
+
+Alvorlighetsgrad: INFO
 
 
 
