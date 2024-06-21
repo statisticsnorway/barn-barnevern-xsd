@@ -627,9 +627,9 @@ Gyldig fra 2022-01-01
 
 ### Vedtak Kontroll 4: Lovhjemmel refererer til feil barnevernlov
 
-Gitt at en har et Vedtak der Vedtak/LovhjemmelType/Lov og eventuelt Vedtak/JmfrLovhjemmelType/Lov er utfylt<br/>
-når Lov er utfylt med noe annet enn BVL eller BVL2021<br/>
-så gir feilmeldingen "Lovhjemlene under Vedtak innholder annen verdi for Lov enn BVL eller BVL2021. Lov: {lov}."
+Gitt at en har et vedtak der Vedtak/LovhjemmelType/Lov og eventuelt Vedtak/JmfrLovhjemmelType/Lov er utfylt<br/>
+når Lov er utfylt med noe annet enn BVL, BVL2021 eller BL1981<br/>
+så gi feilmeldingen "Lovhjemlene under vedtak inneholder annen verdi for lov enn BVL, BVL2021 eller BL1981. Lov: {lov}."
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2022-01-01
@@ -640,10 +640,10 @@ Gyldig fra 2022-01-01
 
 Gitt att en har et Vedtak
 
-når Vedtak sin StartDato er før 01. januar 2023 og Vedtak/Lovhjemmel/Lov ikke er BVL<br/>
+når Vedtak sin StartDato er før 01. januar 2023 og Vedtak/Lovhjemmel/Lov er BVL2021<br/>
 så gi feilmeldingen "Lovhjemmel opprettet før 01. januar 2023 krever lov = '**[BVL](#barnevernloven)**'"
 
-når Vedtak sin StartDato er 01. januar 2023 eller senere og Vedtak/Lovhjemmel/Lov ikke er BVL2021<br/>
+når Vedtak sin StartDato er 01. januar 2023 eller senere og Vedtak/Lovhjemmel/Lov er BVL<br/>
 så gi feilmeldingen "Lovhjemmel opprettet på 01. januar 2023 eller senere krever lov = '**[BVL2021](#barnevernloven)**'"
 
 Alvorlighetsgrad: ERROR<br/>
@@ -1025,10 +1025,10 @@ Gyldig fra 2022-01-01
 
 Gitt at en har et Oversendelse til fylkesnemnd<br/>
 
-når OversendelseFylkesnemnd sin StartDato er før 01. januar 2023 og OversendelseFylkesnemnd/Lovhjemmel/Lov ikke er BVL<br/>
+når OversendelseFylkesnemnd sin StartDato er før 01. januar 2023 og OversendelseFylkesnemnd/Lovhjemmel/Lov er BVL2021<br/>
 så gi feilmeldingen "Lovhjemmel opprettet før 01. januar 2023 krever lov = '**[BVL](#barnevernloven)**'"
 
-når OversendelseFylkesnemnd sin StartDato er 01. januar 2023 eller senere og OversendelseFylkesnemnd/Lovhjemmel/Lov ikke er BVL2021<br/>
+når OversendelseFylkesnemnd sin StartDato er 01. januar 2023 eller senere og OversendelseFylkesnemnd/Lovhjemmel/Lov er BVL<br/>
 så gi feilmeldingen "Lovhjemmel opprettet på 01. januar 2023 eller senere krever lov = '**[BVL2021](#barnevernloven)**'"
 
 Alvorlighetsgrad: ERROR<br/>
