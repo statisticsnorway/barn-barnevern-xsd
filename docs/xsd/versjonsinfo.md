@@ -3,6 +3,14 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.3.0.4
+Endringsdato: 21. juni 2024
+
+## Kodeverk
+- Lagt til ny kode i element Lov under LovhjemmelType
+  - BL1981 = Barneloven fra 1981
+
+---
 # v.3.0.3
 Endringsdato: 6. juni 2024
 
