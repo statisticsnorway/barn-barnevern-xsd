@@ -52,7 +52,7 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Kapittel>1</Kapittel>" +
                         "<Paragraf>2</Paragraf>" +
                         "</Lovhjemmel>",
-                "cvc-enumeration-valid: Value '' is not facet-valid with respect to enumeration '[BVL, BVL2021]'. " +
+                "cvc-enumeration-valid: Value '' is not facet-valid with respect to enumeration '[BVL, BVL2021, BL1981]'. " +
                         "It must be a value from the enumeration."
             ),
             row(
@@ -63,7 +63,7 @@ class LovhjemmelTypeTest : BehaviorSpec({
                         "<Paragraf>2</Paragraf>" +
                         "</Lovhjemmel>",
                 "cvc-enumeration-valid: Value 'BVL2022' is not facet-valid with respect " +
-                        "to enumeration '[BVL, BVL2021]'. It must be a value from the enumeration."
+                        "to enumeration '[BVL, BVL2021, BL1981]'. It must be a value from the enumeration."
             ),
 
             /** Kapittel */
