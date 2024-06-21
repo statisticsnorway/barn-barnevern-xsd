@@ -607,9 +607,30 @@ Bjorge.Saether@bufdir.no
 		<xs:sequence>
 			<xs:element name="Lov">
 				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation>
+							BVL = Barnevernloven fra 1992
+							BVL2021 = Barnevernloven fra 2021
+							BL1981 = Barneloven fra 1981
+						</xs:documentation>
+						<xs:appinfo xml:lang="json">
+							{
+								"type":"codelist",
+								"term":"Lov",
+								"title":"Lov",
+								"path":"Lov",
+								"items":[
+									{ "code":"BVL", "validFrom":"1992-01-01", "validTo":"2022-12-31", "title":"Barnevernloven fra 1992" },
+									{ "code":"BVL2021", "validFrom":"2023-01-01", "title":"Barnevernloven fra 2021" },
+									{ "code":"BL1981", "validFrom":"1981-01-01", "title":"Barneloven fra 1981" },
+								]
+							}
+						</xs:appinfo>
+					</xs:annotation>
 					<xs:restriction base="xs:string">
 						<xs:enumeration value="BVL"/>
 						<xs:enumeration value="BVL2021"/>
+						<xs:enumeration value="BL1981"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
