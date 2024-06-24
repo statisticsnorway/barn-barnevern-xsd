@@ -6,7 +6,7 @@ repositories { mavenCentral() }
 plugins {
     kotlin("jvm") version libs.versions.kotlin.get()
     `maven-publish`
-    id("com.google.cloud.artifactregistry.gradle-plugin") version "2.2.1"
+    id("com.google.cloud.artifactregistry.gradle-plugin") version "2.2.2"
     id("org.sonarqube") version "5.0.0.4638"
     jacoco
 }
