@@ -31,14 +31,14 @@ jobs:
 
       - id: "auth"
         name: Authenticate to Google Cloud
-        uses: "google-github-actions/auth@v2.1.3"
+        uses: "google-github-actions/auth@v2.1.5"
         with:
           workload_identity_provider: "projects/${{ secrets.GAR_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/gh-actions/providers/gh-actions"
           service_account: "gh-actions-barnevern@${{ secrets.GAR_PROJECT_ID }}.iam.gserviceaccount.com"
           token_format: "access_token"
 
       - name: Build with Gradle
-        uses: burrunan/gradle-cache-action@v1
+        uses: burrunan/gradle-cache-action@v2
         with:
           gradle-build-scan-report: false
           concurrent: true
