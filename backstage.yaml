@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: barn-xsd
+  title: barn-xsd
+  description: |
+    Kotlin-library containing xml schema definition for municipal reporting.
+  tags:
+    - kotlin
+    - gradle
+  annotations:
+    github.com/project-slug: statisticsnorway/barn-snapshot-models
+spec:
+  type: library
+  system: BARN
+  owner: barnevern-developers
+  lifecycle: production
