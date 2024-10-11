@@ -9,7 +9,7 @@ metadata:
     - kotlin
     - gradle
   annotations:
-    github.com/project-slug: statisticsnorway/barn-snapshot-models
+    github.com/project-slug: statisticsnorway/barn-barnevern-xsd
 spec:
   type: library
   system: BARN
