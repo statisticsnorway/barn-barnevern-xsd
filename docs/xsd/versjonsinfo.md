@@ -3,6 +3,13 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.3.0.5
+Endringsdato: 28. november 2024
+
+## Kodeverk
+- Endret titler i kodeliste for tiltakskategori, Brukes på stien /Barnevern/Sak/Tiltak/Kategori/@Kode
+
+---
 # v.3.0.4
 Endringsdato: 21. juni 2024
 
