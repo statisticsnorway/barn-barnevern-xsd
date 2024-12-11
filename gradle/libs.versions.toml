@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.1.0"
-jackson = "2.18.0"
+jackson = "2.18.2"
 kotest = "5.9.1"
 
 [libraries]
