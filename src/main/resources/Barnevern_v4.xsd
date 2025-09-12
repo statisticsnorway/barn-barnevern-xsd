@@ -5,8 +5,9 @@
 <!-- Maintainers:
 Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
+Synne.Solbakken@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.0.5">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="4.0.0">
     <!-- ATTRIBUTTER -->
     <xs:attribute name="Id">
         <xs:annotation>
@@ -519,6 +520,12 @@ Bjorge.Saether@bufdir.no
                                 2 = Ikke henlagt – konklusjonsdato melding (evt. 7 dager etter mottatt melding) er startdato undersøkelse
                                 3 = Henlagt pga. aktive tiltak
                                 4 = Melding i pågående undersøkelse
+                                5 = Henlagt som følge av flytting til utlandet
+                                6 = Henlagt som følge av flytting til ukjent sted
+                                7 = Overført til annen tjeneste som følge av flytting til annen kommune
+                                8 = Overført til annen etat
+                                9 = Henlagt på grunn av annen lov
+                                10 = Henlagt av andre grunner
                             </xs:documentation>
                             <xs:appinfo xml:lang="json">
                                 {
@@ -527,10 +534,16 @@ Bjorge.Saether@bufdir.no
                                 "title":"Konklusjon",
                                 "path":"/Barnevern/Sak/Melding/Konklusjon/@Kode",
                                 "items":[
-                                {"code":"1", "validFrom":"2013-01-01", "title":"Henlagt " },
+                                {"code":"1", "validFrom":"2013-01-01", "validTo":"2025-31-12", "changeDescription":"1 deles i kode 5,6,7,8,9 og 10", "title":"Henlagt " },
                                 {"code":"2", "validFrom":"2013-01-01", "title":"Ikke henlagt – konklusjonsdato melding (eventuelt 7 dager etter mottatt melding) er startdato undersøkelse" },
                                 {"code":"3", "validFrom":"2020-01-01", "title":"Henlagt pga. aktive tiltak" },
-                                {"code":"4", "validFrom":"2020-01-01", "title":"Melding i pågående undersøkelse" }
+                                {"code":"4", "validFrom":"2020-01-01", "title":"Melding i pågående undersøkelse" },
+                                {"code":"5", "validFrom":"2026-01-01", "title":"Henlagt på grunn av flytting til utlandet" },
+                                {"code":"6", "validFrom":"2026-01-01", "title":"Henlagt på grunn av flytting til ukjent sted" }
+                                {"code":"7", "validFrom":"2026-01-01", "title":"Overført til annen tjeneste som følge av flytting til annen kommune" }
+                                {"code":"8", "validFrom":"2026-01-01", "title":"Overført til annen etat" }
+                                {"code":"9", "validFrom":"2026-01-01", "title":"Henlagt på grunn av annen lov" }
+                                {"code":"10", "validFrom":"2026-01-01", "title":"Henlagt av andre grunner" }
                                 ]
                                 }
                             </xs:appinfo>
@@ -543,6 +556,12 @@ Bjorge.Saether@bufdir.no
                                 <xs:enumeration value="2"/>
                                 <xs:enumeration value="3"/>
                                 <xs:enumeration value="4"/>
+                                <xs:enumeration value="5"/>
+                                <xs:enumeration value="6"/>
+                                <xs:enumeration value="7"/>
+                                <xs:enumeration value="8"/>
+                                <xs:enumeration value="9"/>
+                                <xs:enumeration value="10"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
@@ -824,6 +843,87 @@ Bjorge.Saether@bufdir.no
                     36 = Behov for bistand i kontakt med andre deler av hjelpeapparatet
                     18 = Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
                     19 = Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)
+                    BARNETS UTVIKLING
+                    Helse
+                    1.1.01 = Fysisk helse og utvikling
+                    1.1.02 = Psykisk helse og utvikling
+                    1.1.03 = Barn med funksjonsnedsettelser
+                    1.1.04 = Tilgang til helse- og tannhelsetjenester
+
+                    Barnehage og skole
+                    1.2.01 = Læring
+                    1.2.02 = Skoleresultater
+                    1.2.03 = Trivsel i barnehage og skole
+
+                    Følelser og uttrykk
+                    1.3.01 = Følelser og temperament
+                    1.3.02 = Holdninger og verdier
+                    1.3.03 = Identitet
+                    1.3.04 = Selvstendighet
+                    1.3.05 = Tilknytning
+                    1.3.06 = Stress og mestring
+                    1.3.07 = Traumer
+                    1.3.08 = Atferd
+                    1.3.09 = Rus
+                    1.3.10 = Skadelig seksuell atferd
+                    1.3.11 = Barn som begår straffbar handlinger
+
+                    Venner og fritid
+                    1.4.01 = Lek og interesser
+                    1.4.02 = Relasjoner til andre barn og voksne
+                    1.4.03 = Mobbing
+                    1.4.04 = Digital hverdag
+
+                    FORELDRENES OMSORG
+                    Grunnleggende omsorg
+                    2.1.01 = Ansvar
+                    2.1.02 = Basal og praktisk omsorg
+                    2.1.03 = Hverdagsrutiner
+
+                    Følelsesmessig tilgjengelighet
+                    2.2.01 = Følelsesmessig regulering
+                    2.2.02 = Følelsesmessig støtte
+                    2.2.03 = Trygg relasjon mellom barn og foreldre
+
+                    Stimulering og veiledning
+                    2.3.01 = Stimulering og engasjement
+                    2.3.02 = Oppdragelse, veiledning og grenser
+
+                    Beskyttelse
+                    2.4.01 = Beskyttelse mot æresrelatert vold og negativ sosial kontroll
+                    2.4.02 = Beskyttelse mot å være vitne til vold i familien
+                    2.4.03 = Beskyttelse mot alvorlige konflikter mellom foreldre
+                    2.4.04 = Konflikt mellom foreldre som ikke bor sammen
+                    2.4.05 = Beskyttelse mot vold
+                    2.4.06 = Beskyttelse mot menneskehandel
+                    2.4.07 = Beskyttelse mot seksuelle overgrep og seksuell utnyttelse
+                    2.4.08 = Beskyttelse mot skadelige tradisjoner og skikker
+                    2.4.09 = Beskyttelse mot vold og overgrep fra jevnaldrende
+
+                    FAMILIE OG MILJØ
+                    Familieforhold
+                    3.1.01 = Familiens sammensetning
+                    3.1.02 = Foreldres fysiske sykdom
+                    3.1.03 = Foreldres psykiske problem/lidelse
+                    3.1.04 = Foreldres kognitive vansker
+                    3.1.05 = Søskens helse og trivsel
+                    3.1.06 = Tidligere hendelser av betydning i familien
+                    3.1.07 = Foreldres erfaring fra egen oppvekst
+                    3.1.08 = Foreldre med rusrelaterte utfordringer
+                    3.1.09 = Barn som pårørende
+                    3.1.10 = Foreldres kriminalitet
+
+                    Bolig økonomi og arbeid
+                    3.2.01 = Levestandard og bolig
+                    3.2.02 = Fattogdom
+
+                    Nettverk og sosial integrering
+                    3.3.01 = Familiens profesjonelle nettverk
+                    3.3.02 = Familiens sosiale nettverk og integrering
+                    3.3.03 = Lukkede religiøse samfunn
+                    3.3.04 = Minioritetsspråklige familier
+                    3.3.05 = Radikalisering og voldelig ekstremisme
+                    3.3.06 = Urfolk og nasjonale minoriteter
                 </xs:documentation>
                 <xs:appinfo xml:lang="json">
                     {
@@ -868,6 +968,74 @@ Bjorge.Saether@bufdir.no
                     { "code":"36", "validFrom":"2025-01-01", "title":"Behov for bistand i kontakt med andre deler av hjelpeapparatet" },
                     { "code":"18", "validFrom":"2013-01-01", "title":"Andre forhold ved foreldre/ familien (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" },
                     { "code":"19", "validFrom":"2013-01-01", "title":"Andre forhold ved barnets situasjon (krever presisering) (Denne kategorien skal kunne benyttes dersom ingen av kategoriene 1-27 passer.)" }
+                    { "code":"1.1.01", "validFrom":"2026-01-01", "title":"Fysisk helse og utvikling" },
+                    { "code":"1.1.02", "validFrom":"2026-01-01", "title":"Psykisk helse og utvikling" },
+                    { "code":"1.1.03", "validFrom":"2026-01-01", "title":"Barn med funksjonsnedsettelser" },
+                    { "code":"1.1.04", "validFrom":"2026-01-01", "title":"Tilgang til helse- og tannhelsetjenester" },
+
+                    { "code":"1.2.01", "validFrom":"2026-01-01", "title":"Læring" },
+                    { "code":"1.2.02", "validFrom":"2026-01-01", "title":"Skoleresultater" },
+                    { "code":"1.2.03", "validFrom":"2026-01-01", "title":"Trivsel i barnehage og skole" },
+
+                    { "code":"1.3.01", "validFrom":"2026-01-01", "title":"Følelser og temperament" },
+                    { "code":"1.3.02", "validFrom":"2026-01-01", "title":"Holdninger og verdier" },
+                    { "code":"1.3.03", "validFrom":"2026-01-01", "title":"Identitet" },
+                    { "code":"1.3.04", "validFrom":"2026-01-01", "title":"Selvstendighet" },
+                    { "code":"1.3.05", "validFrom":"2026-01-01", "title":"Tilknytning" },
+                    { "code":"1.3.06", "validFrom":"2026-01-01", "title":"Stress og mestring" },
+                    { "code":"1.3.07", "validFrom":"2026-01-01", "title":"Traumer" },
+                    { "code":"1.3.08", "validFrom":"2026-01-01", "title":"Adferd" },
+                    { "code":"1.3.09", "validFrom":"2026-01-01", "title":"Rus" },
+                    { "code":"1.3.10", "validFrom":"2026-01-01", "title":"Skadelig seksuell adferd" },
+                    { "code":"1.3.11", "validFrom":"2026-01-01", "title":"Barn som begår straffbar handlinger" },
+
+
+                    { "code":"1.4.01", "validFrom":"2026-01-01", "title":"Lek og interesser" },
+                    { "code":"1.4.02", "validFrom":"2026-01-01", "title":"Relasjoner til andre barn og voksne" },
+                    { "code":"1.4.03", "validFrom":"2026-01-01", "title":"Mobbing" },
+                    { "code":"1.4.04", "validFrom":"2026-01-01", "title":"Digital hverdag" },
+
+                    { "code":"2.1.01", "validFrom":"2026-01-01", "title":"Ansvar" },
+                    { "code":"2.1.02", "validFrom":"2026-01-01", "title":"Basal og praktisk omsorg" },
+                    { "code":"2.1.03", "validFrom":"2026-01-01", "title":"Hverdagsrutiner" },
+
+                    { "code":"2.2.01", "validFrom":"2026-01-01", "title":"Følelsesmessig regulering" },
+                    { "code":"2.2.02", "validFrom":"2026-01-01", "title":"Følelsesmessig støtte" },
+                    { "code":"2.2.03", "validFrom":"2026-01-01", "title":"Trygg relasjon mellom barn og foreldre" },
+
+                    { "code":"2.3.01", "validFrom":"2026-01-01", "title":"Stimulering og engasjement" },
+                    { "code":"2.3.02", "validFrom":"2026-01-01", "title":"Oppdragelse, veiledning og grenser" },
+
+                    { "code":"2.4.01", "validFrom":"2026-01-01", "title":"Beskyttelse mot æresrelatert vold og negativ sosial kontroll" },
+                    { "code":"2.4.02", "validFrom":"2026-01-01", "title":"Beskyttelse mot å være vitne til vold i familien" },
+                    { "code":"2.4.03", "validFrom":"2026-01-01", "title":"Beskyttelse mot alvorlige konflikter mellom foreldre" },
+                    { "code":"2.4.04", "validFrom":"2026-01-01", "title":"Konflikt mellom foreldre som ikke bor sammen" },
+                    { "code":"2.4.05", "validFrom":"2026-01-01", "title":"Beskyttelse mot vold" },
+                    { "code":"2.4.06", "validFrom":"2026-01-01", "title":"Beskyttelse mot menneskehandel" },
+                    { "code":"2.4.07", "validFrom":"2026-01-01", "title":"Beskyttelse mot seksuelle overgrep og seksuell utnyttelse" },
+                    { "code":"2.4.08", "validFrom":"2026-01-01", "title":"Beskyttelse mot skadelige tradisjoner og skikker" },
+                    { "code":"2.4.09", "validFrom":"2026-01-01", "title":"Beskyttelse mot vold og overgrep fra jevnaldrende" },
+
+                    { "code":"3.1.01", "validFrom":"2026-01-01", "title":"Familiens sammensetning" },
+                    { "code":"3.1.02", "validFrom":"2026-01-01", "title":"Foreldres fysiske sykdom" },
+                    { "code":"3.1.03", "validFrom":"2026-01-01", "title":"Foreldres psykiske problem/lidelse" },
+                    { "code":"3.1.04", "validFrom":"2026-01-01", "title":"Foreldres kognitive vansker" },
+                    { "code":"3.1.05", "validFrom":"2026-01-01", "title":"Søskens helse og trivsel" },
+                    { "code":"3.1.06", "validFrom":"2026-01-01", "title":"Tidligere hendelser av betydning i familien" },
+                    { "code":"3.1.07", "validFrom":"2026-01-01", "title":"Foreldres erfaring fra egen oppvekst" },
+                    { "code":"3.1.08", "validFrom":"2026-01-01", "title":"Foreldre med rusrelaterte utfordringer" },
+                    { "code":"3.1.09", "validFrom":"2026-01-01", "title":"Barn som pårørende" },
+                    { "code":"3.1.10", "validFrom":"2026-01-01", "title":"Foreldres kriminalitet" },
+
+                    { "code":"3.2.01", "validFrom":"2026-01-01", "title":"Levestandard og bolig" },
+                    { "code":"3.2.02", "validFrom":"2026-01-01", "title":"Fattogdom" },
+
+                    { "code":"3.3.01", "validFrom":"2026-01-01", "title":"Familiens profesjonelle nettverk" },
+                    { "code":"3.3.02", "validFrom":"2026-01-01", "title":"Familiens sosiale nettverk og integrering" },
+                    { "code":"3.3.03", "validFrom":"2026-01-01", "title":"Lukkede religiøse samfunn" },
+                    { "code":"3.3.04", "validFrom":"2026-01-01", "title":"Minioritetsspråklige familier" },
+                    { "code":"3.3.05", "validFrom":"2026-01-01", "title":"Radikalisering og voldelig ekstremisme" },
+                    { "code":"3.3.06", "validFrom":"2026-01-01", "title":"Urfolk og nasjonale minoriteter" }
                     ]
                     }
                 </xs:appinfo>
@@ -912,11 +1080,125 @@ Bjorge.Saether@bufdir.no
                     <xs:enumeration value="36"/>
                     <xs:enumeration value="18"/>
                     <xs:enumeration value="19"/>
+                    <xs:enumeration value="1.1.01"/>
+                    <xs:enumeration value="1.1.02"/>
+                    <xs:enumeration value="1.1.03"/>
+                    <xs:enumeration value="1.1.04"/>
+
+                    <xs:enumeration value="1.2.01"/>
+                    <xs:enumeration value="1.2.02"/>
+                    <xs:enumeration value="1.2.03"/>
+
+                    <xs:enumeration value="1.3.01"/>
+                    <xs:enumeration value="1.3.02"/>
+                    <xs:enumeration value="1.3.03"/>
+                    <xs:enumeration value="1.3.04"/>
+                    <xs:enumeration value="1.3.05"/>
+                    <xs:enumeration value="1.3.06"/>
+                    <xs:enumeration value="1.3.07"/>
+                    <xs:enumeration value="1.3.08"/>
+                    <xs:enumeration value="1.3.09"/>
+                    <xs:enumeration value="1.3.10"/>
+                    <xs:enumeration value="1.3.11"/>
+
+                    <xs:enumeration value="1.4.01"/>
+                    <xs:enumeration value="1.4.02"/>
+                    <xs:enumeration value="1.4.03"/>
+                    <xs:enumeration value="1.4.04"/>
+
+                    <xs:enumeration value="2.1.01"/>
+                    <xs:enumeration value="2.1.02"/>
+                    <xs:enumeration value="2.1.03"/>
+
+                    <xs:enumeration value="2.2.01"/>
+                    <xs:enumeration value="2.2.02"/>
+                    <xs:enumeration value="2.2.03"/>
+
+                    <xs:enumeration value="2.3.01"/>
+                    <xs:enumeration value="2.3.02"/>
+
+                    <xs:enumeration value="2.4.01"/>
+                    <xs:enumeration value="2.4.02"/>
+                    <xs:enumeration value="2.4.03"/>
+                    <xs:enumeration value="2.4.04"/>
+                    <xs:enumeration value="2.4.05"/>
+                    <xs:enumeration value="2.4.06"/>
+                    <xs:enumeration value="2.4.07"/>
+                    <xs:enumeration value="2.4.08"/>
+                    <xs:enumeration value="2.4.09"/>
+
+                    <xs:enumeration value="3.1.01"/>
+                    <xs:enumeration value="3.1.02"/>
+                    <xs:enumeration value="3.1.03"/>
+                    <xs:enumeration value="3.1.04"/>
+                    <xs:enumeration value="3.1.05"/>
+                    <xs:enumeration value="3.1.06"/>
+                    <xs:enumeration value="3.1.07"/>
+                    <xs:enumeration value="3.1.08"/>
+                    <xs:enumeration value="3.1.09"/>
+                    <xs:enumeration value="3.1.10"/>
+
+                    <xs:enumeration value="3.2.01"/>
+                    <xs:enumeration value="3.2.02"/>
+
+                    <xs:enumeration value="3.3.01"/>
+                    <xs:enumeration value="3.3.02"/>
+                    <xs:enumeration value="3.3.03"/>
+                    <xs:enumeration value="3.3.04"/>
+                    <xs:enumeration value="3.3.05"/>
+                    <xs:enumeration value="3.3.06"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute ref="Presisering"/>
     </xs:complexType>
+
+    <!-- Barnets medvirkning -->
+    <xs:complexType name="BarnetsMedvirkningType">
+        <xs:sequence>
+            <xs:element name="StartDato" type="xs:date"/>
+            <xs:element name="MedvirkningType" type="BarnetsMedvirkningTypeType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="BarnetsMedvirkningTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                1.1 = Barnet medvirket ved samtale
+                1.2 = Barnet medvirket ved representant
+                1.3 = Barnet medvirket ved observasjon
+                1.4 = Barnet medvirket ved andre uttrykk
+                2.1 = Barnet har ikke fått anledning til å medvirke
+                2.2 = Barnet ønsket ikke å medvirke
+            </xs:documentation>
+            <xs:appinfo xml:lang="json">
+                {
+                "type":"codelist",
+                "term":"Undersokelse",
+                "title":"BarnetsMedvirksning",
+                "path":" /Barnevern/Sak/Undersokelse/BarnetsMedvirkning/MedvirkningType",
+                "items":[
+                {"code":"1.1", "validFrom":"2026-01-01", "title":"Barnet medvirket ved samtale" },
+                {"code":"1.2", "validFrom":"2026-01-01", "title":"Barnet medvirket ved representant" },
+                {"code":"1.3", "validFrom":"2026-01-01", "title":"Barnet medvirket ved observasjon" },
+                {"code":"1.4", "validFrom":"2026-01-01", "title":"Barnet medvirket ved andre uttrykk" }
+                {"code":"2.1", "validFrom":"2026-01-01", "title":"Barnet har ikke fått anledning til å medvirke" },
+                {"code":"2.2", "validFrom":"2026-01-01", "title":"Barnet ønsket ikke å medvirke" },
+                ]
+                }
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="1.1"/>
+            <xs:enumeration value="1.2"/>
+            <xs:enumeration value="1.3"/>
+            <xs:enumeration value="1.4"/>
+            <xs:enumeration value="2.1"/>
+            <xs:enumeration value="2.2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- Undersøkelse -->
     <xs:complexType name="UndersokelseType">
         <xs:annotation>
@@ -924,6 +1206,7 @@ Bjorge.Saether@bufdir.no
         </xs:annotation>
         <xs:sequence>
             <xs:element name="Vedtaksgrunnlag" type="SaksinnholdType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="BarnetsMedvirkning" type="BarnetsMedvirkningType" minOccurs="0"/>
             <xs:element name="UtvidetFrist" minOccurs="0">
                 <xs:complexType>
                     <xs:attribute ref="StartDato" use="required">
@@ -980,6 +1263,9 @@ Bjorge.Saether@bufdir.no
                                 4 = Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter BVL2021 §§ 3-1 til 3-5 (tidligere BVL1992 § 4-4) er til stede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)
                                 5 = Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)
                                 6 = Undersøkelsen henlagt etter henvisning til annen instans
+                                7 = Undersøkelsen henlagt som følge av flytting til utlandet
+                                8 = Undersøkelsen henlagt som følge av flytting til ukjent sted
+                                9 = Undersøkelsen henlagt som følge av flytting til annen kommune
                             </xs:documentation>
                             <xs:appinfo xml:lang="json">
                                 {
@@ -992,8 +1278,11 @@ Bjorge.Saether@bufdir.no
                                 { "code":"2", "validFrom":"2013-01-01", "title":"Begjæring om tiltak for fylkesnemnda"},
                                 { "code":"3", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter barnverntjenestens vurdering (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak ikke er oppfylt)" },
                                 { "code":"4", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt etter partens ønske (kategorien gjelder når barneverntjenesten vurderer at vilkår for å sette inn tiltak etter BVL2021 §§ 3-1 til 3-5 (tidligere BVL1992 § 4-4) er til stede, men saken henlegges fordi foreldre/barnet ikke samtykker til tiltak. Gjelder bare når det er snakk om hjelpetiltak som foreldre/barn kan takke nei til.)" },
-                                { "code":"5", "validFrom":"2013-01-01", "title":"Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)" },
-                                { "code":"6", "validFrom":"2022-01-01", "title":"Undersøkelsen henlagt etter henvisning til annen instans" }
+                                { "code":"5", "validFrom":"2013-01-01", "validTo" : "2025-12-31", "changeDescription" : "Deles i kode 7, 8 og 9", "title":"Undersøkelsen henlagt som følge av flytting (kategorien gjelder når undersøkelsessak henlegges fordi barnet flytter til en ny kommune. Bør også innebære et underpunkt der barneverntjenesten må oppgi om saken er meldt videre til barnets nye oppholdskommune, obligatorisk ja/nei svar) (krever presisering)" },
+                                { "code":"6", "validFrom":"2022-01-01", "title":"Undersøkelsen henlagt etter henvisning til annen instans" },
+                                { "code":"7", "validFrom":"2026-01-01", "title":"Undersøkelsen henlagt som følge av flytting til utlandet" },
+                                { "code":"8", "validFrom":"2026-01-01", "title":"Undersøkelsen henlagt som følge av flytting til ukjent sted" }
+                                { "code":"9", "validFrom":"2026-01-01", "title":"Undersøkelsen henlagt som følge av flytting til annen kommune" }
                                 ]
                                 }
                             </xs:appinfo>
@@ -1008,6 +1297,9 @@ Bjorge.Saether@bufdir.no
                                 <xs:enumeration value="4"/>
                                 <xs:enumeration value="5"/>
                                 <xs:enumeration value="6"/>
+                                <xs:enumeration value="7"/>
+                                <xs:enumeration value="8"/>
+                                <xs:enumeration value="9"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
@@ -1081,6 +1373,8 @@ Bjorge.Saether@bufdir.no
                     8.1 = Økonomisk hjelp til egen bolig/hybel
                     8.2 = Bolig med oppfølging inkluderer også bofellesskap. Her skal alle tiltak der barn og unge får oppfølging i bolig (hjemlet i barnevernsloven), uavhengig av om oppfølgingen skjer ved bemanning på stedet eller som ambulant oppfølging i egen bolig, og uavhengig av om boligutgiftene dekkes helt eller delvis av barnevernet, eller på annen måte for eksempel NAV.
                     8.3 = Botreningskurs
+                    8.4 = Kommunale botiltak med døgnbemanning
+                    8.5 = Kommunale botiltak uten døgnbemanning
                     8.99 = Andre tiltak, ikke plasseringstiltak (krever presisering)
                 </xs:documentation>
                 <xs:appinfo xml:lang="json">
@@ -1136,8 +1430,10 @@ Bjorge.Saether@bufdir.no
                     {"code" : "7.3", "validFrom" : "2013-01-01", "title" : "Psykisk helsehjelp for barn og unge (Gjelder ikke ved henvisninger, men når barn får behandling av psykolog eller innen psykisk helsevern/BUP)"},
                     {"code" : "7.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak av undersøkelse og behandling fra andre tjenester (krever presisering)"},
                     {"code" : "8.1", "validFrom" : "2013-01-01", "title" : "Økonomisk hjelp til egen bolig/hybel"},
-                    {"code" : "8.2", "validFrom" : "2013-01-01", "title" : "Bolig med oppfølging (inkluderer også bofellesskap)"},
+                    {"code" : "8.2", "validFrom" : "2013-01-01", "validTo" : "2025-12-31", "changeDescription" : "Deles i kodene 8.4 og 8.5", "title" : "Bolig med oppfølging (inkluderer også bofellesskap)"},
                     {"code" : "8.3", "validFrom" : "2013-01-01", "title" : "Botreningskurs"},
+                    {"code" : "8.4", "validFrom" : "2026-01-01", "title" : "Kommunale botiltak med døgnbemanning"},
+                    {"code" : "8.5", "validFrom" : "2026-01-01", "title" : "Kommunale botiltak uten døgnbemanning"},
                     {"code" : "8.99", "validFrom" : "2013-01-01", "title" : "Andre tiltak, ikke plasseringstiltak (krever presisering)"}
                     ]
                     }
@@ -1195,6 +1491,8 @@ Bjorge.Saether@bufdir.no
                     <xs:enumeration value="8.1"/>
                     <xs:enumeration value="8.2"/>
                     <xs:enumeration value="8.3"/>
+                    <xs:enumeration value="8.4"/>
+                    <xs:enumeration value="8.5"/>
                     <xs:enumeration value="8.99"/>
                 </xs:restriction>
             </xs:simpleType>
