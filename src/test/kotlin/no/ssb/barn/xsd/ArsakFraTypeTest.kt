@@ -11,7 +11,7 @@ import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class ArsakFraTypeTest : BehaviorSpec({
@@ -21,7 +21,7 @@ class ArsakFraTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
+                getSchemaValidatorV4().validate(
                     buildArsakFraXml(
                         "<ArsakFra Kode=\"1.1.1\" Presisering=\"~Presisering~\" />"
                     ).toStreamSource()
@@ -65,7 +65,7 @@ class ArsakFraTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildArsakFraXml(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildArsakFraXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

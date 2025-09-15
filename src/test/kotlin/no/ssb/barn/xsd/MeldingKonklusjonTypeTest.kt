@@ -12,7 +12,7 @@ import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class MeldingKonklusjonTypeTest : BehaviorSpec({
@@ -22,7 +22,7 @@ class MeldingKonklusjonTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
+                getSchemaValidatorV4().validate(
                     buildMeldingKonklusjonXml(
                         "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" />"
                     ).toStreamSource()
@@ -64,12 +64,12 @@ class MeldingKonklusjonTypeTest : BehaviorSpec({
                 "invalid Kode",
                 "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"42\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration " +
-                        "'[1, 2, 3, 4]'. It must be a value from the enumeration."
+                        "'[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]'. It must be a value from the enumeration."
             )
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildMeldingKonklusjonXml(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildMeldingKonklusjonXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

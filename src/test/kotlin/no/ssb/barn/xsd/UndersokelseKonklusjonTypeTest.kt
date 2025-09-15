@@ -14,7 +14,7 @@ import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class UndersokelseKonklusjonTypeTest : BehaviorSpec({
@@ -23,13 +23,15 @@ class UndersokelseKonklusjonTypeTest : BehaviorSpec({
 
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
-            shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
-                    buildUndersokelseXml(
-                        "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" " +
-                                "Presisering=\"~Presisering~\" />"
-                    ).toStreamSource()
-                )
+            val validXML = "<Konklusjon SluttDato=\"$VALID_DATE\" Kode=\"1\" " +
+                    "Presisering=\"~Presisering~\" />"
+
+            Then("should not throw any exceptions") {
+                shouldNotThrowAny {
+                    getSchemaValidatorV4().validate(
+                        buildUndersokelseXml(validXML).toStreamSource()
+                    )
+                }
             }
         }
 
@@ -85,7 +87,7 @@ class UndersokelseKonklusjonTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildUndersokelseXml(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildUndersokelseXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

@@ -10,7 +10,7 @@ import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class OppfolgingTypeTest : BehaviorSpec({
@@ -34,7 +34,7 @@ class OppfolgingTypeTest : BehaviorSpec({
             /** make sure it's possible to make a valid test XML */
             When(description) {
                 shouldNotThrowAny {
-                    getSchemaValidatorV3().validate(
+                    getSchemaValidatorV4().validate(
                         buildXmlInTest(partialXml).toStreamSource()
                     )
                 }
@@ -51,7 +51,7 @@ class OppfolgingTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {
@@ -77,7 +77,7 @@ class OppfolgingTypeTest : BehaviorSpec({
             )
 
             val thrown = shouldThrow<SAXException> {
-                getSchemaValidatorV3().validate(xml.toStreamSource())
+                getSchemaValidatorV4().validate(xml.toStreamSource())
             }
 
             Then("thrown should be as expected") {

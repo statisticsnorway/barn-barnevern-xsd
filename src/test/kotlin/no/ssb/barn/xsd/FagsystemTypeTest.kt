@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.VALID_DATO_UTTREKK
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class FagsystemTypeTest : BehaviorSpec({
@@ -19,7 +19,7 @@ class FagsystemTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
+                getSchemaValidatorV4().validate(
                     buildXmlInTest(
                         "<Fagsystem Leverandor=\"Modulus Barn\" Navn=\"Modulus Barn\" Versjon=\"1\" />"
                     ).toStreamSource()
@@ -93,7 +93,7 @@ class FagsystemTypeTest : BehaviorSpec({
         ) { description, fagsystemXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildXmlInTest(fagsystemXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildXmlInTest(fagsystemXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {
