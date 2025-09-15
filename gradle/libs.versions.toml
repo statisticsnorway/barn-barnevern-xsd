@@ -7,7 +7,7 @@ kotest = "5.9.1"
 # NOTE: This is required for bumping the Kotlin version above
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 
-jakarta-xml-bind-api = { group = "jakarta.xml.bind", name = "jakarta.xml.bind-api", version = "4.0.2" }
+jakarta-xml-bind-api = { group = "jakarta.xml.bind", name = "jakarta.xml.bind-api", version = "4.0.4" }
 jackson-jakarta-rs-xml-provider = { group = "com.fasterxml.jackson.jakarta.rs", name = "jackson-jakarta-rs-xml-provider", version.ref = "jackson" }
 jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
 jackson-datatype-jsr310 = { group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version.ref = "jackson" }
