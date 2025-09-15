@@ -3,6 +3,17 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.4.0.0
+Endringsdato: 15. september 2025
+
+## Struktur:
+- Lagt til BarnetsMedvirkningType og benytter denne under /Sak/Undersokelse/BarnetsMedvirkning
+
+## Kodeverk
+
+Store endringer i kodelistene for SaksinnholdType/@Kode, TiltakType/Kategori/@Kode, Melding/Konklusjon/@Kode og Undersokelse/Konklusjon/@Kode. Se Kodelister.md for endringer. 
+
+---
 # v.3.0.5
 Endringsdato: 28. november 2024
 

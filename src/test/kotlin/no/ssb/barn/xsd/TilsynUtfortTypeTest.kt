@@ -15,7 +15,7 @@ import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class TilsynUtfortTypeTest : BehaviorSpec({
@@ -25,7 +25,7 @@ class TilsynUtfortTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
+                getSchemaValidatorV4().validate(
                     buildXmlInTest(
                         "<Utfort Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                                 "UtfortDato=\"$VALID_DATE\" />"
@@ -71,7 +71,7 @@ class TilsynUtfortTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

@@ -12,7 +12,7 @@ import no.ssb.barn.TestUtils.LOVHJEMMEL_XML
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class KategoriTypeTest : BehaviorSpec({
@@ -22,7 +22,7 @@ class KategoriTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
+                getSchemaValidatorV4().validate(
                     buildXmlInTest(
                         "<Kategori Kode=\"1.1\" Presisering=\"~Presisering~\"/>"
                     ).toStreamSource()
@@ -49,7 +49,7 @@ class KategoriTypeTest : BehaviorSpec({
                 "cvc-enumeration-valid: Value '42.42' is not facet-valid with respect to enumeration " +
                         "'[1.1, 1.2, 1.99, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.99, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, " +
                         "3.7, 3.8, 3.9, 3.10, 3.99, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.99, 5.1, 5.2, " +
-                        "5.3, 5.4, 5.99, 6.1, 6.2, 6.3, 6.4, 6.99, 7.1, 7.2, 7.3, 7.99, 8.1, 8.2, 8.3, 8.99]'. " +
+                        "5.3, 5.4, 5.99, 6.1, 6.2, 6.3, 6.4, 6.99, 7.1, 7.2, 7.3, 7.99, 8.1, 8.2, 8.3, 8.4, 8.5, 8.99]'. " +
                         "It must be a value from the enumeration."
             ),
 
@@ -68,7 +68,7 @@ class KategoriTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {
