@@ -1157,47 +1157,49 @@ Synne.Solbakken@bufdir.no
     <xs:complexType name="BarnetsMedvirkningType">
         <xs:sequence>
             <xs:element name="StartDato" type="xs:date"/>
-            <xs:element name="MedvirkningType" type="BarnetsMedvirkningTypeType"/>
+            <xs:element name="BarnetsMedvirkningType">
+                <xs:simpleType>
+                    <xs:annotation>
+                        <xs:documentation>
+                            1.1 = Barnet medvirket ved samtale
+                            1.2 = Barnet medvirket ved representant
+                            1.3 = Barnet medvirket ved observasjon
+                            1.4 = Barnet medvirket ved andre uttrykk
+                            2.1 = Barnet har ikke fått anledning til å medvirke
+                            2.2 = Barnet ønsket ikke å medvirke
+                        </xs:documentation>
+                        <xs:appinfo xml:lang="json">
+                            {
+                            "type":"codelist",
+                            "term":"Undersokelse",
+                            "title":"BarnetsMedvirksning",
+                            "path":" /Barnevern/Sak/Undersokelse/BarnetsMedvirkning/MedvirkningType",
+                            "items":[
+                            {"code":"1.1", "validFrom":"2026-01-01", "title":"Barnet medvirket ved samtale" },
+                            {"code":"1.2", "validFrom":"2026-01-01", "title":"Barnet medvirket ved representant" },
+                            {"code":"1.3", "validFrom":"2026-01-01", "title":"Barnet medvirket ved observasjon" },
+                            {"code":"1.4", "validFrom":"2026-01-01", "title":"Barnet medvirket ved andre uttrykk" }
+                            {"code":"2.1", "validFrom":"2026-01-01", "title":"Barnet har ikke fått anledning til å medvirke" },
+                            {"code":"2.2", "validFrom":"2026-01-01", "title":"Barnet ønsket ikke å medvirke" },
+                            ]
+                            }
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="3"/>
+                        <xs:enumeration value="1.1"/>
+                        <xs:enumeration value="1.2"/>
+                        <xs:enumeration value="1.3"/>
+                        <xs:enumeration value="1.4"/>
+                        <xs:enumeration value="2.1"/>
+                        <xs:enumeration value="2.2"/>
+                    </xs:restriction>
+                </xs:simpleType>
+
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:simpleType name="BarnetsMedvirkningTypeType">
-        <xs:annotation>
-            <xs:documentation>
-                1.1 = Barnet medvirket ved samtale
-                1.2 = Barnet medvirket ved representant
-                1.3 = Barnet medvirket ved observasjon
-                1.4 = Barnet medvirket ved andre uttrykk
-                2.1 = Barnet har ikke fått anledning til å medvirke
-                2.2 = Barnet ønsket ikke å medvirke
-            </xs:documentation>
-            <xs:appinfo xml:lang="json">
-                {
-                "type":"codelist",
-                "term":"Undersokelse",
-                "title":"BarnetsMedvirksning",
-                "path":" /Barnevern/Sak/Undersokelse/BarnetsMedvirkning/MedvirkningType",
-                "items":[
-                {"code":"1.1", "validFrom":"2026-01-01", "title":"Barnet medvirket ved samtale" },
-                {"code":"1.2", "validFrom":"2026-01-01", "title":"Barnet medvirket ved representant" },
-                {"code":"1.3", "validFrom":"2026-01-01", "title":"Barnet medvirket ved observasjon" },
-                {"code":"1.4", "validFrom":"2026-01-01", "title":"Barnet medvirket ved andre uttrykk" }
-                {"code":"2.1", "validFrom":"2026-01-01", "title":"Barnet har ikke fått anledning til å medvirke" },
-                {"code":"2.2", "validFrom":"2026-01-01", "title":"Barnet ønsket ikke å medvirke" },
-                ]
-                }
-            </xs:appinfo>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:length value="1"/>
-            <xs:enumeration value="1.1"/>
-            <xs:enumeration value="1.2"/>
-            <xs:enumeration value="1.3"/>
-            <xs:enumeration value="1.4"/>
-            <xs:enumeration value="2.1"/>
-            <xs:enumeration value="2.2"/>
-        </xs:restriction>
-    </xs:simpleType>
 
     <!-- Undersøkelse -->
     <xs:complexType name="UndersokelseType">
