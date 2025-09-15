@@ -21,7 +21,7 @@ class UndersokelseBarnetsMedvirkningTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         val validXML = "<BarnetsMedvirkning>" +
                 "<StartDato>$VALID_DATE</StartDato>" +
-                "<BarnetsMedvirkningType>$VALID_PARTICIPATION_TYPE</BarnetsMedvirkningType>" +
+                "<MedvirkningType>$VALID_PARTICIPATION_TYPE</MedvirkningType>" +
                 "</BarnetsMedvirkning>"
 
         Then("should not throw any exceptions") {
@@ -38,17 +38,17 @@ class UndersokelseBarnetsMedvirkningTypeTest : BehaviorSpec({
             /** StartDato */
             row(
                 "missing StartDato",
-                "<BarnetsMedvirkning><BarnetsMedvirkningType>$VALID_PARTICIPATION_TYPE</BarnetsMedvirkningType></BarnetsMedvirkning>",
-                "cvc-complex-type.2.4.a: Invalid content was found starting with element 'BarnetsMedvirkningType'. One of '{StartDato}' is expected."
+                "<BarnetsMedvirkning><MedvirkningType>$VALID_PARTICIPATION_TYPE</MedvirkningType></BarnetsMedvirkning>",
+                "cvc-complex-type.2.4.a: Invalid content was found starting with element 'MedvirkningType'. One of '{StartDato}' is expected."
             ),
             row(
                 "empty StartDato",
-                "<BarnetsMedvirkning><StartDato></StartDato><BarnetsMedvirkningType>$VALID_PARTICIPATION_TYPE</BarnetsMedvirkningType></BarnetsMedvirkning>",
+                "<BarnetsMedvirkning><StartDato></StartDato><MedvirkningType>$VALID_PARTICIPATION_TYPE</MedvirkningType></BarnetsMedvirkning>",
                 EMPTY_DATE_ERROR
             ),
             row(
                 "invalid StartDato",
-                "<BarnetsMedvirkning><StartDato>$INVALID_DATE</StartDato><BarnetsMedvirkningType>$VALID_PARTICIPATION_TYPE</BarnetsMedvirkningType></BarnetsMedvirkning>",
+                "<BarnetsMedvirkning><StartDato>$INVALID_DATE</StartDato><MedvirkningType>$VALID_PARTICIPATION_TYPE</MedvirkningType></BarnetsMedvirkning>",
                 INVALID_DATE_FORMAT_ERROR
             ),
 
@@ -56,16 +56,16 @@ class UndersokelseBarnetsMedvirkningTypeTest : BehaviorSpec({
             row(
                 "missing BarnetsMedvirkningType",
                 "<BarnetsMedvirkning><StartDato>$VALID_DATE</StartDato></BarnetsMedvirkning>",
-                "cvc-complex-type.2.4.b: The content of element 'BarnetsMedvirkning' is not complete. One of '{BarnetsMedvirkningType}' is expected."
+                "cvc-complex-type.2.4.b: The content of element 'BarnetsMedvirkning' is not complete. One of '{MedvirkningType}' is expected."
             ),
             row(
                 "empty MedvirkningType",
-                "<BarnetsMedvirkning><StartDato>$VALID_DATE</StartDato><BarnetsMedvirkningType></BarnetsMedvirkningType></BarnetsMedvirkning>",
-                "cvc-length-valid: Value '' with length = '0' is not facet-valid with respect to length '3' for type '#AnonType_BarnetsMedvirkningTypeBarnetsMedvirkningType'."
+                "<BarnetsMedvirkning><StartDato>$VALID_DATE</StartDato><MedvirkningType></MedvirkningType></BarnetsMedvirkning>",
+                "cvc-length-valid: Value '' with length = '0' is not facet-valid with respect to length '3' for type '#AnonType_MedvirkningTypeBarnetsMedvirkningType'."
             ),
             row(
                 "invalid MedvirkningType",
-                "<BarnetsMedvirkning><StartDato>$VALID_DATE</StartDato><BarnetsMedvirkningType>XXX</BarnetsMedvirkningType></BarnetsMedvirkning>",
+                "<BarnetsMedvirkning><StartDato>$VALID_DATE</StartDato><MedvirkningType>XXX</MedvirkningType></BarnetsMedvirkning>",
                 "cvc-enumeration-valid: Value 'XXX' is not facet-valid with respect to enumeration '[1.1, 1.2, 1.3, 1.4, 2.1, 2.2]'. It must be a value from the enumeration."
             ),
 
