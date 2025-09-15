@@ -9,7 +9,7 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "UndersokelseType",
-    propOrder = ["id", "migrertId", "startDato", "erSlettet", "vedtaksgrunnlag", "utvidetFrist", "konklusjon"]
+    propOrder = ["id", "migrertId", "startDato", "erSlettet", "vedtaksgrunnlag", "utvidetFrist", "barnetsMedvirkning", "konklusjon"]
 )
 data class UndersokelseType(
     @field:XmlAttribute(name = "Id", required = true)
@@ -28,6 +28,9 @@ data class UndersokelseType(
     @field:JacksonXmlProperty(localName = "Vedtaksgrunnlag")
     @field:JacksonXmlElementWrapper(useWrapping = false)
     val vedtaksgrunnlag: MutableList<SaksinnholdType> = mutableListOf(),
+
+    @field:XmlElement(name = "BarnetsMedvirkning")
+    var barnetsMedvirkning: BarnetsMedvirkningType? = null,
 
     @field:XmlElement(name = "UtvidetFrist")
     var utvidetFrist: UndersokelseUtvidetFristType? = null,

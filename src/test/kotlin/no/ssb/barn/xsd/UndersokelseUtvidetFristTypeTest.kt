@@ -12,7 +12,7 @@ import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class UndersokelseUtvidetFristTypeTest : BehaviorSpec({
@@ -22,7 +22,7 @@ class UndersokelseUtvidetFristTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
+                getSchemaValidatorV4().validate(
                     buildUndersokelseXml(
                         "<UtvidetFrist StartDato=\"$VALID_DATE\" Innvilget=\"1\" />"
                     ).toStreamSource()
@@ -64,7 +64,7 @@ class UndersokelseUtvidetFristTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildUndersokelseXml(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildUndersokelseXml(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

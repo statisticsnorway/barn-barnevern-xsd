@@ -18,7 +18,7 @@ class OppfolgingHyppighetTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                ValidationUtils.getSchemaValidatorV3().validate(
+                ValidationUtils.getSchemaValidatorV4().validate(
                     buildXmlInTest(
                         "<Hyppighet Id=\"6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e\" " +
                                 "StartDato=\"${TestUtils.VALID_DATE}\" Kode=\"2\"/>" +
@@ -88,7 +88,7 @@ class OppfolgingHyppighetTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    ValidationUtils.getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
+                    ValidationUtils.getSchemaValidatorV4().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

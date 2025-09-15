@@ -13,7 +13,7 @@ import no.ssb.barn.TestUtils.INVALID_ID_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.VALID_DATO_UTTREKK
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 import java.time.Year
 
@@ -31,7 +31,7 @@ class BarnevernTypeTest : BehaviorSpec({
         ) { description, dateTimeString ->
             When(description) {
                 shouldNotThrowAny {
-                    getSchemaValidatorV3().validate(
+                    getSchemaValidatorV4().validate(
                         buildXmlInTest(
                             "<Barnevern Id=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" " +
                                     "ForrigeId=\"236110fc-edba-4b86-87b3-d6bb945cbc76\" " +
@@ -108,7 +108,7 @@ class BarnevernTypeTest : BehaviorSpec({
         ) { description, sakElement, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildXmlInTest(sakElement).toStreamSource())
+                    getSchemaValidatorV4().validate(buildXmlInTest(sakElement).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {
