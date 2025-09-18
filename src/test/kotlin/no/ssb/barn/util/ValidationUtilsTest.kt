@@ -7,7 +7,7 @@ import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import no.ssb.barn.util.ValidationUtils.VERSION_THREE_XSD
 import no.ssb.barn.util.ValidationUtils.getSchemaValidator
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 import java.io.StringReader
 import javax.xml.transform.stream.StreamSource
@@ -17,7 +17,7 @@ class ValidationUtilsTest : BehaviorSpec({
     Given("XML that should not validate because of Melder Kode=\"\" (BAR-693)") {
         When("validate XML") {
             val thrown = shouldThrow<SAXException> {
-                getSchemaValidatorV3().validate(StreamSource(StringReader(testXml(""))))
+                getSchemaValidatorV4().validate(StreamSource(StringReader(testXml(""))))
             }
 
             then("thrown should be as expected") {
@@ -31,7 +31,7 @@ class ValidationUtilsTest : BehaviorSpec({
     Given("XML that should validate") {
         When("validate XML") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(StreamSource(StringReader(testXml())))
+                getSchemaValidatorV4().validate(StreamSource(StringReader(testXml())))
             }
         }
     }
@@ -39,7 +39,7 @@ class ValidationUtilsTest : BehaviorSpec({
     Given("existing XSD") {
         When("getSchemaValidator") {
             val schemaValidator = shouldNotThrowAny {
-                getSchemaValidatorV3()
+                getSchemaValidatorV4()
             }
 
             Then("schemaValidator should not be null") {

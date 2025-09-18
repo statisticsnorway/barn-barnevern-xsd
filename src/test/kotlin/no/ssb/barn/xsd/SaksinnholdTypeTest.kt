@@ -11,7 +11,7 @@ import no.ssb.barn.TestUtils.INVALID_CLARIFICATION_ERROR
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXml
 import no.ssb.barn.toStreamSource
-import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV3
+import no.ssb.barn.util.ValidationUtils.getSchemaValidatorV4
 import org.xml.sax.SAXException
 
 class SaksinnholdTypeTest : BehaviorSpec({
@@ -21,7 +21,7 @@ class SaksinnholdTypeTest : BehaviorSpec({
         /** make sure it's possible to make a valid test XML */
         When("valid XML, expect no exceptions") {
             shouldNotThrowAny {
-                getSchemaValidatorV3().validate(
+                getSchemaValidatorV4().validate(
                     buildXmlInTest(
                         "<Saksinnhold Kode=\"1\" Presisering=\"~Presisering~\"/>"
                     ).toStreamSource()
@@ -47,7 +47,19 @@ class SaksinnholdTypeTest : BehaviorSpec({
                 "<Saksinnhold Kode=\"42\" />",
                 "cvc-enumeration-valid: Value '42' is not facet-valid with respect to enumeration " +
                         "'[1, 2, 3, 4, 20, 21, 22, 23, 24, 28, 29, 31, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, " +
-                        "25, 26, 27, 30, 32, 33, 34, 35, 36, 18, 19]'. It must be a value from the enumeration."
+                        "25, 26, 27, 30, 32, 33, 34, 35, 36, 18, 19, " +
+                        "1.1.01, 1.1.02, 1.1.03, 1.1.04, " +
+                        "1.2.01, 1.2.02, 1.2.03, " +
+                        "1.3.01, 1.3.02, 1.3.03, 1.3.04, 1.3.05, 1.3.06, 1.3.07, 1.3.08, 1.3.09, 1.3.10, 1.3.11, " +
+                        "1.4.01, 1.4.02, 1.4.03, 1.4.04, " +
+                        "2.1.01, 2.1.02, 2.1.03, " +
+                        "2.2.01, 2.2.02, 2.2.03, " +
+                        "2.3.01, 2.3.02, " +
+                        "2.4.01, 2.4.02, 2.4.03, 2.4.04, 2.4.05, 2.4.06, 2.4.07, 2.4.08, 2.4.09, " +
+                        "3.1.01, 3.1.02, 3.1.03, 3.1.04, 3.1.05, 3.1.06, 3.1.07, 3.1.08, 3.1.09, 3.1.10, " +
+                        "3.2.01, 3.2.02, " +
+                        "3.3.01, 3.3.02, 3.3.03, 3.3.04, 3.3.05, 3.3.06" +
+                        "]'. It must be a value from the enumeration."
             ),
 
             /** Presisering */
@@ -65,7 +77,7 @@ class SaksinnholdTypeTest : BehaviorSpec({
         ) { description, partialXml, expectedError ->
             When(description) {
                 val thrown = shouldThrow<SAXException> {
-                    getSchemaValidatorV3().validate(buildXmlInTest(partialXml).toStreamSource())
+                    getSchemaValidatorV4().validate(buildXmlInTest(partialXml).toStreamSource())
                 }
 
                 Then("thrown should be as expected") {

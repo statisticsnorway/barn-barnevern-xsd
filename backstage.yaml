@@ -8,6 +8,8 @@ metadata:
   tags:
     - kotlin
     - gradle
+    - kotest
+    - sonarcloud
   annotations:
     github.com/project-slug: statisticsnorway/barn-barnevern-xsd
 spec:
