@@ -17,7 +17,7 @@ data class BarnetsMedvirkningType(
     @field:XmlSchemaType(name = "date")
     val startDato: LocalDate,
 
-    @field:XmlElement(name = "BarnetsMedvirkningTypeType", required = true)
+    @field:XmlElement(name = "MedvirkningType", required = true)
     @field:XmlSchemaType(name = "string")
     val barnetsMedvirkningType: String,
 )
