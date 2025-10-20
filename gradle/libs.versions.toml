@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.1.10"
 jackson = "2.18.3"
-kotest = "5.9.1"
+kotest = "6.0.4"
 
 [libraries]
 # NOTE: This is required for bumping the Kotlin version above
