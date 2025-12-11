@@ -1043,7 +1043,7 @@ Synne.Solbakken@bufdir.no
             <xs:simpleType>
                 <xs:restriction base="xs:string">
                     <xs:minLength value="1"/>
-                    <xs:maxLength value="2"/>
+                    <xs:maxLength value="6"/>
                     <xs:enumeration value="1"/>
                     <xs:enumeration value="2"/>
                     <xs:enumeration value="3"/>
