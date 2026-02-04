@@ -99,13 +99,23 @@ Gyldig fra 2013-01-01
 
 ### Avgiver Kontroll 1: Bydelsnummer og bydelsnavn
 
-Gitt at en har en Avgiver der Organisasjonsnummer er en av 958935420 (Oslo), 964338531 (Bergen) eller 942110464 (Trondheim)<br/>
-når Bydelsnummer eller Bydelsnavn mangler utfylling<br/>
+Avgiver Kontroll 1: Bydelsnummer og bydelsnavn
+Gitt at en har en Avgiver der kommune er en av 0301 (Oslo), 4601 (Bergen) eller 5001 (Trondheim)
+når Bydelsnummer eller Bydelsnavn mangler utfylling
 så gi feilmeldingen "Bydelsnummer og/eller Bydelsnavn skal være utfylt"
 
-Alvorlighetsgrad: ERROR<br/>
+Alvorlighetsgrad: ERROR
 Gyldig fra 2013-01-01
 
+
+###  Avgiver Kontroll 2: Kommunenummer
+
+Gitt at en har en Avgiver der kommune finnes
+når kommunenummer ikke er gyldig (utgått / startet)
+så gi feilmeldingen "Ugyldig kommunernummer"
+
+Alvorlighetsgrad: ERROR
+Gyldig fra 2013-01-01
 
 
 ## <a name="sak">Sak</a>
@@ -113,8 +123,8 @@ Gyldig fra 2013-01-01
 ### Sak kontroll 1: Dato innenfor lovlige verdier
 
 Gitt at en har en Sak
-når en dato i saken er før 01.01.<i år - 26 år> eller etter 31.12.<i år + 26 år>
-så gi feilmeldingen "<Feltnavn>: Dato ($dateToCheck) må være mellom 01.01.<min. år> og 31.12.<maks. år>"
+når en dato i saken er mer enn 1 år før barnets fødselsdato 
+så gi feilmeldingen "Dato ($dateToCheck) er mer enn 1 år før barnets fødsel"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
@@ -129,24 +139,14 @@ Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
-### UTGÅR: Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
-
-Gitt at en har en Sak uten SluttDato<br/>
-når saken mangler melding, plan og tiltak<br/>
-så gi feilmeldingen "Klienten har ingen meldinger, planer eller tiltak"
-
-Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
-
-
 ### Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet
 
-Gitt at en har en Sak med datoUttrekk og fødselsdato<br/>
+Gitt at en har en Sak som er aktiv med datoUttrekk og fødselsdato<br/>
 når datoUttrekk minus fødselsdato er lik 25 år eller større<br/>
 og saken ikke har sluttdato eller saken har underelementer uten sluttdato (unntak: vedtak)<br/>
 så gi feilmeldingen "Klienten er over 25 år og skal avsluttes som klient. Alder: {alder} år."
 
-Alvorlighetsgrad: WARNING<br/>
+Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
@@ -237,20 +237,9 @@ Gyldig fra 2022-01-01
 
 
 
-### Personalia Kontroll 14: Kontroll av Fødselsnummer og Kjønn
-
-Gitt at en har Personalia med fødselsnummer og kjønn<br/>
-når de 5 siste karakterene i Personlia sitt fødselsnummer er ulik 99999 og den 9. karakteren i fødselsnummer modulus 2 er lik 0 er forskjellig fra koden for kjønn<br/>
-så gi feilmeldingen "Fødselsnummer og Kjønn viser til forskjellige kjønn"
-
-Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2022-01-01
-
-
-
 ### Personalia Kontroll 15: Kontroll av Fødselsnummer, fødselsdato og StartDato
 
-Gitt at en har Personalia med fødselsnummer, startdato og datouttrekk<br/>
+Gitt at en har en aktiv Sak der Personalia med fødselsnummer, startdato og datouttrekk<br/>
 når startdato er etter fødselsdato og de 5 siste karakterene i fødselsnummer er lik 99999<br/>
 så gi feilmeldingen "Feil i Fødselsnummer for født barn"
 
@@ -329,22 +318,11 @@ Gyldig fra 2013-01-01
 ### Melding Kontroll 2e: StartDato er før sakens StartDato
 
 Gitt at en har en Melding med StartDato og i sak med StartDato<br/>
-når meldingens StartDato er før sakens StartDato<br/>
-så gi feilmeldingen "Meldingens startdato {StartDato} er før sakens startdato {StartDato}"
+når meldingens StartDato er mer enn 1 uke før sakens StartDato<br/>
+så gi feilmeldingen "Meldingens startdato {StartDato} er mer enn 1 uke før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
 Alvorlighetsgrad med migrert-id: WARNING<br/>
-Gyldig fra 2013-01-01
-
-
-
-### Melding Kontroll 3: Fristoverskridelse på behandlingstid
-
-Gitt at en har en Melding der StartDato og Konklusjon/SluttDato finnes<br/>
-når Konklusjon/SluttDato er mer enn 7 dager etter StartDato<br/>
-så gi feilmeldingen "Fristoverskridelse på behandlingstid for melding, ({StartDato} -> {Konklusjon/SluttDato})"
-
-Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2013-01-01
 
 
@@ -377,32 +355,6 @@ når en sammenligner meldingene med hverandre og finner helt identisk innhold, m
 så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: INFO<br/>
-Gyldig fra 2013-01-01
-
-
-
-### <a name="melder">Melder</a>
-
-#### Melder Kontroll 2: Mangler Presisering
-
-Gitt at en har en Melder der Kode er 22 (= Andre offentlige instanser)<br/>
-når Melder mangler Presisering<br/>
-så gi feilmeldingen "Melder med kode ({Kode}) mangler presisering"
-
-Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
-
-
-
-### <a name="saksinnhold">Saksinnhold</a>
-
-#### Saksinnhold Kontroll 2: Mangler Presisering
-
-Gitt at en har et Saksinnhold der Kode er 18 (= Andre forhold ved foreldre/familien) eller 19 (= Andre forhold ved barnets situasjon)<br/>
-når Saksinnhold mangler Presisering<br/>
-så gi feilmeldingen "Saksinnhold med kode ({Kode}) mangler presisering"
-
-Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
@@ -469,6 +421,7 @@ Gyldig fra 2013-01-01
 ### Undersøkelse Kontroll 11: Fristoverskridelse på behandlingstid i forhold til melding sin startdato
 
 [TODO] trenger en gjennomgang da denne må referere til 3/6 måneder stedet for 90/180 dager
+[TODO] Sak som er aktiv
 
 Gitt at en har en ukonkludert Undersøkelse med en Relasjon til en Melding<br/>
 der relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType<br/>
@@ -743,7 +696,8 @@ når presisering mangler<br/>
 så gi feilmelding "Tiltakskategori (kode) mangler presisering."
 
 Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
+Gyldig fra 2013-01-01, gyldig til 2025-12-31
+Avsluttet da presiseringstekster ikke lenger blir rapportert.
 
 
 
