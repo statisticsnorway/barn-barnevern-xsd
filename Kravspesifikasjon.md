@@ -347,16 +347,6 @@ Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
-### Melding Kontroll 19: Dublett på innhold, men forskjellige identer
-
-Gitt at en har 2 eller flere Meldinger med konklusjon<br/>
-når en sammenligner meldingene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
-så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
-
-Alvorlighetsgrad: INFO<br/>
-Gyldig fra 2013-01-01
-
-
 ### Melding Kontroll 24: Ugyldig kode for saksinnhold
 
 Gitt at en har en Melding der Melding.Konklusjon.SluttDato er satt<br/>
@@ -417,54 +407,11 @@ Gyldig fra 2013-01-01
 
 
 
-### Undersøkelse Kontroll 3: Vedtaksgrunnlag mangler presisering
-
-Gitt at en har et Vedtaksgrunnlag der Kode er 18 (= Andre forhold ved foreldre/familien) eller 19 (= Andre forhold ved barnets situasjon)<br/>
-når Vedtaksgrunnlag mangler Presisering<br/>
-så gi feilmeldingen "Vedtaksgrunnlag med kode ({Kode}) mangler presisering"
-
-Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
-
-
-
 ### Undersøkelse Kontroll 7: Konkludert undersøkelse mangler vedtaksgrunnlag
 
 Gitt at en har en Undersøkelse der Konklusjon finnes og Konklusjon sin Kode er 1 eller 2<br/>
 når Vedtaksgrunnlag mangler<br/>
 så gi feilmeldingen "Undersøkelse konkludert med kode {Konklusjon/Kode} mangler vedtaksgrunnlag"
-
-Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
-
-
-
-### Undersøkelse Kontroll 11: Fristoverskridelse på behandlingstid i forhold til melding sin startdato
-
-[TODO] trenger en gjennomgang da denne må referere til 3/6 måneder stedet for 90/180 dager
-[TODO] Sak som er aktiv
-
-Gitt at en har en ukonkludert Undersøkelse med en Relasjon til en Melding<br/>
-der relasjon som inneholder melding/Id i sin FraId, "Melding" i sin FraType, undersøkelse/Id i sin TilId og "Undersokelse" i sin TilType<br/>
-og undersøkelse sin Konklusjon/SluttDato mangler <br/>
-
-når Datouttrekk er mer enn 7 + 90 dager etter Melding sin StartDato <br/>
-og UtvidetFrist sin Invilget enten mangler eller er lik 2 (= "Nei"), <br/>
-så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 90 dager etter melding sin startdato"
-
-når Datouttrekk er mer enn 7 + 180 dager etter Melding sin StartDato <br/>
-så gi feilmeldingen "Undersøkelse skal konkluderes innen 7 + 180 dager etter melding sin startdato"
-
-Alvorlighetsgrad: WARNING<br/>
-Gyldig fra 2013-01-01
-
-
-
-### Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
-
-Gitt at en har 2 eller flere Undersøkelser<br/>
-når en sammenligner Undersøkelsene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
-så gi feilmeldingen "Det finnes 2 eller flere Undersøkelser med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
@@ -563,27 +510,6 @@ Gyldig fra 2022-01-01
 
 
 
-### Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato
-
-Gitt at en har et Vedtak der SluttDato finnes og Vedtaket har Status der Status sin EndretDato finnes<br/>
-når statusens EndretDato er etter vedtakets SluttDato<br/>
-så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er etter Vedtakets sluttdato {Konklusjon/SluttDato}"
-
-Alvorlighetsgrad: INFO<br/>
-Gyldig fra 2022-01-01
-
-
-
-### Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato
-
-Gitt at en har et Vedtak der StartDato finnes og Vedtaket har Status der Status sin EndretDato finnes<br/>
-når statusens EndretDato er før vedtakets StartDato <br/>
-så gi feilmeldingen "Status sin endretdato {Status/EndretDato} er før vedtakets startdato {StartDato}"
-
-Alvorlighetsgrad: INFO<br/>
-Gyldig fra 2022-01-01
-
-
 
 ### Vedtak Kontroll 3: Avsluttet vedtak skal ha SluttDato
 
@@ -614,25 +540,17 @@ Gyldig fra 2022-01-01
 
 Gitt att en har et Vedtak
 
-når Vedtak sin StartDato er før 01. januar 2023 og Vedtak/Lovhjemmel/Lov er BVL2021<br/>
+når Vedtak sin StartDato er før 01. januar 2022 og Vedtak/Lovhjemmel/Lov er forskjellig fra BVL<br/>
 så gi feilmeldingen "Lovhjemmel opprettet før 01. januar 2023 krever lov = '**[BVL](#barnevernloven)**'"
 
-når Vedtak sin StartDato er 01. januar 2023 eller senere og Vedtak/Lovhjemmel/Lov er BVL<br/>
+når Vedtak sin StartDato er fra 01. januar 2022 til 31. desember 2022 og Vedtak/Lovhjemmel/Lov er forskjellig fra BVL og BVL2021<br/>
+så gi feilmeldingen "Lovhjemmel opprettet fra 01. januar 2022 til 31. desember 2022 krever lov = '**[BVL](#barnevernloven)**' eller '**[BVL2021](#barnevernloven)**'"
+
+når Vedtak sin StartDato er 01. januar 2023 eller senere og Vedtak/Lovhjemmel/Lov er forskjellig fra BVL2021<br/>
 så gi feilmeldingen "Lovhjemmel opprettet på 01. januar 2023 eller senere krever lov = '**[BVL2021](#barnevernloven)**'"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2022-01-01
-
-
-
-### Vedtak Kontroll 19: Dublett på innhold, men forskjellige identer
-
-Gitt at en har 2 eller flere Vedtak<br/>
-når en sammenligner Vedtakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
-så gi feilmeldingen "Det finnes 2 eller flere Vedtak med identisk innhold, men med forskjellige identer"
-
-Alvorlighetsgrad: INFO<br/>
-Gyldig fra 2013-01-01
 
 
 
@@ -687,52 +605,6 @@ Gyldig fra 2013-01-01
 
 
 
-### Tiltak Kontroll 5: Barnet er over 7 år og er i barnehage
-
-Gitt at det er en sak med tiltak og fødseldato (slik at en kan utlede alder)<br/>
-når barnets alder er større enn 7 år og tiltakets kategori er '4.1' Barnehage<br/>
-så gi feilmelding "Barnet er over 7 år og i barnehage. Alder: {alder} år."
-
-Alvorlighetsgrad: WARNING<br/>
-Gyldig fra 2013-01-01
-
-
-
-### Tiltak Kontroll 6: Barnet er over 11 år og i SFO
-
-Gitt at det er en sak med tiltak og fødseldato (slik at en kan utlede alder)<br/>
-når barnets alder er større enn 11 år og tiltakets kategori er '4.2' SFO/AKS<br/>
-så gi feilmelding "Barnet er over 11 år og i SFO. Alder: {alder} år."
-
-Alvorlighetsgrad: WARNING<br/>
-Gyldig fra 2013-01-01
-
-
-
-### Tiltak Kontroll 7: Kontroll om presisering av tiltakskategori
-
-Gitt at en har et Tiltak der Kategori/Kode er en følgende koder:
-1.99, 2.99, 3.7, 3.99, 4.99, 5.99, 6.99, 7.99 eller 8.99<br/>
-når presisering mangler<br/>
-så gi feilmelding "Tiltakskategori (kode) mangler presisering."
-
-Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01, gyldig til 2025-12-31
-Avsluttet da presiseringstekster ikke lenger blir rapportert.
-
-
-
-### Tiltak Kontroll 8: Kontroll av kode og presisering av opphevelse
-
-Gitt at en har et Tiltak der Opphevelse/Kode er 4<br/>
-når presisering mangler<br/>
-så gi feilmelding "Opphevelse (kode) mangler presisering."
-
-Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
-
-
-
 ### Tiltak Kontroll 9: Flere plasseringstiltak er oppgitt i samme tidsperiode
 
 Gitt at en har 2 eller flere [Plasseringstiltak](#plasseringstiltak)<br/>
@@ -778,17 +650,6 @@ Gyldig fra 2013-01-01
 
 
 
-### Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
-
-Gitt at en har 2 eller flere Tiltak<br/>
-når en sammenligner Tiltakene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
-så gi feilmeldingen "Det finnes 2 eller flere tiltak med identisk innhold, men med forskjellige identer"
-
-Alvorlighetsgrad: WARNING<br/>
-Gyldig fra 2022-01-01
-
-
-
 ### Tiltak Kontroll 20: Tiltak skal ha relasjon fra Vedtak
 
 Gitt at det er et Tiltak, en Relasjon og et Vedtak <br/>
@@ -823,7 +684,7 @@ Dersom dette ikke er et plasseringstiltak (institusjon) må tiltakskode endres. 
 Er det et administrative vedtak som er gitt kode 1.99 skal tiltaket slettes."
 
 Alvorlighetsgrad: WARNING<br/>
-Gyldig fra 2023-01-01
+Gyldig fra 2023-01-01, gyldig til 2026-12-31
 
 
 
@@ -836,7 +697,7 @@ Dersom dette ikke er et plasseringstiltak (fosterhjem) må tiltakskode endres. <
 Er det et administrative vedtak som er gitt kode 2.99 skal tiltaket slettes."
 
 Alvorlighetsgrad: WARNING<br/>
-Gyldig fra 2023-01-01
+Gyldig fra 2023-01-01, gyldig til 2026-12-31
 
 
 
@@ -887,7 +748,7 @@ når UtfortDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Utført evaluering {Plan/Evaluering/UtfortDato} er etter sakens sluttdato {Sak/SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
+Gyldig fra 2013-01-01, gyldig til 2026-12-31
 
 
 
@@ -898,18 +759,7 @@ når UtfortDato er før sakens StartDato<br/>
 så gi feilmeldingen "Utført evaluering {Plan/Evaluering/UtfortDato} er før sakens startdato {Sak/StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2013-01-01
-
-
-
-### Plan Kontroll 19: Dublett på innhold, men forskjellige identer
-
-Gitt at en har 2 eller flere Planer<br/>
-når en sammenligner Planene med hverandre og finner helt identisk innhold, men forskjellig id<br/>
-så gi feilmeldingen "Det finnes 2 eller flere Planer med identisk innhold, men med forskjellige identer"
-
-Alvorlighetsgrad: INFO<br/>
-Gyldig fra 2013-01-01
+Gyldig fra 2013-01-01, gyldig til 2026-12-31
 
 
 ## <a name="ettervern">Ettervern</a>
@@ -921,7 +771,7 @@ når StartDato er etter SluttDato<br/>
 så gi feilmeldingen "Ettervernets tilbudSendtDato {TilbudSendtDato} er etter sluttdato {Konklusjon/SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2022-01-01
+Gyldig fra 2022-01-01, gyldig til 2026-12-31
 
 
 
@@ -932,7 +782,7 @@ når SluttDato er etter sakens SluttDato<br/>
 så gi feilmeldingen "Ettervern sin sluttdato {Konklusjon/SluttDato} er etter sakens sluttdato {SluttDato}"
 
 Alvorlighetsgrad: ERROR<br/>
-Gyldig fra 2022-01-01
+Gyldig fra 2022-01-01, gyldig til 2026-12-31
 
 
 
@@ -943,6 +793,7 @@ når ettervernets TilbudSendtDato er før sakens StartDato <br/>
 så gi feilmeldingen "Ettervern sin tilbud-sendt-dato {TilbudSendtDato} er før sakens startdato {StartDato}"
 
 Alvorlighetsgrad: ERROR<br/>
+Gyldig fra 2022-01-01, gyldig til 2026-12-31
 
 
 
@@ -1000,10 +851,13 @@ Gyldig fra 2022-01-01
 
 Gitt at en har et Oversendelse til fylkesnemnd<br/>
 
-når OversendelseFylkesnemnd sin StartDato er før 01. januar 2023 og OversendelseFylkesnemnd/Lovhjemmel/Lov er BVL2021<br/>
+når OversendelseFylkesnemnd sin StartDato er før 01. januar 2022 og Vedtak/Lovhjemmel/Lov er forskjellig fra BVL<br/>
 så gi feilmeldingen "Lovhjemmel opprettet før 01. januar 2023 krever lov = '**[BVL](#barnevernloven)**'"
 
-når OversendelseFylkesnemnd sin StartDato er 01. januar 2023 eller senere og OversendelseFylkesnemnd/Lovhjemmel/Lov er BVL<br/>
+når OversendelseFylkesnemnd sin StartDato er fra 01. januar 2022 til 31. desember 2022 og Vedtak/Lovhjemmel/Lov er forskjellig fra BVL og BVL2021<br/>
+så gi feilmeldingen "Lovhjemmel opprettet fra 01. januar 2022 til 31. desember 2022 krever lov = '**[BVL](#barnevernloven)**' eller '**[BVL2021](#barnevernloven)**'"
+
+når OversendelseFylkesnemnd sin StartDato er 01. januar 2023 eller senere og Vedtak/Lovhjemmel/Lov er forskjellig fra BVL2021<br/>
 så gi feilmeldingen "Lovhjemmel opprettet på 01. januar 2023 eller senere krever lov = '**[BVL2021](#barnevernloven)**'"
 
 Alvorlighetsgrad: ERROR<br/>
