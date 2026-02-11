@@ -99,22 +99,21 @@ Gyldig fra 2013-01-01
 
 ### Avgiver Kontroll 1: Bydelsnummer og bydelsnavn
 
-Avgiver Kontroll 1: Bydelsnummer og bydelsnavn
-Gitt at en har en Avgiver der kommune er en av 0301 (Oslo), 4601 (Bergen) eller 5001 (Trondheim)
-når Bydelsnummer eller Bydelsnavn mangler utfylling
+Gitt at en har en Avgiver der kommunenummer er en av 0301 (Oslo), 4601 (Bergen) eller 5001 (Trondheim)<br/>
+når Bydelsnummer eller Bydelsnavn mangler utfylling<br/>
 så gi feilmeldingen "Bydelsnummer og/eller Bydelsnavn skal være utfylt"
 
-Alvorlighetsgrad: ERROR
+Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
-###  Avgiver Kontroll 2: Kommunenummer
+###  Avgiver Kontroll 3: Kommunenummer
 
-Gitt at en har en Avgiver der kommune finnes
-når kommunenummer ikke er gyldig (utgått / startet)
-så gi feilmeldingen "Ugyldig kommunernummer"
+Gitt at en har en Avgiver der kommune finnes og en liste med gyldige kommunenumre for gitte tidsrom<br/>
+når kommunenummer ikke er gyldig (ikke finnes, ikke startet eller utgått)<br/>
+så gi feilmeldingen "Ugyldig kommunernummer"<br/>
 
-Alvorlighetsgrad: ERROR
+Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
@@ -122,9 +121,9 @@ Gyldig fra 2013-01-01
 
 ### Sak kontroll 1: Dato innenfor lovlige verdier
 
-Gitt at en har en Sak
-når en dato i saken er mer enn 1 år før barnets fødselsdato 
-så gi feilmeldingen "Dato ($dateToCheck) er mer enn 1 år før barnets fødsel"
+Gitt at en har en Sak<br/>
+når saken sin startdato er mer enn 1 år før barnets fødselsdato <br/>
+så gi feilmeldingen "Sakens startdato ({Sak.StartDato}) er mer enn 1 år før barnets fødselsdato ({Sak.Personalia.Fodseldato})"
 
 Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
@@ -355,6 +354,28 @@ når en sammenligner meldingene med hverandre og finner helt identisk innhold, m
 så gi feilmeldingen "Det finnes 2 eller flere meldinger med identisk innhold, men med forskjellige identer"
 
 Alvorlighetsgrad: INFO<br/>
+Gyldig fra 2013-01-01
+
+
+### Melding Kontroll 24: Ugyldig kode for saksinnhold
+
+Gitt at en har en Melding der Melding.Konklusjon.SluttDato er satt<br/>
+når Melding.SaksInnhold.Kode mangler, ikke finnes i listen over gyldige koder for saksinnhold eller er utenfor gyldighetsperioden<br/>
+så for hver Melding.SaksInnhold.Kode som ikke validérer
+gi feilmeldingen "Melding har ugyldig kode for saksinnhold ({melding.saksinnhold.kode}) for sluttdato {melding.konklusjon.sluttDato}"
+
+Alvorlighetsgrad: ERROR<br/>
+Gyldig fra 2013-01-01
+
+
+### Melding Kontroll 25: Ugyldig kode for melder
+
+Gitt at en har en Melding der Melding.Konklusjon.SluttDato er satt<br/>
+når Melding.Melder.Kode mangler, ikke finnes i listen over gyldige koder for melder eller er utenfor gyldighetsperioden<br/>
+så for hver Melding.Melder.Kode som ikke validérer
+gi feilmeldingen "Melding har ugyldig kode for melder ({melding.melder.kode}) for sluttdato {melding.konklusjon.sluttDato}"
+
+Alvorlighetsgrad: ERROR<br/>
 Gyldig fra 2013-01-01
 
 
