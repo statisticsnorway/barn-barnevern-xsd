@@ -923,6 +923,52 @@ Gyldig fra 2022-01-01
 
 ## <a name="endringslogg">Endringslogg</a>
 
+### <a name="2026-03-16">2026-03-16</a>
+
+Fjernet
+
+- Sak Kontroll 6: Klienten skal ha melding, plan eller tiltak
+- Personalia Kontroll 14: Kontroll av Fødselsnummer og Kjønn
+- Melding Kontroll 3: Fristoverskridelse på behandlingstid
+- Melding Kontroll 19: Dublett på innhold, men forskjellige identer
+- Melder Kontroll 2: Mangler Presisering
+- Saksinnhold Kontroll 2: Mangler Presisering
+- Undersøkelse Kontroll 3: Vedtaksgrunnlag mangler presisering
+- Undersøkelse Kontroll 11: Fristoverskridelse på behandlingstid i forhold til melding sin startdato
+- Undersøkelse Kontroll 19: Dublett på innhold, men forskjellige identer
+- Vedtak Kontroll 2i: Status sin EndretDato er etter vedtakets SluttDato
+- Vedtak Kontroll 2j: Status sin EndretDato er før vedtakets StartDato
+- Vedtak Kontroll 19: Dublett på innhold, men forskjellige identer
+- Tiltak Kontroll 5: Barnet er over 7 år og er i barnehage
+- Tiltak Kontroll 6: Barnet er over 11 år og i SFO
+- Tiltak Kontroll 7: Kontroll om presisering av tiltakskategori
+- Tiltak Kontroll 8: Kontroll av kode og presisering av opphevelse
+- Tiltak Kontroll 19: Dublett på innhold, men forskjellige identer
+- Plan Kontroll 19: Dublett på innhold, men forskjellige identer
+
+
+Endret
+
+- Avgiver Kontroll 1: Bydelsnummer og bydelsnavn
+- Sak kontroll 1: Dato innenfor lovlige verdier
+- Sak Kontroll 7: Klient over 25 år og skal avsluttes i barnevernet
+- Melding Kontroll 2e: StartDato er før sakens StartDato
+- Vedtak kontroll 5: Lovhjemmel refererer til feil barnevernlov
+- Tiltak Kontroll 22: Tiltak med kode 1.99 Andre tiltak
+- Tiltak Kontroll 23: Tiltak med kode 2.99 Andre tiltak
+- Oversendelse til fylkesnemnd Kontroll 5: Lovhjemmel refererer til feil barnevernlov
+
+Lagt til
+
+- Avgiver Kontroll 3: Kommunenummer
+- Melding Kontroll 24: Ugyldig kode for saksinnhold
+- Melding Kontroll 26: Konkludert melding har ugyldig konklusjonskode
+- Undersøkelse Kontroll 24: Ugyldig kode for vedtaksgrunnlag
+- Undersøkelse Kontroll 25: Konkludert undersøkelse har ugyldig konklusjonskode
+- Tiltak Kontroll 24: Ugyldig kode for tiltaksgrunnlag
+- Tiltak Kontroll 25: Ugyldig kode for tiltakskategori
+
+
 ### <a name="2023-06-05">2023-06-05</a>
 
 Lagt til
