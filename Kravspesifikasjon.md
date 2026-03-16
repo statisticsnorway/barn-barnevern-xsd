@@ -197,7 +197,7 @@ Gyldig fra 2022-01-01
 
 
 
-### ### Personalia kontroll 11: Klienten skal ha personalia
+### Personalia kontroll 11: Klienten skal ha personalia
 
 Gitt at en har en Sak <br/>
 når saken mangler Personalia<br/>
@@ -438,6 +438,27 @@ så gi feilmeldingen "Konkludert Undersøkelse mangler en relasjon til vedtak"
 Alvorlighetsgrad, konklusjon kode 1: ERROR<br/>
 Alvorlighetsgrad, konklusjon kode 2: WARNING<br/>
 Gyldig fra 2013-01-01
+
+
+
+### Undersøkelse Kontroll 24: Ugyldig kode for vedtaksgrunnlag
+
+Gitt at en har en Undersøkelse der Konklusjon.sluttDato er satt<br/>
+når koden for Vedtaksgrunnlag mangler, ikke finnes i listen over gyldige koder for saksinnhold eller er utenfor gyldighetsperioden<br/>
+så gi feilmeldingen "Undersøkelse har ugyldig kode for vedtaksgrunnlag ({Kode}) for sluttdato {melding.konklusjon.sluttDato}"
+
+Alvorlighetsgrad: ERROR
+
+
+
+### Undersøkelse Kontroll 25: Konkludert undersøkelse har ugyldig konklusjonskode
+
+Gitt at en har en Undersøkelse der Konklusjon finnes<br/>
+når Konklusjon.Kode mangler, ikke finnes i listen over gyldige koder eller er utenfor gyldighetsperioden<br/>
+så gi feilmeldingen "Undersøkelse konkludert med ugyldig kode ({Konklusjon/Kode}) for sluttdato {Konklusjon/SluttDato}"
+
+Alvorlighetsgrad: ERROR
+
 
 
 ## <a name="vedtak">Vedtak</a>
@@ -698,6 +719,41 @@ Er det et administrative vedtak som er gitt kode 2.99 skal tiltaket slettes."
 
 Alvorlighetsgrad: WARNING<br/>
 Gyldig fra 2023-01-01, gyldig til 2026-12-31
+
+
+
+### Tiltak Kontroll 24: Ugyldig kode for tiltaksgrunnlag
+
+Definisjon av valideringsdato: hvis Tiltak.Konklusjon.SluttDato er satt så brukes denne, ellers brukes datoen i Barnevern.DatoUttrekk
+
+Gitt at en har en Tiltak<br/>
+når Tiltak.Tiltaksgrunnlag.Kode mangler, ikke finnes i listen over gyldige koder for tiltaksgrunnlag eller er utenfor gyldighetsperioden<br/>
+så for hver Tiltak.Tiltaksgrunnlag.Kode som ikke validérer
+gi feilmeldingen "Tiltak har ugyldig kode for tiltaksgrunnlag ({tiltak.tiltaksgrunnlag.kode}) for valideringsdato {valideringsdato}"
+
+Alvorlighetsgrad: ERROR
+
+
+
+### Tiltak Kontroll 25: Ugyldig kode for tiltakskategori
+
+Definisjon av valideringsdato: hvis Tiltak.Konklusjon.SluttDato er satt så brukes denne, ellers brukes datoen i Barnevern.DatoUttrekk
+
+Gitt at en har en Tiltak<br/>
+når Tiltak.Kategori.Kode ikke finnes i listen over gyldige koder eller er utenfor gyldighetsperioden<br/>
+så for hver Tiltak.Kategori.Kode som ikke validérer gi feilmeldingen "Tiltak har ugyldig kode for tiltakskategori ({tiltak.kategori.kode}) for valideringsdato {valideringsdato}"
+
+Alvorlighetsgrad: ERROR
+
+
+
+### Melding Kontroll 26: Konkludert melding har ugyldig konklusjonskode
+
+Gitt at en har en Melding der Konklusjon finnes<br/>
+når Konklusjon.Kode ikke finnes i listen over gyldige koder eller er utenfor gyldighetsperioden<br/>
+så gi feilmeldingen "Melding konkludert med ugyldig kode ({Konklusjon/Kode}) for sluttdato {Konklusjon/SluttDato}"
+
+Alvorlighetsgrad: ERROR
 
 
 
