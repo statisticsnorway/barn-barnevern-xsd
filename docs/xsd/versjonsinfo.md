@@ -3,6 +3,17 @@ Filbeskrivelse basert på xml schema definition brukt til å rapportere barnever
 
 # Versjonshistorikk
 ---
+# v.4.0.1
+Endringsdato: 6. desember 2025
+
+## Struktur:
+- Ingen endringer
+
+## Kodeverk
+
+Endret sluttDato for utgående koder på grunn av overgang til Kunnskapsmodellen i dokumentasjonen til SaksinnholdType. Se Kodelister.md for endringer.
+
+---
 # v.4.0.0
 Endringsdato: 15. september 2025
 
