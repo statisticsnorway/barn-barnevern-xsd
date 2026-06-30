@@ -13,12 +13,17 @@ plugins {
 
 kotlin { jvmToolchain(21) }
 
+val xjc by configurations.creating
+
 dependencies {
     api(libs.jackson.module.kotlin)
     api(libs.jackson.jakarta.rs.xml.provider)
     api(libs.jackson.datatype.jsr310)
 
     testImplementation(libs.kotest.runner.junit5.jvm)
+
+    xjc("org.glassfish.jaxb:jaxb-xjc:4.0.5")
+    xjc("org.glassfish.jaxb:jaxb-runtime:4.0.5")
 }
 
 publishing {
@@ -48,3 +53,5 @@ sonarqube {
         property("sonar.exclusions", "**/xsd/*Type.kt")
     }
 }
+
+tasks.register<XjcTask>("generateXsd")

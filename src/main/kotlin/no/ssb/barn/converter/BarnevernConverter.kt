@@ -11,9 +11,9 @@ import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModu
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import no.ssb.barn.xsd.BarnevernType
-import no.ssb.barn.xsd.OppfolgingType
-import no.ssb.barn.xsd.OppfolgingTypeV3
+import no.ssb.barn.xsd.v4.BarnevernType
+import no.ssb.barn.xsd.v4.OppfolgingType
+import no.ssb.barn.xsd.v4.OppfolgingTypeV3
 
 object BarnevernConverter {
 
