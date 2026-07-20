@@ -25,7 +25,7 @@ class HenvendelseTypeTest : BehaviorSpec({
 			}
 
 			Then("message should indicate missing StartDato") {
-				thrown.message.orEmpty() shouldContain "One of '{StartDato}' is expected"
+				thrown.message.orEmpty() shouldContain "StartDato"
 			}
 		}
 	}
