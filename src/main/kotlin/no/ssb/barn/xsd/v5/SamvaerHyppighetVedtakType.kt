@@ -3,6 +3,7 @@ package no.ssb.barn.xsd.v5
 import jakarta.xml.bind.annotation.*
 import java.math.BigInteger
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -10,13 +11,13 @@ import java.time.LocalDate
 )
 data class SamvaerHyppighetVedtakType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "HyppighetTidsenhet", required = true)
     val hyppighetTidsenhet: String,
 
     @field:XmlElement(name = "HyppighetAntall", required = true)
-    val hyppighetAntall: BigInteger,
+    val hyppighetAntall: Int,
 
     @field:XmlElement(name = "Dato", required = true)
     @XmlSchemaType(name = "date")

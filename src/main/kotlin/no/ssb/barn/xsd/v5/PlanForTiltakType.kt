@@ -2,6 +2,7 @@ package no.ssb.barn.xsd.v5
 
 import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -9,7 +10,7 @@ import java.time.LocalDate
 )
 data class PlanForTiltakType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "MigrertId")
     val migrertId: String? = null,
@@ -19,7 +20,7 @@ data class PlanForTiltakType(
     val startDato: LocalDate,
 
     @field:XmlElement(name = "ErSlettet")
-    val erSlettet: Boolean? = null,
+    val erSlettet: Boolean = false,
 
     @field:XmlElement(name = "SluttDato")
     @XmlSchemaType(name = "date")

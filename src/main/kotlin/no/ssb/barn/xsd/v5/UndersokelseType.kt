@@ -3,6 +3,7 @@ package no.ssb.barn.xsd.v5
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -12,7 +13,7 @@ import java.time.LocalDate
 )
 data class UndersokelseType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "MigrertId")
     val migrertId: String? = null,
@@ -22,7 +23,7 @@ data class UndersokelseType(
     val startDato: LocalDate,
 
     @field:XmlElement(name = "ErSlettet")
-    val erSlettet: Boolean? = null,
+    val erSlettet: Boolean = false,
 
     @field:XmlElement(name = "Vedtaksgrunnlag")
     @field:JacksonXmlElementWrapper(useWrapping = false)

@@ -2,6 +2,7 @@ package no.ssb.barn.xsd.v5
 
 import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -9,7 +10,7 @@ import java.time.LocalDate
 )
 data class SamvaerGjennomforingType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "Kode", required = true)
     val kode: String,

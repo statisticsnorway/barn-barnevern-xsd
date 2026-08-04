@@ -3,6 +3,7 @@ package no.ssb.barn.xsd.v5
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -12,14 +13,14 @@ import java.time.LocalDate
 )
 data class SakType(
     @field:XmlElement(required = true)
-    var id: String,
+    var id: UUID,
 
     @field:XmlElement(name = "MigrertId")
     var migrertId: String? = null,
 
     @field:XmlElement(name = "StartDato", required = true)
     @XmlSchemaType(name = "date")
-    var startDato: LocalDate?,
+    var startDato: LocalDate,
 
     @field:XmlElement(name = "SluttDato")
     @XmlSchemaType(name = "date")
@@ -32,7 +33,7 @@ data class SakType(
     var isAvsluttet: Boolean? = null,
 
     @field:XmlElement(name = "ErSlettet")
-    var erSlettet: Boolean? = null,
+    var erSlettet: Boolean = false,
 
     @field:XmlElement(name = "DatoIndividuellPlan")
     @field:JacksonXmlElementWrapper(useWrapping = false)

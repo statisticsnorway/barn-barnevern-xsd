@@ -17,5 +17,5 @@ data class HenvendelseKonklusjonType(
     var kode: String,
 
     @field:XmlElement(name = "ErSlettet")
-    var erSlettet: Boolean? = null
+    var erSlettet: Boolean = false
 )

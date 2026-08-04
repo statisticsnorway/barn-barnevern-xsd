@@ -1,8 +1,8 @@
 package no.ssb.barn.xsd.v5
 
 import jakarta.xml.bind.annotation.*
-import java.math.BigInteger
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -10,7 +10,7 @@ import java.time.LocalDate
 )
 data class OppfolgingHyppighetType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "Dato", required = true)
     @XmlSchemaType(name = "date")
@@ -20,5 +20,5 @@ data class OppfolgingHyppighetType(
     val hyppighetTidsenhet: String,
 
     @field:XmlElement(name = "HyppighetAntall", required = true)
-    val hyppighetAntall: BigInteger
+    val hyppighetAntall: Int
 )

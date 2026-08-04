@@ -1,7 +1,8 @@
 package no.ssb.barn.xsd.v5
 
 import jakarta.xml.bind.annotation.*
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -11,11 +12,11 @@ import java.time.LocalDateTime
 )
 data class BarnevernregisterInnrapporteringType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "DatoUttrekk", required = true)
     @XmlSchemaType(name = "dateTime")
-    val datoUttrekk: LocalDateTime,
+    val datoUttrekk: ZonedDateTime,
 
     @field:XmlElement(name = "ForrigeId")
     val forrigeId: String? = null,

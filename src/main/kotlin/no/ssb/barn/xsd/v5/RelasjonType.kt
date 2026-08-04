@@ -1,6 +1,7 @@
 package no.ssb.barn.xsd.v5
 
 import jakarta.xml.bind.annotation.*
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -9,7 +10,7 @@ import jakarta.xml.bind.annotation.*
 )
 data class RelasjonType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "FraId", required = true)
     val fraId: String,
@@ -19,12 +20,12 @@ data class RelasjonType(
     val fraKode: BegrepKode,
 
     @field:XmlElement(name = "TilId", required = true)
-    val tilId: String,
+    val tilId: UUID,
 
     @field:XmlElement(name = "TilKode", required = true)
     @XmlSchemaType(name = "string")
     val tilKode: BegrepKode,
 
     @field:XmlElement(name = "ErSlettet")
-    val erSlettet: Boolean? = null
+    val erSlettet: Boolean = false
 )

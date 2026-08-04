@@ -2,6 +2,7 @@ package no.ssb.barn.xsd.v5
 
 import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -10,7 +11,7 @@ import java.time.LocalDate
 )
 data class SlettetType(
     @field:XmlElement(name = "Id", required = true)
-    var id: String,
+    var id: UUID,
 
     @field:XmlElement(name = "Kode", required = true)
     @XmlSchemaType(name = "string")

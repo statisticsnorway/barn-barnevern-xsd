@@ -2,6 +2,7 @@ package no.ssb.barn.xsd.v5
 
 import jakarta.xml.bind.annotation.*
 import java.time.LocalDate
+import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -11,7 +12,7 @@ import java.time.LocalDate
 )
 data class PersonaliaType(
     @field:XmlElement(name = "Id", required = true)
-    val id: String,
+    val id: UUID,
 
     @field:XmlElement(name = "StartDato", required = true)
     @XmlSchemaType(name = "date")
@@ -21,10 +22,10 @@ data class PersonaliaType(
     var fodselsnummer: String? = null,
 
     @field:XmlElement(name = "Ufodt")
-    var isUfodt: Boolean? = null,
+    var isUfodt: Boolean = false,
 
     @field:XmlElement(name = "Ukjent")
-    var isUkjent: Boolean? = null,
+    var isUkjent: Boolean = false,
 
     @field:XmlElement(name = "Fodselsdato")
     @XmlSchemaType(name = "date")
@@ -37,5 +38,5 @@ data class PersonaliaType(
     var dUFNummer: String? = null,
 
     @field:XmlElement(name = "ErSlettet")
-    var erSlettet: Boolean? = null
+    var erSlettet: Boolean = false
 )
