@@ -11,5 +11,5 @@ import java.time.LocalDate
 data class BrukAvPolitiType(
     @field:XmlElement(name = "Dato", required = true)
     @XmlSchemaType(name = "date")
-    val dato: LocalDate? = null
+    val dato: LocalDate
 )
