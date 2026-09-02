@@ -16,17 +16,14 @@ enum class BegrepKode(private val value: String) {
     @XmlEnumValue("Undersokelse")
     UNDERSOKELSE("Undersokelse"),
 
-    @XmlEnumValue("PlanForTiltak")
-    PLAN_FOR_TILTAK("PlanForTiltak"),
+    @XmlEnumValue("Plan")
+    PLAN("Plan"),
 
     @XmlEnumValue("Tiltak")
     TILTAK("Tiltak"),
 
     @XmlEnumValue("Vedtak")
     VEDTAK("Vedtak"),
-
-    @XmlEnumValue("Ettervern")
-    ETTERVERN("Ettervern"),
 
     @XmlEnumValue("OversendelseFylkesnemnd")
     OVERSENDELSE_FYLKESNEMND("OversendelseFylkesnemnd"),

@@ -8,7 +8,7 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "TiltakType",
-    propOrder = ["id", "migrertId", "startDato", "erSlettet", "lovhjemmel", "jmfrLovhjemmel", "kode", "tiltaksgrunnlag", "barnetsMedvirkning", "evaluering", "brukAvPoliti", "samvaerEtterOmsorgsovertakelse", "tilsyn", "oppfolging", "konklusjon"
+    propOrder = ["id", "migrertId", "startDato", "erSlettet", "lovhjemmel", "jmfrLovhjemmel", "kode", "tiltaksgrunnlag", "barnetsMedvirkning", "evaluering", "samvaerEtterOmsorgsovertakelse", "tilsyn", "oppfolging", "konklusjon"
     ]
 )
 data class TiltakType(
@@ -46,10 +46,6 @@ data class TiltakType(
     @field:XmlElement(name = "Evaluering")
     @field:JacksonXmlElementWrapper(useWrapping = false)
     val evaluering: MutableList<TiltakEvalueringType> = mutableListOf(),
-
-    @field:XmlElement(name = "BrukAvPoliti")
-    @field:JacksonXmlElementWrapper(useWrapping = false)
-    val brukAvPoliti: MutableList<BrukAvPolitiType> = mutableListOf(),
 
     @field:XmlElement(name = "SamvaerEtterOmsorgsovertakelse")
     val samvaerEtterOmsorgsovertakelse: SamvaerEtterOmsorgsovertakelseType? = null,

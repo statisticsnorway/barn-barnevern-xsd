@@ -14,5 +14,5 @@ data class UtvidetFristType (
     val startDato: LocalDate,
 
     @field:XmlElement(name = "Innvilget")
-    val isInnvilget: Boolean? = null
+    val innvilget: Boolean? = null
 )

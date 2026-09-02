@@ -8,7 +8,7 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "SakType",
-    propOrder = ["id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet", "erSlettet", "datoIndividuellPlan", "personalia", "henvendelse", "undersokelse", "planForTiltak", "tiltak", "vedtak", "ettervern", "oversendelseFylkesnemnd", "flytting", "relasjon", "slettet"
+    propOrder = ["id", "migrertId", "startDato", "sluttDato", "journalnummer", "avsluttet", "erSlettet", "brukAvPoliti", "datoIndividuellPlan", "personalia", "henvendelse", "undersokelse", "plan", "tiltak", "vedtak", "oversendelseFylkesnemnd", "flytting", "relasjon", "slettet"
     ]
 )
 data class SakType(
@@ -30,10 +30,14 @@ data class SakType(
     var journalnummer: String,
 
     @field:XmlElement(name = "Avsluttet")
-    var isAvsluttet: Boolean? = null,
+    var avsluttet: Boolean? = null,
 
     @field:XmlElement(name = "ErSlettet")
     var erSlettet: Boolean = false,
+
+    @field:XmlElement(name = "BrukAvPoliti")
+    @field:JacksonXmlElementWrapper(useWrapping = false)
+    val brukAvPoliti: MutableList<BrukAvPolitiType> = mutableListOf(),
 
     @field:XmlElement(name = "DatoIndividuellPlan")
     @field:JacksonXmlElementWrapper(useWrapping = false)
@@ -52,9 +56,9 @@ data class SakType(
     @field:JacksonXmlElementWrapper(useWrapping = false)
     var undersokelse: MutableList<UndersokelseType> = mutableListOf(),
 
-    @field:XmlElement(name = "PlanForTiltak")
+    @field:XmlElement(name = "Plan")
     @field:JacksonXmlElementWrapper(useWrapping = false)
-    var planForTiltak: MutableList<PlanForTiltakType> = mutableListOf(),
+    var plan: MutableList<PlanType> = mutableListOf(),
 
     @field:XmlElement(name = "Tiltak")
     @field:JacksonXmlElementWrapper(useWrapping = false)
@@ -63,10 +67,6 @@ data class SakType(
     @field:XmlElement(name = "Vedtak")
     @field:JacksonXmlElementWrapper(useWrapping = false)
     var vedtak: MutableList<VedtakType> = mutableListOf(),
-
-    @field:XmlElement(name = "Ettervern")
-    @field:JacksonXmlElementWrapper(useWrapping = false)
-    var ettervern: MutableList<EttervernType> = mutableListOf(),
 
     @field:XmlElement(name = "OversendelseFylkesnemnd")
     @field:JacksonXmlElementWrapper(useWrapping = false)

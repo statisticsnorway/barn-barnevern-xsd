@@ -6,23 +6,26 @@ import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "EttervernType", propOrder = ["id", "migrertId", "tilbudSendtDato", "erSlettet", "konklusjon"
-    ]
+    name = "PlanType", propOrder = ["id", "migrertId", "startDato", "erSlettet", "sluttDato", "kode"]
 )
-data class EttervernType(
+data class PlanType(
     @field:XmlElement(name = "Id", required = true)
     val id: UUID,
 
     @field:XmlElement(name = "MigrertId")
     val migrertId: String? = null,
 
-    @field:XmlElement(name = "TilbudSendtDato", required = true)
+    @field:XmlElement(name = "StartDato", required = true)
     @XmlSchemaType(name = "date")
-    val tilbudSendtDato: LocalDate,
+    val startDato: LocalDate,
 
     @field:XmlElement(name = "ErSlettet")
     val erSlettet: Boolean = false,
 
-    @field:XmlElement(name = "Konklusjon")
-    val konklusjon: EttervernKonklusjonType? = null
+    @field:XmlElement(name = "SluttDato")
+    @XmlSchemaType(name = "date")
+    val sluttDato: LocalDate? = null,
+
+    @field:XmlElement(name = "Kode", required = true)
+    val kode: String
 )

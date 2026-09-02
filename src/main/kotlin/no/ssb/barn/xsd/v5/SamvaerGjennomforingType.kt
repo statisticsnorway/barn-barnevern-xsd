@@ -6,11 +6,14 @@ import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "SamvaerGjennomforingType", propOrder = ["id", "kode", "utfortDato"]
+    name = "SamvaerGjennomforingType", propOrder = ["id", "part", "kode", "utfortDato"]
 )
 data class SamvaerGjennomforingType(
     @field:XmlElement(name = "Id", required = true)
     val id: UUID,
+
+    @field:XmlElement(name = "Part", required = true)
+    val part: String,
 
     @field:XmlElement(name = "Kode", required = true)
     val kode: String,

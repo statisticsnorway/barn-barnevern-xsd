@@ -5,8 +5,7 @@ import java.time.LocalDate
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "HenvendelseKonklusjonType", propOrder = ["sluttdato", "kode", "erSlettet"
-    ]
+    name = "HenvendelseKonklusjonType", propOrder = ["sluttdato", "kode"]
 )
 data class HenvendelseKonklusjonType(
     @field:XmlElement(name = "Sluttdato", required = true)
@@ -15,7 +14,4 @@ data class HenvendelseKonklusjonType(
 
     @field:XmlElement(name = "Kode", required = true)
     var kode: String,
-
-    @field:XmlElement(name = "ErSlettet")
-    var erSlettet: Boolean = false
 )

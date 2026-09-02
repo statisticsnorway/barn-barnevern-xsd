@@ -8,7 +8,7 @@ import java.util.UUID
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "UndersokelseType",
-    propOrder = ["id", "migrertId", "startDato", "erSlettet", "vedtaksgrunnlag", "barnetsMedvirkning", "utvidetFrist", "konklusjon", "plan", "brukAvPoliti"
+    propOrder = ["id", "migrertId", "startDato", "erSlettet", "vedtaksgrunnlag", "barnetsMedvirkning", "utvidetFrist", "konklusjon"
     ]
 )
 data class UndersokelseType(
@@ -38,11 +38,4 @@ data class UndersokelseType(
 
     @field:XmlElement(name = "Konklusjon")
     val konklusjon: UndersokelseKonklusjonType? = null,
-
-    @field:XmlElement(name = "Plan")
-    val plan: UndersokelsePlanType? = null,
-
-    @field:XmlElement(name = "BrukAvPoliti")
-    @field:JacksonXmlElementWrapper(useWrapping = false)
-    val brukAvPoliti: MutableList<BrukAvPolitiType> = mutableListOf()
 )

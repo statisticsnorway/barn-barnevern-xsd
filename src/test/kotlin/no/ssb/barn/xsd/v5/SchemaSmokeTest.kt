@@ -62,7 +62,37 @@ class SchemaSmokeTest : BehaviorSpec({
                 thrown.message.orEmpty() shouldContain "date"
             }
         }
+
+        When("Henvendelse has MelderType with both OffentligMelder and PrivatMelder") {
+            val inner = "<Henvendelse>" +
+                    "<Id>6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e</Id>" +
+                    "<StartDato>$VALID_DATE</StartDato>" +
+                    "<Melder>" +
+                        "<OffentligMelder>5</OffentligMelder>" +
+                        "<PrivatMelder>1</PrivatMelder>" +
+                    "</Melder>" +
+                "</Henvendelse>"
+            val thrown = shouldThrow<SAXException> {
+                getSchemaValidatorV5().validate(buildBarnevernXmlV5(inner).toStreamSource())
+            }
+
+            Then("message should contain error") {
+                thrown.message.orEmpty() shouldContain "No child element is expected at this point"
+            }
+        }
+
+        When("Henvendelse has MelderType with only OffentligMelder") {
+            shouldNotThrowAny {
+                val inner = "<Henvendelse>" +
+                    "<Id>6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e</Id>" +
+                    "<StartDato>$VALID_DATE</StartDato>" +
+                    "<Melder>" +
+                    "<OffentligMelder>5</OffentligMelder>" +
+                    "</Melder>" +
+                    "</Henvendelse>"
+
+                getSchemaValidatorV5().validate(buildBarnevernXmlV5(inner).toStreamSource())
+            }
+        }
     }
 })
-
-

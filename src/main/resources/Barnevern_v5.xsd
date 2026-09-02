@@ -7,7 +7,7 @@ Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
 Synne.Solbakken@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="5.1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="5.3.0">
     <!-- ROTELEMENT -->
     <xs:element name="BarnevernregisterInnrapportering" type="BarnevernregisterInnrapporteringType">
         <xs:annotation>
@@ -19,9 +19,21 @@ Synne.Solbakken@bufdir.no
     <!-- BARNEVERNTYPE -->
     <xs:complexType name="BarnevernregisterInnrapporteringType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="DatoUttrekk" type="xs:dateTime"/>
-            <xs:element name="ForrigeId" type="UuidIdType" minOccurs="0"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation>Unik ID for innsendelse av datasett</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DatoUttrekk" type="DatoTidUttrekk">
+                <xs:annotation>
+                    <xs:documentation>Dato for uttrekk/innrapportering</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ForrigeId" type="UuidIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Unik ID som ble brukt ved forrige innrapportering. Muliggjør knytning av forrige innrapportering med siste innrapportering.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="Fagsystem" type="FagsystemType">
                 <xs:annotation>
                     <xs:documentation>Informasjon om fagsystem for innrapportering.</xs:documentation>
@@ -36,10 +48,6 @@ Synne.Solbakken@bufdir.no
                 <!-- unique-checks-->
                 <xs:unique name="HenvendelseIdUnique">
                     <xs:selector xpath="Henvendelse"/>
-                    <xs:field xpath="Id"/>
-                </xs:unique>
-                <xs:unique name="EttervernIdUnique">
-                    <xs:selector xpath="Ettervern"/>
                     <xs:field xpath="Id"/>
                 </xs:unique>
                 <xs:unique name="OversendelseFylkesnemndIdUnique">
@@ -63,7 +71,7 @@ Synne.Solbakken@bufdir.no
                     <xs:field xpath="Id"/>
                 </xs:unique>
                 <xs:unique name="PlanIdUnique">
-                    <xs:selector xpath="PlanForTiltak"/>
+                    <xs:selector xpath="Plan"/>
                     <xs:field xpath="Id"/>
                 </xs:unique>
                 <xs:unique name="FlyttingIdUnique">
@@ -82,18 +90,8 @@ Synne.Solbakken@bufdir.no
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    <!-- ETTERVERN -->
-    <xs:complexType name="EttervernType">
-        <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
-            <xs:element name="TilbudSendtDato" type="xs:date"/>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Konklusjon" type="EttervernKonklusjonType" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <!-- PLAN for tiltak -->
-    <xs:complexType name="PlanForTiltakType">
+    <!-- PLAN -->
+    <xs:complexType name="PlanType">
         <xs:sequence>
             <xs:element name="Id" type="UuidIdType"/>
             <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
@@ -108,25 +106,58 @@ Synne.Solbakken@bufdir.no
                     <xs:documentation>Dato avslutning plan.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Kode" type="PlanForTiltakKode"/>
+            <xs:element name="Kode" type="PlanKode"/>
         </xs:sequence>
     </xs:complexType>
     <!-- SAK -->
     <xs:complexType name="SakType">
         <xs:annotation>
-            <xs:documentation>Typedefinisjon for Sak (tidligere Individ).</xs:documentation>
+            <xs:documentation>Typedefinisjon for Sak (tidligere Individ).Unik ID knyttet til en registrert sak i en barnevernstjeneste</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
-            <xs:element name="StartDato" type="xs:date"/>
-            <xs:element name="SluttDato" type="xs:date" minOccurs="0"/>
-            <xs:element name="Journalnummer" type="JournalnummerType"/>
-            <xs:element name="Avsluttet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation>ID-en er en flyktig GUID som endres fra tid til annen</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Unik id knyttet til gammelt fagsystem. Identifiserer saken som en sak migrert fra gammelt fagsystem. Muliggjør en knytning av saken med data i det gamle systemet. Denne ID-en mister sin funksjon etter migrering.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StartDato" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Dato for når en ny sak opprettes på et barn i fagsystemet. Identifiserer datoen for når et individ får en ny sak registrert i fagsystemet</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SluttDato" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Dato for når en sak blir avsluttet/gjort inaktiv i fagsystemet. Identifiserer tidspunktet et individ er registrert ut av datasystemet.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Journalnummer" type="JournalnummerType">
+                <xs:annotation>
+                    <xs:documentation>Journalnummer knytter et individ til en sak i barnevernstjenestens arkiv, og følger barnet gjennom hele forløpet innenfor samme barnevernstjeneste. Journalnummer tilsvarer saksnummer/klientnummer. Hvis barnet flytter uten at saken blir overført til ny tjeneste, vil barnet få et nytt saksnummer ved ny registrering</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Avsluttet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Saken er avsluttet. Angir om barnevernstjenesten har avsluttet saken.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Saken er slettet i fagsystemet</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BrukAvPoliti" type="BrukAvPolitiType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Bruk av politi jf. §12-10</xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="DatoIndividuellPlan" type="xs:date" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
-                    <xs:documentation>Dato individuell plan er gyldig fra, hvis den finnes. Individuell plan jf. §15-9</xs:documentation>
+                    <xs:documentation>Dersom det opprettes en individuell plan for barnet, vil denne informajonen reflektere dato planen trer i kraft.</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Personalia" type="PersonaliaType" minOccurs="0" maxOccurs="unbounded"/>
@@ -136,16 +167,11 @@ Synne.Solbakken@bufdir.no
                 </xs:annotation>
             </xs:element>
             <xs:element name="Undersokelse" type="UndersokelseType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="PlanForTiltak" type="PlanForTiltakType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Plan" type="PlanType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Tiltak" type="TiltakType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="Vedtak" type="VedtakType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation>Alle typer vedtak som kan fattes i barnevernssaker, også av fylkesnemnda.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="Ettervern" type="EttervernType" minOccurs="0" maxOccurs="unbounded">
-                <xs:annotation>
-                    <xs:documentation>Tilbud om ettervern. Evt. ettervernstiltak registreres som tiltak.</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="OversendelseFylkesnemnd" type="OversendelseBarneverntjenesteType" minOccurs="0" maxOccurs="unbounded">
@@ -165,43 +191,102 @@ Synne.Solbakken@bufdir.no
     <!-- HENVENDELSE -->
     <xs:complexType name="HenvendelseType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="StartDato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation>Dato henvendelse mottatt.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Kode" type="HenvendelseKode" minOccurs="0"/>
-            <xs:element name="Melder" type="MelderType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Saksinnhold" type="SaksinnholdKode" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kode" type="HenvendelseKode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Kategoriserer hvilken type henvendelse opplysningene gjelder</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Melder" type="MelderType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Saksinnhold" type="SaksinnholdKode" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Angivelse av tematikk i henvendelsen, og som danner grunnlaget for en bekymring omkring barnet eller for søknaden om bistand.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="Konklusjon" type="HenvendelseKonklusjonType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <!-- TILTAK -->
     <xs:complexType name="TiltakType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="StartDato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation> Dato iverksettelse tiltak.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Lovhjemmel" type="LovhjemmelType"/>
-            <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
-            <xs:element name="Kode" type="TiltakKode"/>
-            <xs:element name="Tiltaksgrunnlag" type="SaksinnholdKode" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="BarnetsMedvirkning" type="BarnetsMedvirkningType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Evaluering" type="TiltakEvalueringType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="BrukAvPoliti" type="BrukAvPolitiType" minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
                 <xs:annotation>
-                    <xs:documentation>Bruk av politi jf. §12-10</xs:documentation>
+                    <xs:documentation> </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="SamvaerEtterOmsorgsovertakelse" type="SamvaerEtterOmsorgsovertakelseType" minOccurs="0"/>
+            <xs:element name="Lovhjemmel" type="LovhjemmelType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kode" type="TiltakKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Tiltaksgrunnlag" type="SaksinnholdKode" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BarnetsMedvirkning" type="BarnetsMedvirkningType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Evaluering" type="TiltakEvalueringType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SamvaerEtterOmsorgsovertakelse" type="SamvaerEtterOmsorgsovertakelseType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="Tilsyn" type="TilsynType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Tilsyn i fosterhjem utført av uavhengig part.</xs:documentation>
@@ -212,28 +297,54 @@ Synne.Solbakken@bufdir.no
                     <xs:documentation>Oppfølgingsbesøk i fosterhjem utført av ansvarlig barneverntjeneste.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Konklusjon" type="TiltakKonklusjonType" minOccurs="0"/>
+            <xs:element name="Konklusjon" type="TiltakKonklusjonType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <!-- UNDERSØKELSE -->
     <xs:complexType name="UndersokelseType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="StartDato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation> Dato undersøkelse startet.Samme verdi som for SluttDato i koplet HenvendelseType hvis konklusjon (i HenvendelseType) har kode = '2': 'Ikke henlagt'..</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Vedtaksgrunnlag" type="SaksinnholdKode" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="BarnetsMedvirkning" type="BarnetsMedvirkningType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="UtvidetFrist" type="UtvidetFristType" minOccurs="0"/>
-            <xs:element name="Konklusjon" type="UndersokelseKonklusjonType" minOccurs="0"/>
-            <xs:element name="Plan" type="UndersokelsePlanType" minOccurs="0"/>
-            <xs:element name="BrukAvPoliti" type="BrukAvPolitiType" minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
                 <xs:annotation>
-                    <xs:documentation>Bruk av politi jf. §12-10</xs:documentation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Vedtaksgrunnlag" type="SaksinnholdKode" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BarnetsMedvirkning" type="BarnetsMedvirkningType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UtvidetFrist" type="UtvidetFristType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Konklusjon" type="UndersokelseKonklusjonType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
@@ -241,23 +352,51 @@ Synne.Solbakken@bufdir.no
     <!-- VEDTAK -->
     <xs:complexType name="VedtakType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="StartDato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation> Dato vedtak fattet.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Lovhjemmel" type="LovhjemmelType"/>
-            <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Lovhjemmel" type="LovhjemmelType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="Krav" type="OversendelsePrivatKravType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation>Krav fra privat part om endring av tidligere vedtak fattet av fylkesnemnd.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Status" type="VedtakStatusType" maxOccurs="unbounded"/>
-            <xs:element name="BortfallsdatoVedtak" type="xs:date" minOccurs="0"/>
+            <xs:element name="Status" type="VedtakStatusType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BortfallsdatoVedtak" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="NyBortfallsdatoVedtak" type="xs:date" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Utvidet frist for iverksettelse jf. §5-2 annet ledd</xs:documentation>
@@ -270,39 +409,57 @@ Synne.Solbakken@bufdir.no
         <xs:sequence>
             <xs:element name="Organisasjonsnummer" type="OrganisasjonsnummerType">
                 <xs:annotation>
-                    <xs:documentation>Organisasjonsnummer, avgiverkommune.</xs:documentation>
+                    <xs:documentation>Unik ID som identifiserer rapporterende barnevernstjeneste</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Kommunenummer" type="KommunenummerType">
                 <xs:annotation>
-                    <xs:documentation>kommunenummer, avgiverkommune.</xs:documentation>
+                    <xs:documentation>Nummeret til kommunen som har rapportert inn og som avgiveren (barnverntjenesten) representerer. Kommunenummeret er fastsatt iht. Statistisk sentralbyrås oversikt</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Kommunenavn" type="KommunenavnType">
                 <xs:annotation>
-                    <xs:documentation>kommunenavn, avgiverkommune.</xs:documentation>
+                    <xs:documentation>Navnet til kommunen som har rapportert inn og som avgiveren (barnverntjenesten) representerer</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Bydelsnummer" type="BydelsnummerType" minOccurs="0">
                 <xs:annotation>
-                    <xs:documentation>Benyttes kun for kommuner med bydeler</xs:documentation>
+                    <xs:documentation>Innhentes (kun Oslo) for å identifisere hvilken barneverntjeneste individet er registrert i</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Bydelsnavn" type="BydelsnavnType" minOccurs="0">
                 <xs:annotation>
-                    <xs:documentation>Benyttes kun for kommuner med bydeler</xs:documentation>
+                    <xs:documentation>Bydelens navn</xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="BarnetsMedvirkningType">
         <xs:sequence>
-            <xs:element name="StartDato" type="xs:date"/>
-            <xs:element name="Kode" type="BarnetsMedvirkningKode"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StartDato" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kode" type="BarnetsMedvirkningKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="BrukAvPolitiType">
         <xs:sequence>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="Dato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation>Dato politibruk ble gjennomført</xs:documentation>
@@ -314,52 +471,101 @@ Synne.Solbakken@bufdir.no
         <xs:sequence>
             <xs:element name="Sluttdato" type="xs:date">
                 <xs:annotation>
-                    <xs:documentation>Konklusjonsdato</xs:documentation>
+                    <xs:documentation>Dato for når meldingen eller søknaden konkluderes på av barnevernstjenesten. Denne datoen avslutter beregningen av tidsforløp for behandling av henvendelsen. Ved valg av konklusjon "2 - Ikke henlagt" blir datofeltet også startdato for den tilmålte tiden for gjennomføring av undersøkelse.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Kode" type="HenvendelseKonklusjonKode"/>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="EttervernKonklusjonType">
-        <xs:sequence>
-            <xs:element name="SluttDato" type="xs:date"/>
-            <xs:element name="Kode" type="EttervernKonklusjonKode"/>
+            <xs:element name="Kode" type="HenvendelseKonklusjonKode">
+                <xs:annotation>
+                    <xs:documentation>Kategorisering av barnevernstjenestens konklusjon etter gjennomgang av melding eller søknad. Denne settes når henvendelsen er ferdig behandlet og tjenestens videre forløp i saken er besluttet.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="FagsystemType">
         <xs:sequence>
             <xs:element name="Leverandor" type="xs:string">
                 <xs:annotation>
-                    <xs:documentation>Leverandørnavn fagsystem. Eksempler: 'Visma', 'Acos', 'Netcompany'</xs:documentation>
+                    <xs:documentation>Leverandør av fagsystemet som er kilde til dataene</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="Navn" type="xs:string">
                 <xs:annotation>
-                    <xs:documentation>Navn fagsystem. Eksempel: 'Familia'</xs:documentation>
+                    <xs:documentation>Navn på fagsystemet som er kilde til dataene</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Versjon" type="VersjonType"/>
+            <xs:element name="Versjon" type="VersjonType">
+                <xs:annotation>
+                    <xs:documentation>Fagsystemets versjonsnummer</xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="FlyttingType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
-            <xs:element name="FlyttetDato" type="xs:date"/>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="ArsakFra" type="ArsakFraKode"/>
-            <xs:element name="FlyttingTil" type="FlyttingTilKode"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FlyttetDato" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ArsakFra" type="ArsakFraKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FlyttingTil" type="FlyttingTilKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="LovhjemmelType">
         <xs:sequence>
-            <xs:element name="Lov" type="LovKode"/>
-            <xs:element name="Kapittel" type="LovKapittelType"/>
-            <xs:element name="Paragraf" type="LovParagrafType"/>
-            <xs:element name="Ledd" type="LovLeddType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Bokstav" type="LovBokstavType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Punktum" type="LovPunktumType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Lov" type="LovKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kapittel" type="LovKapittelType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Paragraf" type="LovParagrafType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Ledd" type="LovLeddType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Bokstav" type="LovBokstavType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Punktum" type="LovPunktumType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="MelderType">
@@ -372,7 +578,11 @@ Synne.Solbakken@bufdir.no
     </xs:complexType>
     <xs:complexType name="OppfolgingHyppighetType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="Dato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation>datoen da besøkshyppigheten vedtas</xs:documentation>
@@ -392,7 +602,11 @@ Synne.Solbakken@bufdir.no
     </xs:complexType>
     <xs:complexType name="OppfolgingType">
         <xs:sequence>
-            <xs:element name="Hyppighet" type="OppfolgingHyppighetType" maxOccurs="unbounded"/>
+            <xs:element name="Hyppighet" type="OppfolgingHyppighetType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="UtfortDato" type="xs:date" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation>Oppfolging i fosterhjem utført av uavhengig part. Dato oppfølgingsbesøk utført.</xs:documentation>
@@ -402,53 +616,162 @@ Synne.Solbakken@bufdir.no
     </xs:complexType>
     <xs:complexType name="OversendelseBarneverntjenesteType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0"/>
-            <xs:element name="DatoOversendtFylkesnemnd" type="xs:date"/>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Lovhjemmel" type="LovhjemmelType"/>
-            <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MigrertId" type="MigrertIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DatoOversendtFylkesnemnd" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Lovhjemmel" type="LovhjemmelType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="JmfrLovhjemmel" type="LovhjemmelType" minOccurs="0" maxOccurs="3">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="OversendelsePrivatKravType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="DatoKravMottatt" type="xs:date"/>
-            <xs:element name="Konklusjon" type="OversendelsePrivatKravKonklusjonKode" minOccurs="0"/>
-            <xs:element name="DatoOversendtFylkesnemnd" type="xs:date" minOccurs="0"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DatoKravMottatt" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Konklusjon" type="OversendelsePrivatKravKonklusjonKode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DatoOversendtFylkesnemnd" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="PersonaliaType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="StartDato" type="xs:date"/>
-            <xs:element name="Fodselsnummer" type="FodselsnummerType" minOccurs="0"/>
-            <xs:element name="Ufodt" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Ukjent" type="xs:boolean" minOccurs="0"/>
-            <xs:element name="Fodselsdato" type="xs:date" minOccurs="0">
+            <xs:element name="Id" type="UuidIdType">
                 <xs:annotation>
-                    <xs:documentation>Barnets fødselsdato. For ufødte barn oppgis termindato.</xs:documentation>
+                    <xs:documentation>Unik ID knyttet til registrert personalia i en barnevernstjeneste. Knytter personalia til individets øvrige saksopplysninger i siste innrapportering. </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Kjonn" type="KjonnKode" minOccurs="0"/>
-            <xs:element name="DUFNummer" type="DUFNummerType" minOccurs="0"/>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="StartDato" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Dato for når et individ knyttes til en sak. Samsvarer gjerne med BarnevernType/SakType/@StartDato</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Fodselsnummer" type="FodselsnummerType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Barnets fødselsnummer eller d-nummer slik dette fremkommer i Folkeregisteret.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Ufodt" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Dersom saksopplysningene omhandler et ufødt barn, skal det fremkomme her.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Ukjent" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Opplysningene omhandler et ukjent barn, det vil si at barnets identitet er usikker.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Fodselsdato" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Dato for når barnet er født. Det forventes at informasjonen som innrapporteres samsvarer med registreringen i Folkeregisteret.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kjonn" type="KjonnKode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DUFNummer" type="DUFNummerType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="RelasjonType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="FraId" type="IdType"/>
-            <xs:element name="FraKode" type="BegrepKode"/>
-            <xs:element name="TilId" type="UuidIdType"/>
-            <xs:element name="TilKode" type="BegrepKode"/>
-            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FraId" type="IdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FraKode" type="BegrepKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TilId" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TilKode" type="BegrepKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ErSlettet" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="SamvaerGjennomforingType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="Kode" type="SamvaerGjennomforingKode"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Part" type="PartSamvaerEtterOmsorgsovertakelseKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kode" type="SamvaerGjennomforingKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="UtfortDato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation>Dato for gjennomforing av samvaer</xs:documentation>
@@ -458,7 +781,16 @@ Synne.Solbakken@bufdir.no
     </xs:complexType>
     <xs:complexType name="SamvaerHyppighetVedtakType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation>Unik ID knyttet til den registrerte pålagte hyppigheten av samvær med en eller begge foreldre Hyppighet skal normalt fremgå av vedtak fra nemnd. Knytter hyppigheten av samværet til gjennomføring av samværet, individets tiltak og øvrige saksopplysninger i siste innrapportering. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Part" type="PartSamvaerEtterOmsorgsovertakelseKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="HyppighetTidsenhet" type="TidsenhetKode">
                 <xs:annotation>
                     <xs:documentation>Angir enhet(uke/måned/år) for hyppighet</xs:documentation>
@@ -471,48 +803,94 @@ Synne.Solbakken@bufdir.no
             </xs:element>
             <xs:element name="Dato" type="xs:date">
                 <xs:annotation>
-                    <xs:documentation>Vedtaksbestemt dato fra når minimum antall samvær som barnet skal ha, gjelder</xs:documentation>
+                    <xs:documentation>Dato fra når den pålagte samværshyppigheten skal være gjeldende iht vedtak</xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="SamvaerEtterOmsorgsovertakelseType">
         <xs:sequence>
-            <xs:element name="HyppighetVedtak" type="SamvaerHyppighetVedtakType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="Gjennomforing" type="SamvaerGjennomforingType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="HyppighetVedtak" type="SamvaerHyppighetVedtakType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Gjennomforing" type="SamvaerGjennomforingType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="SlettetType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="Kode" type="BegrepKode"/>
-            <xs:element name="SlettetDato" type="xs:date"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kode" type="BegrepKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SlettetDato" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TilsynAnsvarligType">
         <xs:sequence>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="StartDato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation>Datoen tilsynskommunen settes</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Kommunenummer" type="KommunenummerType"/>
+            <xs:element name="Kommunenummer" type="KommunenummerType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TilsynHyppighetType">
         <xs:sequence>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="StartDato" type="xs:date">
                 <xs:annotation>
                     <xs:documentation>Datoen hyppigheten settes</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Kode" type="PlanlagtHyppighetKode"/>
+            <xs:element name="Kode" type="PlanlagtHyppighetKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TilsynType">
         <xs:sequence>
-            <xs:element name="Ansvarlig" type="TilsynAnsvarligType" maxOccurs="unbounded"/>
-            <xs:element name="Hyppighet" type="TilsynHyppighetType" maxOccurs="unbounded"/>
+            <xs:element name="Ansvarlig" type="TilsynAnsvarligType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Hyppighet" type="TilsynHyppighetType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="UtfortDato" type="xs:date" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation>Dato tilsynsbesøk utført.</xs:documentation>
@@ -522,8 +900,28 @@ Synne.Solbakken@bufdir.no
     </xs:complexType>
     <xs:complexType name="TiltakEvalueringType">
         <xs:sequence>
-            <xs:element name="Saksinnhold" type="SaksinnholdKode"/>
-            <xs:element name="GjennomfortDato" type="xs:date"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:choice>
+                <xs:element name="Saksinnhold" type="SaksinnholdKode" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation> </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="TiltaketKanAvsluttes" type="xs:boolean" fixed="true">
+                    <xs:annotation>
+                        <xs:documentation> </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+            <xs:element name="GjennomfortDato" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TiltakKonklusjonType">
@@ -534,8 +932,16 @@ Synne.Solbakken@bufdir.no
                 </xs:annotation>
             </xs:element>
             <xs:choice>
-                <xs:element name="Opphevelse" type="OpphevelseKode"/>
-                <xs:element name="AvslutningAvTiltak" type="TiltakAvslutningKode"/>
+                <xs:element name="Opphevelse" type="OpphevelseKode">
+                    <xs:annotation>
+                        <xs:documentation> </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="AvslutningAvTiltak" type="TiltakAvslutningKode">
+                    <xs:annotation>
+                        <xs:documentation> </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -546,13 +952,11 @@ Synne.Solbakken@bufdir.no
                     <xs:documentation>Dato undersøkelse konkludert.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Kode" type="UndersokelseKonklusjonKode"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="UndersokelsePlanType">
-        <xs:sequence>
-            <xs:element name="StartDato" type="xs:date"/>
-            <xs:element name="Kode" type="UndersokelsePlanKode"/>
+            <xs:element name="Kode" type="UndersokelseKonklusjonKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="UtvidetFristType">
@@ -562,14 +966,30 @@ Synne.Solbakken@bufdir.no
                     <xs:documentation>Dato mottak søknad om utvidet frist.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="Innvilget" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="Innvilget" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="VedtakStatusType">
         <xs:sequence>
-            <xs:element name="Id" type="UuidIdType"/>
-            <xs:element name="EndretDato" type="xs:date"/>
-            <xs:element name="Kode" type="VedtakStatusKode"/>
+            <xs:element name="Id" type="UuidIdType">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EndretDato" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Kode" type="VedtakStatusKode">
+                <xs:annotation>
+                    <xs:documentation> </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <!-- SIMPLE TYPES -->
@@ -584,6 +1004,16 @@ Synne.Solbakken@bufdir.no
             <xs:minLength value="2"/>
             <xs:maxLength value="2"/>
             <xs:pattern value="\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DatoTidUttrekk">
+        <xs:annotation>
+            <xs:documentation>
+                og tid for uttrekk med tidssone. Eksempler gyldige formater: '2022-06-23T09:30:10Z' (UTC-tid), eller '2022-06-23T11:30:10+02:00' (dato/tid med offset).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime">
+            <xs:pattern value=".*(Z|[+-]\d{2}:\d{2})"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="DUFNummerType" id="BUF_2C2C3B52-194E-420B-ACE3-DBC813DFFB02">
@@ -788,27 +1218,12 @@ Synne.Solbakken@bufdir.no
             <xs:enumeration value="Personalia"/>
             <xs:enumeration value="Henvendelse"/>
             <xs:enumeration value="Undersokelse"/>
-            <xs:enumeration value="PlanForTiltak"/>
+            <xs:enumeration value="Plan"/>
             <xs:enumeration value="Tiltak"/>
             <xs:enumeration value="Vedtak"/>
-            <xs:enumeration value="Ettervern"/>
             <xs:enumeration value="OversendelseFylkesnemnd"/>
             <xs:enumeration value="Flytting"/>
             <xs:enumeration value="Relasjon"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="EttervernKonklusjonKode" id="BUF_4F0DE32B-94E3-4765-B150-54784446365A">
-        <xs:annotation>
-            <xs:documentation>
-                1 = Gitt tilbud om tiltak, akseptert
-                2 = Gitt tilbud om tiltak, avslått av bruker grunnet ønske om annet tiltak
-                3 = Ikke lenger tiltak etter BVL, etter brukers ønske
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="1"/>
-            <xs:enumeration value="2"/>
-            <xs:enumeration value="3"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="FlyttingTilKode" id="BUF_926C6E85-02FC-427B-8A2B-B0795A8A7992">
@@ -985,7 +1400,22 @@ Synne.Solbakken@bufdir.no
             <xs:enumeration value="9"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="PlanForTiltakKode" id="BUF_1BFAA681-26F6-4C2F-A63C-21BC275D6083">
+    <xs:simpleType name="PartSamvaerEtterOmsorgsovertakelseKode" id="BUF_72CC4D32-69A9-48D0-BC32-76426EACD60F">
+        <xs:annotation>
+            <xs:documentation>
+                1 = Mor
+                2 = Far
+                3 = Begge
+                9 = Annet
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PlanKode" id="BUF_1BFAA681-26F6-4C2F-A63C-21BC275D6083">
         <xs:annotation>
             <xs:documentation>
                 1 = Tiltaksplan etter BVL2021 § 8-1 (tidligere BVL1992 § 4-5)
@@ -994,8 +1424,8 @@ Synne.Solbakken@bufdir.no
                 4 = Omsorgsplan etter BVL2021 § 8-3, 4. ledd (tidligere BVL1992 § 4-15, 3. ledd)
                 5 = Tiltaksplan – ettervern etter BVL 2021 § 8-5, 2. ledd
                 6 = Samværsplan etter BVL 2021 § 7-6
-                Flyttet til undersokelsePlanKode 7 = Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd
-                Flyttet til undersokelsePlanKode 8 = Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd
+                7 = Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd
+                8 = Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -1005,6 +1435,8 @@ Synne.Solbakken@bufdir.no
             <xs:enumeration value="4"/>
             <xs:enumeration value="5"/>
             <xs:enumeration value="6"/>
+            <xs:enumeration value="7"/>
+            <xs:enumeration value="8"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="PlanlagtHyppighetKode" id="BUF_6786E6AF-EFD2-4B5E-A792-4EC7ED7C2159">
@@ -1547,18 +1979,6 @@ Synne.Solbakken@bufdir.no
             <xs:enumeration value="7"/>
             <xs:enumeration value="8"/>
             <xs:enumeration value="9"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="UndersokelsePlanKode" id="BUF_14D52A46-A602-4E6D-BE05-2C135D168139">
-        <xs:annotation>
-            <xs:documentation>
-                7 = Undersøkelsesplan etter BVL 2021 § 2-2, 3. ledd
-                8 = Undersøkelsesplan etter akuttvedtak etter BVL 2021 § 8-2, 3. ledd
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="7"/>
-            <xs:enumeration value="8"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="VedtakStatusKode" id="BUF_51F19F2E-7D1A-4F45-9B59-8953C5959163">
