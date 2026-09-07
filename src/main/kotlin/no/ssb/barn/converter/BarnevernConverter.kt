@@ -11,9 +11,10 @@ import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModu
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import no.ssb.barn.xsd.BarnevernType
-import no.ssb.barn.xsd.OppfolgingType
-import no.ssb.barn.xsd.OppfolgingTypeV3
+import no.ssb.barn.xsd.v4.BarnevernType
+import no.ssb.barn.xsd.v4.OppfolgingType
+import no.ssb.barn.xsd.v4.OppfolgingTypeV3
+import no.ssb.barn.xsd.v5.BarnevernregisterInnrapporteringType
 
 object BarnevernConverter {
 
@@ -49,8 +50,10 @@ object BarnevernConverter {
     fun unmarshallXml(xml: String): BarnevernType<OppfolgingType> = unmarshallXml<BarnevernType<OppfolgingType>>(xml)
 
     @JvmStatic
-    fun unmarshallXmlV3(xml: String): BarnevernType<OppfolgingTypeV3> =
-        unmarshallXml<BarnevernType<OppfolgingTypeV3>>(xml)
+    fun unmarshallXmlV3(xml: String): BarnevernType<OppfolgingTypeV3> = unmarshallXml<BarnevernType<OppfolgingTypeV3>>(xml)
+
+    @JvmStatic
+    fun unmarshallXmlV5(xml: String) = unmarshallXml<BarnevernregisterInnrapporteringType>(xml)
 
     inline fun <reified T : Any> unmarshallXml(xml: String): T = XML_MAPPER.readValue(xml)
 
