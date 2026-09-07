@@ -44,10 +44,13 @@ object TestUtils {
                 innerXml +
                 "</Sak></Barnevern>"
 
-    fun buildBarnevernXmlV5(innerXml: String) =
+    fun buildBarnevernXmlV5(
+        innerXml: String,
+        datoUttrekk: String = VALID_DATO_UTTREKK,
+    ) =
         "<BarnevernregisterInnrapportering>" +
                 "<Id>236110fc-edba-4b86-87b3-d6bb945cbc76</Id>" +
-                "<DatoUttrekk>$VALID_DATO_UTTREKK</DatoUttrekk>" +
+                "<DatoUttrekk>$datoUttrekk</DatoUttrekk>" +
                 "<Fagsystem><Leverandor>Netcompany</Leverandor><Navn>Modulus Barn</Navn><Versjon>1</Versjon></Fagsystem>" +
                 "<Avgiver><Organisasjonsnummer>999999999</Organisasjonsnummer><Kommunenummer>1234</Kommunenummer><Kommunenavn>~Kommunenavn~</Kommunenavn></Avgiver>" +
                 "<Sak><id>6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e</id><StartDato>$VALID_DATE</StartDato><Journalnummer>2022-00004</Journalnummer>" +

@@ -6,6 +6,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.string.shouldContain
 import no.ssb.barn.TestUtils.INVALID_DATE
 import no.ssb.barn.TestUtils.INVALID_DATE_FORMAT_ERROR
+import no.ssb.barn.TestUtils.INVALID_DATO_UTTREKK
 import no.ssb.barn.TestUtils.VALID_DATE
 import no.ssb.barn.TestUtils.buildBarnevernXmlV5
 import no.ssb.barn.toStreamSource
@@ -60,6 +61,20 @@ class SchemaSmokeTest : BehaviorSpec({
             Then("message should contain date error details") {
                 thrown.message.orEmpty() shouldContain INVALID_DATE_FORMAT_ERROR
                 thrown.message.orEmpty() shouldContain "date"
+            }
+        }
+
+        When("datoUttrekk has invalid format, expect datatype validation error") {
+            val inner = "<Tiltak><Id>6ee9bf92-7a4e-46ef-a2dd-b5a3a0a9ee2e</Id><StartDato>$VALID_DATE</StartDato><Lovhjemmel><Lov>BVL</Lov><Kapittel>1</Kapittel><Paragraf>2</Paragraf></Lovhjemmel><Kode>2.1</Kode></Tiltak>"
+            val thrown = shouldThrow<SAXException> {
+                getSchemaValidatorV5().validate(
+                    buildBarnevernXmlV5(datoUttrekk = INVALID_DATO_UTTREKK, innerXml = inner).toStreamSource()
+                )
+            }
+
+            Then("message should contain dateTime error details") {
+                thrown.message.orEmpty() shouldContain INVALID_DATO_UTTREKK
+                thrown.message.orEmpty() shouldContain "DatoTidUttrekk"
             }
         }
 
