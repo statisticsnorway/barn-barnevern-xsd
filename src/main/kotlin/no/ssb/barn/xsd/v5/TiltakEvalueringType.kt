@@ -7,7 +7,7 @@ import java.util.UUID
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "TiltakEvalueringType", propOrder = ["id", "saksinnhold", "tiltaketKanAvsluttes", "gjennomfortDato"]
+    name = "TiltakEvalueringType", propOrder = ["id", "saksinnhold", "gjennomfortDato", "tiltaketKanAvsluttes"]
 )
 data class TiltakEvalueringType(
     @field:XmlElement(name = "Id", required = true)
@@ -18,7 +18,7 @@ data class TiltakEvalueringType(
     val saksinnhold: MutableList<String> = mutableListOf(),
 
     @field:XmlElement(name = "TiltaketKanAvsluttes")
-    val tiltaketKanAvsluttes: Boolean = false,
+    val tiltaketKanAvsluttes: Boolean? = null,
 
     @field:XmlElement(name = "GjennomfortDato", required = true)
     @XmlSchemaType(name = "date")
