@@ -16,6 +16,17 @@ object ValidationUtils {
     @JvmStatic
     val VERSION_FOUR_XSD = "Barnevern_v4.xsd"
 
+    @JvmStatic
+    val VERSION_FIVE_XSD = "Barnevern_v5.xsd"
+
+    /**
+     * Returns a [Validator] that validates XML against the [VERSION_FIVE_XSD] schema.
+     *
+     * @return a [Validator] that validates against the [VERSION_FIVE_XSD] schema
+     */
+    @JvmStatic
+    fun getSchemaValidatorV5(): Validator = getSchemaValidator(VERSION_FIVE_XSD)
+
     /**
      * Returns a [Validator] that validates XML against the [VERSION_FOUR_XSD] schema.
      *
