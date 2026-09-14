@@ -22,10 +22,10 @@ data class PersonaliaType(
     var fodselsnummer: String? = null,
 
     @field:XmlElement(name = "Ufodt")
-    var isUfodt: Boolean = false,
+    var ufodt: Boolean = false,
 
     @field:XmlElement(name = "Ukjent")
-    var isUkjent: Boolean = false,
+    var ukjent: Boolean = false,
 
     @field:XmlElement(name = "Fodselsdato")
     @XmlSchemaType(name = "date")
