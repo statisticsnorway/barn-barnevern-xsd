@@ -7,7 +7,7 @@ Jon.Ole.Johansen.Hagemo@ssb.no
 Bjorge.Saether@bufdir.no
 Synne.Solbakken@bufdir.no
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="4.0.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="4.0.2">
     <!-- ATTRIBUTTER -->
     <xs:attribute name="Id">
         <xs:annotation>
@@ -912,6 +912,8 @@ Synne.Solbakken@bufdir.no
                     3.1.08 = Foreldre med rusrelaterte utfordringer
                     3.1.09 = Barn som pårørende
                     3.1.10 = Foreldres kriminalitet
+                    3.1.11 = Foreldres helse og livsstil
+                    3.1.12 = Barnet mangler omsorgsperson
 
                     Bolig økonomi og arbeid
                     3.2.01 = Levestandard og bolig
@@ -1026,6 +1028,8 @@ Synne.Solbakken@bufdir.no
                     { "code":"3.1.08", "validFrom":"2026-01-01", "title":"Foreldre med rusrelaterte utfordringer" },
                     { "code":"3.1.09", "validFrom":"2026-01-01", "title":"Barn som pårørende" },
                     { "code":"3.1.10", "validFrom":"2026-01-01", "title":"Foreldres kriminalitet" },
+                    { "code":"3.1.11", "validFrom":"2026-01-01", "title":"Foreldres helse og livsstil" },
+                    { "code":"3.1.12", "validFrom":"2026-01-01", "title":"Barnet mangler omsorgsperson" },
 
                     { "code":"3.2.01", "validFrom":"2026-01-01", "title":"Levestandard og bolig" },
                     { "code":"3.2.02", "validFrom":"2026-01-01", "title":"Fattogdom" },
@@ -1137,6 +1141,8 @@ Synne.Solbakken@bufdir.no
                     <xs:enumeration value="3.1.08"/>
                     <xs:enumeration value="3.1.09"/>
                     <xs:enumeration value="3.1.10"/>
+                    <xs:enumeration value="3.1.11"/>
+                    <xs:enumeration value="3.1.12"/>
 
                     <xs:enumeration value="3.2.01"/>
                     <xs:enumeration value="3.2.02"/>
